@@ -164,6 +164,21 @@ disql jy2web/Ninestar2022
 
 ```
 
+## 六、其他配置
+
+### Linux(Unix)下License的安装
+
+**操作方法如下**：
+
+首先，找到DM服务器所在的目录，方法是以root用户或安装用户登录到Linux系统，启动终端，执行以下命令即可进入DM服务器程序安装的目录：
+
+```bash
+# 关闭达梦数据库
+/data/dmdbms/bin/DmServicejyv2g  stop
+# 再将dm.key文件拷贝到该目录，替换原有的dm.key即可
+# 更新拥有者权限
+chown dmdba.dinstall dm.key
+```
 
 
 

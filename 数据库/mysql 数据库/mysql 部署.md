@@ -1,16 +1,16 @@
 #database/mysql
 
-下载地址：https://dev.mysql.com/downloads/mysql/
-
 安装方式：
 
-（1）RPM、Yum（Red Hat Enterprise Linux/Oracle Linux）：安装方便，安装速度快，无法定制
-（2）二进制（Linux Generic）：不需要安装，解压即可使用，不能定制功能
-（3）编译安装/源码安装（Source Code）：可定制，安装man  
+（1）RPM、Yum（Red Hat Enterprise Linux/Oracle Linux）：安装方便，安装速度快，无法定制；
+（2）二进制（Linux Generic）：不需要安装，解压即可使用，不能定制功能；
+（3）编译安装/源码安装（Source Code）：安装过程复杂，需要各种依赖库，可定制  ；
     5.5版本之前：./configure , make , make install  
     5.5版本之后：cmake , gmake
-**注意：MySQL RC、apl、beta版本都不要选，一定要选择GA版（稳定版）**
+**注意：MySQL apl、beta、RC版本都不要选，一定要选择GA版（稳定版）**
 
+
+下载地址：https://dev.mysql.com/downloads/mysql/
 
 # RPM安装
 
@@ -35,16 +35,6 @@ yum -y remove mariadb*
 tar -xvf mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar 
 yum -y install ./mysql-community-*.rpm
 
-# 离线环境需要单独安装
-# 作为依赖被安装:
-#  keyutils-libs-devel.x86_64 0:1.5.8-3.el7       krb5-devel.x86_64 0:1.15.1-54.el7_9         
-#  libcom_err-devel.x86_64 0:1.42.9-19.el7        libkadm5.x86_64 0:1.15.1-54.el7_9           
-#  libselinux-devel.x86_64 0:2.5-15.el7           libsepol-devel.x86_64 0:2.5-10.el7          
-#  libverto-devel.x86_64 0:0.2.5-4.el7            openssl-devel.x86_64 1:1.0.2k-25.el7_9      
-#  pcre-devel.x86_64 0:8.32-17.el7                perl-Data-Dumper.x86_64 0:2.145-3.el7       
-#  perl-JSON.noarch 0:2.59-2.el7                  perl-Test-Harness.noarch 0:3.28-3.el7       
-#  perl-Test-Simple.noarch 0:0.98-243.el7         zlib-devel.x86_64 0:1.2.7-20.el7_9
-
 # 修改my.cnf配置文件
 vim /etc/my.cnf
 -------------------------------------------------
@@ -63,7 +53,7 @@ default-character-set=utf8mb4
 [mysqld]
 # 数据存放目录
 datadir=/var/lib/mysql
-# sock文件目录
+# sock文件（）
 socket=/var/lib/mysql/mysql.sock
 # 错误日志路径
 log-error=/var/log/mysqld.log
@@ -85,9 +75,11 @@ lower-case-table-names=1
 default_authentication_plugin=mysql_native_password
 -------------------------------------------------
 
-# 启动数据库并初始化
+# 启动数据库
 systemctl start mysqld
 grep 'password' /var/log/mysqld.log
+
+# 运行安全配置向导
 mysql_secure_installation 
 
 # 设置root远程登录并修改认证方式
@@ -96,7 +88,6 @@ sql> update mysql.user set host='%', plugin='mysql_native_password' where user='
 sql> flush privileges;
 sql> select host, user, plugin from mysql.user;
 
-# 到此表示MySQL已经在redhat7.x上安装完成。
 ```
 
 ##  数据库数据目录迁移
@@ -329,7 +320,7 @@ max_allowed_packet=100M
 default_authentication_plugin=mysql_native_password
 #default_authentication_plugin=caching_sha2_password
 #default_authentication_plugin=sha2_password
-#缓冲池字节大小，单位kb，如果不设置，默认为128M
+#缓冲池字节大小,配置为系统内存的50%至75%，默认为128M
 innodb_buffer_pool_size=1024M
 #指定innodb tablespace文件（ ibdata1就是默认表空间文件，文件大小为1G。因为有autoextend，若空间不够用，该文件可以自动增长）
 innodb_data_file_path = ibdata1:1G:autoextend

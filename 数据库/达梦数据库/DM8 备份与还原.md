@@ -166,7 +166,6 @@ dexp jy2web/Ninestar2022 file=exp_ts_jy2web.dmp log=exp_ts_jy2web.log table=tabl
 使用dm管理工具图形方式导出数据库
 在数据库对象处，右键，选择导出  
 
-![](assets/DM8%20备份与还原/image-20221127211003276.png)
 
 dimp 逻辑导入工具利用 dexp 工具生成的备份文件对本地或远程的数据库进行联机逻辑还原。dimp 导入是 dexp 导出的相反过程。还原的方式可以灵活选择，如是否忽略对象存在而导致的创建错误、是否导入约束、是否导入索引、导入时是否需要编译、是否生成日志等。
 

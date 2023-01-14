@@ -1,4 +1,4 @@
-#system/pam
+#system
 ## pam的配置文件
 
 `vim /etc/pam.d/vsftpd`

@@ -19,14 +19,14 @@ Vim 中存在三种模式 ：命令模式、编辑模式 (输入/插入模式)�
 ## 命令模式
 
 ```bash
-x       # 删除字符
+x     # 删除字符
 dd     # 删除一行
-y       # 复制字符
-yy     # 复制一行
-u       # 撤销
-i        # 光标之前插入文本。
-I        # 光标所在行首插入。
-a       # 光标之后插入文本。
+y     # 复制字符
+yy    # 复制一行
+u      # 撤销
+i     # 光标之前插入文本。
+I     # 光标所在行首插入。
+a     # 光标之后插入文本。
 A      # 光标所在行尾插入。
 o      # 下一行插入。
 O      # 上一行插入。
@@ -78,4 +78,18 @@ N       # 往上继续寻找下一个相同的字串
 
 ```bash
 set ts=4  # 设置vim中缩进为4个空格
+```
+
+debian禁用vim鼠标的visual模式
+
+```bash
+vim /usr/share/vim/vim82/defaults.vim 
+----------------------------------------
+if has('mouse')
+  if &term =~ 'xterm'
+    set mouse-=a
+  else
+    set mouse=nvi
+  endif
+endif
 ```

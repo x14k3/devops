@@ -1,4 +1,4 @@
-#system/ntp
+#system
 
 
 ## ntp服务端

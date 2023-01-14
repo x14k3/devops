@@ -12,18 +12,18 @@ make && make install
 RPM包是**预先在linux机器上编译好并打包好的文件，安装起来非常快捷**。但是也有一些缺点，比如**安装的环境必须与编译时的环境一致或者相当**；包与包之间存在着相互依赖的情况。
 
 ```bash
-rpm -qa                        # 查看所有已经安装的包 
-rpm -qi pkg_name       # 查看已安装包的详细信息，例如安装时间 
-rpm -qf file_name        # 查看一个文件属于哪个rpm 包 
-rpm -ql pkg_name       # 查看已安装的包里面有哪些文件 
-rpm -qpl pkg_name     # 查看一个RPM包里有哪些文件 
+rpm -qa             # 查看所有已经安装的包 
+rpm -qi pkg_name    # 查看已安装包的详细信息，例如安装时间 
+rpm -qf file_name   # 查看一个文件属于哪个rpm 包 
+rpm -ql pkg_name    # 查看已安装的包里面有哪些文件 
+rpm -qpl pkg_name   # 查看一个RPM包里有哪些文件 
 rpm -Uvh pkg_name   # 升级rpm包 
-rpm -ivh pkg_name     # 安装所有指定的包，通常会保留原包，-v 显示安装过程
-rpm -ivh --nodeps      # 忽略依赖包安装
+rpm -ivh pkg_name   # 安装所有指定的包，通常会保留原包，-v 显示安装过程
+rpm -ivh --nodeps   # 忽略依赖包安装
 rpm -ivh --nodeps --force # 强制安装
 rpm -Fvh pkg_name   # 只安装比当前版本更高的包
-rpm -e pkg_name       # 正常卸载软件包
-rpm -e --nodeps         # 强力卸载rpm包
+rpm -e pkg_name     # 正常卸载软件包
+rpm -e --nodeps     # 强力卸载rpm包
 
 ```
 
@@ -32,17 +32,17 @@ Yum(全称为 Yellow dogUpdater, Modified)是一个在Fedora和RedHat以及CentO
 
 ```bash
 yum search php       # 使用YUM查找软件包
-yum list php             # 列出所有可安装的软件包
-yum list updates      # 列出所有可更新的软件包
-yum list installed     # 列出所有已安装的软件包
-yum check-update   # 检查可更新的rpm包
-yum update             # 更新所有软件命令;
+yum list php         # 列出所有可安装的软件包
+yum list updates     # 列出所有可更新的软件包
+yum list installed   # 列出所有已安装的软件包
+yum check-update     # 检查可更新的rpm包
+yum update           # 更新所有软件命令;
 yum update PACKAGE_NAME  # 更新具体的yum包
-yum remove            # 卸载yum包装
+yum remove           # 卸载yum包装
 yum install --downloadonly --downloaddir=/tmp package-name # 只下载不安装
-yum clearn all         # 清除暂存中旧的rpm头文件和包文件
-yum history            # 显示yum历史 
-yum repolist           # 显示已启用的yum存储库的列表
+yum clearn all       # 清除暂存中旧的rpm头文件和包文件
+yum history          # 显示yum历史 
+yum repolist         # 显示已启用的yum存储库的列表
 yum info PACKAGE_NAME # 显示yum包的信息
 yum localinstall --nogpgcheck PACKAGE_NAME # 在本地寻找依赖，离线安装。--nogpgcheck 参数用来禁止检查gpg签名
 
@@ -209,21 +209,3 @@ dnf autoremove
 dnf clean all
 ```
 
-# APT
-
-**debian 11.x (bullseye)**
-
-编辑/etc/apt/sources.list文件(需要使用sudo), 在文件最前面添加以下条目(操作前请做好相应备份)
-
-```
-deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
-deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
-deb https://mirrors.aliyun.com/debian-security/ bullseye-security main
-deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main
-deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
-deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
-deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
-deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
-```
-
-`apt-get update`

@@ -124,10 +124,10 @@ Redis4.0开始支持RDB和AOF的混合持久化，就是内存快照以一定频
 ## 三、redis 相关命令
 ```bash
 /data/redis/bin/redis-server  /data/redis/etc/redis.conf   & # 后台启动redis
-redis -a password  shutdown                # 关闭reids
-redis -a password                                  # 登录redis
-> flushall             # 清空缓存
-> key  *               # 查看所有key值
+redis -a password  shutdown  # 关闭reids
+redis -a password            # 登录redis
+> flushall        # 清空缓存
+> key  *          # 查看所有key值
 ```
 
 

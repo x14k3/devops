@@ -1,4 +1,4 @@
-#system/nfs
+#system
 
 1.概述  
 NFS：Network File System 网络文件系统，基于内核的文件系统。Sun 公司开发，通过使用 NFS，用户和程序可以像访问本地文件一样访问远端系统上的文件，基于RPC（Remote Procedure Call Protocol 远程过程调用）实现。

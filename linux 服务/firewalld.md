@@ -1,4 +1,4 @@
-#system/firewalld
+#system
 
 从CentOS7(RHEL7)开始，官方的标准防火墙设置软件从iptables变更为firewalld，相信不少习惯使用iptables的人会感到十分不习惯，但实际上firewalld更为简单易用。
 

@@ -1,26 +1,37 @@
-#system/rsync
+#system
+
+
+rsync 命令的基本格式有多种，分别是：
+
+```bash
+# rsync 命令的基本格式有多种，分别是：
+# 用于仅在本地备份数据；
+rsync [OPTION] SRC DEST
+# 用于将本地数据备份到远程机器上；
+rsync [OPTION] SRC [USER@]HOST:DEST   # ssh 认证
+rsync [OPTION] SRC [USER@]HOST::DEST  # rsync 认证
+# 用于将远程机器上的数据备份到本地机器上；
+rsync [OPTION] [USER@]HOST:SRC  DEST
+rsync [OPTION] [USER@]HOST::SRC DEST
+```
+
+
+
 # 使用ssh协议
 
-## 1.服务端
-
-*   yum安装rsync
+*   yum安装rsync（客户端服务端都需要安装）
 
     `yum -y install rsync`
 
 * 二进制安装rsync
+
 	下载地址：https://rsync.samba.org/
+	
 	```bash
 	./configure --prefix=/usr/local/rsync
 	make
 	make install
 	```
-
-
-## 2.客户端
-
-*   安装rsync
-
-    `yum -y install rsync`
 
 *   推送push
 
@@ -42,7 +53,10 @@
     -D    # 保持设备文件信息
     -L    # 保留软连接指向的目标文件
     -e    # 使用的信道协议，指定替代rsh的shell程序
+    -u    # 表示把 DEST 中比 SRC 还新的文件排除掉，不会覆盖。
+    --progress # 表示在同步的过程中可以看到同步的过程状态，比如统计要同步的文件数量、 同步的文件传输速度等。
     --append            # 指定文件接着上次传输中断处继续传输
+    --exclude           # 排除文件或目录，相对路径
     --exclude-from=file # 按照文件指定内容排除
     --bwlimit=100       # 限速传输（单位：MB）
     --delete            # 让目标目录和源目录数据保持一致
@@ -50,14 +64,18 @@
     --port              # 指定端口传输
     ––existing          # 仅仅更新那些已经存在于接收端的文件，而不备份那些新创建的文件
     ––ignore-existing   # 忽略那些已经存在于接收端的文件，仅备份那些新创建的文件
-
+	
+	# 通过rsync同步远程服务器的文件，当ssh为默认端口22时，使用命令：
+	rsync -avz file user@remote_IP:/path
+	# 当ssh更改端口为 8022 时，rsync同步文件方法为：
+	rsync -avz -e 'ssh -p 8022' file user@remote_IP:/path
     ```
 
 *   拉取pull
 
     ```bash
     # 格式 rsync 参数 root@远程的ip地址:[远程的路径] 要放到本地的地址(路径)
-    rsync -v root@10.0.0.12:/opt/test.txt ./
+    rsync -azv root@10.0.0.12:/opt/test.txt ./
     ```
 
 # 使用rsync协议
@@ -77,15 +95,20 @@
 	```
  
     ```bash
-    uid = rsync
-    gid = rsync
+    uid = nobody
+    gid = nobody
     use chroot = no
+    read only = yes
     max connections = 4
-    pid file = /var/run/rsyncd.pid
+    timeout = 900
     exclude = lost+found/
     fake super = yes
-    transfer logging = yes
-    timeout = 900
+    transfer logging = yes  
+	log file = /var/log/rsyncd.log
+	pid file = /var/run/rsyncd.pid
+	lock file = /var/run/rsync.lock
+	
+    
     ignore nonreadable = yes
     read only = false    
     dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2
@@ -100,6 +123,7 @@
 *   创建系统用户,作为守护进程的用户
 
     ```bash
+    # 如果使用默认用户nobody,则可以忽略该步骤
     groupadd rsync;useradd -g rsync -s /sbin/nologin rsync
     ```
 
@@ -213,21 +237,29 @@ inotifywait参数：
 
 # rsync配置文件详解
 
-```powershell
+```bash
 ########### 全局参数 ##################
-uid = rsync
-gid = rsync
-use chroot = no
-max connections = 4
-pid file = /var/run/rsyncd.pid
-exclude = lost+found/
+motd file = /etc/rsyncd.motd    #设置服务器信息提示文件，在该文件中编写提示信息
+transfer logging = yes    #开启rsync数据传输日志功能
+log file = /var/log/rsyncd.log    #设置日志文件名，可通过log format参数设置日志格式
+pid file = /var/run/rsyncd.log    #设置rsync进程号保存文件名称
+lock file = /var/run/rsync.lock    #设置锁文件名称
+port = 873    #设置服务器监听的端口号，默认是873
+address = 192.168.0.230    #设置本服务器所监听网卡接口的ip地址
+uid = nobody    #设置进行数据传输时所使用的帐户名或ID号，默认使用nobody
+gid = nobody    #设置进行数据传输时所使用的组名或GID号，默认使用nobody
+#如果"use chroot"指定为true，那么rsync在传输文件以前首先chroot到path参数所指定的目录下。
+#这样做的原因是实现额外的安全防护，但是缺点是需要root权限，
+#并且不能备份指向外部的符号连接所指向的目录文件。默认情况下chroot值为true。
+use chroot = no 
+read only = yes    #是否允许客户端上传数据，yes表示不允许
+max connections =10    #设置并发连接数，0表示无限制
 # rsync使用-ac参数，必须具备fake supper = yes的配置参数才可以
 fake super = yes
-transfer logging = yes
 timeout = 900
-ignore nonreadable = yes
-# false 才能上传文件，true 不能上传文件
-read only = false    
+# 指定rysnc服务器完全忽略那些用户没有访问权限的文件。这对于在需要备份的目录中有些文件是不应该被备份者得到的情况是有意义的。
+ignore nonreadable
+# 用来指定那些不进行压缩处理再传输的文件，默认值是*.gz *.tgz *.zip *.z *.rpm *.deb *.iso *.bz2 *.tbz。
 dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2
 incoming chmod = Du=r,Do=r,Fug=r,Fo=r  # 设置服务器收到的文件权限
 outgoing chmod = Du=rwx,Dog=x,Fg=rw,Fog=r
@@ -240,16 +272,19 @@ hosts allow = 127.0.0.1
 ########### 模块参数 ##################
 # 共享名：用来连接是写在url上的,切记
 [backup]
+#同步目录，路径通过path指定
 path = /backup
+#定义注释说明字串
 comment = log backup
+#设置允许连接服务器的账户，此账户可以是系统中不存在的用户
 auth users = logbackup
+#密码验证文件名，该文件权限要求为只读，建议为600，仅在设置auth users后有效
 secrets file = /etc/rsyncd_users.db
+#设置哪些主机可以同步数据，多ip和网段之间使用空格分隔
+hosts allow = 192.168.0.0/255.255.255.0
+#除了hosts allow定义的主机外，拒绝其他所有
+hosts deny=*
+#客户端请求显示模块列表时，本模块名称是否显示，默认为true
+list = false
 ```
 
-参考：
-
-<https://www.wangt.cc/2021/12/linux中架构中的备份服务器搭建rsync/>
-
-源码部署：
-
-<https://www.jianshu.com/p/db08a6e50013>

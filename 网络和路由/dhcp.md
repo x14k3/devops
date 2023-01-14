@@ -1,4 +1,4 @@
-#system/dhcp
+#system
 
 DHCP，动态主机配置协议，前身是BOOTP协议，是一个局域网的网络协议，使用UDP协议工作。DHCP通常被用于局域网环境，**主要作用是集中的管理、分配IP地址，使client动态的获得IP地址、Gateway地址、DNS服务器地址等信息，并能够提升地址的使用率**。
 

@@ -1,18 +1,51 @@
-#system/ssh
+#system
+
+
+## ssh 安全加固
+
+`vim /etc/ssh/sshd_config`
+
+```bash
+# 禁止使用密码登录  
+PasswordAuthentication no
+# 禁止使用root远程登陆
+PermitRootLogin no
+# 客户端一般是动态IP 可以禁用UseDNS
+UseDNS no
+
+#重新加载sshd
+systemctl restart sshd
+```
+
+### ssh 别名登录
+
+`vim ~/.ssh/config`
+
+```bash
+Host vps
+    HostName 119.28.77.113
+    User sunds
+    Port 2022
+    IdentityFile ~/.ssh/vps.rsa
+
+
+# 直接ssh 登陆
+ssh vps
+```
 
 
 ## ssh 的登录验证模式
 
-#### 口令登录
+### 口令登录
+
 `ssh -p 2222 -i /opt/vps.rsa user@ip`
 
-#### 公钥登录
+### 秘钥登录
 
-公钥登录是为了解决每次登录服务器都要输入密码的问题，流行使用RSA加密方案，主要流程包含：
+秘钥登录是为了解决每次登录服务器都要输入密码的问题，流行使用RSA加密方案，主要流程包含：
 
 ```bash
 # 1.客户端生成RSA公钥和私钥
-ssh-keygen
 ssh-keygen -t rsa -b 2048
 # b:指定密钥对加密长
 # t:指定加密类型（rsa/dsa等）`
@@ -21,11 +54,10 @@ ssh-keygen -t rsa -b 2048
 # id_rsa.pub  你的公钥
 # id_rsa      你的私钥
 
-# 3.将自己的公钥上传到服务器
-ssh-copy-id x.x.x.x
-
-# 4.把公钥文件内容加入到主机B的~/.ssh/authorized_keys文件中
-cat id_rsa.pub >> ~/.ssh/authorized_keys
+# 3.将自己的公钥上传到服务器，把公钥文件内容加入到被访问的~/.ssh/authorized_keys文件中
+ssh-copy-id 192.168.0.105
+#cat id_rsa.pub >> /root/.ssh/authorized_keys
+#ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.10.113
 ```
 
 **原理**
@@ -37,43 +69,11 @@ cat id_rsa.pub >> ~/.ssh/authorized_keys
 
 ```
 
-**ssh配置**
-
-```bash
-#关闭密码登录  禁止使用root远程登陆
-vim /etc/ssh/sshd_config
----------------------------
-PasswordAuthentication no
-PermitRootLogin no
-UseDNS no
--------------------------
-/usr/sbin/sshd   #重新加载sshd
-
-#配置ssh免密码登录后，仍提示输入密码**
-chown -R test.test /home/test
-chmod 700 /home/test/.ssh
-chmod 600 /home/test/.ssh/authorized_keys
-```
-
-#### ssh 别名登录
-
-```bash
-vim ~/.ssh/config
------------------------------------------
-Host vps
-    HostName 119.28.77.113
-    User sunds
-    Port 2022
-    IdentityFile ~/.ssh/vps.rsa
------------------------------------------
-ssh vps
-```
-
 
 
 ## ssh 服务相关命令
 
-#### scp 安全的远程文件复制目录
+### scp 安全的远程文件复制目录
 
 ```bash
 # scp 本地文件 远程登录用户名@远程主机IP地址:目标目录
@@ -81,7 +81,7 @@ scp -P 2222 /root/test.txt  root@192.168.72.137:/data
 # 指定其他端口 要使用大写-P  指定端口
 ```
 
-#### sftp 安全的文件传输协议
+### sftp 安全的文件传输协议
 
 SFTP是SSH File Transfer Protocol的缩写，安全文件传送协议。SFTP与FTP有着几乎一样的语法和功能。
 

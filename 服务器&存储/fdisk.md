@@ -20,16 +20,15 @@ fdisk /dev/sdb
 mkfs.xfs /dev/sdb1
 
 # 挂载新分区
-mkdir  /data2
-mount /dev/sdb1 /data2
+mkdir  /data ;mount /dev/sdb1 /data
 
 # 卸载
 umount -v /dev/sdb1    # 通过设备名卸载
-umount -v /data2       # 通过挂载点卸载
+umount -v /data       # 通过挂载点卸载
 
 
 # 自动挂载
-echo '/dev/sdb1 /data2 xfs defaults 0 0' >> /etc/fstab
+echo '/dev/sdb1 /data xfs defaults 0 0' >> /etc/fstab
 mount -a 
 ```
 

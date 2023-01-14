@@ -12,8 +12,7 @@
 /opt/bak
 ```
 如果有pfile文件，则可以直接跳到第四步：
-[4. 生成pfile文件并重新启动到nomount状态](#4.%20生成pfile文件并重新启动到nomount状态)
-
+[4. 生成pfile文件并并重新启动到nomount状态](RMAN%20异机恢复.md#4.%20生成pfile文件并并重新启动到nomount状态)
 
 ## 2. 目标端启动到nomount状态
 
@@ -61,11 +60,10 @@ RMAN>
 ## 4. 生成pfile文件并并重新启动到nomount状态
 
 
-如果要修改数据目录可以
+如果要修改数据目录可以修改pfile后再启动到nomount状态
 
 ```sql
-RMAN> create pfile='/tmp/pfile.bak' from  spfile;
---SQL> create pfile='/tmp/pfile.bak' from 'XXXXXXX/spfile';
+RMAN> sql "create pfile=''/tmp/pfile.bak'' from spfile";
 
 vim /tmp/pfile.bak
 ----------------------------------------------
@@ -106,7 +104,7 @@ fmsdb.__unified_pga_pool_size=0
 -- 根据pfile文件创建相关目录
 mkdir -p /data/oradata/FMSDB                   # 数据目录
 mkdir -p /data/arch/fmsdb                          # 日志归档目录
-mkdir -p /data/u01/app/oracle/fast_recovery_area/sccdb
+mkdir -p /data/u01/app/oracle/fast_recovery_area/fmsdb
 mkdir -p /data/u01/app/oracle/admin/fmsdb/adump
 chown -R oracle.oinstall /data/u01 /data/oradata /data/arch
 
@@ -120,19 +118,19 @@ Copyright (c) 1982, 2013, Oracle.  All rights reserved.
 
 Connected to an idle instance.
 -- 如果有pfile文件，则可以直接跳到这里：
-SQL> startup nomount pfile='/tmp/pfile.bak';
+SQL> startup nomount pfile='/tmp/pfile.bak' force;
 ORACLE instance started.
 
 Total System Global Area 3221222464 bytes
-Fixed Size                               8901696 bytes
-Variable Size                       654311424 bytes
-Database Buffers              2550136832 bytes
-Redo Buffers                           7872512 bytes
+Fixed Size                  8901696 bytes
+Variable Size             654311424 bytes
+Database Buffers         2550136832 bytes
+Redo Buffers                7872512 bytes
 
 SQL> create spfile from pfile='/tmp/pfile.bak';
+-- spfile 文件会生成在 $ORACLE_HOME/dbs/下
 File created.
 
---SQL> startup nomount force;
 ```
 
 
@@ -214,7 +212,7 @@ RMAN> recover database;
 RMAN> recover database until scn 20152861;
 
 --以resetlogs方式打开数据库
-alter database open resetlogs;
+RMAN> alter database open resetlogs;
 ```
 
 
@@ -232,3 +230,26 @@ FMSDB     READ WRITE
 SQL> 
 ```
 
+
+## 总结
+
+```sql
+RMAN> startup nomount
+RMAN> restore spfile from '/opt/bak/ctl_c-1440834294-20221114-0b.bak';
+RMAN> sql "create pfile=''/tmp/pfile.bak'' from spfile";
+
+-- 如果有pfile文件，则可以直接跳到这里：
+SQL> startup nomount pfile='/tmp/pfile.bak' force;
+SQL> create spfile from pfile='/tmp/pfile.bak';
+
+RMAN> restore controlfile from '/opt/bak/ctl_c-1440834294-20221114-0b.bak';
+RMAN> alter database mount;
+RMAN> catalog start with '/opt/bak/';
+RMAN> restore database;
+RMAN> recover database;
+--在进行recover database的过程中由于缺少日志执行进行不完全恢复，只能基于时间点进行恢复
+RMAN> recover database until scn 20152861;
+
+--以resetlogs方式打开数据库
+RMAN> alter database open resetlogs;
+```

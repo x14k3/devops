@@ -1,4 +1,4 @@
-#system/logrote
+#system
 
 logrorare一定程度上可以简化对会生成大量日志文件的系统的管理。logrotate可以实现自动轮替、删除、压缩和mail日志的功能。
 
@@ -65,5 +65,5 @@ logrotate 配置文件的主要参数如表:
 | size大小                | 日志只有大于指定大小才进行日志轮替，而不是按照时间轮替，如size 100k     |
 | dateext                 | 使用日期作为日志轮替文件的后缀，如secure-20130605     |
 | sharedscripts           | 在此关键宇之后的脚本只执行一次     |
-| prerotate/cndscript     | 在曰志轮替之前执行脚本命令。endscript标识prerotate脚本结束     |
-| postrolaie/endscripl    |   在日志轮替之后执行脚本命令。endscripi标识postrotate脚本结束 |
+| prerotate/endscript     | 在曰志轮替之前执行脚本命令。endscript标识prerotate脚本结束     |
+| postrotate/endscript    |   在日志轮替之后执行脚本命令。endscripi标识postrotate脚本结束 |

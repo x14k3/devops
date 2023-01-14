@@ -1,4 +1,4 @@
-#system/ftp
+#system
 
 # ftp和sftp的区别
 

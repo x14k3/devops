@@ -3,14 +3,11 @@
 `tcpdump` 是一个命令行抓包工具，允许抓取和分析经过系统的流量数据包。  
 `tcpdump` 是一款强大的工具，支持多种选项和过滤规则，适用场景十分广泛。由于它是命令行工具，因此适用于在远程服务器或者没有图形界面的设备中收集数据包以便于事后分析。
 
-### 1、安装tcpdump
+安装tcpdump ：`yum install tcpdump libpcap`
 
-`yum install tcpdump`
-**`注：`**`tcpdump依赖libpcap包，该库文件用于捕获网络数据包。`
+## 用tcpdump抓包
 
-### 2、用tcpdump抓包
-
-##### 2.1、tcpdump -D命令列出可以抓包的网络接口
+#### tcpdump -D命令列出可以抓包的网络接口
 
 ```bash
 [root@192-168-188-155 ~]# tcpdump -D
