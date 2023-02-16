@@ -30,7 +30,7 @@ yum -y install  ansible
 `/etc/ansible/ansible.cfg`
 
 ```bash
-inventory = /etc/ansible/hosts         # ansible主机管理清单
+inventory = /etc/ansible/hosts        # ansible主机管理清单
 forks = 5                             # 并发数量
 sudo_user = root                      # 提权
 remote_port = 22                      # 操作主机的端口

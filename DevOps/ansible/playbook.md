@@ -16,41 +16,15 @@
 | 组件名称     | 说明                                                                                                                                                                                                                                     | 参数 |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
 | hosts        | 运行指定任务的目标主机，主机或主机组在inventory清单中指定，可以使用系统默认的/etc/ansible/hosts，也可以自己编辑，在运行的时候加上-i选项，指定清单的位置即可。在运行清单文件的时候，-list-hosts选项会显示那些主机将会参与执行task的过程中 |      |
-| remoute_user | 在远程主机上执行任务的用户；在远端系统执行task的用户，可以任意指定，也可以使用sudo，但是用户必须要有执行相应task的权限                                                                                                                   |      |
-| sudo_user    |                                                                                                                                                                                                                                          |      |
-| tasks        | 任务列表；指定远端主机将要执行的一系列动作。tasks的核心为ansible的模块，前面已经提到模块的用法                                                                                                                                           |      |
-| templates    | 包含了模板语法的文本文件                                                                                                                                                                                                                 |      |
-| variables    | 变量                                                                                                                                                                                                                                     |      |
-| handlers     | 由特定条件触发的任务                                                                                                                                                                                                                     |      |
+| remoute_user | 在远程主机上执行任务的用户；在远端系统执行task的用户，可以任意指定，也可以使用sudo，但是用户必须要有执行相应task的权限            |      |
+| sudo_user    |      |      |
+| tasks        | 任务列表；指定远端主机将要执行的一系列动作。tasks的核心为ansible的模块，前面已经提到模块的用法  |      |
+| templates    | 包含了模板语法的文本文件       |      |
+| variables    | 变量      |      |
+| handlers     | 由特定条件触发的任务    |      |
 
 
-## ansible-playbook示例
-
-### 部署jdk+tomcat并启动
-1.上传tomcat和jdk安装包至/opt
-2.编写playbook剧本
-
-```yaml
----
-- name: 部署tomcat
-  hosts: test1
-  remote_user: root
-  tasks:
-    - name: 上传、解压jdk
-      unarchive: copy="yes" src="/opt/jdk-8u333-linux-x64.tar.gz" dest="/usr/local"
-    - name: 设置/etc/profile
-      lineinfile: dest=/etc/profile line="export JAVA_HOME=/usr/local/jdk1.8.0_333\nexport JRE_HOME=$JAVA_HOME/jre\nexport CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib\nexport PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin"
-    - name: 创建/data目录
-      file: path="/data" state="directory"
-    - name: 上传、解压tomcat至/data
-      unarchive: copy="yes" src="/opt/apache-tomcat-8.5.84.tar.gz" dest="/data"
-    - name: 启动tomcat
-      shell: source /etc/profile; nohup /data/apache-tomcat-8.5.84/bin/startup.sh
-   
-```
-
-
-## Playbook中使用变量
+## Playbook 中的变量
 
 **变量调用方式：**
 
@@ -120,3 +94,131 @@
 	ntp_server=ntp.magedu.com
 	nfs_server=nfs.magedu.com
 	```
+
+6. register变量
+	register能将tasks的运行过程状态以json格式记录下来,tasks运行可能会产生error,我们在运行playbook的时候,可以根据json中的值来判断是否产生错误.
+	例如我们可以根据json中的rc(return code)值来判断运行结果.
+
+	```bash
+	---
+	- name: register接收变量演示
+	  hosts: all
+	  tasks:
+	    - name: shell执行hostname,并将hostname结果保存到变量名myvar
+	      shell: hostname
+	      register: myvar
+	    - name: 打印接收的myvar变量
+	      debug:
+	        msg: "{{ myvar }}"
+	        msg: "{{ myvar.stdout }}"
+	```
+
+### 演示部署jdk+tomcat并启动
+1.上传tomcat和jdk安装包至/opt
+2.编写playbook剧本
+
+```yaml
+---
+- name: 部署tomcat
+  hosts: test1
+  remote_user: root
+  tasks:
+    - name: 上传、解压jdk
+      unarchive: copy="yes" src="/opt/jdk-8u333-linux-x64.tar.gz" dest="/usr/local"
+    - name: 设置/etc/profile
+      lineinfile: dest=/etc/profile line="export JAVA_HOME=/usr/local/jdk1.8.0_333\nexport JRE_HOME=$JAVA_HOME/jre\nexport CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib\nexport PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin"
+    - name: 创建/data目录
+      file: path="/data" state="directory"
+    - name: 上传、解压tomcat至/data
+      unarchive: copy="yes" src="/opt/apache-tomcat-8.5.84.tar.gz" dest="/data"
+    - name: 启动tomcat
+      shell: source /etc/profile; nohup /data/apache-tomcat-8.5.84/bin/startup.sh
+   
+```
+
+```yaml
+---
+- name: 部署tomcat
+  hosts: test1
+  remote_user: root
+  vars:
+  - pkg_path: /opt/ansible-store/tomcat
+  - data_path: /data
+  tasks:
+    - name: 上传、解压 jdk
+      unarchive: copy="yes" src="{{ pkg_path }}/jdk-8u333-linux-x64.tar.gz" dest="/usr/local"
+    - name: 配置 jdk 环境变量
+      lineinfile: dest=/etc/profile line="export JAVA_HOME=/usr/local/jdk1.8.0_333\nexport JRE_HOME=$JAVA_HOME/jre\nexport CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib\nexport PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin"
+    - name: 创建部署目录
+      file: path="{{ data_path }}" state="directory"
+    - name: 上传、解压 tomcat
+      unarchive: copy="yes" src="{{ pkg_path }}/apache-tomcat-8.5.84.tar.gz" dest="{{ data_path }}"
+    - name: 启动 tomcat
+      shell: source /etc/profile; nohup "{{ data_path }}"/apache-tomcat-8.5.84/bin/startup.sh
+   
+```
+
+
+## ansible 判断和循环
+
+### 1. 标准循环
+
+```yaml
+# 模式1
+- name: add several users
+  user: name={{ item }} state=present groups=wheel
+  with_items:
+     - testuser1
+     - testuser2  
+  or  
+  with_items: "{{ somelist }}"
+```
+
+```yaml
+# 模式2. 字典循环
+- name: add several users
+  user: name={{ item.name }} state=present groups={{ item.groups }}
+  with_items:
+    - { name: 'testuser1', groups: 'wheel' }
+    - { name: 'testuser2', groups: 'root' }
+```
+
+### 2. 嵌套循环
+
+```yaml
+---
+- name: test
+  hosts: masters
+  tasks:
+    - name: give users access to multiple databases
+      command: "echo name={{ item[0] }} priv={{ item[1] }} test={{ item[2] }}"
+      with_nested:
+        - [ 'alice', 'bob' ]
+        - [ 'clientdb', 'employeedb', 'providerdb' ]
+        - [ '1', '2', ]
+
+**result:**
+changed: [localhost] => (item=[u'alice', u'clientdb', u'1'])
+changed: [localhost] => (item=[u'alice', u'clientdb', u'2'])
+changed: [localhost] => (item=[u'alice', u'employeedb', u'1'])
+changed: [localhost] => (item=[u'alice', u'employeedb', u'2'])
+changed: [localhost] => (item=[u'alice', u'providerdb', u'1'])
+changed: [localhost] => (item=[u'alice', u'providerdb', u'2'])
+changed: [localhost] => (item=[u'bob', u'clientdb', u'1'])
+changed: [localhost] => (item=[u'bob', u'clientdb', u'2'])
+changed: [localhost] => (item=[u'bob', u'employeedb', u'1'])
+changed: [localhost] => (item=[u'bob', u'employeedb', u'2'])
+changed: [localhost] => (item=[u'bob', u'providerdb', u'1'])
+changed: [localhost] => (item=[u'bob', u'providerdb', u'2'])
+```
+
+### 3. 文件循环(with_file, with_fileglob)
+
+with_file 是将每个文件的文件内容作为item的值  
+with_fileglob 是将每个文件的全路径作为item的值, 在文件目录下是非递归的, 如果是在role里面应用改循环, 默认路径是roles/role_name/files_directory**
+
+```yaml
+- copy: src={{ item }} dest=/opt/ owner=root mode=600
+    with_fileglob:
+	  - /playbooks/files/fooapp/*
+```

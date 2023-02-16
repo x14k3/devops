@@ -16,13 +16,13 @@ mkdir /data ; chown -R nfs.nfs /data
 # 存储目录信息  允许哪些主机进行数据存储(权限参数)
 vim /etc/exports
 ---------------------------------
-/data   172.16.1.0/24(rw,sync)
-/data   *(rw,sync)
+/data/nfs 192.168.0.0/24(rw,sync,no_subtree_check)
+/data   *(rw,sync,no_subtree_check)
 ---------------------------------
 
 # 启动nfs-server
 systemctl daemon-reload
-systemctl start   nfs-server
+systemctl start  nfs-server
 systemctl status nfs-server
 ```
  

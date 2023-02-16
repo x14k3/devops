@@ -36,7 +36,7 @@ git clone [url]
 
 ```bash
 # 显示当前的Git配置
-git config --list
+git config --list
 # 编辑Git配置文件
 git config -e [--global]
 # 设置提交代码时的用户信息
@@ -335,7 +335,7 @@ git archive  # 生成一个可供发布的压缩包
 ```
 
 
-##  如何将本地项目上传到Github的方法步骤
+##  将本地项目上传到Github的方法步骤
 ```bash
 # 第一步：我们需要先创建一个本地的版本库（其实也就是一个文件夹）。
 mkdir github  ;cd github
@@ -353,5 +353,21 @@ git commit -m "新增笔记"
 # 在Github上创建好Git仓库之后我们就可以和本地仓库进行关联了
 git remote add origin https://github.com/x14k3/devops.git
 # 关联好之后我们就可以把本地库的所有内容推送到远程仓库（也就是Github）上了
+git push -u origin master
+```
+
+##  更新Github上的项目方法步骤
+```bash
+# 第一步：把代码clone到本地
+git clone https://github.com/x14k3/devops.git
+# 查看当前的git仓库状态，可以使用git status
+git status
+# 更新代码
+
+# 更新后使用git add * (*是更新全部）
+git add *
+# 接着输入git commit -m "更新说明“，commit只是提交到缓存区域
+git commit -m "update"
+# 最后git push origin master,最后一步才是push到远程的master分支上
 git push -u origin master
 ```

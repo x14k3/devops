@@ -24,4 +24,4 @@ Memcached不支持复制。而，Redis支持主从复制，允许从属Redis服�
 Redis的密钥长度最大为2GB，而Memcached的密钥长度最大为250字节。
 
 - 线程
-Redis是单线程的；而，Memcached是多线程的
+Redis是单线程的；而Memcached是多线程的

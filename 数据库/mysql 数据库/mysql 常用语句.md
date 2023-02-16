@@ -53,7 +53,7 @@ flush privileges;
 
 ------------------- root远程登陆 -------------------
 mysql -uroot -p
-update mysql.user set host='%', plugin='mysql_native_password' where user='root';
+update mysql.user set host='%', plugin='mysql_native_password' where user='root'; # 不要更换plugin，否则以前的密码会失效
 flush privileges;
 select host, user, plugin from mysql.user;
 

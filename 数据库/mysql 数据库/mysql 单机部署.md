@@ -43,8 +43,6 @@ vim /etc/my.cnf
 port=3306
 # 用于本地连接的 socket 套接字
 socket=/var/lib/mysql/mysql.sock
-# 连接客户端字符编码
-default-character-set=utf8mb4
 
 [mysql]
 # 设置默认字符编码
@@ -109,8 +107,6 @@ vim /etc/my.cnf
 port=3306
 # 用于本地连接的 socket 套接字
 socket=/data/mysql/mysql.sock
-# 连接客户端字符编码
-default-character-set=utf8mb4
 
 [mysql]
 # 设置默认字符编码
@@ -193,10 +189,7 @@ vim /etc/my.cnf
 # 连接端口号，默认 3306
 port=3306
 # 用于本地连接的 socket 套接字
-socket=/data/mysql/data/mysql.sock
-# 连接客户端字符编码
-default-character-set=utf8mb4
-
+socket=/data/mysql/mysql.sock
 [mysql]
 # 设置默认字符编码
 default-character-set=utf8mb4
@@ -246,7 +239,7 @@ mysqld_pid_file_path=/data/mysql/mysqld.pid
 /data/mysql/support-files/mysql.server start
 
 # 查看默认密码
-cat /data/mysql/error.log
+grep 'password' /data/mysql/error.log
 
 # 初始化
 /data/mysql/bin/mysql_secure_installation 
@@ -333,22 +326,31 @@ innodb_data_file_path = ibdata1:1G:autoextend
 #也就是说，无论是级联情况，还是一主多从情况，都可以通过GTID自动找点儿，而无需像之前那样通过File_name和File_position找点儿了
 gtid_mode = ON
 enforce_gtid_consistency = ON
-log_slave_updates = ON
 server_id = 161
 #binlog日志文件存储路径
 log_bin = /data/mysql/binlog
+# binlog 日志大小限制
+max_binlog_size=500M
+# 二进制日志自动删除的天数，默认值为0,表示“没有自动删除”，启动时和二进制日志循环时可能删除  
+expire_logs_days=15
+#将从服务器 从 主服务器 收到的更新记入到 从服务器 自己的二进制日志文件中,这样从服务器也可以作为其他服务器的主服务器。
+log-slave-updates=1
 
-#将从服务器 从 主服务器 收到的更新记入到 从服务器 自己的二进制日志文件中                 
-log-slave-updates
+# 启动中继日志
+relay_log=slave-relay-bin
+# 中继日志索引文件的路径名称
+relay-log-index = slave-relay-bin.index
+
+max_relay_log_size=500M
+# 自动删除从库的relaylog，但是在MHA架构下该配置不会自动删除
+relay_log_purge=1
+# 从库超时时间
+slave-net-timeout=120
 
 #这个参数一般用在主主同步中，用来错开自增值, 防止键值冲突
 auto_increment_offset = 1           
 #这个参数一般用在主主同步中，用来错开自增值, 防止键值冲突
 auto_increment_increment = 1    
-
-
-#二进制日志自动删除的天数，默认值为0,表示“没有自动删除”，启动时和二进制日志循环时可能删除  
-expire_logs_days = 7                    
 
 
 #二进制日志文件并不是每次写的时候同步到磁盘。因此当数据库所在操作系统发生宕机时，可能会有最后一部分数据没有写入二进制日志文件中，这给恢复和复制带来了问题。
@@ -390,7 +392,10 @@ slow_query_log_file = /data/mysql/logs/slow.log
 #binlog失效日期单位秒
 binlog_expire_logs_seconds = 1296000
 
-#binlog模式（ROW行模式，Level默认，mixed自动模式）
+#binlog模式（
+#-   ROW记录包括了是EVENT TYPE，且是基于每行的,即你执行了一个DML操作，binlog中记录的并不是具体的这个sql，而是针对该语句的每一行或者多行记录各自生成记录，这样能有效避免主从下针对同一条sql而产生不同的结果，这种方式无疑是最安全的，但是效率和空间上消耗是最大的。
+#-   STATAMENT 是基于sql执行语句的（显示记录），相对于row占用的存储空间要少。用于数据同步的话还是要谨慎，需要保证主从机器之间的一致性（variables参数，Binlog日志格式参数，表引擎，数据，索引等等），如果不能保证，用于恢复数据的情景还是要慎用（可以参考下面`update where limit`语句的例子）
+#-   MIXED格式是自动判断并自动切换行和语句的策略，既然是自动，就不能保证完全符合每个业务场景，除非Server层面能做到绝对安全。。
 binlog_format = ROW
 
 #为每个session 分配的内存，在事务过程中用来存储二进制日志的缓存。

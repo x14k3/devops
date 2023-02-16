@@ -11,11 +11,11 @@ GRANT PROCESS ON mysql.proc to 'jy2web';
 flush privileges;
 quit; 
 mysqldump -uroot -p databaseName > /tmp/xxxx.sql
---single-transaction   设置事务的隔离级别为可重复读,在这期间不会锁表。
---events             导出事件
---routines          导出存储过程以及自定义函数。
---triggers           导出触发器。该选项默认启用
---set-gtid-purged=OFF  主从模式备份时就要加--set-gtid-purged=OFF，否则你在主上导入恢复了数据，主没有了binlog日志，同步则不会被同步。
+--single-transaction  设置事务的隔离级别为可重复读,在这期间不会锁表。
+--events              导出事件
+--routines            导出存储过程以及自定义函数。
+--triggers            导出触发器。该选项默认启用
+--set-gtid-purged=OFF 主从模式备份时就要加--set-gtid-purged=OFF，否则你在主上导入恢复了数据，主没有了binlog日志，同步则不会被同步。
 
 -- 还原数据
 --mysql -u用户名 -p密码 数据库名  <  脚本路径
