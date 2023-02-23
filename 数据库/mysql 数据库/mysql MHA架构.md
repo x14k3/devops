@@ -269,6 +269,7 @@ port=3306
 
 ```bash
 /sbin/ifconfig ens33:1 192.168.0.111/24
+# ip addr add 192.168.0.111/24 dev ens33
 ```
 
 

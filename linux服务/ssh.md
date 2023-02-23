@@ -58,6 +58,11 @@ ssh-keygen -t rsa -b 2048
 ssh-copy-id 192.168.0.105
 #cat id_rsa.pub >> /root/.ssh/authorized_keys
 #ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.10.113
+
+# 保证权限正确
+chmod 550 /home/zhangming; #chmod 550 /root
+chmod 700 /home/zhangming/.ssh 
+chmod 600 /home/zhangming/.ssh/authorized_keys
 ```
 
 **原理**
