@@ -1,4 +1,4 @@
-#database/oracle
+# RMAN 备份策略
 
 DBA生存之四大守则的第一条就是：备份重于一切
 
@@ -27,11 +27,12 @@ RMAN> backup tablespace jy2web format '/data/oraback/fmsdb/jy2web_%d_%T_%t.bak';
 ```
 
 ### 1.1 差异增量备份
+
 自上一次同级别的差异备份或者是上一次更高级别的备份完成之后的数据库发生改变的数据块.
 
 **说明**：通俗些 其0级备份是对数据空间的完整备份（包括数据库逻辑日志），其备份量较大，在此基础上的1级备份，是增量备份，备份量较小,只备份0级备份之后的数据。0级备份是全备 1级备份是增量备份
 
-![](assets/RMAN%20备份策略/image-20221127211303605.png)
+![](assets/image-20221127211303605-20230610173813-ek330vc.png)
 
 ```sql
 -- 0级增量备份=全备，可以做级增量备份的基础
@@ -44,7 +45,7 @@ RMAN> backup incremental level 1 database format '/data/oraback/fmsdb/inc1_%d_%T
 
 自上一次上0级备份完成以来数据库所有的改变信息。
 
-![](assets/RMAN%20备份策略/image-20221127211310933.png)
+![](assets/image-20221127211310933-20230610173813-llhcgb8.png)
 
 ```sql
 -- 1级累积增量备份
@@ -52,9 +53,6 @@ RMAN> backup incremental level 1 cumulative database format '/data/oraback/fmsdb
 ```
 
 **注意**:差异增量备份跟累积增量备份不要混用，只用一种就行，通常差异增量备份用得多
-
-
-
 
 ## 2. 归档日志备份
 
@@ -81,8 +79,6 @@ RMAN> backup database plus archivelog;
 -- RMAN提供了DELETE ALL INPUT参数，加在BACKUP命令后，则会在完成备份后自动删除归档目录中已备份的归档日志。
 RMAN> backup database plus archivelog delete all input;
 ```
-
-
 
 ## 3. 控制文件备份
 
@@ -118,8 +114,6 @@ RMAN> backup spfile format '/data/oraback/fmsdb/spfile_%d_%T_%t.bak';
 RMAN> create pfile='/tmp/pfile.ora' from spfile='/tmp/spfile.bak';
 ```
 
-
-
 # 二、RMAN RESTORE
 
 还原、恢复
@@ -147,7 +141,6 @@ RMAN> recover tablespace users;   --恢复表空间
 RMAN> recover datafile n;       --恢复数据文件
 ```
 
-
 # 四、 RMAN LIST
 
 查看备份集信息
@@ -162,8 +155,6 @@ RMAN> list backup of archivelog all;    --查看归档日志备份集
 RMAN> list archivelog all;              --查看当前所有归档日志
 RMAN> list expired backup;              --列出所有无效备份
 ```
-
-
 
 # 五、RMAN CROSSCHECK
 
@@ -182,7 +173,6 @@ RMAN> crosscheck backup of controlfile; -- 查看控制文件备份
 RMAN> crosscheck backup of archivelog all; -- 查看归档日志备份
 RMAN> crosscheck archivelog all;
 ```
-
 
 # 六、RMAN DETELE
 
@@ -211,7 +201,6 @@ RMAN> report obsolete;    -- 查看过期备份
 ```
 
 # 七、RMAN CONFIGURE
-
 
 ```sql
 [oracle@fmsrvdb ~]$ rman target /
@@ -322,8 +311,6 @@ CONFIGURE CHANNEL C1 DEVICE TYPE DISK FORMAT '/data/oraback/fmsdb/%U_%T.bak';
 CONFIGURE CHANNEL C2 DEVICE TYPE DISK FORMAT '/data/oraback/fmsdb/%U_%T.bak';
 ```
 
-
-
 ## 7. PARALLELISM
 
 通过parallelism参数来指定同时"自动"创建多少个通道，可以加快备份恢复的速度。
@@ -340,21 +327,19 @@ CONFIGURE DEVICE TYPE DISK PARALLELISM 1 BACKUP TYPE TO BACKUPSET
 CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET;
 ```
 
-
 # 八、备份文件格式
 
-| 符号 | 说明                                        |
-| ---- | -------------------------------- |
-| %c   | 备份片的拷贝数                      |
-| %d   | 数据库名称                              |
-| %T   | 年月日格式(YYYYMMDD)        |
-| %t   | 备份集时间戳                          |
-| %u   | 一个八个字符的名称代表备份集与创建时间      |
-| %p   | 该备份集中的备份片号，从1开始到创建的文件数 |
-| %U   | 一个唯一的文件名，代表%u_%p_%c              |
-| %s   | 备份集的号                            |
-| %F  |一个基于DBID唯一的名称,仅适用于控制文件自动备份格式  |   
-
+|符号|说明|
+| ----| ---------------------------------------------------|
+|%c|备份片的拷贝数|
+|%d|数据库名称|
+|%T|年月日格式(YYYYMMDD)|
+|%t|备份集时间戳|
+|%u|一个八个字符的名称代表备份集与创建时间|
+|%p|该备份集中的备份片号，从1开始到创建的文件数|
+|%U|一个唯一的文件名，代表%u_%p_%c|
+|%s|备份集的号|
+|%F|一个基于DBID唯一的名称,仅适用于控制文件自动备份格式|
 
 # 附：RMAN备份脚本
 

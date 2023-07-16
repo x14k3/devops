@@ -1,25 +1,23 @@
-#database/mysql
+# mysql 主从架构
 
 # 基于binlog主从复制
 
 MySQL主从复制涉及到三个线程，一个运行在主节点（log dump thread），其余两个(I/O thread, SQL thread)运行在从节点，如下图所示:
 
-![](assets/mysql%20主从架构/image-20230214122442357.png)
+![](assets/image-20230214122442357-20230610173813-vp569hj.png)
 
 复制的原理其实很简单，仅分为以下三步：
 
--   在**主库**上把数据更改记录到二进制日志`binary log`中，具体是在每次准备提交事务完成数据更新前，主库将数据更新的事件记录到二进制日志中去，Mysql会按照事务提交的顺序来记录二进制日志的。日志记录好之后，主库通知存储引擎提交事务。
-    
--   **从库**会启动一个**IO线程**，该线程会连接到主库。而主**库上的binlog dump线程**会去读取主库本地的binlog日志文件中的更新事件。发往从库，从库接收到日志之后会将其记录到本地的中继日志`relay-log`当中。
-    
--   **从库中的SQL线程**读取中继日志relay-log中的事件，将其重放到从库中。
+- 在**主库**上把数据更改记录到二进制日志`binary log`中，具体是在每次准备提交事务完成数据更新前，主库将数据更新的事件记录到二进制日志中去，Mysql会按照事务提交的顺序来记录二进制日志的。日志记录好之后，主库通知存储引擎提交事务。
+- **从库**会启动一个**IO线程**，该线程会连接到主库。而主**库上的binlog dump线程**会去读取主库本地的binlog日志文件中的更新事件。发往从库，从库接收到日志之后会将其记录到本地的中继日志`relay-log`当中。
+- **从库中的SQL线程**读取中继日志relay-log中的事件，将其重放到从库中。
 
 **mysql基于binlog的主从复制的步骤:**
 
 - 1) 在主库与从库都安装mysql数据库[[mysql 单机部署]];
-- 2) 在主库的my.cnf配置文件中配置server-id 和log-bin; 
-- 3) 在主库创建认证用户并做授权，查看binlog偏移量; 
-- 4) 在从库的my.cnf配置文件中配置server-id; 
+- 2) 在主库的my.cnf配置文件中配置server-id 和log-bin;
+- 3) 在主库创建认证用户并做授权，查看binlog偏移量;
+- 4) 在从库的my.cnf配置文件中配置server-id;
 - 5) 登陆从库后，执行change master语句开启同步。
 
 1. 主库配置
@@ -81,7 +79,7 @@ systemctl restart mysqld  #/data/mysql/support-files/mysql.server restart
 
 3. 从库执行同步命令
 
-```sql                       
+```sql
 -- 用于同步的主服务器上的用户和密码
 change master to master_user='replication',
 master_password='Ninestar@2022',
@@ -108,21 +106,19 @@ show slave status\G;
 stop  slave;
 ```
 
-
 # 基于GTID主从复制
 
 从 MySQL 5.6.5 版本新增了一种主从复制方式：`GTID`，其全称是`Global Transaction Identifier`，即全局事务标识。通过`GTID`保证每个主库提交的事务在集群中都有唯一的一个`事务ID`。**强化了数据库主从的一致性和故障恢复数据的容错能力**。在主库宕机发生主从切换的情况下。`GTID`方式可以让其他从库自动找到新主库复制的位置，而且`GTID`可以忽略已经执行过的事务，减少了数据发生错误的概率。
 
 **在传统的主从复制slave端，binlog是不用开启的，但是在GTID中slave端的binlog是必须开启的**
 
-
 **基于GTID的主从复制原理**
 
--   主服务器更新数据时，会在事务前产生GTID，一同记录到binlog日志中。
--   binlog传送到从服务器后，被写入到本地的relay log中。从服务器读取GTID，并将其设定为自己的GTID（GTID_NEXT系统）。
--   sql线程从relay log中获取GTID，然后对比从服务器端的binlog是否有记录。
--   如果有记录，说明该GTID的事务已经执行，从服务器会忽略。
--   如果没有记录，从服务器就会从relay log中执行该GTID的事务，并记录到binlog。
+- 主服务器更新数据时，会在事务前产生GTID，一同记录到binlog日志中。
+- binlog传送到从服务器后，被写入到本地的relay log中。从服务器读取GTID，并将其设定为自己的GTID（GTID_NEXT系统）。
+- sql线程从relay log中获取GTID，然后对比从服务器端的binlog是否有记录。
+- 如果有记录，说明该GTID的事务已经执行，从服务器会忽略。
+- 如果没有记录，从服务器就会从relay log中执行该GTID的事务，并记录到binlog。
 
 ==优势==
 
@@ -131,13 +127,12 @@ stop  slave;
 - 比传统的复制更加安全
 - GTID是连续的没有空洞的，保证数据的一致性，零丢失
 
-
 **基于GTID+并行复制+半同步模式的主从架构搭建步骤:**
 
 - 1) 在主库与从库都安装mysql数据库[[mysql 单机部署]];
-- 2) 在主库的my.cnf配置文件中配置server-id 、log-bin、gtid-mode、log-slave-updates、enforce-gtid-consistency; 
-- 3) 在主库创建认证用户并做授权; 
-- 4) 在从库的my.cnf配置文件中配置server-id，其他的和主库的配置基本一样; 
+- 2) 在主库的my.cnf配置文件中配置server-id 、log-bin、gtid-mode、log-slave-updates、enforce-gtid-consistency;
+- 3) 在主库创建认证用户并做授权;
+- 4) 在从库的my.cnf配置文件中配置server-id，其他的和主库的配置基本一样;
 - 5) 登陆从库后，指定master并开启同步开关。
 
 1. 修改（主）mysql配置文件，然后重启下服务
@@ -246,7 +241,6 @@ mysql> change master to master_host='192.168.0.104' ,master_user='master',master
 mysql> start slave;
 ```
 
-
 # 复制模式
 
 ## 异步
@@ -257,7 +251,7 @@ MySQL默认的复制即是异步的，主库在执行完客户端提交的事务
 
 是介于全同步复制与全异步复制之间的一种，主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈。同时，这里只是一个收到的反馈，而不是已经完全完成并且提交的反馈，如此，节省了很多时间。
 
-![](assets/mysql%20主从架构/image-20230216193028013.png)
+![](assets/image-20230216193028013-20230610173813-o4yy8fh.png)
 
 状态检查
 
@@ -283,10 +277,6 @@ show status like 'Rpl_semi_sync_master_status';
 
 ```
 
-
 ## 全同步
 
 指当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响。
-
-
-

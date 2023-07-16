@@ -1,5 +1,4 @@
-#middleware/nacos
-
+# nacos 集群部署
 
 [官网：https://nacos.io/](https://links.jianshu.com/go?to=https://nacos.io/ "官网：https://nacos.io/")
 [下载地址：https://github.com/alibaba/nacos/releases](https://links.jianshu.com/go?to=https://github.com/alibaba/nacos/releases "下载地址：https://github.com/alibaba/nacos/releases")
@@ -8,10 +7,10 @@
 
 ```bash
  tar -xvf nacos-server-1.3.0.tar.gz
- ```
+```
 
 ### 2. 配置集群配置文件
-    
+
 在nacos的解压目录nacos/的conf目录下，有配置文件cluster.conf，请每行配置成ip:port。（请配置3个或3个以上节点）
 
 ```bash
@@ -47,7 +46,6 @@ grant all privileges on nacos.* to nacos@'%';
 ```bash
 mysql -unacos -p nacos < /data/nacos/conf/nacos-mysql.sql
 ```
-
 
 3. application.properties 配置
 

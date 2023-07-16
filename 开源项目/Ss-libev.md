@@ -1,8 +1,9 @@
-#openSource
+# Ss-libev
 
 # Ss-libev
 
 ## 部署
+
 ```bash
 
 # 升级内核
@@ -47,9 +48,8 @@ asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel -y
 
 ```
 
-
-
 ## 单用户配置
+
 ```json
 {
     "server": "111.111.111.111",        // 你vps的ip地址
@@ -61,8 +61,8 @@ asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel -y
 }
 ```
 
-
 ## 多用户配置
+
 多用户配置时，应用ss-manager而不是ss-server
 
 ```json
@@ -78,7 +78,6 @@ asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel -y
 }
 
 ```
-
 
 ## 启动
 
@@ -145,7 +144,7 @@ sudo vim /etc/shadowsocks-libev/config.json
 
 下载 SwitchyOmega
 
-###  系统全局代理
+### 系统全局代理
 
 ```javascript
 sudo apt-get install privoxy

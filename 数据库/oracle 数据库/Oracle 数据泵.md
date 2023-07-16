@@ -1,12 +1,10 @@
-#database/oracle
- 
+# Oracle 数据泵
+
 ## 数据泵备份
 
-*   **EXP和IMP是客户端工具**程序,它们既可以在可以客户端使用,也可以在服务端使用。
-
-*   **EXPDP和IMPDP是服务端的工具**程序,他们只能在ORACLE服务端使用,**不能在客户端使用**。
-
-*   IMP只适用于EXP导出文件,不适用于EXPDP导出文件;IMPDP只适用于EXPDP导出文件,而不适用于EXP导出文件。
+* **EXP和IMP是客户端工具**程序,它们既可以在可以客户端使用,也可以在服务端使用。
+* **EXPDP和IMPDP是服务端的工具**程序,他们只能在ORACLE服务端使用,**不能在客户端使用**。
+* IMP只适用于EXP导出文件,不适用于EXPDP导出文件;IMPDP只适用于EXPDP导出文件,而不适用于EXP导出文件。
 
 ## 服务端expdp/impdp
 

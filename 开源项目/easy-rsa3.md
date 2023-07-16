@@ -1,5 +1,3 @@
-#openSource
-
 # easy-rsa3
 
 easy-rsa 是一个 CLI 实用程序，用于构建和管理 PKI CA。通俗地说，这意味着创建根证书颁发机构，并请求和签署证书，包括中间 CA 和证书吊销列表 （CRL）。

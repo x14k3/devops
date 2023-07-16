@@ -1,11 +1,10 @@
-#openSource 
-
+# headscale
 
 Tailscale 是一种利用 NAT 穿透(aka: P2P 穿透)技术的 VPN 工具. Tailscale 客户端等是开源的, 不过遗憾的是中央控制服务器目前并不开源; Tailscale 目前也提供免费的额度给用户使用, 在 NAT 穿透成功的情况下也能保证满速运行.
 
 不过一旦无法 NAT 穿透需要做中转时, Tailscale 官方的服务器由于众所周知的原因在国内访问速度很拉胯; 不过万幸的是开源社区大佬们搓了一个开源版本的中央控制服务器(Headscale), 也就是说: **我们可以自己搭建中央服务器啦, 完全 “自主可控” 啦**
 
-P2P内网穿透原理：[NAT 概述](../网络/NAT%20概述.md)    [NAT 穿透](../网络/NAT%20穿透.md)
+P2P内网穿透原理：[NAT 概述](../计算机网络/NAT%20概述.md)    [NAT 穿透](../计算机网络/NAT%20穿透.md)
 
 ## headscale 部署
 
@@ -26,7 +25,7 @@ server_url     # 改为公网 IP 或域名。
 magic_dns   # 如果暂时用不到 DNS 功能，设置为false
 ip_prefixes:  # 设置连接到tailscale的客户端的ip地址池
 #  - fd7a:115c:a1e0::/48 # 不适用ipv6，可以注释掉
-- 111.11.1.0/24
+- 100.64.0.0/10
 
 -------------------------------------------------
 
@@ -41,7 +40,6 @@ nohup ./headscale serve >> ./headscale.log 2>&1 &
 ./headscale namespaces create default
 ./headscale namespaces list
 ```
-
 
 ## tailscale 客户端接入
 
@@ -92,9 +90,9 @@ To authenticate, visit:
 
 ### windows
 
-Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`http://<HEADSCALE_PUB_IP>:8080/windows`，便会出现如下的界面：
+Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.cn:22051/windows`​，便会出现如下的界面：
 
-![](assets/headscale/Pasted%20image%2020221222215323.png)
+![](assets/Pasted image 20221222215323-20230610173813-1i6nu9z.png)
 
 **注册客户端到headscale控制服务器**
 
@@ -102,37 +100,35 @@ Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需
 
 ```bash
 # 将 <HEADSCALE_PUB_IP> 换成你的 Headscale 公网 IP 或域名
-tailscale up --login-server=http://ip:8080 --accept-routes=true --accept-dns=false --advertise-routes=192.168.188.0/24
+tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --accept-dns=false --advertise-routes=192.168.188.0/24
 ```
 
 然后将浏览器弹出的命令在服务端执行：
 
-![](assets/headscale/Pasted%20image%2020221222220854.png)
-
+![](assets/Pasted image 20221222220854-20230610173813-c77ouoo.png)
 
 **客户端开启路由转发功能**
 
 搜索框输入`regedit`，打开注册表编辑器，在注册表编辑器中将参数**IPEnableRouter**的值从0修改为1，然后关闭注册表编辑器并重新启动系统。
 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters`
 
-
-
 ## 开启路由转发
 
 大多数时候我们可能并不会在每个服务器上都安装 Tailscale 客户端, 通常只安装 2、3 台, 然后想通过这两三台转发该内网的所有流量. **此时你需要**
 
--   启动 tailscale 时设置正确的路由提示 `--advertise-routes=192.168.1.0/24` 来告诉 Headscale 服务器 “我这个节点可以转发这些地址的路由”
--   其他节点启动时需要增加 `--accept-routes=true` 选项来声明 “我接受外部其他节点发布的路由”
+- 启动 tailscale 时设置正确的路由提示 `--advertise-routes=192.168.1.0/24` 来告诉 Headscale 服务器 “我这个节点可以转发这些地址的路由”
+- 其他节点启动时需要增加 `--accept-routes=true` 选项来声明 “我接受外部其他节点发布的路由”
 
 然后在headscale服务端启用客户端发布的子网
 
 ```bash
+# 查看注册的节点
+./headscale nodes list
 # 发布客户端的子网
 headscale routes enable -i 1 -r "192.168.188.0/24"
 # 查看客户端发布的subnet
 headscale nodes routes list -i <id>
 ```
-
 
 ## 管理命令
 
@@ -172,6 +168,27 @@ tailscale up [flags]
 -   `--ssh`  # 运行[尾鳞 SSH]服务器，允许根据尾网管理员声明的访问策略进行[访问]，默认为 false。
 -   `--timeout=<duration>` # 等待尾部秤服务初始化的最长时间。 可以是可解析的任何值`duration`[`time.ParseDuration()`].默认为 ，将永久阻止。`0s`
 -   `--unattended` #（仅限视窗）在[无人值守模式下]运行，即使在当前用户注销后，Tailscale 仍会继续运行。
+
+SUBCOMMANDS
+  up         Connect to Tailscale, logging in if needed
+  down       Disconnect from Tailscale
+  set        Change specified preferences
+  login      Log in to a Tailscale account
+  logout     Disconnect from Tailscale and expire current node key
+  switch     Switches to a different Tailscale account
+  netcheck   Print an analysis of local network conditions
+  ip         Show Tailscale IP addresses
+  status     Show state of tailscaled and its connections
+  ping       Ping a host at the Tailscale layer, see how it routed
+  nc         Connect to a port on a host, connected to stdin/stdout
+  ssh        SSH to a Tailscale machine
+  version    Print Tailscale version
+  web        Run a web server for controlling Tailscale
+  file       Send or receive files
+  bugreport  Print a shareable identifier to help diagnose issues
+  cert       Get TLS certs
+  lock       Manage tailnet lock
+  licenses   Get open source license information
 ```
 
 ## nginx 代理
@@ -301,8 +318,6 @@ dns_config:
   magic_dns: false                   # *使用 MagicDns https://tailscale.com/kb/1081/magicdns/  
   base_domain: example.com  # 定义基础域名以创建 MagicDns 主机名
 ```
-
-
 
 ## 中继服务器搭建
 

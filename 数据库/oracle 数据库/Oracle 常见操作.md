@@ -1,6 +1,4 @@
-#database/oracle
-
-
+# Oracle 常见操作
 
 ### 导入sql脚本
 
@@ -108,8 +106,6 @@ drop user user_name cascade;
 
 ```
 
-
-
 ### 创建用户
 
 ```sql
@@ -157,9 +153,6 @@ sqlplus sys/ as sysdba  --登录数据库dba
 SQL> shutdown immediate --关闭数据库
 SQL> startup
 ```
-
-
-
 
 ### PDB/CDB相关
 

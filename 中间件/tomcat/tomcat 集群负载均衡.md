@@ -1,7 +1,6 @@
-#middleware/tomcat 
+# tomcat 集群负载均衡
 
 对于高访问量、高并发量的网站或web应用来说，目前最常见的解决方案应该就是利用负载均衡进行server集群，例如比较流行的nginx+redis+tomcat。集群之后比如我们有N个Tomcat，用户在访问我们的网站时有可能第一次请求分发到tomcat1下，而第二次请求又分发到了tomcat2下，有过web开发经验的朋友都知道这时session不一致会导致怎样的后果，所以我们需要解决一下多个tomcat之间session共享的问题。
-
 
 **Tomcat集群session同步方案有以下几种方式：**
 
@@ -9,18 +8,15 @@
 2. 利用nginx的基于访问ip的hash路由策略，保证访问的ip始终被路由到同一个tomcat上，这个配置更简单。可以解决session(并不是共享session解决)的问题! 并且如果应用是某一个局域网大量用户同时登录，这样负载均衡就没什么作用了；
 3. 利用memcached存储session，并把多个tomcat的session集中管理，从而实现Session共享；
 4. 采用Redis作为session存储方案：支持大规模集群，目前不支持tomcat8以上版本；
-5. 利用filter方法实现。这种方法比较推荐，因为它的服务器使用范围比较多，不仅限于tomcat ，而且实现的原理比较简单容易控制。  
+5. 利用filter方法实现。这种方法比较推荐，因为它的服务器使用范围比较多，不仅限于tomcat ，而且实现的原理比较简单容易控制。
 6. 利用terracotta服务器共享session。这种方式配置比较复杂。
-
-
 
 ## 基于Tomcat Cluster的session共享
 
 两台服务器同时安装jdk和tomcat
 
-1. _[jdk 安装](../jdk/jdk%20安装.md)_
-
-2. _tomcat 安装_
+1. **
+2. *tomcat 安装*
 
 下载地址：https://tomcat.apache.org/
 
@@ -34,7 +30,7 @@
     -->
 ```
 
-4. _在tomcat的server.xml配置参数据中增加session同步复制的设置_
+4. *在tomcat的server.xml配置参数据中增加session同步复制的设置*
 
 `vim server.xml`   增加下列代码，增加Engine后面的cluster中去
 
@@ -84,7 +80,7 @@
         </Cluster>
 ```
 
-5. _同时需要修改tomcat的web.xml配置参数才能真正实现session同步复制的设置_
+5. *同时需要修改tomcat的web.xml配置参数才能真正实现session同步复制的设置*
 
 `vim web.xml`
 
@@ -99,8 +95,6 @@
 </web-app>
 ```
 
-5. _启动tomcat_
+5. *启动tomcat*
 
 ## 利用filter方法实现session共享
-
-

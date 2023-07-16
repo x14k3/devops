@@ -1,4 +1,4 @@
-#openSource
+# alist
 
 Alist 是一款支持多种存储的目录文件列表程序，支持 web 浏览与 webdav，后端基于`gin`，前端使用`react`
 
@@ -75,4 +75,3 @@ systemctl enable alist
 systemctl start    alist
 
 ```
-

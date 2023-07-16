@@ -1,5 +1,4 @@
-#docker
-
+# docker 命令
 
 ## docker run
 
@@ -58,8 +57,8 @@ docker top          #查看正在运行中的容器进程信息
 docker attach       #链接正在运行的容器,_注意：_ 如果从这个 stdin 中 exit，会导致容器的停止。
 docker events       #从docker服务器获取事件
 docker wait         #让一个容器进入等待，使其进入阻塞状态
-docker export       #将容器打包为tar格式的镜像
-docker import       #加载通过docker export打包的容器镜像
+docker export       #将容器打包为tar格式的镜像   [docker export hass -o hass.tar ]
+docker import       #加载通过docker export打包的容器镜像 [ docker import hass.tar ]
 docker port         #列出一个容器的端口映射情况
 docker container    #管理已经运行的容器的
 docker deploy       #部署新的堆栈或更新已有堆栈的
@@ -86,16 +85,16 @@ docker save         #将镜像保存成tar文件 [docker save -o alpine.tar  alp
 docker load         #从tar中恢复镜像 [docker load < alpine.tar]
 ```
 
- **总结一下docker save和docker export的区别：**
+**总结一下docker save和docker export的区别：**
 
 - docker save   保存的是镜像；docker load   用来载入镜像包，
 - docker export 保存的是容器；docker import 用来载入容器包，但两者都会恢复为镜像。
 
 > docker save的应用场景是：
-如果你的应用是使用docker-compose.yml编排的多个镜像组合，但你要部署的客户服务器并不能连外网。这时，你可以使用docker save将用到的镜像打个包，然后拷贝到客户服务器上使用docker load载入。
+> 如果你的应用是使用docker-compose.yml编排的多个镜像组合，但你要部署的客户服务器并不能连外网。这时，你可以使用docker save将用到的镜像打个包，然后拷贝到客户服务器上使用docker load载入。
 
 > docker export的应用场景：
-主要用来制作基础镜像，比如你从一个ubuntu镜像启动一个容器，然后安装一些软件和进行一些设置后，使用docker export保存为一个基础镜像。然后，把这个镜像分发给其他人使用，比如作为基础的开发环境。
+> 主要用来制作基础镜像，比如你从一个ubuntu镜像启动一个容器，然后安装一些软件和进行一些设置后，使用docker export保存为一个基础镜像。然后，把这个镜像分发给其他人使用，比如作为基础的开发环境。
 
 ## 数据卷管理
 
@@ -110,11 +109,10 @@ docker load         #从tar中恢复镜像 [docker load < alpine.tar]
 ```bash
 login       #docker登入 [docker login 192.168.0.100:8081]
 logout      #docker登出
-pull        #拉取镜像
+pull        #拉取镜像         [docker pull 192.168.0.100:8081/images/alpine:3.15]
 push        #推送镜像至服务器 [docker push 192.168.0.100:8081/images/alpine:3.15]
 search      #在docker hub上查询镜像
 ```
-
 
 ## 其他命令
 
@@ -137,6 +135,7 @@ service      #docker服务管理
 `docker run --name mytomcat -d -p 8888:8080 tomcat`
 
 ### 2.修改hostconfig.json和config.v2.json配置文件
+
 ```bash
 docker stop 容器id
 systemctl stop docker
@@ -148,6 +147,7 @@ docker start 容器id
 ```
 
 ### 3.iptable转发端口
+
 ```bash
 docker inspect 容器id | grep IPAddress
 

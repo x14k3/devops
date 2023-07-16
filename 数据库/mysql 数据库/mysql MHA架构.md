@@ -1,3 +1,4 @@
+# mysql MHA架构
 
 MHA（MasterHigh Availability）是一套优秀的MySQL高可用环境下故障切换和主从复制的软件。
 MHA 的出现就是解决MySQL 单点的问题。 MySQL故障切换过程中，MHA能做到0-30秒内自动完成故障切换操作。
@@ -10,10 +11,10 @@ MHA 能在故障切换的过程中最大程度上保证数据的一致性，以�
 
 ## 搭建MySQL + MHA
 
-![](assets/mysql%20MHA架构/image-20230216200302909.png)
+![](assets/image-20230216200302909-20230610173813-r4w0zss.png)
 
-环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考[[mysql 单机部署]] 
-操作系统：`Linux CentOS 7.6`  
+环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考[[mysql 单机部署]]
+操作系统：`Linux CentOS 7.6`
 数据库：`MySQL 8.0.26`   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
 MHA：`mha4mysql-0.58` https://github.com/yoshinorim/mha4mysql-node https://github.com/yoshinorim/mha4mysql-manager
 
@@ -48,7 +49,6 @@ relay_log_purge = 0
 read_only=1
 ```
 
-
 ### 3. 安装MHA node组件
 
 在所有服务器上都安装 MHA node 组件
@@ -73,7 +73,6 @@ filter_mysqlbinlog     # 去除不必要的 ROLLBACK 事件（MHA 已不再使�
 purge_relay_logs       # 清除中继日志（不会阻塞 SQL 线程）
 
 ```
-
 
 ### 4. 安装MHA manager组件
 
@@ -210,7 +209,6 @@ sub usage {
 }
 ```
 
-
 **创建 MHA 软件目录并拷贝配置文件，这里使用app1.cnf配置文件来管理 mysql 节点服务器**
 
 ```bash
@@ -271,7 +269,6 @@ port=3306
 /sbin/ifconfig ens33:1 192.168.0.111/24
 # ip addr add 192.168.0.111/24 dev ens33
 ```
-
 
 ### 6. 在 manager 节点上测试MHA
 
@@ -341,7 +338,6 @@ ifconfig
 （1）默认情况下如果一个slave落后master 100M的relay logs的话，即使有权重，也会失效。
 （2）如果check_repl_delay=0的话，即使落后很多日志，也强制选择其为备选主。
 
-
 **故障修复步骤**
 
 ```bash
@@ -385,20 +381,19 @@ nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf -
 dos2unix /usr/local/bin/master_ip_failover 
 ```
 
-
 # MHA 和 MGR 浅谈
 
 我们知道mha是外部的基于mysql主从半同步开发的一套高可用切换方案，它并不属于mysql内核，独立于mysql存在于外围，mha重点在切换，可以理解为一套切换工具。而mgr存在于mysql内核层面，是内核层面数据强一致方案，它的重点在高可用强一致，如果将mgr用在生产环境中，那么针对mgr，还需要开发一套监控及切换方案，而mha将这一整套切换方案vip之类的都考虑进去了。
 
 mha会在集群中某台机器一般是slave节点安装mha manager，当master出现故障时，可以自动将最新数据的slave提升为master同时将所有其他的slave指向新的master，整个过程是透明的，对应用无感知，切换时间一般在30s以内，非常高效。mha适用于一主一从，一主多从，一般配合半同步使用，预防数据丢失。
 
-![](assets/mysql%20MHA架构/image-20230216200554290.png)
+![](assets/image-20230216200554290-20230610173813-poksi1u.png)
 
 mha大致原理是manager进程会定期（一般是1s一次）探测主库节点，当主库出现故障时，mha会找到应用了最新日志的slave的binlog位置，并且拉取主库和最新从库的差异日志并应用到该从库上。，然后将该从库提升为master，并且将其他从库指向新主库，切换过程配合vip的漂移。
 
 mgr全称是mysql group replication，它其实是对mysql半同步的一个创新，它至少要求三个节点，三个节点间基于paxos协议做同步，paxos协议是多主节点的强一致协议。
 
-![](assets/mysql%20MHA架构/image-20230216200600782.png)
+![](assets/image-20230216200600782-20230610173813-xkiuufl.png)
 
 mgr有两种模式，单主模式和多主模式，区别就是是否提供多个节点同时写入的能力。由于mgr采用乐观锁，在高并发的情况下很容易在提交那一刻造成冲突，所以在生产环境中一般采用单主模式居多。
 

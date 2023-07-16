@@ -1,3 +1,0 @@
-#devops/kvm 
-
-KVM的全称是Kernel-based Virtual Machine，其是一种基于linux内核的采用硬件辅助虚拟化技术的全虚拟化解决方案。它最初由以色列的初创公司Qumranet开发，并在linux-2.6.20中开始被纳入在linux内核，成为内核源码的一部分。KVM自诞生之初就定位于基于硬件辅助的虚拟化来提供全虚拟化的支持，其以内核模块的形式被加载。加载KVM模块的linux内核相当于变成了一个Hypervisor，同时依赖linux内核提供的各种功能来实现硬件管理，拥有极高的兼容性及可扩展性。

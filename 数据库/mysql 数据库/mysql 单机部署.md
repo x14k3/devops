@@ -1,14 +1,13 @@
-#database/mysql
+# mysql 单机部署
 
 安装方式：
 
 （1）RPM、Yum（Red Hat Enterprise Linux/Oracle Linux）：安装方便，安装速度快，无法定制；
 （2）二进制（Linux Generic）：不需要安装，解压即可使用，不能定制功能；
 （3）编译安装/源码安装（Source Code）：安装过程复杂，需要各种依赖库，可定制  ；
-    5.5版本之前：./configure , make , make install  
-    5.5版本之后：cmake , gmake
+5.5版本之前：./configure , make , make install
+5.5版本之后：cmake , gmake
 **注意：MySQL apl、beta、RC版本都不要选，一定要选择GA版（稳定版）**
-
 
 下载地址：https://dev.mysql.com/downloads/mysql/
 
@@ -88,7 +87,7 @@ sql> select host, user, plugin from mysql.user;
 
 ```
 
-##  数据库数据目录迁移
+## 数据库数据目录迁移
 
 该操作一定要在刚部署完数据库软件后进行。
 
@@ -141,7 +140,6 @@ systemctl restart mysqld
 mv /var/lib/mysql /tmp/
 # rm -rf /var/lib/mysql /tmp/
 ```
-
 
 # 二进制安装
 
@@ -268,10 +266,8 @@ sql> select host, user, plugin from mysql.user;
 # 到此表示MySQL5.7.28二进制安装在redhat7.6上已完成。
 ```
 
-
-
-
 # my.cnf 配置说明
+
 ```properties
 [mysqld]
 # MySQL 的安装路径
@@ -482,7 +478,6 @@ read_buffer         = 2M
 write_buffer        = 2M
 
 ```
-
 
 ## 通用模板
 

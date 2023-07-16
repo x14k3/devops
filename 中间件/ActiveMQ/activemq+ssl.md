@@ -1,4 +1,4 @@
-#middleware/activemq 
+# activemq+ssl
 
 ### 1、技术背景
 
@@ -8,13 +8,14 @@ SSL（Secure Sockets Layer 安全套接层）及其继任者TLS（TransportLayer
 
 为了实现消息认证，使用Java自带的 keytool 命令可以生成以上密钥及证书文件，首先生成密钥及证书信任文件。
 ==Server需要：==
+
 - 1）KeyStore：保存服务端的私钥；
 - 2）Trust KeyStore：保存客户端的授权证书
 
 ==Client需要：==
+
 - 1）KeyStore：保存客户端的私钥；
 - 2）Trust KeyStore：保存服务端的授权证书
-
 
 ### 2、生成证书
 
@@ -34,8 +35,6 @@ keytool -import -alias broker -keystore client.ts -file broker_cert
 # 注意：【此处需要输入密钥库口令】(…口令2…)
 ```
 
-
-
 如果使用双向认证，则继续下面的操作，在客户端生成证书，并导入到服务端的Trust KeyStore 中
 
 ```bash
@@ -51,8 +50,6 @@ keytool -export -alias client -keystore client.ks -file client_cert
 keytool -import -alias client -keystore broker.ts -file client_cert
 # 注意：【此处需要输入密钥库口令】(…口令4…)
 ```
-
-
 
 ### 3、服务端（ActiveMQ）配置
 
@@ -83,7 +80,6 @@ cp broker.ks broker.ts  /data/activeMQ/activemq-10098/conf
 
 ```
 
-
 ### 4、客户端（Tomcat）配置
 
 1、将生成的文件client.ts 、client.ks 复制到客户端主机
@@ -97,8 +93,6 @@ cp broker.ks broker.ts  /data/activeMQ/activemq-10098/conf
 set JAVA_OPTS=%JAVA_OPTS% -Djavax.net.ssl.keyStore="【client.ks的路径】" -Djavax.net.ssl.keyStorePassword="【口令3】"-Djavax.net.ssl.trustStore="【client.ts的路径】" -Djavax.net.ssl.trustStorePassword="【口令2】"
 
 ```
-
-
 
 3、打开 context.xml 文件，修改 ActiveMQ 对应的Resource 节点配置
 
@@ -126,7 +120,3 @@ type="**org.apache.activemq.ActiveMQSslConnectionFactory**"
 useEmbeddedBroker="false"/>
 
 ```
-
-
-
-

@@ -1,4 +1,4 @@
-#database/oracle
+# Oracle 优化 & 安全配置
 
 ## 最大连接数优化
 
@@ -19,6 +19,7 @@ select count() from v$session where status='ACTIVE';
 ```
 
 ## 密码相关
+
 ```sql
 -- 密码有效期(无期)
 -- Oracle数据库密码期限是180，把它改成无限制
@@ -38,7 +39,6 @@ alter user root account unlock;
 alter user 用户名 identified by 原密码;
 
 ```
-
 
 ## 内存优化
 

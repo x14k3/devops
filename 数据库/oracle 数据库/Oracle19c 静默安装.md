@@ -1,12 +1,11 @@
-#database/oracle
-
+# Oracle19c 静默安装
 
 ## 一、环境准备
-1. 下载地址：
-https://edelivery.oracle.com/osdc/faces/SoftwareDelivery
-2. 官方文档：
-https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html
 
+1. 下载地址：  
+   [https://edelivery.oracle.com/osdc/faces/SoftwareDelivery](https://edelivery.oracle.com/osdc/faces/SoftwareDelivery)
+2. 官方文档：  
+   [https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html](https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html)
 
 ```bash
 #修改主机名
@@ -157,7 +156,7 @@ zypper in -y vim unzip net-tools gcc bc binutils glibc glibc-devel insserv-compa
 ## 4.刷新 zypper lr ; zypper clean;
 ```
 
-***
+---
 
 ## 二、安装数据库
 
@@ -168,9 +167,7 @@ zypper in -y vim unzip net-tools gcc bc binutils glibc glibc-devel insserv-compa
 unzip -d /data/u01/app/oracle/product/19.3.0/db_1/ /opt/oracle19c.zip
 ```
 
-
-
-### 2. 静默安装oracle
+### 2. 静默安装oracle数据库
 
 ```bash
 chown -R oracle:oinstall /data/u01/   #修改目录拥有者
@@ -199,12 +196,10 @@ exit;  #切换回root用户
 /data/u01/app/oracle/product/19.3.0/db_1/root.sh
 ```
 
-
-
-### 3. 静默创建数据库
+### 3. 静默创建数据库实例
 
 - 创建FS存储方式非CDB数据库：
-当指定FS时，数据库文件由操作系统的文件系统管理。
+  当指定FS时，数据库文件由操作系统的文件系统管理。
 
 ```bash
 # 创建数据目录和日志归档目录
@@ -261,9 +256,8 @@ dbca -silent -ignorePreReqs -ignorePrereqFailure -createDatabase \
 -totalMemory 8192
 ```
 
-
 - 创建存储为磁盘组的CDB单实例数据库：
-当ASM被指定时，您的数据库文件被放在Oracle ASM磁盘组中。Oracle数据库自动管理数据库文件的放置和命名。datafileDestination 磁盘组名，例如：'DATA'
+  当ASM被指定时，您的数据库文件被放在Oracle ASM磁盘组中。Oracle数据库自动管理数据库文件的放置和命名。datafileDestination 磁盘组名，例如：'DATA'
 
 ```bash
 dbca -silent -ignorePreReqs  -ignorePrereqFailure  -createDatabase \
@@ -418,8 +412,6 @@ export NLS_LANG="AMERICAN_AMERICA.ZHS16GBK"    # 终端字符集使用utf-8
 export NLS_LANG="SIMPLIFIED CHINESE_CHINA".ZHS16GBK  # 终端字符集使用gbk
 
 ```
-
-
 
 ## 2. db_install.rsp参数
 

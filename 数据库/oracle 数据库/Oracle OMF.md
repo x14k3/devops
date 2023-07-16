@@ -1,36 +1,33 @@
-#database/oracle 
+# Oracle OMF
 
 使用OMF (Oracle Managed Files )可以简化Oracle 数据库的管理，通过OMF，可以指定filesystem 目录，之后就可以在这个目录下创建和管理数据库。 比如创建表空间时，不需要指定datafile的名称，默认会将数据文件创建到这个目录下面。在初始化参数里指定特殊类型文件的文件系统目录，这样就可以保证文件的唯一性。
 
-1.  开启该功能会简化DBA的日常操作
-2.  开启后Oracle会按照规则自动生成唯一的文件名
-3.  当文件不再需要时Oracle会自动删除
-4.  数据库可对如下数据库结构启用该功能
-    -   表空间(Tablespaces)
-    -   重做日志(Redo log files)
-    -   控制文件(Control files)
-    -   归档日志文件(Archived logs)
-    -   块变更跟踪文件(Block change tracking files)
-    -   闪回日志文件(Flashback logs)
-    -   RMAN备份文件(RMAN backups)
+1. 开启该功能会简化DBA的日常操作
+2. 开启后Oracle会按照规则自动生成唯一的文件名
+3. 当文件不再需要时Oracle会自动删除
+4. 数据库可对如下数据库结构启用该功能
+   - 表空间(Tablespaces)
+   - 重做日志(Redo log files)
+   - 控制文件(Control files)
+   - 归档日志文件(Archived logs)
+   - 块变更跟踪文件(Block change tracking files)
+   - 闪回日志文件(Flashback logs)
+   - RMAN备份文件(RMAN backups)
 
 **使用的好处**
 
-1.  简化DBA工作
-2.  减少由于人为指定错误文件导致的错误
-3.  减少建立测试和开发环境耗费的时间
-4.  会自动删除不需要的文件而不用担心删除错误，减少服务器空间的浪费
-
+1. 简化DBA工作
+2. 减少由于人为指定错误文件导致的错误
+3. 减少建立测试和开发环境耗费的时间
+4. 会自动删除不需要的文件而不用担心删除错误，减少服务器空间的浪费
 
 *启动OMF的初始化参数如下表:*
 
-| 初始化参数                  | 描述                                                                                                                                                                                                                                                                      |
-| --------------------------- | -------------------------------------------------------------------------------------------------- |
-| DB_CREATE_FILE_DEST         | 用于确定创建datafiles,tempfiles文件缺省路径，如果未指定 DB_CREATE_ONLINE_LOG_DEST_n，也用作重做日志和控制文件的默认位置。    |
-| DB_CREATE_ONLINE_LOG_DEST_n | 用于确定创建重做日志和控制文件缺省路径。 通过更改 n，您可以多次使用此初始化参数，您最多可以指定五个多路复用副本。   |
-| DB_RECOVERY_FILE_DEST       | 指定闪回恢复区路径，在数据库未使用格式选项时创建RMAN备份、归档日志、以及闪回日志。 如果未指定 DB_CREATE_ONLINE_LOG_DEST_n，也用作重做日志和控制文件 | 
-
-
+|初始化参数|描述|
+| ---------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------|
+|DB_CREATE_FILE_DEST|用于确定创建datafiles,tempfiles文件缺省路径，如果未指定 DB_CREATE_ONLINE_LOG_DEST_n，也用作重做日志和控制文件的默认位置。|
+|DB_CREATE_ONLINE_LOG_DEST_n|用于确定创建重做日志和控制文件缺省路径。 通过更改 n，您可以多次使用此初始化参数，您最多可以指定五个多路复用副本。|
+|DB_RECOVERY_FILE_DEST|指定闪回恢复区路径，在数据库未使用格式选项时创建RMAN备份、归档日志、以及闪回日志。 如果未指定 DB_CREATE_ONLINE_LOG_DEST_n，也用作重做日志和控制文件|
 
 ```sql
 -- 设置DB_CREATE_FILE_DEST
@@ -47,8 +44,8 @@ ALTER SYSTEM SET LOG_ARCHIVE_DEST_1 = 'LOCATION=USE_DB_RECOVERY_FILE_DEST';
 
 **格式为：**
 
--   数据文件：`OMF路径/ORACLE_SID/datafile/`
--   日志文件：`OMF路径/ORACLE_SID/onlinelog/`
+- 数据文件：`OMF路径/ORACLE_SID/datafile/`
+- 日志文件：`OMF路径/ORACLE_SID/onlinelog/`
 
 ## 使用OMF为表空间创建数据文件
 
@@ -81,7 +78,6 @@ ALTER TABLESPACE undotbs_1 ADD DATAFILE AUTOEXTEND ON MAXSIZE 800M;
 -- 如果使用drop tablespace {_tablespace_name}_; 删除表空间，OMF管理的会将物理文件也一同删除
 
 ```
-
 
 ## 使用OMF创建redo日志文件
 

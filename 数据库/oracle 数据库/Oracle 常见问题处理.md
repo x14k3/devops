@@ -1,4 +1,4 @@
-#database/oracle 
+# Oracle 常见问题处理
 
 ## 报错日志目录
 
@@ -19,7 +19,9 @@ redo       # 重做日志
 ```
 
 ## ora-01652:无法通过128(在表空间space中)扩展temp段解决办法
+
 这种情况一看是当前用户所在的表空间达到32G大小上限，需要增加一个新的表空间
+
 ```sql
 –-01.为用户追加第1个表空间
 alter tablespace jy2web0726 add datafile '/data/oradata/orcl/jy2web0726_extend1.dbf'
@@ -49,7 +51,6 @@ crosscheck archivelog all;
 delete noprompt expired archivelog all;
 ```
 
-
 ## undo表空间文件过大，占用磁盘空间
 
 ```sql
@@ -76,17 +77,15 @@ shutdown immediate;
 startup;
 ```
 
-
 # oracle恢复redo
 
-
-
-
 # Oracle性能变慢
+
 1. 查看日志：/data/u01/app/oracle/diag/rdbms/jzdb/jzdb/trace/alert.log
 2. 查看ora_进程pid > pid的top
 3. 查看磁盘IO iostat -x 1
 4. 查看数据库中过去一天内排在前10位的等待事件及其总等待时间
+
 ```sql
 SELECT *
   FROM (SELECT EVENT,
@@ -100,9 +99,11 @@ SELECT *
  WHERE ROWNUM <= 10;
  --------------------------------------------------------------------
 ```
+
 **enq: TM - contention：**
 一般是执行DML期间，为防止对与DML相关的对象进行修改，执行DML的进程必须对该表获得TM锁。
-下面修改参数，从而增加更多的dml锁尝试解决问题。  
+下面修改参数，从而增加更多的dml锁尝试解决问题。
+
 ```sql
 # 查看锁
 select * from v$lock;
@@ -113,12 +114,12 @@ alter system set dml_locks=4000 scope=spfile;
 
 ```
 
-
-
 ## checkpoint not complete
+
 假设我们只有两个redo log group：group 1和group 2，并且buffer cache中总是有大量的dirty block需要写入datafile，当redo log从group 1 switch to group 2的时候，会触发checkpoint, checkpoint要求DBWr把buffer cache中的dirty block写入datafile。然而，当我们再次用完group 2里面的空间，需要再次switch to group 1并重用group 1的时候，如果我们发现redo log group 1所保护的那些dirty block还没有完全写入到datafile，整个数据库必须等待DBWr把所有的dirty block写入到datafile之后才能做其他的事情，这就是我们遇到的"checkpoint not complete"问题。
 
 解决办法包括增加redo日志组合增大online redo log文件大小，为DBRr争取充裕的时间。
+
 ```sql
 
 --1.查看当前日志组成员
@@ -153,4 +154,5 @@ alter database drop logfile group 3;
 ```
 
 ## redo log 一直处于active 状态
+
 如果日志都处于active状态，那么显然DBWR的写已经无法跟上log switch触发的检查点。

@@ -1,11 +1,10 @@
-#openSource 
+# frp
 
 frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。
 
 下载地址：
 
-<https://github.com/fatedier/frp/releases>
-
+[https://github.com/fatedier/frp/releases](https://github.com/fatedier/frp/releases)
 
 ## 1.frp服务端配置
 
@@ -39,11 +38,8 @@ systemctl start frps
 systemctl status frps
 ```
 
-
-
-
-
 ## 2.frp客户端配置
+
 在需要被访问的内网机器上（SSH 服务通常监听在 22 端口）部署 frpc，修改 frpc.ini 文件，
 
 ```bash
@@ -68,12 +64,10 @@ nohup  /data/frps/frpc -c /data/frps/frpc.ini >> /data/logs/frpc.log 2>&1 &
 # 访问frp服务端 119.28.xx.113:22922 的流量转发到内网机器的 22 端口。
 ```
 
-
-
-
 ## 3.其他
 
 ### 使用nginx代理frps
+
 ```nginx
     # 代理frps dashboard服务端口
     server {
@@ -117,7 +111,6 @@ nohup  /data/frps/frpc -c /data/frps/frpc.ini >> /data/logs/frpc.log 2>&1 &
         }
 ```
 
-
 ### ftps.ini配置文件详解
 
 ```bash
@@ -157,6 +150,7 @@ heartbeat_timeout # 服务端和客户端心跳连接的超时时间
 ```
 
 ### ftpc.ini配置文件详解
+
 ```bash
 # 下面这句开头必须要有，表示配置的开始
 [common]

@@ -1,5 +1,4 @@
-#python 
-
+# python pip
 
 # pip
 
@@ -7,7 +6,7 @@
 pip 是 Python 包管理工具，该工具提供了对Python 包的查找、下载、安装、卸载的功能。
 目前如果你在 [python.org](https://www.python.org/) 下载最新版本的安装包，则是已经自带了该工具。
 
-## pip 安装 
+## pip 安装
 
 ```bash
 # 在linux下使用包管理工具安装pip： 例如，ubuntu下：
@@ -15,7 +14,6 @@ apt-get install python-pip
 # Fedora系下：Redhat、centos
 yum install python-pip
 ```
-
 
 ## pip 使用
 
@@ -80,8 +78,8 @@ General Options:
                               removed in the future.
 ```
 
-
 ## 配置国内源
+
 ```bash
 # 1. 每次手动指定
 pip install -i https://pypi.doubanio.com/simple 模块名
@@ -90,7 +88,6 @@ pip install -i https://pypi.doubanio.com/simple 模块名
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```
-
 
 # wheel
 
@@ -127,8 +124,8 @@ root@doshell opt $
 
 细看会发现：
 
-1.  **NumPy**下载的是以**whl**格式结尾的东西，而**uWSGI**则是下了**tar.gz**的压缩包；
-2.  **uWSGI**多了一些build的过程，在build结束之后才开始install。
+1. **NumPy**下载的是以**whl**格式结尾的东西，而**uWSGI**则是下了**tar.gz**的压缩包；
+2. **uWSGI**多了一些build的过程，在build结束之后才开始install。
 
 了解了这些区别之后，我们再来铺垫一点发行版的内容。
 
@@ -152,11 +149,12 @@ whl的好处：不用怎么担心依赖关系。
 wheel包本质上是一个zip文件。是已编译发行版的一种格式。一个wheel包的文件名由以下这些部分组成
 举个例子：
 `tensorflow-2.3.1-cp36-cp36m-macosx_10_9_x86_64.whl`
--   tensorflow是包名（dist）。
--   2.3.1是包的版本号（version）。
--   cp36是对python解释器和版本的要求（python）。cp指的是CPython解释器，35指的是版本3.5的Python。
--   cp36m是ABI的标签（python）。ABI即应用二进制接口（Application Binary Interface）。一般不用关心。
--   macosx_10_9_x86_64是平台标签（platform），告诉我们这个包是为macOS操作系统的，使用10.9的macOS developer SDK编译，适用于x86-64指令集。
+
+- tensorflow是包名（dist）。
+- 2.3.1是包的版本号（version）。
+- cp36是对python解释器和版本的要求（python）。cp指的是CPython解释器，35指的是版本3.5的Python。
+- cp36m是ABI的标签（python）。ABI即应用二进制接口（Application Binary Interface）。一般不用关心。
+- macosx_10_9_x86_64是平台标签（platform），告诉我们这个包是为macOS操作系统的，使用10.9的macOS developer SDK编译，适用于x86-64指令集。
 
 ## wheel包的好处
 
@@ -165,5 +163,3 @@ wheel包本质上是一个zip文件。是已编译发行版的一种格式。一
 3. 免除了_setup.py_的执行。setup.py是Python的disutils、setuptools编译机制所需要的文件，需要执行大量的编译、安装工作，如果没有wheel的存在，包的安装、维护都会很麻烦；
 4. 不需要编译器。pip在下载时帮你确定了版本、平台等信息；
 5. 使用wheel的话，pip自动为你生成.pyc文件，方便Python解释器的读取。
-
-

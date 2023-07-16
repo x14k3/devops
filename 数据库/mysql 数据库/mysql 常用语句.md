@@ -1,5 +1,4 @@
-#database/mysql
-
+# mysql 常用语句
 
 ## 数据库信息查看
 
@@ -78,7 +77,6 @@ update views set definer='jy2web' where table_name='xxxxx';
 
 ```
 
-
 ## 函数相关
 
 ```Bash
@@ -91,6 +89,7 @@ select name from mysql.proc where db = 'xx' and type = 'FUNCTION'    # 函数
 ```
 
 ## 视图相关
+
 ```sql
 -- 查看所有视图的定义者
 select TABLE_SCHEMA,TABLE_NAME,DEFINER from information_schema.VIEWS;
@@ -98,9 +97,9 @@ select TABLE_SCHEMA,TABLE_NAME,DEFINER from information_schema.VIEWS;
 -- 修改视图定义者
 select concat("alter DEFINER=`jy2gm`@`%` SQL SECURITY DEFINER VIEW `",TABLE_SCHEMA,"`.",TABLE_NAME," as ",VIEW_DEFINITION,";") from information_schema.VIEWS where DEFINER = '@%';
 ```
-  
 
 ## 存储过程相关
+
 ```bash
 
 ```

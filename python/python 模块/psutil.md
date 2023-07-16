@@ -1,5 +1,4 @@
-
-#python
+# psutil
 
 psutil是一个跨平台库([http://pythonhosted.org/psutil/](http://pythonhosted.org/psutil/))能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat、iotop、uptime、pidof、tty、taskset、pmap等。目前支持32位和64位的Linux、Windows、OS X、FreeBSD和Sun Solaris等操作系统.
 
@@ -12,22 +11,21 @@ cd psutil-3.2.1
 python setup.py install
 ```
 
-
 ## CPU
 
-*获取CPU逻辑核数。`logical`参数默认为`True`，指获取逻辑核数。*
+*获取CPU逻辑核数。*​*`logical`*​*参数默认为*​*`True`*​*，指获取逻辑核数。*
 
 ```
 print(psutil.cpu_count(logical=True))  # 4
 ```
 
- *获取CPU物理核数。*
+*获取CPU物理核数。*
 
 ```
 print(psutil.cpu_count(logical=False))
 ```
 
-*以百分比的形式返回表示当前CPU的利用率的浮点数。`interval`参数必须设置为大于0，因为它测试的是时间间隔内的利用率。`percpu`参数为`True`则所有CPU利用率的浮点列表，列表的顺序在调用之间是一致的。*
+*以百分比的形式返回表示当前CPU的利用率的浮点数。*​*`interval`*​*参数必须设置为大于0，因为它测试的是时间间隔内的利用率。*​*`percpu`*​*参数为*​*`True`*​*则所有CPU利用率的浮点列表，列表的顺序在调用之间是一致的。*
 
 ```
 print(psutil.cpu_percent(interval=1, percpu=True))  
@@ -50,7 +48,6 @@ print(psutil.cpu_times())
 # scputimes(user=24555.5, system=24045.421875, idle=470324.85937499994, interrupt=1376.078125, dpc=482.375)
 ```
 
-
 *将CPU频率作为名称包返回，包括 以Mhz表示的当前，最小和最大频率。在Linux 当前频率上报告实时值，在所有其他平台上它代表名义上的“固定”值。如果percpu是True并且系统支持每CPU频率检索（仅限Linux），则为每个CPU返回频率列表，否则返回包含单个元素的列表。如果无法确定最小值和最大值，则将它们设置为0。*
 
 ```
@@ -61,12 +58,13 @@ print(psutil.cpu_freq(percpu=True))
 ## Memory
 
 *获取内存使用情况。相关参数，单位（字节）：*
--  total，总大小。
+
+- total，总大小。
 - available，可用内存。
 - used，已使用。
 - free，空闲。
 - percent，使用率。
-需要注意的是，已使用和可用不等于总和。
+  需要注意的是，已使用和可用不等于总和。
 
 ```
 print(psutil.virtual_memory())  
@@ -74,11 +72,12 @@ print(psutil.virtual_memory())
 ```
 
 *获取交换分区内存统计信息。相关参数，单位（字节）：*
--   total，总大小。
--   used，已使用地swap内存。
--   free，空闲。
- -   sin，系统累计从磁盘交换的字节数。
- -   sout，系统累计从磁盘换出的字节数。
+
+- total，总大小。
+- used，已使用地swap内存。
+- free，空闲。
+- sin，系统累计从磁盘交换的字节数。
+- sout，系统累计从磁盘换出的字节数。
 
 ```
 print(psutil.swap_memory())  # sswap(total=19490631680, used=7854170112, free=11636461568, percent=40.3, sin=0, sout=0)
@@ -103,10 +102,11 @@ print(psutil.disk_partitions(all=False))
 ```
 
 *返回指定磁盘的信息。相关参数，单位（字节）：*
--   total，总大小。
--   used，使用。
- -   free，空闲。
--   percent，使用率。
+
+- total，总大小。
+- used，使用。
+- free，空闲。
+- percent，使用率。
 
 ```
 print(psutil.disk_usage('C:\\'))   # sdiskusage(total=128034672640, used=98790318080, free=29244354560, percent=77.2)
@@ -123,11 +123,12 @@ for d in psutil.disk_partitions():
 '''
 ```
 
-*获取磁盘`I/O`统计信息。相关参数：*
--   read\_count，读取次数。
--   write\_count，写入次数。
--   read\_bytes，读取的字节数。
--   write\_bytes，写入的字节数。
+*获取磁盘*​*`I/O`*​*统计信息。相关参数：*
+
+- read\_count，读取次数。
+- write\_count，写入次数。
+- read\_bytes，读取的字节数。
+- write\_bytes，写入的字节数。
 
 ```
 print(psutil.disk_io_counters())  # sdiskio(read_count=1066650, write_count=1677203, read_bytes=61252281856, write_bytes=77213490688, read_time=21399, write_time=125572)
@@ -149,6 +150,7 @@ print(psutil.net_io_counters())  # snetio(bytes_sent=195227541, bytes_recv=12406
 ```
 
 *获取系统的套接字信息。每个命名元组都提供7个属性：*
+
 - fd：套接字文件描述符。如果连接引用当前进程，则可以将其传递给socket.fromfd 以获取可用的套接字对象。在Windows和SunOS上，它始终设置为-1。
 - family：地址族，AF_INET，AF_INET6或AF_UNIX。
 - type：地址类型，SOCK_STREAM或SOCK_DGRAM。
@@ -164,11 +166,12 @@ print(psutil.net_connections())
 ```
 
 *获取网卡地址相关信息。相关参数：*
--   family：地址族，AF\_INET或AF\_INET6或者`psutil.AF_LINK`指MAC地址。
--   address：主NIC地址（始终设置）。
--   netmask：网络掩码地址（可能是`None`）。
--   广播：广播地址（可能是`None`）。
--   ptp：代表“点对点”; 它是点对点接口（通常是VPN）上的目标地址。_广播_和_ptp_是互斥的。可能是`None`。
+
+- family：地址族，AF\_INET或AF\_INET6或者`psutil.AF_LINK`指MAC地址。
+- address：主NIC地址（始终设置）。
+- netmask：网络掩码地址（可能是`None`）。
+- 广播：广播地址（可能是`None`）。
+- ptp：代表“点对点”; 它是点对点接口（通常是VPN）上的目标地址。_广播_和_ptp_是互斥的。可能是`None`。
 
 ```
 print(psutil.net_if_addrs())
@@ -182,10 +185,11 @@ print(psutil.net_if_addrs())
 ```
 
 *获取网卡的信息，相关参数：*
--   isup：指示NIC是否已启动并运行的bool。
--   duplex：双工通信类型; 它可以是`NIC_DUPLEX_FULL`，`NIC_DUPLEX_HALF`或`NIC_DUPLEX_UNKNOWN`
--   speed：以兆位（MB）表示的NIC速度，如果无法确定（例如'localhost'），它将被设置为`0`。
--   mtu：NIC的最大传输单位，以字节为单位。
+
+- isup：指示NIC是否已启动并运行的bool。
+- duplex：双工通信类型; 它可以是`NIC_DUPLEX_FULL`，`NIC_DUPLEX_HALF`或`NIC_DUPLEX_UNKNOWN`
+- speed：以兆位（MB）表示的NIC速度，如果无法确定（例如'localhost'），它将被设置为`0`。
+- mtu：NIC的最大传输单位，以字节为单位。
 
 ```
 print(psutil.net_if_stats())

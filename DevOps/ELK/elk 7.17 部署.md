@@ -1,4 +1,4 @@
-#devops/elk 
+# elk 7.17 部署
 
 ELK访问信息
 
@@ -16,54 +16,49 @@ Redis ：5.0.10
 
 ```
 
-*   关闭防火墙和selinux
+* 关闭防火墙和selinux
 
-    ```bash
-    systemctl stop firewalld;setenforce 0
-    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+  ```bash
+  systemctl stop firewalld;setenforce 0
+  sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
-    ```
+  ```
+* 下载并安装软件包
 
-*   下载并安装软件包
+  [https://www.elastic.co/cn/downloads/](https://www.elastic.co/cn/downloads/ "https://www.elastic.co/cn/downloads/") &#x20;
+* 新建普通用户elk：elasticsearch只能用普通用户启动
 
-    [https://www.elastic.co/cn/downloads/](https://www.elastic.co/cn/downloads/ "https://www.elastic.co/cn/downloads/") &#x20;
+  `useradd elk;echo Ninestar123|passwd --stdin elk`
+* elk用户拥有的可创建文件描述符数量
 
-*   新建普通用户elk：elasticsearch只能用普通用户启动
+  `vim /etc/security/limits.conf` &#x20;
 
-    `useradd elk;echo Ninestar123|passwd --stdin elk`
+  ```bash
+  elk hard nofile 65536
+  elk soft nofile 65536
+  ```
+* 限制一个进程可以拥有的VMA(虚拟内存区域)的数量
 
-*   elk用户拥有的可创建文件描述符数量
+  `vim /etc/sysctl.conf    # 在最后面追加下面内容`
 
-    `vim /etc/security/limits.conf` &#x20;
+  ```bash
+  vm.max_map_count=655360                            
+  ```
 
-    ```bash
-    elk hard nofile 65536
-    elk soft nofile 65536
-    ```
+  `执行: sysctl -p`
+* 解压到/data目录,授权给elk用户
 
-*   限制一个进程可以拥有的VMA(虚拟内存区域)的数量
-
-    `vim /etc/sysctl.conf    # 在最后面追加下面内容`
-
-    ```bash
-    vm.max_map_count=655360                            
-    ```
-
-    `执行: sysctl -p`
-
-*   解压到/data目录,授权给elk用户
-
-    ```bash
-    mkdir -p /data/{logs,script}
-    tar -zxf elasticsearch-7.17.0-linux-x86_64.tar.gz -C /data/
-    tar -zxf kibana-7.17.0-linux-x86_64.tar.gz -C /data/
-    tar -zxf logstash-7.17.0-linux-x86_64.tar.gz -C /data/
-    cd /data
-    mv elasticsearch-7.17.0-linux-x86_6 elasticsearch
-    mv kibana-7.17.0-linux-x86_64 kibana
-    mv logstash-7.17.0-linux-x86_64 logstash
-    chown -R elk:elk /data/*
-    ```
+  ```bash
+  mkdir -p /data/{logs,script}
+  tar -zxf elasticsearch-7.17.0-linux-x86_64.tar.gz -C /data/
+  tar -zxf kibana-7.17.0-linux-x86_64.tar.gz -C /data/
+  tar -zxf logstash-7.17.0-linux-x86_64.tar.gz -C /data/
+  cd /data
+  mv elasticsearch-7.17.0-linux-x86_6 elasticsearch
+  mv kibana-7.17.0-linux-x86_64 kibana
+  mv logstash-7.17.0-linux-x86_64 logstash
+  chown -R elk:elk /data/*
+  ```
 
 ## 安装redis
 
@@ -120,7 +115,7 @@ action.destructive_requires_name: true
 
 `cd /data/kibana/`
 
-` vim config/kibana.yml`
+`​ vim config/kibana.yml`
 
 ```
 # 修改服务端口
@@ -145,7 +140,7 @@ nohup /data/kibana/bin/kibana >> /data/logs/kibana.log 2>&1 & ;
 
 ## 配置logstash
 
-![](assets/elk%207.17%20部署/image-20221127214009311.png)
+![](assets/image-20221127214009311-20230610173808-l39nnkc.png)
 
 Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
 
@@ -153,8 +148,9 @@ Logstash管道有两个必需的元素，**输入**和**输出**，以及一个*
 
 `vim /data/logstash/config/logstash.conf`
 
-    input {
-      redis {
+```yaml
+input {
+    redis {
         host => "192.168.10.142"
         port => "6379"
         password => "Ninestar123"
@@ -165,35 +161,35 @@ Logstash管道有两个必需的元素，**输入**和**输出**，以及一个*
       }
     }
 
-    # 数据处理
-    # filter {
-    #     grok {
-    #         match => ["message",  "%{COMBINEDAPACHELOG}"]
-    #     }
-    # }
+# 数据处理
+# filter {
+#     grok {
+#         match => ["message",  "%{COMBINEDAPACHELOG}"]
+#     }
+# }
 
 
-    # 1.将采集数据标准输出到控制台
-    #output {
-    #    stdout {
-    #        codec => rubydebug
-    #    }
-    #}
-    # 2.将采集数据保存到file文件中
-    #output {
-    #    file {
-    #        path => "/data/logs/client/%{+YYYY-MM-dd}-%{host}.txt"
-    #        codec => line {
-    #            format => "%{message}"
-    #        }
-    #        gzip => true
-    #    }
-    #}
+# 1.将采集数据标准输出到控制台
+#output {
+#    stdout {
+#        codec => rubydebug
+#    }
+#}
+# 2.将采集数据保存到file文件中
+#output {
+#    file {
+#        path => "/data/logs/client/%{+YYYY-MM-dd}-%{host}.txt"
+#        codec => line {
+#            format => "%{message}"
+#        }
+#        gzip => true
+#    }
+#}
 
-    # 3.将采集数据保存到elasticsearch
-    output {
-      if [type] == "xylc[192.168.10.135]" {
-        if "client" in [tags] {
+# 3.将采集数据保存到elasticsearch
+output {
+    if [type] == "xylc[192.168.10.135]" {
+	    if "client" in [tags] {
           elasticsearch {
             hosts => ["https://192.168.10.142:9200"]
             index => "%{[type]}-%{[tags]}-%{+YYYY-MM-dd}"
@@ -216,6 +212,7 @@ Logstash管道有两个必需的元素，**输入**和**输出**，以及一个*
         }
       }
     }
+```
 
 启动logstash
 
@@ -265,6 +262,43 @@ output.redis:
   
 ```
 
-启动filebeat
+## 配置filebeat收集mysql慢查询日志
 
-    nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebeat/filebeat.log 2>&1 &
+```bash
+cd /data/filebeat; vim filebeat.yml
+
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /usr/local/mysql/mysql-slow.log
+  #开启多行收集
+  multiline.pattern: "^# User@Host:"
+  multiline.negate: true
+  multiline.match: after
+  
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 1
+setup.kibana:
+output.logstash:
+   hosts: ["192.168.98.203:5044"]
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
+参数说明
+multiline.pattern # 正则表达式，去匹配指定的一行，这里去匹配的以“# User@Host:”开头的那一行；
+multiline.negate  # 取值true 或 false；
+默认是false，就是将multiline.pattern匹配到的那一行合并到上一行；
+如果配置是true，就是将除了multiline.pattern匹的那一行的其他所有行合并到其上一行；
+multiline.match   # after 或 before，就是指定将要合并到上一行的内容，合并到上一行的末尾或开头；
+```
+
+启动filebeat
+`nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebeat/filebeat.log 2>&1 &`

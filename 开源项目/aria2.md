@@ -1,7 +1,6 @@
+# aria2
 
-#openSource 
-
-## aria2 搭建
+## 部署 aria2
 
 ```bash
 wget https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/aria2.sh
@@ -149,5 +148,33 @@ bt-tracker=udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.internetwar
 
 #### 后台启动Aria2 rpc 方便cloudreve调用
 aria2c --conf-path=/etc/aria2/aria2.conf -D
+
+```
+
+# 安装 AriaNg
+
+AriaNg是一个web端网站，直接将前端包放到web服务器中即可。
+
+下载前端资源
+https://github.com/mayswind/AriaNg/releases
+`wget https://github.com/mayswind/AriaNg/releases/download/1.3.6/AriaNg-1.3.6.zip`
+
+[nginx 部署](../中间件/nginx/nginx%20部署.md)
+
+```conf
+    server {
+        listen       80;
+        server_name  192.168.0.100;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location /aria2 {
+            # 将AriaNg中的资源解压到 /data/nginx/html/ariaNg/
+            alias   /data/nginx/html/ariaNg/;
+            index  index.html;
+        }
+    }
 
 ```

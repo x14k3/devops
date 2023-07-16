@@ -1,4 +1,4 @@
-#database/dm8
+# DM8 常用语句
 
 ## 1.链接数据库
 
@@ -39,8 +39,8 @@ GRANT DBA TO JY2WEB;
 GRANT DBA TO JY2GM;
 ```
 
-
 ## 4.数据库启停
+
 ```bash
 #服务注册成功后，启动数据库，如下所示：
 systemctl start DmServiceDmFMSServer.service
@@ -53,6 +53,7 @@ systemctl restart DmServiceDmFMSServer.service
 ```
 
 ## 5.查看当前执行的查询
+
 ```sql
 --查看正在执行的语句：
 select * from v$sessions where state = 'ACTIVE';
@@ -61,4 +62,3 @@ select * from v$sessions where state = 'ACTIVE';
 --sess_id是上面查询出的结果列
 call sp_close_session(sess_id);
 ```
-

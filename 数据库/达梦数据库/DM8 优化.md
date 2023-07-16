@@ -1,6 +1,7 @@
-#database/dm8 
+# DM8 优化
 
 ### 达梦数据库修改最大连接数
+
 ```sql
 --查看最大连接数
 select SF_GET_PARA_VALUE(2,'MAX_SESSIONS');
@@ -18,6 +19,7 @@ MAX_SESSIONS   = 1000
 ```
 
 ### 会话信息
+
 ```sql
 --包括连接信息、会话信息；涉及的动态视图有V$CONNECT、V$STMTS、V$SESSIONS等。
 --例如查看会话信息。

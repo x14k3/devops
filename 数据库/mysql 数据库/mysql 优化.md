@@ -1,4 +1,4 @@
-#database/mysql 
+# mysql 优化
 
 ## 32GB内存的mysql配置参数
 

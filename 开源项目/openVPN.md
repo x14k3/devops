@@ -1,41 +1,39 @@
-#openSource
+# openVPN
 
-**OpenVPN**是一个用于创建虚拟私人网络加密通道的软件包，最早由James Yonan编写。OpenVPN允许建立的VPN使用公开密钥 、电子证书、或者用户名／密码来进行身份验证。
+**OpenVPN** 是一个用于创建虚拟私人网络加密通道的软件包，最早由 James Yonan 编写。OpenVPN 允许建立的 VPN 使用公开密钥 、电子证书、或者用户名／密码来进行身份验证。
 
 ## 原理
 
-OpenVPN的技术核心是虚拟网卡，其次是[SSL](https://zh.m.wikipedia.org/wiki/SSL "SSL")协议实现。
+OpenVPN 的技术核心是虚拟网卡，其次是 [SSL](https://zh.m.wikipedia.org/wiki/SSL "SSL") 协议实现。
 
-![](assets/openVPN/image-20221128154119160.png)
+![](assets/image-20221128154119160-20230610173813-n8ucumm.png)
 
 ### 虚拟网卡
 
-在OpenVPN中，如果用户访问一个远程的虚拟地址（属于虚拟网卡配用的地址系列，区别于真实地址），则操作系统会通过路由机制将数据包（TUN模式）或数据帧（TAP模式）发送到虚拟网卡上，服务程序接收该数据并进行相应的处理后，会通过SOCKET( "网络套接字")从外网上发送出去。这完成了一个单向传输的过程，反之亦然。当远程服务程序通过SOCKET从外网上接收到数据，并进行相应的处理后，又会发送回给虚拟网卡，则该应用软件就可以接收到。
+在 OpenVPN 中，如果用户访问一个远程的虚拟地址（属于虚拟网卡配用的地址系列，区别于真实地址），则操作系统会通过路由机制将数据包（TUN 模式）或数据帧（TAP 模式）发送到虚拟网卡上，服务程序接收该数据并进行相应的处理后，会通过 SOCKET( "网络套接字")从外网上发送出去。这完成了一个单向传输的过程，反之亦然。当远程服务程序通过 SOCKET 从外网上接收到数据，并进行相应的处理后，又会发送回给虚拟网卡，则该应用软件就可以接收到。
 
-###  加密
+### 加密
 
-OpenVPN使用OpenSSL库来加密数据与控制信息。这意味着，它能够使用任何OpenSSL支持的算法。它提供了HMAC功能以提高连接的安全性。此外，OpenSSL的硬件加速也能提高它的性能。2.3.0以后版本引入PolarSSL。
+OpenVPN 使用 OpenSSL 库来加密数据与控制信息。这意味着，它能够使用任何 OpenSSL 支持的算法。它提供了 HMAC 功能以提高连接的安全性。此外，OpenSSL 的硬件加速也能提高它的性能。2.3.0 以后版本引入 PolarSSL。
 
-
-openvpn有两种认证方式：
+openvpn 有两种认证方式：
 
 - [基于证书认证](#基于证书认证)
 - [基于用户密码方式认证](#基于用户密码方式认证)
 
 演示环境准备：
 
-| 服务器名称    | ip 地址                              | 部署软件 |
-| ------------- | ------------------------------------ | -------- |
-| openvpn服务端 | 公网：192.168.0.202 ;内网：10.0.0.108 | openvpnServer  |
-| openvpn客户端 | 192.168.0.100                        |    openvpnClient     |
-
+|服务器名称|ip 地址|部署软件|
+| --------------| -------------------------------------| -------------|
+|openvpn 服务端|公网：192.168.0.202 ;内网：10.0.0.108|openvpnServer|
+|openvpn 客户端|192.168.0.100|openvpnClient|
 
 # 基于证书认证
 
-使用easy-rsa工具生成证书
+使用 easy-rsa 工具生成证书
 下载地址：https://github.com/OpenVPN/easy-rsa
 
-## 1.配置EasyRsa
+## 1.配置 EasyRsa
 
 ```bash
 tar -zxf EasyRSA-3.1.1.tgz
@@ -52,10 +50,9 @@ set_var EASYRSA_REQ_OU      "My Organizational Unit"
 set_var EASYRSA_CERT_EXPIRE "180"      # 证书有效期
 ```
 
-
 ## 2.制作证书
 
-### 2.1 自建CA认证体系
+### 2.1 自建 CA 认证体系
 
 ```bash
 
@@ -306,7 +303,8 @@ Certificate created at: /opt/EasyRSA-3.1.1/pki/issued/client001.crt
 [root@test EasyRSA-3.1.1]# 
 ```
 
-以上步骤生成的pki文件
+以上步骤生成的 pki 文件
+
 ```bash
 [root@test EasyRSA-3.1.1]# tree pki/
 pki/
@@ -371,7 +369,7 @@ make && make install
 
 ### 创建配置文件
 
-模板文件可在 `~/openvpn-2.5.8/sample/sample-config-files`找到
+模板文件可在 `~/openvpn-2.5.8/sample/sample-config-files` 找到
 
 `vim /data/openvpn/server.conf`
 
@@ -403,7 +401,7 @@ echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 sysctl -p
 ```
 
-### 启动openvpn
+### 启动 openvpn
 
 ```bash
 cat > /usr/lib/systemd/system/openvpn.service << EOF
@@ -426,7 +424,6 @@ systemctl start   openvpn
 systemctl status openvpn
 ```
 
-
 ## 2. 客户端配置
 
 官方客户端下载地址：
@@ -435,7 +432,7 @@ systemctl status openvpn
 
 ### 创建配置文件
 
-模板文件可在 `~/openvpn-2.5.8/sample/sample-config-files`找到
+模板文件可在 `~/openvpn-2.5.8/sample/sample-config-files` 找到
 
 `vim /data/openvpn/client.conf`
 
@@ -458,13 +455,11 @@ compress lz4-v2
 windows 客户端配置文件 命名为 client.ovpn
 证书和配置文件放到 C:\Users\doshe\OpenVPN\config
 
-
 # 基于用户密码方式认证
-
 
 在上面[基于证书认证](#基于证书认证)环境基础上修改
 
-1. 修改`vim /data/openvpn/server.conf`添加几个参数
+1. 修改 `vim /data/openvpn/server.conf` 添加几个参数
 
 ```bash
 #客户端不进行证书认证，如果不加将实现证书和用户密码双重认证
@@ -537,8 +532,6 @@ systemctl restart  openvpn
 #添加上
 auth-user-pass
 ```
-
-
 
 # 配置文件详解
 
@@ -617,6 +610,3 @@ cipher AES-256-CBC
 verb 3
 
 ```
-
-
-

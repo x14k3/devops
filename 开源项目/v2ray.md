@@ -1,4 +1,4 @@
-#openSource
+# v2ray
 
 V2Rray 官网：https://www.v2ray.com/
 V2Rray 下载地址：https://github.com/v2ray/v2ray-core/releases
@@ -97,7 +97,6 @@ cat /proc/sys/kernel/random/uuid
 
 ```
 
-
 ## 配置 WebSocket + TLS + Web
 
 ```json
@@ -163,21 +162,17 @@ cat /proc/sys/kernel/random/uuid
         }
 ```
 
-
-
-
 # v2ray客户端部署
-
 
 ## windows
 
 如果服务端的配置为 [vmess 协议](#vmess%20协议)
 
-![](assets/v2ray/image-20221127210933123.png)
+![](assets/image-20221127210933123-20230610173813-wthc3c7.png)
 
 如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
 
-![](assets/v2ray/image-20221127210912432.png)
+![](assets/image-20221127210912432-20230610173813-dx832bp.png)
 
 ## linux
 
@@ -193,7 +188,7 @@ mkdir -p /data/v2ray
 unzip -qd /data/v2ray/ 2ray-linux-64.zip
 
 # 修改配置文件
-# 可以使用在windows客户端配置完成后，导出json配置文件
+# 可以使用在windows客户端配置完成后，导出所选服务器为客户端配置
 
 # 启动服务
 nohup ./v2ray -config ./config.json >> ./v2ray.log 2>&1 &
@@ -202,8 +197,9 @@ nohup ./v2ray -config ./config.json >> ./v2ray.log 2>&1 &
 # 配置`.bashrc`文件
 ----------------------------------
 start_v2ray(){
-  export http_proxy='http://127.0.0.1:10809'
-  export https_proxy='http://127.0.0.1:10809'
+# ### 配置curl、wget等命令使用代理
+  export http_proxy='http://127.0.0.1:10808'
+  export https_proxy='http://127.0.0.1:10808'
   echo "设置代理"
 }
 stop_v2ray_(){
@@ -216,4 +212,3 @@ source .bashrc
 
 start_v2ray
 ```
-

@@ -1,4 +1,4 @@
-#database/oracle
+# Oracle 内存管理
 
 # 一、PGA与SGA
 
@@ -6,11 +6,9 @@ Oracle使用两种类型的内存结构，一种为共享的，而另一种为�
 
 当启动Oracle数据库时，系统会先在内存内规划一个固定区域，主要包括共享池、数据缓冲区、日志缓冲区三类。我们称此区域为系统全局区(System Global Area)，简称SGA。SGA是Oracle实例中最重要的内存部件。SGA的目的是提高查询性能，允许大量的并发数据库活动。
 
-pga在用户登录时候直接绑定各类会话、权限等信息，而且当排序时候也是在这个区域中进行的，但是当排序尺寸超出pga区域范围，就会占用临时表空间的大小。  
-
+pga在用户登录时候直接绑定各类会话、权限等信息，而且当排序时候也是在这个区域中进行的，但是当排序尺寸超出pga区域范围，就会占用临时表空间的大小。
 
 调整SGA并不总是很容易。在Oracle 11g中，用户可以使用自动内存管理（Automatic Memory Management）来将共享内存管理问题完全自动化。*使用AMM，Oracle将根据变化的数据库负荷为SGA和PGA自动分配内存或回收内存，重新分配，* Oracle使用内部视图和统计数据来决定为SGA组件中分配内存的最好办法。
-
 
 # 二、自动内存管理
 
@@ -41,7 +39,7 @@ show parameter target;
 
 ### /dev/shm对自动内存管理的影响
 
-若使用自动内存管理，必须要确保**_(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值_**。
+若使用自动内存管理，必须要确保***(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值***。
 
 ```sql
 # 修改/dev/shm (默认大小为内存一半)
@@ -114,7 +112,6 @@ kernel.shmmni = 4096
 ALTER SYSTEM SET PGA_AGGREGATE_TARGET = 2048m SCOPE = SPFILE;  # pga自动管理
 ```
 
-
 # 五、手动共享内存管理
 
 要手动管理共享内存，首先必须禁用自动内存管理和自动共享内存管理。因此MEMORY_TARGET和SGA_TARGET都必须设置为0。同时需要手工设置其他组件的值
@@ -128,8 +125,6 @@ LARGE_POOL_SIZE   # 大池是一个可选组件。一般用于备份进程，并
 JAVA_POOL_SIZE      # JAVA池，JAVA代码所需要的内存将从此分配。
 STREAMS_POOL_SIZE # 流池，存储缓冲队列消息的内存池。
 ```
-
-
 
 # 六、手动PGA内存管理
 
@@ -148,4 +143,3 @@ ALTER SYSTEM SET PGA_AGGREGATE_TARGET = 0 SCOPE = SPFILE;  # 禁用pga自动管�
 例如：机器内存是128G,SGA+PGA合计会分配64G~96G。需要注意的是50%~75%只是一个普遍值，但不是个绝对值。机器内存只有4G的情况下，分配50%是很有必要的，但是如果机器内存有512G，对于只部署数据库的机器来说分配75%仍然有大量的内存未使用。
 
 一般可以先确定PGA大小，然后剩余内存都分配给SGA。如果你的系统有大量的并发访问，那么PGA分配就需要比较多，而如果你的系统并发访问人数非常少。那么几百MB的PGA就可满足了。而剩下的内存则都可以分配给SGA。
-

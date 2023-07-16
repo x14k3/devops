@@ -1,34 +1,33 @@
-#docker
+# docker harbor
 
--   Harbor 是 VMware 公司开源的企业级 Docker Registry 项目，其目标是帮助用户迅速搭建一个企业级的 Docker Registry （私有仓库）服务。
-    
--   Harbor以 Docker 公司开源的 Registry 为基础，提供了图形管理 UI 、基于角色的访问控制(Role Based AccessControl) 、AD/LDAP 集成、以及审计日志(Auditlogging) 等企业用户需求的功能，同时还原生支持中文。
-    
--   Harbor 的每个组件都是以 Docker 容器的形式构建的，使用 docker-compose 来对它进行部署。用于部署 Harbor 的 docker-compose 模板位于 harbor/docker-compose.yml。
+- Harbor 是 VMware 公司开源的企业级 Docker Registry 项目，其目标是帮助用户迅速搭建一个企业级的 Docker Registry （私有仓库）服务。
+- Harbor以 Docker 公司开源的 Registry 为基础，提供了图形管理 UI 、基于角色的访问控制(Role Based AccessControl) 、AD/LDAP 集成、以及审计日志(Auditlogging) 等企业用户需求的功能，同时还原生支持中文。
+- Harbor 的每个组件都是以 Docker 容器的形式构建的，使用 docker-compose 来对它进行部署。用于部署 Harbor 的 docker-compose 模板位于 harbor/docker-compose.yml。
+
 # harbor特性
 
-1.  基于角色控制：用户和仓库都是基于项目进行组织的，而用户在项目中可以拥有不同的权限。
-2.  基于镜像的复制策略：镜像可以在多个Harbor实例之间进行复制（同步）。
-3.  支持 LDAP/AD：Harbor 可以集成企业内部已有的 AD/LDAP（类似数据库的一张表），用于对已经存在的用户认证和管理。
-4.  镜像删除和垃圾回收：镜像可以被删除，也可以回收镜像占用的空间。
-5.  图形化用户界面：用户可以通过浏览器来浏览，搜索镜像仓库以及对项目进行管理。
-6.  审计管理：所有针对镜像仓库的操作都可以被记录追溯，用于审计管理。
-7.  支持 RESTful API：RESTful API 提供给管理员对于 Harbor 更多的操控, 使得与其它管理软件集成变得更容易。
-8.  Harbor和docker registry的关系：Harbor实质上是对docker registry做了封装，扩展了自己的业务模板。
+1. 基于角色控制：用户和仓库都是基于项目进行组织的，而用户在项目中可以拥有不同的权限。
+2. 基于镜像的复制策略：镜像可以在多个Harbor实例之间进行复制（同步）。
+3. 支持 LDAP/AD：Harbor 可以集成企业内部已有的 AD/LDAP（类似数据库的一张表），用于对已经存在的用户认证和管理。
+4. 镜像删除和垃圾回收：镜像可以被删除，也可以回收镜像占用的空间。
+5. 图形化用户界面：用户可以通过浏览器来浏览，搜索镜像仓库以及对项目进行管理。
+6. 审计管理：所有针对镜像仓库的操作都可以被记录追溯，用于审计管理。
+7. 支持 RESTful API：RESTful API 提供给管理员对于 Harbor 更多的操控, 使得与其它管理软件集成变得更容易。
+8. Harbor和docker registry的关系：Harbor实质上是对docker registry做了封装，扩展了自己的业务模板。
 
 # harbor组件
 
-![](assets/docker%20harbor/image-20230221160453415.png)
+![](assets/image-20230221160453415-20230610173810-e24vwcc.png)
 
-| Harbor组件                  | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Proxy                       | Harbor 的 Registry、UI、Token 服务等组件，都处在 nginx 反向代理后边。<br>该代理将来自浏览器、docker clients 的请求转发到后端不同的服务上。                                                                                                                                                                                                                                                                                                                             |
-| Registry                    | 负责储存 Docker 镜像，并处理 Docker push/pull 命令。<br>由于要对用户进行访问控制，即不同用户对 Docker镜像有不同的读写权限，<br>Registry 会指向一个 Token 服务，强制用户的每次 Docker pull/push 请求都要携带一个合法的 Token， Registry 会通过公钥对 Token 进行解密验证。                                                                                                                                                                                               |
-| Core services               | Harbor的核心功能，主要提供以下3个服务:<br> 1）UI（harbor-ui）: 提供图形化界面，帮助用户管理 Registry 上的镜像（image）, 并对用户进行授权。<br>2）WebHook：为了及时获取Registry 上image 状态变化的情况，在Registry 上配置 Webhook，把状态变化传递给 UI 模块。 <br>3）Token 服务：负责根据用户权限给每个 Docker push/pull 命令签发 Token。Docker 客户端向 Registry 服务发起的请求， 如果不包含 Token，会被重定向到 Token 服务，获得 Token 后再重新向 Registry 进行请求。 |
-| Database（harbor-db）       | 为core services提供数据库服务，负责储存用户权限、审计日志、Docker 镜像分组信息等数据。                                                                                                                                                                                                                                                                                                                                                                                 |
-| Job services                | 主要用于镜像复制，本地镜像可以被同步到远程 Harbor 实例上。                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Log collector（harbor-log） | 负责收集其他组件的日志到一个地方                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|                             |        |
+|Harbor组件|说明|
+| ---------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Proxy|Harbor 的 Registry、UI、Token 服务等组件，都处在 nginx 反向代理后边。<br>该代理将来自浏览器、docker clients 的请求转发到后端不同的服务上。|
+|Registry|负责储存 Docker 镜像，并处理 Docker push/pull 命令。<br>由于要对用户进行访问控制，即不同用户对 Docker镜像有不同的读写权限，<br>Registry 会指向一个 Token 服务，强制用户的每次 Docker pull/push 请求都要携带一个合法的 Token， Registry 会通过公钥对 Token 进行解密验证。|
+|Core services|Harbor的核心功能，主要提供以下3个服务:<br> 1）UI（harbor-ui）: 提供图形化界面，帮助用户管理 Registry 上的镜像（image）, 并对用户进行授权。<br>2）WebHook：为了及时获取Registry 上image 状态变化的情况，在Registry 上配置 Webhook，把状态变化传递给 UI 模块。 <br>3）Token 服务：负责根据用户权限给每个 Docker push/pull 命令签发 Token。Docker 客户端向 Registry 服务发起的请求， 如果不包含 Token，会被重定向到 Token 服务，获得 Token 后再重新向 Registry 进行请求。|
+|Database（harbor-db）|为core services提供数据库服务，负责储存用户权限、审计日志、Docker 镜像分组信息等数据。|
+|Job services|主要用于镜像复制，本地镜像可以被同步到远程 Harbor 实例上。|
+|Log collector（harbor-log）|负责收集其他组件的日志到一个地方|
+|||
 
 # docker-harbor 部署
 
@@ -140,6 +139,7 @@ verify_remote_cert # 默认打开。此标志决定了当Harbor与远程 registe
 
 #如果希望将 Docker 镜像存储到其他的磁盘路径，可以修改这个参数。
 ```
+
 # docker-harbor 使用
 
 1.登录控制台
@@ -165,7 +165,183 @@ docker login 192.168.10.31 -u admin -p Ninestar123
 systemctl restart docker
 ```
 
-# docker-compose.yml 
+## 上传镜像步骤
+
+- 设置docker仓库为registry本地仓库
+- 给需要存储的镜像打tag
+- 上传镜像到registry仓库
+
+**查看当前本地镜像**
+
+```
+[root@zutuanxue_manage01 ~]# docker images
+REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
+baishuming2020/centos_nginx    latest              bcd9f28f6126        33 minutes ago      447MB
+baishuming2020/centos_8_base   latest              3e9f682f8459        47 minutes ago      200MB
+centos                         latest              0f3e07c0138f        6 weeks ago         220MB
+registry                       latest              f32a97de94e1        8 months ago        25.8MB
+```
+
+a、设置docker仓库为registry本地仓库
+
+```
+#1、修改docker进程启动文件，修改其启动方式，目的是为了让通过docker配置文件启动
+[root@zutuanxue_manage01 ~]# sed -i.bak '/^ExecStart=/c\ExecStart=\/usr\/bin\/dockerd' /usr/lib/systemd/system/docker.service
+
+#2、设置docker 守护进程的配置文件 /etc/docker/daemon.json,默认没有该文件
+[root@zutuanxue_manage01 ~]# cat /etc/docker/daemon.json 
+{
+ "insecure-registries": ["http://192.168.1.150:5000"]
+}
+
+insecure-registries 指定非安全的仓库地址，多个用逗号隔开
+
+#3、重启docker生效配置文件
+[root@zutuanxue_manage01 ~]# systemctl daemon-reload
+[root@zutuanxue_manage01 ~]# systemctl restart docker
+```
+
+b、给需要存储的镜像打tag
+
+```
+[root@zutuanxue_manage01 ~]# docker tag baishuming2020/centos_nginx:latest 192.168.1.150:5000/centos_nginx:v1
+
+[root@zutuanxue_manage01 ~]# docker images
+REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
+192.168.98.240:5000/centos_nginx   v1                  bcd9f28f6126        45 minutes ago      447MB
+baishuming2020/centos_nginx        latest              bcd9f28f6126        45 minutes ago      447MB
+baishuming2020/centos_8_base       latest              3e9f682f8459        59 minutes ago      200MB
+centos                             latest              0f3e07c0138f        6 weeks ago         220MB
+registry                           latest              f32a97de94e1        8 months ago        25.8MB
+```
+
+c、上传镜像到registry仓库
+
+```
+#1、上传镜像
+[root@zutuanxue_manage01 ~]# docker push 192.168.98.240:5000/centos_nginx:v1
+The push refers to repository [192.168.98.240:5000/centos_nginx]
+1da799aaf1ec: Pushed 
+f598357997c6: Pushed 
+630012d2d35b: Pushed 
+4dcde7ab808a: Pushed 
+64dc1b92ebb6: Pushed 
+7db2133dafb9: Pushed 
+fd05189e6e81: Pushed 
+ee645629aa71: Pushed 
+v1: digest: sha256:507a5ad9dd5771cdf461a6fa24c3fff6ea9eabd6945abf03e9264d3130fe816b size: 1996
+
+#2、查看上传
+[root@zutuanxue_manage01 ~]# curl http://192.168.98.240:5000/v2/_catalog
+{"repositories":["centos_nginx"]}
+
+#查看存储文件夹
+[root@zutuanxue_manage01 ~]# ls /opt/docker_repos/docker/registry/v2/repositories/centos_nginx/
+_layers  _manifests  _uploads
+```
+
+## 拉取镜像镜像步骤
+
+- 设置客户端docker仓库为registry仓库
+- 拉取镜像到本地
+
+a、设置192.168.1.151[hostname:zutuanxue_node1]机器的docker仓库为registry仓库
+
+```
+#1、设置docker启动文件
+[root@zutuanxue_node1 ~]# sed -i.bak '/^ExecStart=/c\ExecStart=\/usr\/bin\/dockerd' /usr/lib/systemd/system/docker.service
+
+#2、设置docker配置文件
+[root@zutuanxue_node1 ~]# cat  /etc/docker/daemon.json 
+{
+ "insecure-registries": ["http://192.168.1.150:5000"]
+}
+```
+
+b、下载镜像
+192.168.1.151[hostname:zutuanxue_node1]机器上的docker可以拉取registry仓库中的192.168.1.150:5000/centos_nginx:v1容器镜像
+
+```
+[root@zutuanxue_node1 ~]# docker pull 192.168.1.150:5000/centos_nginx:v1
+v1: Pulling from centos_nginx
+dcd04d454f16: Pull complete 
+5cb2e05aa6e1: Pull complete 
+870634eb98b4: Pull complete 
+0fae9697ee4b: Pull complete 
+18ad57cfcecb: Pull complete 
+64dd6f0d85c1: Pull complete 
+7178b0b4388e: Pull complete 
+34de8795cd41: Pull complete 
+Digest: sha256:507a5ad9dd5771cdf461a6fa24c3fff6ea9eabd6945abf03e9264d3130fe816b
+Status: Downloaded newer image for 192.168.98.240:5000/centos_nginx:v1
+192.168.98.240:5000/centos_nginx:v1
+
+#验证下载
+[root@zutuanxue_node1 ~]# docker images
+REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
+192.168.1.150:5000/centos_nginx   v1                  bcd9f28f6126        4 hours ago         447MB
+```
+
+## registry带basic认证的仓库
+
+**实现步骤**
+
+- 安装需要认证的包
+- 创建存放认证信息的文件
+- 创建认证信息
+- 创建带认证的registry容器
+- 指定仓库地址
+- 登录认证
+
+**实现过程**
+a、安装需要认证的包
+
+```
+yum -y install httpd-tools
+```
+
+b、创建存放认证信息的文件
+
+```
+mkdir -p /opt/registry-var/auth
+```
+
+c、创建认证信息
+
+```
+htpasswd -Bbn zutuanxue 123456 >> /opt/registry-var/auth/htpasswd
+```
+
+d、创建带认证的registry容器
+
+```
+docker run -d -p 10000:5000 --restart=always --name registry \
+-v  /opt/registry-var/auth:/auth \
+-v /opt/myregistry:/var/lib/registry \
+-e "REGISTRY_AUTH=htpasswd" \
+-e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+-e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+registry:latest
+```
+
+e、指定仓库地址
+
+```
+cat /etc/docker/daemon.json 
+{
+ "insecure-registries": ["http://192.168.1.150:5000","http://192.168.1.150:10000"]
+}
+```
+
+f、登录认证
+
+```
+docker login 192.168.1.150:10000
+Username：zutuanxue
+Password：123456
+```
+
+# docker-compose.yml
 
 ```yml
 version: '2.3'

@@ -1,4 +1,4 @@
-#database/dm8
+# DM8 部署
 
 # 达梦数据库服务端安装
 
@@ -6,6 +6,7 @@
 https://www.dameng.com/list_103.html
 
 ## 一、环境准备
+
 原则建议分 3 块盘符，分别是 dmdata 实例盘、dmbak 备份盘和 dmarch 归档盘。
 
 ```bash
@@ -77,12 +78,10 @@ mkdir -p /data/{dmapp,dmdata}
 chown -R dmdba:dinstall /data/{dmapp,dmdata}
 ```
 
-
-
-
 ## 二、数据库安装
 
-_命令行安装_
+*命令行安装*
+
 ```bash
 su - dmdba
 -------------------------------------------------
@@ -109,7 +108,6 @@ EOF
 source .bash_profile
 ```
 
-
 ## 三、创建数据库实例
 
 使用`dminit help` 命令查看创建实例参数
@@ -131,11 +129,10 @@ INSTANCE_NAME=fmsdb
 #CHARSET            字符集选项。0 代表 GB18030；1 代表 UTF-8；2 代表韩文字符集 EUC-KR；取值 0、1 或 2 之一。默认值为 0。
 ```
 
-
 ## 四、注册服务
 
 注册数据库服务、守护服务、监控服务等
-**注册服务需使用 *root* 用户进行注册**。使用 root 用户进入数据库安装目录的 `~/script/root` 下:
+**注册服务需使用 ​**​***root***​**​ 用户进行注册**。使用 root 用户进入数据库安装目录的 `~/script/root` 下:
 
 ```bash
 cd /data/dmapp/script/root
@@ -179,8 +176,6 @@ disql jy2web/Ninestar2022
 # 更新拥有者权限
 chown dmdba.dinstall dm.key
 ```
-
-
 
 # 达梦数据库客户端安装
 

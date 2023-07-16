@@ -1,34 +1,34 @@
-#database/oracle
+# Oracle RAC
 
-Oracle RAC，全称是Oracle Real Application Cluster，即真正的应用集群，是oracle提供的一个并行集群系统，整个集群系统由*Oracle Clusterware （集群就绪软件）*和* Real Application Clusters（RAC)*两大部分组成。
+Oracle RAC，全称是Oracle Real Application Cluster，即真正的应用集群，是oracle提供的一个并行集群系统，整个集群系统由 **Oracle Clusterware （集群就绪软件）**​***和***​**​ Real Application Clusters（RAC)** 两大部分组成。
 
-oracle RAC的实质是位于不同操作系统的Oracle实例节点同时访问同一个Oracle数据库，每个节点间通过私有网络进行通信，互相监控节点的运行状态，oracle数据库所有的数据文件、联机日志文件、控制文件等均放在集群的共享存储设备上，而共享存储设备可以是RAW、ASM、OCFS2等，所有集群节点可以同时读写共享存储。Oracle RAC的基本拓扑结构如下所示：
-![](assets/Oracle%20RAC/image-20230114221134066.png)
+oracle RAC 的实质是位于不同操作系统的Oracle实例节点同时访问同一个Oracle数据库，每个节点间通过私有网络进行通信，互相监控节点的运行状态，oracle数据库所有的数据文件、联机日志文件、控制文件等均放在集群的共享存储设备上，而共享存储设备可以是RAW、ASM、OCFS2等，所有集群节点可以同时读写共享存储。Oracle RAC的基本拓扑结构如下所示：  
+​​![v2-3bffb03f93b2b988f1a2dcf4810c9786_720w](assets/v2-3bffb03f93b2b988f1a2dcf4810c9786_720w-20230630143802-qdrv1bw.jpg)​​
 
-从图中可以看出，运行在两个节点上的数据库实例访问同一个RAC数据库，并且两个节点的本地磁盘仅用来存放oracle安装程序和ClusterWare软件，而在共享存储上，存放了oracle的数据文件、控制文件、联机日志文件、归档日志文件等，这是安装oracle Rac时的一种数据存储分配方式，其实，RAC提供了多种数据存储方式，这个将在下面进行独立介绍。
+‍
 
 **DG 侧重于容灾，独立存储，但两者数据不能做到实时同步（单活）。** **RAC侧重于负载均衡，但共享存储不能容灾（双活）**。
-
 
 # oracle RAC 搭建
 
 ## 部署规划
 
 #### 1.软件安装版本
+
 [LINUX.X64_193000_db_home.zip](https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html#license-lightbox)
 [LINUX.X64_193000_grid_home.zip](https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html#license-lightbox)
 共享存储：ASM
 
 #### 2.网络规划
 
-| 网络配置   | node 1        | node 2        | 备注 |
-| ---------- | ------------- | ------------- | ---- |
-| 主机名     | rac01         | rac02         |      |
-| public ip  | 192.168.0.104 | 192.168.0.105 |      |
-| private ip | 10.0.0.104    | 10.0.0.105  |      |
-| vip        | 192.168.0.111 | 192.168.0.222 |      |
-| scan ip    | 192.168.0.120 | 192.168.0.120 |      |
-Oracle RAC中每个节点都有一个虚拟IP，简称VIP， 与公网PUBLIC  IP在同一个网段。vip 附属在public网口接口。
+|网络配置|node 1|node 2|备注|
+| --------------------------------------------------------------------------------------------------------| -------------| -------------| ----|
+|主机名|rac01|rac02||
+|public ip|192.168.0.104|192.168.0.105||
+|private ip|10.0.0.104|10.0.0.105||
+|vip|192.168.0.111|192.168.0.222||
+|scan ip|192.168.0.120|192.168.0.120||
+|Oracle RAC中每个节点都有一个虚拟IP，简称VIP， 与公网PUBLIC  IP在同一个网段。vip 附属在public网口接口。||||
 
 public网卡有二个IP地址：public ip是固定的，vip是浮动的。
 
@@ -40,13 +40,13 @@ client -> scan listener -> local listener -> local instance
 
 #### 3.ASM 磁盘组规划
 
-| ASM磁盘组 | 用途              | 大小     | AMS冗余  |
-| --------- | ----------------- | -------- | -------- |
-| SYSDG     | ORC Vote 19C Grid | 5G+5G+5G | NORMAL   |
-| DATADG    | 数据文件          | 20G+20G  | EXTERNAL |
-| FRADG     | 闪回，归档，备份  | 10G+10G  | EXTERNAL | 
-![](assets/Oracle%20RAC/image-20230130190236778.png)
-磁盘创建完成之后我们添加到两台主机上
+|ASM磁盘组|用途|大小|AMS冗余|
+| --------------------------------------------------------------| -----------------| --------| --------|
+|SYSDG|ORC Vote 19C Grid|5G+5G+5G|NORMAL|
+|DATADG|数据文件|20G+20G|EXTERNAL|
+|FRADG|闪回，归档，备份|10G+10G|EXTERNAL|
+|![](assets/image-20230130190236778-20230610173813-8re7l8h.png)||||
+|磁盘创建完成之后我们添加到两台主机上||||
 
 _修改虚拟机vmx文件_在虚拟机的vmx文件中添加配置信息。
 
@@ -60,20 +60,17 @@ diskLib.dataCachePageSize= "4096"
 diskLib.maxUnsyncedWrites= "0"
 ```
 
-
-
 #### 4.Oracle组件
 
-| 组件名称       | Grid                             | Oracle                                              |
-| -------------- | -------------------------------- | --------------------------------------------------- |
-| 所属用户       | grid                             | oracle                                              |
-| 所属组         | asmadmin,asmdba,asmoper,dba grid | dba,asmdba,backupdba,dgdba,kmdba,racdba,oper oracle |
-| 家目录         | /home/grid                       | /home/oracle                                        |
-| Oracle基础目录 | /data/u01/app/grid           | /data/u01/app/oracle                                     |
-| Oracle主目录   | /data/u01/app/19.0.0/grid   | /data/u01/app/oracle/product/19.0.0/dbhome_1             |
+|组件名称|Grid|Oracle|
+| ----------------| ----------------------------------| -----------------------------------------------------|
+|所属用户|grid|oracle|
+|所属组|asmadmin,asmdba,asmoper,dba grid|dba,asmdba,backupdba,dgdba,kmdba,racdba,oper oracle|
+|家目录|/home/grid|/home/oracle|
+|Oracle基础目录|/data/u01/app/grid|/data/u01/app/oracle|
+|Oracle主目录|/data/u01/app/19.0.0/grid|/data/u01/app/oracle/product/19.0.0/dbhome_1|
 
 ## 环境准备
-
 
 ```bash
 #修改主机名

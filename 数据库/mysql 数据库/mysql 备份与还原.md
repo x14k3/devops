@@ -1,9 +1,8 @@
-#database/mysql
+# mysql 备份与还原
 
 # mysqldump 逻辑备份
 
 >  mysqldump是mysql用于转存储数据库的实用程序。它主要产生一个SQL脚本，其中包含从头重新创建数据库所必需的命令CREATE TABLE INSERT等。它的备份原理是通过协议连接到 MySQL 数据库，将需要备份的数据查询出来，将查询出的数据转换成对应的insert 语句，当我们需要还原这些数据时，只要执行这些 insert 语句，即可将对应的数据还原。
-
 
 ## 备份数据库
 
@@ -31,9 +30,8 @@ sed -n '/INSERT INTO `t_user`/p' fullbk20151108031001 > user.sql
 
 ```
 
-
-
 ## mysqldump 参数详解
+
 ```bash
 --tables                 # 指定需要导出的表名。
 #mysqldump -uroot -p --host=localhost --databases test --tables test
@@ -134,8 +132,6 @@ sed -n '/INSERT INTO `t_user`/p' fullbk20151108031001 > user.sql
 #mysqldump -uroot -p --host=localhost --all-databases --default-auth=”/usr/local/lib/plugin/< PLUGIN >”
 ```
 
-
 # innobackupex 物理备份
 
 Percona XtraBackup是一款基于MySQL的热备份的开源实用程序，它可以备份5.1到5.7版本上InnoDB,XtraDB,MyISAM存储引擎的表。innobackupex实际上是percona-xtrabackup的perl整合脚本,功能当然更强大一些.
-

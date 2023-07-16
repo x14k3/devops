@@ -1,4 +1,4 @@
-#openSource
+# fail2ban
 
 fail2ban用于监视系统日志，通过正则表达式匹配错误错误信息，设置一定的条件触发相应的屏蔽动作。
 
@@ -24,10 +24,10 @@ systemctl daemon-reload
 fail2ban-client set sshd unbanip 222.128.103.170
 ```
 
-
 ### 配置文件说明
 
- 配置文件位于：
+配置文件位于：
+
 ```bash
 - /etc/fail2ban/action.d          # 采取相对应措施的目录
 - /etc/fail2ban/fail2ban.conf  # fail2ban的配置文件
@@ -47,9 +47,6 @@ logpath    # fail2ban 监控的日志文件
 --------------------------------------------------
 ```
 
-
 ### 自定义过滤拦截
 
 创建nginx-ssh规则文件
-
-

@@ -1,0 +1,214 @@
+# KVM 虚拟机管理
+
+# 一、虚拟机基本管理
+
+虚拟机管理方法：
+
+- virt-manager
+- cockpit web控制台
+- virsh命令
+
+## 1.1 virt-manager管理工具
+
+## 1.2 cockpit管理工具
+
+## 1.3 virsh命令用法
+
+```bash
+virsh nodeinfo            # 查看KVM节点信息
+virsh list --all          # 列出虚拟机
+virsh net-list --all      # 列出虚拟网络
+virsh dominfo   test_01   # 查看指定虚拟机的信息
+virsh start     test_01   # 虚拟机开启（启动）
+virsh reboot    test_01   # 虚拟机重新启动 
+virsh shutdown  test_01   # 虚拟机关机 
+virsh destroy   test_01   # 强制关机（强制断电） 
+virsh suspend   test_01   # 暂停（挂起）KVM 虚拟机 
+virsh resume    test_01   # 恢复被挂起的 KVM 虚拟机 
+virsh dumpxml   test_01   # 查看KVM虚拟机当前配置  
+virsh dumpxml   test_01 > test_01.bak.xml # 备份vm-node1虚拟机的xml文件，原文件默认路径/etc/libvirt/qemu/vm-node1.xml
+virsh undefine  test_01   # 删除配置文件，磁盘文件未删除 
+virsh autostart test_01   # 随物理机启动而启动（开机启动） 
+virsh autostart --disable test_01  # 取消标记为自动开始（取消开机启动）
+virsh console   test_01　 # 连接虚拟机，虚拟机需要开启serial [systemctl start serial-getty@ttyS0.service]
+virsh domiflist test_01   # 查看虚拟机网卡信息 
+#arp -a | grep  52:54:00:c3:48:3b 查看虚拟机ip地址
+virsh domblklist test_01  # 查看虚拟机硬盘信息
+```
+
+彻底删除一个虚拟机
+
+```bash
+# 检查虚拟机使用的磁盘文件
+virsh dumpxml test_01 # vm-name是你要删除的虚拟机名称
+# 关闭虚拟机
+virsh shutdown test_01
+# 删除快照（如果有）
+virsh snapshot-list --domain vm-name
+virsh snapshot-delete --domain vm-name --snapshotname 3sep2016u1
+# 删除虚拟机
+virsh undefine test_01
+# 删除磁盘文件
+rm -f /var/lib/libvirt/images/vm-name.img   # 虚拟机磁盘文件默认的存放位置，如果修改了地址，按照自己安装的地址来
+
+```
+
+# 二、虚拟机磁盘管理
+
+qemu-img是虚拟机的磁盘管理命令，支持非常多的磁盘格式，如raw,qcow2,vdi,vmdk
+`qemu-img  [参数]  块文件名  大小`
+
+注意：
+**raw** ：裸格式，创建时就需要指定存储容量，占用全部容量，不支持动态扩容，不支持快照，性能好。
+**qcow2**：quickcopyonwrite2,写时复制，开始只占用少许容量，支持动态扩容，支持压缩，支持AES加密，支持快照，性能较好。
+
+```bash
+# 查看镜像格式
+qemu-img info  /data/virthost/test_01/test_01.img
+qemu-img create   # 创建磁盘
+#qemu-img create -f qcow2 test_01.qcow2 20G
+qemu-img convet　 # 转换磁盘格式
+#qemu-img convert -f qcow2 test_01.qcow2 -O raw test_01.img
+qemu-img resize　 # 扩容磁盘空间，镜像大小调整
+#qemu-img resize test.img +2G
+#qemu-img resize test.img -4G
+qemu-img snapshot # 镜像快照配置
+	-a            # 让镜像文件使用某个快照
+	-c            # 创建一个快照
+	-d            # 删除一个快照
+	-l            # 查询并列出镜像文件中的所有快照
+#创建一个快照
+#qemu-img snapshot -c test_01_Snapshot test_01.qcow2
+#删除快照
+#qemu-img snapshot -d test_01_Snapshot test_01.qcow2 
+#qemu-img snapshot -d 3 test_01.qcow2
+```
+
+# 三、虚拟机快照管理
+
+- 创建快照
+- 查看快照
+- 删除快照
+- 还原快照
+
+**快照创建方法：**
+
+1. LVM快照
+2. 基于qcow2磁盘格式创建快照
+
+## 3.1 基于KVM的虚拟机快照
+
+**创建快照**
+
+KVM快照是基于LVM快照来实现的，具体操作方法是：
+
+- 创建一个LV，假设为node1_disk
+- 创建虚拟机使用现有LV:node1_disk
+- 安装系统并做好应用 [创建快照之前]
+- 关闭虚拟机
+- 创建kvm的快照：node1_disk_snap
+- 修改虚拟机磁盘使用快照磁盘:node1_disk_snap
+
+```
+虚拟机使用的是快照盘 
+还原虚拟机就是基于原盘再做一次快照，继续使用快照就可以了
+```
+
+**还原快照**
+
+- 关闭虚拟机
+- 删除kvm的快照:node1_disk_snap
+- 创建新快照：node1_disk_snap
+- 开机
+
+**拓展知识点-lvm**
+
+```
+#创建lv kvm_disk
+[root@zutuanxue ~]# lvcreate -n kvm_disk -L5G  cl 
+  Logical volume "kvm_disk" created.
+ 
+#生成lv快照
+[root@zutuanxue ~]# lvcreate -n kvm_disk_snap -L 5G -s /dev/cl/kvm_disk 
+
+#删除快照
+[root@zutuanxue ~]# lvremove /dev/cl/kvm_disk_snap 
+Do you really want to remove active logical volume cl/kvm_disk_snap? [y/n]: y
+  Logical volume "kvm_disk_snap" successfully removed
+```
+
+## 3.2 KVM自带快照功能
+
+**创建快照: snapshot-create-as**
+
+```bash
+#命令格式	
+virsh   snapshot-create-as   虚拟机的名称  snapshot的名称
+
+#为rhel8创建一个快照
+virsh # snapshot-create-as rhel8 web01
+已生成域快照 web01
+```
+
+**查看快照**
+
+```
+#查看快照
+virsh # snapshot-list rhel8
+ 名称               生成时间              状态
+------------------------------------------------------------
+ web01                2020-03-21 00:37:35 -0400 running
+ 
+
+#查看快照信息
+virsh # snapshot-info --domain rhel8 --snapshotname web01 
+名称：       web01
+域：          rhel8
+当前：       是
+状态：       running
+位置：       内部
+上级：       -
+下级：       0
+降序：       0
+元数据：    是 
+```
+
+**还原快照**
+
+```
+#命令格式
+virsh snapshot-revert 虚拟机的名称 --snapshotname  快照名称
+
+#还原快照web01
+virsh # snapshot-revert --domain rhel8 --snapshotname web01 
+```
+
+**删除快照**
+
+```
+virsh # snapshot-delete --domain rhel8 web01 
+已删除域快照 web01
+```
+
+**扩展：raw磁盘转换qcow2方法**
+
+```
+qemu-img命令
+-f  源镜像的格式   
+-O 目标镜像的格式
+
+#a、转换磁盘格式
+[root@zutuanxue ~]# qemu-img convert -fraw -O qcow2 /var/lib/libvirt/images/win10.img /var/lib/libvirt/images/win10.qcow2
+
+#b、修改xml文件定义磁盘格式
+[root@zutuanxue ~]# vim /etc/libvirt/qemu/win10.xml
+<disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/var/lib/libvirt/images/win10.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x04' slot='0x00' function='0x0'/>
+    </disk>
+
+#c、重启服务生效
+[root@zutuanxue ~]# systemctl restart libvirtd.service
+```

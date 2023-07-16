@@ -1,13 +1,13 @@
-#docker
+# docker compose
 
 我们知道使用一个 `Dockerfile` 模板文件，可以让用户很方便的定义一个单独的应用容器。然而，在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况。例如要实现一个 Web 项目，除了 Web 服务容器本身，往往还需要再加上后端的数据库服务容器，甚至还包括负载均衡容器等。
 
 `Compose` 恰好满足了这样的需求。它允许用户通过一个单独的 `docker-compose.yml` 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
 
-**`Compose` 中有两个重要的概念：**
+**`Compose`**​**​ 中有两个重要的概念：**
 
--   服务 (`service`)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。
--   项目 (`project`)：由一组关联的应用容器组成的一个完整业务单元，在 `docker-compose.yml` 文件中定义。
+- 服务 (`service`)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。
+- 项目 (`project`)：由一组关联的应用容器组成的一个完整业务单元，在 `docker-compose.yml` 文件中定义。
 
 `Compose` 的默认管理对象是项目，通过子命令对项目中的一组容器进行便捷地生命周期管理。
 `Compose` 项目由 Python 编写，实现上调用了 Docker 服务提供的 API 来对容器进行管理。因此，只要所操作的平台支持 Docker API，就可以在其上利用 `Compose` 来进行编排管理。
@@ -27,7 +27,6 @@ docker-compose --version
 docker-compose version 1.27.4, build 40524192
 ```
 
-
 Linux 系统请使用以下介绍的方法安装。
 从 官方 GitHub Release(https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。
 
@@ -36,7 +35,6 @@ curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compos
 # bash 补全命令
 curl -L https://raw.githubusercontent.com/docker/compose/1.27.4/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
 ```
-
 
 # 使用 docker compose 部署 nginx
 
@@ -292,8 +290,6 @@ pid: "host"
 
 将PID模式设置为主机PID模式，跟主机系统共享进程命名空间。容器使用pid标签将能够访问和操纵其他容器和宿主机的名称空间。
 
-
-
 ## extra_hosts
 
 添加主机名的标签，会在/etc/hosts文件中添加一些记录。
@@ -310,8 +306,6 @@ extra_hosts:
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ```
-
-
 
 ## dns
 
@@ -508,10 +502,10 @@ aliases：同一网络上的其他容器可以使用服务名称或此别名来�
 
 ## restart
 
--   no：是默认的重启策略，在任何情况下都不会重启容器。
--   always：容器总是重新启动。
--   on-failure：在容器非正常退出时（退出状态非0），才会重启容器。
--   unless-stopped：在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器
+- no：是默认的重启策略，在任何情况下都不会重启容器。
+- always：容器总是重新启动。
+- on-failure：在容器非正常退出时（退出状态非0），才会重启容器。
+- unless-stopped：在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器
 
 ```
 restart: "no"
@@ -625,6 +619,7 @@ devices:
 ## tty
 
 为容器分配一个伪终端，就相当于 `docke run -t`, 就是把 `/bin/bash` 当做前台进程。
+
 ```
 tty: true
 ```
@@ -665,12 +660,11 @@ MKNOD            # 允许使用mknod()系统调用
 LEASE            # 允许修改文件锁的FL_LEASE标志
 ```
 
-
 # 使用 docker compose 部署redis集群
 
 1.编写redis配置文件
 
-参考[三、集群模式](../中间件/redis/redis%20高可用部署.md#三、集群模式)
+参考[三、集群模式](../中间件/redis/redis%20部署.md#三、集群模式)
 
 ```bash
 # 在server上创建一个目录用于存放redis集群部署文件。这里我放的路径为/root/redis-cluster

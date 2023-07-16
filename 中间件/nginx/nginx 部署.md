@@ -1,4 +1,4 @@
-#middleware/nginx
+# nginx 部署
 
 nginx源码包下载地址：https://nginx.org/en/download.html
 
@@ -9,6 +9,7 @@ zlib 依赖：http://www.zlib.net/
 pcre依赖：http://www.pcre.org/
 
 ## 安装依赖
+
 ```bash
 # Redhat
 yum -y install gcc gcc-c++ pcre pcre-devel openssl openssl-devel zlib-devel  automake   libxml2-dev libxslt-devel  gd-devel perl-devel perl-ExtUtils-Embed GeoIP GeoIP-devel GeoIP-data
@@ -58,9 +59,6 @@ systemctl start nginx.service
 systemctl enable nginx.service
 ```
 
-
-
-
 ## 置文件nginx.conf详解
 
 ```nginx
@@ -80,15 +78,4 @@ http {             # 这个是协议级别
 	    }
 	}
 }
-```
-
-## nginx相关模块说明
-
-<https://www.cnbugs.com/post-116.html>
-
-## 日志切割
-
-```bash
-
-
 ```

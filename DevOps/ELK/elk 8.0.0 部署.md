@@ -1,4 +1,4 @@
-#devops/elk
+# elk 8.0.0 部署
 
 **ELK-8.0.0主要升级内容：**
 
@@ -8,14 +8,12 @@
 
 **已知问题：**
 
--   如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
-    
-    `bin/elasticsearch-reset-password -u elastic`
-    
--   然后，用 bin/elasticsearch-create-enrollment-token 工具为 Kibana 创建一个注册令牌：
-    
-    `bin/elasticsearch-create-enrollment-token -s kibana`
-    
+- 如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
+
+  `bin/elasticsearch-reset-password -u elastic`
+- 然后，用 bin/elasticsearch-create-enrollment-token 工具为 Kibana 创建一个注册令牌：
+
+  `bin/elasticsearch-create-enrollment-token -s kibana`
 
 ## 0.环境准备
 
@@ -26,47 +24,42 @@ Redis ：5.0.10
 
 ```
 
--   下载并安装软件包
-    
-    [https://www.elastic.co/cn/downloads/](https://www.elastic.co/cn/downloads/)
-    
--   新建普通用户elk：elasticsearch只能用普通用户启动
-    
-    `useradd elk;echo Ninestar123|passwd --stdin elk`
-    
--   elk用户拥有的可创建文件描述符数量
-    
-    `vim /etc/security/limits.conf`
-    ```bash
-	elk hard nofile 65536
-	elk soft nofile 65536
-	```
+- 下载并安装软件包
 
+  [https://www.elastic.co/cn/downloads/](https://www.elastic.co/cn/downloads/)
+- 新建普通用户elk：elasticsearch只能用普通用户启动
 
--   限制一个进程可以拥有的VMA(虚拟内存区域)的数量
-    
-    `vim /etc/sysctl.conf # 在最后面追加下面内容`
-    ```bash
-    vm.max_map_count=655360
-	```
+  `useradd elk;echo Ninestar123|passwd --stdin elk`
+- elk用户拥有的可创建文件描述符数量
 
-	`执行: sysctl -p`
+  `vim /etc/security/limits.conf`
 
+  ```bash
+  elk hard nofile 65536
+  elk soft nofile 65536
+  ```
+- 限制一个进程可以拥有的VMA(虚拟内存区域)的数量
 
+  `vim /etc/sysctl.conf # 在最后面追加下面内容`
 
--   解压到/data目录,授权给elk用户
+  ```bash
+  vm.max_map_count=655360
+  ```
 
-	```Bash
-	mkdir -p /data/{logs,script}
-	tar -zxf elasticsearch-8.0.0-linux-x86_64.tar.gz -C /data/
-	tar -zxf kibana-8.0.0-linux-x86_64.tar.gz -C /data/
-	tar -zxf logstash-8.0.0-linux-x86_64.tar.gz -C /data/
-	cd /data
-	mv elasticsearch-8.0.0-linux-x86_6 elasticsearch
-	mv kibana-8.0.0-linux-x86_64 kibana
-	mv logstash-8.0.0-linux-x86_64 logstash
-	chown -R elk:elk /data/*
-	```
+  `执行: sysctl -p`
+- 解压到/data目录,授权给elk用户
+
+  ```Bash
+  mkdir -p /data/{logs,script}
+  tar -zxf elasticsearch-8.0.0-linux-x86_64.tar.gz -C /data/
+  tar -zxf kibana-8.0.0-linux-x86_64.tar.gz -C /data/
+  tar -zxf logstash-8.0.0-linux-x86_64.tar.gz -C /data/
+  cd /data
+  mv elasticsearch-8.0.0-linux-x86_6 elasticsearch
+  mv kibana-8.0.0-linux-x86_64 kibana
+  mv logstash-8.0.0-linux-x86_64 logstash
+  chown -R elk:elk /data/*
+  ```
 
 ## 1.安装redis
 
@@ -140,7 +133,7 @@ cd /data/elasticsearch/bin
 
 ```
 
-![](assets/elk%208.0.0%20部署/image-20221127214031544.png)
+![](assets/image-20221127214031544-20230610173808-09i4hd0.png)
 
 ## 3.配置kibana
 
@@ -176,23 +169,19 @@ tail -f /data/logs/kibana.log
 
 ```
 
-![](assets/elk%208.0.0%20部署/image-20221127214108186.png)
-![](assets/elk%208.0.0%20部署/image-20221127214123394.png)
-
+![](assets/image-20221127214108186-20230610173808-syk0jej.png)
+![](assets/image-20221127214123394-20230610173808-vo92xqm.png)
 
 再输入上面生成的kibana_system用户和密码
-![](assets/elk%208.0.0%20部署/image-20221127214134165.png)
-
+![](assets/image-20221127214134165-20230610173808-kibk71j.png)
 
 ## 4.配置logstash
 
-![](assets/elk%208.0.0%20部署/image-20221127214156296.png)
-
-
+![](assets/image-20221127214156296-20230610173808-wcg982r.png)
 
 Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
 
-从 Elasticsearch目录复制[自签名 CA 证书。](https://www.elastic.co/guide/en/elasticsearch/reference/8.0/configuring-stack-security.html#stack-security-certificates)`config/certs`
+从 Elasticsearch目录复制[自签名 CA 证书。](https://www.elastic.co/guide/en/elasticsearch/reference/8.0/configuring-stack-security.html#stack-security-certificates)​`config/certs`
 
 ```Bash
 cp -r /data/elasticsearch/config/certs/ /data/logstash/config/
@@ -330,13 +319,14 @@ output.redis:
 nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebeat/filebeat.log 2>&1 &
 ```
 
-
 ## 持续优化
 
 ### 1.elasticsearch 数据存储方案
+
 略
 
 ### 2.elasticsearch 用户权限管理
+
 略
 
 ### 3.安全功能在默认情况下被启用和配置
@@ -347,10 +337,9 @@ nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebea
 
 **已知问题：**
 
-*   如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
+* 如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
 
-    `bin/elasticsearch-reset-password -u elastic
+  `bin/elasticsearch-reset-password -u elastic
+* 然后，用 bin/elasticsearch-create-enrollment-token 工具为 Kibana 创建一个注册令牌： 
 
-*   然后，用 bin/elasticsearch-create-enrollment-token 工具为 Kibana 创建一个注册令牌： 
-
-    `bin/elasticsearch-create-enrollment-token -s kibana
+  `bin/elasticsearch-create-enrollment-token -s kibana
