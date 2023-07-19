@@ -81,7 +81,7 @@ export PATH
 
 # 创建数据目录
 mkdir /data/pgsql/data/
-chown -R postgres.postgres /data/pgsql 
+chown -R postgres.postgres /data/pgsql
 
 # 切换到postgres用户
 su - postgres

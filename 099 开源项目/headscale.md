@@ -148,26 +148,26 @@ headscale nodes routes list -i <id>
 ```bash
 # 将您的设备连接到tailscale或headscale服务端，并在需要时进行身份验证。
 tailscale up [flags] 
--   `--accept-dns` # 接受管理控制台中的 [DNS 配置]，默认接受 DNS 设置。
--   `--accept-risk=<risk>` # 接受风险并跳过风险类型的确认。这可以是 或 ，也可以是空字符串以不接受风险。`lose-ssh``all`
--   `--accept-routes`         # 接受其他节点的[子网路由]。Linux 设备默认为不接受路由。
--   `--advertise-exit-node` # 提供作为来自 Tailscale 网络的出站互联网流量的[出口节点]默认为不提供作为退出节点。
--   `--advertise-routes=<ip>` # 向headscale服务端公开[子网路由]，是得其他节点可以访问
--   `--advertise-tags=<tags>` # 向此设备授予标记的权限
--   `--authkey=<key>`  # 提供[身份验证密钥] 自动将节点验证为用户帐户。
--   `--exit-node=<ip>` # 提供用作出口节点的[尾标 IP] 要禁用出口节点，请传递带有空参数的标志：。`--exit-node=`
--   `--exit-node-allow-lan-access` # 允许在通过出口节点路由流量时直接访问本地网络。默认不允许直接访问您的 LAN。
--   `--force-reauth`     # 强制重新进行身份验证。
--   `--hostname=<name>` # 提供用于设备的主机名，而不是操作系统提供的主机名。请注意，这将更改 [MagicDNS]中使用的计算机名称。
--   `--netfilter-mode` #（仅限Linux）用于控制自动防火墙配置程度的高级功能。 值为“关闭”、“不转移”或“打开”。默认为“开”，但 Synology 默认为“关”除外。设置此标志 设置为“关闭”将禁用 的所有管理。设置为“nodivert”创建和管理尾鳞子链，但保留这些子链的调用 链条连接到管理员。设置为“开”意味着对尾鳞规则进行全面管理。请注意，如果您设置为“关闭” 或“nodivert”，您有责任为尾标流量安全地配置防火墙。我们建议使用安装的规则作为起点。`netfilter``--netfilter-mode``--netfilter-mode=on`
--   `--operator=<user>` # 提供 Unix 用户名，而不是操作 。`root``tailscaled`
--   `--qr`                # 为网络登录 URL 生成二维码。默认不显示 QR 码。
--   `--reset`            # 将未指定的设置重置为默认值。
--   `--shields-up`   # 阻止来自headscale网络上其他设备的[传入连接]，适用于个人设备 仅建立传出连接。
--   `--snat-subnet-routes` #（（仅限 Linux）将 NAT 流量源发送到使用 通告的本地路由。 默认将 NAT 流量提供给通告的路由。 设置为 false 以禁用子网路由伪装。--advertise-routes
--   `--ssh`  # 运行[尾鳞 SSH]服务器，允许根据尾网管理员声明的访问策略进行[访问]，默认为 false。
--   `--timeout=<duration>` # 等待尾部秤服务初始化的最长时间。 可以是可解析的任何值`duration`[`time.ParseDuration()`].默认为 ，将永久阻止。`0s`
--   `--unattended` #（仅限视窗）在[无人值守模式下]运行，即使在当前用户注销后，Tailscale 仍会继续运行。
+# --accept-dns            接受管理控制台中的 [DNS 配置]，默认接受 DNS 设置。
+# --accept-risk=<risk>    接受风险并跳过风险类型的确认。这可以是 或 ，也可以是空字符串以不接受风险。 lose-ssh all 
+# --accept-routes         接受其他节点的[子网路由]。Linux 设备默认为不接受路由。
+# --advertise-exit-node   提供作为来自 Tailscale 网络的出站互联网流量的[出口节点]默认为不提供作为退出节点。
+# --advertise-routes=<ip>  向headscale服务端公开[子网路由]，是得其他节点可以访问
+# --advertise-tags=<tags>  向此设备授予标记的权限
+# --authkey=<key>    提供[身份验证密钥] 自动将节点验证为用户帐户。
+# --exit-node=<ip>   提供用作出口节点的[尾标 IP] 要禁用出口节点，请传递带有空参数的标志：。`--exit-node=`
+# --exit-node-allow-lan-access 允许在通过出口节点路由流量时直接访问本地网络。默认不允许直接访问您的 LAN。
+# --force-reauth      强制重新进行身份验证。
+# --hostname=<name>   提供用于设备的主机名，而不是操作系统提供的主机名。请注意，这将更改 [MagicDNS]中使用的计算机名称。
+# --netfilter-mode  （仅限Linux）用于控制自动防火墙配置程度的高级功能。 值为“关闭”、“不转移”或“打开”。默认为“开”，但 Synology 默认为“关”除外。设置此标志 设置为“关闭”将禁用 的所有管理。设置为“nodivert”创建和管理尾鳞子链，但保留这些子链的调用 链条连接到管理员。设置为“开”意味着对尾鳞规则进行全面管理。请注意，如果您设置为“关闭” 或“nodivert”，您有责任为尾标流量安全地配置防火墙。我们建议使用安装的规则作为起点。`netfilter``--netfilter-mode``--netfilter-mode=on`
+# --operator=<user>   提供 Unix 用户名，而不是操作 。`root``tailscaled`
+# --qr                为网络登录 URL 生成二维码。默认不显示 QR 码。
+# --reset             将未指定的设置重置为默认值。
+#  --shields-up       阻止来自headscale网络上其他设备的[传入连接]，适用于个人设备 仅建立传出连接。
+# --snat-subnet-routes （仅限 Linux）将 NAT 流量源发送到使用 通告的本地路由。 默认将 NAT 流量提供给通告的路由。 设置为 false 以禁用子网路由伪装。--advertise-routes
+# --ssh     运行[尾鳞 SSH]服务器，允许根据尾网管理员声明的访问策略进行[访问]，默认为 false。
+# -timeout=<duration> 等待尾部秤服务初始化的最长时间。 可以是可解析的任何值`duration`[`time.ParseDuration()`].默认为 ，将永久阻止。`0s`
+# --unattended      （仅限视窗）在[无人值守模式下]运行，即使在当前用户注销后，Tailscale 仍会继续运行。
 
 SUBCOMMANDS
   up         Connect to Tailscale, logging in if needed

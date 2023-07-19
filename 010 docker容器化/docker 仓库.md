@@ -1,10 +1,14 @@
+# docker 仓库
+
+‍
+
 # docker harbor
 
 - Harbor 是 VMware 公司开源的企业级 Docker Registry 项目，其目标是帮助用户迅速搭建一个企业级的 Docker Registry （私有仓库）服务。
 - Harbor以 Docker 公司开源的 Registry 为基础，提供了图形管理 UI 、基于角色的访问控制(Role Based AccessControl) 、AD/LDAP 集成、以及审计日志(Auditlogging) 等企业用户需求的功能，同时还原生支持中文。
 - Harbor 的每个组件都是以 Docker 容器的形式构建的，使用 docker-compose 来对它进行部署。用于部署 Harbor 的 docker-compose 模板位于 harbor/docker-compose.yml。
 
-# harbor特性
+## harbor特性
 
 1. 基于角色控制：用户和仓库都是基于项目进行组织的，而用户在项目中可以拥有不同的权限。
 2. 基于镜像的复制策略：镜像可以在多个Harbor实例之间进行复制（同步）。
@@ -15,7 +19,7 @@
 7. 支持 RESTful API：RESTful API 提供给管理员对于 Harbor 更多的操控, 使得与其它管理软件集成变得更容易。
 8. Harbor和docker registry的关系：Harbor实质上是对docker registry做了封装，扩展了自己的业务模板。
 
-# harbor组件
+## harbor组件
 
 ![](assets/image-20230221160453415-20230610173810-e24vwcc.png)
 
@@ -29,7 +33,7 @@
 |Log collector（harbor-log）|负责收集其他组件的日志到一个地方|
 |||
 
-# docker-harbor 部署
+## docker-harbor 部署
 
 1.在服务端安装docker和docker-compose 客户端上安装docker 关闭防火墙 修改主机名
 
@@ -140,7 +144,7 @@ verify_remote_cert # 默认打开。此标志决定了当Harbor与远程 registe
 #如果希望将 Docker 镜像存储到其他的磁盘路径，可以修改这个参数。
 ```
 
-# docker-harbor 使用
+## docker-harbor 使用
 
 1.登录控制台
 
@@ -165,7 +169,7 @@ docker login 192.168.10.31 -u admin -p Ninestar123
 systemctl restart docker
 ```
 
-## 上传镜像步骤
+### 上传镜像步骤
 
 - 设置docker仓库为registry本地仓库
 - 给需要存储的镜像打tag
@@ -240,7 +244,7 @@ v1: digest: sha256:507a5ad9dd5771cdf461a6fa24c3fff6ea9eabd6945abf03e9264d3130fe8
 _layers  _manifests  _uploads
 ```
 
-## 拉取镜像镜像步骤
+### 拉取镜像镜像步骤
 
 - 设置客户端docker仓库为registry仓库
 - 拉取镜像到本地
@@ -282,7 +286,7 @@ REPOSITORY                         TAG                 IMAGE ID            CREAT
 192.168.1.150:5000/centos_nginx   v1                  bcd9f28f6126        4 hours ago         447MB
 ```
 
-## registry带basic认证的仓库
+### registry带basic认证的仓库
 
 **实现步骤**
 
@@ -341,7 +345,7 @@ Username：zutuanxue
 Password：123456
 ```
 
-# docker-compose.yml
+## docker-compose.yml
 
 ```yml
 version: '2.3'
