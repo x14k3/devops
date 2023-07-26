@@ -1,6 +1,18 @@
 # mysql 主从架构
 
-# 基于binlog主从复制
+‍
+
+主从复制的作用
+
+* 数据备份：确保数据安全，做数据的热备，slave作为后备数据库，主数据库服务器故障后，可以切换到从数据库继续工作，避免数据的丢失；
+* 提升性能：提高I/O性能，随着业务量增大，数据库I/O访问频率增大，单机无法满足；
+* 读写分离：即写请求分发到master，读请求分发到slave，能在一定程度上减轻数据库服务器的访问压力；
+
+‍
+
+‍
+
+## 基于binlog日志点的主从复制
 
 MySQL主从复制涉及到三个线程，一个运行在主节点（log dump thread），其余两个(I/O thread, SQL thread)运行在从节点，如下图所示:
 
@@ -8,13 +20,13 @@ MySQL主从复制涉及到三个线程，一个运行在主节点（log dump thr
 
 复制的原理其实很简单，仅分为以下三步：
 
-- 在**主库**上把数据更改记录到二进制日志`binary log`中，具体是在每次准备提交事务完成数据更新前，主库将数据更新的事件记录到二进制日志中去，Mysql会按照事务提交的顺序来记录二进制日志的。日志记录好之后，主库通知存储引擎提交事务。
-- **从库**会启动一个**IO线程**，该线程会连接到主库。而主**库上的binlog dump线程**会去读取主库本地的binlog日志文件中的更新事件。发往从库，从库接收到日志之后会将其记录到本地的中继日志`relay-log`当中。
-- **从库中的SQL线程**读取中继日志relay-log中的事件，将其重放到从库中。
+* master 服务器将数据的改变记录二进制 binlog 日志，当 master 上的数据发生改变时，则将其改变写入二进制日志中；
+* slave 服务器会在一定时间间隔内对 master 二进制日志进行探测其是否发生改变，如果发生改变，则开始一个 I/OThread 请求 master 二进制事件；
+* 从库给主库发起读数据请求后, 主库会通过 `dump`​ 线程 把 `binlog`​ 日志文件 推送 给从库, 从库的 `I/O`​ 线程把接收到数据更新到 `relay log`​, 之后从库的 `SQL`​ 线程把 `relay log`​ 应用为 `binlog`​ 日志, 直到主库与从库的 `binlog`​ 日志文件完全数据一致, 达到主从同步。
 
 **mysql基于binlog的主从复制的步骤:**
 
-- 1) 在主库与从库都安装mysql数据库[[mysql 单机部署]];
+- 1) 在主库与从库都安装mysql数据库;mysql 单机部署
 - 2) 在主库的my.cnf配置文件中配置server-id 和log-bin;
 - 3) 在主库创建认证用户并做授权，查看binlog偏移量;
 - 4) 在从库的my.cnf配置文件中配置server-id;
@@ -106,7 +118,7 @@ show slave status\G;
 stop  slave;
 ```
 
-# 基于GTID主从复制
+## 基于binlog-GTID的主从复制
 
 从 MySQL 5.6.5 版本新增了一种主从复制方式：`GTID`，其全称是`Global Transaction Identifier`，即全局事务标识。通过`GTID`保证每个主库提交的事务在集群中都有唯一的一个`事务ID`。**强化了数据库主从的一致性和故障恢复数据的容错能力**。在主库宕机发生主从切换的情况下。`GTID`方式可以让其他从库自动找到新主库复制的位置，而且`GTID`可以忽略已经执行过的事务，减少了数据发生错误的概率。
 
@@ -163,10 +175,10 @@ binlog_group_commit_sync_delay = 100 
 binlog_group_commit_sync_no_delay_count = 10
 
 ####################### 半同步模式
-plugin-load = rpl_semi_sync_master=semisync_master.so
+plugin_dir = /data/mysql/lib/plugin
+plugin_load = "rpl_semi_sync_master=semisync_master.so"
 rpl-semi-sync-master-enabled = 1
 rpl_semi_sync_master_timeout = 1000
-
 
 # 不同步的数据库
 binlog-ignore-db=mysql,sys,performance_schema,information_schema
@@ -216,7 +228,8 @@ relay_log_info_repository=TABLE
 relay_log_recovery=ON
 
 ####################### 半同步模式
-plugin-load = rpl_semi_sync_slave=semisync_slave.so
+plugin_dir = /data/mysql/lib/plugin
+plugin_load = "rpl_semi_sync_slave=semisync_slave.so"
 rpl-semi-sync-slave-enabled = 1
 
 -----------------------------------
@@ -241,42 +254,4 @@ mysql> change master to master_host='192.168.0.104' ,master_user='master',master
 mysql> start slave;
 ```
 
-# 复制模式
-
-## 异步
-
-MySQL默认的复制即是异步的，主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，这样就会有一个问题，主如果crash掉了，此时主上已经提交的事务可能并没有传到从库上，如果此时，强行将从提升为主，可能导致新主上的数据不完整。
-
-## 半同步
-
-是介于全同步复制与全异步复制之间的一种，主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈。同时，这里只是一个收到的反馈，而不是已经完全完成并且提交的反馈，如此，节省了很多时间。
-
-![](assets/image-20230216193028013-20230610173813-o4yy8fh.png)
-
-状态检查
-
-```bash
-# 查看插件是否加载成功
-SELECT PLUGIN_NAME, PLUGIN_STATUS FROM INFORMATION_SCHEMA.PLUGINS  WHERE PLUGIN_NAME LIKE '%semi%';
-
-`+----------------------+---------------+`
-`| PLUGIN_NAME          | PLUGIN_STATUS |`
-`+----------------------+---------------+`
-`| rpl_semi_sync_master | ACTIVE        |`
-`+----------------------+---------------+`
-
-
-# 查看半同步是否在运行
-show status like 'Rpl_semi_sync_master_status';
-
-`+-----------------------------+-------+`
-`| Variable_name               | Value |`
-`+-----------------------------+-------+`
-`| Rpl_semi_sync_master_status | ON    |`
-`+-----------------------------+-------+`
-
-```
-
-## 全同步
-
-指当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响。
+‍

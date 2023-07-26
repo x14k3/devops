@@ -29,7 +29,8 @@ source /etc/locale.conf
 # 卸载自带的mariadb数据库
 rpm -qa | grep -i mariadb 
 yum -y remove mariadb*
-
+# 修改主机名
+hostnamectl set-hostname test01
 # 解压 安装
 tar -xvf mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar 
 yum -y install ./mysql-community-*.rpm
@@ -45,7 +46,7 @@ socket=/var/lib/mysql/mysql.sock
 
 [mysql]
 # 设置默认字符编码
-default-character-set=utf8mb4
+default_character-set=utf8mb4
 
 [mysqld]
 # 数据存放目录
@@ -68,7 +69,7 @@ symbolic-links=0
 # 设置为1，则不会限制。
 log_bin_trust_function_creators=1
 # 大小写敏感（mysql 8.0版本，mysql初始化后就不支持修改lower_case_table_names参数了）
-lower-case-table-names=1
+lower_case_table_names=1
 default_authentication_plugin=mysql_native_password
 -------------------------------------------------
 
@@ -109,7 +110,7 @@ socket=/data/mysql/mysql.sock
 
 [mysql]
 # 设置默认字符编码
-default-character-set=utf8mb4
+default_character_set=utf8mb4
 
 [mysqld]
 # 数据存放目录
@@ -121,7 +122,7 @@ log-error=/data/mysql/mysqld.log
 # pid文件目镜
 pid-file=/data/mysql/mysqld.pid
 # 默认字符集
-character-set-server=utf8
+character_set_server=utf8
 # 最大连接数
 max_connections=2000
 # 是否支持符号链接:否
@@ -129,7 +130,7 @@ symbolic-links=0
 # 控制是否可以信任存储函数创建者
 log_bin_trust_function_creators=1
 # 大小写敏感
-lower-case-table-names=1
+lower_case_table_names=1
 default_authentication_plugin=mysql_native_password
 -------------------------------------------------
 
@@ -166,19 +167,13 @@ tar -xvf mysql-8.0.26-linux-glibc2.12-x86_64.tar.xz -C /data/
 # 修改目录名称
 cd /data/
 mv mysql-8.0.26-linux-glibc2.12-x86_64/ mysql
-
+# 创建数据目录
+mkdir data;touch mysql/error.log
 # 检查并创建用户和用户组
 groupadd mysql ; useradd -r -g mysql mysql
 
 # 给目录和用户授予权限，很重要的一步
 chown -R mysql:mysql /data/mysql/ 
-
-
-# 初始化数据目录 --defaults-file=放在第一个参数位置
-/data/mysql/bin/mysqld  --initialize --user=mysql --basedir=/data/mysql/ --datadir=/data/mysql/data --log-error=/data/mysql/error.log --pid-file=/data/mysql/mysql.pid
-
-# 大小写敏感（mysql 8.0版本，mysql初始化后就不支持修改lower_case_table_names参数了！！所以需要在初始化时指定该参数）
-#/data/mysql/bin/mysqld  --initialize --user=mysql --basedir=/data/mysql/ --datadir=/data/mysql/data --log-error=/data/mysql/error.log --pid-file=/data/mysql/mysql.pid lower-case-table-names=1
 
 # 创建 my.cnf 配置文件
 vim /etc/my.cnf
@@ -190,7 +185,7 @@ port=3306
 socket=/data/mysql/mysql.sock
 [mysql]
 # 设置默认字符编码
-default-character-set=utf8mb4
+default_character_set=utf8mb4
 
 [mysqld]
 # 数据库软件目录
@@ -202,7 +197,7 @@ socket=/data/mysql/mysql.sock
 # 错误日志路径
 log-error=/data/mysql/error.log
 # pid文件目镜
-pid-file=/data/mysql/mysqld.pid
+pid-file=/data/mysql/mysql.pid
 # 默认字符集
 character-set-server=utf8mb4
 # 最大连接数
@@ -211,15 +206,20 @@ max_connections=2000
 symbolic-links=0
 # 控制是否可以信任存储函数创建者
 log_bin_trust_function_creators=1
-
+lower_case_table_names=1
 default_authentication_plugin=mysql_native_password
--------------------------------------------------
+default-time_zone = '+8:00'
+# 初始化数据目录 --defaults-file=放在第一个参数位置
+/data/mysql/bin/mysqld_safe --defaults-file=/etc/my.cnf --initialize-insecure --user=mysql --basedir=/data/mysql --datadir=/data/mysql/data --log-error=/data/mysql/error.log --pid-file=/data/mysql/mysql.pid
+#–initialize 会在日志里打印出一个随机密码。
+#–initialize-insecure 不会产生随机密码，第一次登陆数据库使用空密码。
+# 大小写敏感（mysql 8.0版本，mysql初始化后就不支持修改lower_case_table_names参数了！！所以需要在初始化时指定该参数）
+#/data/mysql/bin/mysqld_safe --initialize-insecure --user=mysql --lower-case-table-names=1
+
 # 配置环境变量
-vim /etc/profile
------------------------------------------
-# 添加如下：
+cat >> /etc/profile <<EOF
 export PATH=$PATH:/data/mysql/bin
------------------------------------------
+EOF
 source /etc/profile
 
 
@@ -229,11 +229,11 @@ vim /data/mysql/support-files/mysql.server
 ----------------------------------------------------
 basedir=/data/mysql
 datadir=/data/mysql/data
-mysqld_pid_file_path=/data/mysql/mysqld.pid
+mysqld_pid_file_path=/data/mysql/mysql.pid
 ---------------------------------------------------------
-# sed -i 's#^basedir=#basedir=/data/mysql#1' /data/mysql/support-files/mysql.server
-# sed -i 's#^datadir=#datadir=/data/mysql/data#1' /data/mysql/support-files/mysql.server
-# sed -i 's#^mysqld_pid_file_path=#mysqld_pid_file_path=/data/mysql/mysqld.pid#1' /data/mysql/support-files/mysql.server
+sed -i 's#^basedir=#basedir=/data/mysql#1' /data/mysql/support-files/mysql.server
+sed -i 's#^datadir=#datadir=/data/mysql/data#1' /data/mysql/support-files/mysql.server
+sed -i 's#^mysqld_pid_file_path=#mysqld_pid_file_path=/data/mysql/mysql.pid#1' /data/mysql/support-files/mysql.server
 /data/mysql/support-files/mysql.server start
 
 # 查看默认密码
@@ -344,9 +344,9 @@ relay_log_purge=1
 slave-net-timeout=120
 
 #这个参数一般用在主主同步中，用来错开自增值, 防止键值冲突
-auto_increment_offset = 1           
+auto_increment_offset = 1         
 #这个参数一般用在主主同步中，用来错开自增值, 防止键值冲突
-auto_increment_increment = 1    
+auto_increment_increment = 1  
 
 
 #二进制日志文件并不是每次写的时候同步到磁盘。因此当数据库所在操作系统发生宕机时，可能会有最后一部分数据没有写入二进制日志文件中，这给恢复和复制带来了问题。
@@ -359,7 +359,6 @@ sync_binlog=1
 slave_net_timeout = 120
 
 #====================================================================================================================#
-
 # 如果的值sync_master_info大于0，则副本在每个sync_master_info事件后都会更新其连接元数据存储库表 。如果为0，则表永远不会更新。
 master_info_repository = TABLE
 
@@ -369,11 +368,8 @@ master_info_repository = TABLE
 #如果relay_log_info_repository=file，就会创建一个realy-log.info，
 #如果relay_log_info_repository=table，就会创建mysql.slave_relay_info表来记录同步的位置信息。
 relay_log_info_repository = TABLE
-
-
 #校验binlog，默认为crc32
 binlog_checksum = NONE
-
 
 #它控制是否可以信任存储函数创建者，不会创建写入二进制日志引起不安全事件的存储函数。如果设置为0（默认值），用户不得创建或修改存储函数，除非它们具有除CREATE ROUTINE或ALTER ROUTINE特权之外的SUPER权限。 设置为0还强制使用DETERMINISTIC特性或READS SQL DATA或NO SQL特性声明函数的限制。 如果变量设置为1，MySQL不会对创建存储函数实施这些限制。 此变量也适用于触发器的创建，设置为1，可将函数复制到slave  
 log_bin_trust_function_creators = 1
@@ -395,7 +391,7 @@ binlog_expire_logs_seconds = 1296000
 binlog_format = ROW
 
 #为每个session 分配的内存，在事务过程中用来存储二进制日志的缓存。
-binlog_cache_size       = 4M    
+binlog_cache_size       = 4M  
 
 #用户可以创建的内存表(memory table)的大小.这个值用来计算内存表的最大行数值
 max_heap_table_size     = 64M
@@ -503,7 +499,7 @@ key_buffer_size        = 64M
 query_cache_size       = 128M
 tmp_table_size          = 128M
 tmpdir                  = /data/mysql/tmp
-
+default-time_zone = '+8:00'
 lower_case_table_names  = 1
 log-bin-trust-function-creators = 1
 binlog_format           = mixed

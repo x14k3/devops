@@ -1,8 +1,16 @@
 # mysql MHA架构
 
-MHA（MasterHigh Availability）是一套优秀的MySQL高可用环境下故障切换和主从复制的软件。
-MHA 的出现就是解决MySQL 单点的问题。 MySQL故障切换过程中，MHA能做到0-30秒内自动完成故障切换操作。
+MHA（MasterHigh Availability）是一套优秀的MySQL高可用环境下故障切换和主从复制的软件。  
+MHA 的出现就是解决MySQL 单点的问题。 MySQL故障切换过程中，MHA能做到0-30秒内自动完成故障切换操作。  
 MHA 能在故障切换的过程中最大程度上保证数据的一致性，以达到真正意义上的高可用。
+
+优点：  
+1:MHA除了支持日志点的复制还支持GTID的方式  
+2:同MMM相比，MHA会尝试从旧的Master中恢复旧的二进制日志，只是未必每 次都能成功。如果希望更少的数据丢失场景，建议使用MHA架构。
+
+缺点：  
+1:MHA需要自行开发VIP转移脚本。  
+2:MHA只监控Master的状态，未监控Slave的状态  
 
 ## MHA 的组成
 
@@ -13,10 +21,9 @@ MHA 能在故障切换的过程中最大程度上保证数据的一致性，以�
 
 ![](assets/image-20230216200302909-20230610173813-r4w0zss.png)
 
-环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考[[mysql 单机部署]]
-操作系统：`Linux CentOS 7.6`
-数据库：`MySQL 8.0.26`   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
-MHA：`mha4mysql-0.58` https://github.com/yoshinorim/mha4mysql-node https://github.com/yoshinorim/mha4mysql-manager
+环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考mysql 单机部署  
+操作系统：`Linux CentOS 7.6`​<br />数据库：`MySQL 8.0.26`​   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)  
+MHA：`mha4mysql-0.58`​ https://github.com/yoshinorim/mha4mysql-node https://github.com/yoshinorim/mha4mysql-manager
 
 ### 1. 在所有服务器上配置无密码认证
 
