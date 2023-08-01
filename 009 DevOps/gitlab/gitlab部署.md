@@ -33,13 +33,6 @@ gitlab下载地址[https://packages.gitlab.com/gitlab/gitlab-ce](https://package
   在某些系统上，您可能需要安装额外的软件包（例如 postgresql-contrib）以使此扩展可用。
 
   参考PostgreSQL部署
-* Gitlab geo 要求  
-  如果您使用的是GitLab Geo，则跟踪数据库也需要postgres_fdw扩展名。  
-  参考postgres_fdw
-* Unicorn  
-  可以增加unicorn worker 的数量，有助于减少应用程序的响应时间并提高处理并行请求的能力  
-  对于大多数情况，建议使用：CPU核心+1=unicorn worker  
-  对于所有2GB及以上的机器，建议至少有3个，如果是1GB建议使用两个
 * redis和 sidekiq  
   Redis  存储所有用户会话和后台任务队列，redis的存储要求很低，每个用户大约25KB，sidekiq使用多线程进程处理后台作业，此过程从整个redis堆栈（200M+)开始，但由于内存泄露，他可能会随着时间的推移而增长，在非常活跃的服务器上，sidekiq进程可以使用1GB+内存
 * Prometheus 及相关，使用默认设置，这些进程将消耗大概200M内存
@@ -79,28 +72,24 @@ yum install -y gitlab-ce   # 默认安装到/opt目录
 
 #### 2.1 gitlab服务构成
 
-​查看服务状态：gitlab-ctl status，可以看到gitlab的依赖组件​
+查看服务状态：`gitlab-ctl status`​ 可以看到gitlab的依赖组件
 
-GitLab 由主要由以下服务构成，他们共同承担了 Gitlab 的运作需要  
-Nginx：静态 web 服务器，web入口  
-postgresql：数据库。  
-redis：缓存数据库。  
-sidekiq：用于在后台执行队列任务（异步执行） 。  
-unicorn （gitlab rails）：gitlab自身的web，包含了gitlab主进程，负责处理快速/一般任务，与redis一起工作，内容有:  
-	- 通过检查存储在redis中的用户来检查权限  
-	- 为sidekiq 制作任务  
-	- 从仓库（warehouse） 取东西或在哪里移动东西  
-gitlab-shell：用于SSH交互，而不是http，gitlab-shell 通过redis与sidekiq 进行通信，并直接通过TCP访问unicorn  
-gitlab-workhorse: 反向代理服务器，可以处理与redis无关的请求，磁盘上的CSS，JS 文件等），处理git push/pull 请求，处理redis的链接（修改有redis发送的响应或发送给redis请求，管理redis的长期web socket链接）  
-gitaly： 后台服务，专门负责访问磁盘以高效处理git，并处理缓存耗时操作，所有的git操作都通过gitaly 进行处理  
-mail_room： 处理邮件请求，恢复gitlab发送的邮件时，gitlab会调用此服务.  
-logrotate：日志文件管理工具。
+* Alertmanager：用于监控系统和应用程序，并在发生故障时发送通知。
+* Gitaly：一个Git服务器，处理与Git存储库相关的所有请求。它提高了GitLab性能和稳定性。
+* GitLab Exporter：将GitLab度量指标导出到Prometheus中，以便进行监控和警报。
+* GitLab Kubernetes Agent Server (KAS)：使用Kubernetes管理集群，并支持CI/CD操作。
+* GitLab Workhorse：处理所有传入HTTP请求并管理响应。它提高了速度和可靠性。
+* Logrotate：日志文件轮换工具，可以避免磁盘空间耗尽。
+* Nginx：Web服务器，用于反向代理和负载均衡。
+* Postgres Exporter：将PostgreSQL数据库度量指标导出到Prometheus中，以便进行监控和警报。
+* PostgreSQL：数据库引擎，用于存储数据。
+* Prometheus：开源监控系统，收集时间序列数据并提供可视化、告警等功能。
+* Puma：Ruby Web服务器，用于处理Rails应用程序请求。
+* Redis：内存缓存数据库，用于加快应用程序的读写速度。
+* Redis Exporter: 将Redis度量指标导出到Prometheus中，以便进行监控和警报。
+* Sidekiq：用于处理后台任务的任务队列。它是一个非常快速和可靠的工作线程。
 
-‍
-
-‍
-
-gitlab常用的默认安装目录
+#### 2.2 gitlab常用的默认安装目录
 
 ```bash
 gitlab组件日志路径：/var/log/gitlab

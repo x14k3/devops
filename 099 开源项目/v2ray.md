@@ -1,8 +1,8 @@
 # v2ray
 
-V2Rray 官网：https://www.v2ray.com/
-V2Rray 下载地址：https://github.com/v2ray/v2ray-core/releases
-参考：https://www.v2ray.com/awesome/tools.html
+V2Rray 官网：[https://www.v2ray.com/](https://www.v2ray.com/)  
+V2Rray 下载地址：[https://github.com/v2fly/v2ray-core/releases](https://github.com/v2fly/v2ray-core/releases)  
+参考：[https://www.v2ray.com/awesome/tools.html](https://www.v2ray.com/awesome/tools.html)
 
 v2ray(Project V) 相对于 Shadowsocks，v2ray 更像全能选手，拥有更多可选择的协议 / 传输载体 (Socks、HTTP、TLS、TCP、mKCP、WebSocket )，还有强大的路由功能，不仅仅于此，它亦包含 Shadowsocks 组件，你只需要安装 v2ray，你就可以使用所有的 v2ray 相关的特性包括使用 Shadowsocks，由于 v2ray 是使用 GO 语言所撰写的，天生的平台部署优势，下载即可使用，
 

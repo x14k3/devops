@@ -1,25 +1,5 @@
 # Zabbix 搭建
 
-# Zabbix简介
-
-官方网站：[http://www.zabbix.com/](http://www.zabbix.com/ "http://www.zabbix.com/")
-Zabbix 是企业级监控系统的开源解决方案，是一个基于 WEB 界面的分布式监控服务器。
-**主要特点：**
-Zabbix 安装、配置简单，学习成本低，支持多语言（包括中文）,免费开源，自动发现服务器与网络设备，分布式监视，良好的 WEB 界面交互等通知功能
-Zabbix 主要监控服务器：CPU 负载、内存使用、磁盘使用、网络状态、端口监视、日志监视。
-**Zabbix 运行机制**：
-Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法监控服务器状态。可以在 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OX X，Windows 多平台运行。
-Zabbix Agent 安装在被监控的服务器上，主要完成对内存，CPU，磁盘等信息收集。
-
-![](assets/image-20221127214348840-20230610173809-l37frcx.png)
-
-**Zabbix 运行过程图**
-1\. Agent 从服务器中收集相关数据，传送给 Zabbix Server
-2\. Server 把数据存储到数据库中
-3\. Server 把数据分析之后以 Web 页面，展示出来。
-zabbix-server 监听端口：10051 ； Agent 监控端口 10050 。
-服务端安装 Zabbix Server 和 Zabbix Agent 两个服务，客户端只安装 Zabbix Agent 一个服务。
-
 # 环境准备
 
 ```bash
