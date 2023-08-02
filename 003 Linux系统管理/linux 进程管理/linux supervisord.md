@@ -37,8 +37,8 @@ systemctl enable supervisord.service
 
 ```ini
 
-[unix_http_server]        
-file=/tmp/supervisor.sock   ; socket文件的路径，supervisorctl用XML_RPC和supervisord通信就是通过它进行的。如果不设置的话，supervisorctl也就不能用了      
+[unix_http_server]    
+file=/tmp/supervisor.sock   ; socket文件的路径，supervisorctl用XML_RPC和supervisord通信就是通过它进行的。如果不设置的话，supervisorctl也就不能用了    
 ;chmod=0700                 ; 修改上面的那个socket文件的权限为0700,默认为0700
 ;chown=nobody:nogroup       ; 修改上面的那个socket文件的属组为user.group,默认为启动supervisord进程的用户及属组
 ;username=user              ; 使用supervisorctl连接的时候，认证的用户,默认为不需要用户
@@ -50,7 +50,7 @@ file=/tmp/supervisor.sock   ; socket文件的路径，supervisorctl用XML_RPC和
 
 [supervisord]                ;这个主要是定义supervisord这个服务端进程的一些参数
 logfile=/tmp/supervisord.log ; 这个是supervisord这个主进程的日志路径，注意和子进程的日志不搭嘎。默认路径$CWD/supervisord.log，$CWD是当前目录
-logfile_maxbytes=50MB        ; 这个是上面那个日志文件的最大的大小，当超过50M的时候，会生成一个新的日志文件。当设置为0时，表示不限制文件大小,默认值是50M，非必须设置。            
+logfile_maxbytes=50MB        ; 这个是上面那个日志文件的最大的大小，当超过50M的时候，会生成一个新的日志文件。当设置为0时，表示不限制文件大小,默认值是50M，非必须设置。          
 logfile_backups=10           ; 日志文件保持的数量，上面的日志文件大于50M时，就会生成一个新文件。文件数量大于10时，最初的老文件被新文件覆盖，文件数量将保持为10,当设置为0时，表示不限制文件的数量。
 loglevel=info                ; 日志级别，有critical, error, warn, info, debug, trace, or blather等
 pidfile=/tmp/supervisord.pid ; supervisord的pid文件路径。默认为$CWD/supervisord.pid
@@ -74,7 +74,7 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 [supervisorctl]              ;这个主要是针对supervisorctl的一些配置  
 serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接supervisord的时候，本地UNIX socket路径，注意这个是和前面的[unix_http_server]对应的,默认值就是unix:///tmp/supervisor.sock
 ;serverurl=http://127.0.0.1:9001 ; 这个是supervisorctl远程连接supervisord的时候，用到的TCP socket路径注意这个和前面的[inet_http_server]对应,默认就是http://127.0.0.1:9001
-                           
+                       
 ;username=chris              ; 用户名
 ;password=123                ; 密码
 ;prompt=mysupervisor         ; 输入用户名密码时候的提示符,默认supervisor
@@ -85,10 +85,10 @@ serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接superv
 ; supervisor.
 
 [program:theprogramname]      ;这个就是咱们要管理的子进程了，":"后面的是名字，最好别乱写和实际进程有点关联最好。这样的program我们可以设置一个或多个，一个program就是要被管理的一个进程
-;command=/bin/cat              ; 这个就是我们的要启动进程的命令路径了，可以带参数例子：/home/test.py -a 'hehe',有一点需要注意的是，我们的command只能是那种在终端运行的进程，不能是守护进程。这个想想也知道了，比如说command=service httpd start。httpd这个进程被linux的service管理了，我们的supervisor再去启动这个命令,这已经不是严格意义的子进程了。
+;command=/bin/cat              ; 绝对路径！这个就是我们的要启动进程的命令路径了，可以带参数例子：/home/test.py -a 'hehe',有一点需要注意的是，我们的command只能是那种在终端运行的进程，不能是守护进程。这个想想也知道了，比如说command=service httpd start。httpd这个进程被linux的service管理了，我们的supervisor再去启动这个命令,这已经不是严格意义的子进程了。
 
 ;process_name=%(program_name)s ; 这个是进程名，如果我们下面的numprocs参数为1的话，就不用管这个参数了，它默认值%(program_name)s也就是上面的那个program冒号后面的名字，但是如果numprocs为多个的话，那就不能这么干了。
-       
+   
 ;numprocs=1                    ; 启动进程的数目。当不为1时，就是进程池的概念，注意process_name的设置
 ;directory=/tmp                ; 进程运行前，会前切换到这个目录
 ;umask=022                     ; 进程掩码，默认none，非必须
@@ -133,8 +133,8 @@ serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接superv
 ;process_name=%(program_name)s ; 这个也一样，进程名，当下面的numprocs为多个的时候，才需要。否则默认就OK了
 ;numprocs=1                    ; 相同的listener启动的个数
 ;events=EVENT                  ; event事件的类型，也就是说，只有写在这个地方的事件类型。才会被发送
-                  
-                             
+              
+                         
 ;buffer_size=10                ; 这个是event队列缓存大小，单位不太清楚，楼主猜测应该是个吧。当buffer超过10的时候，最旧的event将会被清除，并把新的event放进去。默认值为10
 ;directory=/tmp                ; 进程执行前，会切换到这个目录下执行
 ;umask=022                     ; 淹没，默认为none，不说了

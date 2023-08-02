@@ -87,20 +87,18 @@ git clone git://github.com/schacon/simplegit.git
 > **简而言之**，使用 `git add`​ 添加需要追踪的新文件和待提交的更改，然后使用 `git status`​ 和 `git diff`​ 查看有何改动，最后用 `git commit`​ 将你的快照记录。这就是你要用的基本流程，绝大部分时候都是这样的。执行 `git rm`​ 来删除 Git 追踪的文件。它还会删除你的工作目录中的相应文件。
 
 ```bash
-git add .                # 添加文件到缓存,无论是修改过的还是新建的都需要添加到缓存
+git add .         # 添加文件到缓存,无论是修改过的还是新建的都需要添加到缓存
+git status        # 查看你的文件在工作目录与缓存的状态
+git status  -s    # 简短的输出
 
-git status              # 查看你的文件在工作目录与缓存的状态
-git status  -s         # 简短的输出
+git diff          # 显示暂存区和工作区的差异
+git diff --stat   # 显示摘要而非整个 diff
+git diff --cached # 查看已缓存的改动
 
-git diff                   # 显示暂存区和工作区的差异
-git diff --stat         # 显示摘要而非整个 diff
-git diff --cached   # 查看已缓存的改动
+git commit  -m "xxx" -a  # 提交工作区自上次commit之后的变化，直接到仓库区 ;-v 提交时显示所有diff信息
 
-
-git commit  -m "xxx" -a   # 提交工作区自上次commit之后的变化，直接到仓库区 ;-v 提交时显示所有diff信息
-
-git reset HEAD      # 取消缓存已缓存的内容
-git rm                     # 将文件从缓存区移除
+git reset HEAD    # 取消缓存已缓存的内容
+git rm            # 将文件从缓存区移除
 ```
 
 ‍
@@ -110,12 +108,12 @@ git rm                     # 将文件从缓存区移除
 > **简而言之**，你可以执行 `git branch (branchname)`​ 来创建分支，使用 `git checkout (branchname)`​ 命令切换到该分支，在该分支的上下文环境中，提交快照等，之后可以很容易地来回切换。当你切换分支的时候，Git 会用该分支的最后提交的快照替换你的工作目录的内容，所以多个分支不需要多个目录。使用 `git merge`​ 来合并分支。你可以多次合并到统一分支，也可以选择在合并之后直接删除被并入的分支。使用 `git log`​ 列出促成当前分支目前的快照的提交历史记录。这使你能够看到项目是如何到达现在的状况的。
 
 ```bash
-git branch                                      # 列出分支；-r 列出所有远程分支 -a 列出所有本地分支和远程分支
-git branch (branchname)            # 新建本地分支
-git branch -d (branchname)       # 删除分支
+git branch                     # 列出分支；-r 列出所有远程分支 -a 列出所有本地分支和远程分支
+git branch (branchname)        # 新建本地分支
+git branch -d (branchname)     # 删除分支
 git branch -dr [remote/branch] # 删除远程分支
 git checkout -b (branchname)   # 创建新分支，并立即切换到它
-git merge                                       # 将分支合并到你的当前分支
+git merge                      # 将分支合并到你的当前分支
 git log    # 显示一个分支中提交的更改记录，--oneline 选项来查看历史记录的紧凑简洁的版本。 --graph 选项，查看历史中什么时候出现了分支、合并
 git tag [tag] [commit]   # 给历史记录中的某个重要的一点打上标签,新建一个tag在指定commit
 

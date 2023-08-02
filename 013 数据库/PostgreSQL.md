@@ -7,5 +7,6 @@
 * 📄 [PostgreSQL流复制](siyuan://blocks/20230629162926-dr3tvuz)
 * 📄 [PostgreSQL内置命令](siyuan://blocks/20230612212339-oivqycl)
 * 📄 [PostgreSQL配置文件详解](siyuan://blocks/20230615105433-hzl9bd8)
+* 📄 [postgreSQL视图与触发器](siyuan://blocks/20230703163121-su1137e)
 
 ‍
