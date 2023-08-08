@@ -7,7 +7,8 @@
 show variables like 'character_set_%';
 -- 查看数据库时区
 show variables like '%time_zone';
-
+-- 查看表结构
+desc tabl_name
 ```
 
 ## 数据库创建

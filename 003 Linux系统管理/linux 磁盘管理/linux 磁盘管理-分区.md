@@ -1,18 +1,12 @@
 # linux 磁盘管理-分区
 
-# fdisk
+## fdisk
 
 一般fdisk用来管理linux的磁盘，进行分区，格式化等操作。
 
 fdisk工具只能给小于2TB的磁盘划分分区。若超过2TB，就要使用parted分区工具进行分区。
 
-### 添加硬盘扩容
-
-1. 增加一块硬盘
-2. 使用fdisk命令进行分区
-3. 格式化指定分区
-4. 创建一个空的目录作为挂载点
-5. 挂载使用
+### 对磁盘进行分区
 
 ```bash
 #1. 增加硬盘
@@ -171,4 +165,252 @@ mount -a
 
 ```
 
-# parted
+## parted
+
+​传​​统的MBR分区表格式，仅支持最大四个主分区，而且不可以格式化2TB以上的磁盘，因此，大磁盘更适合使用parted工具进行GPT的分区格式。
+
+parted用于对磁盘（或RAID磁盘）进行分区及管理，与fdisk分区工具相比，支持2TB以上的磁盘分区，并且允许调整分区的大小
+
+### 对磁盘进行分区
+
+```bash
+$ parted /dev/sdb
+# 对/dev/sdb进行分区或管理操作
+ 
+GNU Parted 3.1
+使用 /dev/sdb
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+ 
+(parted) mklabel gpt
+# 定义分区表格式（常用的有msdos和gpt分区表格式，msdos不支持2TB以上容量的磁盘，所以大于2TB的磁盘选gpt分区表格式）
+ 
+警告: The existing disk label on /dev/sdb will be destroyed and all data on this disk will be lost. Do you want to continue?
+# /dev/sdb上现有的磁盘标签将被销毁，该磁盘上的所有数据将丢失。你想要继续
+是/Yes/否/No? yes                                                     
+ 
+(parted) mkpart p1
+# 创建第一个分区，名称为p1（p1只是第一个分区的名称，用别的名称也可以，如part1）
+ 
+文件系统类型？  [ext2]? xfs    
+# 定义分区格式（不支持ext4，想分ext4格式的分区，可以通过mkfs.ext4格式化成ext4格式）
+                                   
+起始点？ 1   
+# 定义分区的起始位置（单位支持K,M,G,T）
+                                                     
+结束点？ 100%   
+# 定义分区的结束位置（单位支持K,M,G,T）  
+                                                  
+(parted) print   # 查看当前分区情况
+Model: VMware, VMware Virtual S (scsi)
+Disk /dev/sdb: 107GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags: 
+ 
+Number  Start   End    Size   File system  Name  标志
+ 1      1049kB  107GB  107GB  xfs          p1
+
+##
+#3. 再次查看分区情况
+# lsblk
+vdb             252:16   0   15G  0 disk 
+└─vdb1          252:17   0   15G  0 part 
+
+#4. 刷新分区表信息
+[root@zutuanxue ~]# partprobe /dev/vdb
+
+
+#5. 格式化分区#文件系统的格式，如ext2、ext3、xfs等
+[root@zutuanxue ~]# mkfs.xfs /dev/vdb1
+
+#6. 创建新的挂载点
+[root@zutuanxue ~]# mkdir /data
+
+#7. 自动挂载
+echo '/dev/sdb1 /data xfs defaults 0 0' >> /etc/fstab
+mount -a 
+
+```
+
+#### 1. 定义分区类型
+
+```bash
+$ parted -s /dev/sdb mklabel gpt
+# -s表示不输出提示信息
+# 如果不是用脚本执行分区操作，不建议忽略提示信息
+```
+
+#### 2. 查看磁盘分区信息
+
+```bash
+$ parted /dev/sdb print
+Model: VMware, VMware Virtual S (scsi)
+Disk /dev/sdb: 107GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags: 
+ 
+Number  Start  End  Size  File system  Name  标志
+```
+
+#### 3. 创建与删除分区
+
+```bash
+#parted 磁盘 mkpart 分区类型 [文件系统类型] 开始  结束
+```
+
+把整个磁盘/dev/sdb创建为一个主分区  
+
+```bash
+$ parted /dev/sdb mkpart primary xfs 0% 100%
+```
+
+把磁盘/dev/sdb创建为多个主分区
+
+```bash
+$ parted /dev/sdb mkpart primary xfs 1G 10G
+$ parted /dev/sdb mkpart primary xfs 10G 50%
+$ parted /dev/sdb mkpart primary xfs  50% 100%
+$ parted /dev/sdb print       # 查看
+Model: VMware, VMware Virtual S (scsi)
+Disk /dev/sdb: 107GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags: 
+ 
+Number  Start   End     Size    File system  Name     标志
+ 1      1000MB  10.0GB  9000MB               primary
+ 2      10.0GB  53.7GB  43.7GB               primary
+ 3      53.7GB  107GB   53.7GB               primary
+```
+
+删除分区
+
+```bash
+## 删除分区号为 1 的分区
+$ parted /dev/sdb rm 1
+
+$ parted /dev/sdb print
+Model: VMware, VMware Virtual S (scsi)
+Disk /dev/sdb: 107GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name     标志
+ 2      10.0GB  53.7GB  43.7GB               primary
+
+ 3      53.7GB  107GB   53.7GB               primary
+```
+
+格式化并挂载
+
+```bash
+$ mkfs.xfs /dev/sdb2
+$ mkdir /data
+$ mount /dev/sdb2 /data
+$ df -hT /data
+文件系统                类型      容量  已用  可用 已用% 挂载点
+/dev/sdb2               xfs        41G   33M   41G    1% /data
+```
+
+‍
+
+## fdisk，parted使用非交互式方式对磁盘进行分区操作
+
+磁盘分区的时候，平常都是使用交互式的方式进行，但是交互式有时候对一些批量的，或者脚本式的，就不那么友好了
+
+### 1. fdisk 分区
+
+直接进入正题，关于两种分区方式的选型等问题，这里不做讨论。
+
+创建如下交互文本：
+
+```
+$ cat fdisk.txt
+n
+
+
+
+
+w
+```
+
+​`注意：`​文件内容就两步，一个 `n`​，一个 `w`​，但是注意中间有 4 个换行，表示分区过程选项保持默认，如此分配整个磁盘为一个分区。
+
+```
+fdisk /dev/vdb < ./fdisk.txt
+fdisk /dev/vdc < ./fdisk.txt
+```
+
+接下来就是格式化，挂载的事情了，比较常规，下边会给出例子，这里不多赘述。
+
+### 2. parted 风格
+
+debian 系统默认没有 parted 命令，需要先安装：
+
+```
+apt-get update
+apt-get -y install parted
+```
+
+然后创建如下交互文本：
+
+```
+$cat parted.txt
+mklabel gpt
+yes
+mkpart
+1
+ext4
+0
+100%
+Ignore
+q
+```
+
+文本内也都是格式化过程中需要的步骤，同样是将整块磁盘分给一个分区。
+
+然后进行分区：
+
+```
+parted /dev/vdd < ./parted.txt
+```
+
+然后对如上分区进行格式化：
+
+```
+mkfs.ext4 /dev/vdb1
+```
+
+接着创建需要挂载的目录：
+
+```
+cd /
+mkdir data
+```
+
+然后将自动挂载写入配置：
+
+```
+echo "/dev/vdb1 /data ext4  defaults 0 0" >> /etc/fstab
+```
+
+执行加载命令，查看是否正常。
+
+记录两个常用分区命令的非交互方式，方便日常的操作。
+
+### 3. 插曲
+
+过程中还遇到过一个插曲，`vdc`​磁盘应该按照 fdisk 风格来分区即可，因为这个磁盘并没有超过 2T，可以直接分区，但是当时搞错了分区名称，于是误把此分区给搞成了 gpt 风格的，这个时候想要改回 mbr 分区类型，发现并不太容易。
+
+```
+parted /dev/vdc
+(parted)mktable
+New disk label type? msdos
+Warning: The existing disk label on /dev/vdc will be destroyed and all data on
+this disk will be lost. Do you want to continue?
+Yes/No?Yes
+```
+
+​`注意：`​这个地方在重新定义分区类型的时候，并不能写 mbr，或者形如其他分区写成 dos，如果写成这些，命令行将会一直报错，正确的应该是 `msdos`​，然后在保存退出，这个时候此分区就变回所谓的 mbr 分区了。

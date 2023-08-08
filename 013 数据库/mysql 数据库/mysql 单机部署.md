@@ -147,7 +147,7 @@ mv /var/lib/mysql /tmp/
 ```bash
 # 下载mysql 二进制通用安装包 [mysql-8.0.26-linux-glibc2.12-x86_64.tar.xz]
 # https://downloads.mysql.com/archives/community/
-
+wget https://cdn.mysql.com/archives/mysql-8.0/mysql-8.0.33-linux-glibc2.12-x86_64.tar.xz
 # 关闭防火墙和 selinux
 sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/selinux/config
 systemctl stop firewalld && systemctl disable firewalld
@@ -168,7 +168,7 @@ tar -xvf mysql-8.0.26-linux-glibc2.12-x86_64.tar.xz -C /data/
 cd /data/
 mv mysql-8.0.26-linux-glibc2.12-x86_64/ mysql
 # 创建数据目录
-mkdir data;touch mysql/error.log
+mkdir /data/mysql/data;touch /data/mysql/error.log
 # 检查并创建用户和用户组
 groupadd mysql ; useradd -r -g mysql mysql
 
@@ -176,39 +176,33 @@ groupadd mysql ; useradd -r -g mysql mysql
 chown -R mysql:mysql /data/mysql/ 
 
 # 创建 my.cnf 配置文件
-vim /etc/my.cnf
--------------------------------------------------
+cat <<EOF > /etc/my.cnf
+
 [client]
-# 连接端口号，默认 3306
 port=3306
-# 用于本地连接的 socket 套接字
 socket=/data/mysql/mysql.sock
 [mysql]
-# 设置默认字符编码
 default_character_set=utf8mb4
 
 [mysqld]
-# 数据库软件目录
 basedir=/data/mysql
-# 数据存放目录
 datadir=/data/mysql/data
-# sock文件目录
 socket=/data/mysql/mysql.sock
-# 错误日志路径
 log-error=/data/mysql/error.log
-# pid文件目镜
 pid-file=/data/mysql/mysql.pid
-# 默认字符集
 character-set-server=utf8mb4
-# 最大连接数
 max_connections=2000
-# 是否支持符号链接:否
 symbolic-links=0
-# 控制是否可以信任存储函数创建者
 log_bin_trust_function_creators=1
 lower_case_table_names=1
 default_authentication_plugin=mysql_native_password
 default-time_zone = '+8:00'
+server_id = 1
+log_bin = /data/mysql/data/bin-log
+max_binlog_size=500M
+expire_logs_days=15
+EOF
+
 # 初始化数据目录 --defaults-file=放在第一个参数位置
 /data/mysql/bin/mysqld_safe --defaults-file=/etc/my.cnf --initialize-insecure --user=mysql --basedir=/data/mysql --datadir=/data/mysql/data --log-error=/data/mysql/error.log --pid-file=/data/mysql/mysql.pid
 #–initialize 会在日志里打印出一个随机密码。

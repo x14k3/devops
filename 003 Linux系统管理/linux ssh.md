@@ -134,3 +134,5 @@ vim /etc/ssh/sshd_config
 ---------------------------------------
 PermitRootLogin yes   # 允许root登录
 ```
+
+‍
