@@ -2,24 +2,24 @@
 
 **OpenVPN** 是一个用于创建虚拟私人网络加密通道的软件包，最早由 James Yonan 编写。OpenVPN 允许建立的 VPN 使用公开密钥 、电子证书、或者用户名／密码来进行身份验证。
 
-## 原理
+# 原理
 
 OpenVPN 的技术核心是虚拟网卡，其次是 [SSL](https://zh.m.wikipedia.org/wiki/SSL "SSL") 协议实现。
 
 ![](assets/image-20221128154119160-20230610173813-n8ucumm.png)
 
-### 虚拟网卡
+## 虚拟网卡
 
 在 OpenVPN 中，如果用户访问一个远程的虚拟地址（属于虚拟网卡配用的地址系列，区别于真实地址），则操作系统会通过路由机制将数据包（TUN 模式）或数据帧（TAP 模式）发送到虚拟网卡上，服务程序接收该数据并进行相应的处理后，会通过 SOCKET( "网络套接字")从外网上发送出去。这完成了一个单向传输的过程，反之亦然。当远程服务程序通过 SOCKET 从外网上接收到数据，并进行相应的处理后，又会发送回给虚拟网卡，则该应用软件就可以接收到。
 
-### 加密
+## 加密
 
 OpenVPN 使用 OpenSSL 库来加密数据与控制信息。这意味着，它能够使用任何 OpenSSL 支持的算法。它提供了 HMAC 功能以提高连接的安全性。此外，OpenSSL 的硬件加速也能提高它的性能。2.3.0 以后版本引入 PolarSSL。
 
 openvpn 有两种认证方式：
 
-- [基于证书认证](#基于证书认证)
-- [基于用户密码方式认证](#基于用户密码方式认证)
+- 基于证书认证
+- 基于用户密码方式认证
 
 演示环境准备：
 
@@ -91,62 +91,15 @@ set_var EASYRSA_CERT_EXPIRE "180"      # 证书有效期
 ######## 初始化证书管理目录
 [root@fmsrvdb EasyRSA-3.1.1]# ./easyrsa init-pki
 
-Notice
-------
-'init-pki' complete; you may now create a CA or requests.
 
-Your newly created PKI dir is:
-* /data/EasyRSA-3.1.1/pki
-
-* Using Easy-RSA configuration: 
-
-* IMPORTANT: Easy-RSA 'vars' template file has been created in your new PKI.
-             Edit this 'vars' file to customise the settings for your PKI.
-
-* Using x509-types directory: /data/EasyRSA-3.1.1/x509-types
-* 
 ######## 创建根证书，提示输入Common Name，名称随意，但是不能和服务端证书或客户端证书名称相同
 ######## 输入PEM密码 PEM pass phrase，输入两次，此密码必须记住，不然以后不能为证书签名，可以使用nopass参数取消 PEM 密码
 [root@fmsrvdb EasyRSA-3.1.1]# ./easyrsa build-ca nopass 
-* Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
 
-* Using Easy-RSA configuration: /data/EasyRSA-3.1.1/pki/vars
-
-....................................+++
-.....................................................................+++
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
------
-Common Name (eg: your user, host, or server name) [Easy-RSA CA]:  
-
-Notice
-------
-CA creation complete and you may now import and sign cert requests.
-Your new CA certificate file for publishing is at:
-/data/EasyRSA-3.1.1/pki/ca.crt
 
 ############ 生成Diffle Human参数，它能保证密钥在网络中安全传输
 [root@fmsrvdb EasyRSA-3.1.1]# ./easyrsa gen-dh
-* Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
 
-* Using Easy-RSA configuration: /data/EasyRSA-3.1.1/pki/vars
-
-Generating DH parameters, 2048 bit long safe prime, generator 2
-This is going to take a long time
-.........+.....+.........................................................................+......................+................+.........................+..........................................+.................................+............................................+.............+....+..........................+................................................................+.....+.........................................++*++*
-DH parameters appear to be ok.
-
-Notice
-------
-
-DH parameters of size 2048 created
-at: /data/EasyRSA-3.1.1/pki/dh.pem
-
-[root@fmsrvdb EasyRSA-3.1.1]#
 
 ```
 
@@ -155,74 +108,10 @@ at: /data/EasyRSA-3.1.1/pki/dh.pem
 ```bash
 ##### 创建服务器端证书请求，生成证书请求文件
 [root@test EasyRSA-3.1.1]# ./easyrsa gen-req server nopass
-* Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
 
-* Using Easy-RSA configuration: /opt/EasyRSA-3.1.1/vars
-
-* The preferred location for 'vars' is within the PKI folder.
-  To silence this message move your 'vars' file to your PKI
-  or declare your 'vars' file with option: --vars=<FILE>
-
-Generating a 2048 bit RSA private key
-.....+++
-...................+++
-writing new private key to '/opt/EasyRSA-3.1.1/pki/4b3a8e56/temp.a1b5c6e9'
------
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
------
-Common Name (eg: your user, host, or server name) [server]:
-
-Notice
-------
-Keypair and certificate request completed. Your files are:
-req: /opt/EasyRSA-3.1.1/pki/reqs/server.req
-key: /opt/EasyRSA-3.1.1/pki/private/server.key
 
 ##### CA认证颁发服务端证书
 [root@test EasyRSA-3.1.1]# ./easyrsa sign server server
-* Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
-
-* Using Easy-RSA configuration: /opt/EasyRSA-3.1.1/vars
-
-* The preferred location for 'vars' is within the PKI folder.
-  To silence this message move your 'vars' file to your PKI
-  or declare your 'vars' file with option: --vars=<FILE>
-
-
-You are about to sign the following certificate.
-Please check over the details shown below for accuracy. Note that this request
-has not been cryptographically verified. Please be sure it came from a trusted
-source or that you have verified the request checksum with the sender.
-
-Request subject, to be signed as a server certificate for 825 days:
-
-subject=
-    commonName                = server
-
-
-Type the word 'yes' to continue, or any other input to abort.
-  Confirm request details: yes
-
-Using configuration from /opt/EasyRSA-3.1.1/pki/safessl-easyrsa.cnf.init-tmp
-Check that the request matches the signature
-Signature ok
-The Subject's Distinguished Name is as follows
-commonName            :ASN.1 12:'server'
-Certificate is to be certified until Feb  9 14:01:58 2025 GMT (825 days)
-
-Write out database with 1 new entries
-Data Base Updated
-
-Notice
-------
-Certificate created at: /opt/EasyRSA-3.1.1/pki/issued/server.crt
-
-[root@test EasyRSA-3.1.1]#
 ```
 
 ### 2.3 创建客户端证书
@@ -231,76 +120,9 @@ Certificate created at: /opt/EasyRSA-3.1.1/pki/issued/server.crt
 ##### 创建客户端正确请求文件
 [root@test EasyRSA-3.1.1]# ./easyrsa gen-req client001 nopass
 # ./easyrsa gen-req client001   如果使用密码 则在客户端使用的时候会提示
-* Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
-
-* Using Easy-RSA configuration: /opt/EasyRSA-3.1.1/vars
-
-* The preferred location for 'vars' is within the PKI folder.
-  To silence this message move your 'vars' file to your PKI
-  or declare your 'vars' file with option: --vars=<FILE>
-
-Generating a 2048 bit RSA private key
-.........................................................................................................................................................+++
-...........................................................................................................................................................................+++
-writing new private key to '/opt/EasyRSA-3.1.1/pki/2ebbb4bc/temp.c8393ec5'
-Enter PEM pass phrase:
-Verifying - Enter PEM pass phrase:
------
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
------
-Common Name (eg: your user, host, or server name) [client001]:
-
-Notice
-------
-Keypair and certificate request completed. Your files are:
-req: /opt/EasyRSA-3.1.1/pki/reqs/client001.req
-key: /opt/EasyRSA-3.1.1/pki/private/client001.key
 
 ##### 签约证书
 [root@test EasyRSA-3.1.1]# ./easyrsa sign client  client001
-* Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
-
-* Using Easy-RSA configuration: /opt/EasyRSA-3.1.1/vars
-
-* The preferred location for 'vars' is within the PKI folder.
-  To silence this message move your 'vars' file to your PKI
-  or declare your 'vars' file with option: --vars=<FILE>
-
-
-You are about to sign the following certificate.
-Please check over the details shown below for accuracy. Note that this request
-has not been cryptographically verified. Please be sure it came from a trusted
-source or that you have verified the request checksum with the sender.
-
-Request subject, to be signed as a client certificate for 825 days:
-
-subject=
-    commonName                = client001
-
-
-Type the word 'yes' to continue, or any other input to abort.
-  Confirm request details: yes
-
-Using configuration from /opt/EasyRSA-3.1.1/pki/safessl-easyrsa.cnf.init-tmp
-Check that the request matches the signature
-Signature ok
-The Subject's Distinguished Name is as follows
-commonName            :ASN.1 12:'client001'
-Certificate is to be certified until Feb  9 14:12:08 2025 GMT (825 days)
-
-Write out database with 1 new entries
-Data Base Updated
-
-Notice
-------
-Certificate created at: /opt/EasyRSA-3.1.1/pki/issued/client001.crt
-
-[root@test EasyRSA-3.1.1]# 
 ```
 
 以上步骤生成的 pki 文件
@@ -345,11 +167,11 @@ cp pki/ca.crt pki/private/server.key pki/issued/server.crt pki/dh.pem /opt/openv
 cp pki/ca.crt pki/private/client001.key pki/issued/client001.crt /opt/openvpn/client/
 ```
 
-# 安装 openvpn
+## 安装 openvpn
 
 官方下载地址：
 
-[https://openvpn.net/community-downloads/](https://ld246.com/forward?goto=https%3A%2F%2Fopenvpn.net%2Fcommunity-downloads%2F)
+[https://openvpn.net/community-downloads/](https://openvpn.net/community-downloads/)
 
 ```bash
 # 安装依赖
@@ -365,9 +187,9 @@ make && make install
 # /data/openvpn/sbin/openvpn --genkey --secret pki/ta.key
 ```
 
-## 1. 服务端配置
+### 1. 服务端配置
 
-### 创建配置文件
+#### 创建配置文件
 
 模板文件可在 `~/openvpn-2.5.8/sample/sample-config-files` 找到
 
@@ -394,14 +216,14 @@ verb 3
 max-clients 2048
 ```
 
-### 内核开启转发
+#### 内核开启转发
 
 ```bash
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 sysctl -p
 ```
 
-### 启动 openvpn
+#### 启动 openvpn
 
 ```bash
 cat > /usr/lib/systemd/system/openvpn.service << EOF
@@ -424,13 +246,13 @@ systemctl start   openvpn
 systemctl status openvpn
 ```
 
-## 2. 客户端配置
+### 2. 客户端配置
 
 官方客户端下载地址：
 
-[https://openvpn.net/community-downloads/](https://ld246.com/forward?goto=https%3A%2F%2Fopenvpn.net%2Fcommunity-downloads%2F)
+[https://openvpn.net/community-downloads/](https://openvpn.net/community-downloads/)
 
-### 创建配置文件
+#### 创建配置文件
 
 模板文件可在 `~/openvpn-2.5.8/sample/sample-config-files` 找到
 
@@ -457,81 +279,79 @@ windows 客户端配置文件 命名为 client.ovpn
 
 # 基于用户密码方式认证
 
-在上面[基于证书认证](#基于证书认证)环境基础上修改
+在上面 基于证书认证 环境基础上修改
 
 1. 修改 `vim /data/openvpn/server.conf` 添加几个参数
+   ```bash
+   #客户端不进行证书认证，如果不加将实现证书和用户密码双重认证
+   client-cert-not-required
 
-```bash
-#客户端不进行证书认证，如果不加将实现证书和用户密码双重认证
-client-cert-not-required
+   #用户和密码验证脚本
+   auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
 
-#用户和密码验证脚本
-auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
+   #使用用户名密码登录认证
+   username-as-common-name
 
-#使用用户名密码登录认证
-username-as-common-name
+   #脚本安全级别
+   script-security 3
+   ```
 
-#脚本安全级别
-script-security 3
-```
+2. 创建脚本和用户密码文件  
+    ​`vim /etc/openvpn/checkpsw.sh`​
 
-2. 创建脚本和用户密码文件
+    ```bash
+    #!/bin/bash
+    PASSFILE="/etc/openvpn/psw-file"
+    LOG_FILE="/var/log/openvpn-password.log"
+    TIME_STAMP=`date "+%Y-%m-%d %T"`
 
-```bash
-#!/bin/bash
-PASSFILE="/etc/openvpn/psw-file"
-LOG_FILE="/var/log/openvpn-password.log"
-TIME_STAMP=`date "+%Y-%m-%d %T"`
+    ###########################################################
 
-###########################################################
+    if [ ! -r "${PASSFILE}" ]; then
+        echo "${TIME_STAMP}: Could not open password file \"${PASSFILE}\" for reading." >>  ${LOG_FILE}
+        exit 1
+    fi
 
-if [ ! -r "${PASSFILE}" ]; then
-    echo "${TIME_STAMP}: Could not open password file \"${PASSFILE}\" for reading." >>  ${LOG_FILE}
+    CORRECT_PASSWORD=`awk '!/^;/&&!/^#/&&$1=="'${username}'"{print $2;exit}' ${PASSFILE}`
+    if [ "${CORRECT_PASSWORD}" = "" ]; then
+        echo "${TIME_STAMP}: User does not exist: username=\"${username}\", password=\"${password}\"." >> ${LOG_FILE}
+        exit 1
+    fi
+
+    if [ "${password}" = "${CORRECT_PASSWORD}" ]; then
+        echo "${TIME_STAMP}: Successful authentication: username=\"${username}\"." >> ${LOG_FILE}
+        exit 0
+    fi
+
+    echo "${TIME_STAMP}: Incorrect password: username=\"${username}\", password=\"${password}\"." >> ${LOG_FILE}
     exit 1
-fi
+    ```
 
-CORRECT_PASSWORD=`awk '!/^;/&&!/^#/&&$1=="'${username}'"{print $2;exit}' ${PASSFILE}`
-if [ "${CORRECT_PASSWORD}" = "" ]; then
-    echo "${TIME_STAMP}: User does not exist: username=\"${username}\", password=\"${password}\"." >> ${LOG_FILE}
-    exit 1
-fi
+    ```bash
+    #增加执行权限  (2020-12-17标注：不加权限，连接会用户密码认证失败，因为执行不了脚本)
+    chmod +x /etc/openvpn/checkpsw.sh
 
-if [ "${password}" = "${CORRECT_PASSWORD}" ]; then
-    echo "${TIME_STAMP}: Successful authentication: username=\"${username}\"." >> ${LOG_FILE}
-    exit 0
-fi
+    #用户密码文件，格式：一行对应一个用户
+    vim /etc/openvpn/psw-file
+    jinc 123456
+    test 456789
 
-echo "${TIME_STAMP}: Incorrect password: username=\"${username}\", password=\"${password}\"." >> ${LOG_FILE}
-exit 1
-```
+    #修改权限
+    chmod 400 /etc/openvpn/psw-file
 
-```bash
-#增加执行权限  (2020-12-17标注：不加权限，连接会用户密码认证失败，因为执行不了脚本)
-chmod +x /etc/openvpn/checkpsw.sh
-
-#用户密码文件，格式：一行对应一个用户
-vim /etc/openvpn/psw-file
-jinc 123456
-test 456789
-
-#修改权限
-chmod 777 /etc/openvpn/psw-file
-chown root.openvpn /etc/openvpn/* -R
-
-#重启openvpn服务
-systemctl restart  openvpn
-```
+    #重启openvpn服务
+    systemctl restart  openvpn
+    ```
 
 3. 客户端配置文件修改
+   ```bash
+   #注释掉
+   ;cert client.crt
+   ;key client.key
 
-```bash
-#注释掉
-;cert client.crt
-;key client.key
-
-#添加上
-auth-user-pass
-```
+   #添加上
+   auth-user-pass
+   ```
 
 # 配置文件详解
 

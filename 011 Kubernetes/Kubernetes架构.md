@@ -2,7 +2,7 @@
 
 # 1. Kubernetes的总架构图
 
-![](assets/image-20230315180737689-20230610173809-749ff5n.png)
+​![](assets/image-20230315180737689-20230610173809-749ff5n.png)​
 
 # 2. Kubernetes各个组件介绍
 

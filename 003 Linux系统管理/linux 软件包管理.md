@@ -8,8 +8,6 @@
 
 ## 一、rpm软件包
 
-### rpm的介绍
-
 前面的课程我们提到过源码包安装需要解决系统环境、权限等等，这些对于初学者而言都是噩梦一般的存在，所以linux厂商推出了一种类似windows系统中的安装方式，有开发者直接在已知的系统中编译好，使用者可以直接下载并进行安装，升级，卸载等操作。在linux中能够提供这些功能的软件有两种，rpm和dpkg，而在CentOS中使用的是RPM
 
 rpm最早是由redhat开发出来，由于很好用，所以很多发行版也利用rpm来进行软件包的管理。RPM全名RedHat Package Manager，最大的特点就是把需要安装的软件提前编译，打包，然后在rpm包里面存放了用以记录软件依赖关系的相关数据，当用户安装时，优先查看这些数据，如果系统满足数据要求就安装软件包，否则不能安装，安装完成后，将软件包相关信息记录到rpm自己的数据库中，便于查询和卸载等。所以说rpm的优点是方便安装，卸载，查询，缺点就是只能在指定的操作系统上使用，所以不同厂商的rpm包，甚至同一厂商不同版本操作系统的rpm包都不通用。
@@ -58,8 +56,6 @@ rpm的内容我们就介绍到这里，接下来我们看下一个yum
 
 ## 二、yum软件仓库
 
-### yum的介绍
-
 YUM（*Yellow dog Updater, Modified*）是一个基于rpm却更胜于rpm的管理工具，让你可以更轻松的管理Red Hat Enterprise Linux系统中的软件。你可以使用YUM来安装或卸载软件、也可以利用YUM来更新你的系统，更可以利用YUM来搜索一个尚未安装的软件。不管是安装、更新或者删除，YUM都会自动的帮你解决软件间的依赖性问题。通过YUM会比单纯使用rpm来得更加方便。
 
 YUM包含下列几项组件：
@@ -69,7 +65,7 @@ YUM包含下列几项组件：
 - YUM插件：YUM还允许第三方厂商（*3rd Party*）开发YUM的插件（*Plug-in*），让用户可以任意的扩充YUM的功能，比如说有的插件可以帮助选择最快的yum源
 - YUM缓存：YUM运行时，会从YUM下载源获得软件信息与文件，并且暂存于本机的硬盘上。这个暂存的目录，称为“YUM缓存（*YUM cache*）”。缓存目录为/var/cache/yum
 
-### yum的使用
+### 配置 YUM源
 
 **阿里源**
 
@@ -393,11 +389,9 @@ conf  html  logs  sbin
 
 打开虚拟机浏览器输入:http://localhost回车
 
-![nginx访问.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/11/1602404129693.png)
+​![nginx访问.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/11/1602404129693.png)​
 
 ## 四、CentOS 8 dnf命令
-
-### dnf介绍
 
 DNF是新一代的rpm软件包管理器。最早出现在 Fedora 18 这个发行版中，在Fedora 22中正式取代了yum
 

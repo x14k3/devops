@@ -164,12 +164,12 @@ DNS 根域下面是顶级域,也由Internet 域名注册授权机构管理.共�
 
 ## Linux下DNS服务器安装
 
-BIND（Berkeley Internet Name Domain，伯克利因特网名称域）服务是全球范围内使用最广泛、最安全可靠且高效的域名解析服务程序。DNS域名解析服务作为互联网基础设施服务，其责任之重可想而知，因此建议大家在生产环境中安装部署bind服务程序时加上chroot（俗称牢笼机制）扩展包，以便有效地限制bind服务程序仅能对自身的配置文件进行操作，以确保整个服务器的安全。
+目前最常用的域名服务软件是**BIND**（**B**erkeley **I**nternet **N**ame **D**omain），最早由一名伯克利大学的学生编写，目前最新的版本是9，由**ISC**（**I**nternet **S**ystems **C**onsortium）负责编写和维护。
 
 ### 1. 安装bind服务和启动步骤
 
 ```bash
-yum install -y bind*  
+yum -y install bind bind-chroot bind-utils
 #安装bind组件  
 systemctl start named  
 #启动dns服务  

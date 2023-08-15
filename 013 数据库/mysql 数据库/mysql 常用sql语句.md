@@ -9,6 +9,14 @@ show variables like 'character_set_%';
 show variables like '%time_zone';
 -- 查看表结构
 desc tabl_name
+-- 查看所有数据库
+show databases
+-- 查看数据库的所有表
+show tables
+-- 查看所有用户信息
+SELECT User,Host,plugin FROM mysql.user;
+-- 查看binlog信息
+show binary logs; show master status\G;
 ```
 
 ## 数据库创建
