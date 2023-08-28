@@ -256,8 +256,53 @@ i 设定文件不能被删除、改名、设定链接关系，同时不能写入
 
 ```bash
 vim  /etc/sudoers
-Defaults        env_reset,timestamp_timeout=20
+Defaults env_reset,timestamp_timeout=20
 ```
+
+### **给用户添加sudo权限**
+
+根据需要可以选择下面四行中的一行：
+
+```bash
+# 允许用户youuser执行sudo命令(需要输入密码).
+youuser ALL=(ALL) ALL 
+# 允许用户组youuser里面的用户执行sudo命令(需要输入密码).
+%youuser ALL=(ALL) ALL 
+# 允许用户youuser执行sudo命令,并且在执行的时候不输入密码.
+youuser ALL=(ALL) NOPASSWD: ALL 
+# 允许用户组youuser里面的用户执行sudo命令,并且在执行的时候不输入密码.
+%youuser ALL=(ALL) NOPASSWD: ALL
+```
+
+### Defaults 配置项
+
+使用 Defaults 配置，可以改变 sudo 命令的行为，如：
+
+```
+# 指定用户尝试输入密码的次数，默认值为3
+Defaults passwd_tries=5
+
+# 设置密码超时时间，默认为 5 分钟
+Defaults passwd_timeout=2
+
+# 默认 sudo 询问用户自己的密码，添加 targetpw 或 rootpw 配置可以让 sudo 询问 root 密码
+Defaults targetpw
+
+# 指定自定义日志文件
+Defaults logfile="/var/log/sudo.log"
+
+# 要在自定义日志文件中记录主机名和四位数年份，可以加上 log_host 和 log_year 参数
+Defaults log_host, log_year, logfile="/var/log/sudo.log"
+
+# 保持当前用户的环境变量
+Defaults env_keep += "LANG LC_ADDRESS LC_CTYPE COLORS DISPLAY HOSTNAME EDITOR"
+Defaults env_keep += "ftp_proxy http_proxy https_proxy no_proxy"
+
+# 安置一个安全的 PATH 环境变量
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+```
+
+‍
 
 ## 4.2 su
 

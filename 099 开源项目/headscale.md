@@ -8,7 +8,7 @@ P2P内网穿透原理：[NAT 概述](../计算机网络/NAT%20概述.md)    [NAT
 
 ## headscale 部署
 
-下载地址：https://github.com/juanfont/headscale/releases/
+下载地址：[https://github.com/juanfont/headscale/releases/](https://github.com/juanfont/headscale/releases/)
 
 ```bash
 # 创建部署目录
@@ -43,7 +43,7 @@ nohup ./headscale serve >> ./headscale.log 2>&1 &
 
 ## tailscale 客户端接入
 
-下载地址：https://tailscale.com/download/linux/static
+下载地址：[https://tailscale.com/download/linux/static](https://tailscale.com/download/linux/static)
 
 ### linux
 
@@ -125,9 +125,9 @@ tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --acce
 # 查看注册的节点
 ./headscale nodes list
 # 发布客户端的子网
-headscale routes enable -i 1 -r "192.168.188.0/24"
+./headscale routes enable -i 1 -r "192.168.188.0/24"
 # 查看客户端发布的subnet
-headscale nodes routes list -i <id>
+./headscale nodes routes list -i <id>
 ```
 
 ## 管理命令

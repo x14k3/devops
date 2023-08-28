@@ -3,8 +3,6 @@
 * 📄 [linux logrotate](siyuan://blocks/20230610173801-5bt2ht6)
 * 📄 [linux rsyslog](siyuan://blocks/20230803121402-0hdctz8)
 
-‍
-
 ### 日志介绍
 
 程序执行的时候，可以通过标准输出（stdout, Standard Output）与标准错误输出 （stderr, Standard Error Output）来输送信息，用户就可以了解该程序执行时发生了什么状况；可是对于在后台执行的服务器程序，或者Linux 内核本身来说，就没有办法这样做了。服务与内核启动后，会切断与终端机（Terminal） 或控制台（Console）的联机，如此一来，即使有信息通过标准输出、标准错误输出传送出去，用户也未必能从屏幕上看到信息。

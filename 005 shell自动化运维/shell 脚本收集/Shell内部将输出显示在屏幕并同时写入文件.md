@@ -2,10 +2,6 @@
 
 ‍
 
-‍
-
-‍
-
 ```bash
 #输出日志文件
 logfile=/tmp/Install_MySQL.log

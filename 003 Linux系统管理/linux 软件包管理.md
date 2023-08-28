@@ -67,7 +67,7 @@ YUM包含下列几项组件：
 
 ### 配置 YUM源
 
-**阿里源**
+#### **阿里源**
 
 [https://developer.aliyun.com/mirror/](https://developer.aliyun.com/mirror/ "https://developer.aliyun.com/mirror/")
 
@@ -90,7 +90,7 @@ sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.
 yum clean all &&  yum makecache 
 ```
 
-**本地源**
+#### **本地源**
 
 ```bash
 # 备份Linux本地现有的yum仓库文件
@@ -120,7 +120,7 @@ EOF
 yum clean all &&  yum makecache
 ```
 
-**局域网yum源**
+#### **局域网源**
 
 *配置本地源*
 [../中间件/Web服务器-Nginx/nginx 部署](app://obsidian.md/%E4%B8%AD%E9%97%B4%E4%BB%B6/Web%E6%9C%8D%E5%8A%A1%E5%99%A8-Nginx/nginx%20%E9%83%A8%E7%BD%B2)
@@ -188,7 +188,7 @@ EOF
 yum clean all &&  yum makecache 
 ```
 
-清除yum缓存
+#### yum常用命令
 
 ```
 [root@zutuanxue ~]# yum clean all
@@ -205,6 +205,33 @@ yum clean all &&  yum makecache
 搜索dhcp-server这个软件包
 [root@zutuanxue ~]# yum search dhcp-server		
 ```
+
+‍
+
+### 配置zypper源
+
+#### zypper常用命令
+
+```bash
+#安装源操作：zypper+ 参数
+
+repos, lr       #列出所有定义的安装源
+addrepo, ar     #添加一个新的安装源
+removerepo, rr  #删除指定的安装源
+renamerepo, nr  #重命名指定的安装源
+modifyrepo, mr  #修改指定的安装源
+refresh, ref    #刷新所有安装源
+clean           #清除本地缓存
+
+#安装某个软件包
+zypper install package_name
+#安装某个版本的软件包
+zypper install package_name=version
+#卸载某个软件包
+zypper remove package_name
+```
+
+‍
 
 ## 三、源码包的安装
 

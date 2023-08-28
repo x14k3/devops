@@ -159,7 +159,7 @@ AriaNg是一个web端网站，直接将前端包放到web服务器中即可。
 https://github.com/mayswind/AriaNg/releases
 `wget https://github.com/mayswind/AriaNg/releases/download/1.3.6/AriaNg-1.3.6.zip`
 
-[nginx 部署](../中间件/nginx/nginx%20部署.md)
+2. nginx 部署
 
 ```conf
     server {

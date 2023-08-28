@@ -2,7 +2,7 @@
 
 Alist 是一款支持多种存储的目录文件列表程序，支持 web 浏览与 webdav，后端基于`gin`，前端使用`react`
 
-下载地址：https://github.com/alist-org/alist/releases
+下载地址：[https://github.com/alist-org/alist/releases](https://github.com/alist-org/alist/releases)
 
 ```bash
 # 解压下载对文件得到可执行文件：  

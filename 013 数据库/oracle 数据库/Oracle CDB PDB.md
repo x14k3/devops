@@ -1,14 +1,14 @@
 # Oracle CDB PDB
 
-==**数据库**==（DATABASE）是一个数据集合，Oracle数据库都将其数据存放在数据文件中。在物理结构上，Oracle数据库必须的3类文件分别是数据文件、控制文件和联机Redo日志文件。在逻辑结构上，Oracle数据库由表空间、段、区和块组成。数据库名称由DB_NAME来标识。
+* **数据库**（DATABASE）是一个数据集合，Oracle数据库都将其数据存放在数据文件中。在物理结构上，Oracle数据库必须的3类文件分别是数据文件、控制文件和联机Redo日志文件。在逻辑结构上，Oracle数据库由表空间、段、区和块组成。数据库名称由DB_NAME来标识。
 
-==**实例**==（INSTANCE）是操作Oracle数据库的一种手段。它是由OS分配的一块内存（包括SGA和PGA）和一些后台进程（PMON、SMON、LGWR、CKPT、DBWn等）组成的。实例在启动时会读取初始化参数文件（SPFILE或PFILE），获取数据库运行时的参数的值。实例名称由INSTANCE_NAME来标识。
+* **实例**（INSTANCE）是操作Oracle数据库的一种手段。它是由OS分配的一块内存（包括SGA和PGA）和一些后台进程（PMON、SMON、LGWR、CKPT、DBWn等）组成的。实例在启动时会读取初始化参数文件（SPFILE或PFILE），获取数据库运行时的参数的值。实例名称由INSTANCE_NAME来标识。
 
 在Oracle 12c之前，一个数据库可以被1个实例（Single Instance，单实例）或多个实例访问或挂载（RAC，集群），也就是说*一个实例只能对应一个数据库，一个数据库可以被多个实例挂载（RAC）*
 
 从Oracle 12c开始，对于非CDB（non-CDB，非容器数据库）类型的数据库而言，它和Oracle 12c之前的数据库没有差别。但是，对于CDB（Container Database，容器数据库）类型的数据库而言，数据库和实例之间是多对多的关系。*一个数据库实例可以对应多个数据库（CDB及CDB所包含的PDB（Pluggable Database，可插拔数据库）），实例不能在非CDB和CDB之间共享。*
 
-![](assets/image-20221127211228967-20230610173813-oj2b00c.png)
+​![](assets/image-20221127211228967-20230610173813-oj2b00c.png)​
 
 一个CDB数据库容器包含了下面一些组件：
 

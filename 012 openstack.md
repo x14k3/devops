@@ -1,7 +1,7 @@
 # 012 openstack
 
 * 📄 [1.openstack 概述](siyuan://blocks/20230610173725-56rjmgb)
-* 📄 [2.Openstack使用](siyuan://blocks/20230610173803-vo4uq7d)
+* 📄 [2.openstack 使用](siyuan://blocks/20230610173803-vo4uq7d)
 * 📑 [openstack部署](siyuan://blocks/20230610173810-4ucs1m6)
 
   * 📄 [1.基础环境部署](siyuan://blocks/20230610173749-vlb9wuk)

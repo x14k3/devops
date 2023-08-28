@@ -55,19 +55,19 @@ BIOS：Advanced（高级菜单）内的CPU Configuration（处理器设置），
 
 1. 在ESXi平台的主界面按下F2按键，键入root账户的密码登录管理员权限；
 
-| 设置项目                      | 补充说明      |
-| -----------------------------| -------------------- |
-| Configure Password | 配置root密码 |
-| Configure Lockdown Mode      | 配置锁定模式。启用锁定模式后，除vpxuser以外的任何用户都没有身份验证权限，也无法直接对ESXi执行操作。锁定模式将强制所有操作都通过vCenterServer执行。 |
-| Configure Management Network | 配置网络 |
-| Restart Management Network   | 重启网络      |
-| Test Management Network | 使用Ping命令测试网络 |
-| Network Restore Options      | 还原网络配置 |
-| Configure Keyboard | 配置键盘布局 |
-| Troubleshooting Options      | 故障排除设置   |
-| View System Logs | 查看系统日志 |
-| View Support Information     | 查看支持信息   |
-| Reset System Configuration | 还原系统配置
+|设置项目|补充说明|
+| ------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------------|
+|Configure Password|配置root密码|
+|Configure Lockdown Mode|配置锁定模式。启用锁定模式后，除vpxuser以外的任何用户都没有身份验证权限，也无法直接对ESXi执行操作。锁定模式将强制所有操作都通过vCenterServer执行。|
+|Configure Management Network|配置网络|
+|Restart Management Network|重启网络|
+|Test Management Network|使用Ping命令测试网络|
+|Network Restore Options|还原网络配置|
+|Configure Keyboard|配置键盘布局|
+|Troubleshooting Options|故障排除设置|
+|View System Logs|查看系统日志|
+|View Support Information|查看支持信息|
+|Reset System Configuration|还原系统配置 |
 
 2. 选中 IPv4 Configuration 进行IPv4地址设置；
 3. 按照实际需求进入 DNS Configuration 配置DNS 之后按Enter确认；
@@ -120,3 +120,26 @@ BIOS：Advanced（高级菜单）内的CPU Configuration（处理器设置），
 15. 确认配置信息；
 16. 开始配置。等待十几分钟
 17. 登陆账号(管理员+oss域名)：<administrator@vsphere.local>
+
+‍
+
+‍
+
+# 从 VMware ESXi 访问 iSCSI 目标
+
+1. 在导航器中，转至**存储** > **适配器**选项卡，并单击**配置 iSCSI**。
+
+    ​![../_images/iscsi_vmware_esxi1.png](assets/net-img-iscsi_vmware_esxi1-20230828173708-yx9cv97.png)​
+2. 在**配置 iSCSI** 窗口中，在**静态目标**部分中单击**添加静态目标**，填写目标 IQN、IP 地址和端口。单击**保存配置**。
+
+    ​![../_images/iscsi_vmware_esxi2.png](assets/net-img-iscsi_vmware_esxi2-20230828173708-jsp0c9m.png)​
+3. 继续到**设备**选项卡，并单击**刷新**。新添加的磁盘将显示在设备列表中。
+
+    ​![../_images/iscsi_vmware_esxi3.png](assets/net-img-iscsi_vmware_esxi3-20230828173709-covdczy.png)​
+4. 选择磁盘并单击**新数据存储**。在显示的向导中，输入数据存储的名称并选择分区选项。单击 **完成** 以对磁盘进行实际的分区。
+
+可以使用的磁盘将显示在数据存储的列表中。现在可以使用数据存储浏览器查看其目录并将其提供给 VM。
+
+​![../_images/iscsi_vmware_esxi4.png](assets/net-img-iscsi_vmware_esxi4-20230828173709-0obebu4.png)​
+
+‍

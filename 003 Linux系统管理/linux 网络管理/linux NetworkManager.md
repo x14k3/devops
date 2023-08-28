@@ -171,6 +171,27 @@ lo      loopback  unmanaged  --
 
 如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​之后修改的属性才能生效。
 
+### 创建网桥
+
+```bash
+# 接下来创建一个名为br0的网桥：
+sudo nmcli con add type bridge ifname br0
+# 把主接口桥到br0上，例如我的主接口名是eno1：
+sudo nmcli con add type bridge-slave ifname eno1 master br0
+# 关闭主接口，这里可以使用你之前查看获得到的UUID来关闭：
+sudo nmcli con down 9a25e1e1-63fc-3cf3-a9ea-549f9e5ab431
+# 一般情况下，当NetworkManager检测到主接口down掉后，会自动帮你把网桥up起来，如果没有，手动执行下面的命令：
+sudo nmcli con up bridge-br0
+# 由于我的路由器是开了DHCP服务的，这里br0会自动分配IP，但如果是服务器上面，一般是要配置静态IP的，以下是设置静态IP的方法：
+sudo nmcli con modify bridge-br0 ipv4.method manual ipv4.address "192.168.0.251/24" ipv4.gateway "192.168.0.1" ipv4.dns "114.114.114.114"
+sudo nmcli con up bridge-br0
+# 如果要恢复成使用DHCP自动分配IP：
+sudo nmcli con modify bridge-br0 ipv4.method auto
+sudo nmcli con up bridge-br0
+```
+
+‍
+
 ### 给网卡添加vlan tag并配置IP地址
 
 接下来一个例子是给网卡打vlan tag，这个场景也比较常见，特别是在交换机端是trunk口的情况下：
