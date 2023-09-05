@@ -68,47 +68,45 @@ SZB-L0032013
 
 ## [#](https://wiki.eryajf.net/pages/5279.html#_4%E3%80%81expect%E7%9A%84%E6%A1%88%E4%BE%8B) 4、expect的案例
 
-登录一台机器，将本机的一个文件传到远程机器上
+自动输入github账号和密码 提交到github
 
 ```
-$ cat expect1.sh 
-#!/usr/bin/expect
+#!/bin/bash
+figlet GIT PULL
+#=================================================
+# System Required: CentOS/Debian/Ubuntu
+# Description: git pull script
+# Version: 1.0.0
+# Author: doshell
+# Blog: https://github.com/admin/devops/
+#=================================================
+CWD="/opt"
+TODAY=`date "+%Y%m%d"`
+if [[ ! -f ${CWD}/mark.md.zip ]];then
+    echo -e "\033[36m ${CWD}/mark.md.zip does not exist! \033[0m"
+    exit 1
+fi
+rm ${CWD}/devops/0* -rf
+unzip -od ${CWD}/devops ${CWD}/mark.md.zip
+mv ${CWD}/mark.md.zip /tmp/mark.md.zip-${TODAY}
 
+cd ${CWD}/devops
+git add .
+git commit -m "update"
+
+cat ${CWD}/github.token
+
+/usr/bin/expect <<-EOF
 set timeout 20
-
-if { [llength $Extra close brace or missing open braceargv] < 2} {
-  puts "Usage:"
-  puts "$argv0 local_file remote_path"
-  exit 1
-}
-
-set local_file [lindex $argv 0]
-set remote_path [lindex $argv 1]
-set passwd paic1234
-
-set passwderror 0
-spawn scp ${local_file} ${remote_path}
-
+spawn git push origin master
 expect {
-     "password" {
-        if { $passwderror == 1 } {
-                put "passwd is error"
-                exit 2
-           }
-           set timeout 1000
-           set passwderror 1
-           send "paic1234\n"
-           exp_continue
-        }
-     "*es/no)?*" {
-       send "yes\n"
-      exp_continue
-     }
-    timeout {
-      put "connect is timeout"
-      exit 3
-    }
+    "Username for 'https://github.com': " {send "admin\r" }
+    "Password for 'https://admin@github.com': " {send "xxxxxxxxxxxsssssssssssssssaaaaaa\r" }
 }
+expect eof
+EOF
+
+
 ```
 
 ## [#](https://wiki.eryajf.net/pages/5279.html#_5%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9) 5、注意事项
