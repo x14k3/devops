@@ -1,4 +1,4 @@
-# 1. ESXi 7.0 安装部署
+# ESXi 7.0 安装部署
 
 下载地址：
 
@@ -91,3 +91,15 @@
 > 实际的生产环境中，虚拟机选择厚置备磁盘还是精简置备磁盘，要根据实际情况选择。如果虚拟机强调性能、并且数据量不大，则选择“厚置备立刻置零”，这将获得最好的性能。如果数据量持续增长、但变动不大，只是持续的增加，则可以选择“精简置备”磁盘。
 
 ‍
+
+## 在KVM中嵌套安装ESXi
+
+```bash
+virt-install --name=ESXi7.0 --ram 16384 --vcpus 4 \
+--disk path=/data/virthost/ESXi7.0.qcow2,size=50,format=qcow2 \
+--cdrom /data/resource/Soft/VMware_vSphere_Hypervisor_7/VMware-VMvisor-Installer-7.0U3n-21930508.x86_64.iso \
+--graphic vnc,listen=0.0.0.0,port=5911 \
+--virt-type=kvm --hvm \
+--network bridge=br0,model=virtio \
+--osinfo detect=off,name=linux2022
+```

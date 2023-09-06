@@ -72,6 +72,6 @@ EOF
 
 systemctl daemon-reload
 systemctl enable alist
-systemctl start    alist
+systemctl start alist
 
 ```

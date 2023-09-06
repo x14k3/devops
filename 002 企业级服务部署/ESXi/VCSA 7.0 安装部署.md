@@ -1,4 +1,4 @@
-# 2. VCSA 7.0 安装部署
+# VCSA 7.0 安装部署
 
 下载地址：  
 [https://customerconnect.vmware.com/cn/downloads/get-download?downloadGroup=VC670](https://customerconnect.vmware.com/cn/downloads/get-download?downloadGroup=VC670)  

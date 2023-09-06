@@ -48,15 +48,18 @@ cd postgresql-12.15/
 # INSTALL 文件中Short Version 部分解释了如何安装PostgreSQL 的命令，
 # Requirements 部分描述了安装PostgreSQL 所依赖的lib
 
-# 安装依赖
+# 安装依赖CentOS
 yum install -y  gcc gcc-c++ wget make openssl-devel pam-devel libxml2-devel libxslt-devel openldap-devel systemd-devel tcl-devel python-devel bzip2 gmp-devel mpfr-devel llvm5.0 llvm5.0-devel clang libicu-devel perl-ExtUtils-Embed readline-devel
+
+#Ubuntu
+sudo apt-get install libreadline-dev
 
 # 安装到指定目录
 mkdir /data/pgsql
 ./configure --prefix=/data/pgsql --enable-nls --with-python --with-perl --with-tcl --with-gssapi --with-icu --with-openssl --with-pam --with-ldap --with-systemd --with-libxml --with-libxslt --enable-thread-safety --enable-debug
 
 # 编译安装
-make -j 4
+make -j4
 make install
 
 # 安装contrib目录下的一些工具
@@ -66,6 +69,7 @@ make install
 
 # 添加用户postgres
 useradd postgres && echo "Ninestar123" |passwd --stdin postgres
+# useradd -m postgres && echo "postgres:Ninestar123" | chpasswd
 
 # 添加环境变量
 # vim /home/postgres/.bash_profile添加下列内容
@@ -91,9 +95,8 @@ su - postgres
 #/data/pgsql/bin/initdb -D /data/pgsql/data/ -U postgres -W -A peer -E UTF8
 
 # 创建数据库日志目录
-mkdir /data/pgsql/pgdata/logs
 # 服务启动，将在后台启动服务器并且把输出放到指定的日志文件中
-/data/pgsql/bin/pg_ctl -D /data/pgsql/data/ -l /data/pgsql/log/postgres.log start
+/data/pgsql/bin/pg_ctl -D /data/pgsql/data/ -l /data/pgsql/data/pg.log start
 # 停止服务
 /data/pgsql/bin/pg_ctl -D /data/pgsql/data/ stop
 # 重新加载配置文件

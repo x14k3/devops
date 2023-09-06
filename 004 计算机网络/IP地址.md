@@ -1,7 +1,5 @@
 # IP地址
 
-‍
-
 ## **一、IP地址的概念**
 
 ​![](assets/net-img-2fec2292ec8cd18e4cf2240f998e2bf8-20230808100134-itd15xm.png)​

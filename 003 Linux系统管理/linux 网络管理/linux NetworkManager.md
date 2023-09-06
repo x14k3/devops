@@ -16,6 +16,19 @@ NetworkManager主要管理2个对象： Connection（网卡连接配置） 和 D
 * 手动配置ifcfg文件，通过nmcli connection reload来加载生效。
 * 手动配置ifcfg文件，通过传统network.service来加载生效。
 
+‍
+
+NetworkManager的配置在这个目录里面：
+
+```bash
+[Unauthorized System] root@Kylin:/# ll /etc/NetworkManager/system-connections/
+总用量 12
+drwxr-xr-x 2 root root 4096 9月   5 16:52 ./
+drwxr-xr-x 8 root root 4096 9月   5 16:40 ../
+-rw------- 1 root root  406 9月   5 08:32 有线连接 1
+
+```
+
 ## NetworkManager 命令
 
 ### nmcli connection

@@ -120,6 +120,7 @@ mount -a
 ### fstab参数说明
 
 ```txt
+/dev/sdb1 /data xfs defaults 0 0
 # 第一列
 ## 磁盘设备文件或者该设备的Label或者UUID
 
@@ -133,11 +134,11 @@ mount -a
 ## 文件系统的参数
 ### async/sync     设置是否为I/O同步方式运行，默认为async
 ### auto/noauto    此文件系统是否被主动挂载。默认为auto
-### rw/ro               是否以以只读或者读写模式挂载
-### exec/noexec   允许执行此分区的二进制文件
+### rw/ro          是否以以只读或者读写模式挂载
+### exec/noexec    允许执行此分区的二进制文件
 ### user/nouser    允许任意用户来挂载这一设备
-### suid/nosuid     允许suid操作和设定sgid
-### defaults           默认的挂载设置（即 rw, suid, dev, exec, auto, nouser, async,acl）
+### suid/nosuid    允许suid操作和设定sgid
+### defaults       默认的挂载设置（即 rw, suid, dev, exec, auto, nouser, async,acl）
 
 # 第五列
 ## 设置是否让备份程序dump备份文件系统，0为忽略，1为备份

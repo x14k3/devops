@@ -1,118 +1,721 @@
 # linux 网络配置
 
-## Centos
+## 配置 IP
 
-配置文件位于/etc/sysconfig/network-scripts/ifcfg-网卡名称
+### 使用nmcli命令
 
-```bash
-DEVICE=ens33                         #网卡的设备名称
-NAME=ens33                           #网卡设备的别名
-TYPE=Ethernet                        #网络类型：Ethernet以太网
-BOOTPROTO=static                     #引导协议：static静态、dhcp、none
-DEFROUTE=yes                         #启动默认路由
-IPV4_FAILURE_FATAL=no                #不启用IPV4错误检测功能
-IPV6INIT=yes                         #启用IPV6协议
-IPV6_AUTOCONF=yes                    #自动配置IPV6地址
-IPV6_DEFROUTE=yes                    #启用IPV6默认路由
-IPV6_FAILURE_FATAL=no                #不启用IPV6错误检测功能
-UUID=sjdfga-asfd-asdf-asdf-f82b      #网卡设备的UUID唯一标识号
-ONBOOT=yes                           #开机自动启动网卡
-DNS=114.114.114.114                  #DNS域名解析服务器的IP地址 可以多设置一个DNS1
-IPADDR=192.168.1.22                  #网卡的IP地址
-PREFIX=24                            #子网前缀长度(子网掩码)
-GATEWAY=192.168.1.1                  #默认网关IP地址
-IPV6_PEERDNS=yes
-IPV6_PEERROUTES=yes
-IPADDR=192.168.1.22                  #你想要设置的固定IP，理论上192.168.2.2-255之间都可以，请自行验证；如果是dhcp可以不填写
-NETMASK=255.255.255.0                #子网掩码，不需要修改；
+> ​![](assets/net-img-icon-note-20230906153802-08z3vzz.gif) **说明：**<br />使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。
 
-```
+#### nmcli介绍
 
-### 虚拟网卡设置
-
-#### **方法1：修改网卡配置文件**
-
-新建别名独立配置文件 ：重启生效，多IP地址存在别名。
+nmcli是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为：
 
 ```bash
-vi /etc/sysconfig/network-scripts/ifcfg-ens33:0 
----------------------------------------------
-DEVICE=eno167777336:01 #和配置文件名保持一致  
-IPADDR=192.168.1.10    #要设置的ip1  
-PREFIX=24              #要设置的ip的子网掩码  
----------------------------------------------
-#第2步 重启网络 或者重新启动系统  
-systemctl restart network   
-#第3步 查看配置是否生效  
-ip addr show
+ nmcli [OPTIONS] OBJECT { COMMAND | help }
 ```
 
-#### **方法2：ifconfig命令创建\删除虚拟网卡**
+其中，OBJECT选项可以是general、networking、radio、connection或device等。在日常使用中，最常使用的是-t, --terse（用于脚本）、-p, --pretty选项（用于用户）及-h, --help选项，用户可以使用“ nmcli help”获取更多参数及使用信息。
 
 ```bash
-ifconfig eth0:0 192.168.1.10 netmask 255.255.255.0 up
-#删除虚拟网卡:
-ifconfig eth0:0 down
-
-#重启服务器或者网络后,虚拟网卡就失效. 注意：添加的虚拟网卡和原网卡物理地址是一样的。
+$ nmcli help
 ```
 
-#### **方法3：创建tap**
+常用命令使用举例如下：
 
-**前两种方法都有一个特点，创建的网卡可有不同的ip地址，但是Mac地址相同，无法用来创建虚拟机。**  
-使用命令tunctl添加虚拟网卡tap。
+* 显示NetworkManager状态：
 
-关于tap请参考TUN-TAP
+  ```
+  $ nmcli general status
+  ```
+* 显示所有连接：
+
+  ```
+  $ nmcli connection show
+  ```
+* 只显示当前活动连接，如下所示添加 -a, --active：
+
+  ```
+  $ nmcli connection show --active
+  ```
+* 显示由NetworkManager识别到的设备及其状态：
+
+  ```
+  $ nmcli device status
+  ```
+* 使用nmcli工具启动和停止网络接口，在root权限下执行如下命令：
+
+  ```
+  # nmcli connection up id enp3s0
+  # nmcli device disconnect enp3s0
+  ```
+
+‍
+
+#### 设备管理
+
+##### 连接到设备
+
+使用如下命令，NetworkManager将连接到对应网络设备，尝试找到合适的连接配置，并激活配置。
+
+```
+$nmcli device connect "$IFNAME"  
+```
+
+> 如果不存在相应的配置连接，NetworkManager将创建并激活具有默认设置的新配置文件。
+
+##### 断开设备连接
+
+使用如下命令，NetworkManager将断开设备连接，并防止设备自动激活。
+
+```
+$nmcli device disconnect "$IFNAME"  
+```
+
+#### 设置网络连接
+
+列出目前可用的网络连接：
 
 ```bash
-#确认是否有tunctl命令,如果没有通过yum安装即可
-apt-get install uml-utilities  
-#或 yum install tunctl
-#创建虚拟网卡设备
-tunctl -t tap0 -u root
-#设置虚拟网卡
-ifconfig tap0 192.168.0.1 netmask 255.255.255.0 promisc
+$ nmcli con show
+
+NAME    UUID                                  TYPE      DEVICE
+enp4s0  5afce939-400e-42fd-91ee-55ff5b65deab  ethernet  enp4s0
+enp3s0  c88d7b69-f529-35ca-81ab-aa729ac542fd  ethernet  enp3s0
+virbr0  ba552da6-f014-49e3-91fa-ec9c388864fa  bridge    virbr0
 ```
 
-## debian
+> ​![](assets/net-img-icon-note-20230906153802-4oa4n1z.gif) **说明：**<br />输出结果中的NAME字段代表连接ID（名称）。
 
-配置文件位于/etc/network/interfaces
+添加一个网络连接会生成相应的配置文件，并与相应的设备关联。检查可用的设备，方法如下：
 
 ```bash
-auto lo       # auto说明lo接口跟eth0接口会在系统启动时被自动配置;
-iface lo inet loopback  # 将lo接口设置为一个本地回环（loopback）地址;
+$ nmcli dev status
 
-# The primary network interface
-auto eth0
-iface eth0 inet static  # 指出eth0接口具有一个静态的（static）IP配置;
-	address 192.168.0.100 # 分别设置eth0接口的ip、网络号、掩码、广播地址和网关。
-	network 192.168.0.0
-	netmask 255.255.255.0
-	broadcast 192.168.0.255
-	gateway 192.168.0.1
-
-
-	up route add -net 192.168.1.128 netmask 255.255.255.128 gw 192.168.1.2 # 接口启用的时候，添加一条静态路由
-	up route add default gw 192.168.1.200   # 接口启用的时候，添加一个缺省路由；
-	down route del default gw 192.168.1.200 # 在接口禁用的时候，删掉这两条路由配置。
-	down route del -net 192.168.1.128 netmask 255.255.255.128 gw 192.168.1.2
+DEVICE      TYPE      STATE      CONNECTION
+enp3s0      ethernet  connected  enp3s0
+enp4s0      ethernet  connected  enp4s0
+virbr0      bridge    connected  virbr0
+lo          loopback  unmanaged  --
+virbr0-nic  tun       unmanaged  --
 ```
 
-一个物理网卡上多个接口
+##### 配置动态IP连接
+
+###### 配置IP
+
+要使用 DHCP 分配网络时，可以使用动态IP配置添加网络配置文件，命令格式如下：
 
 ```bash
-auto eth0 eth0:1
-iface eth0 inet static
-	address 192.168.0.100
-	network 192.168.0.0
-	netmask 255.255.255.0
-	broadcast 192.168.0.255
-	gateway 192.168.0.1
-	dns-nameservers 10.112.18.1
-iface eth0:1 inet static
-	address 192.168.0.200
-	network 192.168.0.0
-	netmask 255.255.255.0
+nmcli connection add type ethernet con-name connection-name ifname interface-name
 ```
+
+例如创建名为net-test的动态连接配置文件，在root权限下使用以下命令：
+
+```bash
+# nmcli connection add type ethernet con-name net-test ifname enp3s0
+Connection 'net-test' (a771baa0-5064-4296-ac40-5dc8973967ab) successfully added.
+```
+
+NetworkManager 会将参数 connection.autoconnect 设定为 yes，并将设置保存到 “/etc/sysconfig/network-scripts/ifcfg-net-test”文件中，在该文件中会将 ONBOOT 设置为 yes。
+
+###### 激活连接并检查状态
+
+在root权限下使用以下命令激活网络连接：
+
+```bash
+# nmcli con up net-test 
+Connection successfully activated (D-Bus active path:/org/freedesktop/NetworkManager/ActiveConnection/5)
+```
+
+检查这些设备及连接的状态，使用以下命令：
+
+```bash
+$ nmcli device status
+
+DEVICE      TYPE      STATE      CONNECTION
+enp4s0      ethernet  connected  enp4s0
+enp3s0      ethernet  connected  net-test
+virbr0      bridge    connected  virbr0
+lo          loopback  unmanaged  --
+virbr0-nic  tun       unmanaged  --
+```
+
+##### 配置静态IP连接
+
+###### 配置IP
+
+添加静态 IPv4 配置的网络连接，可使用以下命令：
+
+```bash
+nmcli connection add type ethernet con-name connection-name ifname interface-name ip4 address gw4 address
+```
+
+> ​![](assets/net-img-icon-note-20230906153802-5z323gs.gif) **说明：**<br />如果要添加 IPv6 地址和网关信息，使用 ip6 和 gw6 选项。
+
+例如创建名为 net-static的静态连接配置文件，在root权限下使用以下命令：
+
+```
+# nmcli con add type ethernet con-name net-static ifname enp3s0 ip4 192.168.0.10/24 gw4 192.168.0.254
+```
+
+还可为该设备同时指定 IPv6 地址和网关，示例如下：
+
+```
+# nmcli con add type ethernet con-name test-lab ifname enp3s0 ip4 192.168.0.10/24 gw4 192.168.0.254 ip6 abbe::**** gw6 2001:***::*
+Connection 'net-static' (63aa2036-8665-f54d-9a92-c3035bad03f7) successfully added.
+```
+
+NetworkManager 会将其内部参数 ipv4.method 设定为 manual，将 connection.autoconnect 设定为yes，并将设置写入 /etc/sysconfig/network-scripts/ifcfg-my-office 文件，其中会将对应 BOOTPROTO 设定为 none，将 ONBOOT 设定为 yes。
+
+设定两个 IPv4 DNS 服务器地址，在root权限下使用以下命令：
+
+```
+# nmcli con mod net-static ipv4.dns "*.*.*.* *.*.*.*"
+```
+
+设置两个 IPv6 DNS 服务器地址，在root权限下使用以下命令：
+
+```
+# nmcli con mod net-static ipv6.dns "2001:4860:4860::**** 2001:4860:4860::****"
+```
+
+###### 激活连接并检查状态
+
+激活新的网络连接，在root权限下使用以下命令：
+
+```
+# nmcli con up net-static ifname enp3s0
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/6)
+```
+
+检查这些设备及连接的状态，使用以下命令：
+
+```
+$ nmcli device status
+
+DEVICE      TYPE      STATE      CONNECTION
+enp4s0      ethernet  connected  enp4s0
+enp3s0      ethernet  connected  net-static
+virbr0      bridge    connected  virbr0
+lo          loopback  unmanaged  --
+virbr0-nic  tun       unmanaged  --
+```
+
+查看配置的连接详情，使用以下命令（使用 -p, --pretty 选项在输出结果中添加标题和分段）：
+
+```
+$ nmcli -p con show net-static 
+===============================================================================
+Connection profile details (net-static )
+===============================================================================
+connection.id:                          net-static
+connection.uuid:                        b9f18801-6084-4aee-af28-c8f0598ff5e1
+connection.stable-id:                   --
+connection.type:                        802-3-ethernet
+connection.interface-name:              enp3s0
+connection.autoconnect:                 yes
+connection.autoconnect-priority:        0
+connection.autoconnect-retries:         -1 (default)
+connection.multi-connect:               0 (default)
+connection.auth-retries:                -1
+connection.timestamp:                   1578988781
+connection.read-only:                   no
+connection.permissions:                 --
+connection.zone:                        --
+connection.master:                      --
+connection.slave-type:                  --
+connection.autoconnect-slaves:          -1 (default)
+connection.secondaries:                 --
+connection.gateway-ping-timeout:        0
+connection.metered:                     unknown
+connection.lldp:                        default
+connection.mdns:                        -1 (default)
+connection.llmnr:                       -1 (default)
+```
+
+##### 添加 Wi-Fi 连接
+
+有两种方式添加Wi-Fi 连接。
+
+**方法1，通过网络接口连接wifi**
+
+连接到由SSID或BSSID指定的wifi网络。命令如下，该命令找到匹配的连接或创建一个连接，然后在设备上激活它。
+
+```
+$ nmcli device wifi connect "$SSID" password "$PASSWORD" ifname "$IFNAME"  
+$ nmcli --ask device wifi connect "$SSID" 
+```
+
+**方法2，通过配置文件连接Wi-Fi**
+
+1，使用以下命令查看可用 Wi-Fi 访问点：
+
+```
+$ nmcli dev wifi list
+```
+
+2，使用以下命令生成使用的静态 IP 配置，但允许自动 DNS 地址分配的 Wi-Fi 连接：
+
+```
+$ nmcli con add con-name Wifi ifname wlan0 type wifi ssid MyWifi ip4 192.168.100.101/24 gw4 192.168.100.1
+```
+
+3，请使用以下命令设定 WPA2 密码，例如 “answer”：
+
+```
+$ nmcli con modify Wifi wifi-sec.key-mgmt wpa-psk
+$ nmcli con modify Wifi wifi-sec.psk answer
+```
+
+4，使用以下命令更改 Wi-Fi 状态：
+
+```
+$ nmcli radio wifi [ on | off ]
+```
+
+##### 更改属性
+
+请使用以下命令检查具体属性，比如 mtu：
+
+```
+$ nmcli connection show id 'Wifi ' | grep mtu
+802-11-wireless.mtu: auto
+```
+
+使用如下命令更改设置的属性：
+
+```
+$ nmcli connection modify id 'Wifi ' 802-11-wireless.mtu 1350
+```
+
+使用如下命令确认更改：
+
+```
+$ nmcli connection show id 'Wifi ' | grep mtu
+802-11-wireless.mtu: 1350
+```
+
+#### 配置静态路由
+
+* 使用nmcli命令为网络连接配置静态路由，使用命令如下：
+
+  ```
+  $ nmcli connection modify enp3s0 +ipv4.routes "192.168.122.0/24 10.10.10.1"
+  ```
+* 使用编辑器配置静态路由，使用如下命令：
+
+  ```
+  $ nmcli con edit type ethernet con-name enp3s0
+  ===| nmcli interactive connection editor |===
+  Adding a new '802-3-ethernet' connection
+  Type 'help' or '?' for available commands.
+  Type 'describe [<setting>.<prop>]' for detailed property description.
+  You may edit the following settings: connection, 802-3-ethernet (ethernet), 802-1x, ipv4, ipv6, dcb
+  nmcli> set ipv4.routes 192.168.122.0/24 10.10.10.1
+  nmcli>
+  nmcli> save persistent
+  Saving the connection with 'autoconnect=yes'. That might result in an immediate activation of the connection.
+  Do you still want to save? [yes] yes
+  Connection 'enp3s0' (1464ddb4-102a-4e79-874a-0a42e15cc3c0) successfully saved.
+  nmcli> quit
+  ```
+* 使用如下命令激活连接以生效配置：
+
+  ```
+  $ nmcli con up enp3s0
+  ```
+
+### 使用ip命令
+
+linux ip 命令
+
+##### 配置静态地址
+
+在root权限下，配置静态IP地址，使用示例如下：
+
+```
+# ip address add 192.168.0.10/24 dev enp3s0
+```
+
+##### 配置多个地址
+
+ip 命令支持为同一接口分配多个地址，可在root权限下重复多次使用 ip 命令实现分配多个地址。使用示例如下：
+
+```
+# ip address add 192.168.2.223/24 dev enp4s0
+# ip address add 192.168.4.223/24 dev enp4s0
+# ip addr
+
+3: enp4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:aa:da:e2 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.203.12/16 brd 192.168.255.255 scope global dynamic noprefixroute enp4s0
+       valid_lft 8389sec preferred_lft 8389sec
+    inet 192.168.2.223/24 scope global enp4s0
+       valid_lft forever preferred_lft forever
+    inet 192.168.4.223/24 scope global enp4s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::1eef:5e24:4b67:f07f/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever
+```
+
+#### 配置静态路由
+
+如果需要静态路由，可使用 ip route add 命令在路由表中添加，使用 ip route del 命令删除。最常使用的 ip route 命令格式如下：
+
+```
+ip route [ add | del | change | append | replace ] destination-address
+```
+
+在root权限下使用 ip route 命令显示当前的 IP 路由表。示例如下：
+
+```
+# ip route
+
+default via 192.168.0.1 dev enp3s0 proto dhcp metric 100
+default via 192.168.0.1 dev enp4s0 proto dhcp metric 101
+192.168.0.0/16 dev enp3s0 proto kernel scope link src 192.168.202.248 metric 100
+192.168.0.0/16 dev enp4s0 proto kernel scope link src 192.168.203.12 metric 101
+192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1 linkdown
+```
+
+在主机地址中添加一个静态路由，在 root 权限下，使用以下命令格式：
+
+```
+ip route add 192.168.2.1 via 10.0.0.1 [dev interface-name]
+```
+
+其中 192.168.2.1 是用点分隔的十进制符号中的 IP 地址，10.0.0.1 是下一个跃点，_interface-name_ 是进入下一个跃点的退出接口。
+
+要在网络中添加一个静态路由，即代表 IP 地址范围的 IP 地址，请在root权限下运行以下命令格式：
+
+```
+ip route add 192.168.2.0/24 via 10.0.0.1 [dev interface-name]
+```
+
+其中 192.168.2.1 是目标网络的 IP 地址，10.0.0.1 是网络前缀，_interface-name_ 为网卡名称。
+
+### 通过ifcfg文件配置网络
+
+> ​![](assets/net-img-icon-note-20230906153802-cq4kxy7.gif) **说明：**<br />通过ifcfg文件配置的网络配置不会立即生效，修改文件后（以ifcfg-enp3s0为例），需要在root权限下执行**nmcli con reload;nmcli con up enp3s0**命令以重新加载配置文件并激活连接才生效。
+
+#### 配置静态网络
+
+以enp4s0网络接口进行静态网络设置为例，通过在root权限下修改ifcfg文件实现，在/etc/sysconfig/network-scripts/目录中生成名为ifcfg-enp4s0的文件中，修改参数配置，示例如下：
+
+```
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none
+IPADDR=192.168.0.10
+GATEWAY=192.168.0.1
+PREFIX=24
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp4s0static
+UUID=08c3a30e-c5e2-4d7b-831f-26c3cdc29293
+DEVICE=enp4s0
+ONBOOT=yes
+```
+
+#### 配置动态网络
+
+要通过ifcfg文件为em1接口配置动态网络，请按照如下操作在/etc/sysconfig/network-scripts/目录中生成名为 ifcfg-em1 的文件，示例如下：
+
+```
+DEVICE=em1
+BOOTPROTO=dhcp
+ONBOOT=yes
+```
+
+要配置一个向DHCP服务器发送不同的主机名的接口，请在ifcfg文件中新增一行内容，如下所示：
+
+```
+DHCP_HOSTNAME=hostname
+```
+
+要配置忽略由DHCP服务器发送的路由，防止网络服务使用从DHCP服务器接收的DNS服务器更新/etc/resolv.conf。请在ifcfg文件中新增一行内容，如下所示：
+
+```
+PEERDNS=no
+```
+
+要配置一个接口使用具体DNS服务器，请将参数PEERDNS=no，并在ifcfg文件中添加以下行：
+
+```
+DNS1=ip-address
+DNS2=ip-address
+```
+
+其中ip-address是DNS服务器的地址。这样就会让网络服务使用指定的DNS服务器更新/etc/resolv.conf。
+
+#### 配置默认网关
+
+在确定默认网关时，首先解析 /etc/sysconfig/network 文件，然后解析 ifcfg 文件 ，将最后读取的 GATEWAY 的取值作为路由表中的默认路由。
+
+在动态网络环境中，使用 NetworkManager 管理主机时，建议设置为由 DHCP 来分配。
+
+## 配置主机名
+
+### 简介
+
+hostname有三种类型：static、transient和pretty。
+
+* static：静态主机名，可由用户自行设置，并保存在/etc/hostname 文件中。
+* transient：动态主机名，由内核维护，初始是 static 主机名，默认值为“localhost”。可由DHCP或mDNS在运行时更改。
+* pretty：灵活主机名，允许使用自由形式（包括特殊/空白字符）进行设置。静态/动态主机名遵从域名的通用限制。
+
+> ​![](assets/net-img-icon-note-20230906153802-nmivsd8.gif) **说明：**<br />static和transient主机名只能包含a-z、A-Z、0-9、“-”、“_”和“.”，不能在开头或结尾处使用句点，不允许使用两个相连的句点，大小限制为 64 个字符。
+
+### 使用hostnamectl配置主机名
+
+#### 查看所有主机名
+
+查看当前的主机名，使用如下命令：
+
+```
+$ hostnamectl status
+```
+
+> ​![](assets/net-img-icon-note-20230906153802-9j2dfdm.gif) **说明：**<br />如果命令未指定任何选项，则默认使用status选项。
+
+#### 设定所有主机名
+
+在root权限下，设定系统中的所有主机名，使用如下命令：
+
+```
+# hostnamectl set-hostname name
+# exec bash
+```
+
+#### 设定特定主机名
+
+在root权限下，通过不同的参数来设定特定主机名，使用如下命令：
+
+```
+# hostnamectl set-hostname name [option...]
+```
+
+其中option可以是--pretty、--static、--transient中的一个或多个选项。
+
+如果--static或--transient与--pretty选项一同使用时，则会将static和transient主机名简化为pretty主机名格式，使用“-”替换空格，并删除特殊字符。
+
+当设定pretty主机名时，如果主机名中包含空格或单引号，需要使用引号。命令示例如下：
+
+```
+# hostnamectl set-hostname "Stephen's notebook" --pretty
+```
+
+#### 清除特定主机名
+
+要清除特定主机名，并将其还原为默认形式，在root权限下，使用如下命令：
+
+```
+# hostnamectl set-hostname "" [option...]
+```
+
+其中 "" 是空白字符串，option是--pretty、--static和--transient中的一个或多个选项。
+
+#### 远程更改主机名
+
+在远程系统中运行hostnamectl命令时，要使用-H，--host 选项，在root权限下使用如下命令：
+
+```
+# hostnamectl set-hostname -H [username]@hostname new_hostname
+```
+
+其中hostname是要配置的远程主机，username为自选项，new_hostname为新主机名。hostnamectl会通过SSH连接到远程系统。
+
+### 使用nmcli配置主机名
+
+查询static主机名，使用如下命令：
+
+```
+$ nmcli general hostname
+```
+
+在root权限下，将static主机名设定为host-server，使用如下命令：
+
+```
+# nmcli general hostname host-server
+```
+
+要让系统hostnamectl感知到static主机名的更改，在root权限下，重启hostnamed服务，使用如下命令：
+
+```
+# systemctl restart systemd-hostnamed
+```
+
+## 配置网络绑定
+
+### 使用nmcli
+
+* 创建名为mybond0的绑定，使用示例如下：
+
+  ```
+  $ nmcli con add type bond con-name mybond0 ifname mybond0 mode active-backup
+  ```
+* 添加从属接口，使用示例如下：
+
+  ```
+  $ nmcli con add type bond-slave ifname enp3s0 master mybond0
+  ```
+
+  要添加其他从属接口，重复上一个命令，并在命令中使用新的接口，使用示例如下：
+
+  ```
+  $ nmcli con add type bond-slave ifname enp4s0 master mybond0
+  Connection 'bond-slave-enp4s0' (05e56afc-b953-41a9-b3f9-0791eb49f7d3) successfully added.
+  ```
+* 要启动绑定，则必须首先启动从属接口，使用示例如下：
+
+  ```
+  $ nmcli con up bond-slave-enp3s0
+  Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/14)
+  ```
+
+  ```
+  $ nmcli con up bond-slave-enp4s0
+  Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/15)
+  ```
+
+  现在可以启动绑定，使用示例如下：
+
+  ```
+  $ nmcli con up mybond0
+  Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/16)
+  ```
+
+### 使用命令行
+
+#### 检查是否已安装Bonding内核模块
+
+在系统中默认已加载相应模块。要载入绑定模块，可在root权限下使用如下命令：
+
+```
+# modprobe --first-time bonding
+```
+
+显示该模块的信息，可在root权限下使用如下命令：
+
+```
+# modinfo bonding
+```
+
+更多命令请在root权限下使用modprobe --help查看。
+
+#### 创建频道绑定接口
+
+要创建绑定接口，可在root权限下通过在 /etc/sysconfig/network-scripts/ 目录中创建名为 ifcfg-bondN 的文件（使用接口号码替换 N，比如 0）。
+
+根据要绑定接口类型的配置文件来编写相应的内容，比如网络接口。接口配置文件示例如下：
+
+```
+DEVICE=bond0
+NAME=bond0
+TYPE=Bond
+BONDING_MASTER=yes
+IPADDR=192.168.1.1
+PREFIX=24
+ONBOOT=yes
+BOOTPROTO=none
+BONDING_OPTS="bonding parameters separated by spaces"
+```
+
+#### 创建从属接口
+
+创建频道绑定接口后，必须在从属接口的配置文件中添加 MASTER 和 SLAVE 指令。
+
+例如将两个网络接口enp3s0 和 enp4s0 以频道方式绑定，其配置文件示例分别如下：
+
+```
+TYPE=Ethernet
+NAME=bond-slave-enp3s0
+UUID=3b7601d1-b373-4fdf-a996-9d267d1cac40
+DEVICE=enp3s0
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+```
+
+```
+TYPE=Ethernet
+NAME=bond-slave-enp4s0
+UUID=00f0482c-824f-478f-9479-abf947f01c4a
+DEVICE=enp4s0
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+```
+
+#### 激活频道绑定
+
+要激活绑定，则需要启动所有从属接口。请在root权限下，运行以下命令：
+
+```
+# ifup enp3s0
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/7)
+```
+
+```
+# ifup enp4s0
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/8)
+```
+
+> ​![](assets/net-img-icon-note-20230906153802-6ub2vdj.gif) **说明：**<br />对于已经处于“up”状态的接口，请首先使用“ifdown *enp3s0* ”命令修改状态为down，其中 *enp3s0* 为实际网卡名称。
+
+完成后，启动所有从属接口以便启动绑定（不将其设定为 “down”）。
+
+要让 NetworkManager 感知到系统所做的修改，在每次修改后，请在root权限下，运行以下命令：
+
+```
+# nmcli con load /etc/sysconfig/network-scripts/ifcfg-device
+```
+
+查看绑定接口的状态，请在root权限下运行以下命令：
+
+```
+# ip link show
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 52:54:00:aa:ad:4a brd ff:ff:ff:ff:ff:ff
+3: enp4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 52:54:00:aa:da:e2 brd ff:ff:ff:ff:ff:ff
+4: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN mode DEFAULT group default qlen 1000
+    link/ether 86:a1:10:fb:ef:07 brd ff:ff:ff:ff:ff:ff
+5: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel master virbr0 state DOWN mode DEFAULT group default qlen 1000
+    link/ether 52:54:00:29:35:4c brd ff:ff:ff:ff:ff:ff
+```
+
+#### 创建多个绑定
+
+系统会为每个绑定创建一个频道绑定接口，包括 BONDING_OPTS 指令。使用这个配置方法可让多个绑定设备使用不同的配置。请按照以下操作创建多个频道绑定接口：
+
+* 创建多个 ifcfg-bondN 文件，文件中包含 BONDING_OPTS 指令，让网络脚本根据需要创建绑定接口。
+* 创建或编辑要绑定的现有接口配置文件，添加 SLAVE 指令。
+* 使用 MASTER 指令工具在频道绑定接口中分配要绑定的接口，即从属接口。
+
+以下是频道绑定接口配置文件示例：
+
+```
+DEVICE=bondN
+NAME=bondN
+TYPE=Bond
+BONDING_MASTER=yes
+IPADDR=192.168.1.1
+PREFIX=24
+ONBOOT=yes
+BOOTPROTO=none
+BONDING_OPTS="bonding parameters separated by spaces"
+```
+
+在这个示例中，使用绑定接口的号码替换 N。例如要创建两个接口，则需要使用正确的 IP 地址创建两个配置文件 ifcfg-bond0 和 ifcfg-bond1。
 
 ‍

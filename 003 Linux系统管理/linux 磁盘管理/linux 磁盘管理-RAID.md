@@ -8,7 +8,7 @@ RAID(Redundant Array of Independent Disk 独立冗余磁盘阵列)技术是加�
 
 ### 2.1、 RAID0
 
-![raid0.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/18/1602994630063.png)
+![raid0.png](assets/net-img-1602994630063-20230906134846-ew7wfff.png)
 
 **RAID0特点：**
 
@@ -20,7 +20,7 @@ RAID(Redundant Array of Independent Disk 独立冗余磁盘阵列)技术是加�
 
 ### 2.2、 RAID1
 
-![raid1.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/18/1602994658333.png)
+![raid1.png](assets/net-img-1602994658333-20230906134846-9jm11oq.png)
 
 **RAID1特点：**
 
@@ -33,7 +33,7 @@ RAID(Redundant Array of Independent Disk 独立冗余磁盘阵列)技术是加�
 
 ### 2.3、 RAID5
 
-![raid5.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/18/1602994685133.png)
+![raid5.png](assets/net-img-1602994685133-20230906134846-wzh4hc4.png)
 
 **RAID5特点：**
 
@@ -47,7 +47,7 @@ RAID(Redundant Array of Independent Disk 独立冗余磁盘阵列)技术是加�
 
 ### 2.4、 RAID6
 
-![raid6.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/18/1602994696875.png)
+![raid6.png](assets/net-img-1602994696875-20230906134846-twphue8.png)
 
 **RAID6特点：**
 
@@ -60,7 +60,7 @@ RAID(Redundant Array of Independent Disk 独立冗余磁盘阵列)技术是加�
 
 ### 2.5、 RAID10
 
-![raid10.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/18/1602994712492.png)
+![raid10.png](assets/net-img-1602994712492-20230906134846-rco3suq.png)
 
 **RAID10特点：**
 
@@ -246,9 +246,7 @@ mdadm -D /dev/md10
 
 ```
 
-## 
-
-mdadm相关命令
+## mdadm相关命令
 
 mdadm是multiple devices admin的简称，它是Linux下的一款标准的软件 RAID 管理工具
 

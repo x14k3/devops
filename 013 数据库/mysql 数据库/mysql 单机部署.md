@@ -163,7 +163,7 @@ yum -y remove mariadb*
 
 # 上传软件包到服务器后进行解压缩
 mkdir -p /data/
-tar -xvf mysql-8.0.26-linux-glibc2.12-x86_64.tar.xz -C /data/
+tar xf mysql-8.0.33-linux-glibc2.12-x86_64.tar.xz -C /data/
 # 修改目录名称
 cd /data/
 mv mysql-8.0.26-linux-glibc2.12-x86_64/ mysql

@@ -5,6 +5,7 @@
 需要注意的是，这两个网络配置，只能有一个生效，而不能同时生效。
 
 * 📄 [linux bridge](siyuan://blocks/20230803173114-w9zlqes)
+* 📄 [linux ip 命令](siyuan://blocks/20230906152322-cg6qodq)
 * 📄 [linux NetworkManager](siyuan://blocks/20230803163647-p2txceg)
 * 📄 [linux 聚合链路](siyuan://blocks/20230610173719-r7o6gsh)
 * 📄 [linux 路由管理](siyuan://blocks/20230610173807-kqlwuyg)
