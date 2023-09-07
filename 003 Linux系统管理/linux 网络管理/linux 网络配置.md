@@ -1,5 +1,7 @@
 # linux 网络配置
 
+‍
+
 ## 配置 IP
 
 ### 使用nmcli命令
@@ -325,6 +327,8 @@ $ nmcli connection show id 'Wifi ' | grep mtu
   $ nmcli con up enp3s0
   ```
 
+‍
+
 ### 使用ip命令
 
 linux ip 命令
@@ -402,7 +406,10 @@ ip route add 192.168.2.0/24 via 10.0.0.1 [dev interface-name]
 
 以enp4s0网络接口进行静态网络设置为例，通过在root权限下修改ifcfg文件实现，在/etc/sysconfig/network-scripts/目录中生成名为ifcfg-enp4s0的文件中，修改参数配置，示例如下：
 
+##### Redhat/CentOS
+
 ```
+cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-ens33
 TYPE=Ethernet
 PROXY_METHOD=none
 BROWSER_ONLY=no
@@ -421,7 +428,31 @@ NAME=enp4s0static
 UUID=08c3a30e-c5e2-4d7b-831f-26c3cdc29293
 DEVICE=enp4s0
 ONBOOT=yes
+EOF
+
+ifdown ens33 && ifup ens33
 ```
+
+##### Ubuntu-netplan
+
+```bash
+cat <<EOF > /etc/netplan/00-installer-config.yaml
+# This is the network config written by 'subiquity'
+network:
+  version: 2
+  ethernets:
+  	ens3:
+      dhcp4: no
+      addresses: [192.168.128.1/16]
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [114.114.114.114]
+EOF
+
+netplan apply
+```
+
+‍
 
 #### 配置动态网络
 
@@ -459,6 +490,10 @@ DNS2=ip-address
 在确定默认网关时，首先解析 /etc/sysconfig/network 文件，然后解析 ifcfg 文件 ，将最后读取的 GATEWAY 的取值作为路由表中的默认路由。
 
 在动态网络环境中，使用 NetworkManager 管理主机时，建议设置为由 DHCP 来分配。
+
+---
+
+‍
 
 ## 配置主机名
 
@@ -550,6 +585,8 @@ $ nmcli general hostname
 ```
 # systemctl restart systemd-hostnamed
 ```
+
+---
 
 ## 配置网络绑定
 

@@ -45,13 +45,13 @@ help：显示网络对象支持的操作命令的帮助信息。
 ### 实例
 
 ```
-ip link show                     # 显示网络接口信息
-ip link set eth0 up              # 开启网卡
-ip link set eth0 down            # 关闭网卡
+ip link show                                # 显示网络接口信息
+ip link set eth0 up                      # 开启网卡
+ip link set eth0 down                # 关闭网卡
 ip link set eth0 promisc on      # 开启网卡的混合模式
-ip link set eth0 promisc offi    # 关闭网卡的混合模式
+ip link set eth0 promisc offi     # 关闭网卡的混合模式
 ip link set eth0 txqueuelen 1200 # 设置网卡队列长度
-ip link set eth0 mtu 1400        # 设置网卡最大传输单元
+ip link set eth0 mtu 1400         # 设置网卡最大传输单元
 ip addr show     # 显示网卡IP信息
 ip addr add 192.168.0.1/24 dev eth0 # 为eth0网卡添加一个新的IP地址192.168.0.1  --临时 重启失效
 ip addr del 192.168.0.1/24 dev eth0 # 为eth0网卡删除一个IP地址192.168.0.1  --临时 重启失效
