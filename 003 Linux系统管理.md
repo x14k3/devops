@@ -43,8 +43,15 @@
   * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20230803173114-w9zlqes)
   * 📄 [Linux 虚拟网络设备之 vRouter](siyuan://blocks/20230906171717-rabex90)
 * 📄 [linux 文件压缩与解压](siyuan://blocks/20230610173737-lcd72hd)
-* 📄 [linux 性能分析](siyuan://blocks/20230906175252-g3b9ufk)
-* 📄 [linux 用户管理](siyuan://blocks/20230610173640-3viwdgt)
+* 📑 [linux 性能分析](siyuan://blocks/20230906175252-g3b9ufk)
+
+  * 📄 [Linux 性能分析之 CPU](siyuan://blocks/20230906175411-mepqce3)
+  * 📄 [Linux 性能分析之 IO](siyuan://blocks/20230906180047-dj0hsl8)
+  * 📄 [Linux 性能分析之 内存](siyuan://blocks/20230906175719-hwa4fqs)
+  * 📄 [Linux 性能分析之 网络](siyuan://blocks/20230906180245-9hnf2rz)
+* 📑 [linux 用户管理](siyuan://blocks/20230610173640-3viwdgt)
+
+  * 📄 [linux passwd文件](siyuan://blocks/20230907111129-6p3es4o)
 * 📄 [linux 组管理](siyuan://blocks/20230610173750-w3kwdmm)
 * 📄 [VIM文本编辑器](siyuan://blocks/20230610173703-o5bchuv)
 * 📄 [常见系统优化](siyuan://blocks/20230904153449-wd507me)
