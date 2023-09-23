@@ -34,12 +34,7 @@
 
   * 📄 [linux logrotate](siyuan://blocks/20230610173801-5bt2ht6)
   * 📄 [linux rsyslog](siyuan://blocks/20230803121402-0hdctz8)
-* 📑 [linux 软件包管理](siyuan://blocks/20230610173615-gi4fzfk)
-
-  * 📄 [CentOS yum](siyuan://blocks/20230906111854-a1f0qq5)
-  * 📄 [CentOS8 dnf](siyuan://blocks/20230906112113-ap4c6i4)
-  * 📄 [kylin apt](siyuan://blocks/20230906111803-zrtqrv5)
-  * 📄 [opensuse zypper](siyuan://blocks/20230906111854-h14hzkl)
+* 📄 [linux 软件包管理](siyuan://blocks/20230610173615-gi4fzfk)
 * 📑 [linux 网络管理](siyuan://blocks/20230610173746-xcrlvc0)
 
   * 📄 [linux ip 命令](siyuan://blocks/20230906152322-cg6qodq)
@@ -63,6 +58,5 @@
 * 📄 [linux 组管理](siyuan://blocks/20230610173750-w3kwdmm)
 * 📄 [VIM文本编辑器](siyuan://blocks/20230610173703-o5bchuv)
 * 📄 [常见系统优化](siyuan://blocks/20230904153449-wd507me)
-* 📄 [深入理解linux文件](siyuan://blocks/20230610173709-1nibbv0)
 
 ‍

@@ -150,8 +150,6 @@ nohup ./startWebLogic.sh > out.log 2>&1 &
 
 ## find
 
-[http://192.168.2.222:3000/c/find.html](http://192.168.2.222:3000/c/find.html)
-
 ```bash
 -option：
   -name   filename  # 查找名为filename的文件

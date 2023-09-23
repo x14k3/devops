@@ -69,7 +69,7 @@ firewall-cmd --reload      #更新防火墙规则，修改防火墙规则后�
   出站链接：允许
   入站链接：允许
 
-## firewalld 应用
+## firewalld-cmd
 
 ### 1. 开放端口
 
