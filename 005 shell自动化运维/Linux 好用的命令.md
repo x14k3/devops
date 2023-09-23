@@ -1,6 +1,7 @@
 # Linux 好用的命令
 
 * 📄 [Linux好用命令之base64命令](siyuan://blocks/20230904150732-c1dgf5s)
+* 📄 [Linux好用命令之dd命令](siyuan://blocks/20230908150847-8eumf6m)
 * 📄 [Linux好用命令之dig命令](siyuan://blocks/20230904145523-xn9dxbk)
 * 📄 [Linux好用命令之expect命令](siyuan://blocks/20230904145023-2jc7cab)
 * 📄 [Linux好用命令之figlet命令](siyuan://blocks/20230904150901-u6y820t)

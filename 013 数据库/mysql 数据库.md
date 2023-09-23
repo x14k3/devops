@@ -14,5 +14,6 @@
 * 📄 [mysql 单机部署](siyuan://blocks/20230610173758-9h9abmc)
 * 📄 [mysql 同步复制](siyuan://blocks/20230721090526-u5c6i8c)
 * 📄 [mysql 主从架构](siyuan://blocks/20230610173614-2rznm0a)
+* 📄 [测试SQL](siyuan://blocks/20230905171258-osev2wo)
 
 ‍

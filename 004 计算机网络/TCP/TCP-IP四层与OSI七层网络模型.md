@@ -22,9 +22,9 @@ OSI（Open System Interconnect），即开放式系统互联。  一般都叫OSI
 
 ## **OSI七层和TCP/IP四层的关系**
 
-OSI引入了服务、接口、协议、分层的概念，TCP/IP借鉴了OSI的这些概念建立TCP/IP模型。
+OSI引入了服务、接口、协议、分层的概念，TCP/IP 借鉴了OSI 的这些概念建立 TCP/IP模型。
 
-OSI先有模型，后有协议，先有标准，后进行实践；而TCP/IP则相反，先有协议和应用再提出了模型，且是参照的OSI模型。
+OSI先有模型，后有协议，先有标准，后进行实践；而 TCP/IP 则相反，先有协议和应用再提出了模型，且是参照的 OSI模型。
 
 ### TCP/IP协议簇
 

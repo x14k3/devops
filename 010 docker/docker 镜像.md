@@ -239,3 +239,28 @@ docker build -t 192.168.10.31/jinzay/activemq ./
 docker run -d --name activemq -p 10098:61616 -p 10097:8161 192.168.10.31/jinzay/activemq
 
 ```
+
+## 5. nginx镜像
+
+```bash
+docker run \
+-p 8080:80 \
+--name nginx \
+-v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \
+-v /home/nginx/conf/conf.d:/etc/nginx/conf.d \
+-v /home/nginx/log:/var/log/nginx \
+-v /home/nginx/html:/usr/share/nginx/html \
+-d nginx:latest
+```
+
+## 6.minio
+
+```bash
+docker run  -p 9000:9000 --name minio \
+ -d --restart=always \
+ -e MINIO_ACCESS_KEY=minio \
+ -e MINIO_SECRET_KEY=minio@123 \
+ -v /usr/local/minio/data:/data \
+ -v /usr/local/minio/config:/root/.minio \
+  minio/minio server /data  --console-address ":9000" --address ":9090"
+```

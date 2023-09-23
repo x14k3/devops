@@ -348,7 +348,6 @@ ip 命令支持为同一接口分配多个地址，可在root权限下重复多�
 ```
 # ip address add 192.168.2.223/24 dev enp4s0
 # ip address add 192.168.4.223/24 dev enp4s0
-# ip addr
 
 3: enp4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 52:54:00:aa:da:e2 brd ff:ff:ff:ff:ff:ff
@@ -370,33 +369,27 @@ ip 命令支持为同一接口分配多个地址，可在root权限下重复多�
 ip route [ add | del | change | append | replace ] destination-address
 ```
 
-在root权限下使用 ip route 命令显示当前的 IP 路由表。示例如下：
+```bash
+#1）添加到达目标主机的路由记录
+ip route add 目标主机 via 网关
 
-```
-# ip route
+#2）添加到达网络的路由记录
+ip route add 目标网络/掩码 via 网关
 
-default via 192.168.0.1 dev enp3s0 proto dhcp metric 100
-default via 192.168.0.1 dev enp4s0 proto dhcp metric 101
-192.168.0.0/16 dev enp3s0 proto kernel scope link src 192.168.202.248 metric 100
-192.168.0.0/16 dev enp4s0 proto kernel scope link src 192.168.203.12 metric 101
-192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1 linkdown
-```
+#添加默认路由
+ip route add default via 网关 下面只举一个例子说明一下。
+#比如增加一条到达主机10.2.111.112的路由，网关是10.1.111.112
+ip route add 10.2.111.112 via 10.1.111.112
 
-在主机地址中添加一个静态路由，在 root 权限下，使用以下命令格式：
+#3) 删除路由
+ip route del 目标网络/掩码
+ip route del default [via 网关]
 
-```
-ip route add 192.168.2.1 via 10.0.0.1 [dev interface-name]
-```
-
-其中 192.168.2.1 是用点分隔的十进制符号中的 IP 地址，10.0.0.1 是下一个跃点，_interface-name_ 是进入下一个跃点的退出接口。
-
-要在网络中添加一个静态路由，即代表 IP 地址范围的 IP 地址，请在root权限下运行以下命令格式：
-
-```
-ip route add 192.168.2.0/24 via 10.0.0.1 [dev interface-name]
+#4) 清空路由
+ip route flush  #不建议尝试
 ```
 
-其中 192.168.2.1 是目标网络的 IP 地址，10.0.0.1 是网络前缀，_interface-name_ 为网卡名称。
+‍
 
 ### 通过ifcfg文件配置网络
 

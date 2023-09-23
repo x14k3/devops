@@ -28,10 +28,6 @@ export MINIO_REGION = "Hongkong"
 
 ‍
 
-‍
-
-‍
-
 ## 分布式集群部署
 
 ```bash
@@ -45,4 +41,16 @@ http://10.98.66.62:9000/data/minio/data \
 http://10.98.66.63:9000/data/minio/data \
 http://10.98.66.64:9000/data/minio/data \
 http://10.98.66.65:9000/data/minio/data > minio.log 2>&1 &
+```
+
+### docker部署
+
+```bash
+ docker run  -p 9000:9000 --name minio \
+ -d --restart=always \
+ -e MINIO_ACCESS_KEY=minio \
+ -e MINIO_SECRET_KEY=minio@123 \
+ -v /data/minio/data:/data \
+ -v /data/minio/config:/root/.minio \
+  minio/minio server /data  --console-address ":9000" --address ":9090"
 ```

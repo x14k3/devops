@@ -1,5 +1,7 @@
 # Linux好用命令之mount命令
 
+## mount
+
 **mount命令** Linux mount命令是经常会使用到的命令，它用于挂载Linux系统外的文件。
 
 如果通过webdav协议挂载网络磁盘，需要运行指令`apt install davfs2`​安装必要的组件
@@ -59,19 +61,19 @@ mount [-fnrsvw] [-t vfstype] [-o options] device dir
 #### 将 `/dev/hda1`​ 挂在 `/mnt`​ 之下。
 
 ```
-#mount /dev/hda1 /mnt
+mount /dev/hda1 /mnt
 ```
 
 将 `/dev/hda1`​ 用唯读模式挂在 `/mnt`​ 之下。
 
 ```
-#mount -o ro /dev/hda1 /mnt
+mount -o ro /dev/hda1 /mnt
 ```
 
 将 `/tmp/image.iso`​ 这个光碟的 `image`​ 档使用 `loop`​ 模式挂在 `/mnt/cdrom`​ 之下。用这种方法可以将一般网络上可以找到的 `Linux`​ 光 碟 ISO 档在不烧录成光碟的情况下检视其内容。
 
 ```
-#mount -o loop /tmp/image.iso /mnt/cdrom
+mount -o loop /tmp/image.iso /mnt/cdrom
 ```
 
 ‍
@@ -92,3 +94,9 @@ fstab参数说明
 # 自动挂载
 echo '/dev/sdb1 /data xfs defaults 0 0' >> /etc/fstab
 ```
+
+‍
+
+## umount
+
+‍

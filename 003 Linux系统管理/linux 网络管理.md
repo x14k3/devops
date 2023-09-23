@@ -10,7 +10,7 @@
 * 📄 [linux 路由管理](siyuan://blocks/20230610173807-kqlwuyg)
 * 📄 [linux 网络配置](siyuan://blocks/20230803163800-ql9cifl)
 * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20230803173114-w9zlqes)
-* 📄 [Linux 虚拟网络设备之 “vRouter”](siyuan://blocks/20230906171717-rabex90)
+* 📄 [Linux 虚拟网络设备之 vRouter](siyuan://blocks/20230906171717-rabex90)
 
 ‍
 
