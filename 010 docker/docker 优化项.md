@@ -1,6 +1,23 @@
 # docker 优化项
 
-# Docker修改默认存储路径/var/lib/docker
+‍
+
+## 修改**docker仓库源为阿里源**
+
+```bash
+sudo mkdir -p /etc/docker
+vim /etc/docker/daemon.json
+-------------------------------------------------------------
+{
+  "registry-mirrors": ["https://tu2ax1rl.mirror.aliyuncs.com"],
+  "insecure-registries": ["0.0.0.0"]  //用于docker客户端 通过 http 连接仓库
+}
+-------------------------------------------------------------
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+## 修改默认存储路径/var/lib/docker
 
 ```bash
 # 修改docker默认运行目录 /data/docker

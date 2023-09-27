@@ -16,8 +16,6 @@ NetworkManager主要管理2个对象： Connection（网卡连接配置） 和 D
 * 手动配置ifcfg文件，通过nmcli connection reload来加载生效。
 * 手动配置ifcfg文件，通过传统network.service来加载生效。
 
-‍
-
 NetworkManager的配置在这个目录里面：
 
 ```bash
@@ -35,18 +33,18 @@ drwxr-xr-x 8 root root 4096 9月   5 16:40 ../
 
 ```bash
 nmcli connection 
-# add		添加
+# add		       添加
 # delete        删除
-# edit   	编辑
-# up    	启用
-# down		停用
-# help   	帮助
-# load   	加载
-# monitor  	监控
-# show     	查看
-# clone  	克隆
-# modify 	修改
-# reload	重载
+# edit            编辑
+# up    	      启用
+# down		  停用
+# help   	      帮助
+# load   	      加载
+# monitor    监控
+# show     	   查看
+# clone  	      克隆
+# modify 	   修改
+# reload	      重载
 
 
 [root@zutuanxue ~]# nmcli connection modify ens37 ipv4.addresses 192.168.18.100/24 ipv4.gateway 192.168.18.1 ipv4.method manual autoconnect yes
@@ -61,65 +59,37 @@ nmcli connection
 
 ```bash
 [root@zutuanxue ~]# nmcli device 
-connect     		连接
+connect     		    连接
 disconnect  		断开
-lldp        		显示通过lldp协议学习到的相邻设备信息
-monitor     		监控设备
-set         		设置设备
-status      		显示设备状态
-delete      		删除设备 只能删除软件设备
-help        		帮助
-modify      		修改
-reapply     		更新
-show        		查看详细信息
-wifi        		无线网络管理
+lldp        		       显示通过lldp协议学习到的相邻设备信息
+monitor     		   监控设备
+set         		       设置设备
+status      		  显示设备状态
+delete      		  删除设备 只能删除软件设备
+help        		  帮助
+modify      		  修改
+reapply     		  更新
+show        		  查看详细信息
+wifi        		      无线网络管理
 ```
 
-### nmcli的其他常用设置
+### nmcli 其他常用设置
 
 ```
 [root@zutuanxue ~]# nmcli 
 -t		简洁输出	与-p冲突
--p		人性化输出 与-t冲突
+-p	人性化输出 与-t冲突
 -c		颜色开关 auto/on/off
 -f		过滤字段	all查看所有字段   
 connection 	连接 
-device      	设备
-general     	全局
-monitor     	监控
+device      	    设备
+general     	    全局
+monitor     	    监控
 networking  	网络
-radio       	无线广播
-	
-例：
-[root@zutuanxue ~]# nmcli  -t connection 
-ens33:b5ecf570-543c-4da7-b082-bdc073b56acb:802-3-ethernet:ens33
-ens37:5b91e453-1130-48ce-a2a1-f6f728e072ed:802-3-ethernet:ens37
-ens37:077945cb-1d12-4c06-bba3-562426336b67:802-3-ethernet:
-
-[root@zutuanxue ~]# nmcli -p connection 
-========================
-  网络管理器连接配置集
-========================
-NAME   UUID          TYPE      DEVICE 
-----------------------------------------------------
-ens33  b5ec...			 ethernet  ens33  
-ens37  5b91...			 ethernet  ens37  
-ens37  0779...			 ethernet  --   
-
-[root@zutuanxue ~]# nmcli -f STATE connection 
-STATE  
-已激活 
-已激活 
---   
-
-[root@zutuanxue ~]# nmcli general hostname 
-localhost.localdomain
-[root@zutuanxue ~]# nmcli general hostname hello
-[root@zutuanxue ~]# nmcli general hostname 
-hello
+radio       	    无线广播
 ```
 
-### nmcli的返回值
+### nmcli 的返回值
 
 ```
 0: 成功-指示操作已成功
@@ -138,16 +108,20 @@ hello
 
 ## 配置案例
 
+常用参数和网卡配置文件参数的对应关系这个只使用RHEL系列的发行版，不适合Debian系列发行版
+
+​![1273933-20200325211914161-1280908985](assets/1273933-20200325211914161-1280908985-20230924105556-khnssx2.png)​
+
 ### 给网卡配置静态IP地址
 
-弄明白_connection_和_device_的关系之后，给网卡配置IP地址就很方便了：创建一个新的_connection_并把它apply到我们的_device_上。
+弄明白connection和device的关系之后，给网卡配置IP地址就很方便了：创建一个新的_connection_并把它apply到我们的_device_上。
 
 ```
-[root@localhost ~]# nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 ipv6.method auto
+[root@localhost ~]# nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 
 Connection 'eth0-static' (3ae60979-d6f1-4dbb-8a25-ff1178e7305c) successfully added.
 ```
 
-从命令上看应该还是很容易读懂的，创建一个新的`ethernet`​类型的连接，名字叫做`eth0-static`​，网卡名字是`eth0`​，IPv4手动配置，地址网关DNS等等都填上，IPv6使用自动配置。
+从命令上看应该还是很容易读懂的，创建一个新的`ethernet`​类型的连接，名字叫做`eth0-static`​，网卡名字是`eth0`​，IPv4手动配置，地址网关DNS等等都填上。
 
 一般情况下，连接创建后如果对应设备没有活跃的其他连接，创建的连接会直接生效，如果没生效也比较简单，直接执行：
 
@@ -156,31 +130,7 @@ Connection 'eth0-static' (3ae60979-d6f1-4dbb-8a25-ff1178e7305c) successfully add
 Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/4)
 ```
 
-执行完成后连接生效，可以通过`nmcli connection`​和`ip addr`​命令查看结果：
-
-```
-[root@localhost ~]# nmcli connection
-NAME         UUID                                  TYPE      DEVICE
-eth0-static  3ae60979-d6f1-4dbb-8a25-ff1178e7305c  ethernet  eth0
-eth0         72534820-fb8e-4c5a-8d49-8c013441d390  ethernet  --
-[root@localhost ~]# nmcli device
-DEVICE  TYPE      STATE      CONNECTION
-eth0    ethernet  connected  eth0-static
-lo      loopback  unmanaged  --
-[root@localhost ~]# ip addr
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host
-       valid_lft forever preferred_lft forever
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether 00:15:5d:b3:80:01 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.145.59/20 brd 192.168.159.255 scope global noprefixroute eth0
-       valid_lft forever preferred_lft forever
-    inet6 fe80::a7cf:fd2:7970:4bd4/64 scope link noprefixroute
-       valid_lft forever preferred_lft forever
-```
+执行完成后连接生效，可以通过`nmcli connection`​和`ip addr`​命令查看结果。
 
 如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​之后修改的属性才能生效。
 

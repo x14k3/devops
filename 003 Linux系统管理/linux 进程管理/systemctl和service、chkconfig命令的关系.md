@@ -145,10 +145,6 @@ chkconfig --level levels
 
 # update-rc.d命令用法
 
-首先这是 LinuxQuestions 中对 update-rc.d 的定义：
-
-> update-rc.d is the Debian utility to install and remove System-V style init script links. Other distributions (such as Red Hat) use chkconfig. With update-rc.d, you can schedule tasks to be started when you boot your computer, for example the ssh service.
-
 update-rc.d 是一个 Ubuntu 和 Debian 下的工具程序，用来添加和移除 System-V 类型的启动脚本。<br />这些脚本都叫做「System-V init script」，且以实际文件而不是链接文件的方式存储在 /etc/init.d 目录下。（之所以强调实际文件后文会解释原因）<br />其他的 Linux 发行版（例如红帽）使用 chkconfig 这个命令。<br />update-rc.d 就是通过管理 /etc/init.d 目录下的脚本文件来管理系统启动时的计划任务的，例如 ssh 服务、Apache 服务、MySQL 服务等。
 
 因此 /etc/init.d 目录就是系统的启动脚本所在的目录，其中的每一个文件都是一个启动脚本，都代表了某一类应用程序服务。除非我们要手动编写启动脚本，否则我们不需要修改这个目录下的文件，在安装一些需要开机启动的应用程序的时候对应的脚本会自动被添加进去。
@@ -188,6 +184,7 @@ update-rc.d <basename> start|stop <NN> <runlevels>
 ```
 $ update-rc.d sample_init_script defaults
 # 上一条命令等效于（中间是一个英文句点符号）：
+
 $ update-rc.d sample_init_script start 20 2 3 4 5 . stop 20 0 1 6
 ```
 
@@ -215,3 +212,5 @@ $ update-rc.d -f sample_init_script remove
 Update: 如果只是需要使用 service <basename> start/stop/status, 只需要将 basename 的 init script 放到 /etc/init.d 下即可, 不需要通过update-rc.d注册
 
 Update 2017-11-13: 对于通过mysql官方deb包安装的mysql5.7, 使用update-rc.d mysql remove无效, 可以使用 sudo systemctl disable mysql 来禁止mysql开机自启动
+
+‍

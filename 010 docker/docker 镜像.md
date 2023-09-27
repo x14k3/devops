@@ -253,7 +253,7 @@ docker run \
 -d nginx:latest
 ```
 
-## 6.minio
+## 6. minio 镜像
 
 ```bash
 docker run  -p 9000:9000 --name minio \
@@ -264,3 +264,5 @@ docker run  -p 9000:9000 --name minio \
  -v /usr/local/minio/config:/root/.minio \
   minio/minio server /data  --console-address ":9000" --address ":9090"
 ```
+
+‍

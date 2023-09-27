@@ -1,4 +1,4 @@
-# Linux之init.d、rc.d文件夹说明
+# Linux之init.d、rc.d
 
 ‍
 

@@ -27,7 +27,7 @@ Bridge 的这个特性让它可以接入其他的网络设备，比如物理设�
 |​`addif <bridge> <device>`​|将网卡接口接入网桥|**brctl** addif br10 eth0|
 |​`delif <bridge> <device>`​|删除网桥接入的网卡接口|**brctl** delif br10 eth0|
 |​`show <bridge>`​|查询网桥信息|**brctl** show br10|
-|​`stp <bridge> {on|off}`​|启用禁用 STP|**brctl** stp br10 off/on|
+|​`stp <bridge> {on\|off}`​|启用禁用 STP|**brctl** stp br10 off/on|
 |​`showstp <bridge>`​|查看网桥 STP 信息|**brctl** showstp br10|
 |​`setfd <bridge> <time>`​|设置网桥延迟|**brctl** setfd br10 10|
 |​`showmacs <bridge>`​|查看 mac 信息|**brctl** showmacs br10|

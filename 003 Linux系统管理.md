@@ -3,23 +3,20 @@
 * 📄 [linux acl权限](siyuan://blocks/20230610173747-b0whwmi)
 * 📄 [linux PAM文件](siyuan://blocks/20230610173650-r61rup1)
 * 📄 [linux ssh](siyuan://blocks/20230610173745-hsm9ws6)
-* 📑 [linux 常用内核工具](siyuan://blocks/20230912154329-nbtzgrj)
-
-  * 📄 [Cgroups资源限制](siyuan://blocks/20230610173715-36th0on)
-  * 📄 [datto](siyuan://blocks/20230912154350-6wbqtwo)
 * 📑 [linux 磁盘管理](siyuan://blocks/20230731184808-fp74xuk)
 
   * 📄 [linux LVM](siyuan://blocks/20230610173608-94mdetb)
   * 📄 [linux 磁盘管理-RAID](siyuan://blocks/20230610173538-pv1fv66)
   * 📄 [linux 磁盘管理-分区](siyuan://blocks/20230610173743-0ftosvt)
+* 📄 [linux 定时任务](siyuan://blocks/20230610173646-bhdhhzl)
 * 📑 [linux 防火墙](siyuan://blocks/20230803115608-fyehvsl)
 
   * 📄 [firewalld](siyuan://blocks/20230610173734-jic9gse)
   * 📄 [iptables](siyuan://blocks/20230610173617-7l5ftni)
 * 📑 [linux 几个重要路径](siyuan://blocks/20230921212215-oetcqmb)
 
-  * 📄 [Linux之init.d、rc.d文件夹说明](siyuan://blocks/20230921212252-nw2nbmd)
-* 📄 [linux 计划任务](siyuan://blocks/20230610173646-bhdhhzl)
+  * 📄 [Linux之init.d、rc.d](siyuan://blocks/20230921212252-nw2nbmd)
+  * 📄 [proc\\[pid]\status](siyuan://blocks/20230927102400-vxtcxym)
 * 📑 [linux 进程管理](siyuan://blocks/20230731184852-gpvm3o2)
 
   * 📄 [linux supervisord](siyuan://blocks/20230731184946-hlebj0x)
@@ -29,6 +26,7 @@
 
   * 📄 [linux shadow文件](siyuan://blocks/20230610173728-xs4na7q)
 * 📄 [linux 目录结构和文件属性管理](siyuan://blocks/20230610173652-ex2pz40)
+* 📄 [linux 内核优化](siyuan://blocks/20230927141235-ndxotpj)
 * 📄 [linux 权限管理](siyuan://blocks/20230610173646-5p30gm2)
 * 📑 [linux 日志管理](siyuan://blocks/20230610173716-mus5v8e)
 
@@ -57,6 +55,5 @@
   * 📄 [linux passwd文件](siyuan://blocks/20230907111129-6p3es4o)
 * 📄 [linux 组管理](siyuan://blocks/20230610173750-w3kwdmm)
 * 📄 [VIM文本编辑器](siyuan://blocks/20230610173703-o5bchuv)
-* 📄 [常见系统优化](siyuan://blocks/20230904153449-wd507me)
 
 ‍

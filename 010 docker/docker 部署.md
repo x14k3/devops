@@ -79,21 +79,6 @@ systemctl enable docker;sudo systemctl start docker
 
 ```
 
-**修改docker仓库源为阿里源**
-
-```json
-sudo mkdir -p /etc/docker
-vim /etc/docker/daemon.json
--------------------------------------------------------------
-{
-  "registry-mirrors": ["https://tu2ax1rl.mirror.aliyuncs.com"],
-  "insecure-registries": ["0.0.0.0"]  //用于docker客户端 通过 http 连接仓库
-}
--------------------------------------------------------------
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-```
-
 ## docker-daemon.json各配置详解
 
 ```json
