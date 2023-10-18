@@ -37,52 +37,54 @@ docker run -dit imageID /bin/bash
 ## 容器管理
 
 ```bash
-docker start       #开启一个容器并使其在后台运行
-docker stop        #停止一个容器
-docker restart     #重启一个容器
-docker kill        #杀掉一个容器进程
-docker rm          #删除容器
-docker prune       #删除所有终止的容器
-docker pause       #暂停容器
-docker unpause     #恢复暂停容器
-docker create      #从镜像中创建一个容器
-docker exec -it    #在运行的容器中执行命令[docker exec -it alpine /bin/sh ]
+docker start             #开启一个容器并使其在后台运行
+docker stop             #停止一个容器
+docker restart        #重启一个容器
+docker kill                #杀掉一个容器进程
+docker rm                #删除容器
+docker prune          #删除所有终止的容器
+docker pause          #暂停容器
+docker unpause      #恢复暂停容器
+docker create           #从镜像中创建一个容器
+docker exec -it         #在运行的容器中执行命令[docker exec -it alpine /bin/sh ]
     -i :展示容器输入信息STDIN
     -t :命令行交互模式
-    
-docker ps           #列出容器
-docker logs         #获取docker日志
-docker inspect      #获取容器或镜像的元数据
-docker top          #查看正在运行中的容器进程信息
-docker attach       #链接正在运行的容器,_注意：_ 如果从这个 stdin 中 exit，会导致容器的停止。
-docker events       #从docker服务器获取事件
-docker wait         #让一个容器进入等待，使其进入阻塞状态
-docker export       #将容器打包为tar格式的镜像   [docker export hass -o hass.tar ]
-docker import       #加载通过docker export打包的容器镜像 [ docker import hass.tar ]
-docker port         #列出一个容器的端口映射情况
+  
+docker ps                 #列出容器
+docker logs              #获取docker日志
+docker inspect         #获取容器或镜像的元数据
+docker top               #查看正在运行中的容器进程信息
+docker attach          #链接正在运行的容器,_注意：_ 如果从这个 stdin 中 exit，会导致容器的停止。
+docker events          #从docker服务器获取事件
+docker wait              #让一个容器进入等待，使其进入阻塞状态
+
+docker port              #列出一个容器的端口映射情况
 docker container    #管理已经运行的容器的
-docker deploy       #部署新的堆栈或更新已有堆栈的
-docker update       #更新容器
+docker deploy         #部署新的堆栈或更新已有堆栈的
+docker update         #更新容器
 docker rename       #重命名容器
-docker volume       #卷管理
+docker volume        #卷管理
 docker commit       #提交一个容器的文件系统，使之生成一个新的镜像
-docker cp           #向一个正在运行的容器复制文件，或将容器中的文件复制出来
-docker diff         #检查一个容器文件系统更改情况
+docker cp                 #向一个正在运行的容器复制文件，或将容器中的文件复制出来
+docker diff               #检查一个容器文件系统更改情况
+
+docker export          #将容器打包为tar格式的镜像   [docker export hass -o hass.tar ]
+docker import          #加载通过docker export打包的容器镜像 [ docker import hass.tar ]
 ```
 
 ## 镜像管理
 
 ```bash
-docker images       #列出镜像
-docker rmi          #删除镜像
-docker tag          #修改本地某一镜像的标记，使其镜像属于某一仓库 [docker tag alpine:3.15 192.168.0.100:8081/images/alpine:3.15]
-docker build        #通过指定Dockerfile文件编译镜像
-docker history      #查看镜像历史
+docker images         #列出镜像
+docker rmi                #删除镜像
+docker tag                #修改本地某一镜像的标记，使其镜像属于某一仓库 [docker tag alpine:3.15 192.168.0.100:8081/images/alpine:3.15]
+docker build             #通过指定Dockerfile文件编译镜像
+docker history          #查看镜像历史
 docker checkpoint   #设置checkpoint，类似于恢复点，可以让镜像撤销到曾经设置的某一个checkpoint上
-docker manifest     #docker镜像清单管理
-docker trust        #docker可信镜像管理
-docker save         #将镜像保存成tar文件 [docker save -o alpine.tar  alpine:3.15]
-docker load         #从tar中恢复镜像 [docker load < alpine.tar]
+docker manifest       #docker镜像清单管理
+docker trust              #docker可信镜像管理
+docker save               #将镜像保存成tar文件 [docker save -o alpine.tar  alpine:3.15]
+docker load               #从tar中恢复镜像 [docker load < alpine.tar]
 ```
 
 **总结一下docker save和docker export的区别：**
@@ -107,25 +109,27 @@ docker load         #从tar中恢复镜像 [docker load < alpine.tar]
 ## 仓库管理
 
 ```bash
-login       #docker登入 [docker login 192.168.0.100:8081]
-logout      #docker登出
-pull        #拉取镜像         [docker pull 192.168.0.100:8081/images/alpine:3.15]
-push        #推送镜像至服务器 [docker push 192.168.0.100:8081/images/alpine:3.15]
-search      #在docker hub上查询镜像
+login          #docker登入 [docker login 192.168.0.100:8081]
+logout       #docker登出
+pull            #拉取镜像         [docker pull 192.168.0.100:8081/images/alpine:3.15]
+push          #推送镜像至服务器 [docker push 192.168.0.100:8081/images/alpine:3.15]
+search       #在docker hub上查询镜像
 ```
 
 ## 其他命令
 
 ```bash
-info         #查询docker信息
-version      #查询docker版本
-system       #docker系统管理
-stats        #docker容器资源使用统计
-config       #管理docker配置
-network      #docker网络管理
-plugin       #docker插件管理
-secret       #docker敏感信息管理
-service      #docker服务管理
+docker info                      #查询docker信息
+docker version               #查询docker版本
+docker system                #docker系统管理
+docker system df           #查看docker自身的内存占用
+docker system prune    #于清理磁盘，删除关闭的容器、无用的数据卷和网络，以及dangling镜像(即无tag的镜像)。
+docker stats                    #docker容器资源使用统计
+docker config                 #管理docker配置
+docker network             #docker网络管理
+docker plugin                 #docker插件管理
+docker secret                 #docker敏感信息管理
+docker service               #docker服务管理
 ```
 
 ## docker容器端口映射

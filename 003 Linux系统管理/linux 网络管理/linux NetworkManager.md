@@ -117,7 +117,7 @@ radio       	    无线广播
 弄明白connection和device的关系之后，给网卡配置IP地址就很方便了：创建一个新的_connection_并把它apply到我们的_device_上。
 
 ```
-[root@localhost ~]# nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 
+nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 
 Connection 'eth0-static' (3ae60979-d6f1-4dbb-8a25-ff1178e7305c) successfully added.
 ```
 
@@ -132,7 +132,12 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 
 执行完成后连接生效，可以通过`nmcli connection`​和`ip addr`​命令查看结果。
 
-如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​之后修改的属性才能生效。
+如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​​之后修改的属性才能生效。
+
+```bash
+nmcli conn modify  ens33  ipv4.method manual ipv4.addresses "10.10.0.53/16" ipv4.gateway 10.10.1.1 ipv4.dns 114.114.114.114 
+nmcli connection down ens33  && nmcli connection up ens33 
+```
 
 ### 创建网桥
 

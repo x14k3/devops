@@ -91,7 +91,7 @@ firewall-cmd  --get-services                                 # 查看还有哪�
 ##防火墙预定义的服务配置文件是xml文件，目录在 /usr/lib/firewalld/services/，每个服务对应一个端口
 ```
 
-### 2.端口转发
+### 2. 端口转发
 
 ```bash
 
@@ -100,7 +100,7 @@ firewall-cmd --permanent --add-forward-port=proto=80:proto=tcp:toaddr=192.168.1.
 firewall-cmd --permanent  --add-forward-port=proto=80:proto=tcp:toaddr=192.168.0.1:toport=8080 # 将80端口的流量转发至192.168.0.1的8080端口
 ```
 
-### 3.ip限制
+### 3. ip限制
 
 ```bash
 # 针对某个 IP开放端口

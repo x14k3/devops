@@ -26,6 +26,9 @@ create tablespace JY2GM datafile '/data/dmdata/FMSDB/JY2GM01.DBF' size 1024 auto
 # 创建索引表空间
 create tablespace JY2WEB_IDX datafile '/data/dm8/data/DMDB/JY2WEN_IDX01.DBF' size 128 autoextend on next 128 maxsize unlimited;
 
+# 查看表空间
+select * from v$tablespace;
+
 ```
 
 ## 3.创建用户

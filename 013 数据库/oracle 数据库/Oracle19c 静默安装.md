@@ -404,12 +404,19 @@ lsnrctl start   # 启动监听
 NLS_LANG这个参数由三个组成部分，分别是【语言\_区域.字符集】
 
 ```bash
-# windows添加环境变量
+# 数据库字符集如果使用ZHS16GBK
+# 则：
+### windows添加环境变量
 NLS_LANG SIMPLIFIED CHINESE_CHINA.ZHS16GBK
 
-# linux配置   
+### linux配置   
 export NLS_LANG="AMERICAN_AMERICA.ZHS16GBK"    # 终端字符集使用utf-8
 export NLS_LANG="SIMPLIFIED CHINESE_CHINA".ZHS16GBK  # 终端字符集使用gbk
+
+# 数据库字符集如果使用AL32UTF8
+### linux配置   
+export NLS_LANG="AMERICAN_AMERICA.AL32UTF8"    # 终端字符集使用utf-8
+export NLS_LANG="SIMPLIFIED CHINESE_CHINA".AL32UTF8# 终端字符集使用gbk
 
 ```
 
@@ -1384,3 +1391,21 @@ automaticMemoryManagement=
 totalMemory=
 
 ```
+
+‍
+
+## 4. 自动化部署脚本
+
+[readme.txt](assets/readme-20231008160216-g0hryuq.txt)
+
+[01_env_prepararion.sh](assets/01_env_prepararion-20231008160219-mowjfdb.sh)
+
+[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20231008160221-99uesvf.sh)
+
+[03_oracle_dbca.sh](assets/03_oracle_dbca-20231008160223-bdlc2ni.sh)
+
+[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20231008160225-kc9osw1.sh)
+
+[05_oracle_rman.sh](assets/05_oracle_rman-20231008160227-adss7c0.sh)
+
+‍

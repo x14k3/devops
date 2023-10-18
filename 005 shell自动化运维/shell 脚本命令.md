@@ -58,13 +58,13 @@ fi
 [ FILE1 -ef FILE2 ] #如果 FILE1 和 FILE2 指向相同的设备和节点号则返回为真
 
 ######################### 字符串判断 #########################
-[ -z STRING ] #如果STRING的长度为零则返回为真，即空是真
-[ -n STRING ] #如果STRING的长度非零则返回为真，即非空是真
-[ STRING1 ]　 #如果字符串不为空则返回为真,与-n类似
-[ STRING1 == STRING2 ] #如果两个字符串相同则返回为真
-[ STRING1 != STRING2 ] #如果字符串不相同则返回为真
-[ STRING1 < STRING2 ]  #如果 “STRING1”字典排序在“STRING2”前面则返回为真
-[ STRING1 > STRING2 ]  #如果 “STRING1”字典排序在“STRING2”后面则返回为真
+[[ -z STRING ]] #如果STRING的长度为零则返回为真，即空是真
+[[ -n STRING ]] #如果STRING的长度非零则返回为真，即非空是真
+[[ STRING1 ]]　 #如果字符串不为空则返回为真,与-n类似
+[[ STRING1 == STRING2 ]] #如果两个字符串相同则返回为真
+[[ STRING1 != STRING2 ]] #如果字符串不相同则返回为真
+[[ STRING1 < STRING2 ]]  #如果 “STRING1”字典排序在“STRING2”前面则返回为真
+[[ STRING1 > STRING2 ]]  #如果 “STRING1”字典排序在“STRING2”后面则返回为真
 
 ######################### 数值判断 #########################
 [ INT1 -eq INT2 ] #INT1和INT2两数相等返回为真 ,=

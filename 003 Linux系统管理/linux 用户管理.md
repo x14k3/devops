@@ -1,6 +1,6 @@
 # linux 用户管理
 
-## 一、用户和组的相关概念
+## 用户和组的相关概念
 
 - **账号**：是一种用来记录单个用户或是多个用户的数据。Linux中每一个合法的用户都必须要拥有账号，才能使用 。它不仅可以用来验证用户身份，还决定了一个用户在系统中可以从事什么工作
 
@@ -57,7 +57,7 @@
 
 了解完账号的基本概念后，我们一起来看下账号到底记录了哪些信息
 
-## 二、用户账号管理
+## 用户账号管理
 
 ### **useradd命令**
 
@@ -146,7 +146,7 @@ userdel(选项)(参数)
 -r：删除用户的同时，删除与用户相关的所有文件。
 ```
 
-## 三、用户查询命令
+## 用户查询命令
 
 ### **id命令**
 
@@ -179,3 +179,76 @@ root
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
 root     pts/0    192.168.1.17    16:16    3.00s  0.08s  0.00s w
 ```
+
+‍
+
+## 用户提权sudo
+
+**sudo命令** 用来以其他身份来执行命令，预设的身份为root。在`/etc/sudoers`​中设置了可执行sudo指令的用户。若其未经授权的用户企图使用sudo，则会发出警告的邮件给管理员。用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码。
+
+延长Linux中sudo密码在终端的有效时间
+
+```bash
+vim  /etc/sudoers
+Defaults env_reset,timestamp_timeout=20
+```
+
+* **给用户添加sudo权限**
+
+  根据需要可以选择下面四行中的一行：
+
+  ```bash
+  # 允许用户youuser执行sudo命令(需要输入密码).
+  youuser ALL=(ALL) ALL 
+  # 允许用户组youuser里面的用户执行sudo命令(需要输入密码).
+  %youuser ALL=(ALL) ALL 
+  # 允许用户youuser执行sudo命令,并且在执行的时候不输入密码.
+  youuser ALL=(ALL) NOPASSWD: ALL 
+  # 允许用户组youuser里面的用户执行sudo命令,并且在执行的时候不输入密码.
+  %youuser ALL=(ALL) NOPASSWD: ALL
+  ```
+
+- **Defaults 配置项**
+
+  使用 Defaults 配置，可以改变 sudo 命令的行为，如：
+
+  ```
+  # 指定用户尝试输入密码的次数，默认值为3
+  Defaults passwd_tries=5
+
+  # 设置密码超时时间，默认为 5 分钟
+  Defaults passwd_timeout=2
+
+  # 默认 sudo 询问用户自己的密码，添加 targetpw 或 rootpw 配置可以让 sudo 询问 root 密码
+  Defaults targetpw
+
+  # 指定自定义日志文件
+  Defaults logfile="/var/log/sudo.log"
+
+  # 要在自定义日志文件中记录主机名和四位数年份，可以加上 log_host 和 log_year 参数
+  Defaults log_host, log_year, logfile="/var/log/sudo.log"
+
+  # 保持当前用户的环境变量
+  Defaults env_keep += "LANG LC_ADDRESS LC_CTYPE COLORS DISPLAY HOSTNAME EDITOR"
+  Defaults env_keep += "ftp_proxy http_proxy https_proxy no_proxy"
+
+  # 安置一个安全的 PATH 环境变量
+  Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  ```
+
+* **/etc/sudoers内容详解**
+
+  ```bash
+  root         ALL=(ALL:ALL)   ALL
+  %wheel  ALL=(ALL)           ALL
+  %sudo    ALL=(ALL:ALL)    ALL
+  peter      ALL=(ALL) NOPASSWD: ALL
+
+  授权用户/组  主机=[(切换到哪些用户或组)]  [是否需要输入密码验证] 命令1,命令2,...
+  ```
+  * **&quot;字段1&quot;**不以%号开头的表示"将要授权的用户", 比如例子中的root；以%号开头的表示"将要授权的组", 比如例子中的%wheel组 和 %sudo组。
+  * **&quot;字段2&quot;**表示允许登录的主机, ALL表示所有; 如果该字段不为ALL,表示授权用户只能在某些机器上登录本服务器来执行sudo命令.
+  * **&quot;字段3&quot;**如果省略, 相当于(root:root)，表示可以通过sudo提权到root;  如果为(ALL)或者(ALL:ALL), 表示能够提权到(任意用户:任意用户组)。请注意，"字段3"如果没省略,必须使用(  )括号包含起来。这样才能区分是省略了"字段3"还是省略了"字段4"。
+  * **&quot;字段4&quot;**的可能取值是NOPASSWD:。请注意NOPASSWD后面带有冒号:。表示执行sudo时可以不需要输入密码。
+
+  * **&quot;字段5&quot;**是使用逗号分开一系列命令,这些命令就是授权给用户的操作; ALL表示允许所有操作。

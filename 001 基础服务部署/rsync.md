@@ -92,7 +92,7 @@ rsync [OPTION] [USER@]HOST::SRC DEST
 --progress 在传输时显示传输过程。
 --log-format=formAT 指定日志文件格式。
 --password-file=FILE 从FILE中得到密码。
---bwlimit=KBPS 限制I/O带宽，KBytes per second。
+--bwlimit=KBPS 限制I/O带宽，KBytes per second。--bwlimit=1000
 -h, --help 显示帮助信息。
 ```
 

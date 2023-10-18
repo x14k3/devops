@@ -44,3 +44,31 @@ systemctl start docker
 docker info -f '{{ .DockerRootDir}}'
 # 如果输出的是新的路径就代表修改成功了,从这里也可以看出这个配置的官方名称叫 Docker Root Directory(Docker根目录)
 ```
+
+## Docker info 查看报错 WARNING: No swap limit support 解决
+
+1、编辑/etc/default/grub文件。在GRUB_CMDLINE_LINUX=" ",中并追加 cgroup_enable=memory swapaccount=1
+
+```bash
+yang@master:~$ cat  /etc/default/grub
+# If you change this file, run 'update-grub' afterwards to update
+# /boot/grub/grub.cfg.
+# For full documentation of the options in this file, see:
+#   info -f grub -n 'Simple configuration'
+ 
+GRUB_DEFAULT=0
+GRUB_TIMEOUT_STYLE=hidden
+GRUB_TIMEOUT=0
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="maybe-ubiquity"
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+
+注：如果GRUB_CMDLINE_LINUX=内有内容，切记不可删除，只需在后面追加cgroup_enable=memory swapaccount=1并用空格和前面的内容分隔开。
+```
+
+2、保存、更新、重启服务器
+
+```bash
+update-grub
+reboot
+```

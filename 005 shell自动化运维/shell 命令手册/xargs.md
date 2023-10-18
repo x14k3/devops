@@ -1,215 +1,281 @@
 # xargs
 
-给其他命令传递参数的一个过滤器
+​`xargs`​是 Unix 系统的一个很有用的命令，但是常常被忽视，很多人不了解它的用法。
 
-**xargs 命令** 是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。它擅长将标准输入数据转换成命令行参数，xargs 能够处理管道或者 stdin 并将其转换成特定命令的命令参数。xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。xargs 的默认命令是 echo，空格是默认定界符。这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。xargs 是构建单行命令的重要组件之一。
+​​
 
-### xargs 命令用法
+## 一、标准输入与管道命令
 
-xargs 用作替换工具，读取输入数据重新格式化后输出。
+Unix 命令都带有参数，有些命令可以接受"标准输入"（stdin）作为参数。
 
-定义一个测试文件，内有多行文本数据：
+> ```
+>
+> $ cat /etc/passwd | grep root
+> ```
 
-```
-cat test.txt
+上面的代码使用了管道命令（`|`​）。管道命令的作用，是将左侧命令（`cat /etc/passwd`​）的标准输出转换为标准输入，提供给右侧命令（`grep root`​）作为参数。
 
-a b c d e f g
-h i j k l m n
-o p q
-r s t
-u v w x y z
-```
+因为`grep`​命令可以接受标准输入作为参数，所以上面的代码等同于下面的代码。
 
-多行输入单行输出：
+> ```
+>
+> $ grep root /etc/passwd
+> ```
 
-```
-cat test.txt | xargs
+但是，大多数命令都不接受标准输入作为参数，只能直接在命令行输入参数，这导致无法用管道命令传递参数。举例来说，`echo`​命令就不接受管道传参。
 
-a b c d e f g h i j k l m n o p q r s t u v w x y z
-```
+> ```
+>
+> $ echo "hello world" | echo
+> ```
 
-#### 使用 -n 进行多行输出
+上面的代码不会有输出。因为管道右侧的`echo`​不接受管道传来的标准输入作为参数。
 
-**-n 选项** 多行输出：
+## 二、xargs 命令的作用
 
-```
-cat test.txt | xargs -n3
+​`xargs`​命令的作用，是将标准输入转为命令行参数。
 
-a b c
-d e f
-g h i
-j k l
-m n o
-p q r
-s t u
-v w x
-y z
-```
+> ```
+>
+> $ echo "hello world" | xargs echo
+> hello world
+> ```
 
-#### 使用 -d 分割输入
+上面的代码将管道左侧的标准输入，转为命令行参数`hello world`​，传给第二个`echo`​命令。
 
-**-d 选项** 可以自定义一个定界符：
+​`xargs`​命令的格式如下。
 
-```
-echo "nameXnameXnameXname" | xargs -dX
+> ```
+>
+> $ xargs [-options] [command]
+> ```
 
-name name name name
-```
+真正执行的命令，紧跟在`xargs`​后面，接受`xargs`​传来的参数。
 
-结合 **-n 选项** 使用：
+​`xargs`​的作用在于，大多数命令（比如`rm`​、`mkdir`​、`ls`​）与管道一起使用时，都需要`xargs`​将标准输入转为命令行参数。
 
-```
-echo "nameXnameXnameXname" | xargs -dX -n2
+> ```
+>
+> $ echo "one two three" | xargs mkdir
+> ```
 
-name name
-name name
-```
+上面的代码等同于`mkdir one two three`​。如果不加`xargs`​就会报错，提示`mkdir`​缺少操作参数。
 
-#### 读取 stdin
+## 三、xargs 的单独使用
 
-**读取 stdin，将格式化后的参数传递给命令**
+​`xargs`​后面的命令默认是`echo`​。
 
-假设一个命令为 sk.sh 和一个保存参数的文件 arg.txt：
+> ```
+>
+> $ xargs
+> # 等同于
+> $ xargs echo
+> ```
 
-```
-#!/bin/bash
-#sk.sh 命令内容，打印出所有参数。
+大多数时候，`xargs`​命令都是跟管道一起使用的。但是，它也可以单独使用。
 
-echo $*
-```
+输入`xargs`​按下回车以后，命令行就会等待用户输入，作为标准输入。你可以输入任意内容，然后按下`Ctrl d`​，表示输入结束，这时`echo`​命令就会把前面的输入打印出来。
 
-arg.txt 文件内容：
+> ```
+>
+> $ xargs
+> hello (Ctrl + d)
+> hello
+> ```
 
-```
-cat arg.txt
+再看一个例子。
 
-aaa
-bbb
-ccc
-```
+> ```
+>
+> $ xargs find -name
+> "*.txt"
+> ./foo.txt
+> ./hello.txt
+> ```
 
-#### 结合 -I 选项
+上面的例子输入`xargs find -name`​以后，命令行会等待用户输入所要搜索的文件。用户输入`"*.txt"`​，表示搜索当前目录下的所有 TXT 文件，然后按下`Ctrl d`​，表示输入结束。这时就相当执行`find -name *.txt`​。
 
-xargs 的一个 **选项 -I** ，使用 -I 指定一个替换字符串{}，这个字符串在 xargs 扩展时会被替换掉，当 -I 与 xargs 结合使用，每一个参数命令都会被执行一次：
+## 四、-d 参数与分隔符
 
-```
-cat arg.txt | xargs -I {} ./sk.sh -p {} -l
+默认情况下，`xargs`​将换行符和空格作为分隔符，把标准输入分解成一个个命令行参数。
 
--p aaa -l
--p bbb -l
--p ccc -l
-```
+> ```
+>
+> $ echo "one two three" | xargs mkdir
+> ```
 
-复制所有图片文件到 /data/images 目录下：
+上面代码中，`mkdir`​会新建三个子目录，因为`xargs`​将`one two three`​分解成三个命令行参数，执行`mkdir one two three`​。
 
-```
-ls *.jpg | xargs -n1 -I{} cp {} /data/images
-```
+​`-d`​参数可以更改分隔符。
 
-#### 结合 find 命令使用
+> ```
+>
+> $ echo -e "a\tb\tc" | xargs -d "\t" echo
+> a b c
+> ```
 
-**xargs 结合 find 使用**
+上面的命令指定制表符`\t`​作为分隔符，所以`a\tb\tc`​就转换成了三个命令行参数。`echo`​命令的`-e`​参数表示解释转义字符。
 
-用 rm 删除太多的文件时候，可能得到一个错误信息：`/bin/rm Argument list too long`​. 用 `xargs`​ 去避免这个问题：
+## 五、-p 参数，-t 参数
 
-```
-find . -type f -name "*.log" -print0 | xargs -0 rm -f
-```
+使用`xargs`​命令以后，由于存在转换参数过程，有时需要确认一下到底执行的是什么命令。
 
-xargs -0 将 `\0`​ 作为定界符。
+​`-p`​参数打印出要执行的命令，询问用户是否要执行。
 
-统计一个源代码目录中所有 php 文件的行数：
+> ```
+>
+> $ echo 'one two three' | xargs -p touch
+> touch one two three ?...
+> ```
 
-```
-find . -type f -name "*.php" -print0 | xargs -0 wc -l
-```
+上面的命令执行以后，会打印出最终要执行的命令，让用户确认。用户输入`y`​以后（大小写皆可），才会真正执行。
 
-查找所有的 jpg 文件，并且压缩它们：
+​`-t`​参数则是打印出最终要执行的命令，然后直接执行，不需要用户确认。
 
-```
-find . -type f -name "*.jpg" -print | xargs tar -czvf images.tar.gz
-```
+> ```
+>
+> $ echo 'one two three' | xargs -t rm
+> rm one two three
+> ```
 
-#### 打印出执行的命令
+## 六、-0 参数与 find 命令
 
-结合 `-t`​ 选项可以打印出 `xargs`​ 执行的命令
+由于`xargs`​默认将空格作为分隔符，所以不太适合处理文件名，因为文件名可能包含空格。
 
-```
-ls | xargs -t -I{} echo {}
-```
+​`find`​命令有一个特别的参数`-print0`​，指定输出的文件列表以`null`​分隔。然后，`xargs`​命令的`-0`​参数表示用`null`​当作分隔符。
 
-会输出当前目录下的文件列表和执行的 echo 命令
+> ```
+>
+> $ find /path -type f -print0 | xargs -0 rm
+> ```
 
-#### 使用 -p 选项确认执行的命令
+上面命令删除`/path`​路径下的所有文件。由于分隔符是`null`​，所以处理包含空格的文件名，也不会报错。
 
-​`-p`​ 选项会在执行每一个命令时弹出确认，当你需要非常准确的确认每一次操作时可以使用 `-p`​ 参数，比如，查找当前目录下 `.log`​ 文件，每一次删除都需要确认：
+还有一个原因，使得`xargs`​特别适合`find`​命令。有些命令（比如`rm`​）一旦参数过多会报错"参数列表过长"，而无法执行，改用`xargs`​就没有这个问题，因为它对每个参数执行一次命令。
 
-```
-find . -maxdepth 1 -name "*.log" | xargs -p -I{} rm {}
-```
+> ```
+>
+> $ find . -name "*.txt" | xargs grep "abc"
+> ```
 
-#### 执行多个命令
+上面命令找出所有 TXT 文件以后，对每个文件搜索一次是否包含字符串`abc`​。
 
-使用 `-I`​ 选项可以让 `xargs`​ 执行多个命令
+## 七、-L 参数
 
-```
-cat foo.txt
-one
-two
-three
+如果标准输入包含多行，`-L`​参数指定多少行作为一个命令行参数。
 
-cat foo.txt | xargs -I % sh -c 'echo %; mkdir %'
-one
-two
-three
+> ```
+>
+> $ xargs find -name
+> "*.txt"   
+> "*.md"
+> find: paths must precede expression: `*.md'
+> ```
 
-ls
-one two three
-```
+上面命令同时将`"*.txt"`​和`*.md`​两行作为命令行参数，传给`find`​命令导致报错。
 
-#### 其他应用
+使用`-L`​参数，指定每行作为一个命令行参数，就不会报错。
 
-**xargs 其他应用**
+> ```
+>
+> $ xargs -L 1 find -name
+> "*.txt"
+> ./foo.txt
+> ./hello.txt
+> "*.md"
+> ./README.md
+> ```
 
-假如你有一个文件包含了很多你希望下载的 URL，你能够使用 xargs 下载所有链接：
+上面命令指定了每一行（`-L 1`​）作为命令行参数，分别运行一次命令（`find -name`​）。
 
-```
-cat url-list.txt | xargs wget -c
-```
+下面是另一个例子。
 
-### 子 Shell（Subshells）
+> ```
+>
+> $ echo -e "a\nb\nc" | xargs -L 1 echo
+> a
+> b
+> c
+> ```
 
-运行一个 shell 脚本时会启动另一个命令解释器.，就好像你的命令是在命令行提示下被解释的一样，类似于批处理文件里的一系列命令。每个 shell 脚本有效地运行在父 shell(parent shell) 的一个子进程里。这个父 shell 是指在一个控制终端或在一个 xterm 窗口中给你命令指示符的进程。
+上面代码指定每行运行一次`echo`​命令，所以`echo`​命令执行了三次，输出了三行。
 
-```
-cmd1 | ( cmd2; cmd3; cmd4 ) | cmd5
-```
+## 八、-n 参数
 
-如果 cmd2 是 cd /，那么就会改变子 Shell 的工作目录，这种改变只是局限于子 shell 内部，cmd5 则完全不知道工作目录发生的变化。子 shell 是嵌在圆括号 () 内部的命令序列，子 Shell 内部定义的变量为局部变量。
+​`-L`​参数虽然解决了多行的问题，但是有时用户会在同一行输入多项。
 
-子 shell 可用于为一组命令设定临时的环境变量：
+> ```
+>
+> $ xargs find -name
+> "*.txt" "*.md"
+> find: paths must precede expression: `*.md'
+> ```
 
-```
-COMMAND1
-COMMAND2
-COMMAND3
-(
-  IFS=:
-  PATH=/bin
-  unset TERMINFO
-  set -C
-  shift 5
-  COMMAND4
-  COMMAND5
-  exit 3 # 只是从子 shell 退出。
-)
-# 父 shell 不受影响，变量值没有更改。
-COMMAND6
-COMMAND7
-```
+上面的命令将同一行的两项作为命令行参数，导致报错。
 
-## reference
+​`-n`​参数指定每次将多少项，作为命令行参数。
 
-* [https://shapeshed.com/unix-xargs/](https://shapeshed.com/unix-xargs/)
+> ```
+>
+> $ xargs -n 1 find -name
+> ```
 
-‍
+上面命令指定将每一项（`-n 1`​）标准输入作为命令行参数，分别执行一次命令（`find -name`​）。
+
+下面是另一个例子。
+
+> ```
+>
+> $ echo {0..9} | xargs -n 2 echo
+> 0 1
+> 2 3
+> 4 5
+> 6 7
+> 8 9
+> ```
+
+上面命令指定，每两个参数运行一次`echo`​命令。所以，10个阿拉伯数字运行了五次`echo`​命令，输出了五行。
+
+## 九、-I 参数
+
+如果`xargs`​要将命令行参数传给多个命令，可以使用`-I`​参数。
+
+​`-I`​指定每一项命令行参数的替代字符串。
+
+> ```
+>
+> $ cat foo.txt
+> one
+> two
+> three
+>
+> $ cat foo.txt | xargs -I file sh -c 'echo file; mkdir file'
+> one 
+> two
+> three
+>
+> $ ls 
+> one two three
+> ```
+
+上面代码中，`foo.txt`​是一个三行的文本文件。我们希望对每一项命令行参数，执行两个命令（`echo`​和`mkdir`​），使用`-I file`​表示`file`​是命令行参数的替代字符串。执行命令时，具体的参数会替代掉`echo file; mkdir file`​里面的两个`file`​。
+
+## 十、--max-procs 参数
+
+​`xargs`​默认只用一个进程执行命令。如果命令要执行多次，必须等上一次执行完，才能执行下一次。
+
+​`--max-procs`​参数指定同时用多少个进程并行执行命令。`--max-procs 2`​表示同时最多使用两个进程，`--max-procs 0`​表示不限制进程数。
+
+> ```
+>
+> $ docker ps -q | xargs -n 1 --max-procs 0 docker kill
+> ```
+
+上面命令表示，同时关闭尽可能多的 Docker 容器，这样运行速度会快很多。
+
+## 十一、参考链接
+
+* [Linux and Unix xargs command tutorial with examples](https://shapeshed.com/unix-xargs/), George Ornbo
+* [8 Practical Examples of Linux Xargs Command for Beginners](https://www.howtoforge.com/tutorial/linux-xargs-command/), Himanshu Arora
+
+（完）

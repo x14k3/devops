@@ -1,6 +1,6 @@
 # 生成SQL测试数据
 
-postgresql:
+## postgresql:
 
 ```bash
 create user hess superuser  password 'hess@123';  
@@ -33,4 +33,18 @@ insert into test(first_name,last_name) values('ssss323r23','ssdsdvs');
 insert into test(first_name,last_name) values('etrhertbfdx','cxvsdfs');
 insert into test(first_name,last_name) values('xcvgerge','ewrwewgvfd');
 insert into test(first_name,last_name) values('sdgssdsgrhrdgsg','fherherthe');
+```
+
+## oracle
+
+```bash
+sqlplus jy2web/Ninestar123
+
+create table TestTable as 
+select rownum as id,
+               to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
+               trunc(dbms_random.value(0, 100)) as random_id,
+               dbms_random.string('x', 20) random_string
+          from dual
+        connect by level <= 1000;
 ```

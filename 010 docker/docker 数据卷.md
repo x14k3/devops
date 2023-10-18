@@ -34,11 +34,11 @@ docker的理念：将应用和环境打包成一个镜像如果数据都在容�
 > volume也是绕过container的文件系统，直接将数据写到host机器上，只是volume是被docker管理的，docker下所有的volume都在host机器上的指定目录下/var/lib/docker/volumes
 
 ```bash
-docker volume create  [name]    #创建一个数据卷
+docker volume create  [name]     #创建一个数据卷
 docker volume inspect [name]    #展示一个或多个数据卷的详细信息
-docker volume ls                #列出所有的数据卷
-docker volume prune             #移除未使用的数据卷
-docker volume rm      [name]    #移除一个或多个数据卷，不能移除被容器使用的数据卷
+docker volume ls                            #列出所有的数据卷
+docker volume prune                    #移除未使用的数据卷
+docker volume rm      [name]       #移除一个或多个数据卷，不能移除被容器使用的数据卷
 ```
 
 ```bash

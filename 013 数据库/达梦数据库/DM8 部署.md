@@ -98,7 +98,6 @@ su - dmdba
 #步骤8：安装并启动数据库备份插件（DmAPService）
 
 
-
 ### 2.配置环境变量
 su - dmdba
 cat  >> .bash_profile <<EOF
@@ -137,6 +136,7 @@ INSTANCE_NAME=fmsdb
 ```bash
 cd /data/dmapp/script/root
 ./dm_service_installer.sh -t dmserver -dm_ini /data/dmdata/fmsdb/dm.ini -p fmsdb
+
 ```
 
 ## 五、启动数据库
@@ -148,10 +148,10 @@ cd /data/dmapp/script/root
 #disql SYSDBA/Ninestar123@192.168.10.150:8001
 #创建表空间
 create tablespace jy2web datafile '/data/dmdata/fmsdb/JY2WEB01.DBF' size 1024 autoextend on next 1024 maxsize unlimited;
-create tablespace jy2gm datafile '/data/dmdata/fmsdb/JY2GM01.DBF' size 1024 autoextend on next 1024 maxsize unlimited;
+create tablespace jy2gm   datafile '/data/dmdata/fmsdb/JY2GM01.DBF'   size 1024 autoextend on next 1024 maxsize unlimited;
 #创建用户JY2WEB并指定默认的表空间及默认的索引表空间。
 create user jy2web identified by Ninestar2022 default tablespace jy2web;
-create user jy2gm  identified by Ninestar2022 default tablespace jy2gm;
+create user jy2gm   identified by Ninestar2022 default tablespace jy2gm;
 # 授权
 grant resource,dba to jy2web;
 grant resource,dba to jy2gm;
@@ -191,8 +191,8 @@ chown dmdba.dinstall dm.key
 
 # 达梦数据库客户端安装
 
-达梦数据库下载地址：
-https://www.dameng.com/list_103.html
+达梦数据库下载地址：  
+[https://www.dameng.com/list_103.html](https://www.dameng.com/list_103.html)
 
 1. 解压后双击setup.exe 安装向导
 2. 选择语言和时区（时区和服务端一样）

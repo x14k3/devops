@@ -188,7 +188,7 @@ tar [选项...] [FILE]...
       --owner=名称         强制将 NAME
                              作为所添加的文件的所有者
   -p, --preserve-permissions, --same-permissions
-                             解压文件权限信息(默认只为超级用户服务)
+                             保留备份数据的原本权限与属性(默认只为超级用户服务)
       --preserve             与 -p 和 -s 一样
       --same-owner
                              尝试解压时保持所有者关系一致(超级用户默认此项)

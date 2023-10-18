@@ -27,7 +27,6 @@
   * 📄 [linux shadow文件](siyuan://blocks/20230610173728-xs4na7q)
 * 📄 [linux 目录结构和文件属性管理](siyuan://blocks/20230610173652-ex2pz40)
 * 📄 [linux 内核优化](siyuan://blocks/20230927141235-ndxotpj)
-* 📄 [linux 权限管理](siyuan://blocks/20230610173646-5p30gm2)
 * 📑 [linux 日志管理](siyuan://blocks/20230610173716-mus5v8e)
 
   * 📄 [linux logrotate](siyuan://blocks/20230610173801-5bt2ht6)
@@ -42,6 +41,7 @@
   * 📄 [linux 网络配置](siyuan://blocks/20230803163800-ql9cifl)
   * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20230803173114-w9zlqes)
   * 📄 [Linux 虚拟网络设备之 vRouter](siyuan://blocks/20230906171717-rabex90)
+* 📄 [linux 文件属性及权限](siyuan://blocks/20231017170058-vbdzo7g)
 * 📄 [linux 文件压缩与解压](siyuan://blocks/20230610173737-lcd72hd)
 * 📄 [linux 系统启动](siyuan://blocks/20230921212810-yj0hajt)
 * 📑 [linux 性能分析](siyuan://blocks/20230906175252-g3b9ufk)

@@ -1,0 +1,27 @@
+## Oracle19c安装脚本使用说明
+1.使用root用户
+2.上传安装包至/opt 目录
+3.按顺序执行编号01-05的脚本即可
+
+## 默认安装：
+1.非CDB数据库
+2.启用archivelog
+3.启用OMF
+4.rman备份（数据文件、控制文件、日志归档、spfile文件）冗余3次
+5.数据库密码永不过期
+
+
+
+## 默认备份策略：
+包括数据文件、控制文件、日志归档、spfile文件
+每天0点10分执行备份任务，备份日志 /tmp/rmanbackup.log
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+CONFIGURE RETENTION POLICY TO REDUNDANCY 3;
+CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET;
+
+run {
+backup incremental level 0 database plus archivelog delete all input;
+backup spfile;
+delete noprompt obsolete;
+}
+

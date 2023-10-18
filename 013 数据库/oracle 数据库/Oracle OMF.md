@@ -63,8 +63,6 @@ create tablespace JY2WE;
 -- 默认分配大小为100M
 -rw-r----- 1 oracle oinstall 104865792 12月  4 20:45 o1_mf_jy2we_krs5lqvl_.dbf
 
-
-
 -- 也可以指定数据文件大小
 create tablespace JY2GM DATAFILE size 200m autoextend on next 100m maxsize unlimited;
 -rw-r----- 1 oracle oinstall 209723392 12月  4 20:51 o1_mf_jy2gm_krs5xqc1_.dbf

@@ -18,7 +18,7 @@ commit;
 --查看所有用户名
 select username from all_users;
 --查看所有表空间
-select name from v$tablespace;
+select * from v$tablespace;
 --查询数据库名：
 show parameter db_name;
 --查询实例名：
@@ -38,10 +38,13 @@ show parameter service_name;
 select tablespace_name, sum(bytes)/1024/1024 as MB from dba_data_files group by tablespace_name;
 select tablespace_name, sum(bytes)/1024/1024/1024 as GB from dba_data_files group by tablespace_name;
 
--- 查询所有表
+-- 查询表空间中的所有表
+--查询表空间所有表：select table_name from all_tables where TABLESPACE_NAME='表空间';    --表空间名字一定要大写。
+--查询表所在的表空间：select * from user_tables where table_name=‘表名';                                 --表名一定要大写；
 
 --查询逻辑目录
 select * from dba_directories;
+select * from dba_directories where DIRECTORY_NAME='DATA_PUMP_DIR';
 
 --查询数据库字符集
 select userenv('language') from dual;
