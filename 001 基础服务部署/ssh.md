@@ -1,4 +1,4 @@
-# linux ssh
+# ssh
 
 ## ssh 安全加固
 

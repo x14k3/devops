@@ -2,19 +2,15 @@
 
 ## NetworkManager 介绍
 
-NetworkManager是2004年RedHat启动的项目，皆在能够让Linux用户更轻松的处理现代网络需求，尤其是无线网络，能够自动发现网卡并配置IP地址。
-
-RHEL7上同时支持network.service和NetworkManager.service(简称NM)。默认情况下这2个服务都有开启，但是因为NetworkManager.service当时的兼容性不好，有时会造成ip地址无法生效或网络不通问题，大部分人都会将其关闭NM。
-
-但是在RHEL 8/Centos 8上已废弃network.service（默认不安装），只能通过NetworkManager进行网络配置。
+NetworkManager是一个程序，用于为系统自动提供检测和配置以自动连接到网络。NetworkManager的功能对于无线和有线网络都非常有用。对于无线网络，NetworkManager首选已知的无线网络，并且能够切换到最可靠的网络。支持NetworkManager的应用程序可以从联机和脱机模式切换。与无线连接相比NetworkManager更喜欢有线连接，它支持调制解调器连接和某些类型的VPN。NetworkManager最初是由Red  Hat开发的，现在由GNOME项目托管。
 
 NetworkManager主要管理2个对象： Connection（网卡连接配置） 和 Device（网卡设备），他们之间是多对一的关系，但是同一时刻只能有一个Connection对于Device才生效。
 
-在RHEL 8/Centos 8有三种方法配置网络：
+NetworkManager的配置工具有多种形式，如下：
 
-* 通过nmcli connection add命令配置，会自动生成ifcfg文件。
-* 手动配置ifcfg文件，通过nmcli connection reload来加载生效。
-* 手动配置ifcfg文件，通过传统network.service来加载生效。
+1. nmcli：命令行。这是最常用的工具。
+2. nmtui：在shell终端开启文本图形界面。
+3. nm-applet:GUI界面配置工具。
 
 NetworkManager的配置在这个目录里面：
 
@@ -27,84 +23,70 @@ drwxr-xr-x 8 root root 4096 9月   5 16:40 ../
 
 ```
 
-## NetworkManager 命令
+## nmcli使用方法
+
+nmcli使用方法非常类似linux ip命令、cisco交换机命令，并且支持tab补全，也可在命令最后通过-h、–help、help查看帮助。在nmcli中有2个命令最为常用：
 
 ### nmcli connection
 
-```bash
-nmcli connection 
-# add		       添加
-# delete        删除
-# edit            编辑
-# up    	      启用
-# down		  停用
-# help   	      帮助
-# load   	      加载
-# monitor    监控
-# show     	   查看
-# clone  	      克隆
-# modify 	   修改
-# reload	      重载
-
-
-[root@zutuanxue ~]# nmcli connection modify ens37 ipv4.addresses 192.168.18.100/24 ipv4.gateway 192.168.18.1 ipv4.method manual autoconnect yes
-[root@zutuanxue ~]# nmcli connection down ens37
-成功停用连接 "ens37"（D-Bus 活动路径：...
-[root@zutuanxue ~]# nmcli connection up ens37
-连接已成功激活（D-Bus 活动路径：...
-
-```
+译作`连接`​，可理解为配置文件，相当于ifcfg-ethX。可以简写为nmcli c  
+connection有2种状态：  
+▷ 活跃（带颜色字体）：表示当前该connection生效  
+▷ 非活跃（正常字体）：表示当前该connection不生效
 
 ### nmcli device
 
+译作`设备`​，可理解为实际存在的网卡（包括物理网卡和虚拟网卡）。可以简写为nmcli d  
+device有4种常见状态：  
+▷ connected：已被NM纳管，并且当前有活跃的connection  
+▷ disconnected：已被NM纳管，但是当前没有活跃的connection  
+▷ unmanaged：未被NM纳管  
+▷ unavailable：不可用，NM无法纳管，通常出现于网卡link为down的时候（比如ip link set ethX down）
+
+### 常用命令
+
 ```bash
-[root@zutuanxue ~]# nmcli device 
-connect     		    连接
-disconnect  		断开
-lldp        		       显示通过lldp协议学习到的相邻设备信息
-monitor     		   监控设备
-set         		       设置设备
-status      		  显示设备状态
-delete      		  删除设备 只能删除软件设备
-help        		  帮助
-modify      		  修改
-reapply     		  更新
-show        		  查看详细信息
-wifi        		      无线网络管理
-```
+# 查看ip（类似于ifconfig、ip addr）
+nmcli
+# 启用connection（相当于ifup）
+nmcli c up ethX
+# 停止connection（相当于ifdown）
+nmcli c down
+# 删除connection（类似于ifdown并删除ifcfg）
+nmcli c delete ethX
+# 查看connection列表
+nmcli c show
+# 查看connection详细信息
+nmcli c show ethX
+# 重载所有ifcfg或route到connection（不会立即生效）
+nmcli c reload
+# 重载指定ifcfg或route到connection（不会立即生效）
+nmcli c load /etc/sysconfig/network-scripts/ifcfg-ethX
+nmcli c load /etc/sysconfig/network-scripts/route-ethX
+# 立即生效connection，有3种方法
+nmcli c up ethX
+nmcli d reapply ethX
+nmcli d connect ethX
+# 查看device列表
+nmcli d
+# 查看所有device详细信息
+nmcli d show
+# 查看指定device的详细信息
+nmcli d show ethX
+# 激活网卡
+nmcli d connect ethX
+# 关闭无线网络（NM默认启用无线网络）
+nmcli r all off
+# 查看NM纳管状态
+nmcli n
+# 开启NM纳管
+nmcli n on
+# 关闭NM纳管（谨慎执行）
+nmcli n off
+# 监听事件
+nmcli m
 
-### nmcli 其他常用设置
-
 ```
-[root@zutuanxue ~]# nmcli 
--t		简洁输出	与-p冲突
--p	人性化输出 与-t冲突
--c		颜色开关 auto/on/off
--f		过滤字段	all查看所有字段   
-connection 	连接 
-device      	    设备
-general     	    全局
-monitor     	    监控
-networking  	网络
-radio       	    无线广播
-```
-
-### nmcli 的返回值
-
-```
-0: 成功-指示操作已成功
-1: 位置或指定的错误
-2: 无效的用户输入，错误的nmcli调用
-3: 超时了（请参阅 --wait 选项）
-4: 连接激活失败
-5: 连接停用失败
-6: 断开设备失败
-7: 连接删除失败
-8: 网络管理器没有运行
-10: 连接、设备或接入点不存在
-```
-
-‍
 
 ## 配置案例
 
@@ -116,23 +98,28 @@ radio       	    无线广播
 
 弄明白connection和device的关系之后，给网卡配置IP地址就很方便了：创建一个新的_connection_并把它apply到我们的_device_上。
 
+```bash
+# 创建connection，配置静态ip（等同于配置ifcfg，其中BOOTPROTO=none，并ifup启动）
+nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual \
+ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 ,8,8,8,8 connection.autoconnect yes
+▪ type ethernet                            # 创建连接时候必须指定类型，类型有很多，可以通过 nmcli c add type-h看到，这里指定为ethernet。
+▪ con-name ethX ifname ethX  #第一个ethX表示连接（connection）的名字，这个名字可以任意定义，无需和网卡名相同；第二个ethX表示网卡名，这个ethX必须是在 nmcli d里能看到的。
+▪ ipv4.addresses '192.168.1.100/24,192.168.1.101/32'  #配置2个ip地址，分别为192.168.1.100/24和192.168.1.101/32
+▪ ipv4.gateway 192.168.1.254   # 网关为192.168.1.254
+▪ ipv4.dns '8.8.8.8,4.4.4.4'          # dns为8.8.8.8和4.4.4.4
+▪ ipv4.method manual               # 配置静态IP  [ipv4.method auto] 动态DHCP
+▪ connection.autoconnect yes  # 开机自动启用
 ```
-nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 
-Connection 'eth0-static' (3ae60979-d6f1-4dbb-8a25-ff1178e7305c) successfully added.
-```
-
-从命令上看应该还是很容易读懂的，创建一个新的`ethernet`​类型的连接，名字叫做`eth0-static`​，网卡名字是`eth0`​，IPv4手动配置，地址网关DNS等等都填上。
 
 一般情况下，连接创建后如果对应设备没有活跃的其他连接，创建的连接会直接生效，如果没生效也比较简单，直接执行：
 
 ```
-[root@localhost ~]# nmcli connection up eth0-static
-Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/4)
+nmcli connection up eth0-static
 ```
 
 执行完成后连接生效，可以通过`nmcli connection`​和`ip addr`​命令查看结果。
 
-如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​​之后修改的属性才能生效。
+如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​之后修改的属性才能生效。
 
 ```bash
 nmcli conn modify  ens33  ipv4.method manual ipv4.addresses "10.10.0.53/16" ipv4.gateway 10.10.1.1 ipv4.dns 114.114.114.114 
@@ -143,22 +130,22 @@ nmcli connection down ens33  && nmcli connection up ens33
 
 ```bash
 # 接下来创建一个名为br0的网桥：
-sudo nmcli con add type bridge ifname br0
+nmcli con add type bridge ifname br0
 # 把主接口桥到br0上，例如我的主接口名是eno1：
-sudo nmcli con add type bridge-slave ifname eno1 master br0
+nmcli con add type bridge-slave ifname eno1 master br0
 # 关闭主接口，这里可以使用你之前查看获得到的UUID来关闭：
-sudo nmcli con down 9a25e1e1-63fc-3cf3-a9ea-549f9e5ab431
+nmcli con down 9a25e1e1-63fc-3cf3-a9ea-549f9e5ab431
 # 一般情况下，当NetworkManager检测到主接口down掉后，会自动帮你把网桥up起来，如果没有，手动执行下面的命令：
-sudo nmcli con up bridge-br0
-# 由于我的路由器是开了DHCP服务的，这里br0会自动分配IP，但如果是服务器上面，一般是要配置静态IP的，以下是设置静态IP的方法：
-sudo nmcli con modify bridge-br0 ipv4.method manual ipv4.address "192.168.0.251/24" ipv4.gateway "192.168.0.1" ipv4.dns "114.114.114.114"
-sudo nmcli con up bridge-br0
-# 如果要恢复成使用DHCP自动分配IP：
-sudo nmcli con modify bridge-br0 ipv4.method auto
-sudo nmcli con up bridge-br0
-```
+nmcli con up bridge-br0
 
-‍
+# 由于我的路由器是开了DHCP服务的，这里br0会自动分配IP，但如果是服务器上面，一般是要配置静态IP的，以下是设置静态IP的方法：
+nmcli con modify bridge-br0 ipv4.method manual ipv4.address "192.168.0.251/24" ipv4.gateway "192.168.0.1" ipv4.dns "114.114.114.114"
+nmcli con up bridge-br0
+
+# 如果要恢复成使用DHCP自动分配IP：
+nmcli con modify bridge-br0 ipv4.method auto
+nmcli con up bridge-br0
+```
 
 ### 给网卡添加vlan tag并配置IP地址
 

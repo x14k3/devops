@@ -1,7 +1,7 @@
 # linux 防火墙
 
-* 📄 [Firewalld](siyuan://blocks/20230610173734-jic9gse)
-* 📄 [Iptables](siyuan://blocks/20230610173617-7l5ftni)
+* 📄 [firewalld](siyuan://blocks/20230610173734-jic9gse)
+* 📄 [iptables](siyuan://blocks/20230610173617-7l5ftni)
 
 # 理解 firewalld/ufw 与iptables、netfilter 的关系
 
