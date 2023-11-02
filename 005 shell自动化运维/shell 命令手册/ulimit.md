@@ -2,7 +2,7 @@
 
 ulimit[命令](https://www.linuxcool.com/ "命令")来自英文词组“user limit”的缩写，是一条bash解释器的内部命令，其功能是用于限制使用[系统](https://www.linuxdown.com/ "系统")​[资源](https://www.itcool.net/ "资源")。通过使用ulimit命令能够限制用户最大启动进程数、最长CPU使用时长、最高内存占用量等资源，提高整体服务器的运行稳定性，让每位用户都可以充分、合理、公平地利用系统资源。
 
-**语法格式：**ulimit 参数 [对象]
+**语法格式：** ulimit 参数 [对象]
 
 **常用参数：**
 

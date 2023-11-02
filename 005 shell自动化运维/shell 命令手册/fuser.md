@@ -63,6 +63,7 @@ fuser -k -x -u -c /dev/hd1  或者  fuser -kxuc /home
 fuser -d /usr文件
 ```
 
-​`/dev/kmem`​ 用于系统映像。<br />`/dev/mem`​  也用于系统映像。
+​`/dev/kmem`​ 用于系统映像。
+`/dev/mem`​  也用于系统映像。
 
 ‍

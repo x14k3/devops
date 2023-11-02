@@ -97,9 +97,9 @@ raid级别有很多种，下面主要介绍常用的几种:
 
 说明：条带与复制卷的组合，兼具两者的功能，若干brick组成1个复制卷，另外若干brick组成其他复制卷；单个文件以条带的形式存储在2个或多个复制集（replicated sets ），复制集内文件分片以副本的形式保存；
 
-**distribute stripe replica volume 混合卷：** 三种基本卷的复合卷，分布式卷，条带与复制卷的组合，兼具三者的功能
+**distribute stripe replica volume 混合卷：**  三种基本卷的复合卷，分布式卷，条带与复制卷的组合，兼具三者的功能
 
-**dispersed volume：** 分散式（冗余式），例如，数据保存在10个brick中，每个brick有1T，10个brick中有3个是作为冗余brick，作为数据校验，不做存储。此时volume只有7T，volume中允许有3个brick损坏
+**dispersed volume：**  分散式（冗余式），例如，数据保存在10个brick中，每个brick有1T，10个brick中有3个是作为冗余brick，作为数据校验，不做存储。此时volume只有7T，volume中允许有3个brick损坏
 
 ## 五、glusterfs集群
 
@@ -107,9 +107,9 @@ raid级别有很多种，下面主要介绍常用的几种:
 
 ### 学习案例
 
-**案例需求:** 部署一个glusterfs存储集群
+**案例需求:**  部署一个glusterfs存储集群
 
-**集群部署:** 案例步骤
+**集群部署:**  案例步骤
 
 1. 部署集群
 2. 创建卷并启动

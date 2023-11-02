@@ -115,7 +115,7 @@ action.destructive_requires_name: true
 
 `cd /data/kibana/`
 
-`​ vim config/kibana.yml`
+` vim config/kibana.yml`
 
 ```
 # 修改服务端口

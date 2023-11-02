@@ -4,7 +4,7 @@
 
 ## 一、roles介绍
 
-**roles：** ansible模块，类似于函数，完成一个任务的指令。每一个roles都有自己特定的目录结构，就是通过分别将variables, tasks及handlers等放置于单独的目录中,并可以便捷地调用它们的一种机制。
+**roles：**  ansible模块，类似于函数，完成一个任务的指令。每一个roles都有自己特定的目录结构，就是通过分别将variables, tasks及handlers等放置于单独的目录中,并可以便捷地调用它们的一种机制。
 
 **roles优点：**
 
@@ -25,7 +25,7 @@ vars：有一个main.yml文件，定义变量。
 meta：有一个main.yml文件，定义此角色的特殊设定及其依赖关系。
 ```
 
-**注意:** 在每个角色的目录中分别创建files, tasks,handlers,templates,vars和meta目录，用不到的目录可以创建为空目录.
+**注意:**  在每个角色的目录中分别创建files, tasks,handlers,templates,vars和meta目录，用不到的目录可以创建为空目录.
 
 ## 三、案例：通过roles实现lamp
 

@@ -8,7 +8,7 @@ VMware vSphere 是 VMware 的虚拟化平台，可将数据中心转换为包括
 
 ​![2020年 VMware Center Server Appliance VCSA 7.0 安装部署_vsphere](assets/net-img-b69e19fa284a5b8037fe953209367436-20230904172221-x9czec7.png)​
 
-**vSphere 的两个核心组件是 ESXi和vCenter Server。**ESXi是用于创建并运行虚拟机和虚拟设备的虚拟化平台。vCenter Server是一项服务，用于管理网络中连接的多个主机，并将主机资源池化。
+**vSphere 的两个核心组件是 ESXi和vCenter Server。** ESXi是用于创建并运行虚拟机和虚拟设备的虚拟化平台。vCenter Server是一项服务，用于管理网络中连接的多个主机，并将主机资源池化。
 
 ​​
 

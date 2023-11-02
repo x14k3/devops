@@ -39,7 +39,7 @@ wFRAnlkXeBXmWs1MyGEs
 ## 快速创建大文件
 
 ```bash
-dd if=/dev/zero of=test1 bs=1M count=1000
+dd if=/dev/zero of=test1 bs=102400 count=1024  # 100MB
 ```
 
 ## 用dd命令制作ISO镜像U盘启动盘
@@ -54,17 +54,27 @@ dd if=~/Downloads/debian-11.3.0-amd64-netinst.iso of=/dev/sdb bs=1M status=progr
 ## 增加swap分区文件大小
 
 ```bash
-#第一步：创建一个大小为256M的文件：
-dd if=/dev/zero of=/swapfile bs=1024 count=262144
+#第一步：创建一个大小为1G的文件：
+dd if=/dev/zero of=/swapfile bs=1M count=1024
 #第二步：把这个文件变成swap文件：
 mkswap /swapfile
 #第三步：启用这个swap文件：
 swapon /swapfile
 #第四步：编辑/etc/fstab文件，使在每次开机时自动加载swap文件：
-/swapfile    swap    swap    default   0 0
+echo "/swapfile    swap    swap    default   0 0 "  >> /etc/fstab
 ```
 
-‍
+附：Linux下设置swappiness参数来配置内存使用到多少才开始使用swap分区
+
+```bash
+sysctl -a | grep vm.swappiness
+vm.swappiness = 60
+#说明你的内存在使用到100-60=40%的时候，就开始出现有交换分区的使用
+vim /etc/sysctl.conf
+vm.swappiness = 10
+# 生效
+sudo sysctl -p
+```
 
 ## 常用案例汇总
 

@@ -18,7 +18,7 @@
 
 可以看到我的机器配置很低，1 核 2.5GHz（在阿里云买的最低配的服务器）。
 
-### **/proc/cpuinfo**
+###  **/proc/cpuinfo**
 
 /proc 目录是内核透传出来给用户态使用的，里面记录着很多信息文件，比如还有内存文件 meminfo 等。可以使用 cat /proc/cpuinfo 查看 CPU 信息。
 

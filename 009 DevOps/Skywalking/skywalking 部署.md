@@ -26,7 +26,7 @@ Skywalking是分布式系统的应用程序性能监视工具，专为微服务�
 
 5.配置skywalking
 
-`vim /data/apache-skywalking-apm-bin/config/application.yml ​`
+`vim /data/apache-skywalking-apm-bin/config/application.yml `
 
 ```bash
 # 定位到storage部分，将默认的H2存储库改为elasticsearch，并按照以下配置。

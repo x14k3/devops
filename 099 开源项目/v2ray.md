@@ -32,33 +32,8 @@ unzip -qd /data/v2ray/ 2ray-linux-64.zip
 |-- vpoint_socks_vmess.json
 `-- vpoint_vmess_freedom.json
 
-# 配置systemctl服务，根据目录修改v2ray.service文件
-cat /usr/lib/systemd/system/v2ray.service  <<EOF
-[Unit]
-Description=V2Ray Service
-Documentation=https://www.v2fly.org/
-After=network.target
-
-[Service]
-User=v2ray
-Group=v2ray
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/data/v2ray/v2ray -config /data/conf/config.json
-Restart=on-failure
-RestartPreventExitStatus=23
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-useradd -M -s /sbin/nologin v2ray
-
 # 启动服务
-systemctl daemon-reload
-systemctl enable v2ray
-systemctl start v2ray
+/data/v2ray/v2ray -config /data/conf/config.json  &
 
 # 生成uuid
 cat /proc/sys/kernel/random/uuid
@@ -69,8 +44,8 @@ cat /proc/sys/kernel/random/uuid
 ```json
 {
   "log": {
-        "access": "/data/v2ray/log/access.log",
-        "error": "/data/v2ray/log/error.log",
+        "access": "/data/v2ray/access.log",
+        "error": "/data/v2ray/error.log",
         "loglevel": "warning"
     },
   "inbounds": [
@@ -102,8 +77,8 @@ cat /proc/sys/kernel/random/uuid
 ```json
 {
   "log": {
-        "access": "/data/v2ray/log/access.log",
-        "error": "/data/v2ray/log/error.log",
+        "access": "/data/v2ray/access.log",
+        "error": "/data/v2ray/error.log",
         "loglevel": "warning"
     },
   "inbounds": [

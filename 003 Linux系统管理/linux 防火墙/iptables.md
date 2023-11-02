@@ -9,7 +9,7 @@
 注意每一个链对应的表都是不完全一样的，表和链之间是多对多的对应关系。但是不管一个链对应多少个表，它的表都是按照下面的优先顺序来进行查找匹配的。
 **表的处理优先级：raw &gt; mangle &gt; nat &gt; filter**
 
-iptables的四个表iptable_filter，iptable_mangle，iptable_nat，iptable_raw，默认表是filter（没有指定表的时候就是filter表）。
+**iptables的四个表**iptable_filter，iptable_mangle，iptable_nat，iptable_raw，默认表是filter（没有指定表的时候就是filter表）。
 
 - filter 表：用来对数据包进行过滤，具体的规则要求决定如何处理一个数据包。
 - nat 表：网络地址转换，主要用来修改数据包的 IP 地址、端口号信息。
@@ -18,23 +18,29 @@ iptables的四个表iptable_filter，iptable_mangle，iptable_nat，iptable_raw�
 
 > raw 表只使用在 PREROUTING 链和 OUTPUT 链上,因为优先级最高，从而可以对收到的数据包在系统进行 ip_conntrack（连接跟踪）前进行处理。一但用户使用了 raw 表,在某个链上，raw表处理完后，将跳过NAT表和ip_conntrack 处理，即不再做地址转换和数据包的链接跟踪处理了。RAW 表可以应用在那些不需要做nat的情况下，以提高性能。
 
-iptables 的五个链 PREROUTING，INPUT，FORWARD，OUTPUT，POSTROUTING
+**iptables 的五个链** PREROUTING，INPUT，FORWARD，OUTPUT，POSTROUTING
 
 - input 链：当收到访问防火墙本机地址的数据包时，将应用此链中的规则；
 - output 链：当防火墙本机向外发送数据包时，将应用此链中的规则；
 - forward 链：当收到需要通过防火墙转发给其他地址的数据包时，将应用此链中的规则，注意如果需要实现 forward 转发需要开启 Linux 内核中的 ip_forward 功能；
+  ```bash
+  #修改/etc/sysctl.conf文件，修 改下面一行的值： 
+  net.ipv4.ip_forward = 1 
+  #执行下面的命令来使修改生效： 
+  sysctl -p /etc/sysctl.con
+  ```
 - prerouting 链：在对数据包做路由选择之前，将应用此链中的规则；
 - postrouting 链：在对数据包做路由选择之后，将应用此链中的规则；
 
 **首先牢记各个链对应的表有那些**
 
 |链名|对应的表名|
-| -----------| ------------------------|
-|PREROUTING|raw、mangle、nat|
-|FORWARD|mangle、filter|
-|INPUT|mangle、nat、filter|
-|OUTPUT|raw、mangle、Nat、filter|
-|POSTROUTING|mangle、nat|
+| -------------| ----------------------------------------|
+|PREROUTING|raw         mangle   nat|
+|FORWARD|mangle   filter|
+|INPUT|mangle   nat          filter|
+|OUTPUT|raw         mangle   Nat        filter|
+|POSTROUTING|mangle   nat|
 
 # iptables 配置
 
@@ -91,14 +97,14 @@ iptables -t filter -I INPUT -s 192.168.10.31 -p tcp -m tcp --dport 28325 -j DROP
 ## 3. 控制类型
 
 ```bash
-`ACCEPT`     # 允许数据包通过。
-`DROP`       # 直接丢弃数据包，不给任何回应信息，这时候客户端会感觉自己的请求泥牛入海了，过了超时时间才会有反应。
-`REJECT`     # 拒绝数据包通过，必要时会给数据发送端一个响应的信息，客户端刚请求就会收到拒绝的信息。
-`SNAT`       # 源地址转换，解决内网用户用同一个公网地址上网的问题。
-`MASQUERADE` # 是SNAT的一种特殊形式，适用于动态的、临时会变的ip上。
-`DNAT`       # 目标地址转换。
-`REDIRECT`   # 在本机做端口映射。
-`LOG`        # 在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则，也就是说除了记录以外不对数据包做任何其他操作，仍然让下一条规则去匹配。
+ACCEPT    # 允许数据包通过。
+DROP       # 直接丢弃数据包，不给任何回应信息，这时候客户端会感觉自己的请求泥牛入海了，过了超时时间才会有反应。
+REJECT     # 拒绝数据包通过，必要时会给数据发送端一个响应的信息，客户端刚请求就会收到拒绝的信息。
+SNAT        # 源地址转换，解决内网用户用同一个公网地址上网的问题。
+MASQUERADE # 是SNAT的一种特殊形式，适用于动态的、临时会变的ip上。
+DNAT       # 目标地址转换。
+REDIRECT`  # 在本机做端口映射。
+LOG          # 在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则，也就是说除了记录以外不对数据包做任何其他操作，仍然让下一条规则去匹配。
 ```
 
 # 规则管理
@@ -246,15 +252,15 @@ iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # 匹配条件-扩展模块
 
-- *tcp 模块*
+## t*cp 模块*
 
 |参数|说明|示例|
-| -----------| ------------------------| ---------------------------------------|
+| -------------| --------------------------| -----------------------------------------|
 |--dport|tcp扩展模块中的-目标端口|--dport 22；--dport 22:50|
 |--sport|扩展模块中的-源端口|--sport 22；--sport 22:50|
 |--tcp-flags|匹配TCP报文头标志位|--tcp-flags SYN,ACK,FIN,RST,URG,PSH SYN|
 
-- *multiport 模块*
+## *multiport 模块*
 
 指定多个不同的不连续(也可以指定连续的)的目标端口
 
@@ -263,7 +269,7 @@ iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 |--dports|同时定义多个不同的不连续的目标端口|iptables -t filter -I INPUT -s 10.0.1.2 -p tcp -m multiport --dport 22,36,80 -j DROP|
 |--sports|同时定义多个不同的不连续(也可以指定连续的)的源端口|iptables -t filter -I INPUT -s 10.0.1.2 -p tcp -m multiport --sport 22,80:88 -j DROP|
 
-- *iprange 模块*
+## *iprange 模块*
 
 指定一个连续的 IP 地址范围
 
@@ -274,7 +280,7 @@ iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 在`--src-range`或`--dst-range`这个前面加"!"可以取反
 
-- *stging 模块*
+## *stging 模块*
 
 可以指定要匹配的字符串，如果报文中包含对应的字符串，则复合匹配条件。
 
@@ -283,7 +289,7 @@ iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 |--algo bm|指定对应的算法  `bm`、`kmp`|iptables -t filter -I INPUT -m string --algo bm --string "xxx" -j DROP|
 |--string xxx|指定要匹配的字符串|iptables -t filter -I INPUT -m string --algo bm --string "xxx" -j DROP|
 
-- *time 模块*
+## *time 模块*
 
 可以根据时间段去匹配报文，如果报文到达的时间在指定的时间范围以内，则符合匹配条件
 
@@ -302,7 +308,7 @@ iptables -t filter -I INPUT -p tcp --doprt 80 -m time --weekdays 5 --monthdays 1
 # --weekdays`和`--monthdays` 也可以使用"!"取反
 ```
 
-- *commlimit 模块*
+## *commlimit 模块*
 
 可以限制每个IP 地址同时连接到 server 端的连接数量。  不指定 IP 则表示，是针对每个请求 IP进行限制
 
@@ -311,7 +317,7 @@ iptables -t filter -I INPUT -p tcp --doprt 80 -m time --weekdays 5 --monthdays 1
 |--connlimit-above|限制 IP 的连接数量上限|iptables -f filter -I INPUT -p tcp -dport 22 -m connlimit --connlimit-above 2 -j REJECT  只允许每个 IP 有两个 ssh 连接到服务器|
 |--connlimit-mask|限制某类网段的连接数量|iptables -f filter -I INPUT -p tcp -dport 22 -m connlimit --connlimit-above 2 --connlimit-mask 24 -j REJECT  限制 C 类网段的连接次数，24转换就是255.255.255.0, 也就是254个 ip 有2个可以访问|
 
-- *limit 模块*
+## *limit 模块*
 
 可以限制单位时间内流入包的数量 ，可以用秒、分、小时、天作为单位进行限制
 
@@ -327,14 +333,14 @@ iptables -t filter -I INPUT -p tcp --doprt 80 -m time --weekdays 5 --monthdays 1
 iptables -t filter -I INPUT -p icmp -m limit --limit 10/second -j ACCEPT
 ```
 
-- *udp 模块*
+## *udp 模块*
 
 |参数|说明|示例|
 | -------| ----------------------------| -----------------------------------------------------------------|
 |--sport|源端口（可以设置连续端口）|iptables -t filter -I INPUT -p udp -m udp --dport 13 -j ACCEPT|
 |--dporr|目标端口（可以设置连续端口）|iptables -t filter -I INPUT -p udp -m udp --dport 80:88 -j ACCEPT|
 
-- *state 模块*
+## *state 模块*
 
 报文状态可以为NEW、ESTABLISHED、RELATED、INVALID、UNTRACKED
 
@@ -348,7 +354,16 @@ UNTRACKED：报文的状态为untracked时，表示报文未被追踪，当报�
 iptables -t filter -I INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
 
-- *icmp 模块*
+## *conntrack 模块*
+
+conntrack模块会在以后的版本中取代state，现在保留state模块只是为了兼容老用户的习惯
+
+```bash
+-m conntrack --ctstate ESTABLISHED,RELATED -j ...
+-m state --state ESTABLISHED,RELATED -j ... 
+```
+
+## *icmp 模块*
 
 icmp 报文类型：
 

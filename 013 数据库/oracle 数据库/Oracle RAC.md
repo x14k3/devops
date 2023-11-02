@@ -1,13 +1,13 @@
 # Oracle RAC
 
-Oracle RAC，全称是Oracle Real Application Cluster，即真正的应用集群，是oracle提供的一个并行集群系统，整个集群系统由 **Oracle Clusterware （集群就绪软件）**​***和***​**​ Real Application Clusters（RAC)** 两大部分组成。
+Oracle RAC，全称是Oracle Real Application Cluster，即真正的应用集群，是oracle提供的一个并行集群系统，整个集群系统由 **Oracle Clusterware （集群就绪软件）**​***和***​ ** Real Application Clusters（RAC)**  两大部分组成。
 
 oracle RAC 的实质是位于不同操作系统的Oracle实例节点同时访问同一个Oracle数据库，每个节点间通过私有网络进行通信，互相监控节点的运行状态，oracle数据库所有的数据文件、联机日志文件、控制文件等均放在集群的共享存储设备上，而共享存储设备可以是RAW、ASM、OCFS2等，所有集群节点可以同时读写共享存储。Oracle RAC的基本拓扑结构如下所示：  
 ​​![v2-3bffb03f93b2b988f1a2dcf4810c9786_720w](assets/v2-3bffb03f93b2b988f1a2dcf4810c9786_720w-20230630143802-qdrv1bw.jpg)​​
 
 ‍
 
-**DG 侧重于容灾，独立存储，但两者数据不能做到实时同步（单活）。** **RAC侧重于负载均衡，但共享存储不能容灾（双活）**。
+**DG 侧重于容灾，独立存储，但两者数据不能做到实时同步（单活）。**  **RAC侧重于负载均衡，但共享存储不能容灾（双活）** 。
 
 # oracle RAC 搭建
 

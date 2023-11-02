@@ -95,10 +95,10 @@ enabled
 
 用户使用的是 crontab 这个命令来定义周期性的计划任务，但是为了安全性的问题， 与 at 同样的，我们可以限制使用 crontab 的用户账号！使用的限制数据有：
 
-**/etc/cron.allow：**  
+ **/etc/cron.allow：**   
 将可以使用 crontab 的账号写入其中，若不在这个文件内的用户则不可使用 crontab；
 
-**/etc/cron.deny：**  
+ **/etc/cron.deny：**   
 将不可以使用 crontab 的账号写入其中，若未记录到这个文件当中的用户，就可以使用 crontab 。
 
 与 at 一样，以优先级来说， /etc/cron.allow 比 /etc/cron.deny 要高， 一般系统默认是提供 /etc/cron.deny ， 你可以将允许使用 crontab 用户写入 /etc/cron.deny 当中，一个账号一行。crontab 建立计划任务会存放在 /var/spool/cron/ 目录中，

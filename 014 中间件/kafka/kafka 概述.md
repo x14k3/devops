@@ -40,7 +40,7 @@ Kafka拥有三个非常重要的角色特性：
 
 **==Kafka 就是强依赖于ZooKeeper，没有ZooKeeper 的话Kafka 都无法运行。==**
 
-**==​ ZooKeeper 为Kafka 提供了元数据的管理，例如一些Broker 的信息、主题数据、分区数据等等。==**
+ **== ZooKeeper 为Kafka 提供了元数据的管理，例如一些Broker 的信息、主题数据、分区数据等等。==**
 
 ‍
 

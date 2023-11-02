@@ -5,7 +5,7 @@
 * GitHub：[figlet (opens new window)](https://github.com/cmatsuoka/figlet)
 * 官网：[figlet (opens new window)](http://www.figlet.org/)
 
-Linux上安装： `zypper in figlet`​ `​ yum in figlet`​
+Linux上安装： `zypper in figlet`​ ` yum in figlet`​
 
 安装之后就可以直接使用了：
 

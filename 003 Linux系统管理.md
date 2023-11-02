@@ -1,54 +1,71 @@
 # 003 Linux系统管理
 
-* 📄 [linux acl权限](siyuan://blocks/20230610173747-b0whwmi)
-* 📑 [linux 磁盘管理](siyuan://blocks/20230731184808-fp74xuk)
+* 📑 linux 其他
 
-  * 📄 [linux LVM](siyuan://blocks/20230610173608-94mdetb)
-  * 📄 [linux 磁盘管理-RAID](siyuan://blocks/20230610173538-pv1fv66)
-  * 📄 [linux 磁盘管理-分区](siyuan://blocks/20230610173743-0ftosvt)
-* 📄 [linux 定时任务](siyuan://blocks/20230610173646-bhdhhzl)
-* 📑 [linux 防火墙](siyuan://blocks/20230803115608-fyehvsl)
+  * 📄 VIM文本编辑器
+  * 📄 linux PAM文件
+  * 📄 ((20231030115739-igw5coc 'linux debian问题总结'))
+  * 📄 linux proc-pid-status 文件
+  * 📄 ((20231023104919-tvrvtut 'linux sysctl.conf 文件'))
+  * 📄 linux 用户模式
+  * 📄 linux之init.d、rc.d
+* 📄 linux 内核优化
+* 📄 linux 定时任务
+* 📑 linux 性能分析
 
-  * 📄 [firewalld](siyuan://blocks/20230610173734-jic9gse)
-  * 📄 [iptables](siyuan://blocks/20230610173617-7l5ftni)
-* 📑 [linux 进程管理](siyuan://blocks/20230731184852-gpvm3o2)
+  * 📄 Linux 性能分析之 CPU
+  * 📄 Linux 性能分析之 IO
+  * 📄 Linux 性能分析之 内存
+  * 📄 Linux 性能分析之 网络
+* 📄 linux 文件压缩与解压
+* 📑 linux 文件系统管理
 
-  * 📄 [linux supervisord](siyuan://blocks/20230731184946-hlebj0x)
-  * 📄 [linux systemd](siyuan://blocks/20230610173754-nolls1s)
-  * 📄 [systemctl和service、chkconfig命令的关系](siyuan://blocks/20230921210702-rouru0w)
-* 📄 [linux 密码管理](siyuan://blocks/20230610173758-wpafjoy)
-* 📄 [linux 内核优化](siyuan://blocks/20230927141235-ndxotpj)
-* 📑 [linux 日志管理](siyuan://blocks/20230610173716-mus5v8e)
+  * 📄 1. 硬盘结构（机械硬盘和固态硬盘）详解
+  * 📄 2. Linux下几种常用文件系统
+  * 📄 3. Linux系统是如何识别硬盘设备和硬盘分区的
+  * 📄 4. Linux文件系统常用命令
+* 📑 linux 日志管理
 
-  * 📄 [linux logrotate](siyuan://blocks/20230610173801-5bt2ht6)
-  * 📄 [linux rsyslog](siyuan://blocks/20230803121402-0hdctz8)
-* 📄 [linux 软件包管理](siyuan://blocks/20230610173615-gi4fzfk)
-* 📑 [linux 网络管理](siyuan://blocks/20230610173746-xcrlvc0)
+  * 📄 linux logrotate
+  * 📄 linux rsyslog
+* 📑 linux 权限管理
 
-  * 📄 [linux ip 命令](siyuan://blocks/20230906152322-cg6qodq)
-  * 📄 [linux NetworkManager](siyuan://blocks/20230803163647-p2txceg)
-  * 📄 [linux 聚合链路](siyuan://blocks/20230610173719-r7o6gsh)
-  * 📄 [linux 路由管理](siyuan://blocks/20230610173807-kqlwuyg)
-  * 📄 [linux 网络配置](siyuan://blocks/20230803163800-ql9cifl)
-  * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20230803173114-w9zlqes)
-  * 📄 [Linux 虚拟网络设备之 vRouter](siyuan://blocks/20230906171717-rabex90)
-* 📄 [linux 文件属性及权限](siyuan://blocks/20231017170058-vbdzo7g)
-* 📄 [linux 文件压缩与解压](siyuan://blocks/20230610173737-lcd72hd)
-* 📑 [linux 性能分析](siyuan://blocks/20230906175252-g3b9ufk)
+  * 📄 1. Linux权限管理的重要性
+  * 📄 2. Linux 文件拥有者和所属组
+  * 📄 3. Linux 文件属性和权限详解
+  * 📄 4. Linux umask详解：令新建文件和目录拥有默认权限
+  * 📄 5. Linux ACL访问控制权限
+  * 📄 6. Linux mask有效权限详解
+  * 📄 7. Linux 隐藏属性
+  * 📄 8. Linux sudo命令用法详解：系统权限管理
+* 📑 linux 用户和用户组管理
 
-  * 📄 [Linux 性能分析之 CPU](siyuan://blocks/20230906175411-mepqce3)
-  * 📄 [Linux 性能分析之 IO](siyuan://blocks/20230906180047-dj0hsl8)
-  * 📄 [Linux 性能分析之 内存](siyuan://blocks/20230906175719-hwa4fqs)
-  * 📄 [Linux 性能分析之 网络](siyuan://blocks/20230906180245-9hnf2rz)
-* 📄 [linux 用户管理](siyuan://blocks/20230610173640-3viwdgt)
-* 📑 [linux 重要路径](siyuan://blocks/20230921212215-oetcqmb)
+  * 📄 1. Linux用户和用户组
+  * 📄 2. Linux 用户管理
+  * 📄 3. Linux 用户组管理
+  * 📄 4. Linux 密码管理
+  * 📄 5. Linux whoami和who am i命令
+  * 📄 6. Linux id命令
+  * 📄 7. Linux su命令
+* 📄 linux 系统启动管理
+* 📑 linux 网络管理
 
-  * 📄 [linux PAM文件](siyuan://blocks/20230610173650-r61rup1)
-  * 📄 [linux passwd文件](siyuan://blocks/20230907111129-6p3es4o)
-  * 📄 [linux shadow文件](siyuan://blocks/20230610173728-xs4na7q)
-  * 📄 [linux之init.d、rc.d](siyuan://blocks/20230921212252-nw2nbmd)
-  * 📄 [proc\\[pid]\status](siyuan://blocks/20230927102400-vxtcxym)
-* 📄 [linux 组管理](siyuan://blocks/20230610173750-w3kwdmm)
-* 📄 [VIM文本编辑器](siyuan://blocks/20230610173703-o5bchuv)
+  * 📄 Linux 虚拟网络设备之 Bridge
+  * 📄 Linux 虚拟网络设备之 vRouter
+  * 📄 linux NetworkManager
+  * 📄 linux ip 命令
+  * 📄 linux 网络配置
+  * 📄 linux 聚合链路
+  * 📄 linux 路由管理
+* 📄 linux 软件包管理
+* 📑 linux 进程管理
+
+  * 📄 linux supervisord
+  * 📄 linux systemd
+  * 📄 systemctl和service、chkconfig命令的关系
+* 📑 linux 防火墙
+
+  * 📄 firewalld
+  * 📄 iptables
 
 ‍

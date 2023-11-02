@@ -4,7 +4,7 @@
 
 `Compose` 恰好满足了这样的需求。它允许用户通过一个单独的 `docker-compose.yml` 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
 
-**`Compose`**​**​ 中有两个重要的概念：**
+**`Compose`**​ ** 中有两个重要的概念：**
 
 - 服务 (`service`)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。
 - 项目 (`project`)：由一组关联的应用容器组成的一个完整业务单元，在 `docker-compose.yml` 文件中定义。
@@ -31,9 +31,10 @@ Linux 系统请使用以下介绍的方法安装。
 从 官方 [GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。
 
 ```bash
-curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/2.22.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 # bash 补全命令
-curl -L https://raw.githubusercontent.com/docker/compose/1.27.4/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
+curl -L https://raw.githubusercontent.com/docker/compose/2.22.0/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
+
 ```
 
 # 使用 docker compose 部署 nginx

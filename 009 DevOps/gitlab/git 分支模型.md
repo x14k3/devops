@@ -12,7 +12,8 @@ Git分支模型(master/bugfix/hotfix/develop/feature/release)
 
 ## 1.主要分支
 
-​![](assets/net-img-2021-06-10_154857-20230727091212-ijk7r24.png)<br />在核心，开发模型受到现有模型的极大启发。中央仓库拥有两个主要分支，具有无限的生命周期：
+​![](assets/net-img-2021-06-10_154857-20230727091212-ijk7r24.png)
+在核心，开发模型受到现有模型的极大启发。中央仓库拥有两个主要分支，具有无限的生命周期：
 
 * master
 * develop
@@ -54,14 +55,16 @@ Git分支模型(master/bugfix/hotfix/develop/feature/release)
 
 功能分支通常仅存在于开发人员本地存储库中，而不存在于origin。
 
-step 1.创建功能分支<br />在开始处理新功能时，从develop分支分支。
+step 1.创建功能分支
+在开始处理新功能时，从develop分支分支。
 
 ```
 $ git checkout -b myfeature develop
 Switched to a new branch "myfeature"
 ```
 
-step 2.在开发中加入完成的功能<br />完成的功能分支会合并到develop分支中，以确保将它们添加到即将发布的版本中：
+step 2.在开发中加入完成的功能
+完成的功能分支会合并到develop分支中，以确保将它们添加到即将发布的版本中：
 
 ```
 $ git checkout develop
@@ -74,7 +77,10 @@ Deleted branch myfeature (was 05e9557).
 $ git push origin develop
 ```
 
-该–no-ff参数使合并始终创建新的commit，最新版中git merge 默认的就是–no-ff。这样可以避免丢失功能分支的历史信息，并将所有添加功能的 commit 组合到一个commit中。对比：<br />![](assets/net-img-2021-06-10_155212-20230727091212-eqrjhsk.png)<br />在后一种情况下，不可能从Git历史中看到哪些 commit 实现了一个功能 - 您必须手动读取所有日志消息。恢复整个功能（即一组提交）在后一种情况下也是比较头痛的，而如果使用该–no-ff标志则很容易完成 。<br />虽然它会创建一些（空的）commit，但增益远远大于成本。
+该–no-ff参数使合并始终创建新的commit，最新版中git merge 默认的就是–no-ff。这样可以避免丢失功能分支的历史信息，并将所有添加功能的 commit 组合到一个commit中。对比：
+![](assets/net-img-2021-06-10_155212-20230727091212-eqrjhsk.png)
+在后一种情况下，不可能从Git历史中看到哪些 commit 实现了一个功能 - 您必须手动读取所有日志消息。恢复整个功能（即一组提交）在后一种情况下也是比较头痛的，而如果使用该–no-ff标志则很容易完成 。
+虽然它会创建一些（空的）commit，但增益远远大于成本。
 
 ### 2.2.发布分支
 
@@ -89,7 +95,8 @@ $ git push origin develop
 
 当新建了发布分支分配新的版本号，从这个时候开始develop分支反映的将应该是下一个版本的代码。比如新建了release-1.6 后 1.6版本的代码将不再允许提交到develop分支中。
 
-创建发布分支<br />发布分支是从develop分支创建的。例如，假设版本1.1.5是当前的生产版本，我们即将推出一个大版本。状态develop为“下一个版本”做好了准备，我们已经决定这将版本1.2（而不是1.1.6或2.0）。因此，我们分支并为发布分支提供反映新版本号的名称：
+创建发布分支
+发布分支是从develop分支创建的。例如，假设版本1.1.5是当前的生产版本，我们即将推出一个大版本。状态develop为“下一个版本”做好了准备，我们已经决定这将版本1.2（而不是1.1.6或2.0）。因此，我们分支并为发布分支提供反映新版本号的名称：
 
 ```
 $ git checkout -b release-1.2 develop
@@ -134,7 +141,8 @@ Merge made by recursive.
 (Summary of changes)
 ```
 
-这一步很可能导致合并冲突（可能是因为我们已经更改了版本号）。如果是出现这种情况，请修复并提交。<br />现在我们已经完成了，这个时候我们可以删除发布分支，因为我们不再需要它了：
+这一步很可能导致合并冲突（可能是因为我们已经更改了版本号）。如果是出现这种情况，请修复并提交。
+现在我们已经完成了，这个时候我们可以删除发布分支，因为我们不再需要它了：
 
 ```
 $ git branch -d release-1.2
@@ -151,7 +159,8 @@ Deleted branch release-1.2 (was ff452fe).
 
 hotfix 分支主要用来修复生产的紧急bug，比如当开发人员正在 feature、develop 分支 开发下一个版本的功能，而生产出现了紧急bug 必须立刻修复并发布。而你又不想把当前未完成的版本发布到生产，这个时候我们可以在 master 分支上 fork 一个新的 hotfix 分支用来修复bug，这样的话就不会影响到下一个版本的开发。
 
-创建修补 Bug 分支<br />从master分支创建修复 bug 分支。例如，假设版本1.2是当前生产版本正在运行并且由于严重错误而影响生产正常使用。但是develop分支代码仍然不稳定。然后我们可以 fork hotfix分支并开始修复问题：
+创建修补 Bug 分支
+从master分支创建修复 bug 分支。例如，假设版本1.2是当前生产版本正在运行并且由于严重错误而影响生产正常使用。但是develop分支代码仍然不稳定。然后我们可以 fork hotfix分支并开始修复问题：
 
 ```
 $ git checkout -b hotfix-1.2.1 master
@@ -163,7 +172,8 @@ $ git commit -a -m "Bumped version number to 1.2.1"
 1 files changed, 1 insertions(+), 1 deletions(-)
 ```
 
-新建分支后不要忘记标记小版本号！<br />然后，修复 bug 并提交一个或多个单独 commit。
+新建分支后不要忘记标记小版本号！
+然后，修复 bug 并提交一个或多个单独 commit。
 
 ```
 $ git commit -m "Fixed severe production problem"

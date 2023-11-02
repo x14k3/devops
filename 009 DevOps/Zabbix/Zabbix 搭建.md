@@ -78,7 +78,7 @@ centos:7.8
   ```
 * 3.编译安装
 
-  `make install ​`
+  `make install `
 * 4.编辑zabbix-server配置文件
 
   `vim /data/zabbix/etc/zabbix_server.conf`
@@ -144,7 +144,7 @@ centos:7.8
 
 > Zabbix前端是PHP编写的，所以运行它需要PHP支持的网络服务器。安装只需简单的从 UI 目录复制PHP文件到网络服务器 HTML文档目录。
 
-* 安装PHP **(使用7.x版本)**
+* 安装PHP  **(使用7.x版本)** 
   [php](../../中间件/php.md)
 * 安装nginx
   [nginx 部署](../../中间件/nginx/nginx%20部署.md)

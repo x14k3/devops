@@ -13,7 +13,7 @@ python setup.py install
 
 ## CPU
 
-*获取CPU逻辑核数。*​*`logical`*​*参数默认为*​*`True`*​*，指获取逻辑核数。*
+*获取CPU逻辑核数。*​*`logical`*​*参数默认为*​*`True`*​ *，指获取逻辑核数。*
 
 ```
 print(psutil.cpu_count(logical=True))  # 4

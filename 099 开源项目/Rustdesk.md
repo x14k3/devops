@@ -22,6 +22,10 @@
 
 ## 安装 rustdesk-server
 
+*hbbs* - *RustDesk* ID注册服务器; 21116
+
+*hbbr* - *RustDesk* 中继服务器.21117
+
 ### 获取docker-compose脚本
 
 [https://github.com/rustdesk/rustdesk-server/blob/master/docker-compose.yml](https://github.com/rustdesk/rustdesk-server/blob/master/docker-compose.yml)
@@ -42,7 +46,9 @@ services:
       - 21116:21116/udp
       - 21118:21118
     image: rustdesk/rustdesk-server:latest
-    command: hbbs -r 8.210.145.225:21117
+    # 请把 www.xxxaaa.cn:21117 修改为自己的域名
+    # 如果您禁止没有key的用户建立非加密连接，请在运行hbbs和hbbr的时候添加-k _参数
+    command: hbbs -r www.xxxaaa.cn:21117 -k _
     volumes:
       - /data/rustdesk/hbbs:/root
     networks:
@@ -71,22 +77,20 @@ mv docker-compose.yml  /data/rustdesk/
 docker-compose up -d
 ```
 
-默认情况下:  
-hbbs 监听
+务必在防火墙开启这几个端口， **请注意21116同时要开启TCP和UDP**。
 
-* 21115(tcp)  ：hbbs 用作  NAT 类型测试（无需开启，不用关注）
-* 21116(tcp/udp)：21116/UDP 是 hbbs 用作 ID 注册与心跳服务，21116/TCP 是 hbbs 用作 TCP  打洞与连接服务
-* 21118(tcp)：网页客户端（可不开）
-
-hbbr 监听 
-
-* 21117(tcp)：hbbr 用作中继服务
-* 21119(tcp)：网页客户端（可不开）
-
-‍
+* hbbs 监听21115(tcp), 21116(tcp/udp), 21118(tcp)；
+* hbbr 监听21117(tcp), 21119(tcp)；
+* 21115是hbbs用作NAT类型测试；
+* 21116/UDP是hbbs用作ID注册与心跳服务；
+* 21116/TCP是hbbs用作TCP打洞与连接服务；
+* 21117是hbbr用作中继服务, 21118和21119是为了支持网页客户端；
+* 如果您不需要网页客户端（21118，21119）支持，对应端口可以不开；
 
 ‍
 
 ## 客户端使用
 
-​![image](assets/image-20231017143514-16qs7my.png)​
+​​![image](assets/image-20231025134710-d50gwji.png)​​
+
+‍

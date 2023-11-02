@@ -145,13 +145,18 @@ chkconfig --level levels
 
 # update-rc.d命令用法
 
-update-rc.d 是一个 Ubuntu 和 Debian 下的工具程序，用来添加和移除 System-V 类型的启动脚本。<br />这些脚本都叫做「System-V init script」，且以实际文件而不是链接文件的方式存储在 /etc/init.d 目录下。（之所以强调实际文件后文会解释原因）<br />其他的 Linux 发行版（例如红帽）使用 chkconfig 这个命令。<br />update-rc.d 就是通过管理 /etc/init.d 目录下的脚本文件来管理系统启动时的计划任务的，例如 ssh 服务、Apache 服务、MySQL 服务等。
+update-rc.d 是一个 Ubuntu 和 Debian 下的工具程序，用来添加和移除 System-V 类型的启动脚本。
+这些脚本都叫做「System-V init script」，且以实际文件而不是链接文件的方式存储在 /etc/init.d 目录下。（之所以强调实际文件后文会解释原因）
+其他的 Linux 发行版（例如红帽）使用 chkconfig 这个命令。
+update-rc.d 就是通过管理 /etc/init.d 目录下的脚本文件来管理系统启动时的计划任务的，例如 ssh 服务、Apache 服务、MySQL 服务等。
 
 因此 /etc/init.d 目录就是系统的启动脚本所在的目录，其中的每一个文件都是一个启动脚本，都代表了某一类应用程序服务。除非我们要手动编写启动脚本，否则我们不需要修改这个目录下的文件，在安装一些需要开机启动的应用程序的时候对应的脚本会自动被添加进去。
 
 而系统还有另外一类目录叫 /etc/rcX.d，X 代表了 Linux 系统的运行级别。总共有 7 种运行级别，因此就有 7 个 /etc/rcX.d 目录（例如 /etc/rc5.d、/etc/rc0.d）。
 
-/etc/rcX.d 目录下都是一些符号链接文件，这些链接文件都指向 /etc/init.d 目录下的脚本文件，命名规则为 K+NN+服务名或 S+NN+服务名，其中 NN 为两位数字。系统会根据指定的运行级别进入对应的 /etc/rcX.d 目录，并按照文件名顺序检索目录下的链接文件。<br />– 对于以 K 开头的文件，系统将终止对应的服务<br />– 对于以 S 开头的文件，系统将启动对应的服务
+/etc/rcX.d 目录下都是一些符号链接文件，这些链接文件都指向 /etc/init.d 目录下的脚本文件，命名规则为 K+NN+服务名或 S+NN+服务名，其中 NN 为两位数字。系统会根据指定的运行级别进入对应的 /etc/rcX.d 目录，并按照文件名顺序检索目录下的链接文件。
+– 对于以 K 开头的文件，系统将终止对应的服务
+– 对于以 S 开头的文件，系统将启动对应的服务
 
 所以，到这而 Linux 启动项的内部实现就大致明晰了：
 
@@ -177,7 +182,11 @@ update-rc.d <basename> start|stop <NN> <runlevels>
 -f: force
 ```
 
-其中：<br />disable|enable 代表脚本还在 /etc/init.d 中，并设置当前状态是手动启动还是自动启动。<br />start|stop 代表脚本还在 /etc/init.d 中，开机，并设置当前状态是开始运行还是停止运行。（启用后可配置开始运行与否）<br />NN 是一个决定启动顺序的两位数字值。（例如 90 大于 80，因此 80 对应的脚本先启动或先停止）<br />runlevels 则指定了运行级别。
+其中：
+disable|enable 代表脚本还在 /etc/init.d 中，并设置当前状态是手动启动还是自动启动。
+start|stop 代表脚本还在 /etc/init.d 中，开机，并设置当前状态是开始运行还是停止运行。（启用后可配置开始运行与否）
+NN 是一个决定启动顺序的两位数字值。（例如 90 大于 80，因此 80 对应的脚本先启动或先停止）
+runlevels 则指定了运行级别。
 
 例如，添加一个新的启动脚本 sample_init_script，并且指定为默认启动顺序、默认运行级别(要有实际的文件存在于 /etc/init.d，即若文件 /etc/init.d/sample_init_script 不存在，则该命令不会执行):
 

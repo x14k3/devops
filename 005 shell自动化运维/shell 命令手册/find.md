@@ -286,7 +286,7 @@ find . -type f -group sunk
 find .-type f -user root -exec chown tom {} \;
 ```
 
-上例中， **{}** 用于与 **-exec** 选项结合使用来匹配所有文件，然后会被替换为相应的文件名。
+上例中，  **{}**  用于与  **-exec** 选项结合使用来匹配所有文件，然后会被替换为相应的文件名。
 
 找出自己家目录下所有的.txt文件并删除
 
@@ -294,7 +294,7 @@ find .-type f -user root -exec chown tom {} \;
 find $HOME/. -name "*.txt" -ok rm {} \;
 ```
 
-上例中， **-ok** 和 **-exec** 行为一样，不过它会给出提示，是否执行相应的操作。
+上例中，  **-ok** 和  **-exec** 行为一样，不过它会给出提示，是否执行相应的操作。
 
 查找当前目录下所有.txt文件并把他们拼接起来写入到all.txt文件中
 

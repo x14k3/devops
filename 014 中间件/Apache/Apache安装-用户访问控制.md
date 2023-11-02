@@ -20,7 +20,7 @@
 
 \#Require ip ip.address 允许ip或网段 多个空格空开
 
-**容器**​**&lt;RequireAny&gt;**​**​ ​**​**&lt;RequireAll&gt;**​**​ ​**​**&lt;requirenone&gt;**
+**容器**​ **&lt;RequireAny&gt;**​ ** **​ **&lt;RequireAll&gt;**​ ** **​ **&lt;requirenone&gt;**
 
 只要一个成功即可就通过
 

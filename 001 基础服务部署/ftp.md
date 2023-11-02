@@ -243,7 +243,7 @@ ascii_download_enable=YES
 
 4.定义用户配置文件
 
-`vim /etc/vsftpd/userconf/ftp_dzhd ​`  # 文件名要和ftp用名相同
+`vim /etc/vsftpd/userconf/ftp_dzhd `  # 文件名要和ftp用名相同
 
 ```bash
 # 设置ftp_dzhd这个用户的根目录为/data/bps/data/sdq

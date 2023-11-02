@@ -40,7 +40,7 @@ insert into test(first_name,last_name) values('sdgssdsgrhrdgsg','fherherthe');
 ```bash
 sqlplus jy2web/Ninestar123
 
-create table TestTable as 
+create table test as 
 select rownum as id,
                to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
                trunc(dbms_random.value(0, 100)) as random_id,

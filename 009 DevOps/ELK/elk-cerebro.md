@@ -8,7 +8,7 @@
   `unzip  -qd  /data/  cerebro-0.9.4.zip`
 * 修改配置
 
-  `vim /data/cerebro-0.9.4/conf/application.conf ​`
+  `vim /data/cerebro-0.9.4/conf/application.conf `
 
   ```bash
   # elasticsearch节点

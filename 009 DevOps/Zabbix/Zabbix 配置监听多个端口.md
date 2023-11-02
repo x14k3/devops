@@ -4,7 +4,7 @@
 
 1.编写脚本
 
-`vim /data/zabbix/script/ports.py ​`
+`vim /data/zabbix/script/ports.py `
 
 ```python
 #!/usr/bin/python
@@ -56,7 +56,7 @@ UserParameter=net.tcp.jinzay.ports,/data/zabbix/script/ports.py
 
 4.在服务端测试
 
-`zabbix_get -s 192.168.130.138 -p 10050 -k net.tcp.jinzay.ports ​`
+`zabbix_get -s 192.168.130.138 -p 10050 -k net.tcp.jinzay.ports `
 
 ## zabbix_server端操作
 

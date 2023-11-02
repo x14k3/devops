@@ -629,7 +629,7 @@ lpush k c
 4) "a"
 ```
 
-**注意：**
+**注意：** 
 lpush可以重复，写在前面的在底部，后进来的在前面
 
 **rpush key value [value …]**

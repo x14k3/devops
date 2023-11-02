@@ -26,7 +26,7 @@ DNS树的每个节点代表一个域.通过这些节点,对整个域名空间进
 
 Internet 域名空间的最顶层是根域（root）,其记录着Internet 的重要DNS 信息,由**Internet域名注册授权机构管理**,该机构把域名空间各部分的管理责任分配给连接到Internet 的各个组织.
 
-**“.”全球有13个根(root)服务器**
+ **“.”全球有13个根(root)服务器**
 
 DNS 根域下面是顶级域,也由Internet 域名注册授权机构管理.共有3 种类型的顶级域.
 
@@ -34,7 +34,7 @@ DNS 根域下面是顶级域,也由Internet 域名注册授权机构管理.共�
 
 **地址域**:**采用两个字符的国家或地区代号**.如cn 为中国,kr 为韩国,us 为美国.
 
-**反向域**:**这是个特殊域**,**名字为in-addr.arpa**,**用于将IP 地址映射到名字（反向查询）**.
+**反向域**:**这是个特殊域**,**名字为in-addr.arpa**,**用于将IP 地址映射到名字（反向查询）** .
 
 对于顶级域的下级域,Internet 域名注册授权机构授权给Internet 的各种组织.当一个组织获得了对域名空间某一部分的授权后,该组织就负责命名所分配的域及其子域,包括域中的计算机和其他设备,并管理分配域中主机名与IP 地址的映射信息.
 
@@ -180,25 +180,25 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/named.service t
 
 ### 2. DNS配置的主要文件组
 
-- **/etc/hosts**　　主机的一个文件列表 　　添加记录如:111.13.100.92 [www.baidu.com](http://www.baidu.com/)
+-  **/etc/hosts**　　主机的一个文件列表 　　添加记录如:111.13.100.92 [www.baidu.com](http://www.baidu.com/)
 
   对于简单的主机名解析（点分表示法），默认在请求DNS或NIS网络域名服务器前，/etc/named.conf 通常会告诉程序先查看此文件。
-- **/etc/resolv.conf**　　转换程序配置文件
+-  **/etc/resolv.conf**　　转换程序配置文件
 
   在配置程序请求BIND域名查询服务查询主机名时，必须告诉程序使用哪个域名服务器和IP地址来完成这个任务
-- **/etc/named.conf**　　BIND主文件
+-  **/etc/named.conf**　　BIND主文件
 
   设置一般的name参数，指向该服务器使用的域数据库的信息源
-- **/var/named/named.ca**　　根域名配置服务器指向文件
+-  **/var/named/named.ca**　　根域名配置服务器指向文件
 
   指向根域名配置服务器，用于告诉缓存服务器初始化
-- **/var/named/localhost.zone**　 localhost区正向域名解析文件
+-  **/var/named/localhost.zone**　 localhost区正向域名解析文件
 
   用于将本地IP地址（127.0.0.1）转换为本地回送IP地址（127.0.0.1）
-- **/var/named/name.local**　　localhost区反向域名解析文件
+-  **/var/named/name.local**　　localhost区反向域名解析文件
 
   用于将localhost名字转换为本地回送IP地址（127.0.0.1）
-- **/etc/named.rfc1912.zones**　　区块设置文件
+-  **/etc/named.rfc1912.zones**　　区块设置文件
 
 **name.conf文件的主要配置信息：**
 
@@ -328,15 +328,15 @@ value字段：
 
 在配置Bind服务时，主要用到以下三个配置文件：
 
-- **主配置文件（/etc/named.conf）**：用来定义bind服务程序的运行。
-- **区域配置文件（/etc/named.rfc1912.zones）**：用来保存域名和IP地址对应关系的所在位置。类似于图书的目录，对应着每个域和相应IP地址所在的具体位置，当需要查看或修改时，可根据这个位置找到相关文件。
-- **数据配置文件目录（/var/named）**：该目录用来保存域名和IP地址真实对应关系的数据配置文件。
+- **主配置文件（/etc/named.conf）** ：用来定义bind服务程序的运行。
+- **区域配置文件（/etc/named.rfc1912.zones）** ：用来保存域名和IP地址对应关系的所在位置。类似于图书的目录，对应着每个域和相应IP地址所在的具体位置，当需要查看或修改时，可根据这个位置找到相关文件。
+- **数据配置文件目录（/var/named）** ：该目录用来保存域名和IP地址真实对应关系的数据配置文件。
 
 **第一步：修改主配置文件/etc/named.conf**。将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。
 
 ![](assets/image-20221127211620927-20230610173810-p610e0x.png)
 
-**第二步：修改区域配置文件（/etc/named.rfc1912.zones）**。用来保存域名和IP地址对应关系的所在位置。在这个文件中，定义了域名与IP地址解析规则保存的文件位置以及服务类型等内容，而没有包含具体的域名、IP地址对应关系等信息。服务类型有三种，分别为hint（根区域）、master（主区域）、slave（辅助区域），其中常用的master和slave指的就是主服务器和从服务器。
+**第二步：修改区域配置文件（/etc/named.rfc1912.zones）** 。用来保存域名和IP地址对应关系的所在位置。在这个文件中，定义了域名与IP地址解析规则保存的文件位置以及服务类型等内容，而没有包含具体的域名、IP地址对应关系等信息。服务类型有三种，分别为hint（根区域）、master（主区域）、slave（辅助区域），其中常用的master和slave指的就是主服务器和从服务器。
 
 ```bash
 zone "example.com" IN {
@@ -479,7 +479,7 @@ zone "245.168.192.in-addr.arpa" IN {
 [root@localhost ~]# systemctl restart named
 ```
 
-**第二步：** 在从服务器中填写主服务器的IP地址与要抓取的区域信息，然后重启服务。注意此时的服务类型应该是slave（从），而不再是master（主）。masters参数后面应该为主服务器的IP地址，而且file参数后面定义的是同步数据配置文件后要保存到的位置，稍后可以在该目录内看到同步的文件。
+**第二步：**  在从服务器中填写主服务器的IP地址与要抓取的区域信息，然后重启服务。注意此时的服务类型应该是slave（从），而不再是master（主）。masters参数后面应该为主服务器的IP地址，而且file参数后面定义的是同步数据配置文件后要保存到的位置，稍后可以在该目录内看到同步的文件。
 
 ```bash
 [root@localhost ~]# vi /etc/named.conf

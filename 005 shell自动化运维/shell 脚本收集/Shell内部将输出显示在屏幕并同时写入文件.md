@@ -5,13 +5,15 @@
 ```bash
 #输出日志文件
 logfile=/tmp/Install_MySQL.log
-fifofile=/tmp/Install_MySQL.fifo
-mkfifo $fifofile
-cat $fifofile |tee $logfile &
-exec >$fifofile 2>&1
+shellout=/tmp/Install_MySQL.out
+mkfifo $shellout
+cat $shellout|tee $logfile &
+exec > $shellout 2>&1
 .......
 
 .......
 printf "\015"
-rm -rf $fifofile
+rm -rf $shellout
 ```
+
+‍

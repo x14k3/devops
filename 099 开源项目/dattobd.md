@@ -33,11 +33,11 @@ yum install dkms-dattobd dattobd-utils
 * /etc/kernel/postinst.d/50-dattobd
 * /etc/modules-load.d/dattobd.conf
 
-**# load**
+ **# load**
 
 ​`modprobe dattobd`​
 
-**# checking**
+ **# checking**
 
 ​`cat /proc/datto-info`​
 

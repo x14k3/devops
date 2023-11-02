@@ -23,7 +23,7 @@ Bridge 的这个特性让它可以接入其他的网络设备，比如物理设�
 |参数|说明|示例|
 | ------| ------------------------| -----------------------------------|
 |​`addbr <bridge>`​|创建网桥|**brctl** addbr br10|
-|​`delbr <bridge>`​|删除网桥|ifconfig kvmbr1 down**; brctl** delbr kvmbr1|
+|​`delbr <bridge>`​|删除网桥|ifconfig kvmbr1 down **; brctl** delbr kvmbr1|
 |​`addif <bridge> <device>`​|将网卡接口接入网桥|**brctl** addif br10 eth0|
 |​`delif <bridge> <device>`​|删除网桥接入的网卡接口|**brctl** delif br10 eth0|
 |​`show <bridge>`​|查询网桥信息|**brctl** show br10|

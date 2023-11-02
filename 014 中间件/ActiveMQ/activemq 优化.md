@@ -43,7 +43,7 @@ ActiveMQ的内存配置在activemq.xml中，如下所示：
 
 # 网络IO
 
-*ActiveMQ支持多种消息协议，包括AMQP协议、MQTT协议、Openwire协议、Stomp协议等。*​***ActiveMQ在Version 5.13.0+ 版本后，将OpenWire, STOMP, AMQP, MQTT这四种主要协议的端口监听进行了合并，并使用auto关键字进行表示***​*。也就是说，ActiveMQ将监听这一个端口的消息状态，并自动匹配合适的协议格式。配置如下：*
+*ActiveMQ支持多种消息协议，包括AMQP协议、MQTT协议、Openwire协议、Stomp协议等。*​***ActiveMQ在Version 5.13.0+ 版本后，将OpenWire, STOMP, AMQP, MQTT这四种主要协议的端口监听进行了合并，并使用auto关键字进行表示***​ *。也就是说，ActiveMQ将监听这一个端口的消息状态，并自动匹配合适的协议格式。配置如下：*
 
 ```xml
 <transportConnectors>

@@ -14,17 +14,17 @@
 # 三、组件
 
 * **nova-api**：实现了RESTful API功能，是外部访问Nova的唯一途径。接收外部的请求并通过Message Queue将请求发送给其他的服务组件，同时也兼容EC2 API，所以也可以用EC2的管理工具对nova进行日常管理。
-* **nova-scheduler：** 决策虚拟机创建在哪个主机（计算节点）上。决策一个虚拟机应该调度到某物理节点，需要分为两个步骤：
+* **nova-scheduler：**  决策虚拟机创建在哪个主机（计算节点）上。决策一个虚拟机应该调度到某物理节点，需要分为两个步骤：
 
   1. 过滤（filter）：过滤出可以创建虚拟机的主机。
 
   2\. 计算权值（weight）：根据权重大小进行分配，默认根据资源可用空间进行权重排序。
-* **nova-compute：** 负责虚拟机的生命周期管理，创建并终止虚拟机实例的工作后台程序hypervisor api
-* **nova-conductor：** 计算节点访问数据的中间件，nova-compute服务和数据库之间的中间件。它消除了对云数据库的直接访
-* **nova-api-metadata：** 从实例中接收元数据请求。nova-api-metadata服务通常在nova-network安装时使用的是多宿主模式运行。
+* **nova-compute：**  负责虚拟机的生命周期管理，创建并终止虚拟机实例的工作后台程序hypervisor api
+* **nova-conductor：**  计算节点访问数据的中间件，nova-compute服务和数据库之间的中间件。它消除了对云数据库的直接访
+* **nova-api-metadata：**  从实例中接收元数据请求。nova-api-metadata服务通常在nova-network安装时使用的是多宿主模式运行。
 * nova-placement-api：跟踪每个计算提供者的仓库和使用情况。（S版本之后，作为独立的服务组件）
-* **nova-consoleauth：** 用于控制台的授权验证，授权控制台代理提供的用户令牌。此服务必须运行用于控制台代理工作。您可以运行任何类型的代理，而不是集群配置中的单nova-consoleauth服务。
-* **Queue：** 在守护进程之间传递消息的中心。通常使用RabbitMQ也可以用另一个基于AMQP的消息队列，例如ZeroMQ。
+* **nova-consoleauth：**  用于控制台的授权验证，授权控制台代理提供的用户令牌。此服务必须运行用于控制台代理工作。您可以运行任何类型的代理，而不是集群配置中的单nova-consoleauth服务。
+* **Queue：**  在守护进程之间传递消息的中心。通常使用RabbitMQ也可以用另一个基于AMQP的消息队列，例如ZeroMQ。
 
 ![](assets/image-20221127212952563-20230610173810-gd5oa0u.png)
 

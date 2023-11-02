@@ -131,7 +131,7 @@ INSTANCE_NAME=fmsdb
 ## 四、注册服务
 
 注册数据库服务、守护服务、监控服务等
-**注册服务需使用 ​**​***root***​**​ 用户进行注册**。使用 root 用户进入数据库安装目录的 `~/script/root` 下:
+**注册服务需使用 **​***root***​ ** 用户进行注册**。使用 root 用户进入数据库安装目录的 `~/script/root` 下:
 
 ```bash
 cd /data/dmapp/script/root

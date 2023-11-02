@@ -6,9 +6,9 @@
 
 **Server：**​[Zabbix server](https://www.zabbix.com/documentation/4.0/zh/manual/concepts/server) 是 Zabbix软件的核心组件，agent 向其报告可用性、系统完整性信息和统计信息。server也是存储所有配置信息、统计信息和操作信息的核心存储库。
 
-**数据库：**所有配置信息以及 Zabbix 采集到的数据都被存储在数据库中。
+**数据库：** 所有配置信息以及 Zabbix 采集到的数据都被存储在数据库中。
 
-**Web 界面：**该界面是 Zabbix server 的一部分，通常（但不一定）和 Zabbix server 运行在同一台物理机器上。
+**Web 界面：** 该界面是 Zabbix server 的一部分，通常（但不一定）和 Zabbix server 运行在同一台物理机器上。
 
 **Proxy：**​[Zabbix proxy](https://www.zabbix.com/documentation/4.0/zh/manual/concepts/proxy) 可以代替 Zabbix server采集性能和可用性数据。Zabbix proxy在Zabbix的部署是可选部分；但是proxy的部署可以很好的分担单个Zabbix server的负载。
 
@@ -39,9 +39,9 @@
 
 **zabbix agent  需要安装到被监控的主机上，它负责定期收集各项数据，并发送到 zabbix server 端，zabbix server  将数据存储到数据库中，zabbix web 根据数据在前端进行展示和绘图。这里 agent 收集数据分为主动和被动两种模式：**
 
-**主动：**agent 请求server 获取主动的监控项列表，并主动将监控项内需要检测的数据提交给server / proxy
+**主动：** agent 请求server 获取主动的监控项列表，并主动将监控项内需要检测的数据提交给server / proxy
 
-**被动：**server 向 agent 请求获取监控项的数据，agent 返回数据。
+**被动：** server 向 agent 请求获取监控项的数据，agent 返回数据。
 
 ‍
 
@@ -49,17 +49,17 @@
 
 默认情况下 zabbix 包含6个进程：zabbix_agentd、zabbix_get、zabbix_proxy、zabbix_sender、zabbix_server，另外一个zabbix_java_gateway是可选的，这个需要单独安装。
 
-**zabbix_server：**zabbix  服务端守护进程。zabbix_agentd、zabbix_get、zabbix_sender、zabbix_proxy、zabbix_java_gateway的数据最终都是提交到server（说明：当然不是数据都是主动提交给zabbix_server，也有的是  server 主动去取数据）
+**zabbix_server：** zabbix  服务端守护进程。zabbix_agentd、zabbix_get、zabbix_sender、zabbix_proxy、zabbix_java_gateway的数据最终都是提交到server（说明：当然不是数据都是主动提交给zabbix_server，也有的是  server 主动去取数据）
 
-**zabbix_agentd：**客户端守护进程，此进程收集客户端数据，例如cpu负载、内存、硬盘使用情况等。
+**zabbix_agentd：** 客户端守护进程，此进程收集客户端数据，例如cpu负载、内存、硬盘使用情况等。
 
-**zabbix_proxy：**zabbix 代理守护进程。功能类似server，唯一不同的是它只是一个中转站，它需要把收集到的数据提交/被提交到 server 里。
+**zabbix_proxy：** zabbix 代理守护进程。功能类似server，唯一不同的是它只是一个中转站，它需要把收集到的数据提交/被提交到 server 里。
 
-**zabbix_get：**zabbix 工具，单独使用的命令，通常在 server 或者 proxy 端执行获取远程客户端信息的命令。通常用于排错。例如在 server 端获取不到客户端的内存数据，可以使用 zabbix_get 获取客户端的内容的方式来做故障排查。
+**zabbix_get：** zabbix 工具，单独使用的命令，通常在 server 或者 proxy 端执行获取远程客户端信息的命令。通常用于排错。例如在 server 端获取不到客户端的内存数据，可以使用 zabbix_get 获取客户端的内容的方式来做故障排查。
 
-**zabbix_sender：**zabbix 工具，用于发送数据给 server 或者 proxy，通常用于耗时比较长的检查。很多检查非常耗时间，导致 zabbix 超时。于是在脚本执行完毕之后，使用 sender 主动提价数据。
+**zabbix_sender：** zabbix 工具，用于发送数据给 server 或者 proxy，通常用于耗时比较长的检查。很多检查非常耗时间，导致 zabbix 超时。于是在脚本执行完毕之后，使用 sender 主动提价数据。
 
-**zabbix_java_gateway：**zabbix2.0之后引入的一个功能。顾名思义：Java网络，类似agentd，但是只用于 Java 方面。需要特别注意的是，它只能主动去获取数据，而不能被动获取数据。它的数据最终会给到 server 或者proxy。
+**zabbix_java_gateway：** zabbix2.0之后引入的一个功能。顾名思义：Java网络，类似agentd，但是只用于 Java 方面。需要特别注意的是，它只能主动去获取数据，而不能被动获取数据。它的数据最终会给到 server 或者proxy。
 
 ‍
 
@@ -86,7 +86,7 @@
 
 ## zabbix 监控架构
 
-在实际监控架构中，zabbix根据网络环境、监控规模等 分了三种架构：**server-client、master-node-client、server-proxy-client ​**三种。
+在实际监控架构中，zabbix根据网络环境、监控规模等 分了三种架构：**server-client、master-node-client、server-proxy-client ** 三种。
 
 **1、server-client 架构**
 

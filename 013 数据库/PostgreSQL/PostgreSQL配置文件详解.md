@@ -127,7 +127,7 @@ select name,setting from pg_setting where name='data_directory'
 
 ## 2.2 连接和验证（CONNECTIONS AND AUTHENTICATION）
 
-**连接设置（Connection Settings）**
+**连接设置（Connection Settings）** 
 
 ```bash
 #默认情况下,只允许登录了数据库的用户执行本地连接. 若想要任何远程的安装程序进行连接.则需要修改listen_addresses配置参数. 修改为='*',表示允许并接受任何地方传入的连接请求.
@@ -151,7 +151,7 @@ max_connections = 100		# 最大连接数(更改需要重新启动PG数据库)
 
 ```
 
-**认证（Authentication）**
+**认证（Authentication）** 
 
 ```bash
 #authentication_timeout 	= 1min		# 1s-600s
@@ -183,7 +183,7 @@ max_connections = 100		# 最大连接数(更改需要重新启动PG数据库)
 
 ## 2.3 资源使用（RESOURCE USAGE (except WAL)）
 
-**内存（Memory）**
+**内存（Memory）** 
 
 ```bash
 # 共享内存,服务器使用共享内存的主要部分是分配给缓存块的大型块.用于读取或是写入数据库.
@@ -199,19 +199,19 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 
 ```
 
-**磁盘（Disk）**
+**磁盘（Disk）** 
 
 ```bash
 #temp_file_limit = -1     # 每个进程的临时文件空间限制(以KB为单位).如果没有限制,则为-1
 ```
 
-**内核资源（Kernel Resources）**
+**内核资源（Kernel Resources）** 
 
 ```bash
 #max_files_per_process = 1000   # 最小25(更改需要重新启动PG数据库)
 ```
 
-**基于成本的真空延迟（ Cost-Based Vacuum Delay）**
+**基于成本的真空延迟（ Cost-Based Vacuum Delay）** 
 
 ```bash
 #vacuum_cost_delay = 0        # 0-100 milliseconds
@@ -221,7 +221,7 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 #vacuum_cost_limit = 200      # 1-10000 credits
 ```
 
-**后台写入（Background Writer）**
+**后台写入（Background Writer）** 
 
 ```bash
 #bgwriter_delay = 200ms        # 10-10000ms between rounds
@@ -230,7 +230,7 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 #bgwriter_flush_after = 512kB  # 以页计算,0-禁用
 ```
 
-**异步行为（Asynchronous Behavior）**
+**异步行为（Asynchronous Behavior）** 
 
 ```bash
 #effective_io_concurrency = 1         # 1-1000; 0-禁用预取
@@ -248,7 +248,7 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 
 ## 2.4 预写日志（WRITE-AHEAD LOG）
 
-**设置（Settings）**
+**设置（Settings）** 
 
 ```bash
 #wal_level = replica        # 最小、副本或逻辑(更改需要重新启动PG数据库生效)
@@ -271,7 +271,7 @@ open_sync
 
 ```
 
-**检查点（Checkpoints）**
+**检查点（Checkpoints）** 
 
 ```bash
 /*
@@ -288,7 +288,7 @@ min_wal_size = 80MB
 
 ‍
 
-**存档（Archiving）**
+**存档（Archiving）** 
 
 ```bash
 #archive_mode = off     # 启用存档-enables;关闭-off,打开-on 或始终-always (更改需要重新启动PG数据库生效)
@@ -301,7 +301,7 @@ min_wal_size = 80MB
 
 ## 2.5 复制（REPLICATION）
 
-**发送服务器（Sending Servers）**
+**发送服务器（Sending Servers）** 
 
 ```bash
 # 将它们设置在主服务器和任何将发送复制数据的备用服务器上.
@@ -312,7 +312,7 @@ min_wal_size = 80MB
 #track_commit_timestamp = off # 收集事务提交的时间戳(更改需要重新启动PG数据库生效)
 ```
 
-**主服务器（Master Server）**
+**主服务器（Master Server）** 
 
 ```bash
 # 这些设置在备用服务器上被忽略.
@@ -320,7 +320,7 @@ min_wal_size = 80MB
 #vacuum_defer_cleanup_age = 0 # 延迟清理的xact数
 ```
 
-**备用服务器（Standby Servers）**
+**备用服务器（Standby Servers）** 
 
 ```bash
 # 在主服务器上忽略这些设置.
@@ -333,7 +333,7 @@ min_wal_size = 80MB
 #wal_retrieve_retry_interval = 5s   # 在尝试失败后重新尝试检索WAL之前，需要等待的时间
 ```
 
-**订阅者（Subscribers）**
+**订阅者（Subscribers）** 
 
 ```bash
 # 在发布服务器上这些设置将被忽略
@@ -345,7 +345,7 @@ min_wal_size = 80MB
 
 ## 2.6 查询调优（QUERY TUNING）
 
-**计划方法配置（Planner Method Configuration）**
+**计划方法配置（Planner Method Configuration）** 
 
 ```bash
 #enable_bitmapscan = on
@@ -366,7 +366,7 @@ min_wal_size = 80MB
 #enable_partition_pruning = on
 ```
 
-**计划成本常量（Planner Cost Constants）**
+**计划成本常量（Planner Cost Constants）** 
 
 ```bash
 #seq_page_cost = 1.0            # 在任意比例上测量
@@ -384,7 +384,7 @@ min_wal_size = 80MB
 #effective_cache_size = 4GB
 ```
 
-**查询优化器（Genetic Query Optimizer）**
+**查询优化器（Genetic Query Optimizer）** 
 
 ```bash
 #geqo = on
@@ -396,7 +396,7 @@ min_wal_size = 80MB
 #geqo_seed = 0.0        # range 0.0-1.0
 ```
 
-**其他计划选项（Other Planner Options）**
+**其他计划选项（Other Planner Options）** 
 
 ```bash
 /* 备注：为了注释的属性简洁,这里的注释用了C/C++中的注释语法，若是postgresql.conf文件中，则应该用"#"号
@@ -420,7 +420,7 @@ min_wal_size = 80MB
 
 ## 2.7 报告和记录（REPORTING AND LOGGING）
 
-**记录位置（Where to Log）**
+**记录位置（Where to Log）** 
 
 ```bash
 #log_destination = 'stderr'   # 1有效值是stderr、csvlog、syslog和eventlog的组合,具体取决于平台.
@@ -450,7 +450,7 @@ min_wal_size = 80MB
 #event_source = 'PostgreSQL'
 ```
 
-**何时记录（When to Log）**
+**何时记录（When to Log）** 
 
 ```bash
 #log_min_messages = warning   # 按细节降序排列的值:
@@ -484,7 +484,7 @@ min_wal_size = 80MB
 #log_min_duration_statement = -1  # -1被禁用,0记录所有语句及其持续时间,>0只记录至少运行此毫秒数的语句
 ```
 
-**记录什么（What to Log）**
+**记录什么（What to Log）** 
 
 ```bash
 #debug_print_parse = off
@@ -543,7 +543,7 @@ log_timezone = 'PRC'
 
 ## 2.9 统计数据（STATISTICS）
 
-**查询和索引统计信息收集器（Query and Index Statistics Collector）**
+**查询和索引统计信息收集器（Query and Index Statistics Collector）** 
 
 ```bash
 #track_activities = on
@@ -554,7 +554,7 @@ log_timezone = 'PRC'
 #stats_temp_directory = 'pg_stat_tmp'
 ```
 
-**监控（Monitoring）**
+**监控（Monitoring）** 
 
 ```bash
 #log_parser_stats = off
@@ -595,7 +595,7 @@ log_timezone = 'PRC'
 
 ## 2.11 客户端连接默认值（CLIENT CONNECTION DEFAULTS）
 
-**声明行为（Statement Behavior）**
+**声明行为（Statement Behavior）** 
 
 ```bash
 #client_min_messages = notice   # 按细节降序排列的值:
@@ -635,7 +635,7 @@ log_timezone = 'PRC'
 #gin_pending_list_limit = 4MB
 ```
 
-**语言环境和格式（Locale and Formatting）**
+**语言环境和格式（Locale and Formatting）** 
 
 ```bash
 datestyle = 'iso, ymd'
@@ -663,7 +663,7 @@ lc_time = 'zh_CN.UTF-8'       # locale for time formatting
 default_text_search_config = 'pg_catalog.simple'
 ```
 
-**共享库预加载（Shared Library Preloading）**
+**共享库预加载（Shared Library Preloading）** 
 
 ```bash
 #shared_preload_libraries = ''  # (change requires restart)
@@ -692,7 +692,7 @@ default_text_search_config = 'pg_catalog.simple'
 
 ## 2.14 版本和平台兼容性（VERSION AND PLATFORM COMPATIBILITY）
 
-**以前的PostgreSQL版本（Previous PostgreSQL Versions）**
+**以前的PostgreSQL版本（Previous PostgreSQL Versions）** 
 
 ```bash
 #array_nulls = on
@@ -706,7 +706,7 @@ default_text_search_config = 'pg_catalog.simple'
 #synchronize_seqscans = on
 ```
 
-**其他平台和客户（Other Platforms and Client）**
+**其他平台和客户（Other Platforms and Client）** 
 
 ```bash
 #transform_null_equals = off

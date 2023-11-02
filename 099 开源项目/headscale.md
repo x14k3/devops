@@ -15,23 +15,26 @@ P2P内网穿透原理：[NAT 概述](../计算机网络/NAT%20概述.md)    [NAT
 mkdir -p /data/headscale/
 # 创建空的SQLite数据库文件
 touch /data/headscale/db.sqlite
-# 下载配置文件模板
-wget https://github.com/juanfont/headscale/raw/main/config-example.yaml -O /data/headscale/config.yaml
 
-# 1.修改配置文件
+mkdir -p  /etc/headscale/
+cd /etc/headscale/
+# 下载配置文件模板
+wget https://github.com/juanfont/headscale/raw/main/config-example.yaml
+cp config-example.yaml config.yaml
+
+# 编辑配置文件
 vim config.yaml
 -------------------------------------------------
-server_url     # 改为公网 IP 或域名。
-magic_dns   # 如果暂时用不到 DNS 功能，设置为false
-ip_prefixes:  # 设置连接到tailscale的客户端的ip地址池
-#  - fd7a:115c:a1e0::/48 # 不适用ipv6，可以注释掉
-- 100.64.0.0/10
-
+server_url: https://doshell.cn:22xxx
+listen_addr: 127.0.0.1:8904
+private_key_path: /data/headscale/private.key
+private_key_path: /data/headscale/noise_private.key
+ip_prefixes:
+  #  - fd7a:115c:a1e0::/48
+  - 172.168.1.0/24
+db_path: /data/headscale/db.sqlite
+ magic_dns: false
 -------------------------------------------------
-
-# 创建用户
-useradd -r -s /sbin/nologin headscale
-chown -R headscale.headscale /data/headscale
 
 # 启动
 nohup ./headscale serve >> ./headscale.log 2>&1 &
@@ -90,7 +93,7 @@ To authenticate, visit:
 
 ### windows
 
-Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.cn:22051/windows`​，便会出现如下的界面：
+Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.xx:220xx/windows`​，便会出现如下的界面：
 
 ![](assets/Pasted image 20221222215323-20230610173813-1i6nu9z.png)
 

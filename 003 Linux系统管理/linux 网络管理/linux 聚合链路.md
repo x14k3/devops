@@ -58,7 +58,7 @@ mode 0、2、3、4需要交换机设置
 
 ‍
 
-**step 1：** 查看环境
+**step 1：**  查看环境
 
 ```
 [root@zutuanxue ~]# nmcli connection 
@@ -67,7 +67,7 @@ ens33  f035d150-9e89-4ee9-a657-03598d4b0940  ethernet  ens33
 ens37  7726249d-8281-45e8-a8e3-a6a023c64c66  ethernet  ens37
 ```
 
-**step 2：** 创建bond虚拟网卡
+**step 2：**  创建bond虚拟网卡
 
 ```
 [root@zutuanxue ~]# nmcli connection add type bond con-name bond0 ifname bond0 mode 1 ipv4.addresses 192.168.98.200/24 ipv4.method manual autoconnect yes
@@ -81,7 +81,7 @@ ens37  7726249d-8281-45e8-a8e3-a6a023c64c66  ethernet  ens37
 #autoconnect 自动连接
 ```
 
-**step 3：** 为bond网卡添加成员（真实网卡）
+**step 3：**  为bond网卡添加成员（真实网卡）
 
 ```
 [root@zutuanxue ~]# nmcli connection add type bond-slave ifname ens33 master bond0
@@ -111,7 +111,7 @@ ens37: ether 00:0c:29:a6:ad:95  txqueuelen 1000  (Ethernet)
 连接已成功激活（master waiting for slaves）（D-Bus 活动路径：/org/freedesktop/NetworkManager/ActiveConnection/83）
 ```
 
-**step 4：** 查看链接信息并测试
+**step 4：**  查看链接信息并测试
 
 ```
 #查看信息
@@ -178,7 +178,7 @@ BONDING_OPTS="miimon=100 mode=1 fail_over_mac=1"
 
 ## team聚合链路
 
-**step 1：** 建立
+**step 1：**  建立
 
 ```
 [root@zutuanxue ~]# nmcli connection add type team con-name team0 ifname team0 config '{"runner":{"name":"activebackup","hwaddr_policy":"by_active"}}' ipv4.addresses 192.168.98.200/24 ipv4.method manual autoconnect yes
@@ -193,14 +193,14 @@ lacp=mode4
 #聚合链路获取mac的地址有两种方式,一种是从第一个活跃网卡中获取mac地址，然后其余的SLAVE网卡的mac地址都使用该mac地址;另一种是使用hwaddr_policy参数，team使用当前活跃网卡的mac地址，mac地址随活跃网卡的转换而变，虚机不支持第一种获取MAC地址的方式。
 ```
 
-**step 2：** 添加网卡
+**step 2：**  添加网卡
 
 ```
 [root@zutuanxue ~]# nmcli connection add type team-slave ifname ens33 master team0
 [root@zutuanxue ~]# nmcli connection add type team-slave ifname ens37 master team0
 ```
 
-**step 3：** 启用连接
+**step 3：**  启用连接
 
 ```
 [root@zutuanxue ~]# nmcli connection up team-slave-ens33
@@ -208,7 +208,7 @@ lacp=mode4
 [root@zutuanxue ~]# nmcli connection up team0
 ```
 
-**step 4：** 查看状态
+**step 4：**  查看状态
 
 ```
 [root@zutuanxue ~]# teamdctl team0 stat

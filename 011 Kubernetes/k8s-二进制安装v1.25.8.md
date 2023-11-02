@@ -1839,7 +1839,9 @@ kubectl describe clusterrolebinding kubelet-bootstrap
 
 ## 12.2 创建kubelet配置文件kubelet-conf.yaml
 
-配置conf.yml结构参考官网：<br />[https://kubernetes.io/zh-cn/docs/reference/config-api/kubelet-config.v1beta1/](https://kubernetes.io/zh-cn/docs/reference/config-api/kubelet-config.v1beta1/)<br />[https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/)
+配置conf.yml结构参考官网：
+[https://kubernetes.io/zh-cn/docs/reference/config-api/kubelet-config.v1beta1/](https://kubernetes.io/zh-cn/docs/reference/config-api/kubelet-config.v1beta1/)
+[https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/)
 
 ```
 

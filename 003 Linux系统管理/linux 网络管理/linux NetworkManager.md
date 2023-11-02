@@ -333,17 +333,28 @@ bonding-bond0       755f0c93-6638-41c1-a7de-5e932eba6d1f  bond      bond0
 第二步，需要创建一个`ovs-bridge`​，但是呢，这里有个坑，在`man nm-openvswitch`​里也有一些说明：
 
 > * NetworkManager only ever talks to a single OVSDB instance via an UNIX domain socket.
-> * The configuration is made up of Bridges, Ports and Interfaces. Interfaces are always enslaved to Ports, and Ports are<br />always enslaved to Bridges.
-> * NetworkManager only creates Bridges, Ports and Interfaces you ask it to. Unlike ovs-vsctl, it doesn’t create the local<br />interface nor its port automatically.
+> * The configuration is made up of Bridges, Ports and Interfaces. Interfaces are always enslaved to Ports, and Ports are
+>   always enslaved to Bridges.
+> * NetworkManager only creates Bridges, Ports and Interfaces you ask it to. Unlike ovs-vsctl, it doesn’t create the local
+>   interface nor its port automatically.
 > * You can’t enslave Interface directly to a Bridge. You always need a Port, even if it has just one interface.
 > * There are no VLANs. The VLAN tagging is enabled by setting a ovs-port.tag property on a Port.
-> * There are no bonds either. The bonding is enabled by enslaving multiple Interfaces to a Port and configured by setting<br />properties on a port.
+> * There are no bonds either. The bonding is enabled by enslaving multiple Interfaces to a Port and configured by setting
+>   properties on a port.
 
-> Bridges<br />Bridges are represented by connections of ovs-bridge type. Due to the limitations of OVSDB, “empty” Bridges (with no<br />Ports) can’t exist. NetworkManager inserts the records for Bridges into OVSDB when a Port is enslaved.
+> Bridges
+> Bridges are represented by connections of ovs-bridge type. Due to the limitations of OVSDB, “empty” Bridges (with no
+> Ports) can’t exist. NetworkManager inserts the records for Bridges into OVSDB when a Port is enslaved.
 >
-> Ports<br />Ports are represented by connections of ovs-port type. Due to the limitations of OVSDB, “empty” Ports (with no Interfaces)<br />can’t exist. Ports can also be configured to do VLAN tagging or Bonding. NetworkManager inserts the records for Ports into<br />OVSDB when an Interface is enslaved. Ports must be enslaved to a Bridge.
+> Ports
+> Ports are represented by connections of ovs-port type. Due to the limitations of OVSDB, “empty” Ports (with no Interfaces)
+> can’t exist. Ports can also be configured to do VLAN tagging or Bonding. NetworkManager inserts the records for Ports into
+> OVSDB when an Interface is enslaved. Ports must be enslaved to a Bridge.
 >
-> Interfaces<br />Interfaces are represented by a connections enslaved to a Port. The system interfaces (that have a corresponding Linux<br />link) have a respective connection.type of the link (e.g. “wired”, “bond”, “dummy”, etc.). Other interfaces (“internal” or<br />“patch” interfaces) are of ovs-interface type. The OVSDB entries are inserted upon enslavement to a Port.
+> Interfaces
+> Interfaces are represented by a connections enslaved to a Port. The system interfaces (that have a corresponding Linux
+> link) have a respective connection.type of the link (e.g. “wired”, “bond”, “dummy”, etc.). Other interfaces (“internal” or
+> “patch” interfaces) are of ovs-interface type. The OVSDB entries are inserted upon enslavement to a Port.
 
 怎么理解呢，首先NetworkManager之和OVSDB通信，而OVSDB是有些限制的：1. 不允许空Bridge（没有任何Port）存在；2. 不允许空Port（没有任何Interface）存在；3. 不能直接将一个Interface接到Bridge上，必须有对应的Port才行。
 

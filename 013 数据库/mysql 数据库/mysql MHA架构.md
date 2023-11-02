@@ -22,7 +22,8 @@ MHA 能在故障切换的过程中最大程度上保证数据的一致性，以�
 ![](assets/image-20230216200302909-20230610173813-r4w0zss.png)
 
 环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考mysql 单机部署  
-操作系统：`Linux CentOS 7.6`​<br />数据库：`MySQL 8.0.26`​   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)  
+操作系统：`Linux CentOS 7.6`​
+数据库：`MySQL 8.0.26`​   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)  
 MHA：`mha4mysql-0.58`​ https://github.com/yoshinorim/mha4mysql-node https://github.com/yoshinorim/mha4mysql-manager
 
 ### 1. 在所有服务器上配置无密码认证

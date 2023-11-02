@@ -274,8 +274,39 @@ verb 3
 compress lz4-v2
 ```
 
-windows 客户端配置文件 命名为 client.ovpn
+windows 客户端配置文件 命名为 client.ovpn  
 证书和配置文件放到 C:\Users\doshe\OpenVPN\config
+
+#### 附：将证书写进客户端配置文件client.ovpn
+
+​`vim client.ovpn`​
+
+```bash
+#删除或者注释以下几行内容：
+ca ca.crt　         　 改为：#ca ca.crt
+cert client.crt　　 改为：#cert client.crt
+key client.key　　 改为：#key client.key
+tls-auth ta.key 1　改为：#tls-auth ta.key 1
+
+#在最后面添加以下内容：
+<ca>
+ca.crt 文件内容
+</ca>
+<cert>
+client.crt 文件内容
+</cert>
+<key>
+client.key 文件内容
+</key>
+key-direction 1
+<tls-auth>
+ta.key 文件内容
+</tls-auth>
+```
+
+‍
+
+---
 
 # 基于用户密码方式认证
 
