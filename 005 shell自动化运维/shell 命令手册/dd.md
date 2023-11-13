@@ -49,9 +49,7 @@ dd if=~/Desktop/ubuntu-18.04.3-desktop-amd64.iso of=/dev/sdb
 dd if=~/Downloads/debian-11.3.0-amd64-netinst.iso of=/dev/sdb bs=1M status=progress
 ```
 
-‍
-
-## 增加swap分区文件大小
+## 创建swap分区
 
 ```bash
 #第一步：创建一个大小为1G的文件：

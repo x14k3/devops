@@ -30,8 +30,8 @@ openvpn 有两种认证方式：
 
 # 基于证书认证
 
-使用 easy-rsa 工具生成证书
-下载地址：https://github.com/OpenVPN/easy-rsa
+使用 easy-rsa 工具生成证书  
+下载地址：[https://github.com/OpenVPN/easy-rsa](https://github.com/OpenVPN/easy-rsa)
 
 ## 1.配置 EasyRsa
 
@@ -55,52 +55,15 @@ set_var EASYRSA_CERT_EXPIRE "180"      # 证书有效期
 ### 2.1 自建 CA 认证体系
 
 ```bash
-
-[root@fmsrvdb EasyRSA-3.1.1]# tree /data/EasyRSA-3.1.1/
-/data/EasyRSA-3.1.1/
-├── ChangeLog
-├── COPYING.md
-├── doc
-│   ├── EasyRSA-Advanced.md
-│   ├── EasyRSA-Contributing.md
-│   ├── EasyRSA-Readme.md
-│   ├── EasyRSA-Renew-and-Revoke.md
-│   ├── EasyRSA-Upgrade-Notes.md
-│   ├── Hacking.md
-│   └── Intro-To-PKI.md
-├── easyrsa
-├── gpl-2.0.txt
-├── mktemp.txt
-├── openssl-easyrsa.cnf
-├── README.md
-├── README.quickstart.md
-├── vars.example
-└── x509-types
-    ├── ca
-    ├── client
-    ├── code-signing
-    ├── COMMON
-    ├── email
-    ├── kdc
-    ├── server
-    └── serverClient
-
-2 directories, 24 files
-[root@fmsrvdb EasyRSA-3.1.1]# 
-
 ######## 初始化证书管理目录
 [root@fmsrvdb EasyRSA-3.1.1]# ./easyrsa init-pki
-
 
 ######## 创建根证书，提示输入Common Name，名称随意，但是不能和服务端证书或客户端证书名称相同
 ######## 输入PEM密码 PEM pass phrase，输入两次，此密码必须记住，不然以后不能为证书签名，可以使用nopass参数取消 PEM 密码
 [root@fmsrvdb EasyRSA-3.1.1]# ./easyrsa build-ca nopass 
 
-
 ############ 生成Diffle Human参数，它能保证密钥在网络中安全传输
 [root@fmsrvdb EasyRSA-3.1.1]# ./easyrsa gen-dh
-
-
 ```
 
 ### 2.2 服务端证书构建
@@ -162,9 +125,9 @@ pki/
 
 8 directories, 21 files
 
-mkdir -p /opt/openvpn/{server,client}
-cp pki/ca.crt pki/private/server.key pki/issued/server.crt pki/dh.pem /opt/openvpn/server/
-cp pki/ca.crt pki/private/client001.key pki/issued/client001.crt /opt/openvpn/client/
+mkdir -p /opt/openvpn/ssl
+cp pki/ca.crt pki/private/server.key pki/issued/server.crt pki/dh.pem /opt/openvpn/ssl/
+cp pki/ca.crt pki/private/client001.key pki/issued/client001.crt /opt/openvpn/ssl/
 ```
 
 ## 安装 openvpn
@@ -176,6 +139,8 @@ cp pki/ca.crt pki/private/client001.key pki/issued/client001.crt /opt/openvpn/cl
 ```bash
 # 安装依赖
 yum -y install openssl-devel lzo-devel pam-devel gcc
+#apt-get install libnl-genl-3-200 libnl-genl-3-dev libcap-ng-dev libssl-dev liblzo2-dev libpam0g-dev automake autoconf libsysfs-dev libtool m4 liblz4-tool liblz4-dev liblzo2-dev
+
 unzip openvpn-2.5.8.zip 
 cd openvpn-2.5.8
 mkdir -p /data/openvpn
@@ -183,8 +148,8 @@ mkdir -p /data/openvpn
 ./configure --prefix=/data/openvpn
 # 安装
 make && make install
-# ta.key 放置Dos攻击
-# /data/openvpn/sbin/openvpn --genkey --secret pki/ta.key
+# ta.key 防止Dos攻击
+/data/openvpn/sbin/openvpn --genkey secret /data/openvpn/ssl/ta.key
 ```
 
 ### 1. 服务端配置

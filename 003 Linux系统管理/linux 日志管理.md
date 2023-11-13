@@ -1,7 +1,7 @@
 # linux 日志管理
 
-* 📄 [linux logrotate](siyuan://blocks/20230610173801-5bt2ht6)
-* 📄 [linux rsyslog](siyuan://blocks/20230803121402-0hdctz8)
+* 📄 linux logrotate-日志切割工具
+* 📄 linux rsyslog-日志系统
 
 ### 日志介绍
 

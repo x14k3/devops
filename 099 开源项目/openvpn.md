@@ -1,5 +1,5 @@
 # openvpn
 
-[openVPN](siyuan://blocks/20230610173702-x81rrx4)
+[openVPN](siyuan://blocks/20231110105237-p65g7vr)
 
 ‍

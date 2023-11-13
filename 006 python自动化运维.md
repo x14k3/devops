@@ -6,8 +6,8 @@
 * 📄 python 定义函数
 * 📑 python 模块
 
-  * 📄 open
-  * 📄 psutil
+  * 📄 open 模块
+  * 📄 psutil 模块
 * 📄 python 模块分发
 
 ‍

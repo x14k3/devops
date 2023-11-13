@@ -10,8 +10,8 @@ tomcat 和jdk关系（区别）
 
 ## tomcat 部署
 
-1. [jdk](../jdk/jdk.md)
-2. tomcat 安装, 下载地址：https://tomcat.apache.org/
+1. jdk 部署
+2. tomcat 下载地址：[https://tomcat.apache.org/](https://tomcat.apache.org/)
 
 ```bash
 # 进入下载目录，进行解压缩：

@@ -39,7 +39,3 @@ alter user root account unlock;
 alter user 用户名 identified by 原密码;
 
 ```
-
-## 内存优化
-
-参考[[Oracle 内存管理.md]]

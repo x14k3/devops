@@ -1,8 +1,8 @@
 # ActiveMQ
 
-* 📄 [activemq 部署和集群](siyuan://blocks/20230610173645-vh6rd1g)
-* 📄 [activemq 概述](siyuan://blocks/20230610173755-bhs5vp8)
-* 📄 [activemq 优化](siyuan://blocks/20230610173606-3o0gybj)
-* 📄 [activemq+ssl](siyuan://blocks/20230610173737-uu9r2wi)
+* 📄 [activemq 部署和集群](siyuan://blocks/20231110105237-w2d9iw3)
+* 📄 [activemq 概述](siyuan://blocks/20231110105237-gdccmry)
+* 📄 [activemq 优化](siyuan://blocks/20231110105237-br404dd)
+* 📄 [activemq+ssl](siyuan://blocks/20231110105237-8co62y1)
 
 ‍

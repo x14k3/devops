@@ -1,5 +1,5 @@
 # ElasticSearch
 
-* 📄 [ElasticSearch基础概念](siyuan://blocks/20230610173811-cg9nctn)
+* 📄 [ElasticSearch基础概念](siyuan://blocks/20231110105237-992g161)
 
 ‍

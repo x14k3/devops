@@ -1,6 +1,10 @@
 # 005 shell自动化运维
 
-* 📄 shell 三剑客
+* 📑 shell 三剑客
+
+  * 📄 awk
+  * 📄 grep
+  * 📄 sed
 * 📑 shell 命令手册
 * 📄 shell 数组详解
 * 📄 shell 脚本命令

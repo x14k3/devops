@@ -2,6 +2,10 @@
 
 在 CentOS/Fedora/RHEL 版本的 Linux 中则使用下面的命令进行安装。
 
+```bash
+yum install lsof
+```
+
 ​`lsof`​也是有着最多选项的 Linux/Unix 命令之一。`lsof`​可以查看打开的文件是：
 
 * 普通文件
