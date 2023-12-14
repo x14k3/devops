@@ -6,6 +6,7 @@ Alist 是一款支持多种存储的目录文件列表程序，支持 web 浏览
 
 ```bash
 # 解压下载对文件得到可执行文件：  
+wget https://github.com/alist-org/alist/releases/download/v3.27.0/alist-linux-amd64.tar.gz
 tar -zxf alist-linux-amd64.tar.gz 
 
 # 配置文件
@@ -55,7 +56,7 @@ nohup ./alist server &
 ./alist password
 
 # 守护进程
-cat > /usr/lib/systemd/system/alist.service <<EOF
+cat > /etc/systemd/system/alist.service <<EOF
 [Unit]
 Description=alist
 After=network.target

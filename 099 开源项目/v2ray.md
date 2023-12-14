@@ -188,6 +188,31 @@ source .bashrc
 start_v2ray
 ```
 
+使用守护进程管理
+
+```bash
+root@notebook:/data # cat /etc/systemd/system/v2ray.service 
+[Unit]
+Description=V2Ray Service
+Documentation=https://www.v2fly.org/
+After=network.target nss-lookup.target
+
+[Service]
+User=v2ray
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/data/v2ray/v2ray -config /data/v2ray/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+‍
+
 ## apple
 
 i2Ray

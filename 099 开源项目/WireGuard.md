@@ -64,7 +64,7 @@ wg genkey > client_key && wg pubkey < client_key > client_pub
 Address = 172.168.1.1/24   # 分配给本机的ip
 SaveConfig = true
 ListenPort = 22054               # 监听端口UDP
-PrivateKey = <server_private_key >
+PrivateKey = <server_key >
 
 
 PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -72,7 +72,7 @@ PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j A
 
 # Client，可以有很多 Peer
 [Peer] 
-PublicKey = <client_public >
+PublicKey = <client_pub >
 AllowedIPs = 172.168.1.2/24       #分配给client的ip
 
 ```
@@ -121,8 +121,6 @@ ip route show table local
 ip route get 222.222.222.1
 ```
 
-一键安装请参考这个项目：[https://github.com/angristan/wireguard-install](https://github.com/angristan/wireguard-install)
-
 ‍
 
 ### WireGuard Client（N台非公网服务器）
@@ -141,12 +139,12 @@ sysctl -p
 
 ```bash
 [Interface]
-PrivateKey = <client_private_key>
+PrivateKey = <client_key>
 Address =  172.168.1.2/24       #分配给client的ip
 DNS = 8.8.8.8  # 连接后使用的 DNS, 如果要防止 DNS 泄露，建议使用内网的 DNS 服务器
 
 [Peer]
-PublicKey = < server_public>
+PublicKey = < server_pub>
 Endpoint = x.x.x.x:51820  # 服务端公网暴露地址，51280 是上面指定的
 AllowedIPs =  172.168.1.0/24,172.17.0.11/20  # 指定要访问的服务端网段,或者设置0.0.0.0/0来进行全局代理.
 PersistentKeepalive = 25
