@@ -34,6 +34,12 @@ ip_prefixes:
   - 172.168.1.0/24
 db_path: /data/headscale/db.sqlite
  magic_dns: false
+
+# Enabling this option makes devices prefer a random port for WireGuard traffic over the
+# default static port 41641. This option is intended as a workaround for some buggy
+# firewall devices. See https://tailscale.com/kb/1181/firewalls/ for more information.
+randomize_client_port: true
+
 -------------------------------------------------
 
 # 启动
@@ -51,16 +57,7 @@ nohup ./headscale serve >> ./headscale.log 2>&1 &
 ### linux
 
 ```bash
-# 解压
-tar -zxf tailscale_1.34.1_amd64.tgz
-cd tailscale_1.34.1_amd64
-# 将二进制文件复制到官方软件包默认的路径下：
-cp tailscaled /usr/sbin/tailscaled
-cp tailscale /usr/bin/tailscale
-# 将 systemD service 配置文件复制到系统路径下
-cp ./systemd/tailscaled.service /lib/systemd/system/tailscaled.service
-# 将环境变量配置文件复制到系统路径下：
-cp ./systemd/tailscaled.defaults /etc/default/tailscaled
+zypper install tailscale
 
 # 启动服务
 systemctl enable --now tailscaled
@@ -85,8 +82,8 @@ To authenticate, visit:
         http://8.210.145.225:11053/register/nodekey:6207f14cc8d47cac320da2468d08c9494a580cc67846c50c0e067d994f927e32
 
 # 将后面的nodekey复制，然后再headscale服务端 执行 注册到指定的namespace
-./headscale -n default nodes register --key nodekey:905cf165204800247fbd33989dbc22be95c987286c45aac3033937041150d846
-
+./headscale -n sds nodes register --key nodekey:a4ee2f23243ead015342c250eae83d1c5d2e4433502135d922453fda4338e3
+./headscale nodes register --user USERNAME --key nodekey:a4ee2f23243ead015342c250eae83d1c5d2e4433502135d92245
 # 注册成功，查看注册的节点
 ./headscale nodes list
 ```
@@ -95,7 +92,7 @@ To authenticate, visit:
 
 Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.xx:220xx/windows`​，便会出现如下的界面：
 
-![](assets/Pasted image 20221222215323-20230610173813-1i6nu9z.png)
+![](assets/Pasted%20image%2020221222215323-20230610173813-1i6nu9z.png)
 
 **注册客户端到headscale控制服务器**
 
@@ -108,7 +105,7 @@ tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --acce
 
 然后将浏览器弹出的命令在服务端执行：
 
-![](assets/Pasted image 20221222220854-20230610173813-c77ouoo.png)
+![](assets/Pasted%20image%2020221222220854-20230610173813-c77ouoo.png)
 
 **客户端开启路由转发功能**
 
@@ -139,11 +136,11 @@ tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --acce
 
 ```bash
 # 删除客户端
-headscale nodes delete -i <id>
+./headscale nodes delete -i <id>
 # 启用发布的子网
-headscale nodes routes enable -i <id> -r 192.168.10.0/24
+./headscale routes enable -i 1 -r "192.168.188.0/24"
 # 查看客户端发布的subnet
-headscale nodes routes list -i <id>
+./headscale routes list
 ```
 
 ### tailscale 客户端命令

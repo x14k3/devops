@@ -49,7 +49,7 @@ ADR_BASE_LISTENER = /data/u01/app/oracle
 
 ### **ORACLE 动态监听**
 
- listener动态注册，在instance启动的时候PMON进程根据`init.ora`​获取`instance_name`​,`service_names`​两个参数将实例和服务，监听启动时，会将实例注册到监听程序中，启动后状态是“**READY**”。  
+listener动态注册，在instance启动的时候PMON进程根据`init.ora`​获取`instance_name`​,`service_names`​两个参数将实例和服务，监听启动时，会将实例注册到监听程序中，启动后状态是“**READY**”。
 
 ‍
 

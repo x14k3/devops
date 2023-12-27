@@ -7,7 +7,7 @@
 * 📄 5. Linux ACL访问控制权限
 * 📄 6. Linux mask有效权限详解
 * 📄 7. Linux 隐藏属性
-* 📄 8. Linux sudo命令用法详解：系统权限管理
+* 📄 8. Linux sudo命令用法详解
 * 📄 9. linux PAM文件
 
 ‍

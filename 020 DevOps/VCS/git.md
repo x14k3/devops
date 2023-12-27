@@ -34,6 +34,7 @@ git commit -m "message"  -a
 git commit -m "message"  GoT.txt
 # 到现在为止，我们一直在本地服务器上工作。添加远程仓库，以便其他人通过互联网进行协作。
 git remote add origin ssh://git@remote-server/home/git/project-1.git
+git remote add origin https://github.com/x14k3/devops.git
 # 现在，您可以使用 pull 或 push 选项在服务器和本地计算机之间推送或拉取：
 git push origin master
 

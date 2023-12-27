@@ -75,7 +75,7 @@ ZooKeeper主要有领导者（Leader）、跟随者（Follower）和观察者（
 
 这个其实是 zookeeper 很经典的一个用法，简单来说，就好比，你 A 系统发送个请求到 mq，然后 B 系统消息消费之后处理了。那 A 系统如何知道 B 系统的处理结果？用 zookeeper 就可以实现分布式系统之间的协调工作。A 系统发送请求之后可以在 zookeeper 上对某个节点的值注册个监听器，一旦 B 系统处理完了就修改 zookeeper 那个节点的值，A 系统立马就可以收到通知，完美解决。
 
-​![16df8dbb1caefacctplv-t2oaga2asx-zoom-in-crop-mark 3024 0 0 0](assets/16df8dbb1caefacctplv-t2oaga2asx-zoom-in-crop-mark 3024 0 0 0-20230621103756-i4pm964.webp)​
+​![16df8dbb1caefacctplv-t2oaga2asx-zoom-in-crop-mark 3024 0 0 0](assets/16df8dbb1caefacctplv-t2oaga2asx-zoom-in-crop-mark%203024%200%200%200-20230621103756-i4pm964.webp)​
 
 ‍
 
@@ -122,4 +122,4 @@ zookeeper分布式队列的实现完成以下几个要素：
 
 这个应该是很常见的，比如 hadoop、hdfs、yarn 等很多大数据系统，都选择基于 zookeeper 来开发 HA 高可用机制，就是一个重要进程一般会做主备两个，主进程挂了立马通过 zookeeper 感知到切换到备用进程。
 
-​![16df8dbb1cdbb1fatplv-t2oaga2asx-zoom-in-crop-mark 3024 0 0 0](assets/16df8dbb1cdbb1fatplv-t2oaga2asx-zoom-in-crop-mark 3024 0 0 0-20230621104250-564z56f.webp)​
+​![16df8dbb1cdbb1fatplv-t2oaga2asx-zoom-in-crop-mark 3024 0 0 0](assets/16df8dbb1cdbb1fatplv-t2oaga2asx-zoom-in-crop-mark%203024%200%200%200-20230621104250-564z56f.webp)​

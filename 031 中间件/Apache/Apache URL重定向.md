@@ -53,7 +53,7 @@ RewriteCond及RewriteRule行可以可以多个
 
 redirect|R [=code] (强制重定向 redirect)
 
-以 [http://thishost[:thisport]/(使新的URL成为一个URI](http://thishost[:thisport]/%28使新的URL成为一个URI%29%29 为前缀的Substitution可以强制性执行一个外部重定向。 如果code没有指定，则产生一个HTTP响应代码302%28临时性移动%29。如果需要使用在300-400范围内的其他响应代码，只需在此指定这个数值即可， 另外，还可以使用下列符号名称之一: temp %28默认的), permanent, seeother. 用它可以把规范化的URL反馈给客户端，如, 重写“/~”为 “/u/”，或对/u/user加上斜杠，等等。
+以 [http://thishost[:thisport]/(使新的URL成为一个URI](http://thishost[:thisport]/%28使新的URL成为一个URI%29%29%20为前缀的Substitution可以强制性执行一个外部重定向。%20如果code没有指定，则产生一个HTTP响应代码302%28临时性移动%29。如果需要使用在300-400范围内的其他响应代码，只需在此指定这个数值即可，%20另外，还可以使用下列符号名称之一:%20temp%20%28默认的), permanent, seeother. 用它可以把规范化的URL反馈给客户端，如, 重写“/~”为 “/u/”，或对/u/user加上斜杠，等等。
 
 注意: 在使用这个标记时，必须确保该替换字段是一个有效的URL! 否则，它会指向一个无效的位置! 并且要记住，此标记本身只是对URL加上 http://thishost[:thisport]/的前缀，重写操作仍然会继续。通常，你会希望停止重写操作而立即重定向，则还需要使用’L’标记.
 

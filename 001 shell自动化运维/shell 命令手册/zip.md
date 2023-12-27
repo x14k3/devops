@@ -63,18 +63,6 @@ zip [-选项] [-b 路径] [-t 日期] [-n 后缀名] [压缩文件列表] [-xi �
 zip -q -r html.zip /home/Blinux/html
 ```
 
-上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：
-
-```
-zip -q -r html.zip html
-```
-
-比如现在我的html目录下，我操作的zip压缩命令是：
-
-```
-zip -q -r html.zip *
-```
-
 压缩 `example/basic/`​ 目录内容到 `basic.zip`​ 压缩包中 `-x`​ 指定排除目录，注意没有双引号将不起作用。
 
 ```

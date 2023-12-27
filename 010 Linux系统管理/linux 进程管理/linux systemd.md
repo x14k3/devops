@@ -482,6 +482,7 @@ System Commands:
     ```bash
     # 列出正在运行的 Unit
     systemctl list-units
+    systemctl list-unit-files --state=enabled
     # 列出所有Unit，包括没有找到配置文件的或者启动失败的
     systemctl list-units --all
     # 列出所有没有运行的 Unit

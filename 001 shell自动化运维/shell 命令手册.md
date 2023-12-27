@@ -270,7 +270,8 @@
     mapfile - 从标准输入读取行并赋值到数组。  
     md5sum - 计算和校验文件报文摘要的工具程序  
     mesg - 设置当前终端的写权限  
-    mii-tool - 配置网络设备协商方式的工具  
+    mii-tool - 配置网络设备协商方式的工具
+    minicom - 串口终端
     mkbootdisk - 可建立目前系统的启动盘  
     mkcert - 用来生成自签证书的工具  
     mkdir - 用来创建目录  

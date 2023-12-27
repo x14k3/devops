@@ -1,99 +1,102 @@
 # 001 shell自动化运维
 
-* 📑 shell 三剑客
+* 📑 [shell 三剑客](siyuan://blocks/20231110105237-n1q0g7i)
 
-  * 📄 awk
-  * 📄 grep
-  * 📄 sed
-* 📑 shell 命令手册
+  * 📄 [awk](siyuan://blocks/20231110164242-bllf0ol)
+  * 📄 [grep](siyuan://blocks/20231110162840-fwvtqmu)
+  * 📄 [sed](siyuan://blocks/20231110164251-540q6se)
+* 📑 [shell 命令手册](siyuan://blocks/20231110105237-errev41)
 
-  * 📄 apt-get
-  * 📄 arp
-  * 📄 arpd
-  * 📄 arping
-  * 📄 at
-  * 📄 base64
-  * 📄 bc
-  * 📄 bmodinfo
-  * 📄 bzip2
-  * 📄 cp
-  * 📄 crontab
-  * 📄 curl
-  * 📄 cut
-  * 📄 date
-  * 📄 dd
-  * 📄 df
-  * 📄 diff
-  * 📄 dig
-  * 📄 dmidecode
-  * 📄 dnf
-  * 📄 dos2unix
-  * 📄 du
-  * 📄 dump
-  * 📄 dumpe2fs
-  * 📄 exec
-  * 📄 expect
-  * 📄 fdisk
-  * 📄 figlet
-  * 📄 find
-  * 📄 fsck
-  * 📄 fuser
-  * 📄 hdparm
-  * 📄 htpasswd
-  * 📄 iconv
-  * 📄 kill
-  * 📄 ln
-  * 📄 locate
-  * 📄 lsblk
-  * 📄 lsmod
-  * 📄 lsof
-  * 📄 mkfs & mke2fx
-  * 📄 mkisofs
-  * 📄 modprobe
-  * 📄 mount
-  * 📄 nc
-  * 📄 nice
-  * 📄 nohup
-  * 📄 openssl
-  * 📄 parted
-  * 📄 ps
-  * 📄 rmmod
-  * 📄 rsync
-  * 📄 sar
-  * 📄 scp
-  * 📄 script
-  * 📄 set
-  * 📄 shopt
-  * 📄 split
-  * 📄 ss
-  * 📄 strace
-  * 📄 top
-  * 📄 tr
-  * 📄 traceroute
-  * 📄 ulimit
-  * 📄 w
-  * 📄 watch
-  * 📄 wget
-  * 📄 xargs
-  * 📄 yum
-  * 📄 zip
-  * 📄 zypper
-* 📄 shell 数组详解
-* 📄 shell 脚本命令
-* 📑 shell 脚本收集
+  * 📄 [apt-get](siyuan://blocks/20231110105237-uxkolm9)
+  * 📄 [arp](siyuan://blocks/20231110105237-apgbdoz)
+  * 📄 [arpd](siyuan://blocks/20231110105237-nim5tdl)
+  * 📄 [arping](siyuan://blocks/20231110105237-uu8u1pl)
+  * 📄 [at](siyuan://blocks/20231110105237-umqoc4f)
+  * 📄 [base64](siyuan://blocks/20231110105237-7ng3g33)
+  * 📄 [bc](siyuan://blocks/20231110105237-zwk6t5r)
+  * 📄 [bmodinfo](siyuan://blocks/20231110105237-66gsn8o)
+  * 📄 [bzip2](siyuan://blocks/20231110105237-28ii7l3)
+  * 📄 [cp](siyuan://blocks/20231110105237-fv7wfnt)
+  * 📄 [crontab](siyuan://blocks/20231110105237-j6s89rn)
+  * 📄 [curl](siyuan://blocks/20231110105237-iutu4j7)
+  * 📄 [cut](siyuan://blocks/20231110105237-1v3brfj)
+  * 📄 [date](siyuan://blocks/20231110105237-rxi9yl4)
+  * 📄 [dd](siyuan://blocks/20231110105237-nz8e8wt)
+  * 📄 [df](siyuan://blocks/20231110105237-l6ngg1a)
+  * 📄 [diff](siyuan://blocks/20231110105237-rz86zem)
+  * 📄 [dig](siyuan://blocks/20231110105237-bi4v1gd)
+  * 📄 [dmidecode](siyuan://blocks/20231110105237-05adh5q)
+  * 📄 [dnf](siyuan://blocks/20231110105237-1hl26hy)
+  * 📄 [dos2unix](siyuan://blocks/20231110105237-cxszlc5)
+  * 📄 [du](siyuan://blocks/20231110105237-qmoqtff)
+  * 📄 [dump](siyuan://blocks/20231110105237-onn32fn)
+  * 📄 [dumpe2fs](siyuan://blocks/20231110105237-wq290rp)
+  * 📄 [exec](siyuan://blocks/20231110105237-aapmdhq)
+  * 📄 [expect](siyuan://blocks/20231110105237-1qr1m6r)
+  * 📄 [fdisk](siyuan://blocks/20231110105237-qvd3pvd)
+  * 📄 [figlet](siyuan://blocks/20231110105237-xqbf95z)
+  * 📄 [find](siyuan://blocks/20231110105237-hk58jbr)
+  * 📄 [fsck](siyuan://blocks/20231110105237-uti3vbu)
+  * 📄 [fuser](siyuan://blocks/20231110105237-c4ufcct)
+  * 📄 [hdparm](siyuan://blocks/20231115130306-86r820v)
+  * 📄 [htpasswd](siyuan://blocks/20231110105237-4dcxe21)
+  * 📄 [iconv](siyuan://blocks/20231110105237-ias8xaa)
+  * 📄 [kill](siyuan://blocks/20231110155733-t0f9u69)
+  * 📄 [ln](siyuan://blocks/20231110105237-x8oqa4p)
+  * 📄 [locate](siyuan://blocks/20231110105237-4x71yys)
+  * 📄 [lsblk](siyuan://blocks/20231110105237-yaojoxc)
+  * 📄 [lsmod](siyuan://blocks/20231110105237-lt7vzhc)
+  * 📄 [lsof](siyuan://blocks/20231110105237-4r3sfie)
+  * 📄 [minicom](siyuan://blocks/20231222133047-w0fkiok)
+  * 📄 [mkfs &amp; mke2fx](siyuan://blocks/20231110105237-ajfjv4b)
+  * 📄 [mkisofs](siyuan://blocks/20231121220044-gmhlmvl)
+  * 📄 [modprobe](siyuan://blocks/20231110105237-edx85nc)
+  * 📄 [mount](siyuan://blocks/20231110105237-ou6v8gy)
+  * 📄 [nc](siyuan://blocks/20231110105237-vuz28hr)
+  * 📄 [nice](siyuan://blocks/20231110155433-35ugxmc)
+  * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
+  * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
+  * 📄 [openssl](siyuan://blocks/20231110105237-gitknig)
+  * 📄 [parted](siyuan://blocks/20231110105237-lr3mogb)
+  * 📄 [ps](siyuan://blocks/20231110105237-xcutv9q)
+  * 📄 [rmmod](siyuan://blocks/20231110105237-8320hhp)
+  * 📄 [rsync](siyuan://blocks/20231110105237-xosg2rl)
+  * 📄 [sar](siyuan://blocks/20231110105237-i8nelud)
+  * 📄 [scp](siyuan://blocks/20231110105237-7veq4mh)
+  * 📄 [script](siyuan://blocks/20231110105237-rvcx333)
+  * 📄 [set](siyuan://blocks/20231110105237-5jie7mk)
+  * 📄 [shopt](siyuan://blocks/20231110105237-uzo2tei)
+  * 📄 [split](siyuan://blocks/20231110105237-ma8xdmz)
+  * 📄 [ss](siyuan://blocks/20231110105237-eqc2xvi)
+  * 📄 [strace](siyuan://blocks/20231110105237-fhpi4ld)
+  * 📄 [tcpdump](siyuan://blocks/20231214163310-dut0ld3)
+  * 📄 [top](siyuan://blocks/20231110105237-rvy5l2x)
+  * 📄 [tr](siyuan://blocks/20231110105237-6jszkwd)
+  * 📄 [traceroute](siyuan://blocks/20231110105237-ej1qj6t)
+  * 📄 [ulimit](siyuan://blocks/20231110105237-an7nqoh)
+  * 📄 [w](siyuan://blocks/20231110105237-hyo0a35)
+  * 📄 [watch](siyuan://blocks/20231110105237-r814jkr)
+  * 📄 [wget](siyuan://blocks/20231110105237-7vm3c0v)
+  * 📄 [xargs](siyuan://blocks/20231110105237-xd1emfz)
+  * 📄 [yum](siyuan://blocks/20231110105237-70luvz1)
+  * 📄 [zip](siyuan://blocks/20231110105237-j3mv8qh)
+  * 📄 [zypper](siyuan://blocks/20231110105237-p2r21wy)
+* 📄 [shell 数组详解](siyuan://blocks/20231110105237-m365fdo)
+* 📄 [shell 脚本命令](siyuan://blocks/20231110105237-yd94b2n)
+* 📑 [shell 脚本收集](siyuan://blocks/20231110105237-eto9jg5)
 
-  * 📄 Shell内部将输出显示在屏幕并同时写入文件
-  * 📄 jar包服务启动停止shell脚本
-  * 📄 mysql数据库备份脚本
-  * 📄 pyhton-nacos配置文件转义
-  * 📄 ssh免密批量处理
-  * 📄 zabbix监控端口数据（自动发现规则）
-  * 📄 志压缩清理
-  * 📄 文件编码转换utf-8
-  * 📄 服务器初始化脚本
-  * 📄 自动输入github账号和密码 提交到github
-* 📄 shell 脚本格式化输出
-* 📄 批处理参考
-* 📄 正则表达式
+  * 📄 [Shell内部将输出显示在屏幕并同时写入文件](siyuan://blocks/20231110105237-0yfqgq8)
+  * 📄 [jar包服务启动停止shell脚本](siyuan://blocks/20231110105237-b0y635e)
+  * 📄 [mysql数据库备份脚本](siyuan://blocks/20231110105237-bj0jy3e)
+  * 📄 [pyhton-nacos配置文件转义](siyuan://blocks/20231110105237-1s3el2d)
+  * 📄 [ssh免密批量处理](siyuan://blocks/20231110105237-pcmbxs6)
+  * 📄 [zabbix监控端口数据（自动发现规则）](siyuan://blocks/20231110105237-v35zha7)
+  * 📄 [志压缩清理](siyuan://blocks/20231110105237-19v44ru)
+  * 📄 [文件编码转换utf-8](siyuan://blocks/20231110105237-z37ucwa)
+  * 📄 [服务器初始化脚本](siyuan://blocks/20231110105237-r6ouwkk)
+  * 📄 [自动输入github账号和密码 提交到github](siyuan://blocks/20231110105237-xswinm4)
+* 📄 [shell 脚本格式化输出](siyuan://blocks/20231110105237-le33yzc)
+* 📄 [批处理参考](siyuan://blocks/20231130212352-cgm1chw)
+* 📄 [正则表达式](siyuan://blocks/20231110105237-eua2g71)
 
 ‍

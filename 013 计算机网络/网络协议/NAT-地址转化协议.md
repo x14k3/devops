@@ -28,7 +28,7 @@ NAT虽然名为网络地址转换，但是常见的工作模式实际上是NAPT(
 
 Full cone NAT(即一对一NAT): 一旦一个内部地址(iAddr:iPort)映射到外部地址(eAddr:ePort)，所有发自(iAddr:iPort)的包都经由(eAddr:ePort)向外发送。任意外部主机都能通过给(eAddr:ePort)发包到达(iAddr:iPort)。
 
-​![](assets/Pasted image 20221224122712-20230610173813-cl9pm4o.png)​
+​![](assets/Pasted%20image%2020221224122712-20230610173813-cl9pm4o.png)​
 
 总结：同一个内部地址(iAddr:iPort)只会映射相同的外部地址(eAddr:ePort)，映射完成后，目标IP端口都无限制。
 
@@ -36,7 +36,7 @@ Full cone NAT(即一对一NAT): 一旦一个内部地址(iAddr:iPort)映射到�
 
 Address-Restricted cone NAT：内部客户端必须首先发送数据包到对方(IP=X.X.X.X)，然后才能接收来自(IP=X.X.X.X)的数据包。在限制方面，唯一的要求是数据包是来自(IP=X.X.X.X)。内部地址(iAddr:iPort)映射到外部地址(eAddr:ePort)，所有发自(iAddr:iPort)的包都经由(eAddr:ePort)向外发送。外部主机(hostAddr:any)能通过给(eAddr:ePort)发包到达(iAddr:iPort)。注：any指外部主机源端口不受限制，只有发给NAT转换地址(eAddr:ePort)的数据包才被放行
 
-​![](assets/Pasted image 20221224122723-20230610173813-xl01pt4.png)​
+​![](assets/Pasted%20image%2020221224122723-20230610173813-xl01pt4.png)​
 
 总结：同一个内部地址(iAddr:iPort)只会映射相同的外部地址(eAddr:ePort)，映射完成后，必须先发一个包给目标，然后才能收到目标回发的包，目标端口无限制。
 
@@ -44,7 +44,7 @@ Address-Restricted cone NAT：内部客户端必须首先发送数据包到对�
 
 Port-Restricted cone NAT：类似受限制锥形NAT(Restricted cone NAT)，但是还有端口限制。一旦一个内部地址(iAddr:iPort)映射到外部地址(eAddr:ePort)，所有发自(iAddr:iPort)的包都经由(eAddr:ePort)向外发送。在受限圆锥型NAT基础上增加了外部主机源端口必须是固定的。
 
-​![](assets/Pasted image 20221224122729-20230610173813-p4763su.png)​
+​![](assets/Pasted%20image%2020221224122729-20230610173813-p4763su.png)​
 
 总结：同一个内部地址(iAddr:iPort)只会映射相同的外部地址(eAddr:ePort)，映射完成后，必须先发一个包给目标(tAddr:tPort)，然后才能收到目标(tAddr:tPort)回发的包，有目标端口限制。
 
@@ -78,7 +78,7 @@ NAT穿透，简单地讲就是要让处于不同NAT网络下的两个节点(Peer
 5. 两个不同的节点Client1和Client2通过第三方服务器交换公网地址(eAddr1:ePort1)(eAddr2:ePort2)
 6. 自由地进行通讯
 
-​![](assets/Pasted image 20221224122820-20230610173813-v1vs1lq.png)​
+​![](assets/Pasted%20image%2020221224122820-20230610173813-v1vs1lq.png)​
 
 ### 受限圆锥形 NAT
 
@@ -92,7 +92,7 @@ NAT穿透，简单地讲就是要让处于不同NAT网络下的两个节点(Peer
 6. 连接双方Client1和Client2先向对方地址发送一个数据包
 7. 自由地进行通讯
 
-​![](assets/Pasted image 20221224122827-20230610173813-ebf7o3p.png)​
+​![](assets/Pasted%20image%2020221224122827-20230610173813-ebf7o3p.png)​
 
 ### 端口受限圆锥形 NAT
 
@@ -112,7 +112,7 @@ NAT穿透，简单地讲就是要让处于不同NAT网络下的两个节点(Peer
 8. 连接双方Client1和Client2先向对方的代理地址(pAddr1:pPort1)(pAddr2:pPort2)发送一个数据包
 9. 双方通过代理地址(pAddr1:pPort1)(pAddr2:pPort2)进行通讯
 
-​![](assets/Pasted image 20221224122839-20230610173813-wuzf7jz.png)​
+​![](assets/Pasted%20image%2020221224122839-20230610173813-wuzf7jz.png)​
 
 理解了各个NAT类型下的解决简单方案之后，再来看STUN，TURN和ICE，你就会发现这三个协议负责的内容和上述的简单方案非常相似。
 
