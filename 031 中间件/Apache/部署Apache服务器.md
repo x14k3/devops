@@ -1,202 +1,308 @@
 # 部署Apache服务器
 
-## 安装步骤
+Apache在Windows下的下载、安装、部署及代理Tomcat
 
-- 安装apr
-- 安装apr-util
-- 安装apr-iconv
-- 安装apache
-- 启动apache
-- 测试apache
-- MPM
+## Apache简介
 
-## 一、安装依赖
+Apache(音译为[阿帕奇](https://baike.baidu.com/item/%E9%98%BF%E5%B8%95%E5%A5%87/374191))是世界使用排名第一的Web[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8)软件。它可以运行在几乎所有广泛使用的[计算机平台](https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B9%B3%E5%8F%B0/2606037)上，由于其[跨平台](https://baike.baidu.com/item/%E8%B7%A8%E5%B9%B3%E5%8F%B0/8558902)和安全性被广泛使用，是最流行的Web服务器端软件之一。它快速、可靠并且可通过简单的API扩充，将[Perl](https://baike.baidu.com/item/Perl)/[Python](https://baike.baidu.com/item/Python)等[解释器](https://baike.baidu.com/item/%E8%A7%A3%E9%87%8A%E5%99%A8/10418965)编译到服务器中。（摘自：百度百科）
 
-安装依赖
+## 入门
 
-[root@zutuanxue ~]# yum install -y pcre-devel libxml2 expat-devel
+以下来自Apache官方[文档](http://httpd.apache.org/docs/2.4/getting-started.html)
 
-## 二、 apr介绍及安装
+如果您对Apache HTTP Server完全陌生，甚至根本不运行网站，那么您可能都不知道从哪里开始，或者不知道要问什么问题。本文档将向您介绍基础知识。
 
-APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。
+## 客户端，服务器和URL
 
-[root@zutuanxue ~]# wget https://www.apache.org/dist/apr/apr-1.7.0.tar.bz2
+网络上的地址用URL（统一资源定位符）表示，URL指定协议（例如`http`​），服务器名（例如 `www.apache.org`​），URL路径（例如 `/docs/current/getting-started.html`​）以及可能`?arg=value`​用于将其他参数传递给服务器的查询字符串（例如）。服务器。
 
-[root@zutuanxue ~]# tar xf apr-1.7.0.tar.bz2
+客户端（例如Web浏览器）使用指定的协议连接到服务器（例如Apache HTTP Server），并使用URL路径**请求**资源。
 
-[root@zutuanxue ~]# cd apr-1.7.0
+URL路径可以表示服务器上的任何事物。它可以是文件（如`getting-started.html`​），处理程序（如[server-status](http://httpd.apache.org/docs/2.4/mod/mod_status.html)）或某种程序文件（如`index.php`​）。我们将在下面的“[网站内容”](http://httpd.apache.org/docs/2.4/getting-started.html#content)部分中对此进行更多讨论。
 
-[root@zutuanxue apr-1.7.0]# ./configure --prefix=/usr/local/apr
+服务器将发送一个**响应**包括一个状态码和，任选地，响应体。状态代码指示请求是否成功，如果没有成功，则表明存在哪种错误情况。这告诉客户端应如何处理响应。您可以在[HTTP Server Wiki中](http://wiki.apache.org/httpd/CommonHTTPStatusCodes)阅读有关可能的响应代码的信息 。
 
-[root@zutuanxue apr-1.7.0]# make
+事务的详细信息以及任何错误条件都将写入日志文件。下面在“[日志文件和故障排除”](http://httpd.apache.org/docs/2.4/getting-started.html#logs)部分中对此进行了更详细的讨论。
 
-[root@zutuanxue apr-1.7.0]# make install
+## 主机名和DNS
 
-## 三、APR-util介绍及安装
+为了连接到服务器，客户端首先必须将服务器名称解析为IP地址-服务器在Internet上的位置。因此，为了使您的Web服务器可访问，服务器名必须在DNS中。
 
-apr-util该目录中也是包含了一些常用的开发组件。这些组件与apr目录下的相比，它们与apache的关系更加密切一些。比如存储段和存储段组，加密等等。
+如果您不知道如何执行此操作，则需要与网络管理员或Internet服务提供商联系，以执行此步骤。
 
-[root@zutuanxue ~]# wget https://www.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
+一个以上的主机名可能指向同一IP地址，并且一个以上的IP地址可以连接到同一台物理服务器。因此，您可以使用称为[虚拟主机](http://httpd.apache.org/docs/2.4/vhosts/)的功能在同一台物理服务器上运行多个网站。
 
-[root@zutuanxue ~]# tar xf apr-util-1.6.1.tar.bz2
+如果要测试不可通过Internet访问的服务器，则可以在主机文件中放置主机名，以便进行本地解析。例如，`www.example.com`​出于测试目的，您可能希望在主机文件中放置一条记录，以将请求映射到本地系统。此项看起来像：
 
-[root@zutuanxue ~]# cd apr-util-1.6.1
-
-[root@zutuanxue apr-util-1.6.1]# yum install -y expat-devel
-
-[root@zutuanxue apr-util-1.6.1]# ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr/
-
-[root@zutuanxue apr-util-1.6.1]# make
-
-[root@zutuanxue apr-util-1.6.1]# make install
-
-## 四、apr-iconv介绍及安装
-
-apr-iconv包中的文件主要用于实现iconv编码。目前的大部分编码转换过程都是与本地编码相关的。在进行转换之前必须能够正确地设置本地编码。因此假如两个非本地编码A和B需要转换，则转换过程大致为A->Local以及Local->B或者B->Local以及Local->A。
-
-[root@zutuanxue ~]# wget https://www.apache.org/dist/apr/apr-iconv-1.2.2.tar.bz2
-
-[root@zutuanxue ~]# tar xf apr-iconv-1.2.2.tar.bz2
-
-[root@zutuanxue ~]# cd apr-iconv-1.2.2
-
-[root@zutuanxue apr-iconv-1.2.2]# ./configure --prefix=/usr/local/apr-iconv --with-apr=/usr/local/apr
-
-[root@zutuanxue apr-iconv-1.2.2]# make
-
-[root@zutuanxue apr-iconv-1.2.2]# make install
-
-## 五、apache安装
-
-[root@zutuanxue ~]# wget https://www.apache.org/dist/httpd/httpd-2.4.39.tar.gz
-
-[root@zutuanxue ~]# tar xf httpd-2.4.39.tar.gz
-
-[root@zutuanxue ~]# cd httpd-2.4.39
-
-[root@zutuanxue httpd-2.4.39]# ./configure --prefix=/usr/local/apache --enable-mpms-shared=all --with-mpm=event --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --enable-so --enable-remoteip --enable-proxy --enable-proxy-fcgi --enable-proxy-uwsgi --enable-deflate=shared --enable-expires=shared --enable-rewrite=shared --enable-cache --enable-file-cache --enable-mem-cache --enable-disk-cache --enable-static-support --enable-static-ab --disable-userdir --enable-nonportable-atomics --disable-ipv6 --with-sendfile
-
-```
---prefix=/usr/local/apache                         指定安装目录
---enable-mpms-shared=all --with-mpm=event                 开启动态MPM切换        
---with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util         指定依赖包apr apr-util安装路径
---enable-so                                  打开 so 模块，so 模块是用来提 dso 支持的 apache 核心模块
---enable-remoteip                             支持基于客户端IP做访问控制                        
---enable-proxy --enable-proxy-fcgi --enable-proxy-uwsgi         启用代理支持PHP Python网站
---enable-deflate=shared                         开启压缩
---enable-expires=shared                          开启客户端缓存
---enable-rewrite=shared                         开启URL重写
---enable-cache --enable-file-cache --enable-mem-cache --enable-disk-cache 开启服务器缓存    
---enable-static-support                         支持静态连接
---enable-static-ab                             使用静态连接编译 ab - apache http 服务器性能测试工具
---disable-userdir                             禁用用户主目录提供页面访问
---enable-nonportable-atomics                         对新式CPU支持，支持原子的比较交换(compare-and -swap, CAS)操作指令
---disable-ipv6                              禁用IPV6
---with-sendfile                             开启sendfile 0复制机制
+```shell
+127.0.0.1 www.example.com
 ```
 
-[root@zutuanxue httpd-2.4.39]# make
+主机文件可能位于`/etc/hosts`​或 `C:\Windows\system32\drivers\etc\hosts`​。
 
-[root@zutuanxue httpd-2.4.39]# make install
+您可以在[Wikipedia.org/wiki/Hosts_(file）上](http://en.wikipedia.org/wiki/Hosts_(file))了解有关主机文件的更多信息，并在[Wikipedia.org/wiki/Domain_Name_System上](http://en.wikipedia.org/wiki/Domain_Name_System)了解有关DNS的更多信息。
 
-## 相关目录
+## 配置文件和指令
 
-[root@zutuanxue apache]# tree -L 1
+通过简单的文本文件配置Apache HTTP Server。这些文件可能位于各种位置，具体取决于您安装服务器的方式。这些文件的公共位置可以[在httpd Wiki中](http://wiki.apache.org/httpd/DistrosDefaultLayout)找到。如果从源安装了httpd，则配置文件的默认位置为 `/usr/local/apache2/conf`​。默认配置文件通常称为`httpd.conf`​。在服务器的第三方发行版中，这也可能有所不同。
 
-.
+为了便于管理，该配置通常分为多个较小的文件。这些文件是通过`Include`​指令加载的。这些子文件的名称或位置并不是很神奇，并且从一个安装到另一个安装可能会有很大的不同。安排和细分这些文件对**您**来说是最有意义的。如果默认情况下您的文件排列对您没有意义，请随时重新排列。
 
-├── bin 二进制命令
+通过在这些配置文件中放置[配置指令](http://httpd.apache.org/docs/2.4/mod/quickreference.html)来[配置](http://httpd.apache.org/docs/2.4/mod/quickreference.html)服务器。指令是一个关键字，后跟一个或多个设置其值的参数。
 
-├── build
+的“这个问题_我应该在哪里把该指令？_ ”你想要一个指令是有效的，一般考虑回答。如果它是一个全局设置，它应该出现在配置文件中，任何外`<Directory>`​，`<Location>`​，`<VirtualHost>`​，或其他部分。如果仅适用于特定目录，则应将其放在`<Directory>`​引用该目录的 部分中，依此类推。有关这些部分的进一步讨论，请参见“[配置部分”](http://httpd.apache.org/docs/2.4/sections.html)文档。
 
-├── cgi-bin cgi脚本目录
+除了主要配置文件外，某些指令还可以放入`.htaccess`​内容目录中的 文件中。 `.htaccess`​文件主要用于无法访问主服务器配置文件的人员。您可以`.htaccess`​在[`.htaccess`](http://httpd.apache.org/docs/2.4/howto/htaccess.html)​[howto中](http://httpd.apache.org/docs/2.4/howto/htaccess.html)阅读有关文件的更多信息 。
 
-├── conf 配置文件目录
+## 网站内容
 
-├── error 错误记录
+网站内容可以采用许多不同的形式，但可以大致分为静态和动态内容。
 
-├── htdocs 默认网站根目录
+静态内容是诸如HTML文件，图像文件，CSS文件以及位于文件系统中的其他文件之类的东西。该`DocumentRoot`​指令指定应在文件系统中放置这些文件的位置。该指令可以全局设置，也可以针对每个虚拟主机设置。查看您的配置文件，以确定如何为您的服务器设置。
 
-├── icons 小图标
+通常，`index.html`​当请求目录而不指定文件名时，将提供名为的文档。例如，如果`DocumentRoot`​设置为， `/var/www/html`​并且请求 `http://www.example.com/work/`​，则文件 `/var/www/html/work/index.html`​将被提供给客户端。
 
-├── include 一些C语言文件
+动态内容是在请求时生成的任何内容，并且可能从一个请求更改为另一个请求。可以通过多种方式生成动态内容。各种[处理程序](http://httpd.apache.org/docs/2.4/handler.html)可用于生成内容。可以编写[CGI程序](http://httpd.apache.org/docs/2.4/howto/cgi.html)来为您的站点生成内容。
 
-├── logs 日志目录
+诸如mod\_php之类的第三方模块可用于编写执行各种操作的代码。许多使用各种语言和工具编写的第三方应用程序都可以在Apache HTTP Server上下载和安装。对这些第三方事物的支持不在本文档的范围内，您应该找到它们的文档或其他支持论坛来回答有关它们的问题。
 
-├── man 帮助手册
+## 下载，安装和配置（Windows）
 
-├── manual 在线手册
+## 下载
 
-└── modules 存放apache运行需要的模块
+可以从[许多第三方供应商](http://httpd.apache.org/docs/current/platform/windows.html#down)处获得适用于Microsoft Windows的Apache httpd 。
 
-## 六、apache启动
+稳定版本-最新版本：
 
-[root@zutuanxue ~]# /usr/local/apache/bin/httpd
+* [2.4.46](http://httpd.apache.org/download.cgi#apache24)（发布于2020-08-07）
 
-## 七、apache状态测试
+## 安装
 
-[root@zutuanxue ~]# elinks [http://192.168.11.251](http://192.168.11.251/) -dump
+Linux从源代码构建的过程请参考[官方文档](http://httpd.apache.org/docs/2.4/en/install.html)
 
+Windows可直接下载构建好的版本
+
+Apache HTTP Server Project本身不提供二进制版本的软件，仅提供源代码。
+
+如果您不能自己编译Apache HTTP Server，则可以从Internet上可用的大量二进制发行版中获取二进制软件包。
+
+在Microsoft Windows上部署Apache httpd以及可选的PHP和MySQL的流行选项包括：
+
+* [ApacheHaus](http://www.apachehaus.com/cgi-bin/download.plx)
+* [Apache Lounge](http://www.apachelounge.com/download/)
+* [Bitnami WAMP Stack](http://bitnami.com/stack/wamp)
+* [WampServer](http://www.wampserver.com/)
+* [XAMPP](http://www.apachefriends.org/en/xampp.html)
+
+解压到本地目录即可
+
+​![](assets/net-img-image-20210511212856776-20240111141604-o79gi8i.png)​
+
+## 配置
+
+配置文件位于`/conf/httpd.conf`​中
+
+在40行附近把原来的`SRVROOT`​注释，新增一个`SRVROOT`​，值为Apache实际的目录
+
+```properties
+#Define SRVROOT "/Apache24"
+Define SRVROOT "D:\Environment\Apache24"
+ServerRoot "${SRVROOT}"
 ```
-                               It works!
+
+## 运行
+
+通过运行`bin`​目录下的httpd.exe来开启Apache服务
+
+​![](assets/net-img-image-20210511214029115-20240111141604-uzstxc0.png)​
+
+在终端中输入
+
+```shell
+httpd.exe
 ```
 
-## 八、MPM多处理模块
+即可运行
 
-Apache HTTP 服务器被设计为一个功能强大，并且灵活的 web 服务器， 可以在很多平台与环境中工作。不同平台和不同的环境往往需要不同 的特性，或可能以不同的方式实现相同的特性最有效率。Apache httpd 通过模块化的设计来适应各种环境。这种设计允许网站管理员通过在 编译时或运行时，选择哪些模块将会加载在服务器中，来选择服务器特性。
+接下来访问[http://localhost/](http://localhost/)即可展示Apache测试页
 
-Apache HTTP 服务器 2.0 扩展此模块化设计到最基本的 web 服务器功能。 它提供了可以选择的多处理模块(MPM)，用来绑定到网络端口上，接受请求， 以及调度子进程处理请求。
+​![image-20210511214510405](assets/net-img-image-20210511214510405-20240111141604-xe4nttk.png)​
 
-扩展到这一级别的服务器模块化设计，带来两个重要的好处:
+即表示成功访问到了位于`/htdocs/index.html`​文档
 
-Apache httpd 能更优雅，更高效率的支持不同的平台。尤其是 Apache httpd 的 Windows 版本现在更有效率了，因为 mpm_winnt 能使用原生网络特性取代在 Apache httpd 1.3 中使用的 POSIX 层。它也可以扩展到其它平台 来使用专用的 MPM。
+## 访问动态文档
 
-Apache httpd 能更好的为有特殊要求的站点定制。例如，要求 更高伸缩性的站点可以选择使用线程的 MPM，即 worker 或 event； 需要可靠性或者与旧软件兼容的站点可以使用 prefork。
+### Apache代理tomocat，转发请求
 
-在用户看来，MPM 很像其它 Apache httpd 模块。主要是区别是，在任何时间， 必须有一个，而且只有一个 MPM 加载到服务器中。可用的 MPM 列表位于 模块索引页面。
+1. 编辑`Apache24\conf\httpd.conf`​
 
-**默认MPM**
+取消以下内容注释
 
-下表列出了不同系统的默认 MPM。如果你不在编译时选择，那么它就是你将要使用的 MPM。
+```properties
+#LoadModule headers_module modules/mod_headers.so
+#LoadModule proxy_module modules/mod_proxy.so
+#LoadModule proxy_http_module modules/mod_proxy_http.so
+#Include conf/extra/httpd-vhosts.conf
+```
 
-Netware mpm_netware
+将以下：
 
-OS/2 mpmt_os2
+```properties
+<Directory />
+AllowOverride none
+Require all denied
+</Directory>
+```
 
-Unix prefork，worker 或 event，取决于平台特性
+改为：
 
-Windows mpm_winnt
+```properties
+<Directory />
+AllowOverride none
+Require all granted
+Header set Access-Control-Allow-Origin *
+</Directory>
+```
 
-**构建 MPM 为静态模块**
+2. 编辑`Apache24\conf\extra\httpd-vhosts.conf`​
 
-在全部平台中，MPM 都可以构建为静态模块。在构建时选择一种 MPM，链接到服务器中。如果要改变 MPM，必须重新构建。
+首先，将所有内容全部注释，然后在最后添加以下内容（//为注释）（中文不要写到配置文件，会报错，导致apache无法启动）
 
-为了使用指定的 MPM，请在执行 configure 脚本 时，使用参数 --with-mpm=NAME。NAME 是指定的 MPM 名称。
+```properties
+<VirtualHost *:80>
+ServerName localhost #代理服务的域名
+ServerAlias localhost #同上
+ProxyPass / http://127.0.0.1:8080/ #要代理的地址，套接字
+ProxyPassReverse / http://127.0.0.1:8080/ #意思同上
+ErrorLog "logs/lbtest-error.log"
+CustomLog "logs/lbtest-access.log" common
+</VirtualHost>
+```
 
-编译完成后，可以使用 ./httpd -l 来确定选择的 MPM。 此命令会列出编译到服务器程序中的所有模块，包括 MPM。
+然后依次启动Tomcat服务，Apache服务
 
-**构建 MPM 为动态模块**
+首先访问Tomcat地址http://localhost:8080/c1
 
-在 Unix 或类似平台中，MPM 可以构建为动态模块，与其它动态模块一样在运行时加载。 构建 MPM 为动态模块允许通过修改 LoadModule 指令内容来改变 MPM，而不用重新构建服务器程序。
+​![](assets/net-img-image-20210511220608137-20240111141605-tovcnnq.png)​
 
-在执行 configure 脚本时，使用 --enable-mpms-shared 选项可以启用此特性。 当给出的参数为 all 时，所有此平台支持的 MPM 模块都会被安装。还可以在参数中给出模块列表。
+然后访问Apache代理的地址
 
-默认 MPM，可以自动选择或者在执行 configure 脚本时通过 --with-mpm 选项来指定，然后出现在生成的服务器配置文件中。 编辑 LoadModule 指令内容可以选择不同的 MPM。
+​![](assets/net-img-image-20210511220633513-20240111141605-av7nctv.png)​
 
-**–enable-mpms-shared=all --with-mpm=event**
+代理动态文档正常
 
-**Apache三种MPM介绍**
+## 下载，安装和配置（Linux）
 
-**Prefork MPM **: 这个多路处理模块(MPM)实现了一个非线程型的、预派生的web服务器，它的工作方式类似于Apache 1.3。它适合于没有线程安全库，需要避免线程兼容性问题的系统。它是要求将每个请求相互独立的情况下最好的MPM，这样若一个请求出现问题就不会影响到其他请求。
+## Apache服务概览
 
-这个MPM具有很强的自我调节能力，只需要很少的配置指令调整。最重要的是将MaxClients设置为一个足够大的数值以处理潜在的请求高峰，同时又不能太大，以致需要使用的内存超出物理内存的大小。
+> 软件包： httpd, httpd-devel, httpd-manual
+> 服务类型：由systemd启动的守护进程
+> 配置单元： /usr/lib/systemd/system/httpd.service
+> 守护进程： /usr/sbin/httpd
+> 端口： 80(http), 443(https)
+> 配置： /etc/httpd/
+> Web文档： /var/www/html/
 
-**Worker MPM** : 此多路处理模块(MPM)使网络服务器支持混合的多线程多进程。由于使用线程来处理请求，所以可以处理海量请求，而系统资源的开销小于基于进程的MPM。但是，它也使用了多进程，每个进程又有多个线程，以获得基于进程的MPM的稳定性。
+Apache日志记录目录：/var/log/httpd/
+该目录下有两种文件：
 
-每个进程可以拥有的线程数量是固定的。服务器会根据负载情况增加或减少进程数量。一个单独的控制进程(父进程)负责子进程的建立。每个子进程可以建立ThreadsPerChild数量的服务线程和一个监听线程，该监听线程监听接入请求并将其传递给服务线程处理和应答。
+```shell
+access_log # 记录客户端访问Apache的信息，比如客户端的ip
+error_log # 记录访问页面错误信息
+```
 
-不管是Worker模式或是Prefork 模式，Apache总是试图保持一些备用的(spare)或者是空闲的子进程（空闲的服务线程池）用于迎接即将到来的请求。这样客户端就不需要在得到服务前等候子进程的产生。
+Apache服务启动的记录日志：
 
-**Event MPM**：以上两种稳定的MPM方式在非常繁忙的服务器应用下都有些不足。尽管HTTP的Keepalive方式能减少TCP连接数量和网络负载，但是 Keepalive需要和服务进程或者线程绑定，这就导致一个繁忙的服务器会耗光所有的线程。 Event MPM是解决这个问题的一种新模型，它把服务进程从连接中分离出来。在服务器处理速度很快，同时具有非常高的点击率时，可用的线程数量就是关键的资源限制，此时Event MPM方式是最有效的。一个以Worker MPM方式工作的繁忙服务器能够承受每秒好几万次的访问量（例如在大型新闻服务站点的高峰时），而Event MPM可以用来处理更高负载。在event工作模式中，会有一些专门的线程用来管理这些keep-alive类型的线程，当有真实请求过来的时候，将请求传递给服务器的线程，执行完毕后，又允许它释放。这增强了在高并发场景下的请求处理
+```shell
+/var/log/messages # 这个日志是系统的大集合
+```
 
-![apachempm.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/18/1603010761940.png)
+## 安装Apache
+
+```bash
+yum install httpd
+```
+
+​![](assets/net-img-image-20210511234924716-20240111141605-2kkdkli.png)​
+
+## 设置httpd服务开机启动
+
+```bash
+systemctl enable httpd
+Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+```
+
+## 启动Apache
+
+```bash
+systemctl start httpd
+```
+
+## 查看Apache的状态
+
+```bash
+systemctl status httpd
+```
+
+​![](assets/net-img-image-20210511235234410-20240111141605-yoz01xx.png)​
+
+通过服务器IP直接访问
+
+​![Apache测试界面](assets/net-img-image-20210511235325541-20240111141605-evpqpqz.png)​
+
+## Apache命令
+
+停止Apache服务
+
+```bash
+systemctl stop httpd
+```
+
+启动Apache服务
+
+```bash
+systemctl start httpd
+```
+
+重启Apache服务
+
+```bash
+systemctl restart httpd
+```
+
+禁用Apache开机自启动
+
+```bash
+systemctl disable httpd
+```
+
+Apache开机自启动
+
+```bash
+systemctl enable httpd
+```
+
+更改配置后重新加载Apache服务
+
+```bash
+systemctl reload httpd
+```
+
+### Apache的主配置文件
+
+​`/etc/httpd/conf/httpd.conf`​安装完后就可以到Apache的默认目录`/var/www/html`​ 添加一个简单的index.html
+
+```html
+<!DOCTYPE html>
+<head>
+<title>test</title>
+</head>
+<body>
+<p>Hello World!</p>
+</body>
+</html>
+```
+
+再次在浏览器输入ip地址就会显示以下界面
+
+​![Hello World](assets/net-img-image-20210511235812704-20240111141605-p39d8on.png)​

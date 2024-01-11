@@ -23,70 +23,443 @@ drwxr-xr-x 8 root root 4096 9月   5 16:40 ../
 
 ```
 
-## nmcli使用方法
+‍
 
-nmcli使用方法非常类似linux ip命令、cisco交换机命令，并且支持tab补全，也可在命令最后通过-h、–help、help查看帮助。在nmcli中有2个命令最为常用：
+## nmcli 基本选项
 
-### nmcli connection
+|选项|作用|
+| --------| -------------------------------------------------------|
+|\-t|简洁输出，会将多余的空格删除，|
+|\-p|人性化输出，输出很漂亮|
+|\-n|优化输出，有两个选项tabular(不推荐)和multiline(默认)|
+|\-c|颜色开关，控制颜色输出(默认启用)|
+|\-f|过滤字段，all为过滤所有字段，common打印出可过滤的字段|
+|\-g|过滤字段，适用于脚本，以:分隔|
+|\-w|超时时间|
 
-译作`连接`​，可理解为配置文件，相当于ifcfg-ethX。可以简写为nmcli c  
-connection有2种状态：  
-▷ 活跃（带颜色字体）：表示当前该connection生效  
-▷ 非活跃（正常字体）：表示当前该connection不生效
+## general 常规选项
 
-### nmcli device
+命令格式：`nmcli general {status|hostname|permissions|logging}`​
+命令描述：使用此命令可以显示网络管理器状态和权限，你可以获取和更改系统主机名，以及网络管理器日志记录级别和域。
 
-译作`设备`​，可理解为实际存在的网卡（包括物理网卡和虚拟网卡）。可以简写为nmcli d  
-device有4种常见状态：  
-▷ connected：已被NM纳管，并且当前有活跃的connection  
-▷ disconnected：已被NM纳管，但是当前没有活跃的connection  
-▷ unmanaged：未被NM纳管  
-▷ unavailable：不可用，NM无法纳管，通常出现于网卡link为down的时候（比如ip link set ethX down）
+### status
 
-### 常用命令
+显示网络管理器的整体状态
 
 ```bash
-# 查看ip（类似于ifconfig、ip addr）
-nmcli
-# 启用connection（相当于ifup）
-nmcli c up ethX
-# 停止connection（相当于ifdown）
-nmcli c down
-# 删除connection（类似于ifdown并删除ifcfg）
-nmcli c delete ethX
-# 查看connection列表
-nmcli c show
-# 查看connection详细信息
-nmcli c show ethX
-# 重载所有ifcfg或route到connection（不会立即生效）
-nmcli c reload
-# 重载指定ifcfg或route到connection（不会立即生效）
-nmcli c load /etc/sysconfig/network-scripts/ifcfg-ethX
-nmcli c load /etc/sysconfig/network-scripts/route-ethX
-# 立即生效connection，有3种方法
-nmcli c up ethX
-nmcli d reapply ethX
-nmcli d connect ethX
-# 查看device列表
-nmcli d
-# 查看所有device详细信息
-nmcli d show
-# 查看指定device的详细信息
-nmcli d show ethX
-# 激活网卡
-nmcli d connect ethX
-# 关闭无线网络（NM默认启用无线网络）
-nmcli r all off
-# 查看NM纳管状态
-nmcli n
-# 开启NM纳管
-nmcli n on
-# 关闭NM纳管（谨慎执行）
-nmcli n off
-# 监听事件
-nmcli m
+[root@www ~]# nmcli general status
+STATE      CONNECTIVITY  WIFI-HW  WIFI     WWAN-HW  WWAN  
+connected  full          enabled  enabled  enabled  enabled 
+```
+
+### hostname
+
+获取主机名或该更主机名，在没有给定参数的情况下，打印配置的主机名，当指定了参数，它将被移交给NetworkManager，以设置为新的系统主机名。
+
+```bash
+[root@www ~]# nmcli general hostname
+www.keepdown.cn
+[root@www ~]# nmcli general hostname myself
+[root@www ~]# nmcli general hostname
+myself
+```
+
+### permissions
+
+显示当前用户对网络管理器可允许的操作权限。 如启用和禁用网络、更改WI-FI和WWAN状态、修改连接等。
+
+```bash
+[root@www ~]# nmcli general permissions 
+PERMISSION                                                 VALUE 
+org.freedesktop.NetworkManager.enable-disable-network      yes   
+org.freedesktop.NetworkManager.enable-disable-wifi         yes   
+org.freedesktop.NetworkManager.enable-disable-wwan         yes   
+org.freedesktop.NetworkManager.enable-disable-wimax        yes   
+org.freedesktop.NetworkManager.sleep-wake                  yes   
+org.freedesktop.NetworkManager.network-control             yes   
+org.freedesktop.NetworkManager.wifi.share.protected        yes   
+org.freedesktop.NetworkManager.wifi.share.open             yes   
+org.freedesktop.NetworkManager.settings.modify.system      yes   
+org.freedesktop.NetworkManager.settings.modify.own         yes   
+org.freedesktop.NetworkManager.settings.modify.hostname    yes   
+org.freedesktop.NetworkManager.settings.modify.global-dns  yes   
+org.freedesktop.NetworkManager.reload                      yes   
+org.freedesktop.NetworkManager.checkpoint-rollback         yes   
+org.freedesktop.NetworkManager.enable-disable-statistics   yes
+```
+
+### logging
+
+获取和更改网络管理器日志记录级别和域，没有任何参数当前日志记录级别和域显示。为了更改日志记录状态, 请提供级别和域参数,有关可用级别和域值, 参阅**NetworkManager.conf(5)**
+
+```bash
+[root@www ~]# nmcli general logging
+LEVEL  DOMAINS                                                                                                                                                                                                                     
+INFO   PLATFORM,RFKILL,ETHER,WIFI,BT,MB,DHCP4,DHCP6,PPP,IP4,IP6,AUTOIP4,DNS,VPN,SHARING,SUPPLICANT,AGENTS,SETTINGS,SUSPEND,CORE,DEVICE,OLPC,INFINIBAND,FIREWALL,ADSL,BOND,VLAN,BRIDGE,TEAM,CONCHECK,DCB,DISPATCH,AUDIT,SYSTEMD,PROXY
+```
+
+---
+
+## networking 网络控制
+
+命令格式：`nmcli networking {on|off|connectivity}`​
+命令描述：查询网络管理器网络状态，开启和关闭网络
+选项：
+
+* **on**: 禁用所有接口
+* **off**: 开启所有接口
+* **connectivity**: 获取网络状态，可选参数`checl`​告诉网络管理器重新检查连接性，否则显示最近已知的状态。而无需重新检查。（可能的状态如下所示）
+
+  * **none**: 主机为连接到任何网络
+  * **portal**: 无法到达完整的互联网
+  * **limited**: 主机已连接到网络，但无法访问互联网
+  * **full**: 主机连接到网络，并具有完全访问
+  * **unknown**: 无法找到连接状态
+
+```bash
+[root@www ~]# nmcli networking connectivity
+full
+[root@www ~]# nmcli networking connectivity check
+full
+```
+
+---
+
+## radio 无线限传输控制
+
+命令格式：`nmcli radio {all|wifi|wwan}`​
+显示无线开关状态，或启用和禁用开关
+
+```bash
+[root@www ~]# nmcli radio all
+WIFI-HW  WIFI     WWAN-HW  WWAN  
+enabled  enabled  enabled  enabled 
+[root@www ~]# nmcli radio all off
+[root@www ~]# nmcli radio all
+WIFI-HW  WIFI      WWAN-HW  WWAN   
+enabled  disabled  enabled  disabled 
+[root@www ~]# nmcli radio wifi on
+[root@www ~]# nmcli radio wwan on
+[root@www ~]# nmcli radio all
+WIFI-HW  WIFI     WWAN-HW  WWAN  
+enabled  enabled  enabled  enabled
+```
+
+---
+
+## monitor 活动监视器
+
+观察网络管理器活动。监视连接的变化状态、设备或连接配置文件。
+
+另请参阅 `nmcli connection monitor`​ 和`nmcli device monitor`​某些设备或连接中的更改。
+
+---
+
+## connection 连接管理
+
+命令格式：`nmcli connection {show|up|down|modify|add|edit|clone|delete|monitor|reload|load|import|export}`​
+这是主要使用的一个功能。
+
+### show
+
+show有两种用法，分别是：
+
+**1.**  **列出活动的连接，或进行排序（+-为升降序）**
+
+```bash
+# 查看所有连接状态
+[root@www ~]# nmcli connection show
+# 等同于nmcli connection show --order +active
+[root@www ~]# nmcli connection show --active
+# 以活动的连接进行排序
+[root@www ~]# nmcli connection show --order +active
+# 将所有连接以名称排序
+[root@www ~]# nmcli connection show --order +name
+# 将所有连接以类型排序(倒序)
+[root@www ~]# nmcli connection show --order -type
+```
+
+**2.**  **查看指定连接的详细信息**
+
+```bash
+[root@www ~]# nmcli connection show eth0 # 省略......
+```
+
+### up
+
+激活连接，提供连接名称或uuid进行激活，若未提供，则可以使用ifname指定设备名进行激活。
+
+```bash
+# 以连接名进行激活
+[root@www ~]# nmcli connection up eth0
+# 以uuid进行激活
+[root@www ~]# nmcli connection up 5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03
+# 以设备接口名进行激活
+[root@www ~]# nmcli connection up ifname eth0
+```
+
+### down
+
+停用连接，提供连接名或uuid进行停用，若未提供，则可以使用ifname指定设备名进行激活。
+
+```bash
+# 以连接名进行激活
+[root@www ~]# nmcli connection down eth0
+# 以uuid进行激活
+[root@www ~]# nmcli connection down 5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03
+# 以设备接口名进行激活
+[root@www ~]# nmcli connection down ifname eth0
+```
+
+‍
+
+### modify
+
+这些属性可以用`nmcli connection show eth0`​进行获取，然后可以修改、添加或删除属性，若要设置属性，只需指定属性名称后跟值，空值将删除属性值，同一属性添加多个值使用`+`​。同一属性删除指定值用`-`​加索引。
+
+**添加多个ip**
+
+```bash
+# 添加三个
+[root@www ~]# nmcli connection modify eth0 +ipv4.addresses 192.168.100.102/24
+[root@www ~]# nmcli connection modify eth0 +ipv4.addresses 192.168.100.103/24
+[root@www ~]# nmcli connection modify eth0 +ipv4.addresses 192.168.100.104/24
+# 查看
+[root@www ~]# nmcli -f IP4 connection show eth0
+IP4.ADDRESS[1]:                         192.168.100.101/24
+IP4.GATEWAY:                            192.168.100.100
+IP4.DNS[1]:                             8.8.8.8
+# 启用配置
+[root@www ~]# nmcli connection up eth0
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/18)
+# 再次查看
+[root@www ~]# nmcli -f IP4 connection show eth0
+IP4.ADDRESS[1]:                         192.168.100.101/24
+IP4.ADDRESS[2]:                         192.168.100.102/24
+IP4.ADDRESS[3]:                         192.168.100.103/24
+IP4.ADDRESS[4]:                         192.168.100.104/24
+IP4.GATEWAY:                            192.168.100.100
+IP4.DNS[1]:                             8.8.8.8
+```
+
+**删除指定ip**
+
+```bash
+[root@www ~]# nmcli -f IP4 connection show eth0
+IP4.ADDRESS[1]:                         192.168.100.101/24
+IP4.ADDRESS[2]:                         192.168.100.102/24
+IP4.ADDRESS[3]:                         192.168.100.103/24
+IP4.ADDRESS[4]:                         192.168.100.104/24
+IP4.GATEWAY:                            192.168.100.100
+IP4.DNS[1]:                             8.8.8.8
+# 删除索当前索引为2的地址
+[root@www ~]# nmcli connection modify eth0 -ipv4.addresses 2
+# 查看
+[root@www ~]# nmcli -f IP4 connection show eth0
+IP4.ADDRESS[1]:                         192.168.100.101/24
+IP4.ADDRESS[2]:                         192.168.100.102/24
+IP4.ADDRESS[3]:                         192.168.100.103/24
+IP4.ADDRESS[4]:                         192.168.100.104/24
+IP4.GATEWAY:                            192.168.100.100
+IP4.DNS[1]:                             8.8.8.8
+# 再次激活
+[root@www ~]# nmcli connection up eth0
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/19)
+# 查看
+[root@www ~]# nmcli -f IP4 connection show eth0
+IP4.ADDRESS[1]:                         192.168.100.101/24
+IP4.ADDRESS[2]:                         192.168.100.102/24
+IP4.GATEWAY:                            192.168.100.100
+IP4.DNS[1]:                             8.8.8.8
+```
+
+### add
+
+这是创建一个新的连接，需要指定新创建连接的属性，语法与modify相同。
+
+```bash
+[root@www ~]# nmcli con add con-name eth1 type ethernet  autoconnect yes ifname eth0
+# con-name     连接名称
+# type              连接类型
+# autoconnect 是否自动连接
+# ifname          连接到的设备名称
+```
+
+更多的类型或方法可以使用`nmcli connection add help`​查看。
+
+### clone
+
+克隆连接，克隆一个存在的连接，除了连接名称和uuid是新生成的，其他都是一样的。
+
+```bash
+[root@www ~]# nmcli connection clone eth0 eth0_1
+```
+
+### delete
+
+删除连接，这将删除一个连接。
+
+```bash
+[root@www ~]# nmcli connection delete eth0_1
+```
+
+‍
+
+### load
+
+从磁盘加载/重新加载一个或多个连接文件，例如你手动创建了一个`/etc/sysconfig/network-scripts/ifcfg-ethx`​连接文件，你可以将其加载到网络管理器，以便管理。
+
+```bash
+[root@www ~]# echo -e "TYPE=Ethernet\nNAME=ethx" > /etc/sysconfig/network-scripts/ifcfg-ethx
+[root@www ~]# nmcli connection show
+NAME  UUID                                  TYPE            DEVICE 
+eth0  5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  802-3-ethernet  eth0 
+[root@www ~]# nmcli connection load /etc/sysconfig/network-scripts/ifcfg-ethx 
+[root@www ~]# nmcli connection show
+NAME  UUID                                  TYPE            DEVICE 
+eth0  5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  802-3-ethernet  eth0   
+ethx  d45d97fb-8530-60e2-2d15-d92c0df8b0fc  802-3-ethernet  --
+```
+
+### monitor
+
+监视连接配置文件活动。每当指定的连接更改时, 此命令都会打印一行。要监视的连接由其名称、UUID 或 D 总线路径标识。如果 ID 不明确, 则可以使用关键字 id、uuid 或路径。有关 ID 指定关键字的说明, 请参阅上面的连接显示。
+
+监视所有连接配置文件, 以防指定无。当所有监视的连接消失时, 该命令将终止。如果要监视连接创建, 请考虑使用带有 nmcli 监视器命令的全局监视器。
+
+```bash
+[root@www ~]# nmcli connection monitor eth0
+```
+
+---
+
+## device 设备管理
+
+命令格式：`nmcli device {status|show|set|connect|reapply|modify|disconnect|delete|monitor|wifi|lldp}`​
+显示和管理设备接口。该选项有很多功能，例如连接wifi，创建热点，扫描无线，邻近发现等，下面仅列出常用选项。详细功能可使用`nmcli device help`​查看。
+
+### status
+
+打印设备状态，如果没有将命令指定给`nmcli device`​，则这是默认操作。
+
+```bash
+[root@www ~]# nmcli device status
+DEVICE  TYPE      STATE      CONNECTION 
+eth0    ethernet  connected  eth0     
+lo      loopback  unmanaged  --       
+[root@www ~]# nmcli device
+DEVICE  TYPE      STATE      CONNECTION 
+eth0    ethernet  connected  eth0     
+lo      loopback  unmanaged  --
+```
+
+### show
+
+显示所有设备接口的详细信息。
+
+```bash
+# 不指定设备接口名称，则显示所有接口的信息
+[root@www ~]# nmcli device show eth0
+GENERAL.DEVICE:                         eth0
+GENERAL.TYPE:                           ethernet
+GENERAL.HWADDR:                         00:0C:29:99:9A:A1
+GENERAL.MTU:                            1500
+GENERAL.STATE:                          100 (connected)
+GENERAL.CONNECTION:                     eth0
+GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/ActiveConnection/9
+WIRED-PROPERTIES.CARRIER:               on
+IP4.ADDRESS[1]:                         192.168.100.101/24
+IP4.ADDRESS[2]:                         192.168.100.102/24
+IP4.GATEWAY:                            192.168.100.100
+IP4.DNS[1]:                             8.8.8.8
 
 ```
+
+### set
+
+设置设备属性
+
+```bash
+[root@www ~]# nmcli device set ifname eth0 autoconnect yes
+```
+
+### connect
+
+连接设备。提供一个设备接口，网络管理器将尝试找到一个合适的连接, 将被激活。它还将考虑未设置为自动连接的连接。(默认超时为90s)
+
+```bash
+[root@www ~]# nmcli dev connect eth0
+Device 'eth0' successfully activated with '5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03'.
+```
+
+### reapply
+
+使用上次应用后对当前活动连接所做的更改来更新设备。
+
+```bash
+[root@www ~]# nmcli device reapply eth0
+Connection successfully reapplied to device 'eth0'.
+```
+
+### modify
+
+修改设备上处于活动的设备，但该修改只是临时的，并不会写入文件。（语法与 nmcli connection modify 相同）
+
+```bash
+[root@www ~]# nmcli device modify eth0 +ipv4.addresses 192.168.100.103/24
+Connection successfully reapplied to device 'eth0'.
+[root@www ~]# nmcli dev show eth0
+[root@www ~]# nmcli device modify eth0 -ipv4.addresses 1
+Connection successfully reapplied to device 'eth0'.
+```
+
+### disconnect
+
+断开当前连接的设备，防止自动连接。但注意，断开意味着设备停止！但可用 connect 进行连接
+
+```bash
+[root@www ~]# nmcli device disconnect eth0
+```
+
+### delete
+
+删除设备，该命令从系统中删除接口。请注意, 这仅适用于诸如bonds, bridges, teams等软件设备。命令无法删除硬件设备 (如以太网)。超时时间为10秒
+
+```bash
+[root@www ~]# nmcli device delete bonds
+```
+
+### monitor
+
+监视设备活动。每当指定的设备更改状态时, 此命令都会打印一行。
+
+监视所有设备以防未指定接口。当所有指定的设备消失时, 监视器将终止。如果要监视设备添加, 请考虑使用带有 nmcli 监视器命令的全局监视器。
+
+```bash
+[root@www ~]# nmcli device monitor eth0
+```
+
+---
+
+## nmcli 返回状态码
+
+mcli 如果成功退出状态值为0，如果发生错误则返回大于0的值。
+
+* **0**: 成功-指示操作已成功
+* **1**: 位置或指定的错误
+* **2**: 无效的用户输入，错误的nmcli调用
+* **3**: 超时了（请参阅 --wait 选项）
+* **4**: 连接激活失败
+* **5**: 连接停用失败
+* **6**: 断开设备失败
+* **7**: 连接删除失败
+* **8**: 网络管理器没有运行
+* **10**: 连接、设备或接入点不存在
+* **65**: 当使用 --complete-args 选项，文件名应遵循。
+
+---
+
+‍
 
 ## 配置案例
 
@@ -96,12 +469,9 @@ nmcli m
 
 ### 给网卡配置静态IP地址
 
-弄明白connection和device的关系之后，给网卡配置IP地址就很方便了：创建一个新的_connection_并把它apply到我们的_device_上。
-
 ```bash
 # 创建connection，配置静态ip（等同于配置ifcfg，其中BOOTPROTO=none，并ifup启动）
-nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual \
-ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 ,8,8,8,8 connection.autoconnect yes
+nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 ,8,8,8,8 connection.autoconnect yes
 ▪ type ethernet                            # 创建连接时候必须指定类型，类型有很多，可以通过 nmcli c add type-h看到，这里指定为ethernet。
 ▪ con-name ethX ifname ethX  #第一个ethX表示连接（connection）的名字，这个名字可以任意定义，无需和网卡名相同；第二个ethX表示网卡名，这个ethX必须是在 nmcli d里能看到的。
 ▪ ipv4.addresses '192.168.1.100/24,192.168.1.101/32'  #配置2个ip地址，分别为192.168.1.100/24和192.168.1.101/32
@@ -111,20 +481,20 @@ ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.1
 ▪ connection.autoconnect yes  # 开机自动启用
 ```
 
-一般情况下，连接创建后如果对应设备没有活跃的其他连接，创建的连接会直接生效，如果没生效也比较简单，直接执行：
+启用配置
 
 ```
 nmcli connection up eth0-static
 ```
 
-执行完成后连接生效，可以通过`nmcli connection`​和`ip addr`​命令查看结果。
-
-如果要修改一个连接，也很简单，执行`nmcli connection modify XXXX ...`​就行了，语法和add差不多，不过修改一个连接需要注意的是，有些修改不会直接生效，需要执行`nmcli connection down XXXX; nmcli connection up XXXX`​之后修改的属性才能生效。
+修改配置
 
 ```bash
 nmcli conn modify  ens33  ipv4.method manual ipv4.addresses "10.10.0.53/16" ipv4.gateway 10.10.1.1 ipv4.dns 114.114.114.114 
 nmcli connection down ens33  && nmcli connection up ens33 
 ```
+
+‍
 
 ### 创建网桥
 
@@ -578,3 +948,5 @@ ens1f0_2  ethernet  unmanaged  --
 ens1f0_3  ethernet  unmanaged  --
 lo        loopback  unmanaged  --
 ```
+
+‍

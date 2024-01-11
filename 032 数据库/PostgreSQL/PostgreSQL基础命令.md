@@ -8,7 +8,7 @@
 --日常登录本机
 psql
 --登录完整方式
-psql -h localhost -p 5432 -d postgres -U postgres
+psql -h localhost -p 5432 -d dataname -U username
 -- 我们也可以用 URI 的方式连接数据库：
 psql postgresql://jy2web@127.0.0.1:5432/jy2db
 

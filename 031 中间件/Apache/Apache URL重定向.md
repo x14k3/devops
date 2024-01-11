@@ -149,7 +149,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
 
 RewriteEngine on
 
-**1)将域名重写为**​[**http://www.baidu.com**](http://www.baidu.com/)** R 强制重定向 L匹配到此截止**
+**1)将域名重写为**​**[http://www.baidu.com](http://www.baidu.com/)**** R 强制重定向 L匹配到此截止**
 
 \#RewriteRule “^/$” “[http://www.baidu.com](http://www.baidu.com/)” [R]
 

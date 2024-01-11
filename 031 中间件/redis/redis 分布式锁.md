@@ -106,7 +106,7 @@
 
 目前互联网公司在生产环境用的比较广泛的开源框架 Redisson 很好地解决了这个问题，非常的简便易用，且支持 Redis 单实例、Redis M-S、Redis Sentinel、Redis Cluster 等多种部署架构。
 
-感兴趣的朋友可以查阅下官方文档或者源码：[*https://github.com/redisson/redisson/wiki*](https://github.com/redisson/redisson/wiki)
+感兴趣的朋友可以查阅下官方文档或者源码：*[https://github.com/redisson/redisson/wiki](https://github.com/redisson/redisson/wiki)*
 
 其实现原理如图所示（图中以 Redis 集群为例）：
 

@@ -421,7 +421,8 @@
     sleep - 将目前动作延迟一段时间  
     smartmontools - Smartmontools 是一种硬盘检测工具  
     smbclient - 交互方式访问samba服务器  
-    smbpasswd - samba用户和密码管理工具  
+    smbpasswd - samba用户和密码管理工具
+    snapper - 创建文件系统快照  
     sort - 对文本文件中所有行进行排序。  
     source - 在当前Shell环境中从指定文件读取和执行命令。  
     speedtest-cli - 命令行下测试服务器外网速度  
@@ -527,5 +528,3 @@
     zipsplit - 将较大的zip压缩包分割成各个较小的压缩包  
     znew - 将.Z压缩包重新转化为gzip命令压缩的.gz压缩包  
     zypper - SuSE 包管理工具
-
-‍

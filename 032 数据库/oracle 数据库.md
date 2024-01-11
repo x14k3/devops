@@ -1,30 +1,32 @@
 # oracle 数据库
 
-* 📄 Oracle19c 静默安装
-* 📄 Oracle CDB PDB
-* 📑 Oracle DataGuard
+* 📄 [Oracle11g 静默安装](siyuan://blocks/20240111154537-q08w3dz)
+* 📄 [Oracle19c 静默安装](siyuan://blocks/20231110105237-i3wbtoj)
+* 📄 [Oracle CDB PDB](siyuan://blocks/20231110105237-oul69f4)
+* 📑 [Oracle DataGuard](siyuan://blocks/20231110105237-prfvvi6)
 
-  * 📄 1. Dataguard介绍
-  * 📄 2. 19c单机DB+单实例DG--1
-  * 📄 3. 19c单机DB+单实例DG--2
-* 📄 Oracle GoldenGate
-* 📄 Oracle OMF
-* 📄 Oracle RAC
-* 📄 Oracle 优化 & 安全配置
-* 📄 Oracle 体系结构
-* 📄 Oracle 内存管理
-* 📄 Oracle 常用语句
-* 📄 Oracle 常见问题处理
-* 📄 Oracle 数据异机恢复
-* 📄 Oracle 数据恢复
-* 📄 Oracle 数据泵
-* 📄 Oracle 日志归档
-* 📑 Oracle 配置详解
+  * 📄 [1. Dataguard介绍](siyuan://blocks/20231110105237-nvvzb3i)
+  * 📄 [2. 19c单机DB+单实例DG--1](siyuan://blocks/20231110105237-iwop2dy)
+  * 📄 [3. 19c单机DB+单实例DG--2](siyuan://blocks/20231110105237-2dg3i74)
+* 📄 [Oracle GoldenGate](siyuan://blocks/20231110105237-qatg4mk)
+* 📄 [Oracle OMF](siyuan://blocks/20231110105237-1muwt5l)
+* 📄 [Oracle RAC](siyuan://blocks/20231110105237-22u6zer)
+* 📄 [Oracle 优化 &amp; 安全配置](siyuan://blocks/20231110105237-sfeh1a7)
+* 📄 [Oracle 体系结构](siyuan://blocks/20231110105237-0ngto5m)
+* 📄 [Oracle 内存管理](siyuan://blocks/20231110105237-eh86m8g)
+* 📄 [Oracle 常用语句](siyuan://blocks/20231110105237-4d46t04)
+* 📄 [Oracle 常见问题处理](siyuan://blocks/20231110105237-ly2ljyl)
+* 📄 [Oracle 数据异机恢复](siyuan://blocks/20231110105237-o1b43ni)
+* 📄 [Oracle 数据恢复](siyuan://blocks/20231110105237-dqhx1fc)
+* 📄 [Oracle 数据泵](siyuan://blocks/20231110105237-olz151u)
+* 📄 [Oracle 日志归档](siyuan://blocks/20231110105237-8m376yh)
+* 📑 [Oracle 配置详解](siyuan://blocks/20231110105237-3rvwxhs)
 
-  * 📄 listener.ora 详解
-  * 📄 sqlnet.ora 详解
-  * 📄 tnsnames.ora 详解
-* 📄 RMAN 备份策略
-* 📄 windows server 2012 r2 安装oracle 11g
+  * 📄 [listener.ora 详解](siyuan://blocks/20231110105237-5d8jkrr)
+  * 📄 [sqlnet.ora 详解](siyuan://blocks/20231110105237-h2566di)
+  * 📄 [tnsnames.ora 详解](siyuan://blocks/20231110105237-m6s6lud)
+* 📄 [Oralce 基础概念](siyuan://blocks/20240106163022-r6d6dnh)
+* 📄 [RMAN 备份策略](siyuan://blocks/20231110105237-b95b8d3)
+* 📄 [windows server 2012 r2 安装oracle 11g](siyuan://blocks/20231110105237-h3tbtwx)
 
 ‍

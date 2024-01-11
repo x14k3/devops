@@ -4,77 +4,9 @@
 
 ## 配置 IP
 
-### 使用nmcli命令
-
-> ​![](assets/net-img-icon-note-20230906153802-08z3vzz.gif) **说明：** 
-> 使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。
-
-#### nmcli介绍
-
-nmcli是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为：
-
-```bash
- nmcli [OPTIONS] OBJECT { COMMAND | help }
-```
-
-其中，OBJECT选项可以是general、networking、radio、connection或device等。在日常使用中，最常使用的是-t, --terse（用于脚本）、-p, --pretty选项（用于用户）及-h, --help选项，用户可以使用“ nmcli help”获取更多参数及使用信息。
-
-```bash
-$ nmcli help
-```
-
-常用命令使用举例如下：
-
-* 显示NetworkManager状态：
-
-  ```
-  $ nmcli general status
-  ```
-* 显示所有连接：
-
-  ```
-  $ nmcli connection show
-  ```
-* 只显示当前活动连接，如下所示添加 -a, --active：
-
-  ```
-  $ nmcli connection show --active
-  ```
-* 显示由NetworkManager识别到的设备及其状态：
-
-  ```
-  $ nmcli device status
-  ```
-* 使用nmcli工具启动和停止网络接口，在root权限下执行如下命令：
-
-  ```
-  # nmcli connection up id enp3s0
-  # nmcli device disconnect enp3s0
-  ```
-
 ‍
 
-#### 设备管理
-
-##### 连接到设备
-
-使用如下命令，NetworkManager将连接到对应网络设备，尝试找到合适的连接配置，并激活配置。
-
-```
-$nmcli device connect "$IFNAME"  
-```
-
-> 如果不存在相应的配置连接，NetworkManager将创建并激活具有默认设置的新配置文件。
-
-##### 断开设备连接
-
-使用如下命令，NetworkManager将断开设备连接，并防止设备自动激活。
-
-```
-$nmcli device disconnect "$IFNAME"  
-```
-
-#### 设置网络连接
+### 使用((20231110105237-piyjs90 "nmcli"))命令
 
 列出目前可用的网络连接：
 
@@ -104,8 +36,6 @@ virbr0-nic  tun       unmanaged  --
 ```
 
 ##### 配置动态IP连接
-
-###### 配置IP
 
 要使用 DHCP 分配网络时，可以使用动态IP配置添加网络配置文件，命令格式如下：
 
@@ -237,100 +167,6 @@ connection.lldp:                        default
 connection.mdns:                        -1 (default)
 connection.llmnr:                       -1 (default)
 ```
-
-##### 添加 Wi-Fi 连接
-
-有两种方式添加Wi-Fi 连接。
-
-**方法1，通过网络接口连接wifi**
-
-连接到由SSID或BSSID指定的wifi网络。命令如下，该命令找到匹配的连接或创建一个连接，然后在设备上激活它。
-
-```
-$ nmcli device wifi connect "$SSID" password "$PASSWORD" ifname "$IFNAME"  
-$ nmcli --ask device wifi connect "$SSID" 
-```
-
-**方法2，通过配置文件连接Wi-Fi**
-
-1，使用以下命令查看可用 Wi-Fi 访问点：
-
-```
-$ nmcli dev wifi list
-```
-
-2，使用以下命令生成使用的静态 IP 配置，但允许自动 DNS 地址分配的 Wi-Fi 连接：
-
-```
-$ nmcli con add con-name Wifi ifname wlan0 type wifi ssid MyWifi ip4 192.168.100.101/24 gw4 192.168.100.1
-```
-
-3，请使用以下命令设定 WPA2 密码，例如 “answer”：
-
-```
-$ nmcli con modify Wifi wifi-sec.key-mgmt wpa-psk
-$ nmcli con modify Wifi wifi-sec.psk answer
-```
-
-4，使用以下命令更改 Wi-Fi 状态：
-
-```
-$ nmcli radio wifi [ on | off ]
-```
-
-##### 更改属性
-
-请使用以下命令检查具体属性，比如 mtu：
-
-```
-$ nmcli connection show id 'Wifi ' | grep mtu
-802-11-wireless.mtu: auto
-```
-
-使用如下命令更改设置的属性：
-
-```
-$ nmcli connection modify id 'Wifi ' 802-11-wireless.mtu 1350
-```
-
-使用如下命令确认更改：
-
-```
-$ nmcli connection show id 'Wifi ' | grep mtu
-802-11-wireless.mtu: 1350
-```
-
-#### 配置静态路由
-
-* 使用nmcli命令为网络连接配置静态路由，使用命令如下：
-
-  ```
-  $ nmcli connection modify enp3s0 +ipv4.routes "192.168.122.0/24 10.10.10.1"
-  ```
-* 使用编辑器配置静态路由，使用如下命令：
-
-  ```
-  $ nmcli con edit type ethernet con-name enp3s0
-  ===| nmcli interactive connection editor |===
-  Adding a new '802-3-ethernet' connection
-  Type 'help' or '?' for available commands.
-  Type 'describe [<setting>.<prop>]' for detailed property description.
-  You may edit the following settings: connection, 802-3-ethernet (ethernet), 802-1x, ipv4, ipv6, dcb
-  nmcli> set ipv4.routes 192.168.122.0/24 10.10.10.1
-  nmcli>
-  nmcli> save persistent
-  Saving the connection with 'autoconnect=yes'. That might result in an immediate activation of the connection.
-  Do you still want to save? [yes] yes
-  Connection 'enp3s0' (1464ddb4-102a-4e79-874a-0a42e15cc3c0) successfully saved.
-  nmcli> quit
-  ```
-* 使用如下命令激活连接以生效配置：
-
-  ```
-  $ nmcli con up enp3s0
-  ```
-
-‍
 
 ### 使用ip命令
 

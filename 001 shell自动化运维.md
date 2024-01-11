@@ -66,6 +66,7 @@
   * 📄 [script](siyuan://blocks/20231110105237-rvcx333)
   * 📄 [set](siyuan://blocks/20231110105237-5jie7mk)
   * 📄 [shopt](siyuan://blocks/20231110105237-uzo2tei)
+  * 📄 [snapper](siyuan://blocks/20231227181426-x4507fd)
   * 📄 [split](siyuan://blocks/20231110105237-ma8xdmz)
   * 📄 [ss](siyuan://blocks/20231110105237-eqc2xvi)
   * 📄 [strace](siyuan://blocks/20231110105237-fhpi4ld)

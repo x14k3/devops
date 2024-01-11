@@ -40,7 +40,7 @@ git push origin master
 
 ======================================================
 # 如果有其他团队成员想要使用该项目，则需要将远程服务器上的仓库克隆到其本地计算机上：
-git clone git@remote-server:/home/git/project.git
+git clone https://github.com/x14k3/devops
 # 现在他们可以编辑文件，写入提交更改信息，然后将它们推送到服务器：
 git commit -m 'corrections in GoT.txt story' -a
 # 然后推送改变：

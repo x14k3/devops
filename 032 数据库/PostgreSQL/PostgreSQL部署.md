@@ -55,7 +55,7 @@ yum install -y  gcc gcc-c++ wget make openssl-devel pam-devel libxml2-devel libx
 sudo apt-get install libreadline-dev
 
 # 安装到指定目录
-mkdir /data/pgsql
+mkdir -p /data/pgsql
 ./configure --prefix=/data/pgsql --enable-nls --with-python --with-perl --with-tcl --with-gssapi --with-icu --with-openssl --with-pam --with-ldap --with-systemd --with-libxml --with-libxslt --enable-thread-safety --enable-debug
 
 # 编译安装
@@ -80,11 +80,9 @@ export PGDATA=/data/pgsql/data
 export PGLOG=/data/pgsql/log/postgres.log
 export PATH=$PGHOME/bin:$PATH:$HOME/bin
 export LD_LIBRARY_PATH=$PGHOME/lib:$LD_LIBRARY_PATH
-PATH=/usr/local/pgsql/bin:$PATH
-export PATH
 
 # 创建数据目录
-mkdir /data/pgsql/data/
+mkdir -p /data/pgsql/data/
 chown -R postgres.postgres /data/pgsql
 
 # 切换到postgres用户
@@ -102,6 +100,12 @@ su - postgres
 # 重新加载配置文件
 /data/pgsql/bin/pg_ctl -D /data/pgsql/data/ reload
 ```
+
+[postgresql_install_Centos7.x.sh](assets/postgresql_install_Centos7.x-20240111140048-gn0msix.sh)
+
+部署脚本/
+
+‍
 
 ## 编译安装参数说明
 

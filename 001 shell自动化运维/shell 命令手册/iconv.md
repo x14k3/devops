@@ -36,7 +36,8 @@ iconv -l
 将文件file1转码，转后文件输出到fil2中：
 
 ```
-iconv file1 -f EUC-JP-MS -t UTF-8 -o file2 
+iconv -f EUC-JP-MS -t UTF-8 -o file_new file_old
+iconv -f GB2312    -t UTF8  -o file_new file_old
 ```
 
 这里，没`-o`​那么会输出到标准输出。

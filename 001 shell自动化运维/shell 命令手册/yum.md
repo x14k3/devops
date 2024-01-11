@@ -44,28 +44,28 @@ provides：查询某个程序所在安装包。
 ### 实例
 
 ```bash
-yum install                           #全部安装
-yum install package1         #安装指定的安装包package1
+yum install              #全部安装
+yum install package1     #安装指定的安装包package1
 yum groupinsall group1   #安装程序组group1
-yum update                        #全部更新
+yum update               #全部更新
 yum update package1      #更新指定程序包package1
-yum check-update             #检查可更新的程序
+yum check-update         #检查可更新的程序
 yum upgrade package1     #升级指定程序包package1
 yum groupupdate group1   #升级程序组group1
 # 检查 MySQL 是否已安装
 yum list installed | grep mysql
 yum list installed mysql*
-yum info package1         #显示安装包信息package1
-yum list                             #显示所有已经安装和可以安装的程序包
-yum list package1           #显示指定程序包安装情况package1
-yum groupinfo group1   #显示程序组group1信息yum search string 根据关键字string查找安装包
+yum info package1        #显示安装包信息package1
+yum list                 #显示所有已经安装和可以安装的程序包
+yum list package1        #显示指定程序包安装情况package1
+yum groupinfo group1     #显示程序组group1信息yum search string 根据关键字string查找安装包
 
 yum remove &#124; erase package1   #删除程序包package1
-yum groupremove group1                     #删除程序组group1
-yum deplist package1                             #查看程序package1依赖情况
+yum groupremove group1             #删除程序组group1
+yum deplist package1               #查看程序package1依赖情况
 
-yum clean packages        # 清除缓存目录下的软件包
-yum clean headers          # 清除缓存目录下的 headers
+yum clean packages       # 清除缓存目录下的软件包
+yum clean headers        # 清除缓存目录下的 headers
 yum clean oldheaders     # 清除缓存目录下旧的 headers
 ```
 
@@ -217,7 +217,7 @@ yum clean all &&  yum makecache
 # yumdownloader --destdir=/tmp --resolve httpd
 ```
 
-## 方法二：yum --downloadonly[#](https://www.cnblogs.com/yanjieli/p/10725360.html#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9Ayum---downloadonly)
+## 方法二：yum --downloadonly
 
 yum命令的参数有很多，其中就有只是下载而不需要安装的命令，并且也会自动解决依赖；通常和 --downloaddir 参数一起使用。
 
@@ -237,7 +237,7 @@ yum命令的参数有很多，其中就有只是下载而不需要安装的命�
 # yum install yum-plugin-downloadonly
 ```
 
-## 方法三：reposync[#](https://www.cnblogs.com/yanjieli/p/10725360.html#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9Areposync)
+## 方法三：reposync
 
 该命令更加强大，可以将远端yum仓库里面的包全部下载到本地。这样构建自己的yum仓库，就不会遇到网络经常更新包而头痛的事情了。 该命令也是来自与 yum-utils 里面。
 

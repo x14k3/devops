@@ -167,7 +167,7 @@ zypper in -y vim unzip net-tools gcc bc binutils glibc glibc-devel insserv-compa
 unzip -d /data/u01/app/oracle/product/19.3.0/db_1/  /opt/Silence_193000_Linux-x86-64.zip
 ```
 
-### 2. 静默安装oracle数据库
+### 2. 静默安装数据库
 
 参数详解 见 db_install.rsp参数
 
@@ -407,16 +407,14 @@ lsnrctl start   # 启动监听
 
 ## 四、自动化安装脚本
 
-[01_env_prepararion.sh](assets/01_env_prepararion-20231107114608-1xnomig.sh)
+[01_env_prepararion.sh](assets/01_env_prepararion-20231228163930-hzcxh5m.sh)
 
-[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20231107114608-trizzaq.sh)
+[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20231228163935-msfp06c.sh)
 
-[03_oracle_dbca.sh](assets/03_oracle_dbca-20231107114608-rmxdc9s.sh)
+[03_oracle_dbca.sh](assets/03_oracle_dbca-20231228163938-wrsqfj5.sh)
 
-[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20231107114608-ls2rzr4.sh)
+[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20231228163943-fnc2vjv.sh)
 
-[05_oracle_rman.sh](assets/05_oracle_rman-20231107114608-ta6p1mk.sh)
-
-[readme.txt](assets/readme-20231107114608-0axcf9z.txt)
+[05_oracle_rman.sh](assets/05_oracle_rman-20231228163947-agh1vta.sh)
 
 ‍

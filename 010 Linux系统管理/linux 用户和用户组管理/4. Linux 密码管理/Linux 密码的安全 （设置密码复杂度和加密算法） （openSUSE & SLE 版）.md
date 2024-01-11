@@ -10,7 +10,7 @@
 
 ```
 ......
-passwordrequisitepam_cracklib.so ......
+password        requisite       pam_cracklib.so ......
 ......
 ```
 
@@ -27,11 +27,8 @@ password        requisite       pam_cracklib.so try_first_pass local_users_only 
 ```
 ......
 password    requisite     pam_pwhistory.so try_first_pass local_users_only enforce-for-root remember=5 use_authtok
-password    sufficient    pam_unix.so sha512 shadow try_first_pass use_authtok remember=24 use_authtok
+password    sufficient    pam_unix.so sha512 shadow try_first_pass remember=24 use_authtok
 ```
-
-（
-补充：这里以
 
 1. pam_cracklib.so 模块使用前 1 个模块从用户那里得到的密码 （try_first_pass）
 2. 只作用于本地用户 （local_users_only）
@@ -46,8 +43,6 @@ password    sufficient    pam_unix.so sha512 shadow try_first_pass use_authtok r
 11. 新密码最多可以有 3 个字符和旧密码相同 （difok=3）
 12. 新密码不能和最近用过的 24 个密码相同 （remember=24）
 13. 使用 sha512 加密方法加密 （sha512）
-     为例
-     ）
 
 ### 步骤二：修改 /etc/security/pwquality.conf 配置文件
 
@@ -81,9 +76,6 @@ difok = 3
 ......
 ```
 
-（
-补充：这里以
-
 1. 密码最小长度为 15 个字符 （minlen = 15）
 2. 密码必须包含数字的个数 （dcredit = -1）
 3. 密码必须包含大写字母的个数 （ucredit = -1）
@@ -94,8 +86,6 @@ difok = 3
 8. 新密码不能和前 5 个老密码重复 （maxrepeat=5）
 9. 3 次尝试错误密码后产生错误提示 （retry=3）
 10. 新密码最多可以有 3 个字符和旧密码相同 （difok=3）
-     为例
-     ）
 
 ### 步骤三：修改 /etc/login.defs 配置文件
 
