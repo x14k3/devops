@@ -53,7 +53,7 @@ dd if=/dev/zero of=test1 bs=102400 count=1024  # 100MB
 ```bash
 #!/bin/bash
 myCount=0;
-for myCount in {1..10}
+for myCount in {1..1000}
 do
   echo "fileCount" $myCount;
   dateStr=$(date +%s%N)

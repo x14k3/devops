@@ -148,8 +148,6 @@ RUN apk update && apk add --no-cache tzdata \
 docker build -t 192.168.10.31/jinzay/alpine-glibc ./
 ```
 
-JDK虽然是使用正常了，但是有的东西就不正常了
-
 ## 2. jdk 镜像
 
 ```docker

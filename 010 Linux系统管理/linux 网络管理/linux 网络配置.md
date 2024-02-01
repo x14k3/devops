@@ -81,7 +81,7 @@ virbr0-nic  tun       unmanaged  --
 添加静态 IPv4 配置的网络连接，可使用以下命令：
 
 ```bash
-nmcli connection add type ethernet con-name connection-name ifname interface-name ip4 address gw4 address
+nmcli connection add  con-name ip4 address gw4 address
 ```
 
 > ​![](assets/net-img-icon-note-20230906153802-5z323gs.gif) **说明：** 
@@ -90,7 +90,7 @@ nmcli connection add type ethernet con-name connection-name ifname interface-nam
 例如创建名为 net-static的静态连接配置文件，在root权限下使用以下命令：
 
 ```
-# nmcli con add type ethernet con-name net-static ifname enp3s0 ip4 192.168.0.10/24 gw4 192.168.0.254
+# nmcli con add type ethernet ifname enp3s0 ip4 192.168.0.10/24 gw4 192.168.0.254
 ```
 
 还可为该设备同时指定 IPv6 地址和网关，示例如下：

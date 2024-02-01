@@ -279,10 +279,10 @@ IP4.DNS[1]:                             8.8.8.8
 
 ```bash
 [root@www ~]# nmcli con add con-name eth1 type ethernet  autoconnect yes ifname eth0
-# con-name     连接名称
-# type              连接类型
+# con-name    连接名称
+# type        连接类型
 # autoconnect 是否自动连接
-# ifname          连接到的设备名称
+# ifname      连接到的设备名称
 ```
 
 更多的类型或方法可以使用`nmcli connection add help`​查看。
@@ -476,9 +476,9 @@ nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method 
 ▪ con-name ethX ifname ethX  #第一个ethX表示连接（connection）的名字，这个名字可以任意定义，无需和网卡名相同；第二个ethX表示网卡名，这个ethX必须是在 nmcli d里能看到的。
 ▪ ipv4.addresses '192.168.1.100/24,192.168.1.101/32'  #配置2个ip地址，分别为192.168.1.100/24和192.168.1.101/32
 ▪ ipv4.gateway 192.168.1.254   # 网关为192.168.1.254
-▪ ipv4.dns '8.8.8.8,4.4.4.4'          # dns为8.8.8.8和4.4.4.4
-▪ ipv4.method manual               # 配置静态IP  [ipv4.method auto] 动态DHCP
-▪ connection.autoconnect yes  # 开机自动启用
+▪ ipv4.dns '8.8.8.8,4.4.4.4'   # dns为8.8.8.8和4.4.4.4
+▪ ipv4.method manual           # 配置静态IP  [ipv4.method auto] 动态DHCP
+▪ connection.autoconnect yes   # 开机自动启用
 ```
 
 启用配置
@@ -490,7 +490,13 @@ nmcli connection up eth0-static
 修改配置
 
 ```bash
-nmcli conn modify  ens33  ipv4.method manual ipv4.addresses "10.10.0.53/16" ipv4.gateway 10.10.1.1 ipv4.dns 114.114.114.114 
+nmcli conn modify  ens33  \
+ipv4.addresses "10.10.0.53/16" \
+ipv4.gateway 10.10.1.1 \
+ipv4.dns 114.114.114.114 \
+ipv4.method manual \
+ipv6.method disabled
+
 nmcli connection down ens33  && nmcli connection up ens33 
 ```
 

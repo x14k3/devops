@@ -1,4 +1,4 @@
-# Oracle 日志归档
+# Oracle 日志归档和闪回
 
 # oracle 数据写入过程
 
@@ -22,7 +22,7 @@ Redo Log 被称为重做日志，这个日志是记录对数据库所做的修�
 
 Redo Log 主要包含两部分：一部分是内存中的日志缓冲，称作 Log Buffer, 这部分日志比较容易丢失；另一部分是存在磁盘上的重做日志文件，称作 Redo Log File, 这部分日志是持久化到磁盘上的，不容易丢失。
 
-## 查看redolog
+## 查看redo log
 
 ```bash
 select g.member, v.status from v$log v , v$logfile g where v.GROUP#=g.GROUP#;
@@ -100,9 +100,15 @@ SQL> alter database backup controlfile to trace resetlogs;
 
 ```
 
-## 日志归档
+# undo log
 
-我们知道，Oracle 数据库需要至少两组联机日志，每当一组 联机日志写满后会发生日志切换，继续向下一组联机日志写入。
+Undo Log 被称为撤销日志、回滚日志。为了保证读一致性，在更新数据到提交之前，Oracle会先**把旧数据写入到undo log中**，以便回滚，且其他用户读取的数据也是和undo log中的数据一致，直到提交事务才更改数据，undo log是为了撤销所作更改。数据放在undo表空间中。
+
+‍
+
+# 日志归档
+
+我们知道，Oracle 数据库需要至少两组联机日志，每当一组 联机日志写满后会发生日志切换，继续向下一组联机日志写入。  
 如果是归档模式，日志切换会触发归档进程 （ARCn）进行归档，生成归档日志。Oracle 保证归档完成前，联机日志不会被覆盖，如果是非归档模式， 则不会触发归档动作。
 
 不管数据库是否是归档模式，重做日志是肯定要写的。而只有数据库在归档模式下，重做日志才会备份，形成归档日志。
@@ -153,9 +159,7 @@ scope=both    # 内存和spfile都更改
 
 ```
 
-# undo log
-
-Undo Log 被称为撤销日志、回滚日志。为了保证读一致性，在更新数据到提交之前，Oracle会先**把旧数据写入到undo log中**，以便回滚，且其他用户读取的数据也是和undo log中的数据一致，直到提交事务才更改数据，undo log是为了撤销所作更改。数据放在undo表空间中。
+‍
 
 # 数据库闪回
 

@@ -104,13 +104,14 @@ virt-install ---network bridge=br0
 
 ### 问题发现
 
-**问题1：虚拟机能ping通宿主机地址192.168.0.100，但是ping不通局域网相邻地址和网关192.168.0.1**  
+**问题1：虚拟机能ping通宿主机，但ping不通局域网和网关**  
 可能是启用了网络过滤器，调整解决。
 
 ```bash
 cat <<EOF >> /etc/sysctl.conf
-net.bridge.bridge-nf-call-iptables = 0
+net.ipv4.ip_forward = 1
 net.bridge.bridge-nf-call-ip6tables = 0
+net.bridge.bridge-nf-call-iptables = 0
 net.bridge.bridge-nf-call-arptables = 0
 <<EOF
 sysctl -p
@@ -181,7 +182,7 @@ $ sudo virsh net-list --all
   <name>default</name>
   <uuid>22e9a5a3-29dc-4ab9-a2cd-3308479705e2</uuid>
   <forward mode='nat'/>
-  <bridge name='virbr0' stp='on' delay='0'/>
+  <bridge name='virnet' stp='on' delay='0'/>
   <mac address='52:54:00:68:26:e3'/>
   <ip address='10.0.0.1' netmask='255.255.255.0'>
     <dhcp>

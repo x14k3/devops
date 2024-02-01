@@ -5,7 +5,7 @@
 ## 一、环境准备
 
 1. 下载地址：  
-    [https://edelivery.oracle.com/osdc/faces/SoftwareDelivery](https://edelivery.oracle.com/osdc/faces/SoftwareDelivery)
+    [https://www.oracle.com/technetwork/articles/112010-linuxsoft-098940-zhs.html]()
 2. 官方文档：  
     [https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html](https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html)
 
