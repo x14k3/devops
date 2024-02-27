@@ -34,7 +34,7 @@ spawn git push origin master
 expect "Username for 'https://github.com': " 
 send "x14k3\r"
 expect "Password for 'https://x14k3@github.com': "
-send "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\r"
+send "123456password654321\r"
 # 执行过程显示出来
 set results $expect_out(buffer)
 expect eof
