@@ -186,19 +186,6 @@ vim filename--->:set key= --->保存
 注意：不要对系统文件进行加密的操作
 ```
 
-**vim插件**
-
-```
-1、虚拟机网卡设置为NAT
-2、释放IP并重新获取IP
-dhclient -r ensxx
-dhclient ensxx
-3、安装EPELyum源
-dnf install epel-release -y
-4、安装vim插件
-dnf install vim-airline -y
-```
-
 **vimdiff&amp;vimtutor**
 
 vimdiff：编辑两个或者更多个文件并显示不同
@@ -252,6 +239,31 @@ I just went into the exact same problem today. The fix is adding below lines in 
 ```
 set keyprotocol=
 let &term=&term
+```
+
+### 解决delete（backspace）键不能向左删除
+
+VIM使用了 compatible 模式，或者把 backspace 变量设置为空了…其实compatible模式是VIM为了兼容vi而出现的配置，它的作用是使VIM的操作行为和规范和vi一致，而这种模式下backspace配置是空的。即意味着backspace无法删除 indent ， end of line ， start 这三种字符。
+
+在默认状态下，delete（backspace）按下只会删除本次插入模式下插入的文本，这跟backspace的模式设置有关，其模式可以设置为以下三种模式：
+
+```bash
+0 same as “:set backspace=” (Vi compatible)
+1 same as “:set backspace=indent,eol”
+2 same as “:set backspace=indent,eol,start”
+```
+
+知道了原因，就好解决了，只需要将backspace的模式设置成2就可以了，在~/.vimrc中添加了一下内容，保存，下次进入vim就可以在插入模式下任意使用delete（backspace）键了：
+
+```bash
+set backspace=2
+```
+
+或
+
+```bash
+yum remove vim-common
+yum install vim
 ```
 
 ‍

@@ -6,7 +6,9 @@
 * yum软件仓库
 * 源码软件
 
-yum  dnf  apt-get  zypper 
+yum  dnf  apt-get  zypper
+
+dpkg 
 
 ## 一、rpm软件包
 

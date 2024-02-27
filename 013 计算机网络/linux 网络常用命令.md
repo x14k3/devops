@@ -12,7 +12,7 @@ traceroute
 
 nmap
 
-((20231110105237-piyjs90 "nmcli"))
+nmcli
 
 nc
 

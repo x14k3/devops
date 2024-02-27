@@ -1,40 +1,50 @@
 # rmmod
 
-从运行的内核中移除指定的内核模块
+rmmod[命令](https://www.linuxcool.com/ "命令")来自英文词组“remove module”的缩写，其功能是用于移除内核模块。[Linux](https://www.linuxprobe.com/ "Linux")操作[系统](https://www.linuxdown.com/ "系统")的内核具有模块化的特点，运维人员可以使用rmmod命令移除不需要的内核模块，待有需要时再重新加载回来它们。
 
-## 补充说明
+**语法格式：** rmmod \[参数\] 模块名
 
-**rmmod命令** 用于从当前运行的内核中移除指定的内核模块。执行rmmod指令，可删除不需要的模块。Linux操作系统的核心具有模块化的特性，应此在编译核心时，务须把全部的功能都放如核心。你可以将这些功能编译成一个个单独的模块，待有需要时再分别载入它们。
+**常用参数：**
 
-### 语法
-
-```
-rmmod(选项)(参数)
-```
-
-### 选项
-
-```
--v：显示指令执行的详细信息；
--f：强制移除模块，使用此选项比较危险；
--w：等待着，直到模块能够被除时在移除模块；
--s：向系统日志（syslog）发送错误信息。
+```bash
+-a 删除所有目前不需要的模块 
+-f 强制移除模块而不询问 
+-s 将信息写入至日志服务中 
+-v 显示执行过程详细信息 
+-V 显示版本信息 
+-w 确认模块能被删除时再操作
 ```
 
-### 参数
+**参考示例**
 
-模块名：要移除的模块名称。
-
-### 实例
-
-用rmmod命令主要用于卸载正在使用的Linux内核模块，与`modprobe -r`​命令相似，如下所示：
+移除指定内核模块并显示过程信息：
 
 ```
-[root@localhost boot]# lsmod | grep raid1
-raid1                  25153  0
-
-[root@localhost boot]# rmmod raid1
-[root@localhost boot]# lsmod | grep raid1
+[root@linuxcool ~]# <strong>rmmod -v bridge</strong>
 ```
 
-‍
+移除指定内核模块并将错误信息写入日志：
+
+```
+[root@linuxcool ~]# <strong>rmmod -s bridge</strong>
+```
+
+等待模块能够被移除时，然后再进行移除操作：
+
+```
+[root@linuxcool ~]# <strong>rmmod -w bridge</strong>
+```
+
+强制移除指定内核模块：
+
+```
+[root@linuxcool ~]# <strong>rmmod -f bridge</strong>
+```
+
+### 与该功能相关的Linux命令：
+
+lsmod
+
+insmod
+
+modprobe

@@ -3,7 +3,7 @@
     7z - 拥有极高压缩比的开源压缩软件。  
     alias - 定义或显示别名。  
     apk - Alpine Linux 下的包管理工具  
-    apt-get - Debian Linux发行版中的APT软件包管理工具  
+    apt - Debian Linux发行版中的APT软件包管理工具  
     apt-key - 管理Debian Linux系统中的软件包密钥  
     apt-sortpkgs - Debian Linux下对软件包索引文件进行排序的工具  
     aptitude - Debian Linux系统中软件包管理工具  

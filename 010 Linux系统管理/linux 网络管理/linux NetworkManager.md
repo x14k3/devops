@@ -471,14 +471,15 @@ mcli 如果成功退出状态值为0，如果发生错误则返回大于0的值�
 
 ```bash
 # 创建connection，配置静态ip（等同于配置ifcfg，其中BOOTPROTO=none，并ifup启动）
-nmcli connection add type ethernet con-name eth0-static ifname eth0 ipv4.method manual ipv4.addresses "192.168.145.60/20" ipv4.gateway 192.168.144.1 ipv4.dns 114.114.114.114 ,8,8,8,8 connection.autoconnect yes
-▪ type ethernet                            # 创建连接时候必须指定类型，类型有很多，可以通过 nmcli c add type-h看到，这里指定为ethernet。
-▪ con-name ethX ifname ethX  #第一个ethX表示连接（connection）的名字，这个名字可以任意定义，无需和网卡名相同；第二个ethX表示网卡名，这个ethX必须是在 nmcli d里能看到的。
-▪ ipv4.addresses '192.168.1.100/24,192.168.1.101/32'  #配置2个ip地址，分别为192.168.1.100/24和192.168.1.101/32
-▪ ipv4.gateway 192.168.1.254   # 网关为192.168.1.254
-▪ ipv4.dns '8.8.8.8,4.4.4.4'   # dns为8.8.8.8和4.4.4.4
-▪ ipv4.method manual           # 配置静态IP  [ipv4.method auto] 动态DHCP
-▪ connection.autoconnect yes   # 开机自动启用
+nmcli connection add type ethernet con-name eth1-static ifname eth1 ipv4.method manual ipv4.addresses "192.168.31.203/20" ipv4.gateway 192.168.31.1 ipv4.dns 114.114.114.114,8.8.8.8 connection.autoconnect yes
+
+# type ethernet                    创建连接时候必须指定类型，类型有很多，可以通过 nmcli c add type-h看到，这里指定为ethernet。
+# con-name ethX ifname ethX        第一个ethX表示连接（connection）的名字，这个名字可以任意定义，无需和网卡名相同；第二个ethX表示网卡名，这个ethX必须是在 nmcli d里能看到的。
+# ipv4.addresses '192.168.1.100/24,192.168.1.101/32'   配置2个ip地址，分别为192.168.1.100/24和192.168.1.101/32
+# ipv4.gateway 192.168.1.254       网关为192.168.1.254
+# ipv4.dns '8.8.8.8,4.4.4.4'       dns为8.8.8.8和4.4.4.4
+# ipv4.method manual               配置静态IP  [ipv4.method auto] 动态DHCP
+# connection.autoconnect yes       开机自动启用
 ```
 
 启用配置
@@ -490,14 +491,22 @@ nmcli connection up eth0-static
 修改配置
 
 ```bash
-nmcli conn modify  ens33  \
-ipv4.addresses "10.10.0.53/16" \
-ipv4.gateway 10.10.1.1 \
+cat set_ip.sh 
+
+#!/bin/bash
+nmcli conn modify eth0  \
+ipv4.addresses "10.10.0.10/24" \
+ipv4.gateway 10.10.0.1 \
 ipv4.dns 114.114.114.114 \
 ipv4.method manual \
-ipv6.method disabled
+ipv6.method ignore \
+ipv4.routes "10.10.0.0/24 10.10.0.1" \
+connection.autoconnect yes
 
-nmcli connection down ens33  && nmcli connection up ens33 
+nmcli connection down eth0  && nmcli connection up eth0
+
+
+#ipv4.routes "10.10.0.0/24 10.10.0.1" #这会将 10.10.0.0/16 子网的流量定向到网关 10.10.1.1。
 ```
 
 ‍
@@ -522,6 +531,12 @@ nmcli con up bridge-br0
 nmcli con modify bridge-br0 ipv4.method auto
 nmcli con up bridge-br0
 ```
+
+IPv6桥接模式在一些情况下可能会遇到没有地址的问题。这通常是因为IPv6桥接模式被配置为使用透明的桥接，桥接器本身不分配或管理IP地址。
+
+‍
+
+‍
 
 ### 给网卡添加vlan tag并配置IP地址
 

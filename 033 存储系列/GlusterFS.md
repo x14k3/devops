@@ -255,8 +255,6 @@ UUID					Hostname      	State
 0ace00a1-0612-4395-ac9b-f1516207ead1	localhost     	Connected 
 ```
 
-##### 
-
 c、所有storage服务器建立连接，成为一个集群
 
 ```

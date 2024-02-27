@@ -134,31 +134,3 @@ echo -e "\033[字背景颜色；文字颜色m字符串\033[0m"
 [root@zutuanxue ~]# echo -e "\033[0m today is fine \033[3B"
  today is fine 
 ```
-
-#### 3、jobs
-
-需求：输出一个水果购物界面 fruits_shop.sh
-
-![image20190612094713385.png](https://www.zutuanxue.com:8000/static/media/images/2020/9/24/1600908891935.png)
-
-案例要点：
-
-- echo输出缩进问题
-- 字体颜色输出
-
-代码实现：
-
-```
-job代码    01_fruits_shop.sh
-#!/bin/bash
-# 
-#Author: www.zutuanxue.com
-#Release: 
-#Description:打印水果超市列表
-
-echo -e "\t\t    \033[32m Fruits List \033[0m      \n"
-echo -e "\t   \033[31mFruit\033[0m   \t\t \033[31mPrice\033[0m \t\t\033[31mWeight\033[0m"
-echo -e "\t\033[34m1)Apple\t\t￥10.00\t\t1KG\033[0m"
-echo -e "\t\033[34m2)Banana\t￥9.00\t\t1KG\033[0m"
-echo -e "\t\033[34m3)Orange\t￥15.20\t\t1KG\033[0m"
-```

@@ -3,10 +3,10 @@
 * 📄 [linux SElinux管理](siyuan://blocks/20231113140707-xu4su86)
 * 📑 [linux 其他](siyuan://blocks/20231110105237-8z6uwqe)
 
+  * 📄 [PS1 设置](siyuan://blocks/20240224200527-qxht0tn)
   * 📄 [VIM文本编辑器](siyuan://blocks/20231110105237-3z8uj1k)
-  * 📄 [linux 终端美化](siyuan://blocks/20231116212943-or2kc2l)
+  * 📄 [debian](siyuan://blocks/20240222220111-d5ji8sn)
   * 📄 [opensuse](siyuan://blocks/20231116170151-jolbixg)
-* 📄 [linux 内核优化](siyuan://blocks/20231110105237-0j1zwg6)
 * 📄 [linux 定时任务](siyuan://blocks/20231110105237-4mqh2v9)
 * 📑 [linux 性能分析](siyuan://blocks/20231110105237-tzdbegv)
 
@@ -92,5 +92,11 @@
 
   * 📄 [firewalld](siyuan://blocks/20231110105237-htsujad)
   * 📄 [iptables](siyuan://blocks/20231110105237-f3d4oum)
+* 📑 [linxu 重要配置文件](siyuan://blocks/20240205174137-r9uzzee)
+
+  * 📄 [Linux 设备文件](siyuan://blocks/20240205174149-6m3swxy)
+  * 📄 [etc-pam.d ](siyuan://blocks/20240211112927-ac7t3tg)
+  * 📄 [内核参数文件-sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
+  * 📄 [用户配置脚本文件-.netrc ](siyuan://blocks/20240218131901-mqemnci)
 
 ‍

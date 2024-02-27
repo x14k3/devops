@@ -14,23 +14,13 @@
 
 在 Linux 下，类似 lsxxx 这样的命令都是用来查看基本信息的，如 ls 查看当前目录文件信息，lscpu 就用来查看 CPU 信息，类似还有 lspci 查看 PCI 信息。
 
-​![图片](assets/net-img-640-20230906175414-hnw9hrf.jpg)​
-
-可以看到我的机器配置很低，1 核 2.5GHz（在阿里云买的最低配的服务器）。
-
 ###  **/proc/cpuinfo**
 
 /proc 目录是内核透传出来给用户态使用的，里面记录着很多信息文件，比如还有内存文件 meminfo 等。可以使用 cat /proc/cpuinfo 查看 CPU 信息。
 
-​![图片](assets/net-img-640-20230906175414-h64iqo8.jpg)​
-
-这里显示的信息可以具体到每个逻辑核上，由于我只有一个核，所以只显示一组信息。
-
-### **dmidecode**
+### dmidecode
 
 这个命令是用来获取 DMI（Desktop Management Interface）硬件信息的，包括 BIOS、系统、主板、处理器、内存、缓存等等。对于 CPU 信息，可以使用 dmidecode -t processor 来查看。
-
-​![图片](assets/net-img-640-20230906175414-qhr5ak0.jpg)​
 
 ‍
 

@@ -20,7 +20,7 @@ http://192.168.0.100:8123
 ```bash
 #进入hass目录,安装hacs 
 docker exec -it hass bash 
-wget -p -o - https://get.hacs.xyz |bash -
+wget -O - https://get.hacs.xyz | bash -
 
 ```
 

@@ -62,9 +62,9 @@ ip route add default via 192.168.1.254   # 设置系统默认路由
 ip route list                            # 查看路由信息
 ip route add 192.168.4.0/24  via  192.168.0.254 dev eth0 # 设置192.168.4.0网段的网关为192.168.0.254,数据走eth0接口
 ip route add default via  192.168.0.254  dev eth0        # 设置默认网关为192.168.0.254
-ip route del 192.168.4.0/24   # 删除192.168.4.0网段的网关
-ip route del default          # 删除默认路由
-ip route delete 192.168.1.0/24 dev eth0 # 删除路由
+ip route del 192.168.4.0/24              # 删除192.168.4.0网段的网关
+ip route del default                     # 删除默认路由
+ip route delete 192.168.1.0/24 dev eth0  # 删除路由
 ```
 
 **用ip命令显示网络设备的运行状态**

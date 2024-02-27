@@ -62,7 +62,7 @@ parted(选项)(参数)
 
     **mklabel** *磁盘分区形式*
 
-    磁盘分区形式有MBR和GPT两种，以GPT为例：
+    分区表类型：MBR分区表(msdos)和GPT分区表(gpt)
 
     ```bash
     (parted) mklabel gpt

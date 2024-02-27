@@ -48,6 +48,9 @@ nohup ./headscale serve >> ./headscale.log 2>&1 &
 # 创建一个 namespace
 ./headscale namespaces create default
 ./headscale namespaces list
+# 新版本
+./headscale user create default
+./headscale user list
 ```
 
 ## tailscale 客户端接入
@@ -82,7 +85,7 @@ To authenticate, visit:
         http://8.210.145.225:11053/register/nodekey:6207f14cc8d47cac320da2468d08c9494a580cc67846c50c0e067d994f927e32
 
 # 将后面的nodekey复制，然后再headscale服务端 执行 注册到指定的namespace
-./headscale -n sds nodes register --key nodekey:a4ee2f23243ead015342c250eae83d1c5d2e4433502135d922453fda4338e3
+#./headscale -n sds nodes register --key nodekey:a4ee2f23243ead015342c250eae83d1c5d2e4433502135d922453fda4338e3
 ./headscale nodes register --user USERNAME --key nodekey:a4ee2f23243ead015342c250eae83d1c5d2e4433502135d92245
 # 注册成功，查看注册的节点
 ./headscale nodes list
@@ -101,6 +104,7 @@ Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需
 ```bash
 # 将 <HEADSCALE_PUB_IP> 换成你的 Headscale 公网 IP 或域名
 tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --accept-dns=false --advertise-routes=192.168.188.0/24
+tailscale up --login-server=https://doshell.top:11051 --accept-routes=true --accept-dns=false
 ```
 
 然后将浏览器弹出的命令在服务端执行：
@@ -127,7 +131,7 @@ tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --acce
 # 发布客户端的子网
 ./headscale routes enable -i 1 -r "192.168.188.0/24"
 # 查看客户端发布的subnet
-./headscale nodes routes list -i <id>
+./headscale routes list
 ```
 
 ## 管理命令

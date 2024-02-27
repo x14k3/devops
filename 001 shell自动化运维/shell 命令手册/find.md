@@ -70,6 +70,7 @@ find(选项)(参数)
 -version或——version：显示版本信息；
 -xdev：将范围局限在先行的文件系统中；
 -xtype<文件类型>：此参数的效果和指定“-type”参数类似，差别在于它针对符号连接检查。
+-o: 条件，或
 ```
 
 ### 参数
@@ -328,15 +329,11 @@ find . -type f -name "*.txt" -exec printf "File: %s\n" {} \;
 find . -path "./sk" -prune -o -name "*.txt" -print
 ```
 
-> ⚠️ ./sk 不能写成 ./sk/ ，否则没有作用。
-
 忽略两个目录
 
 ```
 find . \( -path ./sk -o  -path ./st \) -prune -o -name "*.txt" -print
 ```
-
-> ⚠️ 如果写相对路径必须加上`./`​
 
 #### find其他技巧收集
 

@@ -5,7 +5,7 @@
 ## 修改**docker仓库源为阿里源**
 
 ```bash
-sudo mkdir -p /etc/docker
+mkdir -p /etc/docker
 vim /etc/docker/daemon.json
 -------------------------------------------------------------
 {

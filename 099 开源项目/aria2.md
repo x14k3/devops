@@ -12,35 +12,25 @@ sudo apt install aria2
 aria2c --version
 ```
 
-这里直接安装就完成, 后续就是自己编写搭建服务.
-
 ## 管理账号
 
 这里需要创建新的 `Linux`​ 账号来托管下载权限, 并且设置主要配置文件夹:
 
 ```
 # 创建账号
-sudo useradd aria2 --shell /usr/sbin/nologin
+useradd -M -s /usr/sbin/nologin aria2
 
 # 创建系统配置目录和赋予权限
-sudo mkdir /etc/aria2
-sudo chown -R aria2:aria2 /etc/aria2
+mkdir /etc/aria2
+chown -R aria2:aria2 /etc/aria2
 ```
-
-这个账号不需要使用到 `shell`​ 权限, 这样处理就行.
 
 ## 系统服务
-
-这里创建系统多配置文件, 注意这里采用动态多配置来处理:
-
-```
-# 创建系统文件, 注意这里采用 `@` 结尾代表这个是传入参数的多配置服务
-sudo vim /lib/systemd/system/aria2@.service
-```
 
 写入系统服务配置:
 
 ```
+cat <<EOF >>/lib/systemd/system/aria2.service
 [Unit]
 Description=Aria2-Download Service
 After=network.target
@@ -48,39 +38,39 @@ After=network.target
 [Service]
 User=aria2
 Group=aria2
-ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2/%I.conf
-# 这里文件描述符最好适当扩大, 因为同时下载可能占用大量文件描述符
-LimitNOFILE=102400
+ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2/aria2.conf
+LimitNOFILE=10240
 
 [Install]
 WantedBy=default.target
+EOF
 ```
 
 完成之后就更新下系统服务即可:
 
 ```
-sudo systemctl daemon-reload 
+systemctl daemon-reload 
 ```
 
 ### Aria2配置
 
-这里创建 `Aria2`​ 配置文件来处理, 这里命名为 `media`​:
+这里创建 `Aria2`​ 配置文件来处理
 
 ```
 # 以 aria2 权限创建对应配置文件
-sudo -u aria2 vim /etc/aria2/media.conf 
+vim /etc/aria2/aria2.conf 
+touch /etc/aria2/aria2.session
+chown -R aria2:aria2 /etc/aria2/
 ```
 
 内部配置内容:
 
-```
-
-## ==============
+```bash
 ##  文件保存相关 
-## ==============
+## ============== ==============
 
 # 文件保存目录
-dir = /data/downloads
+dir = /data/archive/downloads
 
 # 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M
 disk-cache=32M
@@ -99,13 +89,9 @@ remote-time=true
 # falloc和trunc则需要文件系统和内核支持
 # NTFS建议使用falloc, EXT3/4建议trunc, MAC 下需要注释此项
 file-allocation=trunc
-# ==============
 
-
-
-## ==============
 ##  下载连接相关 
-## ==============
+## ============== ==============
 
 # 最大同时下载任务数, 运行时可修改, 默认:5
 max-concurrent-downloads=8
@@ -136,27 +122,21 @@ min-split-size=20M
 # 单个任务最大线程数, 添加时可指定, 默认:5
 # 建议同max-connection-per-server设置为相同值
 split=8
-# ==============
 
-
-## ==============
 ##  进度保存相关 
-## ==============
+## ============== ==============
 
 # 从会话文件中读取下载任务
-input-file=/data/aria2.session
+input-file=/etc/aria2/aria2.session
 
 # 在Aria2退出时保存错误的、未完成的下载任务到会话文件
-save-session=/data/aria2.session
+save-session=/etc/aria2/aria2.session
 
 # 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0
 save-session-interval=1
-# ==============
 
-
-## ==============
 ##  RPC相关设置 
-## ==============
+## ============== ==============
 
 # 启用RPC, 默认:false
 enable-rpc=true
@@ -175,12 +155,9 @@ event-poll=epoll
 
 # 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
 rpc-secret=meteorocat
-# ==============
 
-
-## ==============
 ##  BT/PT下载相关 
-## ==============
+## ============== ==============
 
 # 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true
 follow-torrent=true
@@ -192,7 +169,7 @@ enable-peer-exchange=true
 dht-entry-point=dht.transmissionbt.com:6881
 
 # IPv4 DHT 文件路径，默认：$HOME/.aria2/dht.dat
-dht-file-path=/data/dht.dat
+dht-file-path=/etc/aria2/dht.dat
 
 # 启用 IPv6 DHT 功能, PT 下载(私有种子)会自动禁用，默认:false
 # 在没有 IPv6 支持的环境开启可能会导致 DHT 功能异常
@@ -237,8 +214,8 @@ bt-tracker=
 
 ```
 # 启动服务并开机启动
-sudo systemctl start aria2@media.service
-sudo systemctl enable aria2@media.service
+sudo systemctl start aria2.service
+sudo systemctl enable aria2.service
 ```
 
 ### Aria2Web配置
