@@ -7,7 +7,7 @@
 ```bash
 yum install git-core
 #为 Git 创建一个用户
- useradd -d /home/git git
+useradd -d /home/git git
 echo "Ninestar123" | passwd --stdin git
 
 # 为了容易的访问服务器，我们设置一个免密 ssh 登录。首先在你本地电脑上创建一个 ssh 密钥：
@@ -65,6 +65,12 @@ git config -e [--global]
 # 设置提交代码时的用户信息
 git config [--global] user.name "[name]"
 git config [--global] user.email "[email address]"
+
+# 让git走代理
+root@doshell:~ # git config --global https.proxy http://127.0.0.1:10809
+root@doshell:~ # git config --global https.proxy https://127.0.0.1:10809
+root@doshell:~ # git config --global https.proxy socks5://127.0.0.1:10808
+root@doshell:~ # git config --global http.proxy socks5://127.0.0.1:10808
 
 ```
 

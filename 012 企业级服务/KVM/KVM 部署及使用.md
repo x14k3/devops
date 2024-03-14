@@ -35,6 +35,9 @@ sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-n
 # ubuntu
 sudo apt install qemu-kvm libvirt-daemon-system virt-manager virt-viewer virtinst bridge-utils
 
+# debian
+sudo apt -y install qemu-kvm libvirt-daemon-system libvirt-daemon  bridge-utils libguestfs-tools libosinfo-bin  qemu-system virt-manager
+
 # centos
 yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-tools  virt-viewer  virt-v2v libguestfs-tools-c
 
@@ -362,18 +365,13 @@ netstat -tunlp|grep qemu
 
 ### 3. virsh-虚拟机管理 
 
-虚拟机创建好后，可使用 virsh 管理虚拟机：
+#### 3.1 虚拟机开关机
 
-```shell
+```bash
 # 查看正在运行的虚拟机
 virsh list
 # 查看所有虚拟机，包括 inactive 的虚拟机
 virsh list --all
-# 使用 virt-viewer`以 vnc 协议登入虚拟机终端：
-## 使用虚拟机 ID 连接
-virt-viewer 8
-## 使用虚拟机名称连接，并且等待虚拟机启动
-virt-viewer --wait opensuse15
 # 启动、关闭、暂停(休眠)、重启虚拟机：
 virsh start opensuse15
 virsh suuspend opensuse15
@@ -387,6 +385,31 @@ virsh destroy opensuse15
 virsh autostart opensuse15
 # 禁用自动开机
 virsh autostart --disable opensuse15
+```
+
+#### 3.2 迁移虚拟机
+
+```shell
+# 迁移虚拟机：
+# 使用默认参数进行离线迁移，将已关机的服务器迁移到另一个 qemu 实例
+virsh migrate 37 qemu+ssh://tux@jupiter.example.com/system
+# 还支持在线实时迁移，待续
+```
+
+#### 3.3 查看虚拟机信息
+
+```bash
+
+# 查看虚拟机网卡信息  
+virsh domiflist    test_01
+#arp -a | grep  52:54:00:c3:48:3b 查看虚拟机ip地址 
+# 查看虚拟机硬盘信息
+virsh domblklist   test_01
+```
+
+#### 3.4 虚拟机快照
+
+```bash
 # 虚拟机快照管理：
 # 列出一个虚拟机的所有快照
 virsh snapshot-list --domain opensuse15
@@ -396,26 +419,11 @@ virsh snapshot-create <domain>
 virsh snapshot-restore <domain> <snapshotname>
 # 删除快照
 virsh snapshot-delete <domain> <snapshotname>
-# 删除虚拟机：
-virsh undefine opensuse15
-# 迁移虚拟机：
-# 使用默认参数进行离线迁移，将已关机的服务器迁移到另一个 qemu 实例
-virsh migrate 37 qemu+ssh://tux@jupiter.example.com/system
-# 还支持在线实时迁移，待续
-
-## 通过宿主机连接虚拟机、查看虚拟机信息
-# 连接虚拟机，虚拟机需要开启serial [systemctl start serial-getty@ttyS0.service]
-virsh console      test_01　
-# 查看虚拟机网卡信息  
-virsh domiflist    test_01
-#arp -a | grep  52:54:00:c3:48:3b 查看虚拟机ip地址 
-# 查看虚拟机硬盘信息
-virsh domblklist   test_01   
-# 挂载win镜像
-virsh change-media njvm2k8  hdb /usr/share/virtio-win/virtio-win.iso  
 ```
 
-cpu/内存修改：
+‍
+
+#### 3.5 cpu/内存修改
 
 ```shell
 # 改成 4 核
@@ -424,20 +432,26 @@ virsh setvcpus opensuse15 4
 virsh setmem opensuse15 4096
 ```
 
-修改磁盘、网络及其他设备：
+#### 3.6 添加删除设备
 
-```shell
+```bash
 # 添加新设备
 virsh attach-device
 virsh attach-disk
+# virsh attach-disk test_01 /data/archive/iso/CentOS-7-x86_64-DVD-2207-02.iso vdb
+
 virsh attach-interface
 # 删除设备
 virsh detach-disk
+# virsh detach-disk test_01 vdb
 virsh detach-device
 virsh detach-interface
+
+# 挂载win镜像
+virsh change-media njvm2k8  hdb /usr/share/virtio-win/virtio-win.iso
 ```
 
-彻底删除一个虚拟机
+#### 3.7 彻底删除一个虚拟机
 
 ```bash
 # 检查虚拟机使用的磁盘文件
@@ -453,6 +467,23 @@ virsh undefine test_01
 rm -f /var/lib/libvirt/images/vm-name.img   # 虚拟机磁盘文件默认的存放位置，如果修改了地址，按照自己安装的地址来
 
 ```
+
+#### 3.8 连接虚拟机方式
+
+```bash
+## 通过宿主机连接虚拟机
+# 连接虚拟机，虚拟机需要开启serial [systemctl start serial-getty@ttyS0.service]
+virsh console      test_01
+# 使用 virt-viewer`以 vnc 协议登入虚拟机终端：
+## 使用虚拟机 ID 连接
+virt-viewer 8
+## 使用虚拟机名称连接，并且等待虚拟机启动
+virt-viewer --wait opensuse15
+```
+
+‍
+
+‍
 
 ### 4. virsh-manager-图形界面管理虚拟机
 

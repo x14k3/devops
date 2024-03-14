@@ -229,7 +229,7 @@ tail -f $ORACLE_BASE/cfgtoollogs/dbca
 # dbca -silent -deleteDatabase -sourceDB fmsdb -sid fmsdb -sysDBAUserName sys -sysDBAPassword Ninestar2022 -forceArchiveLogDeletion
 ```
 
-- 创建FS存储方式CDB数据库：[Oracle CDB PDB](Oracle%20CDB%20PDB.md)
+- 创建FS存储方式CDB数据库：
 
 ```bash
 dbca -silent -ignorePreReqs -ignorePrereqFailure -createDatabase \

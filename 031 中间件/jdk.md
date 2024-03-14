@@ -2,7 +2,7 @@
 
 # jdk 部署
 
-jdk下载地址：[https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html]()
+jdk下载地址：[https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html](https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html)
 
 ```bash
 mkdir -p /usr/local/java

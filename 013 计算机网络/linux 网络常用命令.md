@@ -2,11 +2,11 @@
 
 arp
 
-arpd
+((20231110105237-nim5tdl 'arpd'))
 
 arping
 
-dig
+((20231110105237-bi4v1gd 'dig'))
 
 traceroute
 
@@ -14,9 +14,9 @@ nmap
 
 nmcli
 
-nc
+((20231110105237-vuz28hr 'nc'))
 
-ss
+((20231110105237-eqc2xvi 'ss'))
 
 tcpdump
 

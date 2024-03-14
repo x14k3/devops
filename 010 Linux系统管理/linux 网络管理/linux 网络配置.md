@@ -164,7 +164,7 @@ ip route flush  #不建议尝试
 
 ##### Redhat/CentOS
 
-```
+```bash
 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-ens33
 TYPE=Ethernet
 PROXY_METHOD=none

@@ -127,7 +127,7 @@ yum clean all &&  yum makecache
 ## **局域网源**
 
 *配置本地源*
-2. nginx 部署
+nginx 部署
 
 ```bash
 # 安装nginx

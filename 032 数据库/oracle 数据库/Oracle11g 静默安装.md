@@ -5,7 +5,7 @@
 ## 一、环境准备
 
 1. 下载地址：  
-    [https://www.oracle.com/technetwork/articles/112010-linuxsoft-098940-zhs.html]()
+    [https://edelivery.oracle.com/osdc/faces/SoftwareDelivery](https://edelivery.oracle.com/osdc/faces/SoftwareDelivery)
 2. 官方文档：  
     [https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html](https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/index.html)
 
@@ -145,7 +145,7 @@ source /home/oracle/.bash_profile
 
 # 安装oracle所需依赖
 # Centos7.x
-yum install -y  vim make gcc gcc-c++ unzip zip net-tools libnsl bc binutils elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc glibc-devel unixODBC-devel ksh libaio libaio-devel libX11 libXau libXi libXtst libXrender libXrender-devel libgcc libstdc++ libstdc++-devel libxcb  nfs-utils targetcli smartmontools sysstat compat-libcap1
+yum install -y  vim make gcc gcc-c++ unzip zip net-tools libnsl bc binutils elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc glibc-devel unixODBC-devel ksh libaio libaio-devel libX11 libXau libXi libXtst libXrender libXrender-devel libgcc libstdc++ libstdc++-devel libxcb  nfs-utils targetcli smartmontools sysstat compat-libcap1 glibc.i686
 
 
 ## opensuse挂载系统镜像源

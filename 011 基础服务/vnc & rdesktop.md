@@ -1,61 +1,76 @@
 # vnc & rdesktop
 
-## VNC
-
-> *VNC* (Virtual Network Console)是虚拟网络控制台的缩写。它是一款优秀的远程控制工具软件
-
-打开终端并以 root 用户身份登录。
-
-使用以下命令更新软件包管理器：
-
-```
-zypper update
-```
-
-安装 TigerVNC 服务器：
+## tiger-vnc
 
 ```bash
-apt install tightvncserver
-```
+# 安装vnc # debian12 gnome
+apt install tigervnc-standalone-server
+# 生成密码
+su root
+vncpasswd 
+# 然后按提示输入密码
 
-配置 VNC 服务器：
-
-```
-vncserver :1
-```
-
-这将在端口 5901 上启动 VNC 服务器，并分配一个 VNC 会话 ID。你可以通过替换“1”为所需的会话 ID 来启动多个 VNC 服务器。
-
-设置 VNC 服务器密码：
-
-```
-vncpasswd
-```
-
-这将提示你输入新密码和密码确认。
-
-修改 VNC 配置文件：
-
-```
-vi ~/.vnc/xstartup
-```
-
-将文件中的默认设置注释掉，并添加以下行：
-
-```
+# 创建启动停止脚本
+# 启动脚本
+#---------------------------------------------------------
 #!/bin/sh
+/usr/bin/vncserver -rfbauth /root/.vnc/passwd -localhost no -geometry 1920x1080 -depth 24 :0
+#---------------------------------------------------------
+
+# 停止脚本
+#---------------------------------------------------------
+#!/bin/sh
+/usr/bin/vncserver -kill :0
+#---------------------------------------------------------
+
+# 配置启动桌面
+cat << EOF >> ~/.vnc/xstartup
+#!/bin/sh
+export XKL_XMODMAP_DISABLE=1
 unset SESSION_MANAGER
-exec /etc/X11/xinit/xinitrc
+unset DBUS_SESSION_BUS_ADDRESS
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+vncconfig -iconic &
+gnome-panel &
+metacity &
+nautilus &
+gnome-terminal &
+dbus-launch --exit-with-session gnome-session &
+EOF
+
+
+# 配置开机启动
+cat << EOF >>/etc/systemd/system/vncserver.service
+[Unit]
+Description=Remote desktop service (VNC)
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=root
+# Clean any existing files in /tmp/.X11-unix environment
+ExecStartPre=/to/path/vnc/stopVNC #停止脚本路径
+ExecStart=/to/path/startVNC #启动脚本路径
+ExecStop=/to/path/stopVNC #停止脚本路径
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+#使用systemctl设置
+sudo systemctl daemon-reload                 #让系统知道新的单元文件
+sudo systemctl enable vncserver.service      #让系统开机启动这个服务器
+sudo systemctl start vncserver.service       #启动这个服务器
+
+root@doshell:~ # ss -tunlp | grep 590
+udp   UNCONN 0      0             0.0.0.0:59090      0.0.0.0:*    users:(("avahi-daemon",pid=702,fd=14))               
+root@doshell:~ # 
 ```
 
-重启 VNC 服务器：
+‍
 
-```
-vncserver -kill :1
-vncserver :1
-```
-
-现在你已经成功在 SUSE Linux 上安装和配置了 VNC 服务器。你可以使用 VNC 客户端连接到服务器并远程访问桌面环境。
+‍
 
 ## rdesktop
 

@@ -1,158 +1,89 @@
 # linux 定时任务
 
-## at-仅执行一次的计划任务
+> 环境：CentOS
 
-首先，我们先来谈谈仅运行一次的计划任务at
+通过 `crontab`​ 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。
 
-### atd 的启动与 at 运行的方式
+## crond 服务
 
-在使用at之前我们要确保atd服务是运行的，这个需要我们去检查一下，因为并不是所有的发行版linux默认都是开启这个服务的，但是在CentOS中是默认开启的
+Linux 通过 crond 服务来支持 crontab。
 
-```
-[root@zutuanxue ~]# systemctl status atd
-● atd.service - Job spooling tools
-   Loaded: loaded (/usr/lib/systemd/system/atd.service; enabled; vendor preset: enabled)
-   Active: active (running) since Mon 2020-01-13 09:34:03 CST; 1h 17min ago
-#查询atd服务的状态
+### 检查 `crond`​ 服务
 
-[root@zutuanxue ~]# systemctl is-enabled atd
-enabled
+使用 `systemctl list-unit-files`​ 命令确认 `crond`​ 服务是否已安装。
 
-#查询是否开启默认启动
-
-如果没有启动
-[root@zutuanxue ~]# systemctl start atd  
-# 启动
-[root@zutuanxue ~]# systemctl enable atd
-#设置为开启启动
+```bash
+$ systemctl list-unit-files | grep crond
+crond.service                               enabled
 ```
 
-**at的工作模式**
+如果为 enabled，表示服务正运行。
 
-at在运行的时候会将定义好的工作以文本文件的方式写入 /var/spool/at/ 目录内，该工作便能等待 atd 这个服务的调用，但是出于安全考虑，并不是所有的人都可以使用 at 计划任务！所以系统给我们提供了两个文件 /etc/at.allow 与 /etc/at.deny 来进行 at 的使用限制！ 加上这两个文件后， at 的工作情况其实是这样的：
+### crond 服务命令
 
-先找寻 /etc/at.allow 这个文件，写在这个文件中的用户才能使用 at ，没有在这个文件中的用户则不能使用 at (即使没有写在 at.deny 当中)；
+开机自动启动 crond 服务：`chkconfig crond on`​
 
-如果 /etc/at.allow 不存在，就寻找 /etc/at.deny 这个文件，若写在这个 at.deny 的用户则不能使用 at ，而没有在这个 at.deny 文件中的用户，就可以使用 at ；
+或者，按以下命令手动启动：
 
-如果两个文件都不存在，那么只有 root 可以使用 at 这个命令。
-
-在大多数发行版当中，由于假设系统上的所有用户都是可信任的， 因此系统通常会保留一个空的 /etc/at.deny 文件，允许所有人使用 at 。如果有需要的话可以手动建立at.allow文件
-
-### at的使用
-
-单一计划任务的进行就使用 at 这个命令！将 at 加上一个时间即可！基本的语法如下：
-
-```
-[root@zutuanxue ~]# at  [-mldv] TIME  
-[root@zutuanxue ~]# at -c 工作序号 
-选项与参数：  
--m ：当 at 的工作完成后，发邮件通知用户，需要mail服务
--l ：at -l 相当于 atq，查看用户使用at定制的工作
--d ：at -d 相当于 atrm ，删除一个工作；  
--v ：详细信息；  
--c ：查看指定工作的具体内容。  
-TIME：时间格式  
-		HH:MM      ex> 16:00  
-		在今天指定的时刻进行，若该时刻已超过，则明天的这个时间进行此工作。   
-		HH:MM  YYYY-MM-DD   ex> 16:00 2021-07-30  
-		指定在某年某月的某一天的时间进行该工作！   
-		HH:MM[am|pm] [Month] [Date]  ex>  04am Jun 15    			另外一种年月日和时间的指定方式   
-		HH:MM[am|pm] + number [minutes|hours|days|weeks]    		ex> now  + 5 minutes 	五分钟之后
-		ex> 04am + 3 days    	三天后的上午四点  
+```bash
+systemctl enable crond.service  # 开启服务（开机自动启动服务）
+systemctl disable crond.service # 关闭服务（开机不会自动启动服务）
+systemctl start crond.service   # 启动服务
+systemctl stop crond.service    # 停止服务
+systemctl restart crond.service # 重启服务
+systemctl reload crond.service  # 重新载入配置
+systemctl status crond.service  # 查看服务状态
 ```
 
-at在使用过程中的时间指定很重要，另外在使用过程中如果涉及到路径的指定，强烈建议使用绝对路径，定义完成at之后使用键盘上的ctrl+d结束
+## crontab
 
-**at 的管理**
+### crontab 命令
 
-有的时候我用at定义完计划任务之后，发现命令有错误，此时我们就可以使用atq 与 atrm 进行管理。
+crontab 命令格式如下：
 
-```
-[root@zutuanxue ~]# atq  
-[root@zutuanxue ~]# atrm 工作编号 
-[root@zutuanxue at]# atq
-2	Fri Feb 21 16:00:00 2020 a root
-# 在 2020-02-21 的 16:00 有一项工作，该项工作是root设置的，工作编号为2
-[root@zutuanxue ~]# atrm 2  
-[root@zutuanxue ~]# atq  # 没有任何信息，表示该工作被移除了！  
+```bash
+crontab [-u user] file crontab [-u user] [ -e | -l | -r ]
 ```
 
-‍
+* ​`-u user`​：用来设定某个用户的 crontab 服务；
+* ​`file`​：file 是命令文件的名字，表示将 file 做为 crontab 的任务列表文件并载入 crontab。如果在命令行中没有指定这个文件，crontab 命令将接受标准输入（键盘）上键入的命令，并将它们载入 crontab。
+* ​`-e`​：编辑某个用户的 crontab 文件内容。如果不指定用户，则表示编辑当前用户的 crontab 文件。
+* ​`-l`​：显示某个用户的 crontab 文件内容，如果不指定用户，则表示显示当前用户的 crontab 文件内容。
+* ​`-r`​：从/var/spool/cron 目录中删除某个用户的 crontab 文件，如果不指定用户，则默认删除当前用户的 crontab 文件。
+* ​`-i`​：在删除用户的 crontab 文件时给确认提示。
 
-## crontab-周期执行的计划任务
+有两种方法写入定时任务：
 
-相对于 at 是仅执行一次的工作，周期执行的计划任务则是由 crond这个系统服务来控制的。同样各位在使用的时候也要确认一下此服务的状态
+* 在命令行输入：`crontab -e`​ 然后添加相应的任务，存盘退出。
+* 直接编辑 `/etc/crontab`​ 文件，即 `vi /etc/crontab`​，添加相应的任务。
 
-```
-[root@zutuanxue ~]# systemctl status crond
-● crond.service - Command Scheduler
-   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
-   Active: active (running) since Mon 2020-01-13 09:34:03 CST; 2h 0min ago
-[root@zutuanxue ~]# systemctl is-enabled crond
-enabled
-```
+### crontab 文件
 
-用户使用的是 crontab 这个命令来定义周期性的计划任务，但是为了安全性的问题， 与 at 同样的，我们可以限制使用 crontab 的用户账号！使用的限制数据有：
+crontab 要执行的定时任务都被保存在 `/etc/crontab`​ 文件中。
 
- **/etc/cron.allow：**   
-将可以使用 crontab 的账号写入其中，若不在这个文件内的用户则不可使用 crontab；
+crontab 的文件格式如下：
 
- **/etc/cron.deny：**   
-将不可以使用 crontab 的账号写入其中，若未记录到这个文件当中的用户，就可以使用 crontab 。
+​![img](assets/net-img-20200211113339-20240314193544-ftiaq9k.png)​
 
-与 at 一样，以优先级来说， /etc/cron.allow 比 /etc/cron.deny 要高， 一般系统默认是提供 /etc/cron.deny ， 你可以将允许使用 crontab 用户写入 /etc/cron.deny 当中，一个账号一行。crontab 建立计划任务会存放在 /var/spool/cron/ 目录中，
+#### 标准字段
 
-### crontab 的使用
+**逗号**用于分隔列表。例如，在第 5 个字段(星期几)中使用 `MON,WED,FRI`​ 表示周一、周三和周五。
 
-```
-[root@zutuanxue ~]# crontab
--u ：只有root可以使用，指定其它用户的名称
--e ：建立计划任务  
--l ：查看计划任务  
--r ：删除所有计划任务，若只删除一项，只能使用-e进行编辑  
-[root@zutuanxue ~]# crontab -e
-#执行后会打开一个vim的页面，每个任务一行  
-0	12 	* 	*  *			cp	/etc/passwd /root
-分 时 日 	月 周				工作内容
-```
+**连字符**定义范围。例如，`2000-2010`​ 表示 2000 年至 2010 年期间的每年，包括 2000 年和 2010 年。
 
-编辑完毕之后输入“ :wq ”保存退出， 在cron中每项工作 (每行) 的格式都是具有六个字段，这六个字段的意义为：
+除非用反斜杠()转义，否则命令中的\*\*百分号(%)\*\*会被替换成换行符，第一个百分号后面的所有数据都会作为标准输入发送给命令。
 
-|意义|分钟|小时|日期|月份|周|命令|
-| ------| ------| ------| ------| ------| -----| ----------|
-|范围|0-59|0-23|1-31|1-12|0-7|工作内容|
+|字段|是否必填|允许值|允许特殊字符|
+| --------------| ----------| -------------------| --------------|
+|Minutes|是|0–59|​`*`​,`-`​|
+|Hours|是|0–23|​`*`​,`-`​|
+|Day of month|是|1–31|​`*`​,`-`​|
+|Month|是|1–12 or JAN–DEC|​`*`​,`-`​|
+|Day of week|是|0–6 or SUN–SAT|​`*`​,`-`​|
 
-比较有趣的是那个『周』！周的数字为 0 或 7 时，都代表『星期天』的意思！另外，还有一些辅助的字符，大概有底下这些：
+​`/etc/crontab`​ 文件示例：
 
-|特殊字符|含义|
-| :---------| :--------------------------------------------------------------------------------------|
-|*(星号)|代表任何时刻|
-|,(逗号)|代表分隔时段的意思。如3:00 与 6:00 时，就是：0 3,6 * * *|
-|-(减号)|代表一段时间范围内，如：8 点到 12 点之间的每小时的 20 分都进行一项工作：20 8-12 * * *|
-|/n(斜线)|n 代表数字，间隔的单位的意思，如每五分钟进行一次，则：*/5 * * * * 也可以写成 0-59/|
-
-```
-[root@zutuanxue ~]# crontab -l		#查看root的计划任务
-0 16 1 * *	cp /etc/passwd /root
-root@zutuanxue ~]# crontab -u oracle -l
-#查看指定用户的计划任务
-no crontab for oracle
-[root@zutuanxue ~]# crontab -r	#删除所有计划任务
-[root@zutuanxue ~]# crontab -l
-no crontab for root
-```
-
-注意：crontab在使用的时候如果遇到路径，同样建议使用绝对路径，如果只是要删除某个项目，使用 crontab -e 来重新编辑，如果使用 -r 的参数，是会将所有的 crontab 内容都删掉。
-
-### 配置文件
-
-​`/etc/crontab, /etc/cron.d/*`​
-
-crontab -e是针对用户 来设计的，系统的计划任务是通过/etc/crontab文件来实现的，我们只要编辑/etc/crontab 这个文件就可以，由于cron的最低检测时间是分钟，所以编辑好这个文件，系统就会自动定期执行了
-
-```
-[root@zutuanxue ~]# cat /etc/crontab
+```bash
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
@@ -167,94 +98,48 @@ MAILTO=root
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
-```
 
-与crontab -e的内容类似，但是多了几个部分
-
-```
-SHELL=/bin/bash			shell类型
-PATH=/sbin:/bin:/usr/sbin:/usr/bin	执行文件搜索位置
-MAILTO=root		发生错误时通知邮件发送给谁
-
-*  *  *  *  * user-name  command to be executed
-#比crontab -e多了一个执行者的身份，因为并不是所有工作都需要root用户去执行
-```
-
-**额外的文件**
-
-crond有三个相关联的地方，他们分别是：
-
-/etc/crontab 系统计划任务的配置文件
-
-/etc/cron.d/ 此目录和下面的几个目录都是系统计划任务存放运行脚本的位置。
-
-/etc/cron.hourly/
-
-/etc/cron.daily/
-
-/etc/cron.weekly/
-
-/etc/cron.monthly/
-
-/var/spool/cron/* 用户定制的计划任务存放位置
-
-## anacron
-
-anacron 并不是用来取代 crontab 的，anacron 存在的目的就在于处理由于一些原因导致cron无法完成的工作
-
-其实 anacron 也是每个小时被 crond 执行一次，然后 anacron 再去检测相关的工作任务有没有被执行，如果有未完成的工作， 就执行该工作任务，执行完毕或无须执行任何工作时，anacron 就停止了。我们可以通过/etc/cron.d/0hourly的内容查看到
+# 每两个小时以root身份执行 /home/hello.sh 脚本
+0 */2 * * * root /home/hello.sh
 
 ```
-[root@zutuanxue ~]# cat /etc/cron.d/0hourly 
-# Run the hourly jobs
-SHELL=/bin/bash
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=root
-01 * * * * root run-parts /etc/cron.hourly
+
+### crontab 实例
+
+```bash
+# 实例 1：每 1 分钟执行一次 myCommand
+* * * * * myCommand
+
+# 实例 2：每小时的第 3 和第 15 分钟执行
+3,15 * * * * myCommand
+
+# 实例 3：在上午 8 点到 11 点的第 3 和第 15 分钟执行
+3,15 8-11 * * * myCommand
+
+# 实例 4：每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行
+3,15 8-11 */2  *  * myCommand
+
+# 实例 5：每周一上午 8 点到 11 点的第 3 和第 15 分钟执行
+3,15 8-11 * * 1 myCommand
+
+# 实例 6：每晚的 21:30 重启 smb
+30 21 * * * /etc/init.d/smb restart
+
+# 实例 7：每月 1、10、22 日的 4 : 45 重启 smb
+45 4 1,10,22 * * /etc/init.d/smb restart
+
+# 实例 8：每周六、周日的 1 : 10 重启 smb
+10 1 * * 6,0 /etc/init.d/smb restart
+
+# 实例 9：每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb
+0,30 18-23 * * * /etc/init.d/smb restart
+
+# 实例 10：每星期六的晚上 11 : 00 pm 重启 smb
+0 23 * * 6 /etc/init.d/smb restart
+
+# 实例 11：每一小时重启 smb
+* */1 * * * /etc/init.d/smb restart
+
+## 实例 12：晚上 11 点到早上 7 点之间，每隔一小时重启 smb
+0 23-7 * * * /etc/init.d/smb restart
 ```
-
-由于 anacron 默认会以一天、七天、一个月为期去检测系统未进行的 crontab 任务，因此对于某些特殊的使用环境非常有帮助。
-
-那么 anacron 又是怎么知道我们的系统何时关机？这就得要使用 anacron 读取的时间记录文件 (timestamps) 了！ anacron 会去分析现在的时间与时间记录文件所记载的上次执行 anacron 的时间，两者比较后若发现有差异， 那就是在某些时刻没有进行 crontab ！此时 anacron 就会开始执行未进行的 crontab 任务了！
-
-### anacron 与 /etc/anacrontab
-
-anacron 其实是一个程序并非一个服务！这个程序在系统当中已经加入 crontab 的工作！同时 anacron 会每个小时被主动执行一次！所以 anacron 的配置文件应该放置在 /etc/cron.hourly目录中
-
-```
-[root@zutuanxue ~]# cat /etc/cron.hourly/0anacron 
-#!/bin/sh
-# Check whether 0anacron was run today already
-.
-.
-.
-/usr/sbin/anacron -s
-实际上，也仅仅是执行anacron -s命令，这个命令会根据/etc/anacrontab文件的定义去执行各项工作
-```
-
-**anacrontab**
-
-```
-[root@zutuanxue ~]# cat /etc/anacrontab 
-# /etc/anacrontab: configuration file for anacron
-
-# See anacron(8) and anacrontab(5) for details.
-
-SHELL=/bin/sh
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=root
-# the maximal random delay added to the base delay of the jobs
-RANDOM_DELAY=45		#最大随机延迟时间，单位是分钟
-# the jobs will be started during the following hours only
-START_HOURS_RANGE=3-22	#仅执行延迟多少个小时之内的任务
-
-#period in days   delay in minutes   job-identifier   command
-1	5	cron.daily		nice run-parts /etc/cron.daily
-7	25	cron.weekly		nice run-parts /etc/cron.weekly
-@monthly 45	cron.monthly		nice run-parts /etc/cron.monthly
-间隔时间(天)	延迟时间(分钟)	工作名称	执行的内容
-```
-
-以 /etc/cron.daily/ 那一行的为例
-
-每隔一天，在开机后的第5分钟去执行cron.daily目录下的脚本

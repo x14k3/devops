@@ -38,6 +38,7 @@
   * 📄 [Zabbix分布式监控系统](siyuan://blocks/20231110105237-taf0gw1)
 * 📑 [ansible](siyuan://blocks/20231110105237-muwmeww)
 
+  * 📄 [Ansible tower](siyuan://blocks/20240303170126-6nakbdv)
   * 📄 [Ansible-playbook](siyuan://blocks/20231110105237-4387t74)
   * 📄 [Ansible-role](siyuan://blocks/20231110105237-636g4om)
   * 📄 [Ansible](siyuan://blocks/20231110105237-ir8wneo)

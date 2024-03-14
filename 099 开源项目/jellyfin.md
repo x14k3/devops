@@ -180,6 +180,6 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 
 ### 4.2 XMLTV 文件
 
-[http://epg.51zmt.top:8000/e.xml](http://epg.51zmt.top:8000/e.xml)
+[https://epg.112114.xyz/pp.xml](http://epg.51zmt.top:8000/e.xml)
 
 ‍

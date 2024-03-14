@@ -1,9 +1,12 @@
 # 010 Linux系统管理
 
-* 📄 [linux SElinux管理](siyuan://blocks/20231113140707-xu4su86)
+* 📑 [linux SElinux管理](siyuan://blocks/20231113140707-xu4su86)
+
+  * 📄 [1. SELinux 概述](siyuan://blocks/20240302134531-9cykhhh)
+  * 📄 [2. SELinux工作模式设置](siyuan://blocks/20240302135336-lj5dlkv)
+  * 📄 [3. SELinux安全上下文查看方法](siyuan://blocks/20240302135548-2rr5c2m)
 * 📑 [linux 其他](siyuan://blocks/20231110105237-8z6uwqe)
 
-  * 📄 [PS1 设置](siyuan://blocks/20240224200527-qxht0tn)
   * 📄 [VIM文本编辑器](siyuan://blocks/20231110105237-3z8uj1k)
   * 📄 [debian](siyuan://blocks/20240222220111-d5ji8sn)
   * 📄 [opensuse](siyuan://blocks/20231116170151-jolbixg)
@@ -55,23 +58,9 @@
   * 📄 [7. Linux su命令](siyuan://blocks/20231110105237-pveuo4k)
 * 📑 [linux 系统启动管理](siyuan://blocks/20231110105237-o72akll)
 
-  * 📄 [1. Linux系统启动流程（以CentOS 6为对象）](siyuan://blocks/20231113110518-c1yuvwf)
-  * 📄 [2. Linux BIOS开机自检简介](siyuan://blocks/20231113110644-8nm86dp)
-  * 📄 [3. 主引导目录（MBR）结构及作用详解](siyuan://blocks/20231113114957-t7cpvcz)
-  * 📄 [4. Linux内核（内核模块）的加载过程](siyuan://blocks/20231113115123-yjm27jr)
-  * 📄 [5. Linux sbininit初始化系统环境](siyuan://blocks/20231113115254-6weulsk)
-  * 📄 [6. Linux etcinittab：设置（修改）系统默认运行级别](siyuan://blocks/20231113115329-94pkbgv)
-  * 📄 [7. Linux etcrc.drc.local配置文件用法](siyuan://blocks/20231113133501-0qlympz)
-  * 📄 [8. Linux启动引导程序（GRUB）加载内核的过程](siyuan://blocks/20231113133857-998l68y)
-  * 📄 [9. Linux bootgrub目录分析](siyuan://blocks/20231113133933-264lyq4)
-  * 📄 [10. Linux GRUB磁盘分区表示法](siyuan://blocks/20231113134037-2jclhk5)
-  * 📄 [11. Linux bootgrubgrub.conf（GRUB配置文件）内容详解](siyuan://blocks/20231113134259-6di459v)
-  * 📄 [12. Linux多系统并存的GRUB配置文件内容分析](siyuan://blocks/20231113134653-gm0njwn)
-  * 📄 [13. Linux GRUB手动安装方法详解](siyuan://blocks/20231113134742-mb33xqn)
-  * 📄 [14. Linux GRUB加密方法详解（2种加密方式）](siyuan://blocks/20231113135214-uxzi2uv)
-  * 📄 [15. Linux字符界面调整分辨率的方法](siyuan://blocks/20231113135419-a0j57di)
-  * 📄 [16. Linux内核模块管理（查看、添加和删除）](siyuan://blocks/20231113135524-oim9q8e)
-  * 📄 [17. Linux NTFS文件系统安装教程](siyuan://blocks/20231113135859-5t3rf7g)
+  * 📄 [CentOS7系统启动流程分析](siyuan://blocks/20240312200721-8dlhfph)
+  * 📄 [linux 单用户模式](siyuan://blocks/20240308135222-dmx54af)
+  * 📄 [linux 救援模式](siyuan://blocks/20240308135705-p9clypp)
 * 📑 [linux 网络管理](siyuan://blocks/20231110105237-q0mg0iy)
 
   * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20231110105237-op3dz8u)

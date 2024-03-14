@@ -1,281 +1,152 @@
 # xargs
 
-​`xargs`​是 Unix 系统的一个很有用的命令，但是常常被忽视，很多人不了解它的用法。
+xargs可以将stdin中以空格或换行符进行分隔的数据，形成以空格分隔的参数（arguments），传递给其他命令。因为以空格作为分隔符，所以有一些文件名或者其他意义的字符串内含有空格的时候，xargs可能会误判。简单来说，xargs的作用是给其他命令传递参数，是构建单行命令的重要组件之一。
+
+之所以要用到xargs，是因为很多命令不支持使用管道|来传递参数，例如：
+
+```shell
+$ find /sbin -perm +700 | ls -l
+$ find /sbin -perm +700 | xargs ls -l
+```
+
+### 命令格式
+
+```shell
+xargs [OPTIONS] [COMMAND]
+```
+
+### 选项说明
+
+注意，长选项的强制性参数对于短选项也是强制的。
+
+```bash
+-0, --null
+#如果输入的stdin含有特殊字符，例如反引号 `、反斜杠 \、空格等字符时，xargs将它还原成一般字符。为默认选项
+-a, --arg-file=FILE
+#从指定的文件FILE中读取输入内容而不是从标准输入
+-d, --delimiter=DEL
+#指定xargs处理输入内容时的分隔符。xargs处理输入内容默认是按空格和换行符作为分隔符，输出arguments时按空格分隔
+-E EOF_STR
+#EOF_STR是end of file string，表示输入的结束
+-e, --eof[=EOF_STR]
+#作用等同于 -E 选项，与 -E 选项不同时，该选项不符合POSIX标准且EOF_STR不是强制的。如果没有EOF_STR则表示输入没有结束符
+-I REPLACE_STR
+#将xargs输出的每一项参数单独赋值给后面的命令，参数需要用指定的替代字符串REPLACE_STR代替。REPLACE_STR可以使用{} $ @ 等符号，其主要作用是当xargs command后有多个参数时，调整参数位置。
+例如备份以 txt 为后缀的文件：find . -name "*.txt" | xargs -I {} cp {} /tmp/{}.bak
+-i, --replace[=REPLACE_STR]
+#作用同 -I 选项，参数 REPLACE_STR 是可选的，缺省为 {}。建议使用 -I 选项，因为其符合 POSIX
+-L MAX_LINES
+#限定最大输入行数。隐含了 -x 选项
+-l, --max-lines[=MAX_LINES]
+#作用同 -L 选项，参数 MAX_LINES 是可选的，缺省为 1。建议使用 -L 选项，因为其符合 POSIX 标准
+-n, --max-args=MAX_ARGS
+#表示命令在执行的时候一次使用参数的最大个数
+-o, --open-tty
+#在执行命令之前，在子进程中重新打开stdin作为/dev/TTY。如果您希望xargs运行交互式应用程序，这是非常有用的
+-P, --max-procs=MAX_PROCS
+#每次运行最大进程；缺省值为 1。如果MAX_PROCS为 0，xargs将一次运行尽可能多的进程。一般和-n或-L选项一起使用
+-p, --interactive
+#当每次执行一个argument的时候询问一次用户
+--process-slot-var=NAME
+#将指定的环境变量设置为每个正在运行的子进程中的唯一值。一旦子进程退出，将重用该值。例如，这可以用于初始负荷分配方案
+-r, --no-run-if-empty
+#当 xargs 的输入为空的时候则停止xargs，不用再去执行后面的命令了。为默认选项
+-s, --max-chars=MAX_CHARS
+#命令行的最大字符数，指的是xargs后面那个命令的最大命令行字符数，包括命令、空格和换行符。每个参数单独传入xargs后面的命令
+--show-limits
+#显示操作系统对命令行长度的限制
+-t， --verbose
+#先打印命令到标准错误输出，然后再执行
+-x, --exit
+#配合 -s 使用，当命令行字符数大于 -s 指定的数值时，退出 xargs
+--help
+#显示帮助信息并退出
+--version
+#显示版本信息并退出
+```
+
+### 常用示例
+
+#### 1.将shell的特殊字符反引号还原成一般字符
+
+```shell
+$ echo '`0123`4 56789' | xargs -t echo
+echo `0123`4 56789
+`0123`4 56789
+```
+
+如果直接进行如下操作，会报无法找到命令 01234 的错误，因为反引号在 Shell 中会将 01234 作为一个命令来执行，但是 01234 不是一个命令。-t 表示先打印命令，然后再执行。
+
+```shell
+$ echo `01234` 56789
+-bash: 01234: command not found
+56789
+```
+
+#### 2.设置 xargs 读入参数时的结束标识，以逗号结束。这里要注意结束标志必须要是单独的字段，即以空格或者换行符分隔的字段。
+
+```shell
+$ echo 01234 , 56789 | xargs -E ","
+01234
+```
+
+#### 3.使用 rm、mv 等命令同时操作多个文件时，有时会报 “argument list too long” 参数列表过长的错误，此时可以使用 xargs 来解决。xargs 将标准输入的字符串分隔后，作为参数传递给后面的命令。例如，给当前目录的所有文件添加后缀名。
+
+```shell
+$ ls | xargs -t -i mv {} {}.bak
+
+# 选择符合条件的文件
+$ ls | grep -E "201701|201702|201703" | xargs -I {} mv {} {}.bak
+```
+
+#### 4.设置命令行的最大字符数。参数默认一个一个单独传入命令中执行。
+
+```shell
+$ echo "01234 56789" | xargs -t -s 11
+echo 01234
+01234
+echo 56789
+56789
+```
 
-​​
+#### 5.设置标准输入中每次多少行作为命令的参数，默认是将标准输入中所有行的归并到一行一次性传给命令执行。
 
-## 一、标准输入与管道命令
+```shell
+$ echo -e "01234\n56789\n01234" | xargs -t -L 2 echo
+echo 01234 56789
+01234 56789
+echo 01234
+01234
+```
 
-Unix 命令都带有参数，有些命令可以接受"标准输入"（stdin）作为参数。
+#### 6.将文件内容以空格分隔合并为一行输出。将文件内容以空格分隔合并为一行输出。
 
-> ```
->
-> $ cat /etc/passwd | grep root
-> ```
+```shell
+# 列出文件内容
+$ cat test.txt
+a b c d e
+f g h i j
+k l m n o
 
-上面的代码使用了管道命令（`|`​）。管道命令的作用，是将左侧命令（`cat /etc/passwd`​）的标准输出转换为标准输入，提供给右侧命令（`grep root`​）作为参数。
+# 多行输入合并为一行输出
+$ cat test.txt | xargs
+a b c d e f g h i j k l m n o
+```
 
-因为`grep`​命令可以接受标准输入作为参数，所以上面的代码等同于下面的代码。
+#### 7.与ps、grep、awk和kill结合，强制终止指定进程。
 
-> ```
->
-> $ grep root /etc/passwd
-> ```
+```shell
+$ ps -ef | grep nginx | grep -v grep | awk '{printf "%s ",$2}' | xargs kill -9
+```
 
-但是，大多数命令都不接受标准输入作为参数，只能直接在命令行输入参数，这导致无法用管道命令传递参数。举例来说，`echo`​命令就不接受管道传参。
+​`ps -ef|grep nginx`​用于查找包含`nginx`​的进程，`awk '{printf "%s ",$2,FNR}`​将目标进程 ID 打印输出，`xargs kill -9`​则将目标进程 ID 作为参数传递给`kill -9`​用于杀死进程。
 
-> ```
->
-> $ echo "hello world" | echo
-> ```
+‍
 
-上面的代码不会有输出。因为管道右侧的`echo`​不接受管道传来的标准输入作为参数。
+## | xargs exec 区别
 
-## 二、xargs 命令的作用
+* |          用来将前一个命令的标准输出传递到下一个命令的标准输入
+* xargs   将前一个命令的标准输出传递给下一个命令，作为它的参数,而不是标准输入。
+* exec     所有匹配到的文件一起传递给exec执行,xargs命令每次只获取一部分文件而不是全部
 
-​`xargs`​命令的作用，是将标准输入转为命令行参数。
-
-> ```
->
-> $ echo "hello world" | xargs echo
-> hello world
-> ```
-
-上面的代码将管道左侧的标准输入，转为命令行参数`hello world`​，传给第二个`echo`​命令。
-
-​`xargs`​命令的格式如下。
-
-> ```
->
-> $ xargs [-options] [command]
-> ```
-
-真正执行的命令，紧跟在`xargs`​后面，接受`xargs`​传来的参数。
-
-​`xargs`​的作用在于，大多数命令（比如`rm`​、`mkdir`​、`ls`​）与管道一起使用时，都需要`xargs`​将标准输入转为命令行参数。
-
-> ```
->
-> $ echo "one two three" | xargs mkdir
-> ```
-
-上面的代码等同于`mkdir one two three`​。如果不加`xargs`​就会报错，提示`mkdir`​缺少操作参数。
-
-## 三、xargs 的单独使用
-
-​`xargs`​后面的命令默认是`echo`​。
-
-> ```
->
-> $ xargs
-> # 等同于
-> $ xargs echo
-> ```
-
-大多数时候，`xargs`​命令都是跟管道一起使用的。但是，它也可以单独使用。
-
-输入`xargs`​按下回车以后，命令行就会等待用户输入，作为标准输入。你可以输入任意内容，然后按下`Ctrl d`​，表示输入结束，这时`echo`​命令就会把前面的输入打印出来。
-
-> ```
->
-> $ xargs
-> hello (Ctrl + d)
-> hello
-> ```
-
-再看一个例子。
-
-> ```
->
-> $ xargs find -name
-> "*.txt"
-> ./foo.txt
-> ./hello.txt
-> ```
-
-上面的例子输入`xargs find -name`​以后，命令行会等待用户输入所要搜索的文件。用户输入`"*.txt"`​，表示搜索当前目录下的所有 TXT 文件，然后按下`Ctrl d`​，表示输入结束。这时就相当执行`find -name *.txt`​。
-
-## 四、-d 参数与分隔符
-
-默认情况下，`xargs`​将换行符和空格作为分隔符，把标准输入分解成一个个命令行参数。
-
-> ```
->
-> $ echo "one two three" | xargs mkdir
-> ```
-
-上面代码中，`mkdir`​会新建三个子目录，因为`xargs`​将`one two three`​分解成三个命令行参数，执行`mkdir one two three`​。
-
-​`-d`​参数可以更改分隔符。
-
-> ```
->
-> $ echo -e "a\tb\tc" | xargs -d "\t" echo
-> a b c
-> ```
-
-上面的命令指定制表符`\t`​作为分隔符，所以`a\tb\tc`​就转换成了三个命令行参数。`echo`​命令的`-e`​参数表示解释转义字符。
-
-## 五、-p 参数，-t 参数
-
-使用`xargs`​命令以后，由于存在转换参数过程，有时需要确认一下到底执行的是什么命令。
-
-​`-p`​参数打印出要执行的命令，询问用户是否要执行。
-
-> ```
->
-> $ echo 'one two three' | xargs -p touch
-> touch one two three ?...
-> ```
-
-上面的命令执行以后，会打印出最终要执行的命令，让用户确认。用户输入`y`​以后（大小写皆可），才会真正执行。
-
-​`-t`​参数则是打印出最终要执行的命令，然后直接执行，不需要用户确认。
-
-> ```
->
-> $ echo 'one two three' | xargs -t rm
-> rm one two three
-> ```
-
-## 六、-0 参数与 find 命令
-
-由于`xargs`​默认将空格作为分隔符，所以不太适合处理文件名，因为文件名可能包含空格。
-
-​`find`​命令有一个特别的参数`-print0`​，指定输出的文件列表以`null`​分隔。然后，`xargs`​命令的`-0`​参数表示用`null`​当作分隔符。
-
-> ```
->
-> $ find /path -type f -print0 | xargs -0 rm
-> ```
-
-上面命令删除`/path`​路径下的所有文件。由于分隔符是`null`​，所以处理包含空格的文件名，也不会报错。
-
-还有一个原因，使得`xargs`​特别适合`find`​命令。有些命令（比如`rm`​）一旦参数过多会报错"参数列表过长"，而无法执行，改用`xargs`​就没有这个问题，因为它对每个参数执行一次命令。
-
-> ```
->
-> $ find . -name "*.txt" | xargs grep "abc"
-> ```
-
-上面命令找出所有 TXT 文件以后，对每个文件搜索一次是否包含字符串`abc`​。
-
-## 七、-L 参数
-
-如果标准输入包含多行，`-L`​参数指定多少行作为一个命令行参数。
-
-> ```
->
-> $ xargs find -name
-> "*.txt"   
-> "*.md"
-> find: paths must precede expression: `*.md'
-> ```
-
-上面命令同时将`"*.txt"`​和`*.md`​两行作为命令行参数，传给`find`​命令导致报错。
-
-使用`-L`​参数，指定每行作为一个命令行参数，就不会报错。
-
-> ```
->
-> $ xargs -L 1 find -name
-> "*.txt"
-> ./foo.txt
-> ./hello.txt
-> "*.md"
-> ./README.md
-> ```
-
-上面命令指定了每一行（`-L 1`​）作为命令行参数，分别运行一次命令（`find -name`​）。
-
-下面是另一个例子。
-
-> ```
->
-> $ echo -e "a\nb\nc" | xargs -L 1 echo
-> a
-> b
-> c
-> ```
-
-上面代码指定每行运行一次`echo`​命令，所以`echo`​命令执行了三次，输出了三行。
-
-## 八、-n 参数
-
-​`-L`​参数虽然解决了多行的问题，但是有时用户会在同一行输入多项。
-
-> ```
->
-> $ xargs find -name
-> "*.txt" "*.md"
-> find: paths must precede expression: `*.md'
-> ```
-
-上面的命令将同一行的两项作为命令行参数，导致报错。
-
-​`-n`​参数指定每次将多少项，作为命令行参数。
-
-> ```
->
-> $ xargs -n 1 find -name
-> ```
-
-上面命令指定将每一项（`-n 1`​）标准输入作为命令行参数，分别执行一次命令（`find -name`​）。
-
-下面是另一个例子。
-
-> ```
->
-> $ echo {0..9} | xargs -n 2 echo
-> 0 1
-> 2 3
-> 4 5
-> 6 7
-> 8 9
-> ```
-
-上面命令指定，每两个参数运行一次`echo`​命令。所以，10个阿拉伯数字运行了五次`echo`​命令，输出了五行。
-
-## 九、-I 参数
-
-如果`xargs`​要将命令行参数传给多个命令，可以使用`-I`​参数。
-
-​`-I`​指定每一项命令行参数的替代字符串。
-
-> ```
->
-> $ cat foo.txt
-> one
-> two
-> three
->
-> $ cat foo.txt | xargs -I file sh -c 'echo file; mkdir file'
-> one 
-> two
-> three
->
-> $ ls 
-> one two three
-> ```
-
-上面代码中，`foo.txt`​是一个三行的文本文件。我们希望对每一项命令行参数，执行两个命令（`echo`​和`mkdir`​），使用`-I file`​表示`file`​是命令行参数的替代字符串。执行命令时，具体的参数会替代掉`echo file; mkdir file`​里面的两个`file`​。
-
-## 十、--max-procs 参数
-
-​`xargs`​默认只用一个进程执行命令。如果命令要执行多次，必须等上一次执行完，才能执行下一次。
-
-​`--max-procs`​参数指定同时用多少个进程并行执行命令。`--max-procs 2`​表示同时最多使用两个进程，`--max-procs 0`​表示不限制进程数。
-
-> ```
->
-> $ docker ps -q | xargs -n 1 --max-procs 0 docker kill
-> ```
-
-上面命令表示，同时关闭尽可能多的 Docker 容器，这样运行速度会快很多。
-
-## 十一、参考链接
-
-* [Linux and Unix xargs command tutorial with examples](https://shapeshed.com/unix-xargs/), George Ornbo
-* [8 Practical Examples of Linux Xargs Command for Beginners](https://www.howtoforge.com/tutorial/linux-xargs-command/), Himanshu Arora
-
-（完）
+‍

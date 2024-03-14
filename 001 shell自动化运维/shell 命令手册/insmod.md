@@ -4,7 +4,7 @@
 
 lsmod
 
-rmmod
+((20240227111338-zrimqi8 'rmmod'))
 
 modprobe与insmod的区别
 
