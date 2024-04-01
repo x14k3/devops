@@ -171,3 +171,7 @@ reboot -f
 ---
 
 ‍
+
+## Debian/Ubuntu
+
+‍

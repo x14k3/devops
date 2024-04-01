@@ -1,5 +1,30 @@
 # mysql 常见问题处理
 
+‍
+
+## 忘记root密码
+
+```sql
+------------------- 修改用户密码 -------------------
+--- 5.7版本
+update mysql.user set password='newpassword' where user='root';
+--- 8.0以上版本 需要指定密码认证方式
+alter user 'root'@'%' identified with mysql_native_password by 'Ninestar@2021';
+flush privileges;
+
+------------------- 跳过密码验证 -------------------
+--1.关闭数据库，修改配置文件 vim /etc/my.cnf
+--2.添加：跳过权限验证 skip-grant-tables
+--3.重启数据库，空密码即可登录
+--4.修改密码
+--5.还原my.cnf
+--6.重启数据库
+```
+
+‍
+
+‍
+
 ## mysqldump解决 DEFINER 问题
 
 项目上 MySQL 还原 SQL 备份 经常会碰到一个错误如下，且通常出现在导入视图、函数、存储过程事件等对象时，其根本原因就是因为 *导入时所用账号* 并不具有 SUPER 权限，所以无法创建 *其他账号* 的所属对象。

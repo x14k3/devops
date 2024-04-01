@@ -2,35 +2,40 @@
 
 * 📄 [Oracle11g 静默安装](siyuan://blocks/20240111154537-q08w3dz)
 * 📄 [Oracle19c 静默安装](siyuan://blocks/20231110105237-i3wbtoj)
-* 📑 [Oracle CDP](siyuan://blocks/20240307185827-esjiait)
+* 📑 [Oracle CDB](siyuan://blocks/20240307185827-esjiait)
 
-  * 📄 [CDP 概念](siyuan://blocks/20231110105237-oul69f4)
+  * 📄 [CDB 概念](siyuan://blocks/20231110105237-oul69f4)
   * 📄 [安装 CDB 数据库](siyuan://blocks/20240307190646-a9t9z2t)
-  * 📄 [管理 CDP 数据库](siyuan://blocks/20240307190744-4b4qm6l)
+  * 📄 [管理 CDB 数据库](siyuan://blocks/20240307190744-4b4qm6l)
 * 📑 [Oracle DataGuard](siyuan://blocks/20231110105237-prfvvi6)
 
   * 📄 [1. Oracle Dataguard 介绍](siyuan://blocks/20231110105237-nvvzb3i)
-  * 📄 [2. 19c单机DB+单实例DG--1](siyuan://blocks/20231110105237-iwop2dy)
-  * 📄 [3. 19c单机DB+单实例DG--2](siyuan://blocks/20231110105237-2dg3i74)
-* 📄 [Oracle GoldenGate](siyuan://blocks/20231110105237-qatg4mk)
+  * 📄 [2. Oracle Dataguard 搭建](siyuan://blocks/20231110105237-iwop2dy)
+* 📑 [Oracle GoldenGate](siyuan://blocks/20231110105237-qatg4mk)
+
+  * 📄 [Oracle GoldenGate 介绍](siyuan://blocks/20240315212632-pq75ki0)
 * 📄 [Oracle OMF](siyuan://blocks/20231110105237-1muwt5l)
 * 📑 [Oracle RAC](siyuan://blocks/20240131124129-vrz21zl)
 
   * 📄 [1. Oracle RAC 介绍](siyuan://blocks/20240131124219-qt7whoo)
   * 📄 [2. Oracle rac集群中的IP类型简介](siyuan://blocks/20240131170055-hv17otm)
-  * 📄 [3. Oracle19c 静默安装RAC](siyuan://blocks/20240130214424-vl6pjpb)
+  * 📄 [3. Oracle19c RAC-ASM部署](siyuan://blocks/20240130214424-vl6pjpb)
   * 📄 [4. Oracle RAC 集群 crsctl 常用命令](siyuan://blocks/20240131173132-9tt486e)
+* 📄 [Oracle RMAN](siyuan://blocks/20231110105237-b95b8d3)
 * 📄 [Oracle 体系结构](siyuan://blocks/20231110105237-0ngto5m)
 * 📄 [Oracle 内存管理](siyuan://blocks/20231110105237-eh86m8g)
 * 📄 [Oracle 常用语句](siyuan://blocks/20231110105237-4d46t04)
-* 📄 [Oracle 数据异机恢复](siyuan://blocks/20231110105237-o1b43ni)
-* 📄 [Oracle 数据恢复](siyuan://blocks/20231110105237-dqhx1fc)
+* 📑 [Oracle 数据恢复](siyuan://blocks/20231110105237-dqhx1fc)
+
+  * 📄 [Oracle控制文件和redo丢失恢复](siyuan://blocks/20240314202343-2ltra1l)
+  * 📄 [RMAN 备份还原](siyuan://blocks/20231110105237-o1b43ni)
+  * 📄 [利用redo log实现故障恢复](siyuan://blocks/20240314202200-wj05sdt)
 * 📄 [Oracle 数据泵](siyuan://blocks/20231110105237-olz151u)
 * 📑 [Oracle 日志归档和闪回区](siyuan://blocks/20231110105237-8m376yh)
 
   * 📄 [Oracle之重做日志（Redo Log）归档](siyuan://blocks/20240314095026-czk7wdz)
   * 📄 [Oracle之重做日志（Redo Log）管理](siyuan://blocks/20240314092307-3c0eicl)
-  * 📄 [Oralce之闪回区](siyuan://blocks/20240314095055-cio122a)
+  * 📄 [Oracle之闪回区](siyuan://blocks/20240314095055-cio122a)
 * 📑 [Oracle 配置详解](siyuan://blocks/20231110105237-3rvwxhs)
 
   * 📄 [listener.ora 详解](siyuan://blocks/20231110105237-5d8jkrr)
@@ -48,7 +53,6 @@
   * 📄 [将11g数据库插入到12c成为pdb](siyuan://blocks/20240227181134-s2mb9z8)
   * 📄 [报错日志目录](siyuan://blocks/20240227181152-b6xmjgw)
 * 📄 [Oralce 基础概念](siyuan://blocks/20240106163022-r6d6dnh)
-* 📄 [RMAN 备份策略](siyuan://blocks/20231110105237-b95b8d3)
 
 * 📄 [Oracle11g 静默安装](siyuan://blocks/20240111154537-q08w3dz)
 * 📄 [Oracle19c 静默安装](siyuan://blocks/20231110105237-i3wbtoj)

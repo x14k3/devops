@@ -5,7 +5,7 @@
 1. 开启该功能会简化DBA的日常操作
 2. 开启后Oracle会按照规则自动生成唯一的文件名
 3. 当文件不再需要时Oracle会自动删除
-4. 数据库可对如下数据库结构启用该功能
+4. **OMF支持下列文件的自动管理**
    - 表空间(Tablespaces)
    - 重做日志(Redo log files)
    - 控制文件(Control files)
@@ -21,22 +21,24 @@
 3. 减少建立测试和开发环境耗费的时间
 4. 会自动删除不需要的文件而不用担心删除错误，减少服务器空间的浪费
 
-*启动OMF的初始化参数如下表:*
+‍
+
+使用OMF前提条件:必须设置3个相关参数。分别如下：
 
 |初始化参数|描述|
-| ---------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------|
+| -----------------------------| ---------------------------------------------------------------------------------------------------------------------------|
 |DB_CREATE_FILE_DEST|用于确定创建datafiles,tempfiles文件缺省路径，如果未指定 DB_CREATE_ONLINE_LOG_DEST_n，也用作重做日志和控制文件的默认位置。|
 |DB_CREATE_ONLINE_LOG_DEST_n|用于确定创建重做日志和控制文件缺省路径。 通过更改 n，您可以多次使用此初始化参数，您最多可以指定五个多路复用副本。|
-|DB_RECOVERY_FILE_DEST|指定闪回恢复区路径，在数据库未使用格式选项时创建RMAN备份、归档日志、以及闪回日志。 如果未指定 DB_CREATE_ONLINE_LOG_DEST_n，也用作重做日志和控制文件|
+|DB_RECOVERY_FILE_DEST|指定闪回恢复区路径，在数据库未使用格式选项时创建RMAN备份、归档日志、以及闪回日志。|
 
 ```sql
 -- 设置DB_CREATE_FILE_DEST
-ALTER SYSTEM SET DB_CREATE_FILE_DEST = '/data/oradata';
+ALTER SYSTEM SET DB_CREATE_FILE_DEST = '/data/ora_data';
 -- 设置DB_CREATE_ONLINE_LOG_DEST_n
-ALTER SYSTEM SET DB_CREATE_ONLINE_LOG_DEST_1 = '/data/redolog';
+ALTER SYSTEM SET DB_CREATE_ONLINE_LOG_DEST_1 = '/data/ora_redolog';
 --设置DB_RECOVERY_FILE_DEST
 ALTER SYSTEM SET DB_RECOVERY_FILE_DEST_SIZE = 10G;
-ALTER SYSTEM SET DB_RECOVERY_FILE_DEST = '/data/recover';
+ALTER SYSTEM SET DB_RECOVERY_FILE_DEST = '/data/ora_recover';
 ALTER SYSTEM SET LOG_ARCHIVE_DEST_1 = 'LOCATION=USE_DB_RECOVERY_FILE_DEST';
 ```
 
@@ -44,8 +46,18 @@ ALTER SYSTEM SET LOG_ARCHIVE_DEST_1 = 'LOCATION=USE_DB_RECOVERY_FILE_DEST';
 
 **格式为：**
 
-- 数据文件：`OMF路径/ORACLE_SID/datafile/`
-- 日志文件：`OMF路径/ORACLE_SID/onlinelog/`
+* 数据文件：`OMF路径/ORACLE_SID/datafile/`​
+* 日志文件：`OMF路径/ORACLE_SID/onlinelog/`​
+
+omf文件的命名规则:
+
+​`dest_参数路径/db_unique_name_or_db_name/datafile/o1_mf_%t_%u_.dbf`​
+
+位置优先级:
+
+​`control_files初始化参数 > db_create_online_log_dest_n > db_recovery_file_dest >= db_create_file_dest`​
+
+此处的等于号比较有意思：如果没有db_create_online_log_dest_n,而存在db_create_file_dest时，db_recovery_file_dest就相当于db_create_online_log_dest_2，db_create_file_dest则相当于db_create_online_log_dest_1
 
 ## 使用OMF为表空间创建数据文件
 

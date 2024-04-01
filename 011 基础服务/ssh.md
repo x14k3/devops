@@ -80,30 +80,6 @@ echo -e "\n\e[1;36m  SSH password-free configuration completed. \e[0m"
 
 ‍
 
-‍
-
-‍
-
-‍
-
-## ssh 安全加固
-
-​`vim /etc/ssh/sshd_config`​
-
-```bash
-# 禁止使用密码登录  
-PasswordAuthentication no
-# 禁止使用root远程登陆
-PermitRootLogin no
-# 客户端一般是动态IP 可以禁用UseDNS
-UseDNS no
-
-#重新加载sshd
-systemctl restart sshd
-```
-
-‍
-
 ## ssh 服务相关命令
 
 ### scp 安全的远程文件复制目录

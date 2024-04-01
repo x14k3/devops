@@ -53,6 +53,7 @@
   * 📄 [mkisofs](siyuan://blocks/20231121220044-gmhlmvl)
   * 📄 [modprobe](siyuan://blocks/20231110105237-edx85nc)
   * 📄 [mount](siyuan://blocks/20231110105237-ou6v8gy)
+  * 📄 [nc](siyuan://blocks/20240314200041-l7hgq6t)
   * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
   * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
   * 📄 [sar](siyuan://blocks/20231110105237-i8nelud)
@@ -65,6 +66,7 @@
   * 📄 [tr](siyuan://blocks/20231110105237-6jszkwd)
   * 📄 [traceroute](siyuan://blocks/20231110105237-ej1qj6t)
   * 📄 [ulimit](siyuan://blocks/20231110105237-an7nqoh)
+  * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
   * 📄 [xargs](siyuan://blocks/20240310214023-7u1yfg6)
   * 📄 [yum](siyuan://blocks/20231110105237-70luvz1)
   * 📄 [zypper](siyuan://blocks/20231110105237-p2r21wy)
@@ -79,6 +81,7 @@
   * 📄 [shell xargs &amp; exec](siyuan://blocks/20240311213637-qjfcdjg)
   * 📄 [shell 中提取文件名和路径](siyuan://blocks/20240311212631-yfd6fnw)
   * 📄 [shell 函数 ](siyuan://blocks/20240313201900-3ymsesd)
+  * 📄 [shell 命令小技巧](siyuan://blocks/20240401205118-mbui0qx)
   * 📄 [shell 循环](siyuan://blocks/20240311213324-gg0arab)
   * 📄 [shell 数组](siyuan://blocks/20240313201144-ecnv9tp)
   * 📄 [shell中使用read命令接收键盘输入 ](siyuan://blocks/20240311213556-98wlhl1)
@@ -102,6 +105,7 @@
   * 📄 [文件编码转换utf-8](siyuan://blocks/20231110105237-z37ucwa)
   * 📄 [日志压缩清理](siyuan://blocks/20231110105237-19v44ru)
   * 📄 [服务器初始化脚本](siyuan://blocks/20231110105237-r6ouwkk)
+* 📄 [vim 小技巧](siyuan://blocks/20240401212502-r3thxqt)
 * 📄 [正则表达式](siyuan://blocks/20231110105237-eua2g71)
 
 ‍

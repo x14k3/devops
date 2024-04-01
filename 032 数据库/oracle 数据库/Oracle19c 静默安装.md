@@ -51,12 +51,10 @@ useradd -u 200 -g oinstall -G dba,oper,backupdba,dgdba,kmdba,racdba oracle && ec
 #useradd -u 200 -g oinstall -G dba,oper,backupdba,dgdba,kmdba,racdba oracle && echo "oracle:Ninestar123" | chpasswd 
 
 #创建目录
-mkdir -p /data/u01/app/oracle/product/19.3.0/db_1
-chmod -R 755 /data/u01/
-mkdir -p /data/u01/app/oraInventory/
-mkdir -p /data/oradata/
-chown -R oracle:oinstall /data/u01/
-chown -R oracle:oinstall /data/oradata/
+mkdir -p /u01/app/oracle/product/19.3.0/db_1
+mkdir -p /u01/app/oraInventory
+mkdir -p /u01/ora_data
+chmod -R 755 /u01 && chown -R oracle:oinstall /u01
 
 #内核优化sysctl.conf
 cat >>/etc/sysctl.conf <<EOF
@@ -125,10 +123,10 @@ EOF
 cat  >> /home/oracle/.bash_profile <<EOF
 export EDITOR=vi
 export ORACLE_SID=orcl
-export ORACLE_BASE=/data/u01/app/oracle
-export ORACLE_HOME=/data/u01/app/oracle/product/19.3.0/db_1
-export LD_LIBRARY_PATH=/data/u01/app/oracle/product/19.3.0/db_1/lib
-export PATH=/data/u01/app/oracle/product/19.3.0/db_1/bin:$PATH
+export ORACLE_BASE=/u01/app/oracle
+export ORACLE_HOME=/u01/app/oracle/product/19.3.0/db_1
+export LD_LIBRARY_PATH=/u01/app/oracle/product/19.3.0/db_1/lib
+export PATH=/u01/app/oracle/product/19.3.0/db_1/bin:$PATH
 export ORACLE_TERM=xterm
 export TEMP=/tmp
 export TMPDIR=/tmp
@@ -164,7 +162,7 @@ zypper in -y vim unzip net-tools gcc bc binutils glibc glibc-devel insserv-compa
 
 ```bash
 # 解压oracle安装包到 ORACLE_HOME 目录
-unzip -d /data/u01/app/oracle/product/19.3.0/db_1/  /opt/Silence_193000_Linux-x86-64.zip
+unzip -d /u01/app/oracle/product/19.3.0/db_1/  /opt/Silence_193000_Linux-x86-64.zip
 ```
 
 ### 2. 静默安装数据库
@@ -176,13 +174,13 @@ chown -R oracle:oinstall /data/u01/   #修改目录拥有者
 su - oracle                           #切换到oracle用户
 source /home/oracle/.bash_profile     #导入环境变量
 # 执行静默安装数据库软件
-/data/u01/app/oracle/product/19.3.0/db_1/runInstaller -ignorePreReqs -silent \
+/u01/app/oracle/product/19.3.0/db_1/runInstaller -ignorePreReqs -silent \
 oracle.install.option=INSTALL_DB_SWONLY \
 UNIX_GROUP_NAME=oinstall \
-INVENTORY_LOCATION=/data/u01/app/oraInventory \
+INVENTORY_LOCATION=/u01/app/oraInventory \
 SELECTED_LANGUAGES=en,zh_CN \
-ORACLE_HOME=/data/u01/app/oracle/product/19.3.0/db_1 \
-ORACLE_BASE=/data/u01/app/oracle \
+ORACLE_HOME=/u01/app/oracle/product/19.3.0/db_1 \
+ORACLE_BASE=/u01/app/oracle \
 oracle.install.db.InstallEdition=EE \
 oracle.install.db.OSDBA_GROUP=dba \
 oracle.install.db.OSOPER_GROUP=oper \
@@ -194,8 +192,8 @@ oracle.install.db.config.starterdb.installExampleSchemas=false \
 oracle.install.db.rootconfig.executeRootScript=false
 
 exit;  #切换回root用户
-/data/u01/app/oraInventory/orainstRoot.sh
-/data/u01/app/oracle/product/19.3.0/db_1/root.sh
+/u01/app/oraInventory/orainstRoot.sh
+/u01/app/oracle/product/19.3.0/db_1/root.sh
 ```
 
 ### 3. 静默创建数据库实例
@@ -207,8 +205,8 @@ exit;  #切换回root用户
 
 ```bash
 # 创建数据目录和日志归档目录
-mkdir -p /data/oradata/ data/archivelog/fmsdb
-chown -R oracle.oinstall /data/oradata/ data/archivelog/fmsdb
+mkdir -p /u01/ora_data/ /u01/ora_arch/orcl
+chown -R oracle.oinstall /u01
 # 切换到oracle用户
 su - oracle
 # 静默创建数据库
@@ -217,10 +215,10 @@ dbca -silent -ignorePreReqs -ignorePrereqFailure -createDatabase \
 -templateName General_Purpose.dbc \
 -gdbname fmsdb -sid fmsdb \
 -sysPassword Ninestar2022 -systemPassword Ninestar2022 -dbsnmpPassword Ninestar2022 \
--datafileDestination '/data/oradata' \
+-datafileDestination '/u01/ora_data' \
 -characterset ZHS16GBK \
 -enableArchive true \
--archiveLogDest '/data/archivelog/fmsdb' \
+-archiveLogDest '/u01/ora_arch/orcl' \
 -totalMemory 8192
 
 # 日志路径：
@@ -238,7 +236,7 @@ dbca -silent -ignorePreReqs -ignorePrereqFailure -createDatabase \
 -createAsContainerDatabase true \
 -gdbname orcl -sid orcl \
 -sysPassword Ninestar2022 -systemPassword Ninestar2022 -dbsnmpPassword Ninestar2022 \
--datafileDestination '/data/oradata' -recoveryAreaDestination '/data/oraback' \
+-datafileDestination '/u01/ora_data' \
 -characterset ZHS16GBK \
 -totalMemory 8192
 ```
@@ -255,7 +253,7 @@ dbca -silent -ignorePreReqs -ignorePrereqFailure -createDatabase \
 -pdbAdminPassword Ninestar2022 \
 -gdbname orcl -sid orcl \
 -sysPassword Ninestar2022 -systemPassword Ninestar2022 -dbsnmpPassword Ninestar2022 \
--datafileDestination '/data/oradata' -recoveryAreaDestination '/data/oraback' \
+-datafileDestination '/u01/ora_data' \
 -characterset ZHS16GBK \
 -totalMemory 8192
 ```
@@ -299,26 +297,26 @@ dbca -silent -ignorePreReqs  -ignorePrereqFailure  -createDatabase \
 - 每个参数的含义如下所示
 
 ```bash
--gdbname #全局数据库名
--sid     # 数据库SID，sid和gdbname保持一致
--sysPassword    # 数据库sys密码
--systemPassword # 数据库system密码
--sysmanPassword # 数据库sysman密码
+-gdbname          #全局数据库名
+-sid              # 数据库SID，sid和gdbname保持一致
+-sysPassword      # 数据库sys密码
+-systemPassword   # 数据库system密码
+-sysmanPassword   # 数据库sysman密码
 -createAsContainerDatabase # 是否创建CDB，true为创建CDB 
--numberOfPDBs   # 创建PDB的数量 
--pdbName   # PDB名字，如果创建多个PDB，该名字为前缀名 
+-numberOfPDBs     # 创建PDB的数量 
+-pdbName          # PDB名字，如果创建多个PDB，该名字为前缀名 
 -pdbAdminPassword # PDB管理员密码
 -datafileDestination # 数据库数据文件的位置，若是磁盘组则写磁盘组名，例如：'**DATA/**'，若是文件系统就写具体路径，例如：'/u01/app/oracle'，需要注意的是，由于数据文件路径会自动加上数据库名，所以，这里不用加数据库名
 -recoveryAreaDestination # 闪回恢复区的位置，该值一般和datafileDestination保持一致
--redoLogFileSize # 数据库Redo文件的大小
--enableArchive   # 是否启用归档 
--archiveLogDest  # 归档路径
--characterset    # 数据库字符集，一般为AL32UTF8或ZHS16GBK
+-redoLogFileSize  # 数据库Redo文件的大小
+-enableArchive    # 是否启用归档 
+-archiveLogDest   # 归档路径
+-characterset     # 数据库字符集，一般为AL32UTF8或ZHS16GBK
 -nationalCharacterSet # 国家字符集，一般为AL16UTF16
--storageType     #  存储类型：FS为文件系统，ASM为ASM磁盘形式，如果使用ASM存储，还需要指定-diskGroupName，-recoveryGroupName
--diskGroupName   # 存放数据库文件的磁盘组名称，注意此处不加“+”
--nodeinfo        # 安装数据库的节点信息，若是RAC库则必须使用该参数，该参数的值为主机名列表，中间用逗号隔开
--emConfiguration # 数据库管理方式，是本地管理还是使用Grid Control进行管理，一般设置为NONE
+-storageType      #  存储类型：FS为文件系统，ASM为ASM磁盘形式，如果使用ASM存储，还需要指定-diskGroupName，-recoveryGroupName
+-diskGroupName    # 存放数据库文件的磁盘组名称，注意此处不加“+”
+-nodeinfo         # 安装数据库的节点信息，若是RAC库则必须使用该参数，该参数的值为主机名列表，中间用逗号隔开
+-emConfiguration  # 数据库管理方式，是本地管理还是使用Grid Control进行管理，一般设置为NONE
 -automaticMemoryManagement # 是否启动AMM，true代表启动AMM,false代表启动ASMM
 -totalMemory      # 指定实例占用内存大小，PGA和SGA会自动分配
 -memoryPercentage # 代表数据库占用OS内存大小的百分比
@@ -343,12 +341,12 @@ SID_LIST_LISTENER=
     (SID_DESC=
       (GLOBAL_DBNAME = fmsdb)   --db_unique_name
       (SID_NAME = fmsdb)        --instance_name
-      (ORACLE_HOME = /data/u01/app/oracle/product/19.3.0/db_1)
+      (ORACLE_HOME = /u01/app/oracle/product/19.3.0/db_1)
     )
     (SID_DESC=
       (GLOBAL_DBNAME = pdb1)    --pdb_name
       (SID_NAME = fmsdb)        --instance_name
-      (ORACLE_HOME = /data/u01/app/oracle/product/19.3.0/db_1)
+      (ORACLE_HOME = /u01/app/oracle/product/19.3.0/db_1)
     )
   )
 
@@ -360,7 +358,7 @@ LISTENER=
     )
   )
 
-ADR_BASE_LISTENER = /data/u01/app/oracle
+ADR_BASE_LISTENER = /u01/app/oracle
 
 #===========================================================================
 ```
@@ -401,20 +399,20 @@ pdb1 =
 ### 3. 启动监听
 
 ```bash
-su - oracle    # 切换到oracle用户
+su - oracle     # 切换到oracle用户
 lsnrctl start   # 启动监听
 ```
 
 ## 四、自动化安装脚本
 
-[01_env_prepararion.sh](assets/01_env_prepararion-20231228163930-hzcxh5m.sh)
+[01_env_prepararion.sh](assets/01_env_prepararion-20240317194508-2keahg2.sh)
 
-[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20231228163935-msfp06c.sh)
+[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20240317194514-875jrb7.sh)
 
-[03_oracle_dbca.sh](assets/03_oracle_dbca-20231228163938-wrsqfj5.sh)
+[03_oracle_dbca.sh](assets/03_oracle_dbca-20240317194519-7ldx1py.sh)
 
-[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20231228163943-fnc2vjv.sh)
+[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20240317194524-76b64s9.sh)
 
-[05_oracle_rman.sh](assets/05_oracle_rman-20231228163947-agh1vta.sh)
+[05_oracle_rman.sh](assets/05_oracle_rman-20240317194529-wuizcvc.sh)
 
-‍
+[readme.txt](assets/readme-20240317194534-7hhwcuo.txt)

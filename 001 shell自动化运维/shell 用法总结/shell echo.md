@@ -49,42 +49,36 @@ a
 
 脚本中echo显示内容带颜色显示,echo显示带颜色，**需要使用参数-e**
 
-格式如下：
-
-```
-echo -e "\033[字背景颜色；文字颜色m 字符串\033[0m" 
-echo -e "\033[1;36;41m Something here \033[0m"
-```
-
-* ​`\033`​ 代表键盘的 `Ctl`​ 键或 `Esc`​ 键
-* 1 代表字体行为(高亮，闪烁，下划线等)；
-* 36 代表字体的颜色
-* 41 的位置代表背景色
-
-### 文字和背景颜色搭配
-
-字体颜色范围是 `30~37`​
-
-```
-echo -e "\033[30m 黑色字 \033[0m"
-echo -e "\033[31m 红色字 \033[0m"
-echo -e "\033[32m 绿色字 \033[0m"
-echo -e "\033[33m 黄色字 \033[0m"
-echo -e "\033[34m 蓝色字 \033[0m"
-echo -e "\033[35m 紫色字 \033[0m"
-echo -e "\033[36m 天蓝字 \033[0m"
-echo -e "\033[37m 白色字 \033[0m"
-```
-
-字体背景颜色范围是 `40~47`​
-
 ```bash
-echo -e "\033[40;37m 黑底白字 \033[0m" 
-echo -e "\033[41;37m 红底白字 \033[0m" 
-echo -e "\033[42;37m 绿底白字 \033[0m" 
-echo -e "\033[43;37m 黄底白字 \033[0m" 
-echo -e "\033[44;37m 蓝底白字 \033[0m" 
-echo -e "\033[45;37m 紫底白字 \033[0m" 
-echo -e "\033[46;37m 天蓝底白字 \033[0m" 
-echo -e "\033[47;30m 白底黑字 \033[0m"
+echo -e "\033[文字背景颜色;文字颜色m字符串\033[控制选项" 
+
+echo -e "\e[41;36mHello \e[46;35mWorld"
 ```
+
+* **字背景颜色**![](assets/net-img-linux-echo-color-background-20240401211416-fgykvof.png)​
+* **文字颜色**![](assets/net-img-linux-echo-color-word-20240401211416-ok8nqyk.png)​
+* **控制选项**
+
+  ```
+  [0m 关闭所有属性 
+  [1m 设置高亮度 
+  [4m 下划线 
+  [5m 闪烁 
+  [7m 反显 
+  [8m 消隐 
+  [30m — \33[37m 设置前景色 
+  [40m — \33[47m 设置背景色 
+  [nA 光标上移n行 
+  [nB 光标下移n行 
+  [nC 光标右移n行 
+  [nD 光标左移n行 
+  [y;xH设置光标位置 
+  [2J 清屏 
+  [K 清除从光标到行尾的内容 
+  [s 保存光标位置 
+  [u 恢复光标位置 
+  [?25l 隐藏光标 
+  [?25h 显示光标
+  ```
+
+参考：[https://www.linuxshelltips.com/how-to-change-the-output-color-of-echo-in-linux/](https://www.linuxshelltips.com/how-to-change-the-output-color-of-echo-in-linux/)

@@ -289,9 +289,8 @@ virt-install \
 #--network network=default \
 #--osinfo detect=on,name=centos
 
-# 新开一个窗口查看
-virsh list
-netstat -tunlp|grep qemu
+# windows7x86
+virt-install --name win7_test --ram 4096 --vcpus 2 --disk path=/data/virhost/win7.qcow2,size=40,format=qcow2 --cdrom=/data/archive/iso/cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso --boot=cdrom --graphics vnc,listen=0.0.0.0   --virt-type=kvm --hvm --network network=default 
 ```
 
 ‍

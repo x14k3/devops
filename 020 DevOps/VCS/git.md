@@ -67,10 +67,10 @@ git config [--global] user.name "[name]"
 git config [--global] user.email "[email address]"
 
 # 让git走代理
-root@doshell:~ # git config --global https.proxy http://127.0.0.1:10809
-root@doshell:~ # git config --global https.proxy https://127.0.0.1:10809
-root@doshell:~ # git config --global https.proxy socks5://127.0.0.1:10808
-root@doshell:~ # git config --global http.proxy socks5://127.0.0.1:10808
+git config --global https.proxy http://127.0.0.1:10809
+git config --global https.proxy https://127.0.0.1:10809
+git config --global https.proxy socks5://127.0.0.1:10808
+git config --global http.proxy  socks5://127.0.0.1:10808
 
 ```
 

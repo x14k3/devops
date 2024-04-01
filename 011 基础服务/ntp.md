@@ -43,8 +43,8 @@ restrict 120.25.115.20 nomodify notrap noquery # 允许上层时间服务器主�
 
 `yum install ntp`
 
-==方式一：==
-`ntpdate ntp.aliyun.com`
+==方式一：==  
+​`ntpdate ntp.aliyun.com`​  
 立即同步，**在生产环境中慎用ntpdate**。时钟的跃变，对于某些程序会导致很严重的问题。
 
 ==方式二：==
@@ -107,4 +107,56 @@ x     # 已不再使用
 +     # 良好的且优先使用的远程节点或服务器（包含在组合算法中）
 *     # 当前作为优先主同步对象的远程节点或服务器
 
+```
+
+‍
+
+## **常见NTP时间服务器**
+
+```bash
+pool.ntp.org
+# 中国
+cn.ntp.org.cn
+# 中国香港
+hk.ntp.org.cn
+# 美国
+us.ntp.org.cn
+# 阿里云NTP服务器
+ntp.aliyun.com           
+ntp1.aliyun.com
+ntp2.aliyun.com
+ntp3.aliyun.com
+ntp4.aliyun.com
+ntp5.aliyun.com
+ntp6.aliyun.com
+ntp7.aliyun.com
+# 阿里云Time服务器
+time1.aliyun.com
+time2.aliyun.com
+time3.aliyun.com
+time4.aliyun.com
+time5.aliyun.com
+time6.aliyun.com
+time7.aliyun.com
+# 北京大学 
+s1c.time.edu.cn
+s2m.time.edu.cn
+# 清华大学
+s1b.time.edu.cn
+s1e.time.edu.cn
+s2a.time.edu.cn
+s2b.time.edu.cn
+#苹果提供的授时服务器   
+time1.apple.com
+time2.apple.com
+time3.apple.com
+time4.apple.com
+time5.apple.com
+time6.apple.com
+time7.apple.com
+#Google提供的授时服务器   
+time1.google.com
+time2.google.com
+time3.google.com
+time4.google.com
 ```

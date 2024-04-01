@@ -5,11 +5,6 @@
   * 📄 [1. SELinux 概述](siyuan://blocks/20240302134531-9cykhhh)
   * 📄 [2. SELinux工作模式设置](siyuan://blocks/20240302135336-lj5dlkv)
   * 📄 [3. SELinux安全上下文查看方法](siyuan://blocks/20240302135548-2rr5c2m)
-* 📑 [linux 其他](siyuan://blocks/20231110105237-8z6uwqe)
-
-  * 📄 [VIM文本编辑器](siyuan://blocks/20231110105237-3z8uj1k)
-  * 📄 [debian](siyuan://blocks/20240222220111-d5ji8sn)
-  * 📄 [opensuse](siyuan://blocks/20231116170151-jolbixg)
 * 📄 [linux 定时任务](siyuan://blocks/20231110105237-4mqh2v9)
 * 📑 [linux 性能分析](siyuan://blocks/20231110105237-tzdbegv)
 
@@ -80,12 +75,13 @@
 * 📑 [linux 防火墙](siyuan://blocks/20231110105237-frq5f12)
 
   * 📄 [firewalld](siyuan://blocks/20231110105237-htsujad)
-  * 📄 [iptables](siyuan://blocks/20231110105237-f3d4oum)
+  * 📑 [iptables](siyuan://blocks/20231110105237-f3d4oum)
+
+    * 📄 [iptables 示例](siyuan://blocks/20240314194239-attjy4f)
 * 📑 [linxu 重要配置文件](siyuan://blocks/20240205174137-r9uzzee)
 
-  * 📄 [Linux 设备文件](siyuan://blocks/20240205174149-6m3swxy)
-  * 📄 [etc-pam.d ](siyuan://blocks/20240211112927-ac7t3tg)
-  * 📄 [内核参数文件-sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
-  * 📄 [用户配置脚本文件-.netrc ](siyuan://blocks/20240218131901-mqemnci)
+  * 📄 [.netrc](siyuan://blocks/20240211112927-ac7t3tg)
+  * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
+  * 📄 [udev](siyuan://blocks/20240205174149-6m3swxy)
 
 ‍

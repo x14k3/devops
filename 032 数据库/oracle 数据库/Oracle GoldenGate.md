@@ -1,5 +1,5 @@
 # Oracle GoldenGate
 
-简言之：**Oracle GoldenGate软件是做Oracle数据库双活复制的**。
+* 📄 [Oracle GoldenGate 介绍](siyuan://blocks/20240315212632-pq75ki0)
 
 ‍

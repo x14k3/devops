@@ -119,7 +119,7 @@ curl(选项)(参数)
 
 curl命令可以用来执行下载、发送各种HTTP请求，指定HTTP头部等操作。如果系统没有curl可以使用`yum install curl`​安装，也可以下载安装。curl是将下载文件输出到stdout，将进度信息输出到stderr，不显示进度信息使用`--silent`​选项。
 
-```
+```bash
 curl URL --silent
 ```
 
@@ -127,15 +127,17 @@ curl URL --silent
 
 使用选项`-O`​将下载的数据写入到文件，必须使用文件的绝对地址：
 
-```
+```bash
 curl http://example.com/text.iso --silent -O
+# 文件名是text.iso
 ```
 
 选项`-o`​将下载数据写入到指定名称的文件中，并使用`--progress`​显示进度条：
 
-```
+```bash
 curl http://example.com/test.iso -o filename.iso --progress
 ######################################### 100.0%
+# 文件名是filename.iso
 ```
 
 #### **不输出错误和进度信息**

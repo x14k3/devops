@@ -93,10 +93,10 @@ chkconfig 版本 1.7.2 - 版权 (C) 1997-2000 红帽公司
 
 用法：   chkconfig [--list] [--type <类型>] [名称]
 
-chkconfig  --add           <名称>
-chkconfig  --del            <名称>
+chkconfig  --add       <名称>
+chkconfig  --del       <名称>
 chkconfig  --override  <名称>
-chkconfig  [--level   <级别>]   [--type <类型>]   <名称>   <on|off|reset|resetpriorities>
+chkconfig  [--level    <级别>]   [--type <类型>]   <名称>   <on|off|reset|resetpriorities>
 ```
 
 1）设置service开机是否启动

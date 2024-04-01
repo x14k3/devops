@@ -86,13 +86,13 @@ root@doshell:~ #
 * rdesktop连接windows远程桌面
 
   ```bash
-  rdesktop -f -u username -p password  IP
+  sudo rdesktop -f -u username -p password  IP
   ```
 
 * rdesktop连接windows服务器并传输文件
 
   ```bash
-  rdesktop -f -u Administrator -p Ninestar123 10.10.0.167 -r disk:share=/data/archiveFile 
+  sudo rdesktop -f -u Administrator -p Ninestar123 10.10.0.167 -r disk:share=/data/archiveFile 
   ```
 
 * 其他参数
