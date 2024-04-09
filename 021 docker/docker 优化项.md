@@ -45,6 +45,10 @@ docker info -f '{{ .DockerRootDir}}'
 # 如果输出的是新的路径就代表修改成功了,从这里也可以看出这个配置的官方名称叫 Docker Root Directory(Docker根目录)
 ```
 
+‍
+
+‍
+
 ## Docker info 查看报错 WARNING: No swap limit support 解决
 
 1、编辑/etc/default/grub文件。在GRUB_CMDLINE_LINUX=" ",中并追加 cgroup_enable=memory swapaccount=1

@@ -1,7 +1,6 @@
 # KVM 虚拟机网络设置
 
-* Redhat网卡配置是放在/etc/sysconfig/network-scripts目录下面的一大堆文件里面，修改网络时需要依次修改。
-* Debian系的则是存在/etc/network/interfaces文件里面，无论有多少块网卡，统统扔在这个文件里。
+‍
 
 ## NAT
 
