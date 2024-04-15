@@ -88,6 +88,6 @@ ip route flush cache
 
 ‍
 
-# linux 路由策略
+# linux 策略路由
 
 ‍

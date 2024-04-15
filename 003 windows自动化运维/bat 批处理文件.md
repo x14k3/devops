@@ -652,9 +652,9 @@ delims 后面跟一个 字符 ，就可以按照这个字符来进行分割字�
     for /f "delims=," %%i in (for.txt) do echo %%i
     pause
 
-    REM输出结果：
-    REM我叫孙永威
-    REM身体健康
+    输出结果：
+    我叫孙永威
+    身体健康
     ```
 
     第一行，逗号后面的没有读取，根据逗号进行了分割。
@@ -678,9 +678,10 @@ delims 后面所跟字符串，可以有多个：
     for /f "delims=.," %%i in (for.txt) do echo %%i
     pause
 
-    REM输出结果：
-    REM我叫孙永威
-    REM网址：www
+    输出结果：
+
+    我叫孙永威
+    网址：www
     ```
 
     同时按照 点 和 逗号 进行分割。

@@ -13,6 +13,7 @@
   * 📄 [minicom](siyuan://blocks/20231222133047-w0fkiok)
   * 📄 [mkisofs](siyuan://blocks/20231121220044-gmhlmvl)
   * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
+  * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
   * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
   * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
 * 📑 [内核模块管理](siyuan://blocks/20240405214125-526xsw4)
@@ -33,6 +34,7 @@
   * 📄 [xz](siyuan://blocks/20240405214608-b53w02j)
 * 📑 [性能监控](siyuan://blocks/20240405214026-dbaayor)
 
+  * 📄 [UnixBench](siyuan://blocks/20240408181639-8saj9ke)
   * 📄 [cpuinfo](siyuan://blocks/20231110105237-8f06fmg)
   * 📄 [dmesg](siyuan://blocks/20240408133348-xldq05f)
   * 📄 [dmidecode](siyuan://blocks/20231110105237-05adh5q)

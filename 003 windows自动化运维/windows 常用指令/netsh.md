@@ -103,25 +103,80 @@ netsh interface ipv6 ?     # ipv6 配置帮助
 
 ## IP/gateway设置
 
-```
-netsh interface ip set address name="适配器名称" source=dhcp    # 自动获取 ip
-netsh interface ip set address name="适配器名称" source=static address=192.168.0.10 mask=255.255.255.0 gateway=192.168.1.1    # 固定 ip
-netsh interface ip add address name="适配器名称" address=192.168.0.11 mask=255.255.255.0   # 一块网卡多ip
+```bash
+netsh interface ip set
+	name
+	address
+	mask
+	gateway
+	source [static | dhcp]
+	gwmetric [auto | number]
+	store
+		active       # 下一次启动时消失
+		persistent   # 永久有效
+
+netsh interface ip add
+	name
+	address
+	mask
+	store
+		active       # 下一次启动时消失
+		persistent   # 永久有效
+	skipassource [false | true]
 ```
 
-## DNS设置
+```powershell
+netsh interface ip set address name="Ethernet0" source=dhcp    # 自动获取 ip
+# set VIP
+netsh interface ip set address name="Ethernet0" source=static address=192.168.0.10 mask=255.255.255.0 gateway=192.168.1.1 gwmetric=1 store=active 
 
-```
-etsh interface ip set dnsservers name="适配器名称" source=dhcp    # 自动获取 dns
-netsh interface ip set dnsservers name="适配器名称" source=static address=114.114.114.114 register=PRIMARY    # 固定DNS(主：primary)</pre>
+# netsh interface ip add
+netsh interface ip add address name="Ethernet0" address=192.168.0.11 mask=255.255.255.0 gateway=192.168.1.1 gwmetric=1
+# add managerIP
+netsh interface ip add address name="Ethernet0" address=192.168.0.11 mask=255.255.255.0 gateway=192.168.1.1 gwmetric=1 store=persistent skipassource=true
 ```
 
-## Wins设置
+### Add an IP Using Skip as source使用 Skip 作为源添加 IP
 
-```bat
-netsh interface ip set winsservers name="适配器名称" source=dhcp    # 自动获取 wins
-netsh interface ip set winsservers name="适配器名称" source=static 10.1.2.200    # 固定 wins
+**问题描述：**
+
+在window环境下（windows server2008/vista及以上版本）中，绑定了辅助IP后，主动外访时有可能不再走主IP。
+
+微软官方镜像的IP选择策略发生了变化：windows server08/Vista之前的版本，会默认从第一个add到网卡的IP出去。
+
+而windows server2008/Vista 及其之后的版本（包括windows server2008、windows server2012、windows server2016、windows 7等），会遵循以下方式：
+
+* Rule 1： Prefer same address (applies)
+* Rule 2： Prefer appropriate scope (applies)
+* Rule 3： Avoid deprecated addresses (applies)
+* Rule 4： Prefer home addresses - does not apply to IP v4
+* Rule 5： Prefer outgoing Interfaces (applies)
+* Rule 6： Prefer matching label - does not apply to IP v4
+* Rule 7： Prefer public addresses - does not apply to IP v4
+* Rule 8: **Use longest matching prefix with the next hop IP address.**
+
+**根据规则8，如果主IP与下一跳IP的 matching prefix（前缀匹配） 短于辅助IP与下一跳的 matching prefix ，那辅助IP的优先级会高于主IP，packet 就会由辅助IP发送。**
+
+本示例案例中，辅助IP（10.10.20.30）与下一条（即网关10.10.20.1）的 matching prefix 更长，因此流量不再走主IP。
+
+​![prefix+code](assets/prefix+code-20240412145510-orque79.png)​
+
+**设置方法**
+
+```bash
+# server 2008
+netsh int ipv4 add address <Interface Name> <ip address> <subnet mask> skipassource=true
+# server 2012
+netsh int ipv4 add address <Interface Name> <ip address> skipassource=true
 ```
+
+> windows2003         IP在前面的就是出口
+>
+> windows2008/20    默认是ip小的优先
+
+‍
+
+‍
 
 ## 重置ip配置
 
@@ -130,7 +185,21 @@ netsh interface ip reset      # 重置ipv4信息
 netsh interface ipv6 reset    # 重置ipv6信息
 ```
 
-> PS:缺省形参(如：name=)字段信息时，需严格按照命令指定的顺序传参，否则报错；当指定形参后，传参时，具体参数不受顺序(位置)影响。
+‍
+
+## DNS设置
+
+```
+etsh interface ip set dnsservers name="适配器名称" source=dhcp    # 自动获取 dns
+netsh interface ip set dnsservers name="适配器名称" source=static address=114.114.114.114 register=PRIMARY    # 固定DNS(主：primary)
+```
+
+## Wins设置
+
+```bat
+netsh interface ip set winsservers name="适配器名称" source=dhcp                 # 自动获取 wins
+netsh interface ip set winsservers name="适配器名称" source=static 10.1.2.200    # 固定 wins
+```
 
 ## 使用配置文件快速添加配置
 

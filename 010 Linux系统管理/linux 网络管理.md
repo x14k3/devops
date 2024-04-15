@@ -13,9 +13,9 @@
   * 📄 [ip route](siyuan://blocks/20240404124331-9p2j7il)
   * 📄 [ip rule](siyuan://blocks/20240404124335-xm1553g)
   * 📄 [ip tuntap](siyuan://blocks/20240404124340-tjq80vb)
+* 📄 [linux 策略路由](siyuan://blocks/20231110105237-vk5bdpj)
 * 📄 [linux 网络配置](siyuan://blocks/20231110105237-b3v59f7)
 * 📄 [linux 聚合链路](siyuan://blocks/20231110105237-qnhnqtl)
-* 📄 [linux 路由策略](siyuan://blocks/20231110105237-vk5bdpj)
 * 📑 [网络虚拟化](siyuan://blocks/20240404111729-s75d3ip)
 
   * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20231110105237-op3dz8u)

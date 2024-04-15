@@ -5,12 +5,22 @@
   * 📄 [1. SELinux 概述](siyuan://blocks/20240302134531-9cykhhh)
   * 📄 [2. SELinux工作模式设置](siyuan://blocks/20240302135336-lj5dlkv)
   * 📄 [3. SELinux安全上下文查看方法](siyuan://blocks/20240302135548-2rr5c2m)
+* 📑 [linux 个性配置文件](siyuan://blocks/20240205174137-r9uzzee)
+
+  * 📄 [.hidden](siyuan://blocks/20240403220911-b816dvh)
+  * 📄 [.netrc](siyuan://blocks/20240211112927-ac7t3tg)
+* 📑 [linux 内核](siyuan://blocks/20240414212610-nij0ni7)
+
+  * 📄 [cgroups](siyuan://blocks/20240414212933-txv8edc)
+  * 📄 [dattobd](siyuan://blocks/20231110105237-toah5db)
+  * 📄 [namespace](siyuan://blocks/20240414213106-fspib9h)
+  * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
+  * 📄 [udev](siyuan://blocks/20240205174149-6m3swxy)
 * 📑 [linux 文件系统管理](siyuan://blocks/20231110105237-mekft9v)
 
   * 📄 [1. 硬盘结构（机械硬盘和固态硬盘）详解](siyuan://blocks/20231110105237-h46cl9m)
   * 📄 [2. Linux下几种常用文件系统](siyuan://blocks/20231110105237-keh9ag0)
   * 📄 [3. Linux系统是如何识别硬盘设备和硬盘分区的](siyuan://blocks/20231110105237-9r96x4b)
-  * 📄 [4. Linux文件系统常用命令](siyuan://blocks/20231110105237-lfz21el)
   * 📄 [5. Linux虚拟内存和物理内存](siyuan://blocks/20231110105237-db80cv9)
   * 📄 [6. Linux磁盘配额](siyuan://blocks/20231110105237-tdeo05n)
   * 📄 [7. Linux LVM（逻辑卷管理）](siyuan://blocks/20231110105237-qai17ft)
@@ -55,9 +65,9 @@
   * 📄 [7. Linux su命令](siyuan://blocks/20231110105237-pveuo4k)
 * 📑 [linux 系统启动管理](siyuan://blocks/20231110105237-o72akll)
 
-  * 📄 [CentOS7系统启动流程分析](siyuan://blocks/20240312200721-8dlhfph)
   * 📄 [linux 单用户模式](siyuan://blocks/20240308135222-dmx54af)
   * 📄 [linux 救援模式](siyuan://blocks/20240308135705-p9clypp)
+  * 📄 [linux系统启动流程分析](siyuan://blocks/20240312200721-8dlhfph)
 * 📑 [linux 网络管理](siyuan://blocks/20231110105237-q0mg0iy)
 
   * 📄 [linux NetworkManager](siyuan://blocks/20231110105237-qn3idd2)
@@ -69,9 +79,9 @@
     * 📄 [ip route](siyuan://blocks/20240404124331-9p2j7il)
     * 📄 [ip rule](siyuan://blocks/20240404124335-xm1553g)
     * 📄 [ip tuntap](siyuan://blocks/20240404124340-tjq80vb)
+  * 📄 [linux 策略路由](siyuan://blocks/20231110105237-vk5bdpj)
   * 📄 [linux 网络配置](siyuan://blocks/20231110105237-b3v59f7)
   * 📄 [linux 聚合链路](siyuan://blocks/20231110105237-qnhnqtl)
-  * 📄 [linux 路由策略](siyuan://blocks/20231110105237-vk5bdpj)
   * 📑 [网络虚拟化](siyuan://blocks/20240404111729-s75d3ip)
 
     * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20231110105237-op3dz8u)
@@ -96,12 +106,5 @@
   * 📑 [iptables](siyuan://blocks/20231110105237-f3d4oum)
 
     * 📄 [iptables 示例](siyuan://blocks/20240314194239-attjy4f)
-* 📑 [linxu 重要配置文件](siyuan://blocks/20240205174137-r9uzzee)
-
-  * 📄 [.hidden](siyuan://blocks/20240403220911-b816dvh)
-  * 📄 [.netrc](siyuan://blocks/20240211112927-ac7t3tg)
-  * 📄 [linux 安全](siyuan://blocks/20240401112054-3mlih3l)
-  * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
-  * 📄 [udev](siyuan://blocks/20240205174149-6m3swxy)
 
 ‍

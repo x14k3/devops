@@ -242,47 +242,18 @@ http {
 
 ## Nginx location 路径与 proxy_pass 的规律
 
+|序号|访问URL|location配置|proxy_pass配置|后端接收的请求|备注|
+| ------| ---------| --------------| ----------------| -----------------| ------|
+|1|​`test.com/user/test.html`​|/user/|[http://test1/](http://test1/)|/test.html||
+|2|​`test.com/user/test.html`​|/user/|[http://test1](http://test1)|/user/test.html||
+|3|​`test.com/user/test.html`​|/user|[http://test1](http://test1)|/user/test.html||
+|4|​`test.com/user/test.html`​|/user|[http://test1/](http://test1/)|[//test.html](https://test.html)||
+|5|​`test.com/user/test.html`​|/user/|[http://test1/haha/](http://test1/haha/)|/haha/test.html||
+|6|​`test.com/user/test.html`​|/user/|[http://test1/haha](http://test1/haha)|/hahatest.html||
+
+在日常的web网站部署中，经常会用到 `nginx`​的 `proxy_pass`​ 反向代理，有一个配置需要弄清楚：配置 `proxy_pass`​ 时，
+
+* 当在后面的 `upstram_name`​  后面出现了  `/`​，相当于是绝对根路径，则  `nginx`​ 不会把  `location`​  中匹配的路径部分代理走;
+* 如果没有 `/`​，则会把匹配的路径部分也给代理走。
+
 ‍
-
-​![dcf346f467812c4c](assets/dcf346f467812c4c-20240314111907-5ak6q2o.png)​
-
-实际上这张图描述的是 nginx location 的路径配置，及 location 代码块中 proxy_pass 的路径关系，属于 nginx 应用中路径转发的知识。例如图中 Case 1 对应的代码块应该为：
-
-```nginx
-location /test1 {
-    proxy_pass http://127.0.0.1:8080;
-}
-
-```
-
-其中 127.0.0.1:8080 是运行的一个后端服务。
-
-例如域名为`example.com`​，那么我在域名后加上 Test URL：`example.com/test1/abc/test`​，那么我的后端服务接收到的路径将是：`/test1/abc/test`​。
-
-咋一看似乎完全没有规律，其实之前在一些 nginx 实践中，我个人也深受这个问题的困扰。网上许多文章也并没有详细地解释这个问题。
-
-但把这张梗图和一位朋友交流后，发现了其中的规律。
-
-## 如果 proxy_pass URL 的 IP、端口后没加东西
-
-例如：proxy_pass 为`http://127.0.0.1:8080`​，属于没加东西的，而`http://127.0.0.1:8080/`​、`http://127.0.0.1:8080/app1`​、`http://127.0.0.1:8080/app1/`​这些都归为一类，属于有加东西的。
-
-那么，将 nginx 接收到的 URL（即图中的 Test URL），原封不动地直接加到 proxy_pass URL 后面，就成为了后端程序接收到的路径。
-
-图中的 Case 1 3 9 都是这种情况。
-
-当然，前提是 Test URL 需要与 location 后声明的表达式本身匹配。
-
-## 如果 proxy_pass URL 的 IP、端口后有加东西
-
-即使是加了一个「/」，也叫有加东西。
-
-如果是这种情况，则进行如下操作：
-
-1. 将 nginx 接收到的 URL（即图中的 Test URL）中删掉 nginx location 的前缀。
-2. 将上一步得到的字符串直接加到 proxy_pass URL 后面。
-3. 上一步得到的字符串 IP、端口后面的部分，就是后端程序接收到的路径。
-
-例如在 Case 2 中：
-
-Test URL 是`/test2/abc/test`​，nginx location 是`/test2`​。那么将 Test URL 中去掉 nginx location 的部分即为：`/abc/test`​。而 proxy_pass URL 为`http://127.0.0.1:8080/`​，直接加到这后面，得到`http://127.0.0.1:8080//abc/test`​。取 IP、端口后面的部分，为：`//abc/test`​。这也就是后端程序接收到的路径中会有两个「/」的原因。

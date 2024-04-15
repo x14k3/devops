@@ -93,6 +93,7 @@ root@doshell:~ #
 
   ```bash
   sudo rdesktop -f -u Administrator -p Ninestar123 10.10.0.167 -r disk:share=/data/archiveFile 
+  sudo rdesktop -f -u Administrator -p Ninestar123 10.10.0.167 -r clipboard:PRIMARYCLIPBOARD
   ```
 
 * 其他参数
@@ -125,23 +126,17 @@ root@doshell:~ #
      -X: embed into another window with a given id.
      -a: 连接颜色深度
      -z: enable rdp compression
-     -x: RDP5 experience (m[odem 28.8], b[roadband], l[an] or hex nr.)
+     -x: 开启RDP协议的额外功能，如音频重定向、打印机重定向等；
      -P: use persistent bitmap caching
-     -r: enable specified device redirection (this flag can be repeated)
+     -r: 开启远程桌面的额外功能，如共享文件夹、共享粘贴板、共享打印机等
            '-r comport:COM1=/dev/ttyS0': enable serial redirection of /dev/ttyS0 to COM1
            '-r disk:floppy=/mnt/floppy':启用 /mnt/floppy 到 'floppy' 共享的重定向
-           '-r clientname=<client name>': Set the client name displayed
-               for redirected disks
+           '-r clientname=<client name>': Set the client name displayed for redirected disks
            '-r lptport:LPT1=/dev/lp0': enable parallel redirection of /dev/lp0 to LPT1
            '-r printer:mydeskjet': enable printer redirection
-           '-r sound:[local[:driver[:device]]|off|remote]': enable sound redirection
-                       remote would leave sound on server
-                       available drivers for 'local':
-                       alsa:  ALSA output driver, default device: default
-           '-r clipboard:[off|PRIMARYCLIPBOARD|CLIPBOARD]': enable clipboard
-                        redirection.
-                        'PRIMARYCLIPBOARD' looks at both PRIMARY and CLIPBOARD
-                        when sending data to server.
+           '-r sound:[local[:driver[:device]]|off|remote]': enable sound redirection remote would leave sound on server available drivers for 'local': alsa:  ALSA output driver, default device: default
+           '-r clipboard:[off|PRIMARYCLIPBOARD|CLIPBOARD]': enable clipboard redirection.
+                        'PRIMARYCLIPBOARD' looks at both PRIMARY and CLIPBOARD when sending data to server.
                         'CLIPBOARD' looks at only CLIPBOARD.
            '-r scard[:"Scard Name"="Alias Name[;Vendor Name]"[,...]]
             example: -r scard:"eToken PRO 00 00"="AKS ifdh 0"
@@ -150,7 +145,7 @@ root@doshell:~ #
             example: -r scard:"eToken PRO 00 00"="AKS ifdh 0;AKS"
                      "eToken PRO 00 00" -> Device in Linux/Unix enviroment
                      "AKS ifdh 0"       -> Device shown in Windows enviroment 
-                     "AKS"              -> Device vendor name             
+                     "AKS"              -> Device vendor name           
      -0: attach to console
      -4: use RDP version 4
      -5: use RDP version 5 (default)

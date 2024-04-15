@@ -41,13 +41,13 @@ cd EasyRSA-3.1.1
 cp vars.example vars
 vim vars
 ---------------------------------------------------------------
-set_var EASYRSA_REQ_COUNTRY "CN"
-set_var EASYRSA_REQ_PROVINCE    "Beijing"
-set_var EASYRSA_REQ_CITY    "Beijing"
-set_var EASYRSA_REQ_ORG "doshell"
-set_var EASYRSA_REQ_EMAIL   "doshell@qq.com"
-set_var EASYRSA_REQ_OU      "My Organizational Unit"
-set_var EASYRSA_CERT_EXPIRE "180"      # 证书有效期
+set_var EASYRSA_REQ_COUNTRY  "CN"
+set_var EASYRSA_REQ_PROVINCE "Beijing"
+set_var EASYRSA_REQ_CITY     "Beijing"
+set_var EASYRSA_REQ_ORG      "doshell"
+set_var EASYRSA_REQ_EMAIL    "doshell@qq.com"
+set_var EASYRSA_REQ_OU       "My Organizational Unit"
+set_var EASYRSA_CERT_EXPIRE  "180"
 ```
 
 ## 2.制作证书
@@ -359,7 +359,7 @@ ta.key 文件内容
 ;local a.b.c.d  #本机监听IP,默认为本机所有IP
 port 1194       #端口
 ;proto tcp      #协议,生产推荐使用TCP
-proto udp #默认协议
+proto udp       #默认协议
 # 指定OpenVPN创建的通信隧道类型，tun用于建立IP隧道，tap用于建立以太网桥，这两种模式我们也称为路由模式和网桥模式。 
 #不同于硬件物理网卡，TAP/TUN 是在 Linux 内核 2.4.x 版本之后完全由软件实现的虚拟网络设备，在功能上 TAP/TUN 和物理网卡没有区别，它们同样都是网络设备，都可以设置 IP 地址，而且都属于 Linux 网络设备管理模块，由 Linux 网络设备管理模块统一来管理。
 # 如果用tun的话，就是模拟了一个p2p的环境，虽然能够连接到同网段别的ip，但是无法广播，这样就无法实现到某些网段的跳转网关了。
@@ -367,7 +367,7 @@ proto udp #默认协议
 ;dev tap
 dev tun
 ;dev-node MyTap  #TAP-Win32适配器。非windows不需要配置
-ca ca.crt       #ca证书文件
+ca ca.crt        #ca证书文件
 cert server.crt  #服务器证书文件
 key server.key   #服务器私钥文件
 dh dh2048.pem    #dh参数文件
@@ -380,28 +380,28 @@ ifconfig-pool-persist ipp.txt  #服务器自动给客户端分配IP后，客户�
 ;push "route 192.168.20.0 255.255.255.0"
 ;client-config-dir ccd #使服务器子网内机器可以访问客户端子网内机器
 ;route 192.168.40.128 255.255.255.0
-;learn-address ./script                #运行外部脚本，创建不同组的iptables规则，无需配置
+;learn-address ./script                   #运行外部脚本，创建不同组的iptables规则，无需配置
 ;push "redirect-gateway def1 bypass-dhcp" #启用后，客户端所有流量都将通过VPN服务器，因此生产一般无需配置此项
-;push "dhcp-option DNS 208.67.222.222"   #推送DNS服务器，不需要配置
+;push "dhcp-option DNS 208.67.222.222"    #推送DNS服务器，不需要配置
 ;push "dhcp-option DNS 208.67.220.220"
 ;client-to-client                       #允许不同的client直接通信,不安全,生产环境一般无需要配置
 ;duplicate-cn                           #多个用户共用一个证书，一般用于测试环境，生产环境都是一个用户一个证书,无需开启
 keepalive 10 120         #设置服务端检测的间隔和超时时间，默认为每10秒ping一次，如果 120秒没有回应则认为对方已经down
-tls-auth ta.key 0 #访止DoS等攻击的安全增强配置,可以使用以下命令来生成：openvpn --
-genkey --secret ta.key #服务器和每个客户端都需要拥有该密钥的一个拷贝。第二个参数在服务器端应该为’0’，在客户端应该为’1’
-cipher AES-256-CBC  #加密算法
-;compress lz4-v2    #启用Openvpn2.4.X新版压缩算法
-;push "compress lz4-v2"   #推送客户端使用新版压缩算法,和下面的comp-lzo不要同时使用
+tls-auth ta.key 0        #访止DoS等攻击的安全增强配置,可以使用以下命令来生成：openvpn --
+genkey --secret ta.key   #服务器和每个客户端都需要拥有该密钥的一个拷贝。第二个参数在服务器端应该为’0’，在客户端应该为’1’
+cipher AES-256-CBC       #加密算法
+;compress lz4-v2         #启用Openvpn2.4.X新版压缩算法
+;push "compress lz4-v2"  #推送客户端使用新版压缩算法,和下面的comp-lzo不要同时使用
 ;comp-lzo          #旧户端兼容的压缩配置，需要客户端配置开启压缩,openvpn2.4.X等新版可以不用开启
 ;max-clients 100   #最大客户端数
-;user nobody         #运行openvpn服务的用户和组
+;user nobody       #运行openvpn服务的用户和组
 ;group nobody
-persist-key          #重启VPN服务时默认会重新读取key文件，开启此配置后保留使用第一次的key文件,生产环境无需开启
-persist-tun          #启用此配置后,当重启vpn服务时，一直保持tun或者tap设备是up的，否则会先down然后再up,生产环境无需开启
+persist-key        #重启VPN服务时默认会重新读取key文件，开启此配置后保留使用第一次的key文件,生产环境无需开启
+persist-tun        #启用此配置后,当重启vpn服务时，一直保持tun或者tap设备是up的，否则会先down然后再up,生产环境无需开启
 status openvpn-status.log #openVPN状态记录文件，每分钟会记录一次
 ;log         openvpn.log   #第一种日志记录方式,并指定日志路径，log会在openvpn启动的时候清空日志文件,不建议使用
-;log-append openvpn.log   #第二种日志记录方式,并指定日志路径，重启openvpn后在之前的日志后面追加新的日志,生产环境建议使用
-verb 3                   #设置日志级别，0-9，级别越高记录的内容越详细,0 表示静默运行，只记录致命错误,4 表示合理的常规用法,5 和 6 可以帮助调试连接错误。9 表示极度冗余，输出非常详细的日志信息
+;log-append openvpn.log    #第二种日志记录方式,并指定日志路径，重启openvpn后在之前的日志后面追加新的日志,生产环境建议使用
+verb 3                     #设置日志级别，0-9，级别越高记录的内容越详细,0 表示静默运行，只记录致命错误,4 表示合理的常规用法,5 和 6 可以帮助调试连接错误。9 表示极度冗余，输出非常详细的日志信息
 ;mute 20                 #相同类别的信息只有前20条会输出到日志文件中
 explicit-exit-notify 1   #通知客户端，在服务端重启后自动重新连接，仅能用于udp模式，tcp模式不需要配置即可实现断开重新连接,且开启此项后tcp配置后将导致openvpn服务无法启动,所以tcp时必须不能开启此项
 ```
@@ -410,17 +410,17 @@ explicit-exit-notify 1   #通知客户端，在服务端重启后自动重新连
 
 ```bash
 client                      #声明自己是个客户端
-dev tun                   #接口类型，必须和服务端保持一致
-proto udp               #协议类型，必须和服务端保持一致
+dev tun                     #接口类型，必须和服务端保持一致
+proto udp                   #协议类型，必须和服务端保持一致
 remote 192.168.0.202 15443  #server端的ip和端口，可以写域名但是需要可以解析成IP
-resolv-retry infinite  #如果是写的server端的域名，那么就始终解析，如果域名发生变化，会重新连接到新的域名对应的IP
-nobind                     #本机不绑定监听端口，客户端是随机打开端口连接到服务端的1194
+resolv-retry infinite       #如果是写的server端的域名，那么就始终解析，如果域名发生变化，会重新连接到新的域名对应的IP
+nobind                      #本机不绑定监听端口，客户端是随机打开端口连接到服务端的1194
 persist-key
 persist-tun
 ca ca.crt
 cert client.crt
 key client.key
-remote-cert-tls server   #指定采用服务器证书校验方式
+remote-cert-tls server      #指定采用服务器证书校验方式
 tls-auth ta.key 1
 cipher AES-256-CBC
 verb 3

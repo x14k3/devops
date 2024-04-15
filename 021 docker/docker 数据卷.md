@@ -17,6 +17,10 @@ docker的理念：将应用和环境打包成一个镜像如果数据都在容�
 
 ![](assets/image-20221127212013265-20230610173810-zgeo48m.png)
 
+* Volumes 存储在 Docker Host 文件系统的一个路径下，这个路径是由 Docker 来进行管理，路径默认是  /var/lib/docker/volumes/，非 Docker 的进程不能去修改这个路径下面的文件，所以说Volumes  是持久存储数据最好的一种方式。
+* Bind mounts 可以存储在 Docker Host 文件系统的任何位置，它们甚至可能是重要的系统文件或目录，非 Docker 的进程或者 Docker 容器可能随时对其进行修改，存在潜在的安全风险。
+* Tmpfs 只存储在 Docker Host 的系统内存中，不会写入到系统的文件系统中，不会持久存储。
+
 ## bind mount
 
 > 将host机器的目录mount到container中。但是bind mount在不同的宿主机系统是不可移植的，比如Windows和Linux的目录结构是不一样的，bind mount所指向的host目录也不能一样。这也是为什么bind mount不能出现在Dockerfile中的原因，因为这样Dockerfile就不可移植了。​

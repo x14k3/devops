@@ -266,6 +266,14 @@ virt-install
 --noautoconsole
 --os-type=windows
 
+
+# windows7x86
+virt-install --name win7_test --ram 4096 --vcpus 2 --disk path=/data/virhost/win7.qcow2,size=40,format=qcow2 --cdrom=/data/archive/iso/cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso --boot=cdrom --graphics vnc,listen=0.0.0.0   --virt-type=kvm --hvm --network network=default
+
+# windwos10
+virt-install --name win10-test --memory 4096 --vcpus 4 --disk path=/data/virhost/win10-test.qcow2,size=60,format=qcow2 --os-variant=win10 --cdrom /data/archive/iso/Win10_22H2_Chinese_Simplified_x64v1.iso  --network network=default --graphics vnc,listen=0.0.0.0 --noautoconsole
+
+
 ```
 
 再通过VNC客户端连接
@@ -288,9 +296,6 @@ virt-install \
 --network bridge=p2p1-br0,model=virtio \
 #--network network=default \
 #--osinfo detect=on,name=centos
-
-# windows7x86
-virt-install --name win7_test --ram 4096 --vcpus 2 --disk path=/data/virhost/win7.qcow2,size=40,format=qcow2 --cdrom=/data/archive/iso/cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso --boot=cdrom --graphics vnc,listen=0.0.0.0   --virt-type=kvm --hvm --network network=default 
 ```
 
 ‍
