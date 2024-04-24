@@ -16,6 +16,7 @@
   * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
   * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
   * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
+  * 📄 [光盘刻录](siyuan://blocks/20231115103835-hjm12jh)
 * 📑 [内核模块管理](siyuan://blocks/20240405214125-526xsw4)
 
   * 📄 [insmod](siyuan://blocks/20240227111004-f1j5x4j)

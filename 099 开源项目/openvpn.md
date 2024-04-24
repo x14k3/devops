@@ -1,5 +1,3 @@
 # openvpn
 
-[openVPN](siyuan://blocks/20231110105237-p65g7vr)
-
-‍
+* 📄 [1. OpenVPN Server搭建 (Duplicated 2024-04-24 14:35:24)](siyuan://blocks/20240424143524-na569f2)
