@@ -5,9 +5,15 @@
 * 📄 [systemctl和service、chkconfig命令的关系](siyuan://blocks/20231110105237-rzhqmgg)
 * 📑 [systemd](siyuan://blocks/20240423111840-rbgqjc1)
 
-  * 📄 [Systemd 定时器](siyuan://blocks/20240403215034-mgi9u5o)
-  * 📄 [Systemd 开机自动挂载硬盘](siyuan://blocks/20240403215120-kex3dr0)
-  * 📄 [Systemd-命令篇](siyuan://blocks/20240423111931-k9khkso)
-  * 📄 [Systemd-实战篇](siyuan://blocks/20240423114431-w3qdfrv)
+  * 📄 [systemd etcfstab](siyuan://blocks/20240424180039-sizyaj6)
+  * 📄 [systemd path 实时监控文件和目录的变动](siyuan://blocks/20240424175548-grq9r5v)
+  * 📄 [systemd timer 取代cron和at的定时任务](siyuan://blocks/20240424181008-s6g2sr7)
+  * 📄 [systemd timesyncd 做时间同步](siyuan://blocks/20240424181617-nwnjkd7)
+  * 📄 [systemd 开机自启动任务](siyuan://blocks/20240424174529-oagnrjj)
+  * 📄 [systemd 服务管理](siyuan://blocks/20240424172244-jhfhzbk)
+  * 📄 [systemd 服务配置文件编写(1)](siyuan://blocks/20240424172850-cgmuntf)
+  * 📄 [systemd 服务配置文件编写(2)](siyuan://blocks/20240424173746-aczkl2b)
+  * 📄 [systemd 运行级别](siyuan://blocks/20240424175045-s1lcniu)
+  * 📄 [前后台进程、孤儿进程和daemon类进程的父子关系](siyuan://blocks/20240424165936-k0gazgk)
 
 ‍
