@@ -29,193 +29,31 @@ dmidecode [选项]
 -V：显示版本信息。
 ```
 
-**dmidecode参数string及type列表：**
-
-（1）Valid string keywords are：
-
-* bios-vendor
-* bios-version
-* bios-release-date
-* system-manufacturer
-* system-product-name
-* system-version
-* system-serial-number
-* system-uuid
-* baseboard-manufacturer
-* baseboard-product-name
-* baseboard-version
-* baseboard-serial-number
-* baseboard-asset-tag
-* chassis-manufacturer
-* chassis-type
-* chassis-version
-* chassis-serial-number
-* chassis-asset-tag
-* processor-family
-* processor-manufacturer
-* processor-version
-* processor-frequency
-
-（2）Valid type keywords are：
-
-* bios
-* system
-* baseboard
-* chassis
-* processor
-* memory
-* Cache
-* connector
-* slot
-
-（3）type全部编码列表：
-
-* BIOS
-* System
-* Base Board
-* Chassis
-* Processor
-* Memory Controller
-* Memory Module
-* Cache
-* Port Connector
-* System Slots
-* On Board Devices
-* OEM Strings
-* System Configuration Options
-* BIOS Language
-* Group Associations
-* System Event Log
-* Physical Memory Array
-* Memory Device
-* 32-bit Memory Error
-* Memory Array Mapped Address
-* Memory Device Mapped Address
-* Built-in Pointing Device
-* Portable Battery
-* System Reset
-* Hardware Security
-* System Power Controls
-* Voltage Probe
-* Cooling Device
-* Temperature Probe
-* Electrical Current Probe
-* Out-of-band Remote Access
-* Boot Integrity Services
-* System Boot
-* 64-bit Memory Error
-* Management Device
-* Management Device Component
-* Management Device Threshold Data
-* Memory Channel
-* IPMI Device
-* Power Supply
-* Additional Information
-* Onboard Device
-
 ### 实例
 
-```
-dmidecode -t 1  # 查看服务器信息
-dmidecode | grep 'Product Name' # 查看服务器型号 
+```bash
+
+# 需要sudo权限
+sudo dmidecode -t 1     # 系统信息（System Information）
+sudo dmidecode -t 2    # 基本主板信息（Base Board Information）
+sudo dmidecode -t 4    # CPU信息（Processor Information）
+sudo dmidecode -t 11   # 查看OEM信息 
+sudo dmidecode -t 16   # 查询内存信息
+sudo dmidecode -t 17   # 查看内存条数
+
+sudo dmidecode -t processor # CPU信息
+sudo dmidecode -t memory    # 查看内存信息
+# 查看内存的插槽数，已经使用多少插槽。每条内存多大。
+sudo dmidecode|grep -P -A5 "Memory\s+Device"|grep Size|grep -v Range
+# 查看内存支持的最大内存容量
+sudo dmidecode|grep -P 'Maximum\s+Capacity'
+# 查看内存的频率（查看内存信息的看Speed 项）
+sudo dmidecode|grep -A16 "Memory Device"|grep 'Speed'
+
+dmidecode |grep 'Product Name'  # 查看服务器型号 
 dmidecode |grep 'Serial Number' # 查看主板的序列号 
-dmidecode -t 2  # 查看主板信息
-dmidecode -s system-serial-number # 查看系统序列号 
-dmidecode -t memory # 查看内存信息 
-dmidecode -t 11 # 查看OEM信息 
-dmidecode -t 17 # 查看内存条数
-dmidecode -t 16 # 查询内存信息
-dmidecode -t 4  # 查看CPU信息
 
 cat /proc/scsi/scsi # 查看服务器硬盘信息
-```
-
-不带选项执行dmidecode命令通常会输出所有的硬件信息。dmidecode命令有个很有用的选项-t，可以按指定类型输出相关信息，假如要获得处理器方面的信息，则可以执行：
-
-```
-[root@localhost ~]# dmidecode -t processor
-# dmidecode 2.11
-SMBIOS 2.5 present.
-
-Handle 0x0001, DMI type 4, 40 bytes
-Processor Information
-        Socket Designation: Node 1 Socket 1
-        Type: Central Processor
-        Family: Xeon MP
-        Manufacturer: Intel(R) Corporation
-        id: C2 06 02 00 FF FB EB BF
-        Signature: Type 0, Family 6, Model 44, Stepping 2
-        Flags:
-                FPU (Floating-point unit on-chip)
-                VME (Virtual mode extension)
-                DE (Debugging extension)
-                PSE (Page size extension)
-                TSC (time stamp counter)
-                MSR (Model specific registers)
-                PAE (Physical address extension)
-                MCE (Machine check exception)
-                CX8 (CMPXCHG8 instruction supported)
-                APIC (On-chip APIC hardware supported)
-                SEP (Fast system call)
-                MTRR (Memory type range registers)
-                PGE (Page global enable)
-                MCA (Machine check architecture)
-                CMOV (Conditional move instruction supported)
-                PAT (Page attribute table)
-                PSE-36 (36-bit page size extension)
-                CLFSH (CLFLUSH instruction supported)
-                DS (Debug store)
-                ACPI (ACPI supported)
-                MMX (MMX technology supported)
-                FXSR (FXSAVE and FXSTOR instructions supported)
-                SSE (Streaming SIMD extensions)
-                SSE2 (Streaming SIMD extensions 2)
-                ss (Self-snoop)
-                HTT (Multi-threading)
-                TM (Thermal monitor supported)
-                PBE (Pending break enabled)
-        Version: Intel(R) Xeon(R) CPU           E5620  @ 2.40GHz
-        Voltage: 1.2 V
-        External Clock: 5866 MHz
-        Max Speed: 4400 MHz
-        Current Speed: 2400 MHz
-        Status: Populated, Enabled
-        Upgrade: ZIF Socket
-        L1 Cache Handle: 0x0002
-        L2 Cache Handle: 0x0003
-        L3 Cache Handle: 0x0004
-        Serial Number: Not Specified
-        Asset Tag: Not Specified
-        Part Number: Not Specified
-        Core Count: 4
-        Core Enabled: 4
-        Thread Count: 8
-        Characteristics:
-                64-bit capable
-
-Handle 0x0055, DMI type 4, 40 bytes
-Processor Information
-        Socket Designation: Node 1 Socket 2
-        Type: Central Processor
-        Family: Xeon MP
-        Manufacturer: Not Specified
-        ID: 00 00 00 00 00 00 00 00
-        Signature: Type 0, Family 0, Model 0, Stepping 0
-        Flags: None
-        Version: Not Specified
-        Voltage: 1.2 V
-        External Clock: 5866 MHz
-        Max Speed: 4400 MHz
-        Current Speed: Unknown
-        Status: Unpopulated
-        Upgrade: ZIF Socket
-        L1 Cache Handle: Not Provided
-        L2 Cache Handle: Not Provided
-        L3 Cache Handle: Not Provided
-        Serial Number: Not Specified
-        Asset Tag: Not Specified
-        Part Number: Not Specified
-        Characteristics: None
 ```
 
 查看内存的插槽数，已经使用多少插槽。每条内存多大，已使用内存多大

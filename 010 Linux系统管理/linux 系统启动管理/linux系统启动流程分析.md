@@ -1,113 +1,78 @@
 # linux系统启动流程分析
 
-## 启动顺序
+## 引言
 
-Linux 启动过程主要包括以下 4 个步骤：
+最近在看 Cobbler 相关资料，提到了要熟悉 Linux 系统的启动流程，很久没有接触这方面了，有些生疏遗忘了，
+于是重新复习了下，真要深究，可以分为好多步。
 
-​![](https://dn-simplecloud.shiyanlou.com/uid/8797/1509356873667.png-wm)​
+首先贴一张总结得比较好图：
 
-**1.**  **BIOS 自检：**
+​![Linux 操作系统启动流程图](assets/net-img-111242100-20240415162953-fhzh351.png)[http://img1.51cto.com/attachment/201206/111242100](http://img1.51cto.com/attachment/201206/111242100)
 
-计算机加电后，系统将自动读取 BIOS 中的硬件信息（如：显卡、内存、主板、CPU等）。然后查找启动设备并设置优先级。接着系统开始自检（POST，power on selftest），若有问题会给出提示信息，没有问题就启动执行硬件初始化，并设置 PnP（Plug-and-Play，即插即用）设备。最后启动驻留在硬盘主引导记录 MBR（MasterBoot Record，主引导分区）中的引导程序 GRUB 或 lilo。
+下面进行文字版本再说明：
 
-**2.**  **GRUB/lilo 引导启动程序：**
-
-用户通过 GRUB 或 lilo 引导加载程序启动 Linux 系统。引导程序只是将控制权交给内核，此时操作系统并未装入内存。其中，ubuntu 默认 GRUB 为引导加载程序。
-
-**3.**  **装载 Linux 内核：**
-
-最初的引导过程完成后，引导程序开始加载 Linux 内核。ubuntu 的 LInux 内核在 /boot 目录下。
-
-**4.**  **系统初始化：**
-
-Ubuntu 采用的是基于事件的启动管理器 — — Upstart，主要包括 3 个程序（init、telinit、runlevel）和相应配置文件目录（/etc/init、/etc/rcN.d、/etc/init.d）组成。系统内核首先会启动 init 进程，读取并运行 /etc/init 目录下的启动配置文件，init 启动任务时会读取默认的运行等级（runlevel），然后将结果给 upstart 的下一个组件 telinit 中。telinit 通过比较当前 runlevel 与将要进入的 runlevel 之间运行服务的不同，关闭不需要的服务项，启动目前未运行的服务，从而实现系统状态的装换。
-
-初始化阶段完成后，系统就可以准备接受用户登录。
-
-> bios：接管主板所有自检工作，掌握系统的启动，不见之间的兼容和程序管理等多项任务。连接软件与硬件设备的"桥梁"。
->
-> boot loader：grud 实际上是一个 boot loader，开机管理程序可以指定使用哪个核心文件来开机，并实际载入核心（kernel）到内存当中解压缩与执行，此时核心就能够开机在内存内活动，并侦测所有硬件信息与载入适当的驱动程序来使整部主机开始运行。
->
-> init 进程：系统开始的第一个工作，它是其他所有进程的父进程，一直处在运行状态，并且进程 id 号永远是第一个。作用是读取初始化脚本，完成系统相关管理任务。
-
-## 运行级别
-
-Linux 系统的运行级别由 init 启动的，可以通过 ps -ax 命令查看到 PID=1 是 init 进程（当前我们环境较为特殊，看到的内容与本地不符，在下一章节中我们有对 init 进程做详细的介绍）。
-
-init 是 Linux 内核启动的用户级别进程。ubuntu 的默认运行级别文件是 /etc/init/rc-sysinit.conf。
-
-在 /etc/rc$.d 目录中定义了各种运行级别的运行服务
+## 第一阶段：硬件引导启动阶段
 
 ```
-cd /etc
-ls | grep rc
+1.1 POST(Power On Self Test) 加电自检
+1.2 BIOS
+1.2.1 初始化硬件
+1.2.2 查找启动介质
+HDD: 查找启动硬盘的第一个扇区（MBR/BootSector）
+1.3 MBR
+1.3.1 Bootloader（启动装载程序）
+GRUB
+分区表
 ```
 
-我们来查看一下定义为 2 级别的服务
-
-​![](https://dn-simplecloud.shiyanlou.com/87971509431597943-wm)​
-
-> 上面的 rc.local 可以写入任何想要开机时就进行的工作，在启动的最后阶段，系统会执行存于 rc.local 中的命令
->
-> 目录里面的服务以 K 开头的是系统将终止对应的服务，以 S 开头的是系统将启动对应的服务。
->
-> S 或者 K 后面跟的数字是程序优先级，数值越小，优先级越高。数字后面的是服务的名称。
-
-可以看到有这几个运行级别：
-
-|级别|功能|
-| ---------| ---------------------------------------------------------------------------------------------|
-|0|关闭系统|
-|1|让系统进入单用户（S，恢复）模式|
-|2/3/4/5|多用户模式，图形登录界面，运行所有预定的系统服务。对于系统定制而言，运行级别2-5的作用相同。|
-|6|重启系统|
-|S|单用户与（恢复）模式，文本登录界面，只运行很少几项系统服务|
-
-**默认系统下，ubuntu 系统引导进入运行级别 2。**
-
-查看 /etc/init/rc-sysinit.conf 的内容
-
-​![](https://dn-simplecloud.shiyanlou.com/87971509432754859-wm)​
-
-可以看到 default runlevel = 2，即默认运行级别为 2。
-
-## 添加移除自启动程序
-
-### 1. 在 rc.local 脚本中设置
-
-/rc.local 脚本是 ubuntu 开机之后就会自动执行的一个脚本，位于 /etc 路径下。可以通过 root 权限对这个脚本进行内容修改添加命令执行等。
+## 第二阶段：BootLoader 启动引导阶段
 
 ```
-sudo vim /etc/rc/local
+2.1 Stage1
+执行 BootLoader 主程序(位于 MBR 前 446个字节)，它的作用是启动 Stage1.5 或 Stage2
+2.2 Stage1.5
+Stage1.5 是桥梁，由于 Stage2 较大，存放在文件系统中，需要 Stage1.5 引导位于文件系统中的 Stage2
+2.3 Stage2
+Stage2 是 GRUB 的核心映像
+2.4 grub.conf
+Stage2 解析 grub.conf 配置文件，加载内核到内存中
 ```
 
-​![](https://dn-simplecloud.shiyanlou.com/87971509434747325-wm)​
-
-如果需要添加执行的操作，那么必须写在 exit 0 之前。
-
-### 2. 自定义脚本文件
-
-除了使用 rc.local 脚本来自启动开机项，还可以新建一个脚本文件 new.sh 来添加开机自启动项。
-
-首先，新建一个脚本：
+## 第三阶段：内核引导阶段
 
 ```
-vim new.sh
+3.1 /boot/kernel and Kernel parameter 
+内核初始化，加载基本的硬件驱动
+
+3.2 /boot/initrd
+引导 initrd 解压载入
+3.2.1 阶段一：在内存中释放供 kernel 使用的 root filesystem
+执行 initrd 文件系统中的 init，完成加载其他驱动模块
+3.2.2 阶段二：执行真正的根文件系统中的 /sbin/init 进程
 ```
 
-然后脚本到启动目录下：
+## 第四阶段：Sys V init 初始化阶段
 
 ```
-sudo mv new.sh /etc/init.d/new_service.sh
+4.1 /sbin/init
+4.1.1 /etc/inittab
+init 进程读取 /etc/inittab 文件，确定系统启动的运行级别
+4.1.2 /etc/rc.d/rc.sysinit
+执行系统初始化脚本，对系统进行基本的配置
+4.1.3 /etc/rc.d/rcN.d
+根据先前确定的运行级别启动对应运行级别中的服务
+4.1.4 /etc/rc.d/rc.local
+执行用户自定义的开机启动程序
+4.2 登录
+4.2.1 /sbin/mingetty (命令行登录)
+验证通过 执行 /etc/login 
+加载 /etc/profile  ~/.bash_profile  ~/.bash_login  ~/.profile
+取得 non-login Shell
+
+4.2.2 /etc/X11/prefdm (图形界面登录)
+gdm kdm xdm
+Xinit
+加载 ~/.xinitrc  ~/.xserverrc
 ```
 
-将自定义脚本添加至启动项中：
-
-```
-cd /etc/init.d/
-sudo update-rc.d new_service.sh defaults 95
-```
-
-其中，数值 95 表示一个优先级，越小表示执行的越早，可以按照自己的需要相应修改即可。
-
-> 由于实验楼环境的权限问题，不能验证该脚本的启动过程。
+## 第五阶段：启动完成

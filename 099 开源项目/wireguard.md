@@ -1,4 +1,4 @@
-# WireGuard
+# wireguard
 
 > [WireGuard](https://icloudnative.io/tags/wireguard/)  作为一个更先进、更现代的 VPN 协议，比起传统的 IPSec、OpenVPN 等实现，效率更高，配置更简单，并且已经合并入 Linux  内核，使用起来更加方便，简直就是 VPN 中的战斗机。越来越多的高人利用 WireGuard 实现很多奇奇怪怪的需求。例如国内与国外机器通过  WireGuard 打通隧道，变成伪 IPLC 专线；或者打通本地与 Kubernetes 集群的网络。
 
@@ -33,22 +33,8 @@
 [官方安装文档](https://www.wireguard.com/install/) ，或者查看 [如何在五分钟内装好 WireGuard？](https://mp.weixin.qq.com/s?__biz=MzU1MzY4NzQ1OA==&mid=2247488853&idx=1&sn=38acb5689db9d9d69ab1ebc78248e0ed&chksm=fbee5598cc99dc8ee81dc6e2a6ed12bb1fd61efd19f152c75e6e41aadb79a15562d7a6c9cb81&mpshare=1&scene=1&srcid=1118udSysN19LYkQxZEVWFTY&sharer_sharetime=1605681632258&sharer_shareid=8eaca72194dae7b3d51d5c708436eee4&key=8236791ccb71351070dff27fe2ad7a9f146455609c8c7a4bc57532e008e6e2a92c27e10b673a090dd88e54740c3391dbc2623a4128ba12f4ebfc9f83dbaf4ec0e6f01195f693765eb5690757359f4eaecfd37a78bb722773f7c6fa6a83cfbe73fa5273902c5aa16b765ece15a9130e8b12a3496d7bf2ae684ac9200cc5f39a31&ascene=1&uin=MzA1MzI4OTMzMQ==&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AREByymqoZ6jfJZckbtVD7I=&pass_ticket=Jm9uDmvylBr7yM4ArNVQwkHhP3TB921kMFgCmo8A4uq+xezPGCG3aYKbPKyDMclJ&wx_header=0) ECS 是 linux 系统的话内核要5.x以上，没有就升级下内核，其他个人 pc 电脑则下载客户端，当然软路由的话则去找个带 wireguard的固件。
 
 ```bash
-yum -y install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
-rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-yum --enablerepo=elrepo-kernel install -y kernel-lt
-
-yum -y --enablerepo=elrepo-kernel install kernel-lt-{devel,headers,perf}
-# 失败就加   --skip-broken 
-
-
-awk -F\' '$1=="menuentry " {print i++ " : " $2}' /etc/grub2.cfg
-
-#看数字
-grub2-set-default 2
-grub2-mkconfig -o /etc/grub2.cfg
-reboot
-
 yum install dkms kmod-wireguard wireguard-tools
+# sudo apt install wireguard
 
 reboot
 

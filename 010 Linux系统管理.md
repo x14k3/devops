@@ -15,7 +15,24 @@
   * 📄 [dattobd](siyuan://blocks/20231110105237-toah5db)
   * 📄 [namespace](siyuan://blocks/20240414213106-fspib9h)
   * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
+  * 📄 [tuna](siyuan://blocks/20240418114400-4dvd0xp)
   * 📄 [udev](siyuan://blocks/20240205174149-6m3swxy)
+* 📑 [linux 安全管理](siyuan://blocks/20240415100847-65xicz6)
+
+  * 📄 [firewalld](siyuan://blocks/20231110105237-htsujad)
+  * 📑 [iptables](siyuan://blocks/20231110105237-f3d4oum)
+
+    * 📄 [iptables 示例](siyuan://blocks/20240314194239-attjy4f)
+* 📑 [linux 文件属性和权限](siyuan://blocks/20231110105237-z29l1ho)
+
+  * 📄 [1. Linux 文件属性和权限详解](siyuan://blocks/20231110105237-6vj74h0)
+  * 📄 [2. Linux 文件拥有者和所属组](siyuan://blocks/20231110105237-4ptjmen)
+  * 📄 [3. Linux 文件隐藏属性](siyuan://blocks/20231110105237-27tsh3j)
+  * 📄 [4. Linux ACL访问控制权限](siyuan://blocks/20231110105237-3oquv3c)
+  * 📄 [5. Linux mask有效权限详解](siyuan://blocks/20231110105237-cz79885)
+  * 📄 [6. Linux umask详解：令新建文件和目录拥有默认权限](siyuan://blocks/20231110105237-dvi304y)
+  * 📄 [7. Linux sudo命令用法详解](siyuan://blocks/20231110105237-p8m7zix)
+  * 📄 [8. linux PAM文件](siyuan://blocks/20231110105237-vmjw86n)
 * 📑 [linux 文件系统管理](siyuan://blocks/20231110105237-mekft9v)
 
   * 📄 [1. 硬盘结构（机械硬盘和固态硬盘）详解](siyuan://blocks/20231110105237-h46cl9m)
@@ -30,17 +47,6 @@
 
   * 📄 [linux logrotate-日志切割工具](siyuan://blocks/20231110105237-z4jw6h5)
   * 📄 [linux rsyslog-日志系统](siyuan://blocks/20231110105237-jcomrbm)
-* 📑 [linux 权限管理](siyuan://blocks/20231110105237-z29l1ho)
-
-  * 📄 [1. Linux 权限管理的重要性](siyuan://blocks/20231110105237-b6ql61l)
-  * 📄 [2. Linux 文件拥有者和所属组](siyuan://blocks/20231110105237-4ptjmen)
-  * 📄 [3. Linux 文件属性和权限详解](siyuan://blocks/20231110105237-6vj74h0)
-  * 📄 [4. Linux umask详解：令新建文件和目录拥有默认权限](siyuan://blocks/20231110105237-dvi304y)
-  * 📄 [5. Linux ACL访问控制权限](siyuan://blocks/20231110105237-3oquv3c)
-  * 📄 [6. Linux mask有效权限详解](siyuan://blocks/20231110105237-cz79885)
-  * 📄 [7. Linux 隐藏属性](siyuan://blocks/20231110105237-27tsh3j)
-  * 📄 [8. Linux sudo命令用法详解](siyuan://blocks/20231110105237-p8m7zix)
-  * 📄 [9. linux PAM文件](siyuan://blocks/20231110105237-vmjw86n)
 * 📑 [linux 概念释义](siyuan://blocks/20240403215529-w933ywi)
 
   * 📄 [1. 一切皆文件](siyuan://blocks/20240403215644-0halvvy)
@@ -65,7 +71,9 @@
   * 📄 [7. Linux su命令](siyuan://blocks/20231110105237-pveuo4k)
 * 📑 [linux 系统启动管理](siyuan://blocks/20231110105237-o72akll)
 
-  * 📄 [linux 单用户模式](siyuan://blocks/20240308135222-dmx54af)
+  * 📑 [linux 单用户模式](siyuan://blocks/20240308135222-dmx54af)
+
+    * 📄 [CentOS 7 重置 root 密码](siyuan://blocks/20240415163403-xaqe3qu)
   * 📄 [linux 救援模式](siyuan://blocks/20240308135705-p9clypp)
   * 📄 [linux系统启动流程分析](siyuan://blocks/20240312200721-8dlhfph)
 * 📑 [linux 网络管理](siyuan://blocks/20231110105237-q0mg0iy)
@@ -92,19 +100,13 @@
 * 📑 [linux 进程管理](siyuan://blocks/20231110105237-jjrt2xm)
 
   * 📄 [linux proc-pid-status 文件](siyuan://blocks/20231110105237-xkps35d)
-  * 📄 [linux supervisord](siyuan://blocks/20231110105237-f29gce8)
-  * 📑 [linux systemd](siyuan://blocks/20231110105237-qw55643)
+  * 📄 [supervisord](siyuan://blocks/20231110105237-f29gce8)
+  * 📄 [systemctl和service、chkconfig命令的关系](siyuan://blocks/20231110105237-rzhqmgg)
+  * 📑 [systemd](siyuan://blocks/20240423111840-rbgqjc1)
 
     * 📄 [Systemd 定时器](siyuan://blocks/20240403215034-mgi9u5o)
     * 📄 [Systemd 开机自动挂载硬盘](siyuan://blocks/20240403215120-kex3dr0)
-    * 📄 [Systemd 开机自启脚本](siyuan://blocks/20240403215142-0ckpbbb)
-    * 📄 [Systemd 进程管理工具](siyuan://blocks/20240403214843-ssr0urc)
-  * 📄 [systemctl和service、chkconfig命令的关系](siyuan://blocks/20231110105237-rzhqmgg)
-* 📑 [linux 防火墙](siyuan://blocks/20231110105237-frq5f12)
-
-  * 📄 [firewalld](siyuan://blocks/20231110105237-htsujad)
-  * 📑 [iptables](siyuan://blocks/20231110105237-f3d4oum)
-
-    * 📄 [iptables 示例](siyuan://blocks/20240314194239-attjy4f)
+    * 📄 [Systemd-命令篇](siyuan://blocks/20240423111931-k9khkso)
+    * 📄 [Systemd-实战篇](siyuan://blocks/20240423114431-w3qdfrv)
 
 ‍

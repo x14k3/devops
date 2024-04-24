@@ -46,7 +46,7 @@ make -j4 && make install
 chown -R nginx.nginx /data/nginx/
 
 # 添加Nginx系统服务
-cat >  /usr/lib/systemd/system/nginx.service <<EOF
+cat >  /etc/systemd/system/nginx.service <<EOF
 [Unit]
 Description=nginx
 After=network.target

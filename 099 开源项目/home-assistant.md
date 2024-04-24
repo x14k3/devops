@@ -6,7 +6,11 @@
 #拉取hass的最新版镜像(注意：根据自己需求选择对应版本，并不是越新越好)
 docker pull homeassistant/home-assistant:latest
 #创建容器并运行
-docker run -d --name="hass" -v /data/homeassistant/config:/config -p 8123:8123 homeassistant/home-assistant:latest
+docker run -d --name="hass" \
+-v /data/application/homeassistant/config:/config \
+-p 8123:8123 \
+--restart always \
+homeassistant/home-assistant:latest
 
 ```
 

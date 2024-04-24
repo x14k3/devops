@@ -165,7 +165,7 @@ You have selected Linux
 语法格式
 
 ```
-case word in
+case $1 in
     pattern1)
         # statements1
         ;;

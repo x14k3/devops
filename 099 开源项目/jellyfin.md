@@ -62,10 +62,11 @@ $ sudo mkdir -p /data/jellyfin/{config,cache}
 ```bash
 docker run -d --name jellyfin \
 -e PUID=1000 -e PGID=1000 -e TZ=Asia/Shanghai \
+--net=host \
 -p 8096:8096 \
--v /data/jellyfin/config:/config \
--v /data/jellyfin/cache:/cache \
--v /data/archive/media:/media \
+-v /data/application/jellyfin/config:/config \
+-v /data/application/jellyfin/cache:/cache \
+-v /data/media:/media \
 --device=/dev/dri:/dev/dri \
 --add-host=api.themoviedb.org:13.224.161.90 \
 --add-host=api.themoviedb.org:13.35.8.65 \
@@ -181,5 +182,7 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 ### 4.2 XMLTV 文件
 
 [https://epg.112114.xyz/pp.xml](http://epg.51zmt.top:8000/e.xml)
+
+http://epg.51zmt.top:8000/e.xml
 
 ‍

@@ -44,8 +44,8 @@ cat /proc/sys/kernel/random/uuid
 ```json
 {
   "log": {
-        "access": "/data/v2ray/access.log",
-        "error": "/data/v2ray/error.log",
+        "access": "access.log",
+        "error": "error.log",
         "loglevel": "warning"
     },
   "inbounds": [
@@ -56,7 +56,7 @@ cat /proc/sys/kernel/random/uuid
         "clients": [
           {
             "id": "7e471537-72cd-4b32-aab5-xxxxxxxxxxx",
-            "alterId": 0
+            "alterId": 16
           }
         ]
       }
@@ -77,8 +77,8 @@ cat /proc/sys/kernel/random/uuid
 ```json
 {
   "log": {
-        "access": "/data/v2ray/access.log",
-        "error": "/data/v2ray/error.log",
+        "access": "access.log",
+        "error": "error.log",
         "loglevel": "warning"
     },
   "inbounds": [
@@ -89,7 +89,7 @@ cat /proc/sys/kernel/random/uuid
         "clients": [
           {
             "id": "7e471537-72cd-4b32-aab5-xxxxxxxxxxx",
-            "alterId": 0
+            "alterId": 16
           }
         ]
       },
@@ -206,6 +206,7 @@ User=v2ray
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
+WorkingDirectory=/data/application/v2ray
 ExecStart=/data/application/v2ray/v2ray -config /data/application/v2ray/config.json
 Restart=on-failure
 RestartPreventExitStatus=23
@@ -220,10 +221,129 @@ systemctl start v2ray
 
 ```
 
-‍
+# v2ray配置路由规则
 
-## apple
-
-i2Ray
+```json
+{
+  "log": {
+    "access": "access.log",
+    "error": "error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+	  "tag": "socks",
+      "port": 10808,
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+		"routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    },
+    {
+	  "tag": "http",
+      "port": 10809,
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+		"routeOnly": false
+      },
+	  "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy-vmess",
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "doshell.top",
+            "port": 443,
+            "users": [
+              {
+                "id": "673-------b-4f6e-9e-------689",
+                "alterId": 0,
+				"security": "chacha20-poly1305"
+              }
+            ]
+          }
+        ]
+      },
+	  "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "show": false
+        },
+        "wsSettings": {
+          "path": "/vvmess",
+          "headers": {}
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1
+      }
+    },
+    {
+      "tag": "direct",
+      "settings": {},
+      "protocol": "freedom"
+    }
+  ],
+  "dns": {
+    "server": [
+      "8.8.8.8",
+      "114.114.114.114"
+    ]
+  },
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "domain": [
+          "cnblogs.com"
+        ],
+        "outboundTag": "proxy-vmess"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:cn"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "ip": [
+          "geoip:cn",
+          "geoip:private"
+        ]
+      }
+    ]
+  }
+}
+```
 
 ‍

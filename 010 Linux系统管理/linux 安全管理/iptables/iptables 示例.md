@@ -150,7 +150,10 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 公网`210.14.67.7`​让内网`192.168.188.0/24`​上网
 
 ```bash
-iptables -t nat -A POSTROUTING -s 192.168.188.0/24 -j SNAT --to-source 210.14.67.127
+# 添加nat规则，对所有源地址（openvpn为客户端分配的地址）为10.66.1.0/24的数据包转发后进行源地址伪装，伪装成openvpn服务器内网地址192.168.1.1，这样就可以和内网的其它机器通信了。
+iptables -t nat -A POSTROUTING -s 10.66.1.0/24 -j SNAT --to-source 192.168.1.1
+
+iptables -t nat -A POSTROUTING -s 10.66.1.0/24 -o eth0 -j MASQUERADE
 ```
 
 ### 16. 端口映射

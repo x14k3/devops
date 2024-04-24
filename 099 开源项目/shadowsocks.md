@@ -1,6 +1,4 @@
-# Ss-libev
-
-# Ss-libev
+# shadowsocks
 
 ## 部署
 
