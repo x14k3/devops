@@ -12,8 +12,10 @@
   * 📄 [lsof](siyuan://blocks/20231110105237-4r3sfie)
   * 📄 [minicom](siyuan://blocks/20231222133047-w0fkiok)
   * 📄 [mkisofs](siyuan://blocks/20231121220044-gmhlmvl)
+  * 📄 [mknode](siyuan://blocks/20240508152007-zxfqks8)
   * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
   * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
+  * 📄 [script](siyuan://blocks/20240507182310-uzcb81j)
   * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
   * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
   * 📄 [光盘刻录](siyuan://blocks/20231115103835-hjm12jh)
@@ -33,6 +35,12 @@
   * 📄 [gzip](siyuan://blocks/20240306193931-dfvzqy2)
   * 📄 [tar](siyuan://blocks/20240405214800-btrtv9d)
   * 📄 [xz](siyuan://blocks/20240405214608-b53w02j)
+* 📑 [备份与恢复](siyuan://blocks/20240430150341-58o2xo0)
+
+  * 📄 [dd (Duplicated 2024-04-30 15:19:00)](siyuan://blocks/20240430151900-svn0rdm)
+  * 📄 [dump](siyuan://blocks/20231110105237-onn32fn)
+  * 📄 [restore](siyuan://blocks/20240430151809-zj5eboi)
+  * 📄 [rsync (Duplicated 2024-04-30 15:52:03)](siyuan://blocks/20240430155203-zy5l2at)
 * 📑 [性能监控](siyuan://blocks/20240405214026-dbaayor)
 
   * 📄 [UnixBench](siyuan://blocks/20240408181639-8saj9ke)
@@ -56,7 +64,6 @@
 
   * 📄 [dd](siyuan://blocks/20231110105237-nz8e8wt)
   * 📄 [du](siyuan://blocks/20231110105237-qmoqtff)
-  * 📄 [dump](siyuan://blocks/20231110105237-onn32fn)
   * 📄 [dumpe2fs](siyuan://blocks/20231110105237-wq290rp)
   * 📄 [fdisk](siyuan://blocks/20231110105237-qvd3pvd)
   * 📄 [fsck](siyuan://blocks/20231110105237-uti3vbu)
@@ -70,6 +77,7 @@
 * 📑 [文本处理](siyuan://blocks/20240405215737-araolk5)
 
   * 📄 [bc](siyuan://blocks/20231110105237-zwk6t5r)
+  * 📄 [column](siyuan://blocks/20240507120507-wzgrktz)
   * 📄 [cp](siyuan://blocks/20231110105237-fv7wfnt)
   * 📄 [cut](siyuan://blocks/20231110105237-1v3brfj)
   * 📄 [diff](siyuan://blocks/20231110105237-rz86zem)
@@ -84,6 +92,7 @@
 * 📑 [网络相关](siyuan://blocks/20240405220105-p3fp88a)
 
   * 📄 [arping](siyuan://blocks/20231110105237-uu8u1pl)
+  * 📄 [iperf3](siyuan://blocks/20240429152237-h3ij7le)
   * 📄 [nc](siyuan://blocks/20240314200041-l7hgq6t)
   * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
   * 📄 [tcpdump](siyuan://blocks/20231214163310-dut0ld3)

@@ -10,10 +10,13 @@
 * 📄 [lsof](siyuan://blocks/20231110105237-4r3sfie)
 * 📄 [minicom](siyuan://blocks/20231222133047-w0fkiok)
 * 📄 [mkisofs](siyuan://blocks/20231121220044-gmhlmvl)
+* 📄 [mknode](siyuan://blocks/20240508152007-zxfqks8)
 * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
 * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
+* 📄 [script](siyuan://blocks/20240507182310-uzcb81j)
 * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
 * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
+* 📄 [光盘刻录](siyuan://blocks/20231115103835-hjm12jh)
 
 ‍
 

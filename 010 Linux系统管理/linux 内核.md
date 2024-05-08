@@ -5,6 +5,7 @@
 * 📄 [PAM](siyuan://blocks/20231110105237-vmjw86n)
 * 📄 [cgroups](siyuan://blocks/20240414212933-txv8edc)
 * 📄 [dattobd](siyuan://blocks/20231110105237-toah5db)
+* 📄 [ipvs](siyuan://blocks/20240507154926-r4py9bt)
 * 📄 [namespace](siyuan://blocks/20240414213106-fspib9h)
 * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
 * 📄 [tuntap](siyuan://blocks/20240418114400-4dvd0xp)

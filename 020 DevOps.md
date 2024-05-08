@@ -1,6 +1,5 @@
 # 020 DevOps
 
-* 📄 [Confluence](siyuan://blocks/20231110105237-rzoarng)
 * 📑 [ELK](siyuan://blocks/20231110105237-4b7ouf3)
 
   * 📄 [ELK 概述](siyuan://blocks/20231110105237-stz3a0r)
@@ -8,9 +7,6 @@
   * 📄 [elk 8.0.0 部署](siyuan://blocks/20231110105237-lbuh8ql)
   * 📄 [elk-cerebro](siyuan://blocks/20231110105237-mczrg7o)
   * 📄 [elk优化-日常运维](siyuan://blocks/20231110105237-ldthbxc)
-* 📑 [JIRA](siyuan://blocks/20231110105237-idhehr8)
-
-  * 📄 [Jira 概述](siyuan://blocks/20231110105237-bx7g8pv)
 * 📑 [Jenkins](siyuan://blocks/20231110105237-328haj8)
 
   * 📄 [Jenkins 命令](siyuan://blocks/20231110105237-jzbujv8)
@@ -18,9 +14,13 @@
 * 📑 [JumpServer](siyuan://blocks/20231110105237-5qb923l)
 
   * 📄 [JumpServer 部署](siyuan://blocks/20231110105237-rp657mq)
+* 📑 [Sentinel](siyuan://blocks/20240508162532-gnxe14y)
+
+  * 📄 [Sentinel单机部署](siyuan://blocks/20240508162544-unzjx5z)
 * 📑 [Skywalking](siyuan://blocks/20231110105237-zh0aumb)
 
-  * 📄 [skywalking 部署](siyuan://blocks/20231110105237-fe7ld8z)
+  * 📄 [Skywalking+ELK](siyuan://blocks/20231110105237-fe7ld8z)
+  * 📄 [Skywalking单机部署](siyuan://blocks/20240508161412-eax2bd4)
 * 📑 [VCS](siyuan://blocks/20231110105237-rxl9wzo)
 
   * 📄 [git](siyuan://blocks/20231110105237-x78uhqu)
@@ -40,12 +40,21 @@
   * 📄 [Ansible-playbook](siyuan://blocks/20231110105237-4387t74)
   * 📄 [Ansible-role](siyuan://blocks/20231110105237-636g4om)
   * 📄 [Ansible](siyuan://blocks/20231110105237-ir8wneo)
+  * 📄 [Confluence](siyuan://blocks/20231110105237-rzoarng)
+* 📑 [atlassian](siyuan://blocks/20240508143002-cogj8nl)
+
+  * 📄 [Atlassian之jiar和confluence的docker部署安装 ](siyuan://blocks/20240508144454-x52bnck)
 * 📑 [gitlab](siyuan://blocks/20231110105237-pvnzxat)
 
   * 📄 [git 分支模型](siyuan://blocks/20231110105237-de3v78s)
   * 📄 [gitlab基本使用](siyuan://blocks/20231110105237-pt6h5xl)
   * 📄 [gitlab备份](siyuan://blocks/20231110105237-uet6iwz)
   * 📄 [gitlab部署](siyuan://blocks/20231110105237-cbz0ynn)
+* 📑 [nacos](siyuan://blocks/20231110105237-hbkray9)
+
+  * 📄 [nacos 单机部署](siyuan://blocks/20231110105237-aspjd9u)
+  * 📄 [nacos 概述](siyuan://blocks/20231110105237-0v7pqpb)
+  * 📄 [nacos 集群部署](siyuan://blocks/20231110105237-1y89vd5)
 * 📑 [prometheus](siyuan://blocks/20231110105237-r2bgujf)
 
   * 📑 [1. Prometheus基础](siyuan://blocks/20231110105237-njinktc)
@@ -101,8 +110,9 @@
     * 📄 [6.2 基于Consul的服务发现](siyuan://blocks/20231110105237-ifj9i1g)
     * 📄 [6.3 服务发现与Relabeling](siyuan://blocks/20231110105237-t62yazm)
   * 📄 [7. 监控Kubernetes](siyuan://blocks/20231110105237-jfohuak)
-* 📑 [概念](siyuan://blocks/20240408214008-tiy6f39)
+* 📑 [一些概念释义](siyuan://blocks/20240408214008-tiy6f39)
 
+  * 📄 [分布式](siyuan://blocks/20240508140520-3s2hdp4)
   * 📄 [微服务](siyuan://blocks/20240408213945-a14hm7d)
 
 ‍

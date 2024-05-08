@@ -226,11 +226,14 @@ systemctl set-property nginx MemoryLimit=100M --runtime
 
 目前来说，可以不用过多关注来自其它位置的指令，应该给予重点关注的是来自systemd.service自身的指令，比如：
 
-* Type：指定服务的管理类型
-* ExecStart：指定启动服务时执行的命令行
-* ExecStop：指定停止服务时运行的命令
-* ExecReload：指定重载服务进程时运行的命令
-* Restart：指定systemd是否要自动重启服务进程以及什么情况下重启
+```bash
+Type             指定服务的管理类型
+ExecStart        指定启动服务时执行的命令行
+ExecStop         指定停止服务时运行的命令
+ExecReload       指定重载服务进程时运行的命令
+Restart          指定systemd是否要自动重启服务进程以及什么情况下重启
+WorkingDirectory 指定工作目录
+```
 
 特别是Type指令，它直接影响`[Service]`​段中的多项配置方式。
 

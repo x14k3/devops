@@ -91,7 +91,7 @@ select * from empView20;
 
 ​![图片](assets/network-asset-640-20240106163247-gkyg2e1.png)​
 
-###### 语法2：
+语法2：
 
 ```
 create or replace view 视图名称 as 子查询

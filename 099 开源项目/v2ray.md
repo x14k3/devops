@@ -72,6 +72,78 @@ cat /proc/sys/kernel/random/uuid
 
 ```
 
+‍
+
+## 配置VLESS协议
+
+```json
+{
+  "log": {
+        "access": "access.log",
+        "error": "error.log",
+        "loglevel": "warning"
+    },
+  "inbounds": [
+    {
+      "tag": "VLESS-in",
+      "port": 8901,
+      "protocol": "VLESS",
+      "settings": {
+        "clients": [
+          {56----90-4e9b-4------9ed-a------------",
+            "alterId": 0
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {"path": "/hahah"}
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": { },
+      "tag": "blocked"
+    }
+  ],
+    "dns": {
+    "servers": [
+      "https+local://1.1.1.1/dns-query",
+      "1.1.1.1",
+      "1.0.0.1",
+      "8.8.8.8",
+      "8.8.4.4",
+      "localhost"
+      ]
+    },
+    "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "protocol": ["bittorrent"],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
+}
+```
+
+‍
+
 ## 配置 WebSocket + TLS + Web
 
 ```json
@@ -88,7 +160,7 @@ cat /proc/sys/kernel/random/uuid
       "settings": {
         "clients": [
           {
-            "id": "7e471537-72cd-4b32-aab5-xxxxxxxxxxx",
+            "id": "7e------------32-aab5-xx-------",
             "alterId": 16
           }
         ]
@@ -162,9 +234,6 @@ wget https://github.com/v2fly/v2ray-core/releases/download/v4.45.2/v2ray-linux-6
 mkdir -p /data/v2ray
 unzip -qd /data/v2ray/ 2ray-linux-64.zip
 
-# 修改配置文件
-# 可以使用在windows客户端配置完成后，导出所选服务器为客户端配置
-
 # 启动服务
 nohup ./v2ray -config ./config.json >> ./v2ray.log 2>&1 &
 
@@ -187,6 +256,111 @@ source .bashrc
 
 start_v2ray
 ```
+
+配置文件参考
+
+```json
+{
+  "log": {
+    "access": "access.log",
+    "error": "error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "tag": "socks",
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    },
+    {
+      "tag": "http",
+      "port": 10809,
+      "listen": "127.0.0.1",
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "VLESS",
+      "settings": {
+        "vnext": [
+          {
+            "address": "doshe1200.cn",
+            "port": 20051,
+            "users": [
+              {
+                "id": "x---------4e9b-4f6e-9ed5-91------",
+                "alterId": 0,
+				"encryption": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "show": false
+        },
+        "wsSettings": {
+          "path": "/lliiis",
+          "headers": {}
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      }
+    }
+  ]
+}
+```
+
+‍
 
 使用守护进程管理
 
@@ -221,129 +395,49 @@ systemctl start v2ray
 
 ```
 
-# v2ray配置路由规则
+‍
 
-```json
+## 路由规则
+
+```bash
 {
-  "log": {
-    "access": "access.log",
-    "error": "error.log",
-    "loglevel": "warning"
-  },
-  "inbounds": [
-    {
-	  "tag": "socks",
-      "port": 10808,
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-		"routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-	  "tag": "http",
-      "port": 10809,
-      "protocol": "http",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-		"routeOnly": false
-      },
-	  "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    }
-  ],
-  "outbounds": [
-    {
-      "tag": "proxy-vmess",
-      "protocol": "vmess",
-      "settings": {
-        "vnext": [
-          {
-            "address": "doshell.top",
-            "port": 443,
-            "users": [
-              {
-                "id": "673-------b-4f6e-9e-------689",
-                "alterId": 0,
-				"security": "chacha20-poly1305"
-              }
-            ]
-          }
-        ]
-      },
-	  "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "allowInsecure": false,
-          "show": false
-        },
-        "wsSettings": {
-          "path": "/vvmess",
-          "headers": {}
-        }
-      },
-      "mux": {
-        "enabled": false,
-        "concurrency": -1
-      }
-    },
-    {
-      "tag": "direct",
-      "settings": {},
-      "protocol": "freedom"
-    }
-  ],
   "dns": {
-    "server": [
-      "8.8.8.8",
-      "114.114.114.114"
+    "servers": [
+      "114.114.114.114",
+      {
+        "address": "1.1.1.1",
+        "port": 53,
+        "domains": [
+          "geosite:geolocation-!cn"
+        ]
+      }
     ]
   },
   "routing": {
     "domainStrategy": "IPOnDemand",
     "rules": [
+      // 第一条规则
       {
         "type": "field",
-        "domain": [
-          "cnblogs.com"
-        ],
-        "outboundTag": "proxy-vmess"
+        "outboundTag": "direct", // freedom 的 tag
+        "domain": ["geosite:cn"] // 中国大陆网站
       },
+      // 第二条规则
       {
         "type": "field",
-        "domain": [
-          "geosite:cn"
-        ],
-        "outboundTag": "direct"
-      },
-      {
-        "type": "field",
-        "outboundTag": "direct",
+        "outboundTag": "direct", // freedom 的 tag
         "ip": [
-          "geoip:cn",
+          "geoip:cn", // 中国大陆 IP
           "geoip:private"
         ]
-      }
+      },
+      // 第三条规则
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "network": "udp,tcp"
+      }  
     ]
   }
 }
 ```
-
-‍

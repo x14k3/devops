@@ -121,11 +121,19 @@ $ systemctl list-units --type=service
 
 ```bash
 # 显示系统状态
-$ systemctl status
+systemctl status
 # 显示单个 Unit 的状态
-$ sysystemctl status bluetooth.service
+sysystemctl status bluetooth.service
 # 显示远程主机的某个 Unit 的状态
-$ systemctl -H root@rhel7.example.com status httpd.service
+systemctl -H root@rhel7.example.com status httpd.service
+# 要查看所有服务的状态
+systemctl list-units --type=service
+# 列出所有active状态（运行或退出）的服务
+systemctl list-units --type=service --state=active
+# 列出所有正在运行的服务
+systemctl list-units --type=service --state=running
+# 列出所有enabled状态的服务
+systemctl list-unit-files --state=enabled
 ```
 
 除了`status`​命令，`systemctl`​还提供了三个查询状态的简单方法，主要供脚本内部的判断语句使用。
