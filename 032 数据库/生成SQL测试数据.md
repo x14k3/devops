@@ -14,85 +14,49 @@ insert into test select generate_series(1,100), clock_timestamp(), md5(random():
 ```bash
 sqlplus jy2web/Ninestar123
 
-create table test3 as 
+create table test as 
 select rownum as id,
 to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
 trunc(dbms_random.value(0, 100000)) as random_id,
 dbms_random.string('x', 20) random_string from dual connect by level <= 100000;
 ```
 
-```sql
-CREATE TABLE student(
-    s_id number,
-    s_name VARCHAR2(20) NOT NULL,
-    s_sex VARCHAR2(10) DEFAULT 'man',
-    s_age NUMBER NOT NULL,
-    CONSTRAINT pk_sid PRIMARY KEY (s_id)
-);
-
-CREATE TABLE course(
-    c_id NUMBER,
-    c_name VARCHAR2(20) NOT NULL,
-    c_time NUMBER,
-    CONSTRAINT pk_cid PRIMARY KEY (c_id),
-    CONSTRAINT uk_cname UNIQUE (c_name)
-);
-
-CREATE TABLE sc(
-    s_id NUMBER,
-    c_id NUMBER,
-    grade NUMBER,
-    CONSTRAINT pk_scid PRIMARY KEY (s_id, c_id),
-    CONSTRAINT fk_sid FOREIGN KEY (s_id) REFERENCES student(s_id),
-    CONSTRAINT fk_cid FOREIGN KEY (c_id) REFERENCES course(c_id)
-);
-
---如下命令向 course 表插入了 7 条数据，向 student 和 sc 表中插入了十万条随机数据：
-BEGIN
-  INSERT INTO course VALUES(1, 'java', 13);
-  INSERT INTO course VALUES(2, 'python', 12);
-  INSERT INTO course VALUES(3, 'c', 10);
-  INSERT INTO course VALUES(4, 'spark', 15);
-  INSERT INTO course VALUES(5, 'php', 20);
-  INSERT INTO course VALUES(6, 'hadoop', 11);
-  INSERT INTO course VALUES(7, 'oracle', 22);
-  FOR i IN 1..100000 LOOP
-    INSERT INTO /*+ append */ student VALUES(i,'syl'||i,DECODE(TRUNC(DBMS_RANDOM.VALUE(0,2)),0,'man',1,'female'),TRUNC(DBMS_RANDOM.VALUE(12,80)));
-    INSERT INTO /*+ append */ sc VALUES(i,TRUNC(DBMS_RANDOM.VALUE(1,8)),TRUNC(DBMS_RANDOM.VALUE(0,101)));
-    IF MOD(i,5000)=0 THEN
-           COMMIT;
-    END IF;
-  END LOOP;
-END;
-/
-
---提示：数据量巨大，需要等待一段时间。语句中的/*+ append */代表采用直接路径插入，使插入更快，每 5000 行提交一次也是为了提高速度。
-
---接下来看看是否都插入成功了：
-SQL> select count(*) from student;
-
-  COUNT(*)
-----------
-    100000
-
-SQL> select count(*) from course;
-
-  COUNT(*)
-----------
-     7
-
-SQL> select count(*) from sc;
-
-  COUNT(*)
-----------
-    100000
-```
-
-‍
-
-‍
-
 ## Mysql
 
 ```bash
+
+CREATE TABLE `app_user`(
+    `id` INT  NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` VARCHAR(50) DEFAULT '' COMMENT '用户名称',
+    `email` VARCHAR(50) NOT NULL COMMENT '邮箱',
+    `phone` VARCHAR(20) DEFAULT '' COMMENT '手机号',
+    `gender` TINYINT DEFAULT '0' COMMENT '性别（0-男  ： 1-女）',
+    `password` VARCHAR(100) NOT NULL COMMENT '密码',
+    `age` TINYINT DEFAULT '0' COMMENT '年龄',
+    `create_time` DATETIME DEFAULT NOW(),
+    `update_time` DATETIME DEFAULT NOW(),
+    PRIMARY KEY (`id`) 
+)ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT='app用户表'
+
+
+SET GLOBAL log_bin_trust_function_creators=TRUE; -- 创建函数一定要写这个
+DELIMITER $$   -- 写函数之前必须要写，该标志
+
+CREATE FUNCTION mock_data()            -- 创建函数（方法）
+RETURNS INT                            -- 返回类型
+BEGIN                                  -- 函数方法体开始
+    DECLARE num INT DEFAULT 100;   -- 定义一个变量num为int类型。默认值为100 0000
+    DECLARE i INT DEFAULT 0; 
+
+    WHILE i < num DO                   -- 循环条件
+         INSERT INTO app_user(`name`,`email`,`phone`,`gender`,`password`,`age`) 
+         VALUES(CONCAT('用户',i),'2548928007qq.com',CONCAT('18',FLOOR(RAND() * ((999999999 - 100000000) + 1000000000))),FLOOR(RAND()  *  2),UUID(),FLOOR(RAND()  *  100));
+        SET i =  i + 1;    -- i自增  
+    END WHILE;             -- 循环结束
+    RETURN i;
+END;                       -- 函数方法体结束
+$$
+DELIMITER ;                -- 写函数之前必须要写，该标志
+
+SELECT mock_data();        -- 调用函数
 ```

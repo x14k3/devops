@@ -166,7 +166,7 @@ mkdir -p /data/
 tar xf mysql-8.0.33-linux-glibc2.12-x86_64.tar.xz -C /data/
 # 修改目录名称
 cd /data/
-mv mysql-8.0.26-linux-glibc2.12-x86_64/ mysql
+mv mysql-8.0.33-linux-glibc2.12-x86_64/ mysql
 # 创建数据目录
 mkdir /data/mysql/data;touch /data/mysql/error.log
 # 检查并创建用户和用户组

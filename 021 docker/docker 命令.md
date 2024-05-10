@@ -33,6 +33,9 @@
 # 小技巧：docker必须有进程存在才能保存运行
 # 所以启动docker时，避免自动stop，可使用下面的命令
 docker run -dit imageID /bin/bash
+
+# 启动容器时，通过参数来控制日志的文件个数和单个文件的大小：
+docker run -it --log-opt max-size=10m --log-opt max-file=3 redis
 ```
 
 ## 容器管理
@@ -101,11 +104,11 @@ docker load         # 从tar中恢复镜像 [docker load < alpine.tar]
 
 ## 数据卷管理
 
-[docker 数据卷](docker%20数据卷.md)
+docker 数据卷
 
 ## 网络管理
 
-[docker 网络](docker%20网络.md)
+docker 网络
 
 ## 仓库管理
 
