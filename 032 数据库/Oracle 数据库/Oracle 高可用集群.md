@@ -1,4 +1,4 @@
-# Oracle 集群高可用配置
+# Oracle 高可用集群
 
 * 📑 [Oracle DataGuard](siyuan://blocks/20231110105237-prfvvi6)
 

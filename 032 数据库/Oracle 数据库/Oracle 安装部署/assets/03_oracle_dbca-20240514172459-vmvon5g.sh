@@ -53,6 +53,7 @@ SID_LIST_LISTENER=
     (SID_DESC=
       (SID_NAME = ${ORACLE_SID})
       (ORACLE_HOME = ${ORACLE_HOME})
+#      (PROGRAM = extproc)
     )
   )
 
@@ -60,6 +61,7 @@ LISTENER=
   (DESCRIPTION=
     (ADDRESS_LIST=
       (ADDRESS=(PROTOCOL = tcp)(HOST = ${ORACLE_SYSIP})(PORT = ${ORACLE_PORT}))
+      (ADDRESS=(PROTOCOL = ipc)(KEY = extproc))
     )
   )
 

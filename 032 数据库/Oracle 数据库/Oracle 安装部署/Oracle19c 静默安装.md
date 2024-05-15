@@ -405,14 +405,16 @@ lsnrctl start   # 启动监听
 
 ## 四、自动化安装脚本
 
-[01_env_prepararion.sh](assets/01_env_prepararion-20240317194508-2keahg2.sh)
+[01_env_prepararion.sh](assets/01_env_prepararion-20240514172448-37icftl.sh)
 
-[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20240317194514-875jrb7.sh)
+[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20240514172455-hx9h2ua.sh)
 
-[03_oracle_dbca.sh](assets/03_oracle_dbca-20240317194519-7ldx1py.sh)
+[03_oracle_dbca.sh](assets/03_oracle_dbca-20240514172459-vmvon5g.sh)
 
-[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20240317194524-76b64s9.sh)
+[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20240514172504-ytq4i31.sh)
 
-[05_oracle_rman.sh](assets/05_oracle_rman-20240317194529-wuizcvc.sh)
+[05_oracle_rman.sh](assets/05_oracle_rman-20240514172508-vkin4h0.sh)
 
-[readme.txt](assets/readme-20240317194534-7hhwcuo.txt)
+[readme.txt](assets/readme-20240514172511-f2emfty.txt)
+
+‍

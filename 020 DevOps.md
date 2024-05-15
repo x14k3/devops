@@ -43,7 +43,7 @@
   * 📄 [Confluence](siyuan://blocks/20231110105237-rzoarng)
 * 📑 [atlassian](siyuan://blocks/20240508143002-cogj8nl)
 
-  * 📄 [Atlassian之jiar和confluence的docker部署安装 ](siyuan://blocks/20240508144454-x52bnck)
+  * 📄 [jiar和confluence的docker部署](siyuan://blocks/20240508144454-x52bnck)
 * 📑 [gitlab](siyuan://blocks/20231110105237-pvnzxat)
 
   * 📄 [git 分支模型](siyuan://blocks/20231110105237-de3v78s)

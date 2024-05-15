@@ -1,11 +1,12 @@
-# oracle 数据库
+# Oracle 数据库
 
 * 📄 [Oracle 体系结构](siyuan://blocks/20231110105237-0ngto5m)
 * 📄 [Oracle 内存管理](siyuan://blocks/20231110105237-eh86m8g)
-* 📑 [Oracle 备份与还原](siyuan://blocks/20240506143742-texosxn)
+* 📑 [Oracle 备份恢复](siyuan://blocks/20240506143742-texosxn)
 
   * 📄 [Oracle RMAN](siyuan://blocks/20231110105237-b95b8d3)
   * 📄 [Oracle 数据泵](siyuan://blocks/20231110105237-olz151u)
+  * 📄 [基于Flashback恢复](siyuan://blocks/20240506151747-qovnxo5)
   * 📄 [基于RMAN实现异机恢复](siyuan://blocks/20231110105237-o1b43ni)
   * 📄 [基于RMAN的不完全恢复](siyuan://blocks/20240506144819-y7xbwg9)
 * 📑 [Oracle 安装部署](siyuan://blocks/20240506143657-lcbi56z)
@@ -34,7 +35,7 @@
   * 📄 [优化-最大连接数](siyuan://blocks/20240227182052-gim63uz)
   * 📄 [将11g数据库插入到12c成为pdb](siyuan://blocks/20240227181134-s2mb9z8)
   * 📄 [报错日志目录](siyuan://blocks/20240227181152-b6xmjgw)
-* 📑 [Oracle 集群高可用配置](siyuan://blocks/20240506144137-mq4funh)
+* 📑 [Oracle 高可用集群](siyuan://blocks/20240506144137-mq4funh)
 
   * 📑 [Oracle DataGuard](siyuan://blocks/20231110105237-prfvvi6)
 

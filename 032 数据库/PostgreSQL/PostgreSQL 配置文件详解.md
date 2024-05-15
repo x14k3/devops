@@ -1,4 +1,4 @@
-# PostgreSQL配置文件详解
+# PostgreSQL 配置文件详解
 
 Pg的两个主要的配置文件：
 
@@ -251,23 +251,24 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 **设置（Settings）** 
 
 ```bash
-#wal_level = replica        # 最小、副本或逻辑(更改需要重新启动PG数据库生效)
-#fsync = on           # 将数据刷新到磁盘以确保崩溃安全(关闭此功能可能导致不可恢复的数据损坏)
-#synchronous_commit = on    # 同步等级: off, local, remote_write, remote_apply, or on
-#wal_sync_method = fsync    # 默认是操作系统支持的第一个选项:open_datasync, fdatasync (Linux默认),fsync,fsync_writethrough,
-open_sync
+wal_level = replica    # 该参数控制WAL日志信息的输出级别，有minimal， replica， logical三种模式，修改该参数需要重启。
+                       # minimal记录的日志最少，只记录数据库异常关闭需要恢复时的WAL信息。
+                       # replica记录的WAL信息比minimal信息多些，会记录支持WAL归档、复制和备库中启用只读查询等操作所需的WAL信息。
+fsync = on             # 将数据刷新到磁盘以确保崩溃安全(关闭此功能可能导致不可恢复的数据损坏)
+synchronous_commit = on    # 同步等级: off, local, remote_write, remote_apply, or on
+wal_sync_method = fsync    # 默认是操作系统支持的第一个选项:open_datasync, fdatasync (Linux默认),fsync,fsync_writethrough,open_sync
   
-#full_page_writes = on      # 从部分页面写恢复
-#wal_compression = off      # 启用整页写的压缩
-#wal_log_hints = off        # 也做整个页写的非关键的更新(更改需要重新启动PG数据库生效)
+full_page_writes = on      # 从部分页面写恢复
+wal_compression = off      # 启用整页写的压缩
+wal_log_hints = off        # 也做整个页写的非关键的更新(更改需要重新启动PG数据库生效)
 
 #用于控制缓存预写式日志数据的内存大小
-#wal_buffers = -1           # 最小32kB, -1:基于shared_buffers的设置(更改需要重新启动PG数据库生效)   
+wal_buffers = -1           # 最小32kB, -1:基于shared_buffers的设置(更改需要重新启动PG数据库生效)   
 
-#wal_writer_delay = 200ms     # 1-10000 milliseconds
-#wal_writer_flush_after = 1MB # 以页计算, 0-禁用 
-#commit_delay = 0             # range 0-100000, 以微妙为单位
-#commit_siblings = 5          # range 1-1000
+wal_writer_delay = 200ms     # 1-10000 milliseconds
+wal_writer_flush_after = 1MB # 以页计算, 0-禁用 
+commit_delay = 0             # range 0-100000, 以微妙为单位
+commit_siblings = 5          # range 1-1000
 
 ```
 
@@ -278,11 +279,11 @@ open_sync
  *若用户的系统速度赶不上写数据的速度,则可以适当提高该值.默认为5分钟。
 */
 #checkpoint_timeout = 5min     # range 30s-1d
-max_wal_size = 1GB
+max_wal_size = 1GB             # 两个检查点（checkpoint）之间，WAL可增长的最大大小，即：自动WAL checkpoint允许WAL增长的最大值。该值缺省是1GB。如果提高该参数值会提升性能，但也是会消耗更多空间、同时会延长崩溃恢复所需要的时间。
 min_wal_size = 80MB
 #checkpoint_completion_target = 0.5 # 检查点目标持续时间, 0.0 - 1.0
 #checkpoint_flush_after = 256kB     # 以页计算, 0-禁用 
-#checkpoint_warning = 30s       # 0-禁用
+#checkpoint_warning = 30s           # 0-禁用
 
 ```
 
@@ -291,9 +292,10 @@ min_wal_size = 80MB
 **存档（Archiving）** 
 
 ```bash
-#archive_mode = off     # 启用存档-enables;关闭-off,打开-on 或始终-always (更改需要重新启动PG数据库生效)
-#archive_command = ''   # 用于存档日志文件段占位符的命令:%p =文件路径到存档;%f =文件名.e.g. 'test ! -f /mnt/server/archivedir/%f && cp %p /mnt/server/archivedir/%f'
-#archive_timeout = 0    # 在此秒数后强制执行日志文件段切换;0-禁用
+#archive_mode = off       # 启用存档-enables;关闭-off,打开-on 或始终-always (更改需要重新启动PG数据库生效)
+#archive_command = ''     # 用于存档日志文件段占位符的命令:%p =文件路径到存档;%f =文件名.e.g. 'test ! -f /mnt/server/archivedir/%f && cp %p /mnt/server/archivedir/%f'
+#archive_timeout = 0      # 在此秒数后强制执行日志文件段切换;0-禁用
+#archive_cleanup_command  # archive_cleanup_command = 'pg_archivecleanup archivelocation %r' 自动清理归档日志
 
 ```
 

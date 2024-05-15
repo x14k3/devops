@@ -1,4 +1,4 @@
-# PostgreSQL部署
+# PostgreSQL 安装部署
 
 PostgreSQL 是一个开放源代码的通用对象关系数据库管理系统，具有许多高级功能，可让您创建复杂的Web应用程序
 
@@ -9,7 +9,10 @@ PostgreSQL 是一个开放源代码的通用对象关系数据库管理系统，
 ## 安装常用包
 
 ```
-yum -y install coreutils glib2 lrzsz mpstat dstat sysstat e4fsprogs xfsprogs ntp readline-devel zlib-devel openssl-devel pam-devel libxml2-devel libxslt-devel python-devel tcl-devel gcc make smartmontools flex bison perl-devel perl-ExtUtils* openldap-devel
+yum -y install coreutils glib2 lrzsz mpstat dstat sysstat \
+e4fsprogs xfsprogs ntp readline-devel zlib-devel openssl-devel \
+pam-devel libxml2-devel libxslt-devel python-devel tcl-devel gcc make \
+smartmontools flex bison perl-devel perl-ExtUtils* openldap-devel
 ```
 
 ‍
@@ -19,27 +22,26 @@ yum -y install coreutils glib2 lrzsz mpstat dstat sysstat e4fsprogs xfsprogs ntp
 ```bash
 # vi /etc/sysctl.conf
 
-# add by digoal.zhou
 fs.aio-max-nr = 1048576
 fs.file-max = 76724600
-kernel.core_pattern= /data01/corefiles/core_%e_%u_%t_%s.%p       
+kernel.core_pattern= /data01/corefiles/core_%e_%u_%t_%s.%p   
 # /data01/corefiles事先建好，权限777
 kernel.sem = 4096 2147483647 2147483646 512000  
 # 信号量, ipcs -l 或 -u 查看，每16个进程一组，每组信号量需要17个信号量。
-kernel.shmall = 107374182    
+kernel.shmall = 107374182  
 # 所有共享内存段相加大小限制(建议内存的80%)
 kernel.shmmax = 274877906944   
 # 最大单个共享内存段大小(建议为内存一半), >9.2的版本已大幅降低共享内存的使用
-kernel.shmmni = 819200       
+kernel.shmmni = 819200   
 # 一共能生成多少共享内存段，每个PG数据库集群至少2个共享内存段
 net.core.netdev_max_backlog = 10000
-net.core.rmem_default = 262144     
+net.core.rmem_default = 262144   
 # The default setting of the socket receive buffer in bytes.
-net.core.rmem_max = 4194304        
+net.core.rmem_max = 4194304    
 # The maximum receive socket buffer size in bytes
-net.core.wmem_default = 262144     
+net.core.wmem_default = 262144   
 # The default setting (in bytes) of the socket send buffer.
-net.core.wmem_max = 4194304        
+net.core.wmem_max = 4194304    
 # The maximum send socket buffer size in bytes.
 net.core.somaxconn = 4096
 net.ipv4.tcp_max_syn_backlog = 4096
@@ -55,21 +57,21 @@ net.ipv4.tcp_timestamps = 1
 # 减少time_wait
 net.ipv4.tcp_tw_recycle = 0  
 # 如果=1则开启TCP连接中TIME-WAIT套接字的快速回收，但是NAT环境可能导致连接失败，建议服务端关闭它
-net.ipv4.tcp_tw_reuse = 1    
+net.ipv4.tcp_tw_reuse = 1  
 # 开启重用。允许将TIME-WAIT套接字重新用于新的TCP连接
 net.ipv4.tcp_max_tw_buckets = 262144
 net.ipv4.tcp_rmem = 8192 87380 16777216
 net.ipv4.tcp_wmem = 8192 65536 16777216
 net.nf_conntrack_max = 1200000
 net.netfilter.nf_conntrack_max = 1200000
-vm.dirty_background_bytes = 409600000     
+vm.dirty_background_bytes = 409600000   
 #  系统脏页到达这个值，系统后台刷脏页调度进程 pdflush（或其他） 自动将(dirty_expire_centisecs/100）秒前的脏页刷到磁盘
-vm.dirty_expire_centisecs = 3000           
+vm.dirty_expire_centisecs = 3000       
 #  比这个值老的脏页，将被刷到磁盘。3000表示30秒。
-vm.dirty_ratio = 95                        
+vm.dirty_ratio = 95                    
 #  如果系统进程刷脏页太慢，使得系统脏页超过内存 95 % 时，则用户进程如果有写磁盘的操作（如fsync, fdatasync等调用），则需要主动把系统脏页刷出。
 #  有效防止用户进程刷脏页，在单机多实例，并且使用CGROUP限制单实例IOPS的情况下非常有效。  
-vm.dirty_writeback_centisecs = 100          
+vm.dirty_writeback_centisecs = 100      
 #  pdflush（或其他）后台刷脏页进程的唤醒间隔， 100表示1秒。
 vm.extra_free_kbytes = 4096000
 vm.min_free_kbytes = 2097152
@@ -78,7 +80,7 @@ vm.overcommit_memory = 0
 #  在分配内存时，允许少量over malloc, 如果设置为 1, 则认为总是有足够的内存，内存较少的测试环境可以使用 1 .  
 vm.overcommit_ratio = 90   
 #  当overcommit_memory = 2 时，用于参与计算允许指派的内存大小。
-vm.swappiness = 0          
+vm.swappiness = 0      
 #  关闭交换分区
 vm.zone_reclaim_mode = 0   
 # 禁用 numa, 或者在vmlinux中禁止. 
@@ -108,8 +110,9 @@ net.ipv4.ip_local_port_range = 40000 65535
 
 （建议按业务场景设置，我这里先清掉）
 
-```
-iptables -F
+```bash
+#iptables -F
+systemctl stop firewalld && systemctl disable firewalld
 ```
 
 ## selinux
@@ -127,24 +130,23 @@ SELINUXTYPE=targeted
 
 注意SSD对齐，延长寿命，避免写放大。
 
-```
+```bash
 parted -s /dev/sda mklabel gpt
 parted -s /dev/sda mkpart primary 1MiB 100%
 ```
 
 格式化
 
-```
+```bash
 mkfs.ext4 /dev/sda1 -m 0 -O extent,uninit_bg -E lazy_itable_init=1 -T largefile -L u01
 ```
 
 建议使用的ext4 mount选项
 
-```
+```bash
 # vi /etc/fstab
 
 LABEL=u01 /u01     ext4        defaults,noatime,nodiratime,nodelalloc,barrier=0,data=writeback    0 0
-
 
 # mount -a
 ```
@@ -224,7 +226,6 @@ export PGHOME=/data/pgsql
 export PGUSER=postgres
 export PGPORT=5432
 export PGDATA=/data/pgsql/data
-export PGLOG=/data/pgsql/log/postgres.log
 export PATH=$PGHOME/bin:$PATH:$HOME/bin
 export LD_LIBRARY_PATH=$PGHOME/lib:$LD_LIBRARY_PATH
 
@@ -241,16 +242,12 @@ su - postgres
 
 # 创建数据库日志目录
 # 服务启动，将在后台启动服务器并且把输出放到指定的日志文件中
-/data/pgsql/bin/pg_ctl -D /data/pgsql/data/ -l /data/pgsql/data/pg.log start
+/data/pgsql/bin/pg_ctl -D /data/pgsql/data/ -l /data/pgsql/pg.log start
 # 停止服务
 /data/pgsql/bin/pg_ctl -D /data/pgsql/data/ stop
 # 重新加载配置文件
 /data/pgsql/bin/pg_ctl -D /data/pgsql/data/ reload
 ```
-
-[postgresql_install_Centos7.x.sh](assets/postgresql_install_Centos7.x-20240111140048-gn0msix.sh)
-
-部署脚本/
 
 ‍
 
@@ -288,7 +285,7 @@ su - postgres
 
 如果通过环境变量方式定义的初始化参数，就不用再指定了
 
-参考PostgreSQL内置命令
+参考PostgreSQL 内置命令
 
 ```bash
 # initdb 创建一个新的 PostgreSQL 数据库集群
@@ -309,11 +306,9 @@ su - postgres
 
 以PostgreSQL 9.6, 512G内存主机为例
 
-```
-最佳到文件末尾即可，重复的会以末尾的作为有效值。  
+vi postgresql.conf
 
-$ vi postgresql.conf
-
+```ini
 listen_addresses = '0.0.0.0'
 port = 1921
 max_connections = 5000
@@ -392,8 +387,6 @@ host all all 0.0.0.0/0 md5
 pg_ctl start
 ```
 
-好了，你的PostgreSQL数据库基本上部署好了，可以愉快的玩耍了。
-
 ‍
 
 # 环境变量
@@ -405,18 +398,12 @@ pg_ctl start
 export PGHOME=/data/pgsql
 export PGUSER=postgres
 export PGPORT=5432
-export PGDATA=/data/pgsql/data
-export PGLOG=/data/pgsql/log/postgres.log
-export PATH=$PGHOME/bin:$PATH:$HOME/bin
-export LD_LIBRARY_PATH=$PGHOME/lib:$LD_LIBRARY_PATH
-PATH=/usr/local/pgsql/bin:$PATH
+export PGDATA=\$PGHOME/data
+export PATH=\$PGHOME/bin:\$PATH:\$HOME/bin
+export LD_LIBRARY_PATH=\$PGHOME/lib:\$LD_LIBRARY_PATH
 export PATH
 ```
 
 ‍
-
-# pgsql 客户端
-
-参考PostgreSQL内置命令
 
 ‍

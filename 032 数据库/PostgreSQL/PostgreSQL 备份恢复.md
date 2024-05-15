@@ -1,4 +1,4 @@
-# PostgreSQL备份和恢复
+# PostgreSQL 备份恢复
 
 有三种不同的基本方法来备份PostgreSQL数据：
 

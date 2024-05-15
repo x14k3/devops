@@ -1,8 +1,8 @@
-# PostgreSQL基础命令
+# PostgreSQL 基础命令
 
 # 登录命令
 
-参考PostgreSQL内置命令
+参考PostgreSQL 内置命令
 
 ```pgsql
 --日常登录本机
@@ -55,7 +55,7 @@ option:
     | BYPASSRLS | NOBYPASSRLS      --安全策略RLS权限，默认nobypassrls。
     | CONNECTION LIMIT connlimit   --限制用户并发数，默认-1，不限制。正常连接会受限制，后台连接和prepared事务不受限制。
     | PASSWORD 'password' | PASSWORD NULL --设置密码，密码仅用于有login属性的用户，不使用密码身份验证，则可以省略此选项。可以选择将空密码显式写为PASSWORD NULL。
-    | VALID UNTIL 'timestamp'      --密码有效期时间，不设置则用不失效。
+    | VALID UNTIL 'timestamp'      --密码有效期时间，不设置则永不失效。
     | IN ROLE role_name [, ...]    --新角色将立即添加为新成员。
     | IN GROUP role_name [, ...]   --同上
     | ROLE role_name [, ...]       --ROLE子句列出一个或多个现有角色，这些角色自动添加为新角色的成员。 （这实际上使新角色成为“组”）。

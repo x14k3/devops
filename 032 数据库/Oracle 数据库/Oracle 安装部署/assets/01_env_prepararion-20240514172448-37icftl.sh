@@ -67,10 +67,10 @@ export ORACLE_HOSTNAME=oracle
 # oracle数据库密码
 export ORACLE_PASS_ALL=Manager2023
 # 安装目录
-export ORACLE_INSTALL_DIR=/u01
-export ORACLE_DATAFILE=\${ORACLE_INSTALL_DIR}/ora_data
-export ORACLE_RECOVER_PATH=\${ORACLE_INSTALL_DIR}/ora_recover
-export ORACLE_PATH=\${ORACLE_INSTALL_DIR}
+export ORACLE_INSTALL_DIR=/data
+export ORACLE_DATAFILE=\${ORACLE_INSTALL_DIR}/oradata
+export ORACLE_RECOVER_PATH=\${ORACLE_INSTALL_DIR}/orabackup
+export ORACLE_PATH=\${ORACLE_INSTALL_DIR}/u01
 export ORACLE_BASE=\${ORACLE_PATH}/app/oracle
 export ORACLE_HOME=\${ORACLE_BASE}/product/19.3.0/db_1
 export ORACLE_VENT=\${ORACLE_PATH}/app/oraInventory
@@ -87,7 +87,7 @@ EOF
 echo -e "\n\e[1;33m  Please enter the Oracle installation parameters [default value, you can directly press Enter to continue] \e[0m"
 read -p "`echo -e "\n\e[1;36m  Please enter the server host name [oracle] : \e[0m"`" TMP_ORACLE_HOSTNAME
 read -p "`echo -e "\n\e[1;36m  Please enter the server IP address[${TMP_SYSIP}] : \e[0m"`" TMP_ORACLE_SYSIP
-read -p "`echo -e "\n\e[1;36m  Please enter the oracle installation directory [/u01] : \e[0m"`" TMP_ORACLE_INSTALL_DIR
+read -p "`echo -e "\n\e[1;36m  Please enter the oracle installation directory [/data] : \e[0m"`" TMP_ORACLE_INSTALL_DIR
 read -p "`echo -e "\n\e[1;36m  Please enter database SID [orcl] : \e[0m"`" TMP_ORACLE_SID
 read -p "`echo -e "\n\e[1;36m  Please enter database password [Manager2023] : \e[0m"`" TMP_ORACLE_PASSWD
 read -p "`echo -e "\n\e[1;36m  Please enter the database character set [AL32UTF8] : \e[0m"`" TMP_ORACLE_INSTALL_CHARACTERSET

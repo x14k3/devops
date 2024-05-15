@@ -323,6 +323,7 @@ log_bin = /data/mysql/binlog
 max_binlog_size=500M
 # 二进制日志自动删除的天数，默认值为0,表示“没有自动删除”，启动时和二进制日志循环时可能删除  
 expire_logs_days=15
+#MySQL8.0 使用 binlog_expire_logs_seconds 来控制，其效果和名字的变化一样，精确度由天变成了秒
 #将从服务器 从 主服务器 收到的更新记入到 从服务器 自己的二进制日志文件中,这样从服务器也可以作为其他服务器的主服务器。
 log-slave-updates=1
 
@@ -338,7 +339,7 @@ relay_log_purge=1
 slave-net-timeout=120
 
 #这个参数一般用在主主同步中，用来错开自增值, 防止键值冲突
-auto_increment_offset = 1         
+auto_increment_offset = 1       
 #这个参数一般用在主主同步中，用来错开自增值, 防止键值冲突
 auto_increment_increment = 1  
 
