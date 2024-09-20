@@ -2,9 +2,9 @@
 
 ## Aria2部署搭建
 
-这里基于 `Ubuntu`​, 内置的 `apt`​ 源已经有该软件了, 直接安装配置就行:
+　　这里基于 `Ubuntu`​, 内置的 `apt`​ 源已经有该软件了, 直接安装配置就行:
 
-```
+```bash
 # 安装配置软件
 sudo apt install aria2
 
@@ -14,9 +14,9 @@ aria2c --version
 
 ## 管理账号
 
-这里需要创建新的 `Linux`​ 账号来托管下载权限, 并且设置主要配置文件夹:
+　　这里需要创建新的 `Linux`​ 账号来托管下载权限, 并且设置主要配置文件夹:
 
-```
+```bash
 # 创建账号
 useradd -M -s /usr/sbin/nologin aria2
 
@@ -27,9 +27,9 @@ chown -R aria2:aria2 /etc/aria2
 
 ## 系统服务
 
-写入系统服务配置:
+　　写入系统服务配置:
 
-```
+```bash
 cat <<EOF >>/lib/systemd/system/aria2.service
 [Unit]
 Description=Aria2-Download Service
@@ -46,7 +46,7 @@ WantedBy=default.target
 EOF
 ```
 
-完成之后就更新下系统服务即可:
+　　完成之后就更新下系统服务即可:
 
 ```
 systemctl daemon-reload 
@@ -54,16 +54,16 @@ systemctl daemon-reload
 
 ### Aria2配置
 
-这里创建 `Aria2`​ 配置文件来处理
+　　这里创建 `Aria2`​ 配置文件来处理
 
-```
+```bash
 # 以 aria2 权限创建对应配置文件
 vim /etc/aria2/aria2.conf 
 touch /etc/aria2/aria2.session
 chown -R aria2:aria2 /etc/aria2/
 ```
 
-内部配置内容:
+　　内部配置内容:
 
 ```bash
 ##  文件保存相关 
@@ -210,9 +210,9 @@ bt-tracker=
 
 > 注意: `dir/input-file/save-session`​ 目录的权限必须是 `aria2`​ 所有.
 
-这里 `bt-tracker`​ 后续会说明, 只需要完成并启动服务:
+　　这里 `bt-tracker`​ 后续会说明, 只需要完成并启动服务:
 
-```
+```bash
 # 启动服务并开机启动
 sudo systemctl start aria2.service
 sudo systemctl enable aria2.service
@@ -220,11 +220,11 @@ sudo systemctl enable aria2.service
 
 ### Aria2Web配置
 
-这里完成需要UI界面来动态添加下载任务处理, 这里采用 [`AriaNg`](https://ariang.mayswind.net/zh_Hans/)​.
+　　这里完成需要UI界面来动态添加下载任务处理, 这里采用 [`AriaNg`](https://ariang.mayswind.net/zh_Hans/)​.
 
-这里直接手动下载即可, 仅仅是作为 Web 页面:
+　　这里直接手动下载即可, 仅仅是作为 Web 页面:
 
-```
+```bash
 # 进入临时目录并下载
 cd /tmp
 wget https://github.com/mayswind/AriaNg/releases/download/1.3.3/AriaNg-1.3.3-AllInOne.zip
@@ -240,9 +240,9 @@ sudo chown -R www-data:www-data /data/aria2ng
 sudo vim /etc/nginx/conf.d/aria2ng.conf
 ```
 
-Aria2的 Nginx 配置文件如下:
+　　Aria2的 Nginx 配置文件如下:
 
-```
+```bash
 server {
     listen 80;
     server_name _;
@@ -251,31 +251,31 @@ server {
 }
 ```
 
-重写加载配置启动 `Nginx`​ 就能看到项目搭建完成, 按照说明 `系统配置 - AriaNG配置 - RPC`​ 之中填入服务地址和密钥就能加载到.
+　　重写加载配置启动 `Nginx`​ 就能看到项目搭建完成, 按照说明 `系统配置 - AriaNG配置 - RPC`​ 之中填入服务地址和密钥就能加载到.
 
 ### 目录展示
 
-这一步用于直接 Web 展示下载目录文件, 这样就不需要额外的应用来处理:
+　　这一步用于直接 Web 展示下载目录文件, 这样就不需要额外的应用来处理:
 
-参考nginx配置：7.目录展示及文件访问
+　　参考nginx配置：7.目录展示及文件访问
 
-重启启动服务, 这样就搭建好自身的离线下载服务.
+　　重启启动服务, 这样就搭建好自身的离线下载服务.
 
 ### Tracker源
 
-常见的 `BT`​ 下载文件需要手动添加其他服务器源, 这样才能发扬 `'我为人人, 人人为我'`​ 的精神, Tracker 服务器提供对应资源服务发现功能, 让同个资源下载用户进行互相分享.
+　　常见的 `BT`​ 下载文件需要手动添加其他服务器源, 这样才能发扬 `'我为人人, 人人为我'`​ 的精神, Tracker 服务器提供对应资源服务发现功能, 让同个资源下载用户进行互相分享.
 
-所以这里需要配置推荐几个好用的服务:
+　　所以这里需要配置推荐几个好用的服务:
 
-```
+```bash
 https://cdn.staticaly.com/gh/XIU2/TrackersListCollection/master/best.txt
 https://gitee.com/harvey520/www.yaozuopan.top/raw/master/blacklist.txt
 https://cdn.jsdelivr.net/gh/ngosang/trackerslist@master/trackers_best.txt
 ```
 
-这里编写脚本过滤出所有 `Tracker`​ 服务器筛选, 把所有服务器列表内容放置于文件 `tracker.txt`​ , 脚本内容如下( `tracker_exporter.sh`​ ):
+　　这里编写脚本过滤出所有 `Tracker`​ 服务器筛选, 把所有服务器列表内容放置于文件 `tracker.txt`​ , 脚本内容如下( `tracker_exporter.sh`​ ):
 
-```
+```bash
 #!/bin/bash
 
 # files
@@ -307,7 +307,7 @@ if [ $FILE ]; then
 
     # merge files
     if [[ -n "$FILES" ]]; then
-    
+  
         CONTENT=`/bin/cat $FILES | sort |  uniq > $OUT_DIR/tracker.list`
         # ok?
         if [ $? -eq 0 ]; then
@@ -323,9 +323,9 @@ else
 fi
 ```
 
-这里只需要执行即可调出所有 `tracker`​ 服务器:
+　　这里只需要执行即可调出所有 `tracker`​ 服务器:
 
-```
+```bash
 # 执行调用合并服务器
 sudo bash tracker_exporter.sh tracker.txt
 # 完成之后会输出数据:
@@ -336,11 +336,11 @@ sudo bash tracker_exporter.sh tracker.txt
 # Merge File = /tmp/tracker_aria2.list
 ```
 
-内部的文件只需要 `/tmp/tracker.list`​ 和 `/tmp/tracker_aria2.list`​, 把 `tracker_aria2.list`​ 内容放置于之前的 `aria2`​ 配置文件:
+　　内部的文件只需要 `/tmp/tracker.list`​ 和 `/tmp/tracker_aria2.list`​, 把 `tracker_aria2.list`​ 内容放置于之前的 `aria2`​ 配置文件:
 
-```
+```bash
 # 放置于tracker该项即可
 bt-tracker=xxx,yyy,zzzz
 ```
 
-这样就完成整体的离线下载服务
+　　这样就完成整体的离线下载服务

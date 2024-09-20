@@ -4,7 +4,7 @@
 
   * 📄 [1.1 prometheus简介](siyuan://blocks/20231110105237-zo6qkpc)
   * 📄 [1.2 prometheus部署](siyuan://blocks/20231110105237-qcxar1z)
-  * 📄 [1.3 监控数据可视化](siyuan://blocks/20231110105237-grmshib)
+  * 📄 [1.3 Grafana部署](siyuan://blocks/20231110105237-grmshib)
   * 📄 [1.4 prometheus配置](siyuan://blocks/20231110105237-kfcq59r)
   * 📄 [1.5 任务和实例](siyuan://blocks/20231110105237-q86oczv)
   * 📄 [1.6 使用PromQL查询监控数据](siyuan://blocks/20231110105237-fobya6z)
@@ -34,10 +34,10 @@
   * 📄 [4.1 exporter是什么](siyuan://blocks/20231110105237-g7m0ykz)
   * 📑 [4.2 常用Exporter](siyuan://blocks/20231110105237-9c2k1zo)
 
+    * 📄 [容器监控：cAdvisor](siyuan://blocks/20231110105237-tt4oq7v)
     * 📄 [监控MySQL运行状态：MySQLD Exporter](siyuan://blocks/20231110105237-m1qw2br)
     * 📄 [监控Redis运行状态：Redis Exporter](siyuan://blocks/20231110105237-uepl7o6)
     * 📄 [监控域名与证书过期](siyuan://blocks/20231110105237-y3p3ksg)
-    * 📄 [容器监控：cAdvisor](siyuan://blocks/20231110105237-tt4oq7v)
     * 📄 [网络探测：Blackbox Exporter](siyuan://blocks/20231110105237-od063ts)
   * 📄 [4.3 Java自定义Exporter](siyuan://blocks/20231110105237-m8lwlh2)
 * 📑 [5. 集群与高可用](siyuan://blocks/20231110105237-fq7xik5)
@@ -54,4 +54,4 @@
   * 📄 [6.3 服务发现与Relabeling](siyuan://blocks/20231110105237-t62yazm)
 * 📄 [7. 监控Kubernetes](siyuan://blocks/20231110105237-jfohuak)
 
-‍
+　　‍

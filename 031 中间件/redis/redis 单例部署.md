@@ -1,6 +1,6 @@
 # redis 单例部署
 
-下载地址：[https://redis.io/download/](https://redis.io/download/)
+　　下载地址：[https://redis.io/download/](https://redis.io/download/)
 
 # 单节 Redis Standalone
 
@@ -60,7 +60,7 @@ logrotate -f /etc/logrotate.d/redislog.conf
 
 ## 优化项
 
-==1.1 内核参数 overcommit_memory==
+　　==1.1 内核参数 overcommit_memory==
 
 ```bash
 20374:M 26 Nov 2022 14:38:52.160 # Server initialized
@@ -108,4 +108,4 @@ cluster-enabled yes
 cluster-config-file cluster_6379.conf
 ```
 
-‍
+　　‍

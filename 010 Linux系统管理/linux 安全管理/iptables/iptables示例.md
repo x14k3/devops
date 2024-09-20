@@ -118,7 +118,7 @@ iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45
 
 ### 13. 指定数据包出去的网络接口
 
-只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。
+　　只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。
 
 ```bash
 iptables -A FORWARD -o eth0
@@ -147,7 +147,7 @@ Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
 
 ### 15. 启动网络转发规则
 
-公网`210.14.67.7`​让内网`192.168.188.0/24`​上网
+　　公网`210.14.67.7`​让内网`192.168.188.0/24`​上网
 
 ```bash
 # 添加nat规则，对所有源地址（openvpn为客户端分配的地址）为10.66.1.0/24的数据包转发后进行源地址伪装，伪装成openvpn服务器内网地址192.168.1.1，这样就可以和内网的其它机器通信了。
@@ -158,15 +158,16 @@ iptables -t nat -A POSTROUTING -s 10.66.1.0/24 -o eth0 -j MASQUERADE
 
 ### 16. 端口映射
 
-本机的 2222 端口映射到内网 虚拟机的 22 端口
+　　本机的 2222 端口映射到内网 虚拟机的 22 端口
 
 ```bash
+iptables  [-t 表名]  管理选项  [链名]  [匹配条件]  [-j 控制类型]
 iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22
 ```
 
 ### 17. 字符串匹配
 
-比如，我们要过滤所有 TCP 连接中的字符串`test`​，一旦出现它我们就终止这个连接，我们可以这么做：
+　　比如，我们要过滤所有 TCP 连接中的字符串`test`​，一旦出现它我们就终止这个连接，我们可以这么做：
 
 ```bash
 iptables -A INPUT -p tcp -m string --algo kmp --string "test" -j REJECT --reject-with tcp-reset
@@ -197,7 +198,7 @@ iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT
 
 ### 20.网络防火墙
 
-主机防火墙：针对于单个主机进行防护。  
+　　主机防火墙：针对于单个主机进行防护。  
 网络防火墙： 往往处于网络入口或边缘，针对于网络入口进行防护，服务于防火墙背后的本地局域网。  
 在前面的举例中，iptables都是作为主机防火墙的角色出现的。
 
@@ -243,6 +244,6 @@ iptables -I FORWARD -s 10.1.0.0/24 -p tcp --dport 22 -j ACCEPT
 iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 ```
 
-一些注意点：  
+　　一些注意点：  
 1、当测试网络防火墙时，默认前提为网络已经正确配置。  
 2、当测试网络防火墙时，如果出现问题，请先确定主机防火墙规则的配置没有问题。

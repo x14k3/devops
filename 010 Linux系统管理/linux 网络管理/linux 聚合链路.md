@@ -1,24 +1,24 @@
 # linux 聚合链路
 
-链路聚合（英语：Link  Aggregation）是一个计算机网络术语，**指将多个物理端口汇聚在一起，形成一个逻辑端口**，以实现出/入流量吞吐量在各成员端口的负荷分担，交换机根据用户配置的端口负荷分担策略决定网络封包从哪个成员端口发送到对端的交换机。当交换机检测到其中一个成员端口的链路发生故障时，就停止在此端口上发送封包，并根据负荷分担策略在剩下的链路中重新计算报文的发送端口，故障端口恢复后再次担任收发端口。链路聚合在增加链路带宽、实现链路传输弹性和工程冗余等方面是一项很重要的技术。
+　　链路聚合（英语：Link  Aggregation）是一个计算机网络术语，**指将多个物理端口汇聚在一起，形成一个逻辑端口**，以实现出/入流量吞吐量在各成员端口的负荷分担，交换机根据用户配置的端口负荷分担策略决定网络封包从哪个成员端口发送到对端的交换机。当交换机检测到其中一个成员端口的链路发生故障时，就停止在此端口上发送封包，并根据负荷分担策略在剩下的链路中重新计算报文的发送端口，故障端口恢复后再次担任收发端口。链路聚合在增加链路带宽、实现链路传输弹性和工程冗余等方面是一项很重要的技术。
 
-总结一下就是：**两个物理网卡绑定为一个逻辑网卡**
+　　总结一下就是：**两个物理网卡绑定为一个逻辑网卡**
 
-企业工作中，我们的网络状况是不能出现问题的，如果出现问题会带来特别多的麻烦与损失，所以单纯使用一块网卡来进行网络服务肯定是不保险的，我们需要通过2块网卡来绑定为一个逻辑网卡来工作；
+　　企业工作中，我们的网络状况是不能出现问题的，如果出现问题会带来特别多的麻烦与损失，所以单纯使用一块网卡来进行网络服务肯定是不保险的，我们需要通过2块网卡来绑定为一个逻辑网卡来工作；
 
-其中链路聚合通常分为**三种工作模式**：
+　　其中链路聚合通常分为**三种工作模式**：
 
-（1）active-backup：主备（一块网卡工作，另一块备用，当工作的网卡出问题时,备用网卡及时上岗从而避免网络出现问题）  
+　　（1）active-backup：主备（一块网卡工作，另一块备用，当工作的网卡出问题时,备用网卡及时上岗从而避免网络出现问题）  
 （2）loadbalance   ：负载均衡  
 （3）roundrobin    ： 轮询
 
-‍
+　　‍
 
-网卡的链路聚合一般常用的有"bond"和"team"两种模式，"bond"模式最多可以添加两块网卡，"team"模式最多可以添加八块网卡。
+　　网卡的链路聚合一般常用的有"bond"和"team"两种模式，"bond"模式最多可以添加两块网卡，"team"模式最多可以添加八块网卡。
 
 ## bond聚合链路
 
-**bond聚合链路模式**
+　　**bond聚合链路模式**
 
 - mod=0 ，即：(balance-rr) Round-robin policy（轮询）
   聚合口数据报文按包轮询从物理接口转发。
@@ -56,9 +56,9 @@ mode 1、5、6不需要交换机设置
 mode 0、2、3、4需要交换机设置
 ```
 
-‍
+　　‍
 
-**step 1：**  查看环境
+　　**step 1：**  查看环境
 
 ```
 [root@zutuanxue ~]# nmcli connection 
@@ -67,7 +67,7 @@ ens33  f035d150-9e89-4ee9-a657-03598d4b0940  ethernet  ens33
 ens37  7726249d-8281-45e8-a8e3-a6a023c64c66  ethernet  ens37
 ```
 
-**step 2：**  创建bond虚拟网卡
+　　**step 2：**  创建bond虚拟网卡
 
 ```
 [root@zutuanxue ~]# nmcli connection add type bond con-name bond0 ifname bond0 mode 1 ipv4.addresses 192.168.98.200/24 ipv4.method manual autoconnect yes
@@ -81,7 +81,7 @@ ens37  7726249d-8281-45e8-a8e3-a6a023c64c66  ethernet  ens37
 #autoconnect 自动连接
 ```
 
-**step 3：**  为bond网卡添加成员（真实网卡）
+　　**step 3：**  为bond网卡添加成员（真实网卡）
 
 ```
 [root@zutuanxue ~]# nmcli connection add type bond-slave ifname ens33 master bond0
@@ -111,7 +111,7 @@ ens37: ether 00:0c:29:a6:ad:95  txqueuelen 1000  (Ethernet)
 连接已成功激活（master waiting for slaves）（D-Bus 活动路径：/org/freedesktop/NetworkManager/ActiveConnection/83）
 ```
 
-**step 4：**  查看链接信息并测试
+　　**step 4：**  查看链接信息并测试
 
 ```
 #查看信息
@@ -161,7 +161,7 @@ bond0: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP 
 或者直接断开虚拟的网络连接测试还能否ping通
 ```
 
-**删除**
+　　**删除**
 
 ```
 nmcli connection delete bond0 bond-slave-ens33 bond-slave-ens37
@@ -178,7 +178,7 @@ BONDING_OPTS="miimon=100 mode=1 fail_over_mac=1"
 
 ## team聚合链路
 
-**step 1：**  建立
+　　**step 1：**  建立
 
 ```
 [root@zutuanxue ~]# nmcli connection add type team con-name team0 ifname team0 config '{"runner":{"name":"activebackup","hwaddr_policy":"by_active"}}' ipv4.addresses 192.168.98.200/24 ipv4.method manual autoconnect yes
@@ -193,14 +193,14 @@ lacp=mode4
 #聚合链路获取mac的地址有两种方式,一种是从第一个活跃网卡中获取mac地址，然后其余的SLAVE网卡的mac地址都使用该mac地址;另一种是使用hwaddr_policy参数，team使用当前活跃网卡的mac地址，mac地址随活跃网卡的转换而变，虚机不支持第一种获取MAC地址的方式。
 ```
 
-**step 2：**  添加网卡
+　　**step 2：**  添加网卡
 
 ```
 [root@zutuanxue ~]# nmcli connection add type team-slave ifname ens33 master team0
 [root@zutuanxue ~]# nmcli connection add type team-slave ifname ens37 master team0
 ```
 
-**step 3：**  启用连接
+　　**step 3：**  启用连接
 
 ```
 [root@zutuanxue ~]# nmcli connection up team-slave-ens33
@@ -208,7 +208,7 @@ lacp=mode4
 [root@zutuanxue ~]# nmcli connection up team0
 ```
 
-**step 4：**  查看状态
+　　**step 4：**  查看状态
 
 ```
 [root@zutuanxue ~]# teamdctl team0 stat

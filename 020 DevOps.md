@@ -1,55 +1,52 @@
 # 020 DevOps
 
-* 📑 [ELK](siyuan://blocks/20231110105237-4b7ouf3)
+* 📑 [VCS](siyuan://blocks/20231110105237-rxl9wzo)
+
+  * 📄 [Version Control System](siyuan://blocks/20240510171811-lut9j9d)
+  * 📄 [git](siyuan://blocks/20231110105237-x78uhqu)
+  * 📄 [svn](siyuan://blocks/20231110105237-3cwq49l)
+* 📑 [ansible](siyuan://blocks/20231110105237-muwmeww)
+
+  * 📄 [Ansible Ad-hoc 常用命令集](siyuan://blocks/20240729181117-m4hw4ij)
+  * 📄 [Ansible playbook](siyuan://blocks/20231110105237-4387t74)
+  * 📄 [Ansible tower](siyuan://blocks/20240303170126-6nakbdv)
+  * 📄 [Ansible 部署](siyuan://blocks/20231110105237-ir8wneo)
+  * 📄 [Ansible-role](siyuan://blocks/20231110105237-636g4om)
+  * 📄 [Ansible效率优化](siyuan://blocks/20240730104023-4q2swqi)
+  * 📄 [Ansible管理Windows主机](siyuan://blocks/20240731095938-c3nsguv)
+  * 📑 [Ansible进阶](siyuan://blocks/20240730104856-qh68237)
+
+    * 📄 [1. inventory的进阶](siyuan://blocks/20240730220158-0w3fp05)
+    * 📄 [2. 收集目标节点的信息：Facts](siyuan://blocks/20240730220307-qerr0vx)
+    * 📄 [3. Ansible变量的进阶](siyuan://blocks/20240730220357-0vh31qe)
+    * 📄 [4. YAML纯文本裸字符串](siyuan://blocks/20240730220408-8p7a7a6)
+    * 📄 [5. handler的进阶](siyuan://blocks/20240730220429-jtn9bz3)
+    * 📄 [6. when条件判断](siyuan://blocks/20240730220453-sraj2tp)
+    * 📄 [7. 循环迭代的进阶](siyuan://blocks/20240730220515-ufdjck8)
+    * 📄 [8. 异常和错误处理](siyuan://blocks/20240731095147-yaxp0vt)
+* 📑 [elk](siyuan://blocks/20231110105237-4b7ouf3)
 
   * 📄 [ELK 概述](siyuan://blocks/20231110105237-stz3a0r)
   * 📄 [elk 7.17 部署](siyuan://blocks/20231110105237-vgmdydx)
   * 📄 [elk 8.0.0 部署](siyuan://blocks/20231110105237-lbuh8ql)
   * 📄 [elk-cerebro](siyuan://blocks/20231110105237-mczrg7o)
   * 📄 [elk优化-日常运维](siyuan://blocks/20231110105237-ldthbxc)
-* 📑 [Jenkins](siyuan://blocks/20231110105237-328haj8)
-
-  * 📄 [Jenkins 命令](siyuan://blocks/20231110105237-jzbujv8)
-  * 📄 [Jenkins 部署](siyuan://blocks/20231110105237-5vjwl1u)
-* 📑 [JumpServer](siyuan://blocks/20231110105237-5qb923l)
-
-  * 📄 [JumpServer 部署](siyuan://blocks/20231110105237-rp657mq)
-* 📑 [Sentinel](siyuan://blocks/20240508162532-gnxe14y)
-
-  * 📄 [Sentinel单机部署](siyuan://blocks/20240508162544-unzjx5z)
-* 📑 [Skywalking](siyuan://blocks/20231110105237-zh0aumb)
-
-  * 📄 [Skywalking+ELK](siyuan://blocks/20231110105237-fe7ld8z)
-  * 📄 [Skywalking单机部署](siyuan://blocks/20240508161412-eax2bd4)
-* 📑 [VCS](siyuan://blocks/20231110105237-rxl9wzo)
-
-  * 📄 [git](siyuan://blocks/20231110105237-x78uhqu)
-  * 📄 [svn](siyuan://blocks/20231110105237-3cwq49l)
-* 📑 [Zabbix](siyuan://blocks/20231110105237-isddx8s)
-
-  * 📄 [Zabbix 告警通知](siyuan://blocks/20231110105237-c6t9na7)
-  * 📄 [Zabbix 搭建](siyuan://blocks/20231110105237-c8jls7h)
-  * 📄 [Zabbix 简介](siyuan://blocks/20231110105237-vp8lmpw)
-  * 📄 [Zabbix 自动发现与自动注册](siyuan://blocks/20231110105237-ukwl0e1)
-  * 📄 [Zabbix 配置监听多个端口](siyuan://blocks/20231110105237-d34bzzd)
-  * 📄 [Zabbix 配置自定义监控项](siyuan://blocks/20231110105237-j0baios)
-  * 📄 [Zabbix分布式监控系统](siyuan://blocks/20231110105237-taf0gw1)
-* 📑 [ansible](siyuan://blocks/20231110105237-muwmeww)
-
-  * 📄 [Ansible tower](siyuan://blocks/20240303170126-6nakbdv)
-  * 📄 [Ansible-playbook](siyuan://blocks/20231110105237-4387t74)
-  * 📄 [Ansible-role](siyuan://blocks/20231110105237-636g4om)
-  * 📄 [Ansible](siyuan://blocks/20231110105237-ir8wneo)
-  * 📄 [Confluence](siyuan://blocks/20231110105237-rzoarng)
-* 📑 [atlassian](siyuan://blocks/20240508143002-cogj8nl)
-
-  * 📄 [jiar和confluence的docker部署](siyuan://blocks/20240508144454-x52bnck)
 * 📑 [gitlab](siyuan://blocks/20231110105237-pvnzxat)
 
   * 📄 [git 分支模型](siyuan://blocks/20231110105237-de3v78s)
   * 📄 [gitlab基本使用](siyuan://blocks/20231110105237-pt6h5xl)
   * 📄 [gitlab备份](siyuan://blocks/20231110105237-uet6iwz)
   * 📄 [gitlab部署](siyuan://blocks/20231110105237-cbz0ynn)
+* 📑 [jenkins](siyuan://blocks/20231110105237-328haj8)
+
+  * 📄 [Jenkins 流水线](siyuan://blocks/20231110105237-jzbujv8)
+  * 📄 [Jenkins 部署](siyuan://blocks/20231110105237-5vjwl1u)
+* 📑 [jira](siyuan://blocks/20240508143002-cogj8nl)
+
+  * 📄 [jira和confluence的docker部署](siyuan://blocks/20240508144454-x52bnck)
+* 📑 [jumpserver](siyuan://blocks/20231110105237-5qb923l)
+
+  * 📄 [JumpServer 部署](siyuan://blocks/20231110105237-rp657mq)
 * 📑 [nacos](siyuan://blocks/20231110105237-hbkray9)
 
   * 📄 [nacos 单机部署](siyuan://blocks/20231110105237-aspjd9u)
@@ -61,7 +58,7 @@
 
     * 📄 [1.1 prometheus简介](siyuan://blocks/20231110105237-zo6qkpc)
     * 📄 [1.2 prometheus部署](siyuan://blocks/20231110105237-qcxar1z)
-    * 📄 [1.3 监控数据可视化](siyuan://blocks/20231110105237-grmshib)
+    * 📄 [1.3 Grafana部署](siyuan://blocks/20231110105237-grmshib)
     * 📄 [1.4 prometheus配置](siyuan://blocks/20231110105237-kfcq59r)
     * 📄 [1.5 任务和实例](siyuan://blocks/20231110105237-q86oczv)
     * 📄 [1.6 使用PromQL查询监控数据](siyuan://blocks/20231110105237-fobya6z)
@@ -110,9 +107,25 @@
     * 📄 [6.2 基于Consul的服务发现](siyuan://blocks/20231110105237-ifj9i1g)
     * 📄 [6.3 服务发现与Relabeling](siyuan://blocks/20231110105237-t62yazm)
   * 📄 [7. 监控Kubernetes](siyuan://blocks/20231110105237-jfohuak)
+* 📑 [sentinel](siyuan://blocks/20240508162532-gnxe14y)
+
+  * 📄 [Sentinel单机部署](siyuan://blocks/20240508162544-unzjx5z)
+* 📑 [skywalking](siyuan://blocks/20231110105237-zh0aumb)
+
+  * 📄 [Skywalking+ELK](siyuan://blocks/20231110105237-fe7ld8z)
+  * 📄 [Skywalking单机部署](siyuan://blocks/20240508161412-eax2bd4)
+* 📑 [zabbix](siyuan://blocks/20231110105237-isddx8s)
+
+  * 📄 [Zabbix 告警通知](siyuan://blocks/20231110105237-c6t9na7)
+  * 📄 [Zabbix 搭建](siyuan://blocks/20231110105237-c8jls7h)
+  * 📄 [Zabbix 简介](siyuan://blocks/20231110105237-vp8lmpw)
+  * 📄 [Zabbix 自动发现与自动注册](siyuan://blocks/20231110105237-ukwl0e1)
+  * 📄 [Zabbix 配置监听多个端口](siyuan://blocks/20231110105237-d34bzzd)
+  * 📄 [Zabbix 配置自定义监控项](siyuan://blocks/20231110105237-j0baios)
+  * 📄 [Zabbix分布式监控系统](siyuan://blocks/20231110105237-taf0gw1)
 * 📑 [一些概念释义](siyuan://blocks/20240408214008-tiy6f39)
 
   * 📄 [分布式](siyuan://blocks/20240508140520-3s2hdp4)
   * 📄 [微服务](siyuan://blocks/20240408213945-a14hm7d)
 
-‍
+　　‍

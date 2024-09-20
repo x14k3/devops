@@ -48,13 +48,13 @@
 
 # 六、配置文件
 
-1\. \*\*glance-api.conf \*\*：Glance api 服务配置文件。
+　　1\. \*\*glance-api.conf \*\*：Glance api 服务配置文件。
 
-2\. \*\*glance-registry.conf \*\*：Glanceregistry服务配置文件，用户存储镜像有关的元数据。
+　　2\. \*\*glance-registry.conf \*\*：Glanceregistry服务配置文件，用户存储镜像有关的元数据。
 
-3. \*\*glance-scrubber.conf \*\*：用于清理已删除的镜像的服务。
+　　3. \*\*glance-scrubber.conf \*\*：用于清理已删除的镜像的服务。
 
-4. **policy.json** ：镜像服务的访问控制。在这里，我们可以定义角色和策略，是OpenStack Glance中的安全特性。
+　　4. **policy.json** ：镜像服务的访问控制。在这里，我们可以定义角色和策略，是OpenStack Glance中的安全特性。
 
 # 七、工作流程
 

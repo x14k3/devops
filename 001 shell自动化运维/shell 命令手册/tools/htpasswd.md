@@ -1,8 +1,8 @@
 # htpasswd
 
-apache服务器创建密码认证文件
+　　apache服务器创建密码认证文件
 
-**htpasswd命令** 是Apache的Web服务器内置工具，用于创建和更新储存用户名、域和用户基本认证的密码文件。
+　　**htpasswd命令** 是Apache的Web服务器内置工具，用于创建和更新储存用户名、域和用户基本认证的密码文件。
 
 ### 选项
 
@@ -24,43 +24,43 @@ apache服务器创建密码认证文件
 
 ### 实例
 
-**利用htpasswd命令添加用户**
+　　**利用htpasswd命令添加用户**
 
 ```
 htpasswd -bc .passwd www.jsdig.com php
 ```
 
-在bin目录下生成一个.passwd文件，用户名www.jsdig.com，密码：php，默认采用MD5加密方式。
+　　在bin目录下生成一个.passwd文件，用户名www.jsdig.com，密码：php，默认采用MD5加密方式。
 
-**在原有密码文件中增加下一个用户**
+　　**在原有密码文件中增加下一个用户**
 
 ```
 htpasswd -b .passwd Jack 123456
 ```
 
-去掉`-c`​选项，即可在第一个用户之后添加第二个用户，依此类推。
+　　去掉`-c`​选项，即可在第一个用户之后添加第二个用户，依此类推。
 
-**不更新密码文件，只显示加密后的用户名和密码**
+　　**不更新密码文件，只显示加密后的用户名和密码**
 
 ```
 htpasswd -nb Jack 123456
 ```
 
-不更新.passwd文件，只在屏幕上输出用户名和经过加密后的密码。
+　　不更新.passwd文件，只在屏幕上输出用户名和经过加密后的密码。
 
-**利用htpasswd命令删除用户名和密码**
+　　**利用htpasswd命令删除用户名和密码**
 
 ```
 htpasswd -D .passwd Jack
 ```
 
-**利用htpasswd命令修改密码**
+　　**利用htpasswd命令修改密码**
 
 ```
 htpasswd -D .passwd Jack
 htpasswd -b .passwd Jack 123456
 ```
 
-即先使用htpasswd删除命令删除指定用户，再利用htpasswd添加用户命令创建用户即可实现修改密码的功能。
+　　即先使用htpasswd删除命令删除指定用户，再利用htpasswd添加用户命令创建用户即可实现修改密码的功能。
 
-‍
+　　‍

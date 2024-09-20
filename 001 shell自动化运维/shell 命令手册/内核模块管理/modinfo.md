@@ -1,10 +1,10 @@
 # modinfo
 
-显示给定模块的详细信息
+　　显示给定模块的详细信息
 
 ## 补充说明
 
-**modinfo命令** 用于显示给定模块的详细信息。
+　　**modinfo命令** 用于显示给定模块的详细信息。
 
 ### 语法
 
@@ -25,11 +25,11 @@ modinfo(选项)(参数)
 
 ### 参数
 
-模块名：要显示详细信息的模块名称。
+　　模块名：要显示详细信息的模块名称。
 
 ### 实例
 
-显示sg模块的信息：
+　　显示sg模块的信息：
 
 ```
 [root@localhost ~]# modinfo sg
@@ -45,4 +45,4 @@ vermagic:    2.6.9-42.ELsmp SMP 686 REGPARM 4KSTACKS gcc-3.4
 depends:    scsi_mod
 ```
 
-‍
+　　‍

@@ -1,6 +1,6 @@
 # mkisofs
 
-**mkisofs命令** 用来将指定的目录与文件做成ISO 9660格式的映像文件，以供刻录光盘。
+　　**mkisofs命令** 用来将指定的目录与文件做成ISO 9660格式的映像文件，以供刻录光盘。
 
 ### 语法
 
@@ -50,43 +50,43 @@ mkisofs(选项)(参数)
 
 ### 参数
 
-路径：需要添加到映像文件中的路径。
+　　路径：需要添加到映像文件中的路径。
 
 ### 实例
 
-linux中用mkisofs命令把文件制作成ISO步骤：
+　　linux中用mkisofs命令把文件制作成ISO步骤：
 
-把NFS服务器上的目录挂载到本地/mnt/nfs/的目录：
+　　把NFS服务器上的目录挂载到本地/mnt/nfs/的目录：
 
 ```
 mount -t nfs 10.0.2.2:/linuxos/rhel4.0_update3/ /mnt/nfs/
 ```
 
-把已挂载的文件复制到本地：
+　　把已挂载的文件复制到本地：
 
 ```
 cp -a /mnt/NFS/* /root/Decp -a /mnt/nfs/* /root/Desktop/rhel4.0/&sktop/rhel4.0/&
 ```
 
-查找boot.cat文件并删除掉：
+　　查找boot.cat文件并删除掉：
 
 ```
 find rhel4.0/ -name boot.cat | xargs rm
 ```
 
-查找TRANS.TBL文件并删除掉：
+　　查找TRANS.TBL文件并删除掉：
 
 ```
 find rhel4.0/ -name TRANS.TBL -exec rm {} \;
 ```
 
-复制本地的所需文件到指定目录：
+　　复制本地的所需文件到指定目录：
 
 ```
 cp /usr/share/comps/i386/.discinfo rhel4.0/
 ```
 
-把指定目录下的所有文件制作成ISO文件：
+　　把指定目录下的所有文件制作成ISO文件：
 
 ```
 mkisofs -R -J -T -v -no-emul-boot -boot-load-size 4 -boot-info-table -V RHEL4ASDVD -b isolinux/isolinux.bin -c isolinux/boot.cat -o /RHEL4AS.iso rhel4.0/

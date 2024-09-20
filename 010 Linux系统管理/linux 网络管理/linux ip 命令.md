@@ -2,7 +2,7 @@
 
 ## ip 命令的语法
 
-​`ip [OPTIONS] OBJECT [COMMAND [ARGUMENTS]]`​
+　　​`ip [OPTIONS] OBJECT [COMMAND [ARGUMENTS]]`​
 
 * **OPTIONS**
 
@@ -49,7 +49,7 @@
   是命令的一些参数，它们倚赖于对象和命令。
   ip 支持两种类型的参数：flag 和 parameter。flag 由一个关键词组成；parameter 由一个关键词加一个数值组成。
 
-‍
+　　‍
 
 * 📄 [ip address](siyuan://blocks/20240404124326-senc0gv)
 * 📄 [ip link](siyuan://blocks/20240404124222-5y0etrc)
@@ -58,4 +58,4 @@
 * 📄 [ip rule](siyuan://blocks/20240404124335-xm1553g)
 * 📄 [ip tuntap](siyuan://blocks/20240404124340-tjq80vb)
 
-‍
+　　‍

@@ -2,9 +2,9 @@
 
 ## docker run
 
-`docker run [OPTIONS] IMAGE`  根据镜像新建并启动容器。IMAGE是镜像ID或镜像名
+　　`docker run [OPTIONS] IMAGE`  根据镜像新建并启动容器。IMAGE是镜像ID或镜像名
 
-`docker run --name nginx -p 80:80 --restart=always -dit 4cdc /bin/bash`
+　　`docker run --name nginx -p 80:80 --restart=always -dit 4cdc /bin/bash`
 
 ```bash
 #OPTIONS说明：
@@ -46,7 +46,6 @@ docker stop           # 停止一个容器
 docker restart        # 重启一个容器
 docker kill           # 杀掉一个容器进程
 docker rm             # 删除容器
-docker prune          # 删除所有终止的容器
 docker pause          # 暂停容器
 docker unpause        # 恢复暂停容器
 docker create         # 从镜像中创建一个容器
@@ -66,6 +65,7 @@ docker port           # 列出一个容器的端口映射情况
 docker container      # 管理已经运行的容器的
 docker deploy         # 部署新的堆栈或更新已有堆栈的
 docker update         # 更新容器
+# docker update --restart=always <container_name>
 docker rename         # 重命名容器
 docker volume         # 卷管理
 docker commit         # 提交一个容器的文件系统，使之生成一个新的镜像
@@ -91,7 +91,7 @@ docker save         # 将镜像保存成tar文件 [docker save -o alpine.tar  al
 docker load         # 从tar中恢复镜像 [docker load < alpine.tar]
 ```
 
-**总结一下docker save和docker export的区别：**
+　　**总结一下docker save和docker export的区别：**
 
 - docker save   保存的是镜像；docker load   用来载入镜像包，
 - docker export 保存的是容器；docker import 用来载入容器包，但两者都会恢复为镜像。
@@ -104,11 +104,11 @@ docker load         # 从tar中恢复镜像 [docker load < alpine.tar]
 
 ## 数据卷管理
 
-docker 数据卷
+　　docker 数据卷
 
 ## 网络管理
 
-docker 网络
+　　docker 网络
 
 ## 仓库管理
 
@@ -140,7 +140,7 @@ docker service            # docker服务管理
 
 ### 1.在创建容器的时候指定
 
-`docker run --name mytomcat -d -p 8888:8080 tomcat`
+　　`docker run --name mytomcat -d -p 8888:8080 tomcat`
 
 ### 2.修改hostconfig.json和config.v2.json配置文件
 
@@ -163,4 +163,4 @@ docker inspect 容器id | grep IPAddress
 iptables -t nat -A DOCKER -p tcp --dport 8888 -j DNAT --to-destination 192.168.1.15:8080
 ```
 
-‍
+　　‍

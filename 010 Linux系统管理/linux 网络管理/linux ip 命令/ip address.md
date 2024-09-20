@@ -1,8 +1,8 @@
 # ip address
 
-ip address：用于管理ip地址
+　　ip address：用于管理ip地址
 
-**ip address命令格式说明：**
+　　**ip address命令格式说明：**
 
 ```bash
 Usage: ip address {add|change|replace} IFADDR dev IFNAME [ LIFETIME ]
@@ -35,9 +35,9 @@ TYPE := { vlan | veth | vcan | dummy | ifb | macvlan | macvtap |
 
 # **ip address add**
 
-此命令用于新增ip地址
+　　此命令用于新增ip地址
 
-**option：**
+　　**option：**
 
 * dev IFNAME：要将地址添加到的设备的名称
 * local ADDRESS (default)：ip地址，地址的格式取决于协议
@@ -60,13 +60,15 @@ TYPE := { vlan | veth | vcan | dummy | ifb | macvlan | macvtap |
 ```bash
 # 设置eth0网卡IP
 ip addr add 192.168.0.1/24 dev eth0
+# 设置ip、网关、dns
+# ip addr add 192.168.0.1/24 dev eth0 && ip route add default via 192.168.1.1 && echo "nameserver 114.114.114.114" >> /etc/resolv.conf
 # 或：ifconfig eth0 192.168.0.1 netmask 255.255.255.0 up
 # 或：ifconfig eth0 192.168.0.1/24 up
 ```
 
 # **ip address delete**
 
-此命令用于删除ip地址。与ip addr add的参数一致。设备名称是必需的参数。其余的是可选的。如果没有给出参数，则删除第一个地址。
+　　此命令用于删除ip地址。与ip addr add的参数一致。设备名称是必需的参数。其余的是可选的。如果没有给出参数，则删除第一个地址。
 
 ```bash
 # 删除eth0网卡IP地址192.168.0.1
@@ -77,7 +79,7 @@ ip addr del 192.168.0.1/24 dev eth0
 
 # **ip address flush**
 
-此命令刷新根据某些条件选择的协议地址。此命令的参数与show相同，只是不支持类型选择器和主选择器
+　　此命令刷新根据某些条件选择的协议地址。此命令的参数与show相同，只是不支持类型选择器和主选择器
 
 ```bash
 # 从设备eth4删除所有全局IPv4和IPv6地址。 如果没有“范围全局”，它将删除所有地址，包括本地IPv6链接
@@ -86,7 +88,7 @@ ip address flush dev eth4 scope global
 
 # **ip address show**
 
-**option：**
+　　**option：**
 
 * dev IFNAME (default)：设备名称
 * scope SCOPE_VAL：仅列出具有此作用域的地址

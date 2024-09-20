@@ -2,7 +2,7 @@
 
 # jdk 部署
 
-jdk下载地址：[https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html](https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html)
+　　jdk下载地址：[h](https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html)​[ttps://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html](https://www.oracle.com/cn/java/technologies/downloads/archive/)
 
 ```bash
 mkdir -p /usr/local/java
@@ -27,11 +27,11 @@ java -version
 
 ![](assets/image-20221127213410161-20230610173811-tn6wzf8.png)
 
-一般JVM调优，重点在于**调整JVM堆大小、调整垃圾回收器**
+　　一般JVM调优，重点在于**调整JVM堆大小、调整垃圾回收器**
 jvm调优的目的是：减少full gc、降低gc停顿时间、提高吞吐量；
 调优的顺序：“提高吞吐量”>“降低gc停顿时间”；在满足吞吐量的前提下，再降低gc停顿时间
 
-**JVM调优常用参数**
+　　**JVM调优常用参数**
 
 ```bash
 ######## 堆、元空间 优化 ###############
@@ -46,13 +46,13 @@ jvm调优的目的是：减少full gc、降低gc停顿时间、提高吞吐量�
 
 ## 堆区
 
-Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。
+　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。
 
-在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。
+　　在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。
 
-Java 中的堆也是 GC 收集垃圾的主要区域。GC 分为两种：Minor GC、FullGC ( 或称为 Major GC )。
+　　Java 中的堆也是 GC 收集垃圾的主要区域。GC 分为两种：Minor GC、FullGC ( 或称为 Major GC )。
 
-Minor GC 是发生在新生代中的垃圾收集动作，新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。当一个对象被判定为 "死亡" 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。
+　　Minor GC 是发生在新生代中的垃圾收集动作，新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。当一个对象被判定为 "死亡" 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。
 
 ## 元空间
 

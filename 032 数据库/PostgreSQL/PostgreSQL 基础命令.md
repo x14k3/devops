@@ -2,7 +2,7 @@
 
 # 登录命令
 
-参考PostgreSQL 内置命令
+　　参考PostgreSQL 内置命令
 
 ```pgsql
 --日常登录本机
@@ -36,7 +36,7 @@ psql postgresql://jy2web@127.0.0.1:5432/jy2db
 \x                   -- 已列的形式展示
 ```
 
-‍
+　　‍
 
 # 用户管理
 
@@ -63,7 +63,7 @@ option:
     | USER role_name [, ...]       --同上
 ```
 
-bash命令行方式创建用户
+　　bash命令行方式创建用户
 
 ```bash
 createuser [ connection-option ...] [ option ...] [ username ]
@@ -91,7 +91,7 @@ username # 指定要创建的 PostgreSQL 用户的名称。该名称必须不同
 
 ```
 
-‍
+　　‍
 
 # 权限管理
 
@@ -129,7 +129,7 @@ WITH GRANT OPTION   -- 表示该用户可以将自己拥有的权限授权给别
 grant select,insert,update,delete on zjy.zjy to zjy;
 ```
 
-撤销权限
+　　撤销权限
 
 ```pgsql
 REVOKE  { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
@@ -143,7 +143,7 @@ REVOKE  { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER 
  revoke select on all tables in schema zjy from zjy;
 ```
 
-修改owner
+　　修改owner
 
 ```pgsql
  alter database test owner to rcb
@@ -152,19 +152,19 @@ REVOKE  { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER 
 
 # 模式 Schema
 
-一个数据库包含一个或多个已命名的模式，模式又包含表。模式还可以包含其它对象， 包括数据`类型`​、`函数`​、`操作符`​等。同一个对象名可以在不同的模式里使用而不会导致冲突； 比如，`herschema`​和`myschema`​都可以包含一个名为`mytable`​的表。 和数据库不同，模式不是严格分离的：只要有权限，一个用户可以访问他所连接的数据库中的任意模式中的对象。
+　　一个数据库包含一个或多个已命名的模式，模式又包含表。模式还可以包含其它对象， 包括数据`类型`​、`函数`​、`操作符`​等。同一个对象名可以在不同的模式里使用而不会导致冲突； 比如，`herschema`​和`myschema`​都可以包含一个名为`mytable`​的表。 和数据库不同，模式不是严格分离的：只要有权限，一个用户可以访问他所连接的数据库中的任意模式中的对象。
 
-我们需要模式的原因有好多：
+　　我们需要模式的原因有好多：
 
 * 允许多个用户使用一个数据库而不会干扰其它用户。
 * 把数据库对象组织成逻辑组，让它们更便于管理。
 * 第三方的应用可以放在不同的模式中，这样它们就不会和其它对象的名字冲突。
 
-模式类似于操作系统层次的目录，只不过模式不能嵌套。
+　　模式类似于操作系统层次的目录，只不过模式不能嵌套。
 
-‍
+　　‍
 
-我们可以使用 CREATE SCHEMA 语句来创建模式，语法格式如下：
+　　我们可以使用 CREATE SCHEMA 语句来创建模式，语法格式如下：
 
 ```pgsql
 -- 自定义创建模式（schema）
@@ -201,9 +201,9 @@ create schema AUTHORIZATION CURRENT_USER;
 drop database 数据库名;
 ```
 
-关闭数据库所有会话，
+　　关闭数据库所有会话，
 
-注意：删库前需要关闭所有会话，不然会提示：
+　　注意：删库前需要关闭所有会话，不然会提示：
 
 ```pgsql
 ERROR:  database "mydb" is being accessed by other users
@@ -220,7 +220,7 @@ WHERE datname='mydb' AND pid<>pg_backend_pid();
 -- 执行这个语句后就可以使用drop database 删除数据库了。
 ```
 
-‍
+　　‍
 
 # 表管理
 
@@ -288,7 +288,7 @@ create index t_user_username on t_user (username);
 
 # 查询SQL
 
-注意：PostgreSQL中的字段大小写敏感，而且只认小写字母，查询时需注意。其他与基本sql大致相同。
+　　注意：PostgreSQL中的字段大小写敏感，而且只认小写字母，查询时需注意。其他与基本sql大致相同。
 
 ```pgsql
 --## to_timestamp() 字符串转时间
@@ -324,17 +324,17 @@ SELECT SUBSTRING ('PostgreSQL', 8);
 SELECT SUBSTRING ('PostgreSQL', 'gre');
 ```
 
-‍
+　　‍
 
 # 执行sql脚本
 
-方式一：先登录再执行
+　　方式一：先登录再执行
 
 ```
 \i testdb.sql
 ```
 
-方式二：通过psql执行
+　　方式二：通过psql执行
 
 ```
 psql -d testdb -U postgres -f /pathA/xxx.sql
@@ -357,11 +357,11 @@ binaryTransfer=false&forceBinary=false&reWriteBatchedInserts=true
 * ​`forceBinary=false`​：控制是否将非 ASCII 字符串强制转换为二进制格式，`false`​ 表示不强制转换，默认为 `true`​
 * ​`reWriteBatchedInserts=true`​：控制是否将批量插入语句转换成更高效的形式，`true`​ 表示转换，默认为 `false`​
 
-‍
+　　‍
 
 ## 集群PostgreSQL 连接串
 
-集群PostgreSQL，连接串如下：
+　　集群PostgreSQL，连接串如下：
 
 ```
 url: jdbc:postgresql://10.20.1.231:5432/postgres?

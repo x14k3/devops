@@ -1,6 +1,6 @@
 # nacos 集群部署
 
-[官网：https://nacos.io/](https://links.jianshu.com/go?to=https://nacos.io/ "官网：https://nacos.io/")
+　　[官网：https://nacos.io/](https://links.jianshu.com/go?to=https://nacos.io/ "官网：https://nacos.io/")
 [下载地址：https://github.com/alibaba/nacos/releases](https://links.jianshu.com/go?to=https://github.com/alibaba/nacos/releases "下载地址：https://github.com/alibaba/nacos/releases")
 
 ### 1. 解压安装
@@ -11,7 +11,7 @@
 
 ### 2. 配置集群配置文件
 
-在nacos的解压目录nacos/的conf目录下，有配置文件cluster.conf，请每行配置成ip:port。（请配置3个或3个以上节点）
+　　在nacos的解压目录nacos/的conf目录下，有配置文件cluster.conf，请每行配置成ip:port。（请配置3个或3个以上节点）
 
 ```bash
 cp cluster.conf.example  cluster.conf
@@ -26,11 +26,11 @@ vim cluster.conf
 
 #### 使用内置数据源
 
-无需进行任何配置
+　　无需进行任何配置
 
 #### 使用外置数据源
 
-生产使用建议至少主备模式，或者采用高可用数据库。
+　　生产使用建议至少主备模式，或者采用高可用数据库。
 
 1. 创建数据库和用户
 

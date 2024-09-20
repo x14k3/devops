@@ -1,10 +1,10 @@
 # v2ray
 
-V2Rray 官网：[https://www.v2ray.com/](https://www.v2ray.com/)  
+　　V2Rray 官网：[https://www.v2ray.com/](https://www.v2ray.com/)  
 V2Rray 下载地址：[https://github.com/v2fly/v2ray-core/releases](https://github.com/v2fly/v2ray-core/releases)  
 参考：[https://www.v2ray.com/awesome/tools.html](https://www.v2ray.com/awesome/tools.html)
 
-v2ray(Project V) 相对于 Shadowsocks，v2ray 更像全能选手，拥有更多可选择的协议 / 传输载体 (Socks、HTTP、TLS、TCP、mKCP、WebSocket )，还有强大的路由功能，不仅仅于此，它亦包含 Shadowsocks 组件，你只需要安装 v2ray，你就可以使用所有的 v2ray 相关的特性包括使用 Shadowsocks，由于 v2ray 是使用 GO 语言所撰写的，天生的平台部署优势，下载即可使用，
+　　v2ray(Project V) 相对于 Shadowsocks，v2ray 更像全能选手，拥有更多可选择的协议 / 传输载体 (Socks、HTTP、TLS、TCP、mKCP、WebSocket )，还有强大的路由功能，不仅仅于此，它亦包含 Shadowsocks 组件，你只需要安装 v2ray，你就可以使用所有的 v2ray 相关的特性包括使用 Shadowsocks，由于 v2ray 是使用 GO 语言所撰写的，天生的平台部署优势，下载即可使用，
 
 # v2ray服务端部署
 
@@ -55,8 +55,8 @@ cat /proc/sys/kernel/random/uuid
       "settings": {
         "clients": [
           {
-            "id": "7e471537-72cd-4b32-aab5-xxxxxxxxxxx",
-            "alterId": 16
+            "id": "7e4------------------xxxxxxxxxxx",
+            "alterId": 0
           }
         ]
       }
@@ -64,6 +64,7 @@ cat /proc/sys/kernel/random/uuid
   ],
   "outbounds": [
     {
+      "tag": "direct",
       "protocol": "freedom",
       "settings": {}
     }
@@ -72,7 +73,7 @@ cat /proc/sys/kernel/random/uuid
 
 ```
 
-‍
+　　‍
 
 ## 配置VLESS协议
 
@@ -90,7 +91,8 @@ cat /proc/sys/kernel/random/uuid
       "protocol": "VLESS",
       "settings": {
         "clients": [
-          {56----90-4e9b-4------9ed-a------------",
+          {
+            "id": "67-----------------------------2a689",
             "alterId": 0
           }
         ],
@@ -98,51 +100,22 @@ cat /proc/sys/kernel/random/uuid
       },
       "streamSettings": {
         "network": "ws",
-        "wsSettings": {"path": "/hahah"}
+        "wsSettings": {"path": "/xxxxxxxx"}
       }
     }
   ],
   "outbounds": [
     {
+      "tag": "direct",
       "protocol": "freedom",
-      "settings": {},
-      "tag": "direct"
-    },
-    {
-      "protocol": "blackhole",
-      "settings": { },
-      "tag": "blocked"
+      "settings": {}
     }
-  ],
-    "dns": {
-    "servers": [
-      "https+local://1.1.1.1/dns-query",
-      "1.1.1.1",
-      "1.0.0.1",
-      "8.8.8.8",
-      "8.8.4.4",
-      "localhost"
-      ]
-    },
-    "routing": {
-    "domainStrategy": "AsIs",
-    "rules": [
-      {
-        "type": "field",
-        "ip": ["geoip:private"],
-        "outboundTag": "blocked"
-      },
-      {
-        "type": "field",
-        "protocol": ["bittorrent"],
-        "outboundTag": "blocked"
-      }
-    ]
-  }
+  ]
 }
+
 ```
 
-‍
+　　‍
 
 ## 配置 WebSocket + TLS + Web
 
@@ -160,19 +133,20 @@ cat /proc/sys/kernel/random/uuid
       "settings": {
         "clients": [
           {
-            "id": "7e------------32-aab5-xx-------",
-            "alterId": 16
+            "id": "7e99lop9------------------------",
+            "alterId": 0
           }
         ]
       },
       "streamSettings": {
         "network": "ws",
-        "wsSettings": {"path": "/webvmes"}
+        "wsSettings": {"path": "/xxxxxx"}
       }
     }
   ],
   "outbounds": [
     {
+      "tag": "direct",
       "protocol": "freedom",
       "settings": {}
     }
@@ -180,7 +154,7 @@ cat /proc/sys/kernel/random/uuid
 }
 ```
 
-修改nginx配置
+　　修改nginx配置
 
 ```bash
     server {
@@ -213,17 +187,17 @@ cat /proc/sys/kernel/random/uuid
 
 ## windows
 
-如果服务端的配置为 [vmess 协议](#vmess%20协议)
+　　如果服务端的配置为 [vmess 协议](#vmess%20协议)
 
 ![](assets/image-20221127210933123-20230610173813-wthc3c7.png)
 
-如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
+　　如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
 
 ![](assets/image-20221127210912432-20230610173813-dx832bp.png)
 
 ## linux
 
-linux环境下v2ray程序不区分客户端和服务端，客户端同样适用服务端的程序
+　　linux环境下v2ray程序不区分客户端和服务端，客户端同样适用服务端的程序
 
 ```bash
 # 手动安装
@@ -257,9 +231,10 @@ source .bashrc
 start_v2ray
 ```
 
-配置文件参考
+　　配置文件参考
 
 ```json
+
 {
   "log": {
     "access": "access.log",
@@ -313,13 +288,13 @@ start_v2ray
       "settings": {
         "vnext": [
           {
-            "address": "doshe1200.cn",
-            "port": 20051,
+            "address": "ddshe11.com",
+            "port": 1231,
             "users": [
               {
-                "id": "x---------4e9b-4f6e-9ed5-91------",
+                "id": "673----------------------123",
                 "alterId": 0,
-				"encryption": "none"
+                "encryption": "none"
               }
             ]
           }
@@ -333,7 +308,7 @@ start_v2ray
           "show": false
         },
         "wsSettings": {
-          "path": "/lliiis",
+          "path": "/xxxxx",
           "headers": {}
         }
       },
@@ -347,7 +322,7 @@ start_v2ray
       "protocol": "freedom",
       "settings": {}
     },
-    {
+   {
       "tag": "block",
       "protocol": "blackhole",
       "settings": {
@@ -356,13 +331,42 @@ start_v2ray
         }
       }
     }
-  ]
+  ],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": ["geosite:cn"]
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "ip": [
+          "geoip:cn",
+          "geoip:private",
+          "192.168.0.0/16",
+          "10.10.0.0/16",
+          "192.168.31.0/24",
+          "172.168.0.0/24",
+          "10.10.0.0/24"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "network": "udp,tcp"
+      }
+    ]
+  }
 }
+
 ```
 
-‍
+　　‍
 
-使用守护进程管理
+　　使用守护进程管理
 
 ```bash
 useradd -M -s /sbin/nologin v2ray
@@ -395,49 +399,38 @@ systemctl start v2ray
 
 ```
 
-‍
+　　‍
 
 ## 路由规则
 
 ```bash
-{
-  "dns": {
-    "servers": [
-      "114.114.114.114",
-      {
-        "address": "1.1.1.1",
-        "port": 53,
-        "domains": [
-          "geosite:geolocation-!cn"
-        ]
-      }
-    ]
-  },
   "routing": {
     "domainStrategy": "IPOnDemand",
     "rules": [
-      // 第一条规则
       {
         "type": "field",
-        "outboundTag": "direct", // freedom 的 tag
-        "domain": ["geosite:cn"] // 中国大陆网站
+        "outboundTag": "direct",
+        "domain": ["geosite:cn"]
       },
-      // 第二条规则
       {
         "type": "field",
-        "outboundTag": "direct", // freedom 的 tag
+        "outboundTag": "direct",
         "ip": [
-          "geoip:cn", // 中国大陆 IP
-          "geoip:private"
+          "geoip:cn",
+          "geoip:private",
+          "192.168.0.0/16",
+          "10.10.0.0/16",
+          "192.168.31.0/24",
+          "172.168.0.0/24",
+          "10.10.0.0/24"
         ]
       },
-      // 第三条规则
       {
         "type": "field",
         "outboundTag": "proxy",
         "network": "udp,tcp"
-      }  
+      }
     ]
   }
-}
+
 ```

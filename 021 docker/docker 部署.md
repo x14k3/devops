@@ -1,10 +1,10 @@
 # docker 部署
 
-_docker-io, docker-engin_是以前早期的版本,版本号是 1. x 默认centos7 安装的是docker-io,最新版是 1.13
+　　_docker-io, docker-engin_是以前早期的版本,版本号是 1. x 默认centos7 安装的是docker-io,最新版是 1.13
 
-_docker-ce_是社区版本,适用于刚刚开始docker 和开发基于docker研发的应用开发者或者小型团队。Ubuntu默认安装的是docker-ce
+　　_docker-ce_是社区版本,适用于刚刚开始docker 和开发基于docker研发的应用开发者或者小型团队。Ubuntu默认安装的是docker-ce
 
-_docker-ee_是docker的企业版,适用于企业级开发,同样也适用于开发、分发和运行商务级别的应用的IT 团队。
+　　_docker-ee_是docker的企业版,适用于企业级开发,同样也适用于开发、分发和运行商务级别的应用的IT 团队。
 
 ## 官方脚本安装
 
@@ -33,26 +33,29 @@ systemctl status docker
 
 # 更新为阿里源
 # 备份Linux本地现有的yum仓库文件
-yum -y install wget
 cd /etc/yum.repos.d
 mkdir backup
 mv ./* backup/
 
 # 下载新的仓库文件
-## 这是第一个仓库
 wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-## 下载第二个epel仓库
 wget -O /etc/yum.repos.d/epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
 
+#curl -o  /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+#curl -o  /etc/yum.repos.d/epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
+
 # 其他(非阿里云ECS用户会出现出现 curl#6 - "Could not resolve host: mirrors.cloud.aliyuncs.com; Unknown error")
-sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
+sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/*.repo
 
 # 清空之前的yum缓存，生成新缓存
 yum clean all &&  yum makecache 
--------------------------------------------------------------------------------------------------------------------
 ```
 
+　　‍
+
 ## yum源安装
+
+　　预置条件，更新yum源 阿里源
 
 ```bash
 # 增加docker源
@@ -165,4 +168,4 @@ docker login 192.168.10.31 -u admin -p Ninestar123
 systemctl restart docker
 ```
 
-‍
+　　‍

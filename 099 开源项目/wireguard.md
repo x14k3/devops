@@ -1,6 +1,6 @@
 # wireguard
 
-基于Wireguard技术的虚拟个人网络搭建（基于Lighthouse服务器）
+　　基于Wireguard技术的虚拟个人网络搭建（基于Lighthouse服务器）
 
 ## 服务端配置
 
@@ -79,7 +79,7 @@ wg-quick up wg0
 wg-quick down wg0
 ```
 
-‍
+　　‍
 
 ## 客户端配置（以client1为例）
 
@@ -100,7 +100,7 @@ AllowedIPs = 10.9.0.0/24
 Endpoint = 114.132.56.178:50814
 ```
 
-‍
+　　‍
 
 ## Docker安装Wireguard
 
@@ -134,6 +134,6 @@ docker rm wg-easy
 docker pull weejewel/wg-easy
 ```
 
-‍
+　　‍
 
-‍
+　　‍

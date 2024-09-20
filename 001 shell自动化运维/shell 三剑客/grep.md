@@ -1,8 +1,8 @@
 # grep
 
-grep 命令用于查找文件里符合条件的字符串的一行打印出来。
+　　grep 命令用于查找文件里符合条件的字符串的一行打印出来。
 
-grep命令家族有 grep、egrep、fgrep 三个子命令，适用于不通的场景，具体如下：
+　　grep命令家族有 grep、egrep、fgrep 三个子命令，适用于不通的场景，具体如下：
 
 ```bash
 1.grep  原生的grep命令，使用“标准正则表达式”作为匹配标准
@@ -36,4 +36,4 @@ grep命令家族有 grep、egrep、fgrep 三个子命令，适用于不通的场
 cat /etc/passwd|grep -v root
 ```
 
-‍
+　　‍

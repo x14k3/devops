@@ -1,6 +1,6 @@
 # Linux 密码的安全 （设置密码复杂度和加密算法） （CentOS）
 
-这个目录下文件的名称就代表服务的名称：
+　　这个目录下文件的名称就代表服务的名称：
 
 ```bash
 sds@notebook:~ $ ls /etc/pam.d
@@ -25,11 +25,11 @@ cups                               sddm-greeter
 sds@notebook:~ $ 
 ```
 
-Linux对应的密码策略模块有：pam_passwdqc 和 pam_pwquality。
+　　Linux对应的密码策略模块有：pam_passwdqc 和 pam_pwquality。
 
-**pam_passwdqc**：/etc/login.defs 密码过期时间等策略配置。
+　　**pam_passwdqc**：/etc/login.defs 密码过期时间等策略配置。
 
-**pam_pwquality**：/etc/security/pwquality.conf 密码复杂度配置。
+　　**pam_pwquality**：/etc/security/pwquality.conf 密码复杂度配置。
 
 ### 过期时间等配置
 
@@ -47,7 +47,7 @@ PASS_WARN_AGE   30
 ...
 ```
 
-‍
+　　‍
 
 ### 密码复杂度配置
 
@@ -79,7 +79,7 @@ session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet 
 session     required      pam_unix.so
 ```
 
-​`password requisite pam_pwquality.so try_first_pass local_users_only retry=5 authtok_type= minlen=8 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1 enforce_for_root`​
+　　​`password requisite pam_pwquality.so try_first_pass local_users_only retry=5 authtok_type= minlen=8 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1 enforce_for_root`​
 
 ```bash
 minlen=8   密码最小长度为8个字符。
@@ -92,13 +92,13 @@ enforce_for_root 确保即使是root用户设置密码，也应强制执行复�
 
 ### 登陆过期配置
 
-添加的内容一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！
+　　添加的内容一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！
 
-下面这段如果配置在ssh文件里面就是限制的ssh，如果配置在login文件里限制的就是tty处登陆。
+　　下面这段如果配置在ssh文件里面就是限制的ssh，如果配置在login文件里限制的就是tty处登陆。
 
-​`auth required pam_tally2.so deny=5 unlock_time=300 even_deny_root root_unlock_time=300`​
+　　​`auth required pam_tally2.so deny=5 unlock_time=300 even_deny_root root_unlock_time=300`​
 
-详解：
+　　详解：
 
 ```bash
 even_deny_root   # 也限制root用户

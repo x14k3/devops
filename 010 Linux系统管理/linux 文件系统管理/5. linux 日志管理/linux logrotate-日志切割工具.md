@@ -1,12 +1,12 @@
 # linux logrotate-日志切割工具
 
-logrorare一定程度上可以简化对会生成大量日志文件的系统的管理。logrotate可以实现自动轮替、删除、压缩和mail日志的功能。
+　　logrorare一定程度上可以简化对会生成大量日志文件的系统的管理。logrotate可以实现自动轮替、删除、压缩和mail日志的功能。
 
-Linux系统自带的日志滚动工具logrotate由两部分组成：一是命令行工具logrotate，二是后台服务rsyslog。
+　　Linux系统自带的日志滚动工具logrotate由两部分组成：一是命令行工具logrotate，二是后台服务rsyslog。
 
-**配置文件详解/etc/logrotate.conf**
+　　**配置文件详解/etc/logrotate.conf**
 
-默认使用 /etc/logrotate.conf 文件，作为全局配置，而不同应用的具体配置则在 /etc/logrotate.d 目录下，通常以应用程序的名称命名，例如 nginx、mysql、syslog、yum 等配置。
+　　默认使用 /etc/logrotate.conf 文件，作为全局配置，而不同应用的具体配置则在 /etc/logrotate.d 目录下，通常以应用程序的名称命名，例如 nginx、mysql、syslog、yum 等配置。
 
 ```bash
 # 每周轮替一次
@@ -45,9 +45,9 @@ include /etc/logrotate.d
 
 ```
 
-手动执行logrotate文件 `logrotate /etc/logrotate.d/nginx`
+　　手动执行logrotate文件 `logrotate /etc/logrotate.d/nginx`
 
-logrotate 配置文件的主要参数如表:
+　　logrotate 配置文件的主要参数如表:
 
 |参数|参数说明|
 | -----------------------| ------------------------------------------------------------------------------------------|

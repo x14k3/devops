@@ -119,7 +119,7 @@ while condition ; do
 done
 ```
 
-​**`Note:`** ​ 和if一样，condition可以有一系列的statements组成，值是最后的statment的exit status
+　　​**​`Note:`​** ​ 和if一样，condition可以有一系列的statements组成，值是最后的statment的exit status
 
 ## 4.Util循环
 
@@ -129,11 +129,11 @@ until [condition-is-true] ; do
 done
 ```
 
-​**`Note:`** ​ 执行statements，直至command正确运行。在循环的顶部判断条件,并且如果条件一直为false那就一直循环下去
+　　​**​`Note:`​** ​ 执行statements，直至command正确运行。在循环的顶部判断条件,并且如果条件一直为false那就一直循环下去
 
-‍
+　　‍
 
-‍
+　　‍
 
 ## 5.跳出循环
 

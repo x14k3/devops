@@ -2,7 +2,7 @@
 
 ## 系统管理
 
-Systemd 并不是一个命令，而是一组命令，涉及到系统管理的方方面面。
+　　Systemd 并不是一个命令，而是一组命令，涉及到系统管理的方方面面。
 
 ### systemctl
 
@@ -25,7 +25,7 @@ $ sudo systemctl rescue
 
 ### systemd-analyze
 
-用于查看启动耗时
+　　用于查看启动耗时
 
 ```bash
 # 查看启动耗时
@@ -84,9 +84,9 @@ $ loginctl show-user ruanyf
 
 ## Unit
 
-Systemd 可以管理所有系统资源。不同的资源统称为 Unit（单位）。
+　　Systemd 可以管理所有系统资源。不同的资源统称为 Unit（单位）。
 
-Unit 一共分成12种。
+　　Unit 一共分成12种。
 
 > * Service unit：系统服务
 > * Target unit：多个 Unit 构成的一个组
@@ -101,7 +101,7 @@ Unit 一共分成12种。
 > * Swap Unit：swap 文件
 > * Timer Unit：定时器
 
-​`systemctl list-units`​命令可以查看当前系统的所有 Unit 。
+　　​`systemctl list-units`​命令可以查看当前系统的所有 Unit 。
 
 ```bash
 # 列出正在运行的 Unit
@@ -136,7 +136,7 @@ systemctl list-units --type=service --state=running
 systemctl list-unit-files --state=enabled
 ```
 
-除了`status`​命令，`systemctl`​还提供了三个查询状态的简单方法，主要供脚本内部的判断语句使用。
+　　除了`status`​命令，`systemctl`​还提供了三个查询状态的简单方法，主要供脚本内部的判断语句使用。
 
 ```bash
 # 显示某个 Unit 是否正在运行
@@ -171,4 +171,4 @@ $ systemctl show -p CPUShares httpd.service
 $ sudo systemctl set-property httpd.service CPUShares=500
 ```
 
-‍
+　　‍

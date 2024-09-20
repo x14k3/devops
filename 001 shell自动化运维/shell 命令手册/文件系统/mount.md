@@ -2,9 +2,9 @@
 
 ## mount
 
-**mount命令** Linux mount命令是经常会使用到的命令，它用于挂载Linux系统外的文件。
+　　**mount命令** Linux mount命令是经常会使用到的命令，它用于挂载Linux系统外的文件。
 
-如果通过webdav协议挂载网络磁盘，需要运行指令`apt install davfs2`​安装必要的组件
+　　如果通过webdav协议挂载网络磁盘，需要运行指令`apt install davfs2`​安装必要的组件
 
 ### 语法
 
@@ -54,7 +54,7 @@ mount [-fnrsvw] [-t vfstype] [-o options] device dir
 
 ```
 
-‍
+　　‍
 
 ### 实例
 
@@ -64,23 +64,23 @@ mount [-fnrsvw] [-t vfstype] [-o options] device dir
 mount /dev/hda1 /mnt
 ```
 
-将 `/dev/hda1`​ 用唯读模式挂在 `/mnt`​ 之下。
+　　将 `/dev/hda1`​ 用唯读模式挂在 `/mnt`​ 之下。
 
 ```
 mount -o ro /dev/hda1 /mnt
 ```
 
-将 `/tmp/image.iso`​ 这个光碟的 `image`​ 档使用 `loop`​ 模式挂在 `/mnt/cdrom`​ 之下。用这种方法可以将一般网络上可以找到的 `Linux`​ 光 碟 ISO 档在不烧录成光碟的情况下检视其内容。
+　　将 `/tmp/image.iso`​ 这个光碟的 `image`​ 档使用 `loop`​ 模式挂在 `/mnt/cdrom`​ 之下。用这种方法可以将一般网络上可以找到的 `Linux`​ 光 碟 ISO 档在不烧录成光碟的情况下检视其内容。
 
 ```
 mount -o loop /tmp/image.iso /mnt/cdrom
 ```
 
-‍
+　　‍
 
 #### 通过 webdav 协议挂载网络硬盘
 
-将`https://your.webdav.link.here`​的网络存储以网络磁盘的形式挂载到系统路径`/path/to/mount`​
+　　将`https://your.webdav.link.here`​的网络存储以网络磁盘的形式挂载到系统路径`/path/to/mount`​
 
 ```
 mount -t davfs https://your.webdav.link.here /path/to/mount
@@ -88,7 +88,7 @@ mount -t davfs https://your.webdav.link.here /path/to/mount
 
 #### 永久挂载（开机自动挂载）
 
-((20230610173764-f6u7nhy 'fstab参数说明'))
+　　((20230610173764-f6u7nhy 'fstab参数说明'))
 
 ```bash
 # 自动挂载
@@ -106,7 +106,7 @@ smbclient //192.168.1.1/smb_share/ -U smb_user  #系统提示输入smb_user_pass
 smbclient //192.168.1.1/smb_share/ smb_user_passwd -U smb_user  #不提示输入密码
 ```
 
-‍
+　　‍
 
 ##### mount方式
 
@@ -120,13 +120,13 @@ mkdir windows
 mount -t cifs -o username=share,password=share //192.168.66.198/share ./windows 
 ```
 
-‍
+　　‍
 
 ## umount
 
-用于卸载已经加载的文件系统
+　　用于卸载已经加载的文件系统
 
-**umount命令** 用于卸载已经加载的文件系统。利用设备名或挂载点都能umount文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。
+　　**umount命令** 用于卸载已经加载的文件系统。利用设备名或挂载点都能umount文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。
 
 ### 语法
 
@@ -148,27 +148,27 @@ umount(选项)(参数)
 
 ### 参数
 
-文件系统：指定要卸载的文件系统或者其对应的设备文件名。
+　　文件系统：指定要卸载的文件系统或者其对应的设备文件名。
 
 ### 实例
 
-下面两条命令分别通过设备名和挂载点卸载文件系统，同时输出详细信息：
+　　下面两条命令分别通过设备名和挂载点卸载文件系统，同时输出详细信息：
 
-通过设备名卸载
+　　通过设备名卸载
 
 ```
 umount -v /dev/sda1
 /dev/sda1 umounted
 ```
 
-通过挂载点卸载
+　　通过挂载点卸载
 
 ```
 umount -v /mnt/mymount/
 /tmp/diskboot.img umounted
 ```
 
-如果设备正忙，卸载即告失败。卸载失败的常见原因是，某个打开的shell当前目录为挂载点里的某个目录：
+　　如果设备正忙，卸载即告失败。卸载失败的常见原因是，某个打开的shell当前目录为挂载点里的某个目录：
 
 ```
 umount -v /mnt/mymount/
@@ -176,22 +176,22 @@ umount: /mnt/mymount: device is busy
 umount: /mnt/mymount: device is busy
 ```
 
-有时，导致设备忙的原因并不好找。碰到这种情况时，可以用lsof列出已打开文件，然后搜索列表查找待卸载的挂载点：
+　　有时，导致设备忙的原因并不好找。碰到这种情况时，可以用lsof列出已打开文件，然后搜索列表查找待卸载的挂载点：
 
 ```
 lsof | grep mymount         查找mymount分区里打开的文件
 bash   9341  francois  cwd   DIR   8,1   1024    2 /mnt/mymount
 ```
 
-从上面的输出可知，mymount分区无法卸载的原因在于，francois运行的PID为9341的bash进程。
+　　从上面的输出可知，mymount分区无法卸载的原因在于，francois运行的PID为9341的bash进程。
 
-对付系统文件正忙的另一种方法是执行延迟卸载：
+　　对付系统文件正忙的另一种方法是执行延迟卸载：
 
 ```
 umount -vl /mnt/mymount/     执行延迟卸载
 ```
 
-延迟卸载（lazy unmount）会立即卸载目录树里的文件系统，等到设备不再繁忙时才清理所有相关资源。卸载可移动存储介质还可以用eject命令。下面这条命令会卸载cd并弹出CD：
+　　延迟卸载（lazy unmount）会立即卸载目录树里的文件系统，等到设备不再繁忙时才清理所有相关资源。卸载可移动存储介质还可以用eject命令。下面这条命令会卸载cd并弹出CD：
 
 ```
 eject /dev/cdrom      卸载并弹出CD 

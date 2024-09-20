@@ -22,24 +22,24 @@ openssl s_client -help 2>&1  > /dev/null | egrep "\-(ssl|tls)[^a-z]"
 
 ## 证书认证相关
 
-**1.**  **https 单项认证：**
+　　**1.**  **https 单项认证：**
 
-server: server.crt + server.key
+　　server: server.crt + server.key
 client: server\_ca.crt
 
-**2.**  **https 双向认证：**
+　　**2.**  **https 双向认证：**
 
-server: server.crt + server.key + client\_ca.crt
+　　server: server.crt + server.key + client\_ca.crt
 client: server\_ca.crt + client.crt + client.key
 
-在使用 CA 证书进行签署证书时加入`-extfile`​和`-extensions`​选项，具体命令如下：
+　　在使用 CA 证书进行签署证书时加入`-extfile`​和`-extensions`​选项，具体命令如下：
 
 ```bash
 openssl x509 -req  -days 365 -sha256 -extfile openssl.cnf -extensions v3_req
  -in server.csr -signkey server.key -out server.crt
 ```
 
-证书详情信息：
+　　证书详情信息：
 
 ```bash
 Version: 版本号
@@ -55,22 +55,22 @@ Subject Public Key Info: 主体公钥信息
     RSA Public-Key: 具体的公钥数据
 ```
 
-一般证书的签发流程是：
+　　一般证书的签发流程是：
 
-申请者把自己的申请做成证书申请文件 csr(csr 中放入了申请者的公钥以及申请者的信息)
+　　申请者把自己的申请做成证书申请文件 csr(csr 中放入了申请者的公钥以及申请者的信息)
 然后把 csr 发送给签发者 CA 进行证书签发，签发过程就是 CA 用自己的私钥给 csr 生成签名，然后制作为证书文件(.crt 或.pem)
 
-nginx 判定证书的时候，是根据证书中的两个字段：Issuer 和 Subject
+　　nginx 判定证书的时候，是根据证书中的两个字段：Issuer 和 Subject
 如果 Issuer == Subject 那么 nginx 就会认为这是一个自签名的根证书
 如果 Issuer != Subject 那么 nginx 就会认为这不是一个自签名的证书，验证时需要带上签发这个证书的根证书
 
-正式使用时，subject 中的 CN 字段需要填写使用者的域名，也就是 nginx 所在主机的域名。
+　　正式使用时，subject 中的 CN 字段需要填写使用者的域名，也就是 nginx 所在主机的域名。
 
 ## 证书生成
 
-流程：自签 CA，由自签 CA 签发二级 CA，最后由二级 CA 签发网站证书。
+　　流程：自签 CA，由自签 CA 签发二级 CA，最后由二级 CA 签发网站证书。
 
-openssl 参数参考：
+　　openssl 参数参考：
 
 ```bash
 -extensions v3_req 指定 X.509 v3版本
@@ -124,9 +124,9 @@ openssl x509 -req -in client.csr -CA client_ca.crt -CAkey client_ca.key -CAcreat
 cat root_ca.crt server_ca.crt client_ca.crt > caAll.crt
 ```
 
-实例：
+　　实例：
 
-在 Nginx 配置参考：
+　　在 Nginx 配置参考：
 
 ```bash
 server {
@@ -166,7 +166,7 @@ openssl x509 -noout -text -in server.crt
 
 ### 创建根 CA
 
-**1. 创建目录：**
+　　**1. 创建目录：**
 
 ```bash
 mkdir -p /opt/certs/root/key
@@ -176,9 +176,9 @@ touch /opt/certs/root/index.txt.attr
 echo 01 > /opt/certs/root/serial
 ```
 
-**2. 编辑配置文件：**
+　　**2. 编辑配置文件：**
 
-​`vim /opt/certs/root/openssl.cnf`​ :
+　　​`vim /opt/certs/root/openssl.cnf`​ :
 
 ```bash
 [ ca ]
@@ -235,7 +235,7 @@ basicConstraints = CA:TRUE
 [ req_attributes ]
 ```
 
-**3. 生成证书：**
+　　**3. 生成证书：**
 
 ```bash
 # 1，创建根CA私钥
@@ -251,11 +251,11 @@ openssl ca -selfsign -in /opt/certs/root/key/ca.csr -out /opt/certs/root/key/cac
 openssl x509 -text -in /opt/certs/root/key/cacert.crt
 ```
 
-经过以上几个步骤，就生成了根 CA 的相关证书和私钥，可以用于签发其他的 CA（二级 CA），不可签发服务器证书。
+　　经过以上几个步骤，就生成了根 CA 的相关证书和私钥，可以用于签发其他的 CA（二级 CA），不可签发服务器证书。
 
 ### 创建二级 CA
 
-**1. 创建目录：**
+　　**1. 创建目录：**
 
 ```bash
 mkdir -p /opt/certs/agent/key
@@ -265,9 +265,9 @@ touch /opt/certs/agent/index.txt.attr
 echo 01 > /opt/certs/agent/serial
 ```
 
-**2. 编辑配置文件:**
+　　**2. 编辑配置文件:**
 
-​`vim /opt/certs/agent/openssl.cnf`​ :
+　　​`vim /opt/certs/agent/openssl.cnf`​ :
 
 ```bash
 
@@ -325,7 +325,7 @@ basicConstraints        = CA:TRUE
 [ req_attributes ]
 ```
 
-**3. 生成证书：**
+　　**3. 生成证书：**
 
 ```bash
 # 1，创建二级CA私钥
@@ -341,19 +341,19 @@ openssl ca -in /opt/certs/agent/key/ca.csr -out /opt/certs/agent/key/cacert.crt 
 openssl x509 -text -in /opt/certs/agent/key/cacert.crt
 ```
 
-经过以上几个步骤，就生成了一个二级 CA，这个二级 CA 可以签发服务器证书（不能签发其他的 CA）。
+　　经过以上几个步骤，就生成了一个二级 CA，这个二级 CA 可以签发服务器证书（不能签发其他的 CA）。
 
 ### 使用二级 CA 签发服务器端证书
 
-**1. 创建目录：**
+　　**1. 创建目录：**
 
 ```bash
 mkdir /opt/certs/vault
 ```
 
-**2. 编辑配置文件:**
+　　**2. 编辑配置文件:**
 
-​`vim /opt/certs/vault/openssl.cnf`​ :
+　　​`vim /opt/certs/vault/openssl.cnf`​ :
 
 ```bash
 [ req ]
@@ -388,7 +388,7 @@ IP.1 = 10.10.0.103
 # IP.2 = 10.10.0.85
 ```
 
-**3. 生成证书：**
+　　**3. 生成证书：**
 
 ```bash
 # 1，生成网站私钥
@@ -409,13 +409,13 @@ cat /opt/certs/vault/vault.crt /opt/certs/agent/key/cacert.crt /opt/certs/root/k
 openssl x509 -text -in /opt/certs/vault/vault_all.crt
 ```
 
-经过以上几个步骤，就生成了由二级 CA 签发的证书了
+　　经过以上几个步骤，就生成了由二级 CA 签发的证书了
 
 ## 25519 证书
 
-**1. 编辑配置文件：**
+　　**1. 编辑配置文件：**
 
-​`vim openssl-25519.cnf`​
+　　​`vim openssl-25519.cnf`​
 
 ```bash
 
@@ -437,7 +437,7 @@ basicConstraints = CA:FALSE
 IP.1 = 127.0.0.1
 ```
 
-**2. 生成证书：**
+　　**2. 生成证书：**
 
 ```bash
 
@@ -455,9 +455,9 @@ openssl x509 -in server.crt -text -noout
 
 ## CA 和证书区别
 
-CA 和证书是有区别的，CA 是用来颁发证书和签发二级 CA 的，且两者是互斥的。也就是说，一个 CA 要么是用来签发二级 CA 的，要么是用来签发证书的。如何判断？
+　　CA 和证书是有区别的，CA 是用来颁发证书和签发二级 CA 的，且两者是互斥的。也就是说，一个 CA 要么是用来签发二级 CA 的，要么是用来签发证书的。如何判断？
 
-在 `/opt/certs/root/openssl.cnf`​ 配置文件中，有如下配置
+　　在 `/opt/certs/root/openssl.cnf`​ 配置文件中，有如下配置
 
 ```bash
 [ usr_cert ]
@@ -467,15 +467,15 @@ basicConstraints = CA:TRUE
 basicConstraints = CA:TRUE
 ```
 
-usr\_cert 下面的 basicConstraints 代表的是当前 CA 的配置，
+　　usr\_cert 下面的 basicConstraints 代表的是当前 CA 的配置，
 
-CA:TRUE 是当前 CA 签发的是 CA（二级 CA），不能签发证书，
+　　CA:TRUE 是当前 CA 签发的是 CA（二级 CA），不能签发证书，
 CA:FALSE 是当前 CA 签发的是证书，不能签发 CA（二级 CA）
 
-v3\_ca 下面的 basicConstraints 代表的是请求的证书是 CA 还是证书
+　　v3\_ca 下面的 basicConstraints 代表的是请求的证书是 CA 还是证书
 
-CA:TRUE 表示当前请求的是 CA（二级 CA）
+　　CA:TRUE 表示当前请求的是 CA（二级 CA）
 CA:FALSE 表示当前请求的是证书
 
-如果是 CA（二级 CA），则证书请求中的 commonName 不需要填写域名，可以填写组织机构
+　　如果是 CA（二级 CA），则证书请求中的 commonName 不需要填写域名，可以填写组织机构
 如果是证书，则证书请求中的 commonName 需要填写域名（一般是主域名），当然了，这个主域名也要在后面的 subjectAltName 属性中

@@ -6,7 +6,7 @@
 
 ## 准备安装
 
-安装包地址:[https://www.oracle.com/middleware/technologies/tuxedo-downloads.html](https://www.oracle.com/middleware/technologies/tuxedo-downloads.html)  
+　　安装包地址:[https://www.oracle.com/middleware/technologies/tuxedo-downloads.html](https://www.oracle.com/middleware/technologies/tuxedo-downloads.html)  
 安装用户：`tuxedo`​  
 安装目录：`/home/tuxedo`​
 
@@ -22,14 +22,14 @@ chown -R tuxedo:tuxedo /home/tuxedo
 chmod 777 tuxedo12110_64_linux_5_x86.bin 
 ```
 
-‍
+　　‍
 
-下面介绍tuxedo安装的三种方式：  
+　　下面介绍tuxedo安装的三种方式：  
  静默安装、命令行窗口安装、图形界面安装，可根据实际场景使用合适的方式安装。
 
 ## 静默安装
 
-以下部分请使用普通用户进行执行，请勿在 root 用户下进行执行。
+　　以下部分请使用普通用户进行执行，请勿在 root 用户下进行执行。
 
 ```bash
 su - tuxedo
@@ -69,7 +69,7 @@ Installation Complete.
 
 ```
 
-‍
+　　‍
 
 ## 命令行窗口安装
 
@@ -113,7 +113,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:  2
 
 ```
 
-‍
+　　‍
 
 ## 图形界面安装
 
@@ -122,8 +122,8 @@ su - tuxedo
 /home/tuxedo/tuxedo12110_64_linux_5_x86.bin
 ```
 
-‍
+　　‍
 
-‍
+　　‍
 
 ## Tuxedo 12c 演示

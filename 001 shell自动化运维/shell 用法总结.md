@@ -2,6 +2,7 @@
 
 * 📄 [Bash的基本特性之 Here Documents 与 Here Strings](siyuan://blocks/20240313203825-20c9n4i)
 * 📄 [Bash的基本特性之命令行编辑 ](siyuan://blocks/20240313204553-ahliz9x)
+* 📄 [Bash重定向](siyuan://blocks/20240801144128-hh2mdd0)
 * 📄 [shell 内置变量](siyuan://blocks/20240311213842-nbq88jj)
 * 📄 [shell 函数 ](siyuan://blocks/20240313201900-3ymsesd)
 * 📄 [shell 变量和数值运算](siyuan://blocks/20240402201653-pt1in76)
@@ -16,12 +17,12 @@
 * 📄 [使用dialog创建交互式shell对话框 ](siyuan://blocks/20240312202819-2ebulw8)
 * 📄 [使用whiptail创建交互式shell对话框 ](siyuan://blocks/20240312204108-fdau4vs)
 
-‍
+　　‍
 
-‍
+　　‍
 
-‍
+　　‍
 
-‍
+　　‍
 
 ##

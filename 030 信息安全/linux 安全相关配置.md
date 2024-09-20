@@ -11,7 +11,7 @@ systemctl restart sshd
 
 ## 2、设置SSH空闲超时退出时间
 
-​`/etc/ssh/sshd_config`​
+　　​`/etc/ssh/sshd_config`​
 
 ```
 #ClientAliveInterval 0
@@ -21,7 +21,7 @@ ClientAliveInterval 30    #（每30秒往客户端发送会话请求，保持连
 ClientAliveCountMax 3     #（去掉注释即可，3表示重连3次失败后，重启SSH会话）
 ```
 
-​`systemctl restart sshd`​
+　　​`systemctl restart sshd`​
 
 ## 3、 限制登陆访问尝试的验证次数
 
@@ -61,14 +61,14 @@ useradd -s /usr/sbin/nologin test
 
 ## 8、SSH登录事件通知至ntfy
 
-​`/etc/pam.d/sshd`​
+　　​`/etc/pam.d/sshd`​
 
 ```
 session optional pam_exec.so /usr/local/bin/ntfy-ssh-login.sh
 
 ```
 
-​`ntfy-ssh-login.sh`​
+　　​`ntfy-ssh-login.sh`​
 
 ```
 #!/bin/bash
@@ -78,7 +78,7 @@ if [ "${PAM_TYPE}" = "open_session" ]; then
 fi
 ```
 
-部署私有的ntfy
+　　部署私有的ntfy
 
 ```
 ntfy_server:
@@ -108,7 +108,7 @@ chmod 0400 /etc/gshadow
 
 ## 2、密码安全策略
 
-​`/etc/pam.d/password-auth`​
+　　​`/etc/pam.d/password-auth`​
 
 ```
 password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=  difok=1 minlen=8 ucredit=-1 lcredit=-1 dcredit=-1
@@ -120,7 +120,7 @@ password    requisite     pam_pwquality.so try_first_pass local_users_only retry
 * lcredit=新密码中可以包含的小写字母的最大数
 * dcredit=定新密码中可以包含的数字的最大数目
 
-注：这个密码强度的设定只对"普通用户"有限制作用，root用户无论修改自己的密码还是修改普通用户的时候，不符合强度设置依然可以设置成功
+　　注：这个密码强度的设定只对"普通用户"有限制作用，root用户无论修改自己的密码还是修改普通用户的时候，不符合强度设置依然可以设置成功
 
 ## 3、用户帐号限制
 
@@ -158,7 +158,7 @@ source /etc/profile
 
 ## 1、历史命令安全
 
-禁止shell的history记录密码相关的环境变量
+　　禁止shell的history记录密码相关的环境变量
 
 > Bash
 >
@@ -180,24 +180,26 @@ source /etc/profile
 
 ## 四、Fail2Ban
 
-Fail2Ban 是一款入侵防御软件，可以保护服务器免受暴力攻击。 它是用 Python 编程语言编写的。
+　　参考：fail2ban
 
-Fail2Ban 基于auth 日志文件工作，默认情况下它会扫描所有 auth 日志文件，如 /var/log/auth.log、 /var/log/apache/access.log 等，并禁止带有恶意标志的IP，比如密码失败太多，寻找漏洞等等标志。
+　　Fail2Ban 是一款入侵防御软件，可以保护服务器免受暴力攻击。 它是用 Python 编程语言编写的。
 
-通常，Fail2Ban 用于更新防火墙规则，用于在指定的时间内拒绝 IP 地址。 它也会发送邮件通知。
+　　Fail2Ban 基于auth 日志文件工作，默认情况下它会扫描所有 auth 日志文件，如 /var/log/auth.log、 /var/log/apache/access.log 等，并禁止带有恶意标志的IP，比如密码失败太多，寻找漏洞等等标志。
 
-Fail2Ban 为各种服务提供了许多过滤器，如 ssh、apache、nginx、squid、named、mysql、nagios 等。
+　　通常，Fail2Ban 用于更新防火墙规则，用于在指定的时间内拒绝 IP 地址。 它也会发送邮件通知。
 
-Fail2Ban 能够降低错误认证尝试的速度，但是它不能消除弱认证带来的风险。
+　　Fail2Ban 为各种服务提供了许多过滤器，如 ssh、apache、nginx、squid、named、mysql、nagios 等。
 
-这只是服务器防止暴力攻击的安全手段之一。
+　　Fail2Ban 能够降低错误认证尝试的速度，但是它不能消除弱认证带来的风险。
+
+　　这只是服务器防止暴力攻击的安全手段之一。
 
 ```
 # Debian / Ubuntu
 apt install fail2ban
 ```
 
-ssh
+　　ssh
 
 ```
 [sshd]
@@ -225,7 +227,3 @@ iptables -L -n
 fail2ban-client unban --all
 fail2ban-client unban <ip-address>
 ```
-
-参考：[https://linuxiac.com/how-to-protect-ssh-with-fail2ban/](https://linuxiac.com/how-to-protect-ssh-with-fail2ban/)
-
-‍

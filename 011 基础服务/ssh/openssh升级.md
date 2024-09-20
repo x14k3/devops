@@ -1,6 +1,6 @@
 # openssh升级
 
-1、安装telnet-server，防止openssh安装失败，而导致无法远程登陆服务器  
+　　1、安装telnet-server，防止openssh安装失败，而导致无法远程登陆服务器  
 2、升级openssh操作  
 3、闭关telnet-server
 
@@ -40,4 +40,4 @@ vim /etc/ssh/sshd_config
 PermitRootLogin yes   # 允许root登录
 ```
 
-‍
+　　‍

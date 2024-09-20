@@ -1,6 +1,6 @@
 # apt
 
-Ubuntu/Debian apt 提供了丰富的命令，完成包的管理任务。
+　　Ubuntu/Debian apt 提供了丰富的命令，完成包的管理任务。
 
 * ​`apt-get`​​ 命令本身并不具有管理软件包功能，只是提供了一个软件包管理的命令行平台。
 * ​`apt`​​ 命令不适合在脚本中运行，它会有颜色的显示、进度条显示等一些友好的交互界面，在脚本中不稳定，可能报错：`WARNING: apt does not have a stable CLI interface. Use with caution in scripts.`​​，此时，使用 `apt-get`​​ 替代
@@ -26,7 +26,7 @@ deb-src https://mirrors.aliyun.com/debian/ bookworm-backports main non-free non-
 apt update
 ```
 
-‍
+　　‍
 
 ## **更新或升级**
 
@@ -38,9 +38,9 @@ apt-get dist-upgrade    # 发行版升级（如，从10.10到11.04）
 
 ## **安装或重装类**
 
-```
+```bash
 apt-get install pkg                # 安装pkg软件包，多个软件包用空格隔开
-apt-get install --reinstall pkg    # 重新安装软件包pkg
+apt-get install pkg --reinstall    # 重新安装软件包pkg
 apt-get install -f pkg             # 修复安装（破损的依赖关系）软件包pkg
 ```
 
@@ -73,7 +73,7 @@ apt-get build-dep pkg          # 构建pkg源码包的编译环境
 
 ## **查询类**
 
-​`apt-cache`​ 提供了搜索功能
+　　​`apt-cache`​ 提供了搜索功能
 
 ```
 apt-cache stats                 # 显示系统软件包的统计信息
@@ -83,7 +83,7 @@ apt-cache depends pkg           # 查看pkg所依赖的软件包
 apt-cache rdepends pkg          # 查看pkg被那些软件包所依赖
 ```
 
-其中：
+　　其中：
 
 * 普通用户需要可以添加 sudo 申请管理权限
 * 在MAN命令中需要退出命令帮助请按 q 键
@@ -92,7 +92,7 @@ apt-cache rdepends pkg          # 查看pkg被那些软件包所依赖
 
 ### aptitude 解决安装包冲突问题
 
-​`aptitude`​ 和 `apt`​、`apt-get`​ 功能一样，都是用来为 Ubuntu 安装软件包，它可以`自动解决安装时出现的各种依赖问题`​，安装命令如下：
+　　​`aptitude`​ 和 `apt`​、`apt-get`​ 功能一样，都是用来为 Ubuntu 安装软件包，它可以`自动解决安装时出现的各种依赖问题`​，安装命令如下：
 
 ```bash
 apt install aptitude
@@ -100,7 +100,7 @@ apt install aptitude
 
 ### Updates for this repository will not be applied.
 
-​`apt update`​ 时，报如上错误，该问题一般由于系统时间不同步导致，使用如下命令同步：
+　　​`apt update`​ 时，报如上错误，该问题一般由于系统时间不同步导致，使用如下命令同步：
 
 ```bash
 hwclock --hctosys
@@ -117,10 +117,10 @@ Acquire::https::Verify-Host "false";
 EOF
 ```
 
-或
+　　或
 
 ```
 apt -o "Acquire::https::Verify-Peer=false" update
 ```
 
-‍
+　　‍

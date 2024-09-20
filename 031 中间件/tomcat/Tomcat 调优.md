@@ -1,10 +1,10 @@
 # Tomcat 调优
 
-tomcat的优化可以提高网站的并发能力，体现个人的价值，tomcat在java项目中的使用率非常高，所以在生产环境对tomcat的优化也就变得非常必要了，一般情况下tomcat的优化主要从两个方面入手，一个是自身配置，另一个是tomcat所运行的jvm虚拟机的优化，优化的工作可以从安装完tomcat就开始着手
+　　tomcat的优化可以提高网站的并发能力，体现个人的价值，tomcat在java项目中的使用率非常高，所以在生产环境对tomcat的优化也就变得非常必要了，一般情况下tomcat的优化主要从两个方面入手，一个是自身配置，另一个是tomcat所运行的jvm虚拟机的优化，优化的工作可以从安装完tomcat就开始着手
 
 ## 一、AJP优化
 
-在前面的课程中我们提到了一个叫AJP的协议，同时我们也知道了这个AJP的作用，但是在生产环境中一般使用的是nginx+tomcat的架构，所以大多数时候用不到，所以我们可以禁用它，而在我们的server.xml文件中这个AJP默认就是禁用的,如果是其它版本最好看一下
+　　在前面的课程中我们提到了一个叫AJP的协议，同时我们也知道了这个AJP的作用，但是在生产环境中一般使用的是nginx+tomcat的架构，所以大多数时候用不到，所以我们可以禁用它，而在我们的server.xml文件中这个AJP默认就是禁用的,如果是其它版本最好看一下
 AJP协议
 
 ```
@@ -20,25 +20,25 @@ AJP协议
 
 ## 二、运行模式优化
 
-tomcat的运行模式有3种：
+　　tomcat的运行模式有3种：
 
-**bio**
+　　**bio**
 
-性能非常低下，没有经过任何优化处理和支持，适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。
+　　性能非常低下，没有经过任何优化处理和支持，适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。
 
-**nio**
+　　**nio**
 
-nio(new I/O)，是Java SE 1.4及后续版本提供的一种新的I/O操作方式它拥有比传统I/O操作(bio)更好的并发运行性能。Tomcat9默认使用nio运行模式。适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂。AIO(NIO2)使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。
+　　nio(new I/O)，是Java SE 1.4及后续版本提供的一种新的I/O操作方式它拥有比传统I/O操作(bio)更好的并发运行性能。Tomcat9默认使用nio运行模式。适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂。AIO(NIO2)使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。
 
-**apr**
+　　**apr**
 
-安装起来最困难，但是从操作系统级别来解决异步的IO问题，大幅度的提高性能
+　　安装起来最困难，但是从操作系统级别来解决异步的IO问题，大幅度的提高性能
 
-进入tomcat的服务器状态页面查看默认的模式
+　　进入tomcat的服务器状态页面查看默认的模式
 
 ![image20200313202144717.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/20/1603162047961.png)
 
-如果默认使用的是bio模式
+　　如果默认使用的是bio模式
 
 ```
 设置使用nio模式
@@ -49,33 +49,33 @@ nio(new I/O)，是Java SE 1.4及后续版本提供的一种新的I/O操作方式
 
 ### apr运行模式
 
-APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。可以大大地提高Tomcat对静态文件的处理性能。 也是在Tomcat上运行高并发应用的首选模式。
+　　APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。可以大大地提高Tomcat对静态文件的处理性能。 也是在Tomcat上运行高并发应用的首选模式。
 
-系统自带的软件包不是最新的，且缺少相关软件包，所以我们选择源码包安装
+　　系统自带的软件包不是最新的，且缺少相关软件包，所以我们选择源码包安装
 
-所需软件包
+　　所需软件包
 
-apr-1.7.0.tar.gz 主程序包 包含了通用开发组件
+　　apr-1.7.0.tar.gz 主程序包 包含了通用开发组件
 
-apr-iconv-1.2.2.tar.gz 用于实现iconv编码
+　　apr-iconv-1.2.2.tar.gz 用于实现iconv编码
 
-apr-util-1.6.1.tar.gz 额外的开发组件
+　　apr-util-1.6.1.tar.gz 额外的开发组件
 
-tomcat-native.tar.gz 关联tomcat和apr的组件
+　　tomcat-native.tar.gz 关联tomcat和apr的组件
 
-arp相关软件包下载 https://mirrors.cnnic.cn/apache/apr/
+　　arp相关软件包下载 https://mirrors.cnnic.cn/apache/apr/
 
-tomcat-native在tomcat安装目录的bin下
+　　tomcat-native在tomcat安装目录的bin下
 
 ### 部署apr环境
 
-**step 1** 环境准备
+　　**step 1** 环境准备
 
 ```
 [root@zutuanxue ~]# dnf install -y apr-devel openssl-devel gcc make expat-devel libtool 
 ```
 
-**step 2** 安装apr主程序包
+　　**step 2** 安装apr主程序包
 
 ```
 [root@zutuanxue ~]# tar fx apr-1.7.0.tar.gz 
@@ -84,7 +84,7 @@ tomcat-native在tomcat安装目录的bin下
 [root@zutuanxue apr-1.7.0]# make -j4 && make install
 ```
 
-**step 3** 安装apr-iconv
+　　**step 3** 安装apr-iconv
 
 ```
 [root@zutuanxue ~]# tar fx apr-iconv-1.2.2.tar.gz 
@@ -93,7 +93,7 @@ tomcat-native在tomcat安装目录的bin下
 [root@zutuanxue apr-iconv-1.2.2]# make -j4 && make install
 ```
 
-**step 4** 安装apr-util
+　　**step 4** 安装apr-util
 
 ```
 [root@zutuanxue ~]# tar fx apr-util-1.6.1.tar.gz 
@@ -102,7 +102,7 @@ tomcat-native在tomcat安装目录的bin下
 [root@zutuanxue apr-util-1.6.1]# make -j4 && make install
 ```
 
-**step 5** 安装tomcat-native
+　　**step 5** 安装tomcat-native
 
 ```
 [root@zutuanxue ~]# cd /opt/tomcat1/bin/
@@ -112,7 +112,7 @@ tomcat-native在tomcat安装目录的bin下
 [root@zutuanxue tomcat-native-1.2.23-src]# make -j4 && make install
 ```
 
-**step 6** 修改并加载环境变量
+　　**step 6** 修改并加载环境变量
 
 ```
 [root@zutuanxue ~]# echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/apr/lib
@@ -120,7 +120,7 @@ export LD_RUN_PATH=$LD_RUN_PATH:/usr/local/apr/lib' >> /etc/profile
 [root@zutuanxue ~]# source /etc/profile
 ```
 
-**step 7** 修改tomcat配置文件
+　　**step 7** 修改tomcat配置文件
 
 ```
 [root@zutuanxue ~]# vim /opt/tomcat1/conf/server.xml 
@@ -129,7 +129,7 @@ export LD_RUN_PATH=$LD_RUN_PATH:/usr/local/apr/lib' >> /etc/profile
                redirectPort="8443" />
 ```
 
-**step 8** 测试
+　　**step 8** 测试
 
 ```
 #为了避免干扰先执行关闭

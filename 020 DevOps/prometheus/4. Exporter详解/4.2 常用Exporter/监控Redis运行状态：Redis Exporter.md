@@ -2,7 +2,7 @@
 
 ## 部署Redis Exporter
 
-这里使用二进制部署启动Redis以及Redis Exporter，具体安装细节就不做重复了
+　　这里使用二进制部署启动Redis以及Redis Exporter，具体安装细节就不做重复了
 
 ```
 mkdir /data/redis_exporter
@@ -41,6 +41,6 @@ static_configs:
       instance: redis120
 ```
 
-‍
+　　‍
 
-‍
+　　‍

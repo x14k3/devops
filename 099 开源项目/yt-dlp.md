@@ -1,6 +1,6 @@
 # yt-dlp
 
-YT-DLP 是一个免费且开源的软件项目，是基于已停止维护的 youtube-dlc 项目而创建的（作为其分支）。yt-dlp 基于流行的  YouTube 下载器 youtube-dlc，但现在具有额外的功能和改进。该软件主要用于从 YouTube、Vimeo  和其他类似网站下载视频。
+　　YT-DLP 是一个免费且开源的软件项目，是基于已停止维护的 youtube-dlc 项目而创建的（作为其分支）。yt-dlp 基于流行的  YouTube 下载器 youtube-dlc，但现在具有额外的功能和改进。该软件主要用于从 YouTube、Vimeo  和其他类似网站下载视频。
 
 ## 安装yt-dlp
 
@@ -10,12 +10,12 @@ sudo apt install youtube-dl
 
 ## 下载视频
 
-支持下载哪些网站，项目文档上也有：
+　　支持下载哪些网站，项目文档上也有：
 [https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
 
-我这里就有下载油管的视频举例。
+　　我这里就有下载油管的视频举例。
 
-比如我想下载这个视频：[https://www.youtube.com/watch?v=kNU2WCHVVBk](https://www.youtube.com/watch?v=kNU2WCHVVBk)
+　　比如我想下载这个视频：[https://www.youtube.com/watch?v=kNU2WCHVVBk](https://www.youtube.com/watch?v=kNU2WCHVVBk)
 视频格式为：[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)\* ************
 
 ### 1.直接下载
@@ -30,7 +30,7 @@ yt-dlp --merge-output-format mp4 https://www.youtube.com/watch?v=kNU2WCHVVBk
 
 ### 2.查看视频所有分辨率
 
-跟用 youtube-dl命令一样，先用`-F`​参数查看有哪些分辨率。
+　　跟用 youtube-dl命令一样，先用`-F`​参数查看有哪些分辨率。
 
 ```bash
 yt-dlp -F https://www.youtube.com/watch?v=kNU2WCHVVBk
@@ -67,9 +67,9 @@ WARNING: [youtube] Unable to download webpage: <urlopen error timed out>
 home:/# 
 ```
 
-结果跟用 youtube-dl命令的差不多，标题行含义： > ID：文件ID > EXT：格式 > RESOLUTION：分辨率 > FPS：视频的帧率 > FILESIZE：文件大小 > VCODEC：audio only表示仅音频 > ACODEC：video only表示仅视频（没有音频）；像mp4a.40.2（720p）就直接包含了音频
+　　结果跟用 youtube-dl命令的差不多，标题行含义： > ID：文件ID > EXT：格式 > RESOLUTION：分辨率 > FPS：视频的帧率 > FILESIZE：文件大小 > VCODEC：audio only表示仅音频 > ACODEC：video only表示仅视频（没有音频）；像mp4a.40.2（720p）就直接包含了音频
 
-‍
+　　‍
 
 ### 3.下载指定分辨率
 
@@ -97,7 +97,7 @@ yt-dlp -f 'bv[ext=mp4]+ba[ext=m4a]' --embed-metadata --merge-output-format mp4 h
 yt-dlp -f 'bv[ext=mp4]+ba[ext=m4a]' --embed-metadata --merge-output-format mp4 https://www.youtube.com/watch?v=kNU2WCHVVBk -o '%(title)s.mp4'
 ```
 
-最方便直接用，可以直接用最后一种通用的下载最佳视频的方式。
+　　最方便直接用，可以直接用最后一种通用的下载最佳视频的方式。
 
 ```bash
 yt-dlp -f 'bv[ext=mp4]+ba[ext=m4a]' --proxy socks5://127.0.0.1:10808 --output "%(title)s.%(ext)s" --embed-thumbnail --add-metadata --merge-output-format mp4 "https://www.youtube.com/watch?v=EMPtccgQhRY&t=8625s"
@@ -121,4 +121,4 @@ yt-dlp -f 'bv[ext=mp4]+ba[ext=m4a]' --proxy socks5://127.0.0.1:10808 --output "%
 
 ```
 
-‍
+　　‍

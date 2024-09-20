@@ -2,7 +2,7 @@
 
 # 一、基础环境准备
 
-**集群规划信息：**
+　　**集群规划信息：**
 
 |主机名称|IP地址|说明|
 | -----------| -----------------| -------------------|
@@ -13,7 +13,7 @@
 |node02|192.168.10.55|node节点|
 |master-lb|127.0.0.1:16443|nginx组件监听地址|
 
-**说明：**
+　　**说明：**
 
 * master节点为3台实现高可用，并且通过nginx进行代理master流量实现高可用，master也安装node组件。
 * node节点为2台
@@ -55,9 +55,9 @@ swapoff -a
 
 ### 3.配置时间同步
 
-方法1：使用ntp
+　　方法1：使用ntp
 
-方法2：使用chrony(推荐使用)
+　　方法2：使用chrony(推荐使用)
 
 ### 4.所有节点修改资源限制
 
@@ -194,7 +194,7 @@ systemctl restart systemd-journald && systemctl enable systemd-journald
 
 ### 8.配置kubernetes的yum源
 
-我这里使用的自己的代理源,你们可以使用清华源：[https://mirrors.tuna.tsinghua.edu.cn/kubernetes/yum/repos/kubernetes-el7-x86_64/](https://mirrors.tuna.tsinghua.edu.cn/kubernetes/yum/repos/kubernetes-el7-x86_64/)
+　　我这里使用的自己的代理源,你们可以使用清华源：[https://mirrors.tuna.tsinghua.edu.cn/kubernetes/yum/repos/kubernetes-el7-x86_64/](https://mirrors.tuna.tsinghua.edu.cn/kubernetes/yum/repos/kubernetes-el7-x86_64/)
 
 ```
 cat > /etc/yum.repos.d/kubernetes.repo <<EOF
@@ -209,9 +209,9 @@ yum list --showduplicates | grep kubeadm
 
 ## 1.2 安装docker
 
-配置docker源，我这里使用自己的源，你们可以使用清华源：[https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/7/x86_64/](https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/7/x86_64/)
+　　配置docker源，我这里使用自己的源，你们可以使用清华源：[https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/7/x86_64/](https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/7/x86_64/)
 
-1.24.+版本如果使用docker作为容器运行时，需要额外安装cri-docker插件,下载地址:[https://github.com/Mirantis/cri-dockerd/releases](https://github.com/Mirantis/cri-dockerd/releases)
+　　1.24.+版本如果使用docker作为容器运行时，需要额外安装cri-docker插件,下载地址:[https://github.com/Mirantis/cri-dockerd/releases](https://github.com/Mirantis/cri-dockerd/releases)
 
 ```
 cat > /etc/yum.repos.d/docker-ce.repo <<EOF
@@ -224,7 +224,7 @@ EOF
 yum list --showduplicates | grep docker-ce
 ```
 
-**部署docker-ce**
+　　**部署docker-ce**
 
 ```
 #所有节点安装
@@ -254,9 +254,9 @@ docker info
  Cgroup Driver: systemd
 ```
 
-**安装cri-docker，需要事先下载rpm包**
+　　**安装cri-docker，需要事先下载rpm包**
 
-下载地址：[https://github.com/Mirantis/cri-dockerd/releases](https://github.com/Mirantis/cri-dockerd/releases)
+　　下载地址：[https://github.com/Mirantis/cri-dockerd/releases](https://github.com/Mirantis/cri-dockerd/releases)
 
 ```
 #安装
@@ -401,7 +401,7 @@ kubeadm config images pull --config new.yaml
 
 ## 2.2 初始化k8s集群
 
-在一个master节点执行即可
+　　在一个master节点执行即可
 
 ```
 kubeadm init --config new.yaml  --upload-certs
@@ -461,9 +461,9 @@ kubeadm join 127.0.0.1:16443 --token ucpfmd.zbjcz4n5uqe5f9jy \
 
 ### 1.安装calico网络插件
 
-**这里安装v3.24.5版本**
+　　**这里安装v3.24.5版本**
 
-yaml下载地址：[https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/calico-typha.yaml](https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/calico-typha.yaml)
+　　yaml下载地址：[https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/calico-typha.yaml](https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/calico-typha.yaml)
 
 ```
 mkdir /opt/k8s/calico -p
@@ -501,9 +501,9 @@ NAME            STATUS   ROLES    AGE   VERSION
 192.168.10.15   Ready    <none>   11m   v1.25.5
 ```
 
-**安装calicoctl客户端工具**
+　　**安装calicoctl客户端工具**
 
-下载地址：[https://github.com/projectcalico/calico](https://github.com/projectcalico/calico)
+　　下载地址：[https://github.com/projectcalico/calico](https://github.com/projectcalico/calico)
 
 ```
 #创建配置文件
@@ -536,7 +536,7 @@ No IPv6 peers found.
 
 ## 3.2 安装dashboard
 
-下载地址：[https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml](https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml)
+　　下载地址：[https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml](https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml)
 
 ```
 #修改yaml文件
@@ -594,7 +594,7 @@ kubectl describe secrets -n kubernetes-dashboard admin-user
 
 ## 3.3 安装Metrics-server
 
-下载地址：[https://github.com/kubernetes-sigs/metrics-server/](https://github.com/kubernetes-sigs/metrics-server/)
+　　下载地址：[https://github.com/kubernetes-sigs/metrics-server/](https://github.com/kubernetes-sigs/metrics-server/)
 
 ```
 #需要修改配置
@@ -623,7 +623,7 @@ NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 
 ## 4.1 修改kube-proxy工作模式为ipvs
 
-将Kube-proxy改为ipvs模式，因为在初始化集群的时候注释了ipvs配置，所以需要自行修改一下：
+　　将Kube-proxy改为ipvs模式，因为在初始化集群的时候注释了ipvs配置，所以需要自行修改一下：
 
 ```
 #在控制节点修改configmap

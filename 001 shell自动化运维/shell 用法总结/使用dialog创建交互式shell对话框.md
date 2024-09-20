@@ -23,7 +23,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 ## 通用选项
 
-这个选项用来设置dialog box的背景、颜色和标题等。
+　　这个选项用来设置dialog box的背景、颜色和标题等。
 
 * ​`--title <title>`​：窗体的标题
 * ​`--backtitle <backtitle>`​：窗体的背景标题
@@ -47,7 +47,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 ## 窗体类型选项
 
-常见的对话框控件选项如下所示：
+　　常见的对话框控件选项如下所示：
 
 * ​`--calendar`​：提供了一个日历，让你可以选择日期。
 * ​`--checklist`​：允许你显示一个选项列表，每个选项都可以被单独的选择(复选框)。
@@ -218,7 +218,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
   ​![](assets/net-img-08-passwordbox-20240312203845-lorom84.png)​
 
-‍
+　　‍
 
 ## 创建一个进度框
 
@@ -265,4 +265,4 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
   ​![](assets/net-img-10-gauge-20240312203845-8pt7x0u.png)​
 
-‍
+　　‍

@@ -2,9 +2,9 @@
 
 ## ntp服务端
 
-`yum install ntp`
+　　`yum install ntp`
 
-编辑配置文件`vim /etc/ntp.conf`
+　　编辑配置文件`vim /etc/ntp.conf`
 
 ```bash
 driftfile /var/lib/ntp/drift
@@ -37,21 +37,21 @@ server 120.25.115.20 prefer     # 阿里云ntp
 restrict 120.25.115.20 nomodify notrap noquery # 允许上层时间服务器主动修改本机时间
 ```
 
-修改完成后保存退出，并重启ntp（ `systemctl restart ntpd`）
+　　修改完成后保存退出，并重启ntp（ `systemctl restart ntpd`）
 
 ## ntp客户端
 
-`yum install ntp`
+　　`yum install ntp`
 
-==方式一：==  
+　　==方式一：==  
 ​`ntpdate ntp.aliyun.com`​  
 立即同步，**在生产环境中慎用ntpdate**。时钟的跃变，对于某些程序会导致很严重的问题。
 
-==方式二：==
+　　==方式二：==
 
-ntpd 不仅仅是时间同步服务器，它还可以做客户端与标准时间服务器进行同步时间，而且是平滑同步，并非
+　　ntpd 不仅仅是时间同步服务器，它还可以做客户端与标准时间服务器进行同步时间，而且是平滑同步，并非
 
-编辑配置文件`vim /etc/ntp.conf`，注释掉默认ntp服务，使用我们自己配置的ntp服务器
+　　编辑配置文件`vim /etc/ntp.conf`，注释掉默认ntp服务，使用我们自己配置的ntp服务器
 
 ```bash
 driftfile /var/lib/ntp/drift
@@ -64,17 +64,17 @@ restrict 192.168.137.104 nomodify notrap noquery # 允许上层时间服务器�
 
 ```
 
-修改完成后保存退出并重启ntp（ `systemctl restart ntpd`）。
+　　修改完成后保存退出并重启ntp（ `systemctl restart ntpd`）。
 
 ## 查看信息
 
-**查看网络中的ntp服务器**​`ntpq -p`
+　　**查看网络中的ntp服务器**​`ntpq -p`
 
 ![](assets/image-20221127215127840-20230610173810-conzlzl.png)
 
 ![](assets/image-20221127215133514-20230610173810-ifgvw9p.png)
 
-**查看时间同步状态**\*\* ：一般需要5-10分钟后才能成功连接和同步\*\*​
+　　**查看时间同步状态**\*\* ：一般需要5-10分钟后才能成功连接和同步\*\*​
 
 ![](assets/image-20221127215138591-20230610173810-xan0ime.png)
 
@@ -109,7 +109,7 @@ x     # 已不再使用
 
 ```
 
-‍
+　　‍
 
 ## **常见NTP时间服务器**
 

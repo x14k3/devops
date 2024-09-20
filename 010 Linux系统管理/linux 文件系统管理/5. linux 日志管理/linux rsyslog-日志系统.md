@@ -1,8 +1,8 @@
 # linux rsyslog-日志系统
 
-Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。
+　　Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。
 
-**特点：**
+　　**特点：**
 
 * 多线程
 * 可以通过许多协议进行传输UDP，TCP，SSL，TLS，RELP；
@@ -13,7 +13,7 @@ Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安�
 
 ## **配置文件详解**
 
-配置文件/etc/rsyslog.conf主要有3个部分
+　　配置文件/etc/rsyslog.conf主要有3个部分
 
 * MODULES ：模块
 
@@ -147,12 +147,12 @@ Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安�
     #管道        | COMMAND
   ```
 
-	
+　　	
 
-‍
+　　‍
 
 ## rsyslog集中式日志服务器部署
 
-参考：rsyslog
+　　参考：rsyslog
 
-‍
+　　‍

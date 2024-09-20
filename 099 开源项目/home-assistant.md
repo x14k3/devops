@@ -14,12 +14,12 @@ homeassistant/home-assistant:latest
 
 ```
 
-访问控制台：
+　　访问控制台：
 http://192.168.0.100:8123
 
 # 安装HACS
 
-安装HACS(Home Assistant Community Store,一个商店，集成丰富，依托于GitHub。
+　　安装HACS(Home Assistant Community Store,一个商店，集成丰富，依托于GitHub。
 
 ```bash
 #进入hass目录,安装hacs 
@@ -28,4 +28,4 @@ wget -O - https://get.hacs.xyz | bash -
 
 ```
 
-最后重启 homeassistant
+　　最后重启 homeassistant

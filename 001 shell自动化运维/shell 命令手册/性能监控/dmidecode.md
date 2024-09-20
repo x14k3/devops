@@ -1,14 +1,14 @@
 # dmidecode
 
-在Linux系统下获取有关硬件方面的信息
+　　在Linux系统下获取有关硬件方面的信息
 
 ## 补充说明
 
-**dmidecode命令** 可以让你在Linux系统下获取有关硬件方面的信息。dmidecode的作用是将DMI数据库中的信息解码，以可读的文本方式显示。由于DMI信息可以人为修改，因此里面的信息不一定是系统准确的信息。dmidecode遵循SMBIOS/DMI标准，其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。
+　　**dmidecode命令** 可以让你在Linux系统下获取有关硬件方面的信息。dmidecode的作用是将DMI数据库中的信息解码，以可读的文本方式显示。由于DMI信息可以人为修改，因此里面的信息不一定是系统准确的信息。dmidecode遵循SMBIOS/DMI标准，其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。
 
-DMI（Desktop Management Interface,DMI）就是帮助收集电脑系统信息的管理系统，DMI信息的收集必须在严格遵照SMBIOS规范的前提下进行。SMBIOS（System Management BIOS）是主板或系统制造者以标准格式显示产品管理信息所需遵循的统一规范。SMBIOS和DMI是由行业指导机构Desktop Management Task Force(DMTF)起草的开放性的技术标准，其中DMI设计适用于任何的平台和操作系统。
+　　DMI（Desktop Management Interface,DMI）就是帮助收集电脑系统信息的管理系统，DMI信息的收集必须在严格遵照SMBIOS规范的前提下进行。SMBIOS（System Management BIOS）是主板或系统制造者以标准格式显示产品管理信息所需遵循的统一规范。SMBIOS和DMI是由行业指导机构Desktop Management Task Force(DMTF)起草的开放性的技术标准，其中DMI设计适用于任何的平台和操作系统。
 
-DMI充当了管理工具和系统层之间接口的角色。它建立了标准的可管理系统更加方便了电脑厂商和用户对系统的了解。DMI的主要组成部分是Management Information Format(MIF)数据库。这个数据库包括了所有有关电脑系统和配件的信息。通过DMI，用户可以获取序列号、电脑厂商、串口信息以及其它系统配件信息。
+　　DMI充当了管理工具和系统层之间接口的角色。它建立了标准的可管理系统更加方便了电脑厂商和用户对系统的了解。DMI的主要组成部分是Management Information Format(MIF)数据库。这个数据库包括了所有有关电脑系统和配件的信息。通过DMI，用户可以获取序列号、电脑厂商、串口信息以及其它系统配件信息。
 
 ### 语法
 
@@ -34,7 +34,7 @@ dmidecode [选项]
 ```bash
 
 # 需要sudo权限
-sudo dmidecode -t 1     # 系统信息（System Information）
+sudo dmidecode -t 1    # 系统信息（System Information）
 sudo dmidecode -t 2    # 基本主板信息（Base Board Information）
 sudo dmidecode -t 4    # CPU信息（Processor Information）
 sudo dmidecode -t 11   # 查看OEM信息 
@@ -56,7 +56,7 @@ dmidecode |grep 'Serial Number' # 查看主板的序列号
 cat /proc/scsi/scsi # 查看服务器硬盘信息
 ```
 
-查看内存的插槽数，已经使用多少插槽。每条内存多大，已使用内存多大
+　　查看内存的插槽数，已经使用多少插槽。每条内存多大，已使用内存多大
 
 ```
 dmidecode|grep -P -A5 "Memory\s+Device"|grep Size|grep -v Range 
@@ -67,7 +67,7 @@ dmidecode|grep -P -A5 "Memory\s+Device"|grep Size|grep -v Range
 #   Size: No Module Installed
 ```
 
-查看内存支持的最大内存容量
+　　查看内存支持的最大内存容量
 
 ```
 dmidecode|grep -P 'Maximum\s+Capacity'
@@ -75,7 +75,7 @@ dmidecode|grep -P 'Maximum\s+Capacity'
 #  Maximum Capacity: 16 GB
 ```
 
-查看内存的频率
+　　查看内存的频率
 
 ```
 dmidecode|grep -A16 "Memory Device"

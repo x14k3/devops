@@ -1,7 +1,5 @@
 # docker 优化项
 
-‍
-
 ## **docker仓库改为阿里源**
 
 ```bash
@@ -10,22 +8,18 @@ vim /etc/docker/daemon.json
 -------------------------------------------------------------
 {
   "registry-mirrors": ["https://tu2ax1rl.mirror.aliyuncs.com"],
-  "insecure-registries": ["0.0.0.0"]  //用于docker客户端 通过 http 连接仓库
+  "insecure-registries": ["0.0.0.0"]
 }
 -------------------------------------------------------------
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-‍
-
 ## docker pull 使用代理
 
-需求
+　　docker已换阿里源，某些冷门或较新镜像仍然会从docker.io进行下载，需要代理。
 
-docker已换阿里源，某些冷门或较新镜像仍然会从docker.io进行下载，需要代理。
-
-对于docker这种级别的应用，环境变量需要经由systemd传入。
+　　对于docker这种级别的应用，环境变量需要经由systemd传入。
 
 ```bash
 mkdir /etc/systemd/system/docker.service.d
@@ -43,8 +37,6 @@ systemctl daemon-reload
 systemctl stop docker.socket
 systemctl start docker.socket
 ```
-
-‍
 
 ## 容器使用宿主机的代理
 
@@ -80,10 +72,6 @@ systemctl start docker
 docker info -f '{{ .DockerRootDir}}'
 # 如果输出的是新的路径就代表修改成功了,从这里也可以看出这个配置的官方名称叫 Docker Root Directory(Docker根目录)
 ```
-
-‍
-
-‍
 
 ## No swap limit support 解决
 

@@ -1,141 +1,108 @@
 # nmap
 
-Nmap 是一个网络连接端扫描软件，用来扫描网上电脑开放的网络连接端。确定哪些服务运行在哪些连接端，并且推断计算机运行哪个操作系统（这是亦称  fingerprinting）。它是网络管理员必用的软件之一，以及用以评估网络系统安全。它不局限于仅仅收集信息和枚举，同时可以用来作为一个漏洞探测器或安全扫描器。
+　　扫描器是一种能够自动检测主机安全性弱点的程序。扫描器通过发送特定的网络数据包，记录目标主机的应答消息，从而收集关于目标主机的各种信息。目前网络上有很多扫描软件，比较著名的扫描器有SSS，X-Scan，Superscan等，功能最强大的当然是Nmap了。
 
-## 特点
+　　Nmap（Network Mapper）是一款开放源代码的网络探测和安全审核工具。它用于快速扫描一个网络和一台主机开放的端口，还能使用TCP/IP协议栈特征探测远程主机的操作系统类型。nmap支持很多扫描技术，例如：UDP、TCP　connect()、TCP　SYN(半开扫描)、ftp代理(bounce攻击)、反向标志、ICMP、FIN、ACK扫描、圣诞树(Xmas　Tree)、SYN扫描和null扫描。Nmap最初是用于unix系统的命令行应用程序。在2000年的时候，这个应用程序有了windows版本，可以直接安装使用。
 
-Nmap 对于网络检查的作用，应该相当于网址导航、搜索引擎的作用：入口。
+　　‍
 
-* 检测活在网络上的主机（主机发现）
-* 检测主机上开放的端口（端口发现或枚举）
-* 检测到相应的端口（服务发现）的软件和版本
-* 检测操作系统，硬件地址，以及软件版本
-* 检测脆弱性的漏洞（Nmap 的脚本）
+　　**Nmap命令的格式为：**
 
-Nmap 使用不同的技术来执行扫描，包括：TCP 的 connect 扫描，TCP 反向的 ident 扫描，FTP 反弹扫描等。所有这些扫描的类型有自己的优点和缺点。
+　　​`Nmap [ 扫描类型 ... ] [ 通用选项 ] { 扫描目标说明 }`​
 
-‍
+　　‍
 
-在CentOS7 下，可以直接使用yum来进行安装，具体操作如下所示。
-
-```
-# 安装
-yum -y install nmap
-namp -v
-```
-
-## 参数详解
+　　下面对Nmap命令的参数按分类进行说明：
 
 ```bash
-目标探测： 
-  -iL #后面加IP列表文件，扫描IP列表文件的IP
-  -iR #随机扫描目标，例如【nmap -iR 100 -p22】
-  --exclude #排除网络段中的地址 例如【nmap 192.168.1.0/24 --exclude 192.168.0.1-100】
-  --excludefile #把要排除的地址放入一个文件
+`
+2. 
+```
 
-主机发现: 
-  -sL: #例出你想扫描的目标,可用于子网掩码计算  例如【nmap -sL 192.168.1.0/24】
-  -sn: #不做端口扫描
-  -Pn: #不管检测主机是否存活，都进行扫描
-  -PS/PA/PU/PY\[portlist\]: #SYN发现/ACK发现/UDP发现/SCTP发现
-  -PE/PP/PM: #ICMP echo/时间戳发现/查子网掩码（通常查不到）
-  -PO\[protocol list\]: #用IP协议扫描
-  -n/-R: #不做DNS解析/做DNS反向解析
-  --dns-servers <serv1\[,serv2\],...>: #使用其他DNS地址去解析 例如【nmap --dns-servers 8.8.8.8 www.sina.com】
-  --system-dns: #使用操作系统默认的DNS，加不加都是使用系统默认的
-  --traceroute: #追踪路由  例如【nmap  www.baidu.com --traceroute】
+## 1. 扫描类型
 
-端口发现:
-  -sS/sT/sA/sW/sM: #SYN扫描/全连接TCP扫描/ACK扫描/TCP窗口扫描/Maimon扫描
-  -sU: #UDP扫描
-  -sN/sF/sX: #TCP flags全空/只带FIN/FIN,PSH,URG组合扫描
-  --scanflags <flags>: #自定义TCP的flags
-  -sI <zombie host\[:probeport\]>: #僵尸扫描
-  -sY/sZ: #SCTP扫描使用的参数，用于VoIP
-  -sO: #IP协议扫描
-  -b <FTP relay host>: #FTP中继扫描
+```bash
+-sT	   # TCP connect()扫描，这是最基本的TCP扫描方式。这种扫描很容易被检测到，在目标主机的日志中会记录大批的连接请求以及错误信息。
+-sS	   # TCP同步扫描(TCP SYN)，因为不必全部打开一个TCP连接，所以这项技术通常称为半开扫描(half-open)。这项技术最大的好处是，很少有系统能够把这记入系统日志。不过，你需要root权限来定制SYN数据包。
+-sF,-sX,-sN	#秘密FIN数据包扫描、圣诞树(Xmas Tree)、空(Null)扫描模式。这些扫描方式的理论依据是：关闭的端口需要对你的探测包回应RST包，而打开的端口必需忽略有问题的包(参考RFC 793第64页)。
+-sP	   # ping扫描，用ping方式检查网络上哪些主机正在运行。当主机阻塞ICMP echo请求包是ping扫描是无效的。nmap在任何情况下都会进行ping扫描，只有目标主机处于运行状态，才会进行后续的扫描。
+-sU	   # 如果你想知道在某台主机上提供哪些UDP(用户数据报协议,RFC768)服务，可以使用此选项。
+-sA	   # ACK扫描，这项高级的扫描方法通常可以用来穿过防火墙。
+-sW	   # 滑动窗口扫描，非常类似于ACK的扫描。
+-sR	   # RPC扫描，和其它不同的端口扫描方法结合使用。
+-b	   # FTP反弹攻击(bounce attack)，连接到防火墙后面的一台FTP服务器做代理，接着进行端口扫描。
+```
 
-指定端口扫描:
-  -p <port ranges>: #指定端口
-    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9 #U是UDP扫描T是TCP扫描
-  --exclude-ports <port ranges>: #排除端口
-  -F: #快速扫描模式
-  -r: #连续扫描端口
-  --top-ports <number>: #只扫描前面几个端口。例如【nmap 192.168.0.1 --top-ports 10 //扫描前十个端口】
-  --port-ratio <ratio>: #扫描常见端口
+　　‍
 
-服务扫描:
-  -sV: #根据端口进行服务扫描
-  --version-intensity <level>: #根据深入模式扫描，0-9级别的，与sV搭配使用
-  --version-light: #以最低级别扫描
-  --version-all: #以最高级别扫描
-  --version-trace: #显示详细的扫描信息
+## 2. 通用选项
 
-脚本扫描:
-  -sC:#指定什么脚本扫描
-  --script=<Lua scripts>: #后面跟扫描脚本
-  --script-args=<n1=v1,\[n2=v2,...\]>: #跟脚本参数
-  --script-args-file=filename: #跟脚本文件参数扫描
-  --script-trace: #显示所用的发送和接收数据
-  --script-updatedb: #更新脚本数据库
-  --script-help=<Lua scripts>: #获取如何使用脚本方法
+　　‍
 
-系统扫描:
-  -O: #进行系统扫描
-  --osscan-limit: #限制扫描系统类型
-  --osscan-guess: #猜测扫描
+```bash
+-P0	  # 在扫描之前，不ping主机。
+-PT	  # 扫描之前，使用TCP ping确定哪些主机正在运行。
+-PS	  # 对于root用户，这个选项让nmap使用SYN包而不是ACK包来对目标主机进行扫描。
+-PI	  # 设置这个选项，让nmap使用真正的ping(ICMP echo请求)来扫描目标主机是否正在运行。
+-PB	  # 这是默认的ping扫描选项。它使用ACK(-PT)和ICMP(-PI)两种扫描类型并行扫描。如果防火墙能够过滤其中一种包，使用这种方法，你就能够穿过防火墙。
+-O	  # 这个选项激活对TCP/IP指纹特征(fingerprinting)的扫描，获得远程主机的标志，也就是操作系统类型。
+-I	  # 打开nmap的反向标志扫描功能。
+-f	  # 使用碎片IP数据包发送SYN、FIN、XMAS、NULL。包增加包过滤、入侵检测系统的难度，使其无法知道你的企图。
+-v	  # 冗余模式。强烈推荐使用这个选项，它会给出扫描过程中的详细信息。
+-S <IP>	  # 在一些情况下，nmap可能无法确定你的源地址(nmap会告诉你)。在这种情况使用这个选项给出你的IP地址。
+-g port	  # 设置扫描的源端口。一些天真的防火墙和包过滤器的规则集允许源端口为DNS(53)或者FTP-DATA(20)的包通过和实现连接。显然，如果攻击者把源端口修改为20或者53，就可以摧毁防火墙的防护。
+-oN	  # 把扫描结果重定向到一个可读的文件logfilename中。
+-oS	  # 扫描结果输出到标准输出。
+--host_timeout	    # 设置扫描一台主机的时间，以毫秒为单位。默认的情况下，没有超时限制。
+--max_rtt_timeout	# 设置对每次探测的等待时间，以毫秒为单位。如果超过这个时间限制就重传或者超时。默认值是大约9000毫秒。
+--min_rtt_timeout	# 设置nmap对每次探测至少等待你指定的时间，以毫秒为单位。
+-M count	        # 置进行TCP connect()扫描时，最多使用多少个套接字进行并行的扫描。
+```
 
-时间和性能扫描:
-  #采取的选项<time>以秒为单位，或附加“毫秒”（毫秒）， “s”（秒）、“m”（分钟）或“h”（小时）到该值（例如 30m）.
-  -T<0-5>: #设置计时模板（越高速度越快）
-  --min-hostgroup/max-hostgroup <size>: #设置最少或最多扫描多少主机
-  --min-parallelism/max-parallelism <numprobes>: #指定并行数量
-  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout <time>: #设置最小或最少的rtt时间
-  --max-retries <tries>: #设置最大探测次数
-  --host-timeout <time>: #设置超时时间
-  --scan-delay/--max-scan-delay <time>: #设置扫描中间延迟时间
-  --min-rate <number>:#扫描最小速率
-  --max-rate <number>: #扫描最大速率
+## 3. 扫描目标
 
-防火墙或IDS欺骗:
-  -f; --mtu <val>: #设置Mtu值，以太网默认1500
-  -D <decoy1,decoy2\[,ME\],...>: #增加噪声IP，虚假发包地址，作为源地址，迷惑对方
-  -S <IP\_Address>: #伪造源地址扫描
-  -e <iface>: #使用特定接口扫描
-  -g/--source-port <portnum>: #指定源端口扫描
-  --proxies <url1,\[url2\],...>: #使用代理服务器扫描
-  --data <hex string>: #加数据字段，16进制
-  --data-string <string>: #加ASCII码
-  --data-length <num>: #指定数据长度
-  --ip-options <options>: #加option字段
-  --ttl <val>: #设置TTL值
-  --spoof-mac <mac address/prefix/vendor name>:#欺骗MAC地址
-  --badsum: #发送差错校验
+```bash
+目标地址	        # 可以为IP地址，CIRD地址等。如192.168.1.2，222.247.54.5/24
+-iL filename	# 从filename文件中读取扫描的目标。
+-iR	            # 让nmap自己随机挑选主机进行扫描。
+-p	端口         # 这个选项让你选择要进行扫描的端口号的范围。如：-p 20-30,139,60000。
+-exclude	    # 排除指定主机。
+-excludefile	# 排除指定文件中的主机。
+```
 
-输入格式:
-  -oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3,
-     and Grepable format, respectively, to the given filename.
-  -oA <basename>: Output in the three major formats at once
-  -v: Increase verbosity level (use -vv or more for greater effect)
-  -d: Increase debugging level (use -dd or more for greater effect)
-  --reason: Display the reason a port is in a particular state
-  --open: Only show open (or possibly open) ports
-  --packet-trace: Show all packets sent and received
-  --iflist: Print host interfaces and routes (for debugging)
-  --append-output: Append to rather than clobber specified output files
-  --resume <filename>: Resume an aborted scan
-  --noninteractive: Disable runtime interactions via keyboard
-  --stylesheet <path/URL>: XSL stylesheet to transform XML output to HTML
-  --webxml: Reference stylesheet from Nmap.Org for more portable XML
-  --no-stylesheet: Prevent associating of XSL stylesheet w/XML output
+　　‍
 
-杂项:
-  -6: #IPV6扫描
-  -A: Enable OS detection, version detection, script scanning, and traceroute
-  --datadir <dirname>: Specify custom Nmap data file location
-  --send-eth/--send-ip: Send using raw ethernet frames or IP packets
-  --privileged: Assume that the user is fully privileged
-  --unprivileged: Assume the user lacks raw socket privileges
-  -V: Print version number
-  -h: Print this help summary page.
+## 实例
+
+```bash
+nmap -sP 192.168.1.0/24       #进行ping扫描，打印出对扫描做出响应的主机,不做进一步测试(如端口扫描或者操作系统探测)
+
+nmap -sL 192.168.1.0/24       #仅列出指定网络上的每台主机，不发送任何报文到目标主机
+
+nmap -PS 192.168.1.234		  #探测目标主机开放的端口，可以指定一个以逗号分隔的端口列表(如-PS22，23，25，80)
+
+nmap -PU 192.168.1.0/24		  #使用UDP ping探测主机
+
+nmap -sS 192.168.1.0/24		  #使用频率最高的扫描选项：SYN扫描,又称为半开放扫描，它不打开一个完全的TCP连接，执行得很快
+
+nmap -sT 192.168.1.0/24		  #当SYN扫描不能用时，TCP Connect()扫描就是默认的TCP扫描
+
+nmap -sU 192.168.1.0/24		  #UDP扫描用-sU选项,UDP扫描发送空的(没有数据)UDP报头到每个目标端口
+
+nmap -sO 192.168.1.19	      #确定目标机支持哪些IP协议 (TCP，ICMP，IGMP等)
+
+nmap -O 192.168.1.19		  #探测目标主机的操作系统
+nmap -A 192.168.1.19		  #探测目标主机的操作系统
+
+nmap -v scanme.nmap.org		  #这个选项扫描主机scanme.nmap.org中 所有的保留TCP端口。选项-v启用细节模式。
+
+nmap -sS -O scanme.nmap.org/24  	#进行秘密SYN扫描，对象为主机Saznme所在的“C类”网段 的255台主机。同时尝试确定每台工作主机的操作系统类型。因为进行SYN扫描 和操作系统检测，这个扫描需要有根权限。
+
+nmap -sV -p 22,53,110,143,4564 198.116.0-255.1-127      #进行主机列举和TCP扫描，对象为B类188.116网段中255个8位子网。这 个测试用于确定系统是否运行了sshd、DNS、imapd或4564端口。如果这些端口 打开，将使用版本检测来确定哪种应用在运行。
+
+nmap -v -iR 100000 -P0 -p 80		#随机选择100000台主机扫描是否运行Web服务器(80端口)。由起始阶段 发送探测报文来确定主机是否工作非常浪费时间，而且只需探测主机的一个端口，因 此使用-P0禁止对主机列表。
+
+nmap -P0 -p80 -oX logs/pb-port80scan.xml -oG logs/pb-port80scan.gnmap 216.163.128.20/20		#扫描4096个IP地址，查找Web服务器(不ping)，将结果以Grep和XML格式保存。
+
+nmap -sP -PI -PT 192.168.203.0/24  # 扫描mac地址
 ```

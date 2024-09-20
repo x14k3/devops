@@ -3,6 +3,7 @@
 * 📑 [tools](siyuan://blocks/20240405220807-igtzcic)
 
   * 📄 [base64](siyuan://blocks/20231110105237-7ng3g33)
+  * 📄 [cdrecird growisofs](siyuan://blocks/20231115103835-hjm12jh)
   * 📄 [crontab](siyuan://blocks/20231110105237-j6s89rn)
   * 📄 [curl](siyuan://blocks/20231110105237-iutu4j7)
   * 📄 [flock](siyuan://blocks/20240402201243-fqy8c6q)
@@ -16,9 +17,10 @@
   * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
   * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
   * 📄 [script](siyuan://blocks/20240507182310-uzcb81j)
+  * 📄 [ssh](siyuan://blocks/20240724164831-i4pga8x)
   * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
+  * 📄 [wall](siyuan://blocks/20240801151724-z56ndzj)
   * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
-  * 📄 [光盘刻录](siyuan://blocks/20231115103835-hjm12jh)
 * 📑 [内核模块管理](siyuan://blocks/20240405214125-526xsw4)
 
   * 📄 [insmod](siyuan://blocks/20240227111004-f1j5x4j)
@@ -35,6 +37,7 @@
   * 📄 [gzip](siyuan://blocks/20240306193931-dfvzqy2)
   * 📄 [tar](siyuan://blocks/20240405214800-btrtv9d)
   * 📄 [xz](siyuan://blocks/20240405214608-b53w02j)
+  * 📄 [zip](siyuan://blocks/20240718141815-wi3lvpf)
 * 📑 [备份与恢复](siyuan://blocks/20240430150341-58o2xo0)
 
   * 📄 [dd (Duplicated 2024-04-30 15:19:00)](siyuan://blocks/20240430151900-svn0rdm)
@@ -45,18 +48,24 @@
 
   * 📄 [UnixBench](siyuan://blocks/20240408181639-8saj9ke)
   * 📄 [cpuinfo](siyuan://blocks/20231110105237-8f06fmg)
+  * 📄 [cpulimit](siyuan://blocks/20240724145314-pvck5xr)
   * 📄 [dmesg](siyuan://blocks/20240408133348-xldq05f)
   * 📄 [dmidecode](siyuan://blocks/20231110105237-05adh5q)
+  * 📄 [fio](siyuan://blocks/20240726104624-o7nkun7)
   * 📄 [hdparm](siyuan://blocks/20231115130306-86r820v)
-  * 📄 [ifstat](siyuan://blocks/20240405222247-ayjcza4)
-  * 📄 [iostat](siyuan://blocks/20240220134331-1k31g3o)
   * 📄 [meminfo](siyuan://blocks/20231110105237-7l8hmjv)
-  * 📄 [mpstat](siyuan://blocks/20240405222053-g0h8fjx)
+  * 📄 [nice](siyuan://blocks/20240724144329-59k77it)
   * 📄 [pidof](siyuan://blocks/20240408132404-vtqveen)
-  * 📄 [pidstat](siyuan://blocks/20240405221937-8y0ncn2)
   * 📄 [ps](siyuan://blocks/20240405212320-fn0zqq6)
-  * 📄 [sar](siyuan://blocks/20231110105237-i8nelud)
+  * 📄 [pstree](siyuan://blocks/20240801143050-rdp3bjl)
   * 📄 [strace](siyuan://blocks/20231110105237-fhpi4ld)
+  * 📑 [sysstat](siyuan://blocks/20240726104728-stxcb4e)
+
+    * 📄 [iostat](siyuan://blocks/20240220134331-1k31g3o)
+    * 📄 [mpstat](siyuan://blocks/20240726105408-ss5s9hv)
+    * 📄 [pidstat](siyuan://blocks/20240405221937-8y0ncn2)
+    * 📄 [sar](siyuan://blocks/20231110105237-i8nelud)
+  * 📄 [taskset](siyuan://blocks/20240724142312-mfb9kx1)
   * 📄 [top](siyuan://blocks/20240405213206-1nb75qq)
   * 📄 [vmstat](siyuan://blocks/20240405222151-bmkrbb7)
   * 📄 [查看系统版本](siyuan://blocks/20240405120502-alvz3hx)
@@ -72,6 +81,7 @@
   * 📄 [mkfs &amp; mke2fx](siyuan://blocks/20231110105237-ajfjv4b)
   * 📄 [mount](siyuan://blocks/20231110105237-ou6v8gy)
   * 📄 [parted](siyuan://blocks/20240407213922-d9en39l)
+  * 📄 [partprobe](siyuan://blocks/20240725124410-zumu4o3)
   * 📄 [snapper](siyuan://blocks/20231227181426-x4507fd)
   * 📄 [ulimit](siyuan://blocks/20231110105237-an7nqoh)
 * 📑 [文本处理](siyuan://blocks/20240405215737-araolk5)
@@ -92,11 +102,13 @@
 * 📑 [网络相关](siyuan://blocks/20240405220105-p3fp88a)
 
   * 📄 [arping](siyuan://blocks/20231110105237-uu8u1pl)
+  * 📄 [curl (Duplicated 2024-06-12 17:37:39)](siyuan://blocks/20240612173739-ekluj2u)
   * 📄 [iperf3](siyuan://blocks/20240429152237-h3ij7le)
   * 📄 [nc](siyuan://blocks/20240314200041-l7hgq6t)
   * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
   * 📄 [tcpdump](siyuan://blocks/20231214163310-dut0ld3)
   * 📄 [traceroute](siyuan://blocks/20231110105237-ej1qj6t)
+  * 📄 [wget (Duplicated 2024-06-12 17:37:32)](siyuan://blocks/20240612173732-g2xmeci)
 * 📑 [脚本常用命令](siyuan://blocks/20240405220754-9gd6h13)
 
   * 📄 [basename](siyuan://blocks/20240311212631-yfd6fnw)
@@ -117,4 +129,4 @@
   * 📄 [yum](siyuan://blocks/20231110105237-70luvz1)
   * 📄 [zypper](siyuan://blocks/20231110105237-p2r21wy)
 
-‍
+　　‍

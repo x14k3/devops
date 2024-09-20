@@ -1,8 +1,8 @@
 # PostgreSQL 安装部署
 
-PostgreSQL 是一个开放源代码的通用对象关系数据库管理系统，具有许多高级功能，可让您创建复杂的Web应用程序
+　　PostgreSQL 是一个开放源代码的通用对象关系数据库管理系统，具有许多高级功能，可让您创建复杂的Web应用程序
 
-‍
+　　‍
 
 # 安装准备
 
@@ -15,7 +15,7 @@ pam-devel libxml2-devel libxslt-devel python-devel tcl-devel gcc make \
 smartmontools flex bison perl-devel perl-ExtUtils* openldap-devel
 ```
 
-‍
+　　‍
 
 ## 配置OS内核参数
 
@@ -108,7 +108,7 @@ net.ipv4.ip_local_port_range = 40000 65535
 
 ## 配置OS防火墙
 
-（建议按业务场景设置，我这里先清掉）
+　　（建议按业务场景设置，我这里先清掉）
 
 ```bash
 #iptables -F
@@ -117,7 +117,7 @@ systemctl stop firewalld && systemctl disable firewalld
 
 ## selinux
 
-如果没有这方面的需求，建议禁用
+　　如果没有这方面的需求，建议禁用
 
 ```
 # vi /etc/sysconfig/selinux 
@@ -128,20 +128,20 @@ SELINUXTYPE=targeted
 
 ## 部署文件系统
 
-注意SSD对齐，延长寿命，避免写放大。
+　　注意SSD对齐，延长寿命，避免写放大。
 
 ```bash
 parted -s /dev/sda mklabel gpt
 parted -s /dev/sda mkpart primary 1MiB 100%
 ```
 
-格式化
+　　格式化
 
 ```bash
 mkfs.ext4 /dev/sda1 -m 0 -O extent,uninit_bg -E lazy_itable_init=1 -T largefile -L u01
 ```
 
-建议使用的ext4 mount选项
+　　建议使用的ext4 mount选项
 
 ```bash
 # vi /etc/fstab
@@ -151,13 +151,13 @@ LABEL=u01 /u01     ext4        defaults,noatime,nodiratime,nodelalloc,barrier=0,
 # mount -a
 ```
 
-‍
+　　‍
 
 # yum安装
 
 ## 从CentOS仓库安装PostgreSQL
 
-YUM 源 PostgreSQL的版本是 9.2.24，安装完成后，相关的操作命令 psql、postgresql-setup 会添加到 /usr/bin 目录下，可以在命令行下直接使用。
+　　YUM 源 PostgreSQL的版本是 9.2.24，安装完成后，相关的操作命令 psql、postgresql-setup 会添加到 /usr/bin 目录下，可以在命令行下直接使用。
 
 ```bash
 yum install postgresql-server postgresql-contrib
@@ -187,7 +187,7 @@ su - postgres -c "/usr/pgsql-12/bin/psql -c 'SELECT version();'"
 
 # 源码安装
 
-源码下载地址：http://ftp.postgresql.org/pub/source/v12.15/
+　　源码下载地址：http://ftp.postgresql.org/pub/source/v12.15/
 
 ```bash
 # 下载PostgreSQL 源码包
@@ -249,7 +249,7 @@ su - postgres
 /data/pgsql/bin/pg_ctl -D /data/pgsql/data/ reload
 ```
 
-‍
+　　‍
 
 ## 编译安装参数说明
 
@@ -283,9 +283,9 @@ su - postgres
 
 ## initdb初始化参数
 
-如果通过环境变量方式定义的初始化参数，就不用再指定了
+　　如果通过环境变量方式定义的初始化参数，就不用再指定了
 
-参考PostgreSQL 内置命令
+　　参考PostgreSQL 内置命令
 
 ```bash
 # initdb 创建一个新的 PostgreSQL 数据库集群
@@ -300,13 +300,13 @@ su - postgres
 -d             # 以调试模式运行，可以打印出很多调试消息
 ```
 
-‍
+　　‍
 
 ## 配置postgresql.conf
 
-以PostgreSQL 9.6, 512G内存主机为例
+　　以PostgreSQL 9.6, 512G内存主机为例
 
-vi postgresql.conf
+　　vi postgresql.conf
 
 ```ini
 listen_addresses = '0.0.0.0'
@@ -373,7 +373,7 @@ shared_preload_libraries='pg_stat_statements'
 
 ## 配置pg_hba.conf
 
-避免不必要的访问，开放允许的访问，建议务必使用密码访问。
+　　避免不必要的访问，开放允许的访问，建议务必使用密码访问。
 
 ```
 $ vi pg_hba.conf
@@ -387,11 +387,11 @@ host all all 0.0.0.0/0 md5
 pg_ctl start
 ```
 
-‍
+　　‍
 
 # 环境变量
 
-建议通过环境变量方式初始化数据库
+　　建议通过环境变量方式初始化数据库
 
 ```pgsql
 -- 以下环境变量可以使用
@@ -404,6 +404,6 @@ export LD_LIBRARY_PATH=\$PGHOME/lib:\$LD_LIBRARY_PATH
 export PATH
 ```
 
-‍
+　　‍
 
-‍
+　　‍

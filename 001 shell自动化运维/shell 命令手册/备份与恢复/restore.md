@@ -1,6 +1,6 @@
 # restore
 
-**restore命令** 是dump命令的逆过程，用于还原dump命令生成的备份文件。倾倒操作可用来备份文件，而还原操作则是写回这些已备份的文件。
+　　**restore命令** 是dump命令的逆过程，用于还原dump命令生成的备份文件。倾倒操作可用来备份文件，而还原操作则是写回这些已备份的文件。
 
 ```bash
 -b<区块大小>：设置区块大小，单位为Byte；
@@ -27,13 +27,13 @@
 dump -9 -u -f /dev/hda3 /home/frank/
 ```
 
-用restore命令来恢复备份：
+　　用restore命令来恢复备份：
 
 ```shell
 restore rf /dev/hda3 /home/frank
 ```
 
-用restore命令来查看备份文件里的文件列表：
+　　用restore命令来查看备份文件里的文件列表：
 
 ```shell
 restore ft /dev/hda3

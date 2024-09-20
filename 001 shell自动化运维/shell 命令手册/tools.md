@@ -1,6 +1,7 @@
 # tools
 
 * 📄 [base64](siyuan://blocks/20231110105237-7ng3g33)
+* 📄 [cdrecird growisofs](siyuan://blocks/20231115103835-hjm12jh)
 * 📄 [crontab](siyuan://blocks/20231110105237-j6s89rn)
 * 📄 [curl](siyuan://blocks/20231110105237-iutu4j7)
 * 📄 [flock](siyuan://blocks/20240402201243-fqy8c6q)
@@ -14,10 +15,11 @@
 * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
 * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
 * 📄 [script](siyuan://blocks/20240507182310-uzcb81j)
+* 📄 [ssh](siyuan://blocks/20240724164831-i4pga8x)
 * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
+* 📄 [wall](siyuan://blocks/20240801151724-z56ndzj)
 * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
-* 📄 [光盘刻录](siyuan://blocks/20231115103835-hjm12jh)
 
-‍
+　　‍
 
-‍
+　　‍

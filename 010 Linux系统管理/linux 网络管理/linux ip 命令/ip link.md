@@ -54,7 +54,7 @@ TYPE := { vlan | veth | vcan | dummy | ifb | macvlan | macvtap |
 
 # **ip link add**
 
-**option：** 
+　　**option：** 
 
 * link DEVICE：指定要操作的物理设备
 * name NAME：指定新虚拟设备的名称
@@ -86,11 +86,11 @@ TYPE := { vlan | veth | vcan | dummy | ifb | macvlan | macvtap |
 * numtxqueues QUEUE_COUNT：指定新设备的传输队列数
 * numrxqueues QUEUE_COUNT：指定新设备的接收队列数
 
-‍
+　　‍
 
-添加类型格式：
+　　添加类型格式：
 
-VLAN类型的链路，支持以下附加参数：
+　　VLAN类型的链路，支持以下附加参数：
 
 ```bash
 ip link add link DEVICE name NAME type vlan [ protocol VLAN_PROTO ] id VLANID [ reorder_hdr { on | off } ] [ gvrp { on | off } ] [ mvrp { on | off } ] [ loose_binding { on | off } ] [ ingress-qos-map QOS-MAP ] [ egress-qos-map QOS-MAP ] 
@@ -104,7 +104,7 @@ ip link add link DEVICE name NAME type vlan [ protocol VLAN_PROTO ] id VLANID [ 
 * ingress-qos-map QOS-MAP：定义传入帧上优先级代码点之间的映射。格式为从：到由空格分隔的多个映射
 * egress-qos-map QOS-MAP：与入口qos映射相同，但用于输出帧
 
-实例
+　　实例
 
 ```bash
 ip link add link eth0 name eth0.10 type vlan id 10	#在设备eth0上创建新的vlan设备eth0.10
@@ -114,9 +114,9 @@ ip link add link eth0 name eth0.10 type vlan id 10	#在设备eth0上创建新的
 
 # **ip link set**
 
-该命令用于更改设备属性。如果请求多个参数更改，则任何更改失败后，ip会立即中止。 这是ip可以将系统移至不可预测状态的唯一情况。 解决方案是避免通过一个ip链接集调用更改多个参数。
+　　该命令用于更改设备属性。如果请求多个参数更改，则任何更改失败后，ip会立即中止。 这是ip可以将系统移至不可预测状态的唯一情况。 解决方案是避免通过一个ip链接集调用更改多个参数。
 
-**option：**
+　　**option：**
 
 * dev DEVICE：指定要操作的网络设备。 在配置SR-IOV虚拟功能（VF）设备时，此关键字应指定关联的物理功能（PF）设备
 * group GROUP：GROUP具有双重作用：如果同时存在group和dev，则将设备移至指定的组。  如果仅指定了一个组，则该命令将在该组中的所有设备上运行
@@ -164,11 +164,14 @@ ip link set eth0 promisc offi
 ip link set eth0 txqueuelen 1200
 # 设置网卡最大传输单元
 ip link set eth0 mtu 1400
+
+# 修改mac地址
+ip link set dev eth0 address 52:54:00:1c:f5:99
 ```
 
 # **ip link show**
 
-**option：**
+　　**option：**
 
 * dev NAME (default)：名称指定要显示的网络设备。如果省略此参数，则会列出默认组中的所有设备
 * group GROUP：指定要显示的设备组
@@ -184,7 +187,7 @@ ip link show type vlan	# 显示vlan类型设备
 
 # **ip link delete**
 
-**option：**
+　　**option：**
 
 * dev DEVICE：指定要操作的虚拟设备
 * group GROUP：指定要删除的虚拟链接组。不允许删除组0，因为它是默认组

@@ -1,20 +1,20 @@
 # arp
 
-arp 命令用于显示和修改 IP 到 MAC 转换表
+　　arp 命令用于显示和修改 IP 到 MAC 转换表
 
-**arp 命令** 是 Address Resolution Protocol，地址解析协议，是通过解析网络层地址来找寻数据链路层地址的一个网络协议包中极其重要的网络传输协议。而该命令可以显示和修改 arp 协议解析表中的缓冲数据。
+　　**arp 命令** 是 Address Resolution Protocol，地址解析协议，是通过解析网络层地址来找寻数据链路层地址的一个网络协议包中极其重要的网络传输协议。而该命令可以显示和修改 arp 协议解析表中的缓冲数据。
 
-这个核心协议模块实现RFC826中定义的 Address Resolution Protocol [译注：即TCP/IP的第三层到第一层的地址转换协议]，用于在直接相连的网络中换第二层硬件地址和 Ipv4 协议地址之间的转换。 用户除非想对其进行配置，否则一般不会直接操作这个模块。
+　　这个核心协议模块实现RFC826中定义的 Address Resolution Protocol [译注：即TCP/IP的第三层到第一层的地址转换协议]，用于在直接相连的网络中换第二层硬件地址和 Ipv4 协议地址之间的转换。 用户除非想对其进行配置，否则一般不会直接操作这个模块。
 
-实际上，它提供对核心中其它协议的服务。
+　　实际上，它提供对核心中其它协议的服务。
 
-用户进程可以使用 packet(7) 的 sockets，收到 ARP 包（译注：一译分组）。 还有一种机制是使用 netlink(7) sockets，在用户空间管理 ARP 缓存的机制。我们也可以通过 ioctl (2) 控制任意 PF_INET socket上的 ARP 表
+　　用户进程可以使用 packet(7) 的 sockets，收到 ARP 包（译注：一译分组）。 还有一种机制是使用 netlink(7) sockets，在用户空间管理 ARP 缓存的机制。我们也可以通过 ioctl (2) 控制任意 PF_INET socket上的 ARP 表
 
-ARP 模块维护一个硬件地址到协议地址映射的缓存。这个缓存有大小限制，所以不常用的和旧的记录（Entry）将被垃圾收集器清除（garbage-collected），垃圾收集器永远不能删除标为永久的记录。我们可以使用ioctls直接操纵缓冲， 并且其性状可以用下面定义的 sysctl 调节。
+　　ARP 模块维护一个硬件地址到协议地址映射的缓存。这个缓存有大小限制，所以不常用的和旧的记录（Entry）将被垃圾收集器清除（garbage-collected），垃圾收集器永远不能删除标为永久的记录。我们可以使用ioctls直接操纵缓冲， 并且其性状可以用下面定义的 sysctl 调节。
 
-如果在限定的时间（见下面的sysctl）内，一条现存映射没有肯定反馈时， 则认为相邻层的缓存记录失效。 为了再次向目标发送数据，ARP将首先试着询问本地arp进程 app_solicit 次，获取更新了的 MAC（介质访问控制）地址。 如果失败，并且旧的MAC地址是已知的，则发送 ucast_solicit 次的 unicast probe。如果仍然失败，则将向网络广播一个新的ARP请求,此时要 有待发送数据的队列
+　　如果在限定的时间（见下面的sysctl）内，一条现存映射没有肯定反馈时， 则认为相邻层的缓存记录失效。 为了再次向目标发送数据，ARP将首先试着询问本地arp进程 app_solicit 次，获取更新了的 MAC（介质访问控制）地址。 如果失败，并且旧的MAC地址是已知的，则发送 ucast_solicit 次的 unicast probe。如果仍然失败，则将向网络广播一个新的ARP请求,此时要 有待发送数据的队列
 
-如果 Linux 接到一个地址请求，而且该地址指向 Linux 转发的地址，并且接收接口打开了代理 arp 时，Linux 将自动添加一条非永久的代理 arp 记录；如果存在拒绝到目标的路由，则不添加代理 arp 记录。
+　　如果 Linux 接到一个地址请求，而且该地址指向 Linux 转发的地址，并且接收接口打开了代理 arp 时，Linux 将自动添加一条非永久的代理 arp 记录；如果存在拒绝到目标的路由，则不添加代理 arp 记录。
 
 ### 语法
 
@@ -39,11 +39,11 @@ arp（选项）（参数）
 
 ### 参数
 
-主机：查询 arp 缓冲区中指定主机的 arp 条目。
+　　主机：查询 arp 缓冲区中指定主机的 arp 条目。
 
 ### 实例
 
-显示arp 缓冲区内容
+　　显示arp 缓冲区内容
 
 ```
 [root@localhost ~]# arp -v
@@ -53,14 +53,14 @@ Address                  HWtype  HWaddress           Flags Mask            Iface
 Entries: 2      Skipped: 0      Found: 2
 ```
 
-添加静态 arp 映射
+　　添加静态 arp 映射
 
 ```
 arp -s IP MAC-ADDRESS
 arp -s 192.168.1.1 00:b1:b2:b3:b4:b5
 ```
 
-删除 arp 缓存条目
+　　删除 arp 缓存条目
 
 ```
 arp -d 192.168.1.1

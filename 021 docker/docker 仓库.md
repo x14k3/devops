@@ -1,7 +1,5 @@
 # docker 仓库
 
-‍
-
 # docker harbor
 
 - Harbor 是 VMware 公司开源的企业级 Docker Registry 项目，其目标是帮助用户迅速搭建一个企业级的 Docker Registry （私有仓库）服务。
@@ -24,10 +22,10 @@
 ![](assets/image-20230221160453415-20230610173810-e24vwcc.png)
 
 |Harbor组件|说明|
-| ---------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Proxy|Harbor 的 Registry、UI、Token 服务等组件，都处在 nginx 反向代理后边。<br>该代理将来自浏览器、docker clients 的请求转发到后端不同的服务上。|
-|Registry|负责储存 Docker 镜像，并处理 Docker push/pull 命令。<br>由于要对用户进行访问控制，即不同用户对 Docker镜像有不同的读写权限，<br>Registry 会指向一个 Token 服务，强制用户的每次 Docker pull/push 请求都要携带一个合法的 Token， Registry 会通过公钥对 Token 进行解密验证。|
-|Core services|Harbor的核心功能，主要提供以下3个服务:<br> 1）UI（harbor-ui）: 提供图形化界面，帮助用户管理 Registry 上的镜像（image）, 并对用户进行授权。<br>2）WebHook：为了及时获取Registry 上image 状态变化的情况，在Registry 上配置 Webhook，把状态变化传递给 UI 模块。 <br>3）Token 服务：负责根据用户权限给每个 Docker push/pull 命令签发 Token。Docker 客户端向 Registry 服务发起的请求， 如果不包含 Token，会被重定向到 Token 服务，获得 Token 后再重新向 Registry 进行请求。|
+| -----------------------------| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Proxy|Harbor 的 Registry、UI、Token 服务等组件，都处在 nginx 反向代理后边。<br />该代理将来自浏览器、docker clients 的请求转发到后端不同的服务上。<br />|
+|Registry|负责储存 Docker 镜像，并处理 Docker push/pull 命令。<br>由于要对用户进行访问控制，即不同用户对 Docker镜像有不同的读写权限，<br />Registry 会指向一个 Token 服务，强制用户的每次 Docker pull/push 请求都要携带一个合法的 Token， Registry 会通过公钥对 Token 进行解密验证。<br />|
+|Core services|Harbor的核心功能，主要提供以下3个服务:<br />1）UI（harbor-ui）: 提供图形化界面，帮助用户管理 Registry 上的镜像（image）, 并对用户进行授权。<br />2）WebHook：为了及时获取Registry 上image 状态变化的情况，在Registry 上配置 Webhook，把状态变化传递给 UI 模块。 <br />3）Token 服务：负责根据用户权限给每个 Docker push/pull 命令签发 Token。Docker 客户端向 Registry 服务发起的请求， 如果不包含 Token，会被重定向到 Token 服务，获得 Token 后再重新向 Registry 进行请求。<br />|
 |Database（harbor-db）|为core services提供数据库服务，负责储存用户权限、审计日志、Docker 镜像分组信息等数据。|
 |Job services|主要用于镜像复制，本地镜像可以被同步到远程 Harbor 实例上。|
 |Log collector（harbor-log）|负责收集其他组件的日志到一个地方|
@@ -35,11 +33,11 @@
 
 ## docker-harbor 部署
 
-1.在服务端安装docker和docker-compose 客户端上安装docker 关闭防火墙 修改主机名
+　　1.在服务端安装docker和docker-compose 客户端上安装docker 关闭防火墙 修改主机名
 
-`yum -y install docker-ce docker-compose`
+　　`yum -y install docker-ce docker-compose`
 
-2.下载docker-harbor离线安装包
+　　2.下载docker-harbor离线安装包
 
 ```bash
 # docker-harbor 下载地址
@@ -49,7 +47,7 @@ https://github.com/goharbor/harbor/releases
 tar -zxvf harbor-offline-installer-v2.7.1.tgz -C /data/
 ```
 
-3.修改配置文件
+　　3.修改配置文件
 
 ```bash
 hostname: 192.168.10.31                  # 设置为Harbor服务器的IP地址或者域名
@@ -59,7 +57,7 @@ certificate: /data/docker/ssl/server.crt
 private_key: /data/docker/ssl/server.key
 ```
 
-4.开始安装
+　　4.开始安装
 
 ```bash
 #在配置好了 harbor.cfg 之后，执行 ./prepare 命令，为 harbor 启动的容器生成一些必要的文件（环境） 
@@ -73,7 +71,7 @@ cd /data/harbor
 docker-compose up -d  #停止：docker-compose stop
 ```
 
-*5.配置https证书
+　　*5.配置https证书
 
 ```bash
 # 生成 CA 证书私钥
@@ -108,7 +106,7 @@ openssl x509 -req -sha512 -days 3650 \
     -out server.crt
 ```
 
-*6.Harbor.cfg 配置文件详解
+　　*6.Harbor.cfg 配置文件详解
 
 ```bash
 # 所需参数：这些参数需要在配置文件 Harbor.cfg 中设置。如果用户更新它们并运行 install.sh 脚本重新安装 Harbor， 参数将生效。具体参数如下：
@@ -146,12 +144,12 @@ verify_remote_cert # 默认打开。此标志决定了当Harbor与远程 registe
 
 ## docker-harbor 使用
 
-1.登录控制台
+　　1.登录控制台
 
-直接访问：http://ip
+　　直接访问：http://ip
 默认用户名密码：admin/Harbar123456
 
-2.docker 登录docker-harbor
+　　2.docker 登录docker-harbor
 
 ```bash
 docker login 192.168.10.31 -u admin -p Ninestar123
@@ -175,9 +173,9 @@ systemctl restart docker
 - 给需要存储的镜像打tag
 - 上传镜像到registry仓库
 
-**查看当前本地镜像**
+　　**查看当前本地镜像**
 
-```
+```bash
 [root@zutuanxue_manage01 ~]# docker images
 REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
 baishuming2020/centos_nginx    latest              bcd9f28f6126        33 minutes ago      447MB
@@ -186,9 +184,9 @@ centos                         latest              0f3e07c0138f        6 weeks a
 registry                       latest              f32a97de94e1        8 months ago        25.8MB
 ```
 
-a、设置docker仓库为registry本地仓库
+　　a、设置docker仓库为registry本地仓库
 
-```
+```bash
 #1、修改docker进程启动文件，修改其启动方式，目的是为了让通过docker配置文件启动
 [root@zutuanxue_manage01 ~]# sed -i.bak '/^ExecStart=/c\ExecStart=\/usr\/bin\/dockerd' /usr/lib/systemd/system/docker.service
 
@@ -205,9 +203,9 @@ insecure-registries 指定非安全的仓库地址，多个用逗号隔开
 [root@zutuanxue_manage01 ~]# systemctl restart docker
 ```
 
-b、给需要存储的镜像打tag
+　　b、给需要存储的镜像打tag
 
-```
+```bash
 [root@zutuanxue_manage01 ~]# docker tag baishuming2020/centos_nginx:latest 192.168.1.150:5000/centos_nginx:v1
 
 [root@zutuanxue_manage01 ~]# docker images
@@ -219,9 +217,9 @@ centos                             latest              0f3e07c0138f        6 wee
 registry                           latest              f32a97de94e1        8 months ago        25.8MB
 ```
 
-c、上传镜像到registry仓库
+　　c、上传镜像到registry仓库
 
-```
+```bash
 #1、上传镜像
 [root@zutuanxue_manage01 ~]# docker push 192.168.98.240:5000/centos_nginx:v1
 The push refers to repository [192.168.98.240:5000/centos_nginx]
@@ -249,9 +247,9 @@ _layers  _manifests  _uploads
 - 设置客户端docker仓库为registry仓库
 - 拉取镜像到本地
 
-a、设置192.168.1.151[hostname:zutuanxue_node1]机器的docker仓库为registry仓库
+　　a、设置192.168.1.151[hostname:zutuanxue_node1]机器的docker仓库为registry仓库
 
-```
+```bash
 #1、设置docker启动文件
 [root@zutuanxue_node1 ~]# sed -i.bak '/^ExecStart=/c\ExecStart=\/usr\/bin\/dockerd' /usr/lib/systemd/system/docker.service
 
@@ -262,10 +260,10 @@ a、设置192.168.1.151[hostname:zutuanxue_node1]机器的docker仓库为registr
 }
 ```
 
-b、下载镜像
+　　b、下载镜像
 192.168.1.151[hostname:zutuanxue_node1]机器上的docker可以拉取registry仓库中的192.168.1.150:5000/centos_nginx:v1容器镜像
 
-```
+```bash
 [root@zutuanxue_node1 ~]# docker pull 192.168.1.150:5000/centos_nginx:v1
 v1: Pulling from centos_nginx
 dcd04d454f16: Pull complete 
@@ -288,7 +286,7 @@ REPOSITORY                         TAG                 IMAGE ID            CREAT
 
 ### registry带basic认证的仓库
 
-**实现步骤**
+　　**实现步骤**
 
 - 安装需要认证的包
 - 创建存放认证信息的文件
@@ -297,28 +295,28 @@ REPOSITORY                         TAG                 IMAGE ID            CREAT
 - 指定仓库地址
 - 登录认证
 
-**实现过程**
+　　**实现过程**
 a、安装需要认证的包
 
-```
+```bash
 yum -y install httpd-tools
 ```
 
-b、创建存放认证信息的文件
+　　b、创建存放认证信息的文件
 
-```
+```bash
 mkdir -p /opt/registry-var/auth
 ```
 
-c、创建认证信息
+　　c、创建认证信息
 
-```
+```bash
 htpasswd -Bbn zutuanxue 123456 >> /opt/registry-var/auth/htpasswd
 ```
 
-d、创建带认证的registry容器
+　　d、创建带认证的registry容器
 
-```
+```docker
 docker run -d -p 10000:5000 --restart=always --name registry \
 -v  /opt/registry-var/auth:/auth \
 -v /opt/myregistry:/var/lib/registry \
@@ -328,18 +326,18 @@ docker run -d -p 10000:5000 --restart=always --name registry \
 registry:latest
 ```
 
-e、指定仓库地址
+　　e、指定仓库地址
 
-```
+```yaml
 cat /etc/docker/daemon.json 
 {
  "insecure-registries": ["http://192.168.1.150:5000","http://192.168.1.150:10000"]
 }
 ```
 
-f、登录认证
+　　f、登录认证
 
-```
+```docker
 docker login 192.168.1.150:10000
 Username：zutuanxue
 Password：123456

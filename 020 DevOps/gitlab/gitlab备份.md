@@ -1,12 +1,12 @@
 # gitlab备份
 
-由于gitlab中存放的都是开发人员的工作成果，所以为了保证数据安全，我们会定期对数据进行备份，对gitlab进行备份将会创建一个包含所有库和附件的归档文件。对备份的恢复只能恢复到与备份时的gitlab相同的版本。将gitlab迁移到另一台服务器上的最佳方法就是通过备份和还原。gitlab提供了一个简单的命令行来备份整个gitlab ，并且能灵活的满足需求。
+　　由于gitlab中存放的都是开发人员的工作成果，所以为了保证数据安全，我们会定期对数据进行备份，对gitlab进行备份将会创建一个包含所有库和附件的归档文件。对备份的恢复只能恢复到与备份时的gitlab相同的版本。将gitlab迁移到另一台服务器上的最佳方法就是通过备份和还原。gitlab提供了一个简单的命令行来备份整个gitlab ，并且能灵活的满足需求。
 
 ### 备份
 
-备份文件将保存在配置文件中定义的backup_path中 ，文件名为TIMESTAMP_gitlab_backup.tar,TIMESTAMP为备份时的时间戳。TIMESTAMP的格式为 ：EPOCH_YYYY_MM_DD_Gitlab‐version。
+　　备份文件将保存在配置文件中定义的backup_path中 ，文件名为TIMESTAMP_gitlab_backup.tar,TIMESTAMP为备份时的时间戳。TIMESTAMP的格式为 ：EPOCH_YYYY_MM_DD_Gitlab‐version。
 
-**备份配置：**
+　　**备份配置：**
 
 ```
 [root@zutuanxue git_data]# vim /etc/gitlab/gitlab.rb 
@@ -17,7 +17,7 @@ gitlab_rails['backup_keep_time'] = 604800
 [root@zutuanxue git_data]# gitlab-ctl reconfigure
 ```
 
-**手动备份：**
+　　**手动备份：**
 
 ```
 [root@zutuanxue git_data]# gitlab-backup create
@@ -26,9 +26,9 @@ gitlab_rails['backup_keep_time'] = 604800
 [root@zutuanxue git_data]# ls /opt/backups/
 ```
 
-**定时备份：**
+　　**定时备份：**
 
-在定时任务里添加：
+　　在定时任务里添加：
 
 ```
 0 2 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create
@@ -38,16 +38,16 @@ gitlab_rails['backup_keep_time'] = 604800
 
 ### 还原
 
-只能还原到与备份文件相同的gitlab版本。执行恢复操作时，需要gitlab处于运行状态，备份文件位于gitlab_rails[‘backup_path’]。需要先停掉两个服务，停止连接到数据库的进程（也就是停止数据写入服务，如果是空主机，没有任何操作的话，可以不停止服务，停止相应服务的目的是为了保证数据移植），但是保持GitLab是运行的。
+　　只能还原到与备份文件相同的gitlab版本。执行恢复操作时，需要gitlab处于运行状态，备份文件位于gitlab_rails[‘backup_path’]。需要先停掉两个服务，停止连接到数据库的进程（也就是停止数据写入服务，如果是空主机，没有任何操作的话，可以不停止服务，停止相应服务的目的是为了保证数据移植），但是保持GitLab是运行的。
 
-在web中删除项目
+　　在web中删除项目
 
 ```
 [root@zutuanxue backups]# gitlab-ctl stop unicorn
 [root@zutuanxue backups]# gitlab-ctl stop sidekiq
 ```
 
-指定时间戳你要从那个备份恢复：
+　　指定时间戳你要从那个备份恢复：
 
 ```
 [root@zutuanxue git_data]# cd /opt/backups/
@@ -76,4 +76,4 @@ Do you want to continue (yes/no)? yes
 注意：也可使用gitlab-rake gitlab:check SANITIZE=true验证下gitlab服务
 ```
 
-浏览器重新打开gitlab页面，重新登录后查看到被还原的项目内容
+　　浏览器重新打开gitlab页面，重新登录后查看到被还原的项目内容

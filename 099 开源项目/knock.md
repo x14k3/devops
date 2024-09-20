@@ -1,10 +1,10 @@
 # knock
 
-端口敲门服务，即：knockd服务。该服务通过动态的添加iptables规则来隐藏系统开启的服务，使用自定义的一系列序列号来“敲门”，使系统开启需要访问的服务端口，才能对外访问。不使用时，再使用自定义的序列号来“关门”，将端口关闭，不对外监听。进一步提升了服务和系统的安全性。
+　　端口敲门服务，即：knockd服务。该服务通过动态的添加iptables规则来隐藏系统开启的服务，使用自定义的一系列序列号来“敲门”，使系统开启需要访问的服务端口，才能对外访问。不使用时，再使用自定义的序列号来“关门”，将端口关闭，不对外监听。进一步提升了服务和系统的安全性。
 
-‍
+　　‍
 
-‍
+　　‍
 
 ## 1 安装knockd
 
@@ -16,7 +16,7 @@ cd knock-0.7
 make && make install
 ```
 
-knocked 选项：
+　　knocked 选项：
 
 * -i,–interface     监听的网口
 * -d,–daemon    守护模式运行
@@ -29,7 +29,7 @@ knocked 选项：
 
 ## 2 配置knockd服务
 
-​`vim /usr/local/knock/etc/knockd.conf`​
+　　​`vim /usr/local/knock/etc/knockd.conf`​
 
 ```bash
 [options]                       
@@ -64,7 +64,7 @@ Cmd_Timeout = timeout: 在Start_Command and Stop_Command之间的执行的超时
 Stop_Command = command: 在Start_Command已经执行，并且Cmd_Timeout已经超时执行
 ```
 
-‍
+　　‍
 
 ## 3 knocked测试
 
@@ -116,9 +116,9 @@ ACCEPT     tcp  --  112.10.95.255        0.0.0.0/0            tcp dpt:22
 ......
 ```
 
-‍
+　　‍
 
-查看测试系统的SSH端口开启状态
+　　查看测试系统的SSH端口开启状态
 
 ```yaml
 ┌──(kali㉿kali)-[~]
@@ -132,7 +132,7 @@ PORT   STATE  SERVICE VERSION
 
 ```
 
-使用`1356 6784 3409`​暗号敲门
+　　使用`1356 6784 3409`​暗号敲门
 
 ```yaml
 ┌──(kali㉿kali)-[~]
@@ -153,7 +153,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 ```
 
-使用`3409 6784 1356  `​暗号关门
+　　使用`3409 6784 1356  `​暗号关门
 
 ```yaml
 ┌──(kali㉿kali)-[~]

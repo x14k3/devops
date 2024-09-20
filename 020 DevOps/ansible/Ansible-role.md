@@ -1,18 +1,18 @@
 # Ansible-role
 
-假设我们要写一个playbook来安装管理lamp环境，那么这个playbook就会写很长。所以我们希望把这个很大的文件分成多个功能拆分, 分成apache管理,php管理,mysql管理，然后在需要使用的时候直接调用就可以了，以免重复写。就类似编程里的模块化的概念，以达到代码复用的效果。
+　　假设我们要写一个playbook来安装管理lamp环境，那么这个playbook就会写很长。所以我们希望把这个很大的文件分成多个功能拆分, 分成apache管理,php管理,mysql管理，然后在需要使用的时候直接调用就可以了，以免重复写。就类似编程里的模块化的概念，以达到代码复用的效果。
 
 ## 一、roles介绍
 
-**roles：**  ansible模块，类似于函数，完成一个任务的指令。每一个roles都有自己特定的目录结构，就是通过分别将variables, tasks及handlers等放置于单独的目录中,并可以便捷地调用它们的一种机制。
+　　**roles：**  ansible模块，类似于函数，完成一个任务的指令。每一个roles都有自己特定的目录结构，就是通过分别将variables, tasks及handlers等放置于单独的目录中,并可以便捷地调用它们的一种机制。
 
-**roles优点：**
+　　**roles优点：**
 
-1）模块中指令较少，方便编写
+　　1）模块中指令较少，方便编写
 
-2）重复调用方便
+　　2）重复调用方便
 
-3）排错方便
+　　3）排错方便
 
 ## 二、创建roles的目录结构
 
@@ -25,15 +25,15 @@ vars：有一个main.yml文件，定义变量。
 meta：有一个main.yml文件，定义此角色的特殊设定及其依赖关系。
 ```
 
-**注意:**  在每个角色的目录中分别创建files, tasks,handlers,templates,vars和meta目录，用不到的目录可以创建为空目录.
+　　**注意:**  在每个角色的目录中分别创建files, tasks,handlers,templates,vars和meta目录，用不到的目录可以创建为空目录.
 
 ## 三、案例：通过roles实现lamp
 
-分析：需定制三个角色: httpd,mysql,php
+　　分析：需定制三个角色: httpd,mysql,php
 
 ### 3.1） 创建roles目录及文件,并确认目录结构
 
-roles/
+　　roles/
 ├── httpd
 │ ├── files
 │ ├── handlers

@@ -1,8 +1,8 @@
 # pyhton-nacos配置文件转义
 
-‍
+　　‍
 
-‍
+　　‍
 
 ```bash
 #!/bin/python

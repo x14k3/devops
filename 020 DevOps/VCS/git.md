@@ -1,8 +1,8 @@
 # git
 
-## git 服务端部署
+## <span data-type="text" style="color: var(--b3-font-color11);">git 服务端部署</span>
 
-或者参考gitlab部署
+　　或者参考gitlab部署
 
 ```bash
 yum install git-core
@@ -48,13 +48,13 @@ git push origin master
 
 ```
 
-‍
+　　‍
 
-## git 常用命令
+## <span data-type="text" style="color: var(--b3-font-color11);">git 常用命令</span>
 
 ### 0. 配置
 
-Git的设置文件为`.gitconfig`​，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
+　　Git的设置文件为`.gitconfig`​，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
 
 ```bash
 # 显示当前的Git配置
@@ -74,7 +74,7 @@ git config --global http.proxy  socks5://127.0.0.1:10808
 
 ```
 
-‍
+　　‍
 
 ### 1. 获取与创建项目
 
@@ -87,7 +87,7 @@ git init [project-name]
 git clone git://github.com/schacon/simplegit.git
 ```
 
-‍
+　　‍
 
 ### 2. 基本的快照
 
@@ -108,7 +108,7 @@ git reset HEAD    # 取消缓存已缓存的内容
 git rm            # 将文件从缓存区移除
 ```
 
-‍
+　　‍
 
 ### 3. 分支与合并
 
@@ -126,27 +126,27 @@ git tag [tag] [commit]   # 给历史记录中的某个重要的一点打上标�
 
 ```
 
-‍
+　　‍
 
 ### 4. 分享与更新项目
 
 > **简而言之** 使用 `git fetch`​ 更新你的项目，使用 `git push`​ 分享你的改动。你可以用 `git remote`​ 管理你的远程仓库。
 
 ```bash
-git remote            # 列出远端别名， -v 参数，你还可以看到每个别名的实际链接地址
+git remote                    # 列出远端别名， -v 参数，你还可以看到每个别名的实际链接地址
 git remote add [alias] [url]  # 为你的项目添加一个新的远端仓库
-git remote rm      # 删除现存的某个别名
+git remote rm                 # 删除现存的某个别名
 
-git fetch [alias]       # 从远端仓库下载新分支与数据 【从远程获取最新版本到本地，但不会自动merge】
-git pull [alias]  [branch]     # 从远端仓库提取数据并尝试合并到当前分支【会获取所有远程索引并合并到本地分支中来】
+git fetch [alias]             # 从远端仓库下载新分支与数据 【从远程获取最新版本到本地，但不会自动merge】
+git pull [alias]  [branch]    # 从远端仓库提取数据并尝试合并到当前分支【会获取所有远程索引并合并到本地分支中来】
 
-git push [alias] [branch]    # 推送你的新分支与数据到某个远端仓库
+git push [alias] [branch]     # 推送你的新分支与数据到某个远端仓库
 
 ```
 
-‍
+　　‍
 
-### 4. 检查与比较
+### 5. 检查与比较
 
 > **简而言之** 执行 `git log`​ 找到你的项目历史中的特定提交 ——       按作者、日期、内容或者历史记录。执行 `git diff`​ 比较历史记录中的两个不同的点 ——       通常是为了看看两个分支有啥区别，或者从某个版本到另一个版本，你的软件都有啥变化。
 
@@ -154,7 +154,7 @@ git push [alias] [branch]    # 推送你的新分支与数据到某个远端仓�
 # 显示有变更的文件
 git status
 # 显示当前分支的版本历史
- git log
+git log
 # 显示commit历史，以及每次commit发生变更的文件
 git log --stat
 # 搜索提交历史，根据关键词

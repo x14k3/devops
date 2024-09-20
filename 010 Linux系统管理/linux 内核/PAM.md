@@ -2,7 +2,7 @@
 
 ## pam说明
 
-PAM(Pluggable Authentication Modules)即可插拔式认证模块，它是一种高效而且灵活便利的用户级别的认证方式，它也是当前Linux服务器普遍使用的认证方式。
+　　PAM(Pluggable Authentication Modules)即可插拔式认证模块，它是一种高效而且灵活便利的用户级别的认证方式，它也是当前Linux服务器普遍使用的认证方式。
 在不同版本的Linux统中部署PAM认证是有所不同的。
 它提供了对所有服务进行认证的中央机制，适用于login，远程登录（telnet,rlogin,fsh,ftp,点对点协议（PPP）），su等应用程序中。
 系统管理员通过PAM配置文件来制定不同应用程序的不同认证策略；应用程序开发者通过在服务程序中使用PAM API(pam_xxxx( ))来实现对认证方法的调用；而PAM服务模块的开发者则利用PAM SPI来编写模块（主要是引出一些函数pam_sm_xxxx( )供PAM接口库调用），将不同的认证机制加入到系统中；PAM接口库（libpam）则读取配置文件，将应用程序和相应的PAM服务模块联系起来
@@ -11,7 +11,7 @@ PAM(Pluggable Authentication Modules)即可插拔式认证模块，它是一种�
 
 ![](assets/image-20230130111021544-20230610173810-qqbalnz.png)
 
-认证过程讲解
+　　认证过程讲解
 
 1. 使用者执行/usr/bin/passwd 程序，并输入密码
 2. passwd开始调用PAM模块，PAM模块会搜寻passwd程序的PAM相关设置文件，这个设置文件一般是在/etc/pam.d/里边的与程序同名的文件，即PAM会搜寻/etc/pam.d/passwd此设置文件
@@ -20,13 +20,13 @@ PAM(Pluggable Authentication Modules)即可插拔式认证模块，它是一种�
 
 ## PAM 配置文件格式说明
 
-通用配置文件/etc/pam.conf格式,此格式不使用
+　　通用配置文件/etc/pam.conf格式,此格式不使用
 
 ```bash
 application type control module-path arguments
 ```
 
-专用配置文件/etc/pam.d/ 格式
+　　专用配置文件/etc/pam.d/ 格式
 
 ```bash
 type control module-path arguments

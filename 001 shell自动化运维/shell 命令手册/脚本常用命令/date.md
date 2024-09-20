@@ -25,7 +25,7 @@ date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
 
 ### 指定格式输出
 
-format：输出的时间格式。
+　　format：输出的时间格式。
 
 ```
 format可用的转义序列如下：

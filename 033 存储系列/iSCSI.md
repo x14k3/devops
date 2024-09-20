@@ -2,24 +2,24 @@
 
 # ISCSI服务简介
 
-iscsi 结构基于客户/服务器模型，其主要功能是在TCP/IP网络上的主机系统（启动器initlator）和存储设备（目标  target） 之间进行大量的数据封装和可靠传输过程，此外，iscsi 提供了在IP网络封装SCSI命令，且运行在TCP上。
+　　iscsi 结构基于客户/服务器模型，其主要功能是在TCP/IP网络上的主机系统（启动器initlator）和存储设备（目标  target） 之间进行大量的数据封装和可靠传输过程，此外，iscsi 提供了在IP网络封装SCSI命令，且运行在TCP上。
 
-ISCSI 这个架构主要将存储装置与使用的主机分别为两部分，分别是：
+　　ISCSI 这个架构主要将存储装置与使用的主机分别为两部分，分别是：
 
 * ISCSI  target ：就是存储设备端，存放磁盘或RAID的设备，目前也能够将Linux主机仿真成ISCSI  target了，目的在提供其他主机使用的磁盘。
 * ISCSI  inITiator： 就是能够使用target的客户端，通常是服务器，只有装有iscsi initiator的相关功能后才能使用ISCSI  target 提供的磁盘。
 
-**服务器取得磁盘或者文件系统的方式**
+　　**服务器取得磁盘或者文件系统的方式**
 
 1. 直接存取：在本机上的磁盘，就是直接存取设备
 2. 透过存储局域网络（SAN），来自区网内的其他设备提供的磁盘。
 3. 网络文件系统NAS（：来自NAS提供的文件系统）只能立即使用，不能进行格式化。
 
-‍
+　　‍
 
 # Linux下ISCSI服务搭建
 
-iSCSI技术在工作形式上分为服务端（target）与客户端（initiator）。iSCSI服务端即用于存放硬盘存储资源的服务器，它作为前面创建的RAID磁盘阵列的存储端，能够为用户提供可用的存储资源。iSCSI客户端则是用户使用的软件，用于访问远程服务端的存储资源。
+　　iSCSI技术在工作形式上分为服务端（target）与客户端（initiator）。iSCSI服务端即用于存放硬盘存储资源的服务器，它作为前面创建的RAID磁盘阵列的存储端，能够为用户提供可用的存储资源。iSCSI客户端则是用户使用的软件，用于访问远程服务端的存储资源。
 
 1. iscsi server被称为target  server，模拟scsi设备，后端存储设备可以使用文件/LVM/磁盘/RAID等不同类型的设备；启动设备（initiator）：发起I/O请求的设备，需要提供iscsi服务，比如PC机安装iscsi-initiator-utils软件实现，或者通过网卡自带的PXE启动。esp+ip+scsi
 2. iscsi再传输数据的时候考虑了安全性，可以通过IPSEC  对流量加密，并且iscsi提供CHAP认证机制以及ACL访问控制，但是在访问iscsi-target的时候需要IQN（iscsi完全名称，区分唯一的initiator和target设备），格式iqn.年月.域名后缀(反着写)：[target服务器的名称或IP地址]
@@ -83,9 +83,9 @@ systemctl start targetd ; systemctl enable targetd
 
 ### **第二步：配置iSCSI服务端共享资源**
 
-targetcli是用于管理iSCSI服务端存储资源的专用配置命令，它能够提供类似于fdisk命令的交互式配置功能，将iSCSI共享资源的配置内容抽象成“目录”的形式，我们只需将各类配置信息填入到相应的“目录”中即可。这里的难点主要在于认识每个“参数目录”的作用。当把配置参数正确地填写到“目录”中后，iSCSI服务端也可以提供共享资源服务了。
+　　targetcli是用于管理iSCSI服务端存储资源的专用配置命令，它能够提供类似于fdisk命令的交互式配置功能，将iSCSI共享资源的配置内容抽象成“目录”的形式，我们只需将各类配置信息填入到相应的“目录”中即可。这里的难点主要在于认识每个“参数目录”的作用。当把配置参数正确地填写到“目录”中后，iSCSI服务端也可以提供共享资源服务了。
 
-在执行targetcli命令后就能看到交互式的配置界面了。在该界面中可以使用很多Linux命令，比如利用ls查看目录参数的结构，使用cd切换到不同的目录中。 `**/backstores/block**`**是iSCSI服务端配置共享设备的位置**。我们需要把刚刚创建的磁盘分区文件加入到配置共享设备的“资源池”中，并将该文件重新命名为block1，这样用户就不会知道是由服务器中的哪块硬盘来提供共享存储资源，而只会看到一个名为block1的存储设备。
+　　在执行targetcli命令后就能看到交互式的配置界面了。在该界面中可以使用很多Linux命令，比如利用ls查看目录参数的结构，使用cd切换到不同的目录中。 **​`/backstores/block`​****是iSCSI服务端配置共享设备的位置**。我们需要把刚刚创建的磁盘分区文件加入到配置共享设备的“资源池”中，并将该文件重新命名为block1，这样用户就不会知道是由服务器中的哪块硬盘来提供共享存储资源，而只会看到一个名为block1的存储设备。
 
 ```bash
 [root@localhost ~]# targetcli 
@@ -111,7 +111,7 @@ Created block storage object block1 using /dev/sdb.
 
 ### **第三步：创建iSCSI target名称及配置共享资源**
 
-iSCSI   target名称是由系统自动生成的，这是一串用于描述共享资源的唯一字符串。稍后用户在扫描iSCSI服务端时即可看到这个字符串，因此我们不需要记住它。系统在生成这个target名称后，还会在/iscsi参数目录中创建一个与其字符串同名的新“目录”用来存放共享资源。我们需要把前面加入到iSCSI共享资源池中的硬盘设备添加到这个新目录中，这样用户在登录iSCSI服务端后，即可默认使用这硬盘设备提供的共享存储资源了。
+　　iSCSI   target名称是由系统自动生成的，这是一串用于描述共享资源的唯一字符串。稍后用户在扫描iSCSI服务端时即可看到这个字符串，因此我们不需要记住它。系统在生成这个target名称后，还会在/iscsi参数目录中创建一个与其字符串同名的新“目录”用来存放共享资源。我们需要把前面加入到iSCSI共享资源池中的硬盘设备添加到这个新目录中，这样用户在登录iSCSI服务端后，即可默认使用这硬盘设备提供的共享存储资源了。
 
 ```bash
 /backstores/block> cd /iscsi 
@@ -155,7 +155,7 @@ Created LUN 5.
 
 ### **第四步：设置访问控制列表（ACL）**
 
-iSCSI协议是通过客户端名称进行验证的，也就是说，用户在访问存储共享资源时不需要输入密码，只要iSCSI客户端的名称与服务端中设置的访问控制列表中某一名称条目一致即可，因此需要在iSCSI服务端的配置文件中写入一串能够验证用户信息的名称。acls参数目录用于存放能够访问iSCSI服务端共享存储资源的客户端名称。推荐在刚刚系统生成的iSCSI  target后面追加上类似于:client的参数，这样既能保证客户端的名称具有唯一性，又非常便于管理和阅读。
+　　iSCSI协议是通过客户端名称进行验证的，也就是说，用户在访问存储共享资源时不需要输入密码，只要iSCSI客户端的名称与服务端中设置的访问控制列表中某一名称条目一致即可，因此需要在iSCSI服务端的配置文件中写入一串能够验证用户信息的名称。acls参数目录用于存放能够访问iSCSI服务端共享存储资源的客户端名称。推荐在刚刚系统生成的iSCSI  target后面追加上类似于:client的参数，这样既能保证客户端的名称具有唯一性，又非常便于管理和阅读。
 
 ```bash
 /iscsi/iqn.20...rac/tpg1/luns> cd ../acls
@@ -173,7 +173,7 @@ Created mapped LUN 0.
 
 ### **第五步：设置iSCSI服务端的监听IP地址和端口号。**
 
-位于生产环境中的服务器上可能有多块网卡，那么到底是由哪个网卡或IP地址对外提供共享存储资源呢？这就需要我们在配置文件中手动定义iSCSI服务端的信息，即在portals参数目录中写上服务器的IP地址。接下来将由系统自动开启服务器192.168.245.128的3260端口将向外提供iSCSI共享存储资源服务：
+　　位于生产环境中的服务器上可能有多块网卡，那么到底是由哪个网卡或IP地址对外提供共享存储资源呢？这就需要我们在配置文件中手动定义iSCSI服务端的信息，即在portals参数目录中写上服务器的IP地址。接下来将由系统自动开启服务器192.168.245.128的3260端口将向外提供iSCSI共享存储资源服务：
 
 ```bash
 /iscsi/iqn.20...rac/tpg1/acls> cd ../portals/
@@ -190,7 +190,7 @@ Could not create NetworkPortal in configFS
 
 ### **第六步：配置妥当后检查配置信息，重启iSCSI服务端程序并配置防火墙策略**
 
-在参数文件配置妥当后，可以浏览刚刚配置的信息，确保与下面的信息基本一致。**在确认信息无误后输入exit 命令来退出配置**。注意，千万不要习惯性地按Ctrl  +  C组合键结束进程，这样不会保存配置文件，我们的工作也就白费了。最后重启iSCSI服务端程序，再设置firewalld防火墙策略，使其放行3260/tcp端口号的流量。
+　　在参数文件配置妥当后，可以浏览刚刚配置的信息，确保与下面的信息基本一致。**在确认信息无误后输入exit 命令来退出配置**。注意，千万不要习惯性地按Ctrl  +  C组合键结束进程，这样不会保存配置文件，我们的工作也就白费了。最后重启iSCSI服务端程序，再设置firewalld防火墙策略，使其放行3260/tcp端口号的流量。
 
 ```bash
 /iscsi/iqn.20.../tpg1/portals> cd /
@@ -258,19 +258,19 @@ systemctl restart targetd
 netstat -tunl | grep 3260
 ```
 
-‍
+　　‍
 
 ## 配置 initiator 客户端
 
-在RHEL 7系统中，已经默认安装了iSCSI客户端服务程序initiator。如果您的系统没有安装的话，可以使用Yum软件仓库手动安装。
+　　在RHEL 7系统中，已经默认安装了iSCSI客户端服务程序initiator。如果您的系统没有安装的话，可以使用Yum软件仓库手动安装。
 
 ```bash
 yum -y install iscsi-initiator-utils
 ```
 
-iSCSI协议是通过客户端的名称来进行验证，而该名称也是iSCSI客户端的唯一标识，而且必须与服务端配置文件中访问控制列表中的信息一致，否则客户端在尝试访问存储共享设备时，系统会弹出验证失败的保存信息。
+　　iSCSI协议是通过客户端的名称来进行验证，而该名称也是iSCSI客户端的唯一标识，而且必须与服务端配置文件中访问控制列表中的信息一致，否则客户端在尝试访问存储共享设备时，系统会弹出验证失败的保存信息。
 
-下面我们编辑iSCSI客户端中的initiator名称文件，把服务端的访问控制列表名称填写进来，然后重启客户端iscsid服务程序并将其加入到开机启动项中：
+　　下面我们编辑iSCSI客户端中的initiator名称文件，把服务端的访问控制列表名称填写进来，然后重启客户端iscsid服务程序并将其加入到开机启动项中：
 
 ```bash
 [root@localhost ~]# vim /etc/iscsi/initiatorname.iscsi 
@@ -279,7 +279,7 @@ InitiatorName=iqn.2024-02.storage.oracle:client
 [root@localhost ~]# systemctl enable iscsid
 ```
 
-iscsiadm是用于管理、查询、插入、更新或删除iSCSI数据库配置文件的命令行工具，用户需要先使用这个工具扫描发现远程iSCSI服务端，然后查看找到的服务端上有哪些可用的共享存储资源。其中，-m  discovery参数的目的是扫描并发现可用的存储资源，-t  st参数为执行扫描操作的类型，-p  192.168.245.128参数为iSCSI服务端的IP地址.可通过 `man iscsiadm | grep \\-mode`​ 来查看帮助。
+　　iscsiadm是用于管理、查询、插入、更新或删除iSCSI数据库配置文件的命令行工具，用户需要先使用这个工具扫描发现远程iSCSI服务端，然后查看找到的服务端上有哪些可用的共享存储资源。其中，-m  discovery参数的目的是扫描并发现可用的存储资源，-t  st参数为执行扫描操作的类型，-p  192.168.245.128参数为iSCSI服务端的IP地址.可通过 `man iscsiadm | grep \\-mode`​ 来查看帮助。
 
 ```bash
 # 发现iscsi存储
@@ -358,7 +358,7 @@ iscsiadm -m node -T TARGET -p IP:port -l
 iscsiadm -m node -T TARGET -p IP:port -u
 ```
 
-‍
+　　‍
 
 ### 常见错误
 
@@ -384,9 +384,9 @@ Feb 13 10:30:38 test iscsid: iscsid: Kernel reported iSCSI connection 1:0 error 
 Feb 13 10:30:40 test iscsid: iscsid: connection1:0 is operational after recovery (1 attempts)
 ```
 
-经过排查发现是oracle-rac1和oracle-rac2节点共同使用同一个ACL-LUN-NAME导致，
+　　经过排查发现是oracle-rac1和oracle-rac2节点共同使用同一个ACL-LUN-NAME导致，
 
-参考第四步：设置访问控制列表（ACL）增加一个ACL，使得oracle-rac1和oracle-rac2使用不同的ACL即可
+　　参考第四步：设置访问控制列表（ACL）增加一个ACL，使得oracle-rac1和oracle-rac2使用不同的ACL即可
 
 ```bash
   o- iscsi  [Targets: 1]

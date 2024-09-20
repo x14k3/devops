@@ -2,19 +2,19 @@
 
 ## systemd service：简介
 
-Systemd  Service是systemd提供的用于管理服务启动、停止和相关操作的功能，它极大的简化了服务管理的配置过程，用户只需要配置几项指令即可。相比于SysV的服务管理脚本，用户不需要去编写服务的启动、停止、重启、状态查看等等一系列复杂且有重复造轮子嫌疑的脚本代码了，相信写过SysV服务管理脚本的人都深有体会。所以，Systemd  Service是面向所有用户的，即使对于新手用户来说，配置门槛也非常低。
+　　Systemd  Service是systemd提供的用于管理服务启动、停止和相关操作的功能，它极大的简化了服务管理的配置过程，用户只需要配置几项指令即可。相比于SysV的服务管理脚本，用户不需要去编写服务的启动、停止、重启、状态查看等等一系列复杂且有重复造轮子嫌疑的脚本代码了，相信写过SysV服务管理脚本的人都深有体会。所以，Systemd  Service是面向所有用户的，即使对于新手用户来说，配置门槛也非常低。
 
-systemd service是systemd所管理的其中一项内容。实际上，systemd service是[Systemd Unit](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)的一种，除了Service，systemd还有其他几种类型的unit，比如socket、slice、scope、target等等。在这里，暂时了解两项内容：
+　　systemd service是systemd所管理的其中一项内容。实际上，systemd service是[Systemd Unit](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)的一种，除了Service，systemd还有其他几种类型的unit，比如socket、slice、scope、target等等。在这里，暂时了解两项内容：
 
 * Service类型，定义服务程序的启动、停止、重启等操作和进程相关属性
 * Target类型，主要目的是对Service(也可以是其它Unit)进行分组、归类，可以包含一个或多个Service Unit(也可以是其它Unit)
 
-此外，Systemd作为管家，还将一些功能集成到了Systemd Service中，个人觉得比较出彩的两个集成功能是：
+　　此外，Systemd作为管家，还将一些功能集成到了Systemd Service中，个人觉得比较出彩的两个集成功能是：
 
 * 用户可以直接在Service配置文件中定义CGroup相关指令来对该服务程序做资源限制。在以前，对服务程序做CGroup资源控制的步骤是比较繁琐的
 * 用户可以选择Journal日志而非采用rsyslog，这意味着用户可以不用单独去配置rsyslog，而且可以直接通过systemctl或journalctl命令来查看某服务的日志信息。当然，该功能并不适用于所有情况，比如用户需要管理日志时
 
-Systemd Service还有其它一些特性，比如可以动态修改服务管理配置文件，比如可以并行启动非依赖的服务，从而加速开机过程，等等。例如，使用`systemd-analyze blame`​可分析开机启动各服务占用的时长：
+　　Systemd Service还有其它一些特性，比如可以动态修改服务管理配置文件，比如可以并行启动非依赖的服务，从而加速开机过程，等等。例如，使用`systemd-analyze blame`​可分析开机启动各服务占用的时长：
 
 ```bash
 $ systemd-analyze blame
@@ -43,9 +43,9 @@ multi-user.target reached after 2.214s in userspace
 
 > Systemd Service 配置文件的文件名均以 .service 为后缀，这些服务配置文件的存放路径依然遵循Systemd管理配置文件的风格，将服务管理配置文件统一[隐藏]在 /usr/lib/systemd/system 目录下，同时暴露一个可供用户存放服务配置文件的目录 /etc/systemd/system
 
-如果用户需要，可以将服务配置文件手动存放至用户配置目录/etc/systemd/system下。该目录下的服务配置文件可以是普通`.service`​文件，也可以是链接至/usr/lib/systemd/system目录下服务配置文件的软链接。
+　　如果用户需要，可以将服务配置文件手动存放至用户配置目录/etc/systemd/system下。该目录下的服务配置文件可以是普通`.service`​文件，也可以是链接至/usr/lib/systemd/system目录下服务配置文件的软链接。
 
-例如：
+　　例如：
 
 ```bash
 # 位于/usr/lib/systemd/system下的服务配置文件
@@ -96,7 +96,7 @@ tuned.service -> /usr/lib/systemd/system/tuned.service
 
 ## systemd service文件格式说明
 
-一个Systemd Service的服务配置文件大概长这样：
+　　一个Systemd Service的服务配置文件大概长这样：
 
 ```bash
 [Unit]
@@ -118,15 +118,15 @@ WantedBy = xxx.target yy.target
 
 ```
 
-一个`.Service`​配置文件分为三部分：
+　　一个`.Service`​配置文件分为三部分：
 
 * Unit：定义该服务作为Unit角色时相关的属性
 * Service：定义本服务相关的属性
 * Install：定义本服务在设置服务开机自启动时相关的属性。换句话说，只有在创建/移除服务配置文件的软链接时，Install段才会派上用场。这一配置段不是必须的，当未配置`[Install]`​时，设置开机自启动或禁止开机自启动的操作将无任何效果
 
-​`[Unit]`​和`[Install]`​段的配置指令都来自于`man systemd.unit`​，这些指令都用于描述作为Unit时的属性，`[Service]`​段则专属于`.Service`​服务配置文件。
+　　​`[Unit]`​和`[Install]`​段的配置指令都来自于`man systemd.unit`​，这些指令都用于描述作为Unit时的属性，`[Service]`​段则专属于`.Service`​服务配置文件。
 
-这里先介绍一些常见的`[Unit]`​和`[Install]`​相关的指令(虽然支持的配置指令很多，但只需熟悉几个即可)，之后再专门介绍Service段落的配置指令。
+　　这里先介绍一些常见的`[Unit]`​和`[Install]`​相关的指令(虽然支持的配置指令很多，但只需熟悉几个即可)，之后再专门介绍Service段落的配置指令。
 
 ## [Unit]段落指令
 
@@ -152,11 +152,11 @@ WantedBy = xxx.target yy.target
 |ConditionFileNotEmpty, AssertFileNotEmpty|如上，路径存在且是非空文件时启动。|
 |ConditionFileIsExecutable, AssertFileIsExecutable|如上，路径存在且是可执行普通文件时启动。|
 
-对于自定义的服务配置文件来说，需要定义的常见指令包括Description、After、Wants及可能需要的条件判断类指令。所以，Unit段落是非常简单的。
+　　对于自定义的服务配置文件来说，需要定义的常见指令包括Description、After、Wants及可能需要的条件判断类指令。所以，Unit段落是非常简单的。
 
 ## [Install]段落指令
 
-下面是`[Install]`​段落相关的指令，它们只在`systemctl enable/disable`​操作时有效。如果期望服务开机自启动，一般只配置一个WantedBy指令，如果不期望服务开机自启动，则Install段落通常省略。
+　　下面是`[Install]`​段落相关的指令，它们只在`systemctl enable/disable`​操作时有效。如果期望服务开机自启动，一般只配置一个WantedBy指令，如果不期望服务开机自启动，则Install段落通常省略。
 
 |Install指令|含义|
 | -----------------| -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -165,7 +165,7 @@ WantedBy = xxx.target yy.target
 |Alias|指定创建软链接时链接至本服务配置文件的别名文件。例如reboot.target中配置了Alias=ctrl-alt-del.target，当执行enable时，将创建/etc/systemd/system/ctrl-alt-del.service软链接并指向reboot.target。|
 |DefaultInstance|当是一个模板服务配置文件时(即文件名为`Service_Name@.service`​)，该指令指定该模板的默认实例。例如trojan@.service中配置了DefaultInstall=server时，systemctl enable trojan@.service时将创建名为[trojan@server.service](mailto:trojan@server.service)的软链接。|
 
-例如，下面是sshd的服务配置文件/usr/lib/systemd/system/sshd.service，只看Unit段落和Install段落，是否很简单？
+　　例如，下面是sshd的服务配置文件/usr/lib/systemd/system/sshd.service，只看Unit段落和Install段落，是否很简单？
 
 ```bash
 oot@note:/tmp # cat /etc/systemd/system/sshd.service 
@@ -185,14 +185,14 @@ Alias=sshd.service
 
 ## [Service]段配置
 
-Systemd Service配置文件中的`[Service]`​段落可配置的指令很多，可配置在此段落中的指令来源有多处，包括：
+　　Systemd Service配置文件中的`[Service]`​段落可配置的指令很多，可配置在此段落中的指令来源有多处，包括：
 
 * man systemd.service  中描述的专属于Service Unit的指令，一般是定义服务进程启动、停止、重启等 管理行为的指令。比如ExecStart指令指定服务启动时执行的命令
 * man systemd.exec  中描述的指令，一般是定义服务进程的启动环境、运行环境的指令。例如指定工作目录、指定服务进程的运行用户、指定环境变量、指定服务OOM相关的属性，等。特别地，指定标准输出／标准错误的目标时可以设置日志，比如设置为journal时可设置该服务使用journa1日志系统
 * man systemd.kill  中描述的指令，一般是定义终止服务进程相关的指令，比如终止服务时发送什么信号、服务进程没杀死时如何处理，等
 * man resource-control  中描述的指令，一般是定义服务进程关于资源控制相关的指令，即配置服务进程的CGroup。比如该服务进程最多允许使用多少内存、使用哪些CPU、最多占用多少百分比的CPU时间，等
 
-例如，/usr/lib/systemd/system/rsyslog.service文件的内容：
+　　例如，/usr/lib/systemd/system/rsyslog.service文件的内容：
 
 ```bash
 [Service]
@@ -205,7 +205,7 @@ ExecStart=/usr/sbin/rsyslogd -n $SYSLOGD_OPTIONS  # 来自systemd.service
 Restart=on-failure    # 来自systemd.service
 ```
 
-再比如，想要限制一个服务最多允许使用300M内存(比如512M的vps主机运行一个比较耗内存的博客系统时，可设置内存使用限制)，最多30%CPU时间：
+　　再比如，想要限制一个服务最多允许使用300M内存(比如512M的vps主机运行一个比较耗内存的博客系统时，可设置内存使用限制)，最多30%CPU时间：
 
 ```bash
 [Service]
@@ -214,7 +214,7 @@ CPUQuota=30%
 ExecStart=xxx
 ```
 
-此外还需要了解systemd的一项功能，`systemctl set-property`​，它可以在线修改已启动服务的属性。例如
+　　此外还需要了解systemd的一项功能，`systemctl set-property`​，它可以在线修改已启动服务的属性。例如
 
 ```bash
 # 直接限制，且写入配置文件，所以下次启动服务也会被限制
@@ -224,7 +224,7 @@ systemctl set-property nginx MemoryLimit=100M
 systemctl set-property nginx MemoryLimit=100M --runtime
 ```
 
-目前来说，可以不用过多关注来自其它位置的指令，应该给予重点关注的是来自systemd.service自身的指令，比如：
+　　目前来说，可以不用过多关注来自其它位置的指令，应该给予重点关注的是来自systemd.service自身的指令，比如：
 
 ```bash
 Type             指定服务的管理类型
@@ -235,11 +235,11 @@ Restart          指定systemd是否要自动重启服务进程以及什么情�
 WorkingDirectory 指定工作目录
 ```
 
-特别是Type指令，它直接影响`[Service]`​段中的多项配置方式。
+　　特别是Type指令，它直接影响`[Service]`​段中的多项配置方式。
 
-下面将从Type指令开始引入Service段的配置方式。
+　　下面将从Type指令开始引入Service段的配置方式。
 
-根据`man systemd.service`​，Type指令支持多种值：
+　　根据`man systemd.service`​，Type指令支持多种值：
 
 * simple
 * exec
@@ -249,6 +249,6 @@ WorkingDirectory 指定工作目录
 * notify
 * idle
 
-如果配置的是服务进程，Type的值很可能是forking或simple，如果是普通命令的进程，Type的值可能是simple、oneshot。而dbus类型一般情况下用不上，notify要求服务程序中使用代码对systemd  notify进行支持，所以多数情况下可能也用不上。
+　　如果配置的是服务进程，Type的值很可能是forking或simple，如果是普通命令的进程，Type的值可能是simple、oneshot。而dbus类型一般情况下用不上，notify要求服务程序中使用代码对systemd  notify进行支持，所以多数情况下可能也用不上。
 
-关于Type，内容较长，见下一篇文章
+　　关于Type，内容较长，见下一篇文章

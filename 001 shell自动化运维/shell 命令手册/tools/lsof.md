@@ -1,12 +1,12 @@
 # lsof
 
-在 CentOS/Fedora/RHEL 版本的 Linux 中则使用下面的命令进行安装。
+　　在 CentOS/Fedora/RHEL 版本的 Linux 中则使用下面的命令进行安装。
 
 ```bash
 yum install lsof
 ```
 
-​`lsof`​也是有着最多选项的 Linux/Unix 命令之一。`lsof`​可以查看打开的文件是：
+　　​`lsof`​也是有着最多选项的 Linux/Unix 命令之一。`lsof`​可以查看打开的文件是：
 
 * 普通文件
 * 目录
@@ -18,7 +18,7 @@ yum install lsof
 * 网络文件（例如：NFS file、网络 socket，unix 域名 socket）
 * 还有其它类型的文件，等等
 
-虽然`lsof`​命令有着 N 多的选项，但是常用的只有以下几个：
+　　虽然`lsof`​命令有着 N 多的选项，但是常用的只有以下几个：
 
 * ​`-a`​：使用 AND 逻辑，合并选项输出内容
 * ​`-c`​：列出名称以指定名称开头的进程打开的文件
@@ -30,13 +30,13 @@ yum install lsof
 * ​`-p`​：列出指定进程号所打开的文件
 * ​`-i`​：列出打开的套接字
 
-​​
+　　​​
 
-总的说来，`lsof`​命令还是一个比较复杂的命令，那么多选项，用起来还是蛮累的，但是这不能否定它是一个出色的工具，一个我们不得不学习的命令。下面就来说一些`lsof`​的惯用用法。 – 命令：
+　　总的说来，`lsof`​命令还是一个比较复杂的命令，那么多选项，用起来还是蛮累的，但是这不能否定它是一个出色的工具，一个我们不得不学习的命令。下面就来说一些`lsof`​的惯用用法。 – 命令：
 
-​`lsof`​
+　　​`lsof`​
 
-输出：
+　　输出：
 
 ```
 COMMAND     PID   TID    USER   FD      TYPE             DEVICE   SIZE/OFF       NODE NAME
@@ -51,7 +51,7 @@ systemd       1          root  mem       REG              253,1      23968    10
 systemd       1          root  mem       REG              253,1      19888    1050666 /usr/lib64/libattr.so.1.1.0
 ```
 
-输出内容详解：
+　　输出内容详解：
 
 * ​`COMMAND`​：进程的名称
 * ​`PID`​：进程标识符
@@ -105,7 +105,7 @@ systemd       1          root  mem       REG              253,1      19888    10
   * 命令：`lsof +D /usr/local/`​ 说明：递归搜索目录下被进程打开的文件列表
   * 命令：`lsof -i @peida.linux:20,21,22,25,53,80 -r 3`​ 说明：列出目前连接到主机 peida.linux 上端口为 20，21，22，25，53，80 相关的所有文件信息，且每隔 3 秒不断的执行`lsof`​指令
 
-‍
+　　‍
 
 ## 使用操作
 
@@ -118,15 +118,15 @@ rsyslogd 820 syslog    7w   REG  253,0  2585793 5242990 /var/log/syslog
 root@OptiPlex-3000:/data/virthost# 
 ```
 
-要删除文件时要先中止进程，而不是直接删除这个文件。
+　　要删除文件时要先中止进程，而不是直接删除这个文件。
 
-在umount文件系统时，如果文件系统中有打开的文件，那么umount操作会失败，报“device is busy”。这时可使用”lsof /dev/sdaX”显示sdaX文件系统中被打开的所有文件，再关闭所列文件。
+　　在umount文件系统时，如果文件系统中有打开的文件，那么umount操作会失败，报“device is busy”。这时可使用”lsof /dev/sdaX”显示sdaX文件系统中被打开的所有文件，再关闭所列文件。
 
-进程的当前工作目录影响文件系统的卸载，这也是为什么在编写后台进程时需要将其工作目录设置为根目录的原因，
+　　进程的当前工作目录影响文件系统的卸载，这也是为什么在编写后台进程时需要将其工作目录设置为根目录的原因，
 
 ### 2. **恢复删除文件**
 
-某文件被删除，但从lsof能查到该文件仍被某进程打开，这时我们可以恢复被删文件。
+　　某文件被删除，但从lsof能查到该文件仍被某进程打开，这时我们可以恢复被删文件。
 
 ```bash
 root@OptiPlex-3000:/data/virthost# lsof /var/log/syslog
@@ -140,7 +140,7 @@ rsyslogd     820    878 in:imklog          syslog    7w      REG              25
 rsyslogd     820    879 rs:main            syslog    7w      REG              253,0    2586044    5242990 /var/log/syslog (deleted)
 ```
 
-从上面的信息可以看到 PID 820（syslogd）打开文件的文件描述符为  7。同时还可以看到`/var/log/syslog`​已经标记被删除了。因此我们可以在 `/proc/820/fd/7`​  （fd下的每个以数字命名的文件表示进程对应的文件描述符）中查看相应的信息，如下：
+　　从上面的信息可以看到 PID 820（syslogd）打开文件的文件描述符为  7。同时还可以看到`/var/log/syslog`​已经标记被删除了。因此我们可以在 `/proc/820/fd/7`​  （fd下的每个以数字命名的文件表示进程对应的文件描述符）中查看相应的信息，如下：
 
 ```bash
 root@OptiPlex-3000:/data/virthost# head -n 10 /proc/820/fd/7
@@ -157,7 +157,7 @@ Aug 13 00:10:32 OptiPlex-3000 tailscaled[8190]: health("overall"): error: not in
 root@OptiPlex-3000:/data/virthost# 
 ```
 
-从上面的信息可以看出，查看 `/proc/820/fd/7`​ 就可以得到所要恢复的数据。如果可以通过文件描述符查看相应的数据，那么就可以使用 I/O 重定向将其复制到文件中，如:
+　　从上面的信息可以看出，查看 `/proc/820/fd/7`​ 就可以得到所要恢复的数据。如果可以通过文件描述符查看相应的数据，那么就可以使用 I/O 重定向将其复制到文件中，如:
 
 ```bash
 root@OptiPlex-3000:/data/virthost# cat /proc/820/fd/7 > /var/log/syslog
@@ -166,7 +166,7 @@ root@OptiPlex-3000:/data/virthost# systemctl restart syslog
 
 ### 3. 文件删除空间却未释放
 
-在Linux或者Unix系统中，通过rm或者文件管理器删除文件将会从文件系统的目录结构上解除链接(unlink)，然而如果文件是被打开的（有一个进程正在使用），那么进程将仍然可以读取该文件，磁盘空间也一直被占用，这样就会导致我们明明删除了文件，但是磁盘空间却未被释放
+　　在Linux或者Unix系统中，通过rm或者文件管理器删除文件将会从文件系统的目录结构上解除链接(unlink)，然而如果文件是被打开的（有一个进程正在使用），那么进程将仍然可以读取该文件，磁盘空间也一直被占用，这样就会导致我们明明删除了文件，但是磁盘空间却未被释放
 
 1. 首先获得一个已经被删除但是仍然被应用程序占用的文件列表
 
@@ -189,4 +189,4 @@ root@OptiPlex-3000:/data/virthost# systemctl restart syslog
 
     kill掉相应的进程，或者停掉使用这个文件的应用，让os自动回收磁盘空间 `systemctl restart syslogd`​
 
-‍
+　　‍

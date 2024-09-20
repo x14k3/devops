@@ -1,6 +1,6 @@
 # etcd
 
-是一个分布式的，一致的 key-value 存储，主要用途是共享配置和服务发现。etcd的使用场景默认处理的数据都是控制数据，对于应用数据，只推荐数据量很小，但是更新访问频繁的情况。
+　　是一个分布式的，一致的 key-value 存储，主要用途是共享配置和服务发现。etcd的使用场景默认处理的数据都是控制数据，对于应用数据，只推荐数据量很小，但是更新访问频繁的情况。
 
 1. 简单：基于HTTP+JSON的API让你用curl就可以轻松使用。
 2. 安全：可选SSL客户认证机制。
@@ -71,7 +71,7 @@ systemctl start etcd
 
 ## etcd 集群部署
 
-etcd集群可以配置证书进行安全认证，在部署集群之前需要制作etcd所用到的证书。
+　　etcd集群可以配置证书进行安全认证，在部署集群之前需要制作etcd所用到的证书。
 这里安装证书用到了cfssl工具，先安装cfssl工具
 
 ### 证书配置
@@ -93,7 +93,7 @@ chmod +x /usr/bin/cfssl*
   server certificate :  服务端使用，客户端以此验证服务端身份,例如docker服务端、kube-apiserver
   peer certificate :    双向证书，用于etcd集群成员间通信
 
-`cfssl print-defaults config > ca-config.json`
+　　`cfssl print-defaults config > ca-config.json`
 
 ```json
 {
@@ -135,7 +135,7 @@ chmod +x /usr/bin/cfssl*
 
 #### 3. CA证书凭证签发配置文件ca-csr.json
 
-`cfssl print-defaults csr > ca-csr.json`
+　　`cfssl print-defaults csr > ca-csr.json`
 
 ```json
 {
@@ -161,11 +161,11 @@ chmod +x /usr/bin/cfssl*
 
 #### 4. 生成CA证书和私钥
 
-`cfssl gencert -initca ca-csr.json | cfssljson -bare ca`
+　　`cfssl gencert -initca ca-csr.json | cfssljson -bare ca`
 
 #### 5. 生成server端证书
 
-`cfssl print-defaults csr > etcd-server.json`
+　　`cfssl print-defaults csr > etcd-server.json`
 
 ```json
 // 修改如下部分
@@ -176,11 +176,11 @@ chmod +x /usr/bin/cfssl*
 
 ```
 
-`cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server etcd-server.json | cfssljson -bare etcd-server`
+　　`cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server etcd-server.json | cfssljson -bare etcd-server`
 
 #### 6. 生成client端证书
 
-`cfssl print-defaults csr > etcd-client.json`
+　　`cfssl print-defaults csr > etcd-client.json`
 
 ```json
 // 修改如下部分
@@ -190,11 +190,11 @@ chmod +x /usr/bin/cfssl*
  ],
 ```
 
-`cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client etcd-client.json | cfssljson -bare etcd-client`
+　　`cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client etcd-client.json | cfssljson -bare etcd-client`
 
 #### 7. 生成peer端证书
 
-`cfssl print-defaults csr > etcd-peer.json`
+　　`cfssl print-defaults csr > etcd-peer.json`
 
 ```json
 // 修改如下部分
@@ -204,7 +204,7 @@ chmod +x /usr/bin/cfssl*
  ],
 ```
 
-`cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer.json | cfssljson -bare etcd-peer`
+　　`cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer.json | cfssljson -bare etcd-peer`
 
 #### 8. 服务证书到指定位置
 

@@ -1,5 +1,9 @@
 # PostgreSQL
 
+* 📑 [PostgreSQL EXTENSION](siyuan://blocks/20240514165916-u9nvcml)
+
+  * 📄 [WalMiner](siyuan://blocks/20240909134258-3l0bbcs)
+  * 📄 [postgres_fdw](siyuan://blocks/20231110105237-5zs7xa4)
 * 📄 [PostgreSQL wal预写日志](siyuan://blocks/20240514165652-hzch2oi)
 * 📄 [PostgreSQL 内置命令](siyuan://blocks/20231110105237-3qqcg21)
 * 📄 [PostgreSQL 基础命令](siyuan://blocks/20231110105237-jfv26qu)
@@ -10,8 +14,5 @@
 
   * 📄 [PostgreSQL流复制](siyuan://blocks/20240514111802-xbeiwr2)
   * 📄 [基于流复制的主备切换](siyuan://blocks/20240515140112-t9zz1mn)
-* 📑 [PostgreSQL 高级特性](siyuan://blocks/20240514165916-u9nvcml)
 
-  * 📄 [postgres_fdw](siyuan://blocks/20231110105237-5zs7xa4)
-
-‍
+　　‍

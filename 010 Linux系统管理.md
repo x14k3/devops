@@ -9,11 +9,17 @@
 
   * 📄 [.hidden](siyuan://blocks/20240403220911-b816dvh)
   * 📄 [.netrc](siyuan://blocks/20240211112927-ac7t3tg)
+  * 📄 [opensuse 声卡问题](siyuan://blocks/20240906180735-j730zdc)
 * 📑 [linux 内核](siyuan://blocks/20240414212610-nij0ni7)
 
   * 📄 [PAM](siyuan://blocks/20231110105237-vmjw86n)
   * 📄 [cgroups](siyuan://blocks/20240414212933-txv8edc)
   * 📄 [dattobd](siyuan://blocks/20231110105237-toah5db)
+  * 📄 [ipvs](siyuan://blocks/20240507154926-r4py9bt)
+  * 📑 [linux内核的内存管理](siyuan://blocks/20240830115602-lmg0p34)
+
+    * 📄 [分享Linux内存占用几个案例](siyuan://blocks/20240830113526-zc2mpwm)
+    * 📄 [分析procmeminfo文件](siyuan://blocks/20240830114845-pz98924)
   * 📄 [namespace](siyuan://blocks/20240414213106-fspib9h)
   * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
   * 📄 [tuntap](siyuan://blocks/20240418114400-4dvd0xp)
@@ -26,6 +32,7 @@
     * 📄 [iptables示例](siyuan://blocks/20240314194239-attjy4f)
     * 📄 [iptables配置说明](siyuan://blocks/20240426100632-7ewts48)
     * 📄 [四表五链](siyuan://blocks/20240426095345-fzsr45n)
+  * 📄 [linux 安全加固方案](siyuan://blocks/20240520173400-wiqrunn)
 * 📑 [linux 文件属性和权限](siyuan://blocks/20231110105237-z29l1ho)
 
   * 📄 [1. Linux 文件属性和权限详解](siyuan://blocks/20231110105237-6vj74h0)
@@ -43,6 +50,7 @@
     * 📄 [Linux下几种常用文件系统](siyuan://blocks/20231110105237-keh9ag0)
     * 📄 [Linux系统是如何识别硬盘设备和硬盘分区的](siyuan://blocks/20231110105237-9r96x4b)
     * 📄 [linux系统启动流程分析](siyuan://blocks/20240312200721-8dlhfph)
+    * 📄 [什么是inode](siyuan://blocks/20240731111419-ydpvf1o)
     * 📄 [硬盘结构（机械硬盘和固态硬盘）详解](siyuan://blocks/20231110105237-h46cl9m)
     * 📄 [虚拟内存和物理内存](siyuan://blocks/20231110105237-db80cv9)
   * 📄 [2. Linux磁盘配额](siyuan://blocks/20231110105237-tdeo05n)
@@ -55,6 +63,11 @@
   * 📑 [6. linux 单用户模式](siyuan://blocks/20240308135222-dmx54af)
 
     * 📄 [CentOS 7 重置 root 密码](siyuan://blocks/20240415163403-xaqe3qu)
+    * 📄 [Centos 服务器 无法启动 Failed to start Login Service ](siyuan://blocks/20240902141257-3hdrc32)
+  * 📑 [7. linux 系统限制](siyuan://blocks/20240724134120-sd2g7lu)
+
+    * 📄 [limits.conf 文件](siyuan://blocks/20240724134937-uizbfld)
+    * 📄 [linux系统限制进程的cpu使用率](siyuan://blocks/20240724134713-etdkgek)
 * 📑 [linux 概念释义](siyuan://blocks/20240403215529-w933ywi)
 
   * 📄 [1. 一切皆文件](siyuan://blocks/20240403215644-0halvvy)
@@ -76,6 +89,8 @@
     * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （openSUSE &amp; SLE 版）](siyuan://blocks/20231124222313-c4vclkc)
 * 📑 [linux 网络管理](siyuan://blocks/20231110105237-q0mg0iy)
 
+  * 📄 [firewalld](siyuan://blocks/20240809170947-m97709h)
+  * 📄 [iptables](siyuan://blocks/20240809171002-ylasxhm)
   * 📄 [linux NetworkManager](siyuan://blocks/20231110105237-qn3idd2)
   * 📑 [linux ip 命令](siyuan://blocks/20231110105237-dx5qn08)
 
@@ -114,4 +129,4 @@
     * 📄 [systemd 运行级别](siyuan://blocks/20240424175045-s1lcniu)
     * 📄 [前后台进程、孤儿进程和daemon类进程的父子关系](siyuan://blocks/20240424165936-k0gazgk)
 
-‍
+　　‍
