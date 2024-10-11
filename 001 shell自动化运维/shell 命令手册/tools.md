@@ -7,6 +7,7 @@
 * 📄 [flock](siyuan://blocks/20240402201243-fqy8c6q)
 * 📄 [fuser](siyuan://blocks/20231110105237-c4ufcct)
 * 📄 [htpasswd](siyuan://blocks/20231110105237-4dcxe21)
+* 📄 [k3b](siyuan://blocks/20240910095729-cfk7btb)
 * 📄 [kill](siyuan://blocks/20231110155733-t0f9u69)
 * 📄 [lsof](siyuan://blocks/20231110105237-4r3sfie)
 * 📄 [minicom](siyuan://blocks/20231222133047-w0fkiok)

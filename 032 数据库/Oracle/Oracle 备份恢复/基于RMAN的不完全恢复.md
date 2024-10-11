@@ -126,9 +126,12 @@ RMAN> alter database open resetlogs;
 
 　　控制文件：  
 如果控制文件是好的时候可以用list backup of controlfile察看控制文件的列表。  
-自动回复控制文件：  
-RMAN> restore controlfile from autobackup  
+自动回复控制文件：
+
+```bash
+RMAN> restore controlfile from autobackup
 RMAN> restore controlfile;
+```
 
 ## 七、联机日志文件的保护
 

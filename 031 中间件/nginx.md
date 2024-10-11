@@ -69,5 +69,6 @@
   * 📄 [Nginx跨域问题](siyuan://blocks/20240321203341-ncktrie)
   * 📄 [Nginx配置HTTPS](siyuan://blocks/20240801141924-g9hldza)
   * 📄 [Nginx静态文件配置](siyuan://blocks/20240801141831-veg230h)
+  * 📄 [配置案例](siyuan://blocks/20240910101400-s9d8vsr)
 
 　　‍

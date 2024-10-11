@@ -246,7 +246,7 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.4 预写日志（WRITE-AHEAD LOG）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.4 预写日志（WRITE-AHEAD LOG）</span>
 
 　　**设置（Settings）** 
 
@@ -301,7 +301,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.5 复制（REPLICATION）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.5 复制（REPLICATION）</span>
 
 　　**发送服务器（Sending Servers）** 
 
@@ -345,7 +345,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.6 查询调优（QUERY TUNING）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.6 查询调优（QUERY TUNING）</span>
 
 　　**计划方法配置（Planner Method Configuration）** 
 
@@ -420,7 +420,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.7 报告和记录（REPORTING AND LOGGING）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.7 报告和记录（REPORTING AND LOGGING）</span>
 
 　　**记录位置（Where to Log）** 
 
@@ -723,7 +723,7 @@ default_text_search_config = 'pg_catalog.simple'
 #data_sync_retry = off      # fsync数据失败时重试或死机？(更改需要重新启动PG数据库生效)
 ```
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.16 配置文件包括（CONFIG FILE INCLUDES）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.16 配置文件包括（CONFIG FILE INCLUDES）</span>
 
 ```bash
 # 这些选项允许从默认postgresql.conf以外的文件加载设置.
@@ -732,7 +732,7 @@ default_text_search_config = 'pg_catalog.simple'
 #include = ''       # 包含文件
 ```
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.17 自定义选项</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.17 自定义选项</span>
 
 ```bash
 # Add settings for extensions here(在此处添加扩展设置)

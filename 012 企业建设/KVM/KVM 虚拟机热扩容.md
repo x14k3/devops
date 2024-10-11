@@ -147,13 +147,15 @@ virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
 
 　　内存热添加的基础是必须设置最大内存的容量，否则无法添加，最大扩展不能超过最大分配
 
-​![最大内存.png](https://www.zutuanxue.com:8000/static/media/images/2020/10/6/1601971057268.png)​
+```bash
+virsh setmaxmem test_01 16G --config
+```
 
 　　**扩容内存**
 
 ```
 #将原来1G的内容扩容到2G
-[root@zutuanxue ~]# virsh setmem --domain centos8-3 --size 2048M --live --config
+[root@zutuanxue ~]# virsh setmem --domain test_01 --size 2048M --live --config
 
 --size 目标容量
 --live 运行的机器
