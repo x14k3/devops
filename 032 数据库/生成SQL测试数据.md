@@ -11,14 +11,27 @@ insert into test select generate_series(1,100), clock_timestamp(), md5(random():
 
 ## oracle
 
-```bash
-sqlplus jy2web/Ninestar123
-
+```sql
+--创建一个表，并同时添加1000000条数据
 create table test as 
 select rownum as id,
-to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
-trunc(dbms_random.value(0, 100000)) as random_id,
-dbms_random.string('x', 20) random_string from dual connect by level <= 100000;
+               to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
+               trunc(dbms_random.value(0, 100)) as random_id,
+               dbms_random.string('x', 20) random_string
+          from dual
+        connect by level <= 1000;
+
+--在创建表后，原来表的基础上追加记录，比如在方法一创建的TestTable表中追加1000000条数据
+insert into test
+  (ID, INC_DATETIME,RANDOM_ID,RANDOM_STRING)
+  select rownum as id,
+         to_char(sysdate + rownum / 24 / 3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
+         trunc(dbms_random.value(0, 100)) as random_id,
+         dbms_random.string('x', 20) random_string
+    from dual
+  connect by level <= 1000;
+
+
 ```
 
 ## Mysql

@@ -104,7 +104,7 @@ postgres=# select name, context, unit, setting, boot_val, reset_val from pg_sett
 
 　　‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.1 文件位置(FILE LOCATION)</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.1 文件位置(FILE LOCATION)</span>
 
 ```bash
 # 这些变量的默认值由-D命令行选项或PGDATA环境变量驱动,这里表示为ConfigDir.
@@ -345,7 +345,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.6 查询调优（QUERY TUNING）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.6 查询调优（QUERY TUNING）</span>
 
 　　**计划方法配置（Planner Method Configuration）** 
 
@@ -732,7 +732,7 @@ default_text_search_config = 'pg_catalog.simple'
 #include = ''       # 包含文件
 ```
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.17 自定义选项</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.17 自定义选项</span>
 
 ```bash
 # Add settings for extensions here(在此处添加扩展设置)

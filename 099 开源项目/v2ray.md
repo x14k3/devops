@@ -128,27 +128,29 @@ cat /proc/sys/kernel/random/uuid
     },
   "inbounds": [
     {
-      "port": 8899,
-      "protocol": "vmess",
+      "tag": "VMESS-in",
+      "port": 8901,
+      "protocol": "VMESS",
       "settings": {
         "clients": [
           {
-            "id": "7e99lop9------------------------",
+            "id": "6730-4e9b-4f6e-9ed5-900200",
             "alterId": 0
           }
-        ]
+        ],
+        "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
-        "wsSettings": {"path": "/xxxxxx"}
+        "wsSettings": {"path": "/vvmess"}
       }
     }
   ],
   "outbounds": [
     {
-      "tag": "direct",
       "protocol": "freedom",
-      "settings": {}
+      "settings": {},
+      "tag": "direct"
     }
   ]
 }

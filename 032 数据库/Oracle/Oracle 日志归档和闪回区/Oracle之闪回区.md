@@ -1,6 +1,6 @@
 # Oracle之闪回区
 
-　　**开启闪回功能必须是在归档模式下，请参考上面的操作**Oracle之重做日志（Redo Log）归档
+　　**开启闪回功能必须是在归档模式下，请参考上面的操作**Oracle之redo log 归档
 
 　　当启用闪回就必须使用**logarchivedestn**参数来指定归档日志目录。
 
@@ -13,8 +13,8 @@ SQL> show parameter undo;
 
 NAME                     TYPE     VALUE
 ------------------------------------ ----------- ------------------------------
-undo_management        string     AUTO        # undo_management参数值是否为AUTO，如果是“MANUAL”手动，需要修改为“AUTO”
-undo_retention         integer    7200        # 1d是1440 即24*60,7200是5d
+undo_management        string     AUTO        -- undo_management参数值是否为AUTO，如果是“MANUAL”手动，需要修改为“AUTO”
+undo_retention         integer    7200        -- 1d是1440 即24*60,7200是5d
 undo_tablespace        string     UNDO1
 
 ```
@@ -22,23 +22,34 @@ undo_tablespace        string     UNDO1
 　　**单实例：**
 
 ```sql
-# 设置闪回恢复区
+
+--查看oracle是否开启闪回功能
+SQL> select  log_mode,open_mode,flashback_on from v$database; 
+LOG_MODE     OPEN_MODE		  FLASHBACK_ON
+------------ -------------------- ------------------
+ARCHIVELOG   READ WRITE 	  NO
+--查看flashback配置
+SQL> show parameter flashback
 SQL> show parameter recover;
+
+-- 设置flashback大小
 SQL> alter system set db_recovery_file_dest_size=10g scope=spfile;
-# 设置闪回区位置，路径中不用指定实例名，会自动生成，确保目录存在，且拥有者为oracle用户
+-- 查看当前闪回区的使用空间大小:
+SQL> select file_type,percent_space_used,number_of_files from v$recovery_area_usage;
+-- 设置闪回区位置，路径中不用指定实例名，会自动生成，确保目录存在，且拥有者为oracle用户
 SQL> alter system set db_recovery_file_dest='/data/arch' scope=spfile;
-# 设置闪回目标为5天，以分钟为单位，每天为1440分钟，默认为1天
-SQL> alter system set db_flashback_retention_target=2880 scope=spfile;
-# 保存一致性,先关闭数据库
+-- 设置闪回目标为5天，以分钟为单位，每天为1440分钟，默认为1天
+SQL> alter system set db_flashback_retention_target=1440 scope=spfile;
+-- 保存一致性,先关闭数据库
 SQL> shutdown immediate;
-# 启动到mount阶段
+-- 启动到mount阶段
 SQL> startup mount;
-# 启动闪回功能
+-- 启动闪回功能
 SQL> alter database flashback on; 
-# 也可启用表空间闪回
+-- 也可启用表空间闪回
 SQL> alter tablespace abc flashback on;     -- 开启表空间闪回
 SQL> alter tablespace abc flashback off;    -- 关闭表空间闪回
-# 切换到open阶段
+-- 切换到open阶段
 SQL> alter database open;
 ```
 

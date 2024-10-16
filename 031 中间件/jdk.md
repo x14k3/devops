@@ -2,68 +2,156 @@
 
 # jdk 部署
 
-　　jdk下载地址：[h](https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html)​[ttps://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html](https://www.oracle.com/cn/java/technologies/downloads/archive/)
+　　jdk下载地址：[https://d.injdk.cn/download/oraclejdk](https://d.injdk.cn/download/oraclejdk)
 
 ```bash
 mkdir -p /usr/local/java
 tar -zxf jdk-8u333-linux-x64.tar.gz -C /usr/local/java
 #配置环境变量
 vim /etc/profile
---------------------------------------------------------
+----------------------------------------------------------------
 export JAVA_HOME=/usr/local/java/jdk1.8.0_333
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=$PATH:$JAVA_HOME/bin
-
+----------------------------------------------------------------
 
 source /etc/profile
 #验证JDK
 java -version
 ```
 
-# jdk 调优
+# jdk 调优入门
 
-![](assets/image-20221127213402871-20230610173811-fk2t8b7.png)
+　　首先以java8 默认的cms为例，机器是2G内存。
 
-![](assets/image-20221127213410161-20230610173811-tn6wzf8.png)
-
-　　一般JVM调优，重点在于**调整JVM堆大小、调整垃圾回收器**
-jvm调优的目的是：减少full gc、降低gc停顿时间、提高吞吐量；
-调优的顺序：“提高吞吐量”>“降低gc停顿时间”；在满足吞吐量的前提下，再降低gc停顿时间
-
-　　**JVM调优常用参数**
+　　先看GC日志，设置jvm参数如下，其他堆大小相关参数都没有设置：
 
 ```bash
-######## 堆、元空间 优化 ###############
--Xms          # 堆空间最小值
--Xmx          # 堆空间最大值
--Xmn          # 新生代占堆空间的大小
--XX:MetaspaceSize     # 方法区（元空间）初始值
--XX:MaxMetaspaceSize  # 方法区（元空间）最大值
-######## 栈 优化 ###############
--Xss          # 设置栈空间参数的
+gc_option='-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintHeapAtGC -Xloggc:gc.log'
 ```
 
-## 堆区
+　　这会把gc信息打印到jvm进程工作目录的`gc.log`​中，每次进程重启，都会覆盖之前的gc日志
 
-　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。
+　　‍
 
-　　在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。
+1. 在物理内存小的情况下，一定要设置初始堆大小和最大堆大小，以免初始堆太小。
+2. 尽可能地减少对象进入老年代，措施：增加young区大小，增加survivor占比。
 
-　　Java 中的堆也是 GC 收集垃圾的主要区域。GC 分为两种：Minor GC、FullGC ( 或称为 Major GC )。
+### 1.初始堆大小只有32M
 
-　　Minor GC 是发生在新生代中的垃圾收集动作，新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。当一个对象被判定为 "死亡" 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。
+　　首先观察到的问题是，应用一起动，就出现`allocation fail`​导致的youngGC，eden分区直接占满。用`jstat -gc pid`​查看gc和heap堆大小发现，eden分区容量很小，只有8MB大小，young区一共10MB，old区21M。
 
-## 元空间
+　　查了一下，JVM的默认初始堆大小为物理内存的1/64，算了下确实是32的初始堆大小(并且young:old\=1:2)
 
-> **元空间有一个特点: 可以动态扩容。**  如果, 我们没有设置元空间的上限, 那么他可以扩大到整个内存. 比如内存条是8G的, 堆和栈分配了4G的空间, 那么元空间最多可以使用4G。
-> 我们可以通过参数来设置使用的元空间内存。对于64位的JVM来说,**元空间默认大小是21M**, 元空间的默认最大值是无上限的, 他的上限就是内存空间。
+　　查看默认堆大小可以用以下命令：(查询默认配置都可以用这个)
 
-* \-XX:MetaspaceSize: 元空间的初始空间大小, 以字节位单位, **默认是21M**,达到该值就**会触发full GC**, 同时收集器会对该值进行调整, 如果释放了大量的空间, 就适当降低该值, 如果释放了很少的空间, 提升该值,但最到不超过-XX:MaxMetaspaceSize设置的值
+```ruby
+java -XX:+PrintFlagsFinal -version
+java -XX:+PrintFlagsFinal -version | grep HeapSize
+```
 
-  比如: 初始值是21M, 第一次回收了20M, 那么只有1M没有被回收, 下一次, 元空间会自动调整大小, 可能会调整到15M初始大小依然是21M, 第二次回收发现回收了1M, 有20M没有被回收, 他就会自动扩大空间, 可能扩大到30M,也可能是40M
-* \-XX:MaxMetaspaceSize: 设置元空间的最大值, 默认是-1, 即不限制, 或者说只受限于本地内存的大小
+　　解决方案：设置堆最小值，堆最大值：`-Xms400m -Xmx400m`​
 
-  由于调整元空间的大小需要full GC, 这是非常昂贵的操作, 如果应用在启动的时候发生大量的full GC, 通常都是由于永久代或元空间发生了大小的调整, 基于这种情况, 一般建议在JVM参数中将-XX:MetaspaceSize和-XX:MaxMetaspaceSize设置成一样的值, 并设置的比初始值还要大, 对于8G物理内存的机器来说, 一般会将这两个值设置为256M或者512M都可以
+### 2.metaspace达到阈值，导致fullgc
 
-## 线程栈
+　　上面的变更后，一启动时的`allocation fail`​ younggc没了，但是看到metaSpace的空间增长导致fullgc
+
+　　说明metaspace相关的配置需要增大
+
+　　于是增加`-XX:MetaspaceSize=40M`​(ps:该参数在本机的默认参数为20M)
+
+　　注意MetaspaceSize并不是制定元空间的大小，而是元空间达到该大小时执行一次GC，所以设置完该参数后，`jstat -gc pid`​并没有看到metaspace的空间变大。
+
+### 3.youngGC后survivor区占用率100%，且有对象进入老年代
+
+　　有对象进入老年代，问题不算大，但是可能会让fullgc过早发生
+
+　　在这里可以做两件事，增大新生代的大小，增大survivor的占比。
+
+　　于是有`-Xmn120m -XX:SurvivorRatio=4`​，我们之前看到，默认新老代为1:2，这里手动调整年轻代大小为120m；`SurvivorRatio=4`​意思是认为在youngGC后年轻代有1/4的对象能活下来，也就是每个survivor占比为1/(2+4)的大小
+
+　　我们在这里观察到，youngGC后survivor的占用率为100%，说明默认的`SurvivorRatio=8`​（认为1/8的存活率）在我的场景下太低了，所以调高一点。
+
+### 4. 在3的基础上，发现第二次youngGC时，就有部分对象进入老年代，且eden区占用率不为100%
+
+　　这说明，第二次youngGC时，jvm就认为这部分对象需要到老年代，而不是因为eden不够才把他们放进去。
+
+　　这里需要解释下`MaxTenuringThreshold`​与阈值的动态调整。默认该阈值为15，也就是需要活过15次gc才会放到老年代。
+
+　　但是并不是一定等达到这个阈值才会进行晋升的，jvm有阈值动态调整策略，目的是让survivor的使用率小于一个设定值(默认50%)，因此每次gc时，会把多余的部分放入老年代。
+
+　　survivor默认目标占比可以通过如下参数查看
+
+```ruby
+java -XX:+PrintFlagsFinal -version | grep TargetSurvivorRatio
+```
+
+　　JVM引入动态年龄计算，主要基于如下两点考虑：[美团技术博客](https://tech.meituan.com/2017/12/29/jvm-optimize.html)
+
+* 如果固定按照MaxTenuringThreshold设定的阈值作为晋升条件：  a）MaxTenuringThreshold设置的过大，原本应该晋升的对象一直停留在Survivor区，直到Survivor区溢出，一旦溢出发生，Eden+Svuvivor中对象将不再依据年龄全部提升到老年代，这样对象老化的机制就失效了。  b）MaxTenuringThreshold设置的过小，“过早晋升”即对象不能在新生代充分被回收，大量短期对象被晋升到老年代，老年代空间迅速增长，引起频繁的Major GC。分代回收失去了意义，严重影响GC性能。
+* 相同应用在不同时间的表现不同：特殊任务的执行或者流量成分的变化，都会导致对象的生命周期分布发生波动，那么固定的阈值设定，因为无法动态适应变化，会造成和上面相同的问题
+
+### 5.真的需要那么大的old区吗
+
+　　我们之前看到，young : old默认1:2。有点怀疑真的需要这么大的old区吗。可以适当调小吗？
+
+　　我认为可以。但是需要考虑两件事，old调小了，fullgc会来的更早，一方面是old区满的快了，二是因为“内存分配担保机制”：
+
+　　虚拟机检查老年代最大可用连续空间是否大于新生代所有对象的总和，如果大于，则此次分配担保是安全的。如果不大于且允许担保失败，则检查是否大于历次晋升到老年代对象的平均大小，如果大于，则冒险进行 minor GC，冒险失败则进行full GC。如果不大于或者不允许冒险则直接full GC。
+
+### 6.cms的promotion failure和concurrent mode failure
+
+　　1、promotion failure，是在minor  gc过程中，survivor的剩余空间不足以容纳eden及当前在用survivor区间存活对象，只能将容纳不下的对象移到年老代(promotion)，而此时年老代满了无法容纳更多对象，通常伴随full gc，因而导致的promotion failure。这种情况通常需要增加年轻代大小，尽量让新生对象在年轻代的时候尽量清理掉。
+
+　　2、concurrent mode failure，主要是由于cms的无法处理浮动垃圾（Floating  Garbage）引起的。这个跟cms的机制有关。cms的并发清理阶段，用户线程还在运行，因此不断有新的垃圾产生，而这些垃圾不在这次清理标记的范畴里头，cms无法再本次gc清除掉，这些就是浮动垃圾。由于这种机制，cms年老代回收的阈值不能太高，否则就容易预留的内存空间很可能不够(因为本次gc同时还有浮动垃圾产生)，从而导致concurrent mode failure发生。可以通过-XX:CMSInitiatingOccupancyFraction的值来调优。
+
+### 7.内存泄漏检查
+
+1. dump内存后使用MAT查看
+2. 使用`jmap -histo:live pid`​查看
+
+### 8.systemd的java服务设置jvm参数
+
+　　service：
+
+```ini
+[Unit]
+Description=forwardproxy-Http代理
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/opt/proxy
+EnvironmentFile=/opt/proxy/jvm_option
+ExecStart=/usr/bin/java $gc_option $heap_option -jar /opt/proxy/forwardproxy-1.0-jar-with-dependencies.jar -c /opt/proxy/proxy.properties
+LimitNOFILE=100000
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+```
+
+　　作用是从`EnvironmentFile`​读取`gc_option`​和`heap_option`​。注意`EnvironmentFile`​不可以不存在。经过上面的实战，我配置的参数如下：
+
+　　/opt/proxy/jvm\_option
+
+```ini
+gc_option='-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintHeapAtGC -Xloggc:gc.log'
+# 分别为最小堆，最大堆，新生代大小，触发gc的元空间大小（一般是fullgc）两个survivor与eden区比值（=6，则2:6，默认为8即每个survivor为1/10的年轻代大小）
+heap_option='-Xms400m -Xmx400m -Xmn150m -XX:MetaspaceSize=40M -XX:SurvivorRatio=4'
+```
+
+　　另外，为了方便，可以设置以下alias：
+
+```bash
+alias sta='jps -l |grep forward|awk '\''{print $1}'\'' | xargs -I {} jstat -gc {}'
+alias num='jps -l |grep forward|awk '\''{print $1}'\'' | xargs -I {} jmap -histo:live {}'
+```
+
+　　‍
+
+　　‍
+
+　　‍

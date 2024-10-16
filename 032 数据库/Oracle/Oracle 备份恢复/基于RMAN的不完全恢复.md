@@ -20,33 +20,36 @@
 
 　　1、当联机日志被破坏后（删除，或者不能读写了）的不完全恢复。假设在关闭数据库的时候采用的是shutdown immediate，此时数据已经被回写到数据文件中。
 
-```bash
-startup mount      #启动实例并且挂在数据库。
-archive log list   #察看当前的联机日志号。加入当前的日志序列号是10
+```sql
+SQL> startup mount      --启动实例并且挂在数据库。
+SQL> archive log list   --察看当前的联机日志号。加入当前的日志序列号是10
 RMAN> recover database until sequence  11 thread 1
-# 恢复数据库，thread这个参数在oracle rac的时候才能用到，它的值是根据rac的配置而设置的，这里采用1.
+-- 恢复数据库，thread这个参数在oracle rac的时候才能用到，它的值是根据rac的配置而设置的，这里采用1.
 RMAN> alter database open resetlogs
-#打开数据库，并且把日志重置。此时需要注意，数据库的日志被重置后，他们的序号也被重置了，此时的日志序号是从1开始。所以在做一次不完全恢复后，应该给数据库做一次完全的备份。
+-- 打开数据库，并且把日志重置。此时需要注意，数据库的日志被重置后，他们的序号也被重置了，此时的日志序号是从1开始。所以在做一次不完全恢复后，应该给数据库做一次完全的备份。
 ```
 
 　　2、当联机日志被破坏后（删除，或者不能读写了）的不完全恢复。假设在关闭数据库的时候采用的是shutdown abrot，此时数据库的日志文件已经被损坏，并且数据没有被回写到数据文件中。数据文件和控制文件的SCN号不一样。这时就不要用到restore命令拷贝数据文件了。
 
-```bash
-#准备工作：
-insert into test1(a1,a2) values(1,1)   #在一个表中插入数据，
-commit
-alter system switch logfile            #切换归档日志
-insert into test1(a1,a2) values(2,2)
-commit                                 #不切换归档日志。
-shutdown abort                         #强制关机。
-host rm /opt/oracle/oradata/orcl/*.log #删除联机日志文件。
-startup mount                          #启动实例并且挂在数据库。
-archive log list                       #察看当前日志文件的序列号。
-restore database                       #拷贝数据文件。
-recover database  until sequence 5 thread 1
-#恢复日志文件到制定的日志序列号。
-alter database open resetlogs;
-#打开数据库并且重置日志。
+```sql
+--准备工作：
+SQL> insert into test1(a1,a2) values(1,1)   --在一个表中插入数据，
+SQL> commit
+SQL> alter system switch logfile            --切换归档日志
+SQL> insert into test1(a1,a2) values(2,2)
+SQL> commit                                 --不切换归档日志。
+SQL> shutdown abort                         --强制关机。
+
+SQL> !rm redo0*.log     --删除联机日志文件。
+SQL> startup mount                          --启动实例并且挂在数据库。
+SQL> archive log list                       --察看当前日志文件的序列号。
+
+[oracle@oracle ORCL]$ rman target /
+RMAN> restore database                       --拷贝数据文件。
+RMAN> recover database  until sequence 5 thread 1  
+--恢复日志文件到制定的日志序列号。
+RMAN> alter database open resetlogs;
+--打开数据库并且重置日志。
 ```
 
 　　‍
