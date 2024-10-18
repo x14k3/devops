@@ -1,4 +1,4 @@
-# mysql 参数优化
+# mysql 优化配置
 
 ## 查看mysql的所有配置
 

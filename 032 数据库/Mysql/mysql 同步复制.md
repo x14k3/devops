@@ -390,38 +390,6 @@ rpl_semi_sync_master_wait_point=AFTER_SYNC  # 主库在返回给客户端事务�
 ## **全同步复制**
 
 　　全同步复制（full sync replication）是指当主库执行完一个事务后，需要确保所有的从库都执行了该事务才返回给客户端。因为需要等待所有的从库都执行完该事务才能返回，所以全同步复制的性能较差。  
- MySQL自身不支持同步复制，需要用到第三方工具如DRBD（sync模式）等实现同步复制。不过可以参考mysql MGR模式[当主库提交事务之后，所有的从库节点必须收到、APPLY并且提交这些事务，然后主库线程才能继续做后续操作。但缺点是，主库完成一个事务的时间会被拉长，性能降低。]
+MySQL自身不支持同步复制，需要用到第三方工具如 DRDB |参考文章：CentOS 7.6+NFS+Heartbeat+DRBD（sync模式）等实现同步复制。还可以参考mysql MGR模式[当主库提交事务之后，所有的从库节点必须收到、APPLY并且提交这些事务，然后主库线程才能继续做后续操作。但缺点是，主库完成一个事务的时间会被拉长，性能降低。]
 
-　　MGR:
-
-​![e3bf41ip43](assets/e3bf41ip43-20230724105603-ggnxulc.png)​
-
-　　DB1 、DB2 、DB3构成的MGR集群， 集群中每个DB都有MGR层，MGR层功能也可简单理解为由Paxos模块和冲突检测Certify模块实现。
-
-　　当DB1上有事务T1要执行时，T1对DB1是来说本地事务，对于DB2、DB3来说是远端事务；DB1上在事务T1在被执行后，会把执行事务T1信息广播给集群各个节点，包括DB1本身，通过Paxos模块广播给MGR集群各个节点，半数以上的节点同意并且达成共识，之后共识信息进入各个节点的冲突检测certify模块，各个节点各自进行冲突检测验证，最终保证事务在集群中最终一致性。
-
-　　在冲突检测通过之后，本地事务T1在DB1直接提交即可，否则直接回滚。远端事务T1在DB2和DB3分别先更新到relay log，然后应用到binlog，完成数据的同步，否则直接放弃该事务。
-
-* ​`Paxos`​ 模块是基于 `Paxos`​ 算法确保所有节点收到相同广播消息, `transaction message`​ 就是广播消息的内容结构;
-* 冲突检测 `Certify`​ 模块进行冲突检测确保数据最终一致性, 其中 `certification info`​ 是冲突检测中内存结构。
-
-  * ​`transaction message`​ 广播信息: 既 保存着事务要更新行的的相关信息, 有 `transaction_context_log_event`​ (事务上下文信息) 和 `gtid_log_event`​ 及 `log_event_group`​ 三部分组成。 其中 `transaction_context_log_event`​ 又由 `write set`​ 以及 `gtid_executed`​ 组成。
-
-    * ​`write set`​ 叫写入集合, 是事务更新行相关信息的 `Hash`​ 值。 `write set=Hash`​ (库名+表名+主键(唯一键)字段信息) 。
-
-      * 随着 write set 不断写入 certification info 中，内存消耗会相应增大，MGR 有配套的 write set 清理线程，每隔一段时间去清理已经在节点应用或者回放的事务的 write set 信息。
-    * ​`gtid_executed`​ 为已经执行过的事务 `gtid`​ 集合, 也即事务快照版本。
-    * ​`gtid_log_event`​ 为已经执行过的事务 `gtid`​ 集合。
-    * ​`log_event_group`​ 为事务日志信息, 后续要更新到 `relay log`​ 中。
-  * ​`certification info`​: 保存了通过冲突检测的事务的 `write set`​ 和 `gtid_executed`​。 certification info 相当于一个 map, key 是 string 结构, 保存 write set 中提取的主键值; value 是 set 集合, 保存 gtid_executed 事务快照版本。
-
-    * 例如事务  T1 更新数据库 d1 中的表 t1 中两行数据 id=1 和 id=2, 它对应快照版本 UUID_MGR 是 :1-100, 刚开始  certification info 为空, 所以直接提交, 之后 certification info 中快照版本直接更新为 1-101。
-
----
-
-* ​`Certify`​ 冲突检测模块. 通过上面的例子可以了解 冲突检测标准 : transaction - UUID_MGR “>=” certification info - UUID_MGR, 则冲突检测通过。
-
-  * 单一事务 冲突检测 原理分析
-
-    * 例如事务  T2, 更新 id=2 的行, 事务 T2 的 UUID_MGR 为 1-102, 节点中冲突检测模块中的 certification  info 中的 UUID_MGR 为 1-101, 这里 T2:UUID_MGR:1-102 > UUID_MGR:1-100, 则 T2  冲突检测通过。
-    * 例如事务 T3, 更新 id=1 的行, 事务 T3 的 UUID_MGR 为 1-100,  节点中冲突检测模块中的 certification info 中的 UUID_MGR 为 1-101, 很明显  T3:UUID_MGR:1-100 < UUID_MGR:1-101, 则 T3 冲突检测不通过。
+　　‍

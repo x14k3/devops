@@ -13,11 +13,15 @@
 
   * 📄 [Oracle11g 静默安装](siyuan://blocks/20240111154537-q08w3dz)
   * 📄 [Oracle19c 静默安装](siyuan://blocks/20231110105237-i3wbtoj)
+  * 📄 [oracle11g r2 在window server 2012中安装和卸载](siyuan://blocks/20240227181359-xfhdy5x)
+  * 📄 [优化相关](siyuan://blocks/20241015110304-mq7p18j)
 * 📄 [Oracle 常用语句](siyuan://blocks/20231110105237-4d46t04)
 * 📑 [Oracle 日志归档和闪回区](siyuan://blocks/20231110105237-8m376yh)
 
-  * 📄 [Oracle之重做日志（Redo Log）归档](siyuan://blocks/20240314095026-czk7wdz)
-  * 📄 [Oracle之重做日志（Redo Log）管理](siyuan://blocks/20240314092307-3c0eicl)
+  * 📄 [Oracle 检查点](siyuan://blocks/20241012095903-ikqlh19)
+  * 📄 [Oracle之redo log 归档](siyuan://blocks/20240314095026-czk7wdz)
+  * 📄 [Oracle之redo log 管理](siyuan://blocks/20240314092307-3c0eicl)
+  * 📄 [Oracle之事务流程分析](siyuan://blocks/20241014110036-55rxu1v)
   * 📄 [Oracle之闪回区](siyuan://blocks/20240314095055-cio122a)
 * 📑 [Oracle 配置详解](siyuan://blocks/20231110105237-3rvwxhs)
 
@@ -27,12 +31,15 @@
 * 📑 [Oracle 问题归档](siyuan://blocks/20231110105237-ly2ljyl)
 
   * 📄 [archivelog日志占用空间大](siyuan://blocks/20240227181241-j4sf68v)
-  * 📄 [ora-01652:无法通过128(在表空间space中)扩展temp段解决办法](siyuan://blocks/20240227181223-rvyw38l)
-  * 📄 [oracle11g r2 在window server 2012中安装和卸载](siyuan://blocks/20240227181359-xfhdy5x)
-  * 📄 [result cache](siyuan://blocks/20240227182420-5yybeli)
   * 📄 [undo表空间文件过大，占用磁盘空间](siyuan://blocks/20240227181310-4hmitvv)
-  * 📄 [优化-密码相关](siyuan://blocks/20240227182147-wxonx7k)
-  * 📄 [优化-最大连接数](siyuan://blocks/20240227182052-gim63uz)
+  * 📑 [报错代码](siyuan://blocks/20241015110232-crelh3u)
+
+    * 📄 [ORA-00205](siyuan://blocks/20241015174052-5z4ic29)
+    * 📄 [ORA-01033](siyuan://blocks/20241015173833-gd859qa)
+    * 📄 [ORA-01034](siyuan://blocks/20241015174223-tipeyr7)
+    * 📄 [ORA-01110](siyuan://blocks/20241015173907-wxka150)
+    * 📄 [ORA-01652](siyuan://blocks/20241015173714-etsxjke)
+    * 📄 [oracle错误代码大全](siyuan://blocks/20241016160245-kvidg7b)
   * 📄 [报错日志目录](siyuan://blocks/20240227181152-b6xmjgw)
 * 📑 [Oracle 高可用集群](siyuan://blocks/20240506144137-mq4funh)
 

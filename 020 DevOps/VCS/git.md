@@ -84,7 +84,8 @@ git config --global http.proxy  socks5://127.0.0.1:10808
 # 新建一个目录，将其初始化为Git代码库; 你可以在任何时候、任何目录中这么做，完全是本地化的。
 git init [project-name] 
 # 复制一个 Git 仓库;复制该项目的全部记录，让你本地拥有这些。并且该操作将拷贝该项目的主分支， 使你能够查看代码，或编辑、修改。
-git clone git://github.com/schacon/simplegit.git
+sudo git clone   http://192.168.128.127/zx/hess-agent-linux.git
+sudo git clone -b CentOS-6.8  http://192.168.128.127/zx/hess-agent-linux.git   # clone分支
 ```
 
 　　‍

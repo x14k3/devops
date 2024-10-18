@@ -83,7 +83,6 @@ select tablespace_name, sum(bytes)/1024/1024/1024 as GB from dba_data_files grou
 select * from dba_data_files;
 select name from v$datafile;
 
-
 --查询逻辑目录
 select * from dba_directories;
 select * from dba_directories where DIRECTORY_NAME='DATA_PUMP_DIR';
@@ -93,7 +92,7 @@ select userenv('language') from dual;
 
 --查看归档日志信息
 select name,sequence# from v$archived_log;
-
+select  v.group#, v.status,g.member from v$log v , v$logfile g where v.GROUP#=g.GROUP#;
 
 --查询内存配置
 show parameter memory;
@@ -213,3 +212,9 @@ alter session set container=CDB$ROOT;
 -- 打开名称为pdboaec的pdb服务
 alter pluggable database pdboaec open;
 ```
+
+## delete一个表和truncate一个表的差别
+
+　　1、truncate是一个DDL语句，而delete是一个DML语句。  
+2、truncate执行后立即提交数据被清空，而delete会把数据提交到回滚段中如果没有执行commit提交就会恢复数据。  
+3、truncate执行后立即释放之前表占用的存储空间，而delete是不释放的。

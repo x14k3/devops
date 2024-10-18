@@ -53,19 +53,19 @@ case "$mode" in
     then
       # Give extra arguments to mysqld with the my.cnf file. This script
       # may be overwritten at next upgrade.
-      $bindir/mysqld_safe --defaults-file=/data/mysqldata/my.cnf  --datadir="$datadir" --pid-file="$mysqld_pid_file_path" $other_args >/dev/null &
+      $bindir/mysqld_safe --defaults-file=/etc/my.cnf  --datadir="$datadir" --pid-file="$mysqld_pid_file_path" $other_args >/dev/null &
       wait_for_pid created "$!" "$mysqld_pid_file_path"; return_value=$?
 
 
 ```
 
-## mysql -u root -p 等这些常用的参数
+## 客户端登录命令
 
 ```bash
-
+mysql -u root -p
 -h 主机名或ip地址  # 指定登录的主机名；
 -u 用户名         # 指定用户登录的用户名；
--p 密码          # 输入登录密码；
+-p 密码           # 输入登录密码；
 -P 端口号         # 指定登录的MySQL的端口号；
 -D 数据库名       # 指定登录的数据库名称；
 ```

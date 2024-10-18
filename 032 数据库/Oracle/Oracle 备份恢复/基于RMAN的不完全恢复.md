@@ -52,10 +52,6 @@ RMAN> alter database open resetlogs;
 --打开数据库并且重置日志。
 ```
 
-　　‍
-
-　　‍
-
 ## 三、基于时间点的恢复举例
 
 　　1、删表空间如果用这种自动备份的方法的话，如果把当前的表空间删除了，那备份文件的表空间也没有了。
@@ -94,8 +90,6 @@ RMAN>  recover database until scn 984677
 RMAN>  alter database open resetlogs;
 ```
 
-　　‍
-
 ## 五、如果控制文件、数据文件和日志文件都被删除了，如果做恢复处理
 
 ```bash
@@ -123,8 +117,6 @@ RMAN> recover database
 RMAN> alter database open resetlogs;
 ```
 
-　　‍
-
 ## 六、控制文件的操作
 
 　　控制文件：  
@@ -141,12 +133,4 @@ RMAN> restore controlfile;
 　　oracle为了防止联机日志内的数据都被清除，有一个机制是把在线联机日志放在了快速恢复区中。  
 可以为数据库创建一个日志，日志的保存位置是快速恢复区，路径为`$ORACLE_BASE/flash_recovery_area/$ORACLE_SID/onlinelog`​
 
-## 八、delete一个表和truncate一个表的差别
-
-　　1、truncate是一个DDL语句，而delete是一个DML语句。  
-2、truncate执行后立即提交数据被清空，而delete会把数据提交到回滚段中如果没有执行commit提交就会恢复数据。  
-3、truncate执行后立即释放之前表占用的存储空间，而delete是不释放的。
-
-## 九、用impdp的时候可以用REMAP_*参数来指定导入的位置。把原users表空间中的数据转到sysaux表空间;把原syaaux表空间的数据转到users表空间。
-
-　　$ impdp system/oracle schemas=scott directory=d1 dumpfile=scott.dmp job_name=import_scott remap_tablespace=users:sysaux,sysaux:users
+　　‍

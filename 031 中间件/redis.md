@@ -9,6 +9,7 @@
 * 📄 [redis 概述](siyuan://blocks/20231110105237-ygxmj09)
 * 📑 [redis 部署](siyuan://blocks/20241012162553-q6b9wek)
 
+  * 📄 [Redis 6.0 新特性 ACL 介绍 ](siyuan://blocks/20241014141409-jhiwmi0)
   * 📄 [redis cluster](siyuan://blocks/20241012162630-tv68iqs)
   * 📄 [redis 主从](siyuan://blocks/20241012162607-yuzgo49)
   * 📄 [redis 单例部署](siyuan://blocks/20231110105237-4madtae)
