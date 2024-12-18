@@ -32,10 +32,10 @@ sudo zypper mr -da
 #查看系统对应的版本 openSUSE Leap 15.5
 cat /etc/os-release 
 #添加阿里OpenSUSE镜像源
-sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/distribution/leap/15.5/repo/oss openSUSE-Aliyun-OSS
-sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/distribution/leap/15.5/repo/non-oss openSUSE-Aliyun-NON-OSS
-sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/update/leap/15.5/oss openSUSE-Aliyun-UPDATE-OSS
-sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/update/leap/15.5/non-oss openSUSE-Aliyun-UPDATE-NON-OSS
+sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/distribution/leap/15.6/repo/oss openSUSE-Aliyun-OSS
+sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/distribution/leap/15.6/repo/non-oss openSUSE-Aliyun-NON-OSS
+sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/update/leap/15.6/oss openSUSE-Aliyun-UPDATE-OSS
+sudo zypper ar -fc https://mirrors.aliyun.com/opensuse/update/leap/15.6/non-oss openSUSE-Aliyun-UPDATE-NON-OSS
 
 #刷新软件源
 sudo zypper ref

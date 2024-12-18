@@ -22,7 +22,7 @@ show pdbs;      -- 查看所有的PDB
 SQL> alter session set container=pdb1;
 
 --方式2：通过EASY CONNECT，指定"/"跟着PDB名称，就可登录PDB，
-sqlplus sys/password@192.168.0.203:1521/pdb1
+sqlplus test/"8ql6,yhY"@192.168.0.203:1521/pdb1
 
 --方式3：如果是18c、19c以上，设置ORACLE_PDB_SID环境变量的值
 export ORACLE_PDB_SID="pdb1"

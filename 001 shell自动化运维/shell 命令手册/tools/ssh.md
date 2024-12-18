@@ -218,3 +218,19 @@ iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEP
 ```shell
 service iptables save
 ```
+
+　　‍
+
+### 常见问题
+
+　　‍
+
+#### ssh 登录时用户被锁定
+
+```bash
+faillog –a               # 查看用户登录错误次数
+faillog -u user –r       # 清空指定用户user的错误登录次数
+pam_tally2 -u test01 -r  # 同上，等效
+```
+
+　　‍

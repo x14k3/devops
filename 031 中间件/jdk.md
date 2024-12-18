@@ -1,16 +1,37 @@
 # jdk
 
-# jdk 部署
+|版本|major版本号|
+| --------| -------------|
+|JDK 17|61|
+|JDK 16|60|
+|JDK 15|59|
+|JDK 14|58|
+|JDK 13|57|
+|JDK 12|56|
+|JDK 11|55|
+|JDK 10|54|
+|JDK 9|53|
+|JDK 8|52|
+|JDK 7|51|
+|JDK 6|50|
+|JDK 5|49|
+|JDK 4|48|
+|JDK 3|47|
+|JDK 2|46|
+|JDK 1|45|
 
-　　jdk下载地址：[https://d.injdk.cn/download/oraclejdk](https://d.injdk.cn/download/oraclejdk)
+　　‍
+
+# jdk 部署
 
 ```bash
 mkdir -p /usr/local/java
-tar -zxf jdk-8u333-linux-x64.tar.gz -C /usr/local/java
+wget https://mirrors.huaweicloud.com/java/jdk/8u192-b12/jdk-8u192-linux-x64.tar.gz
+tar -zxf jdk-8u192-linux-x64.tar.gz -C /usr/local/java
 #配置环境变量
 vim /etc/profile
 ----------------------------------------------------------------
-export JAVA_HOME=/usr/local/java/jdk1.8.0_333
+export JAVA_HOME=/usr/local/java/jdk1.8.0_192
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=$PATH:$JAVA_HOME/bin

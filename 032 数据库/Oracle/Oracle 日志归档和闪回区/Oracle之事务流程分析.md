@@ -48,7 +48,7 @@ redo log file  ：联机重做日志
 
 ### 记日志
 
-　　现在数据已经被读入到db buffer了，现在服务器进程将该语句所影响的并被读入db buffer中的这些行数据的`rowid`​及要更新的原值和新值及`scn`​等信息从`PGA`​逐条的写入`redo log buffer`​中。在写入`redo log buffer`​之前也要事先请求`redo log buffer的锁存器`​，成功加锁后才开始写入，当写入达到`redo log buffer大小的三分之一`​或`写入量达到1M`​或`超过三秒后`​或`发生检查点时`​或者`dbwr之前发生`​，都会**触发lgwr进程把redo log buffer的数据写入磁盘上的redo file文件中**（这个时候会产生log file sync等待事件），已经被写入redo file的redo log buffer所持有的锁存器会被释放，并可被后来的写入信息覆盖，redo log buffer是循环使用的。Redo file也是循环使用的，当一个redo file 写满后，lgwr进程会自动切换到下一redo file（这个时候可能出现log file switch（checkpoint complete）等待事件）。如果是归档模式，归档进程还要将前一个写满的redo file文件的内容写到归档日志文件中（这个时候可能出现log file switch（archiving needed））。
+　　现在数据已经被读入到db buffer了，现在服务器进程将该语句所影响的并被读入db buffer中的这些行数据的`rowid`​及要更新的原值和新值及`scn`​等信息从`PGA`​逐条的写入`redo log buffer`​中。在写入`redo log buffer`​之前也要事先请求`redo log buffer的锁存器`​，成功加锁后才开始写入，当写入达到`redo log buffer大小的三分之一`​或`写入量达到1M`​或`超过三秒后`​或`发生检查点时`​或者`dbwr之前发生`​，都会触发lgwr进程把redo log buffer的数据写入磁盘上的redo file文件中（这个时候会产生log file sync等待事件），已经被写入redo file的redo log buffer所持有的锁存器会被释放，并可被后来的写入信息覆盖，redo log buffer是循环使用的。Redo file也是循环使用的，当一个redo file 写满后，lgwr进程会自动切换到下一redo file（这个时候可能出现log file switch（checkpoint complete）等待事件）。如果是归档模式，归档进程还要将前一个写满的redo file文件的内容写到归档日志文件中（这个时候可能出现log file switch（archiving needed））。
 
 ### 为事务建立回滚段
 
@@ -76,7 +76,7 @@ redo log file  ：联机重做日志
 
 　　<span data-type="text" style="background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);">用户执行commit命令</span>
 
-　　只有当sql语句所影响的所有行所在的最后一个块被读入db buffer并且重做信息被写入redo log buffer（仅指日志缓冲区，而不包括日志文件）之后，用户才可以发去`commit`​命令，**commit触发lgwr进程，但不强制立即dbwr来释放所有相应db buffer块的锁（也就是`no-force-at-commit`​,即提交不强制写），也就是说有可能虽然已经commit了，但在随后的一段时间内dbwr还在写这条sql语句所涉及的数据块。**表头部的行锁并不在commit之后立即释放，而是要等dbwr进程完成之后才释放，这就可能会出现一个用户请求另一用户已经commit的资源不成功的现象。
+　　只有当sql语句所影响的所有行所在的最后一个块被读入db buffer并且重做信息被写入redo log buffer（仅指日志缓冲区，而不包括日志文件）之后，用户才可以发去`commit`​命令，commit触发lgwr进程，但不强制立即dbwr来释放所有相应db buffer块的锁（也就是`no-force-at-commit`​,即提交不强制写），也就是说有可能虽然已经commit了，但在随后的一段时间内dbwr还在写这条sql语句所涉及的数据块。表头部的行锁并不在commit之后立即释放，而是要等dbwr进程完成之后才释放，这就可能会出现一个用户请求另一用户已经commit的资源不成功的现象。
 
 * 情景1：从Commit和dbwr进程结束之间的时间很短，如果恰巧在commit之后，dbwr未结束之前断电，因为commit之后的数据已经属于
   数据文件的内容，但这部分文件没有完全写入到数据文件中。所以需要前滚。由于commit已经触发lgwr，这些所有未来得及写入数据文件的更改会在实例重启后，由smon进程根据重做日志文件来前滚，完成之前commit未完成的工作（即把更改写入数据文件）。
@@ -97,6 +97,6 @@ redo log file  ：联机重做日志
 
 　　<span data-type="text" style="background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);">用户执行rollback</span>
 
-　　如果用户`rollback`​，则**服务器进程会根据数据文件块和DB BUFFER中块的头部的事务列表和SCN以及回滚段地址找到回滚段中相应的修改前的副本，并且用这些原值来还原当前数据文件中已修改但未提交的改变**。如果有多个“前映像”，服务器进程会在一个“前映像”的头部找到“前前映像”的回滚段地址，一直找到同一事务下的最早的一个“前映像”为止。一旦发出了COMMIT，用户就不能rollback，这使得COMMIT后DBWR进程还没有全部完成的后续动作得到了保障。
+　　如果用户`rollback`​，则服务器进程会根据数据文件块和DB BUFFER中块的头部的事务列表和SCN以及回滚段地址找到回滚段中相应的修改前的副本，并且用这些原值来还原当前数据文件中已修改但未提交的改变。如果有多个“前映像”，服务器进程会在一个“前映像”的头部找到“前前映像”的回滚段地址，一直找到同一事务下的最早的一个“前映像”为止。一旦发出了COMMIT，用户就不能rollback，这使得COMMIT后DBWR进程还没有全部完成的后续动作得到了保障。
 
 　　到现在为例一个事务已经结束了。

@@ -400,3 +400,49 @@ ORMF
 ```
 
 　　crontab : `10 01 * * * /data/script/rmanbackup.sh >> /tmp/rmanback.log 2>&1`
+
+# 附：rman几种恢复方式
+
+　　1、丢失数据文件，进行完全恢复
+
+```bash
+
+RMAN>startup mount;
+RMAN>restore database;
+RMAN>recover database;
+RMAn>sql 'alter database open';
+```
+
+　　2、丢失重做日志文件，进行不完全恢复
+
+```bash
+SQL>startup mount;
+SQL>recover database until cancel;
+SQL>alter database open resetlogs;
+```
+
+　　3、丢失数据文件、控制文件和重做日志文件，进行不完全恢复
+
+```bash
+RMAN>startup nomount;
+RMAN>restore controfile from autobackup;
+RMAN>alter database mount;
+RMAN>restore database;
+SQL>recover database using backup controlfile until cancel;
+SQL>alter database open resetlogs;
+```
+
+　　4、丢失初始化文件、控制文件数据文件和重做日志文件，进行不完全恢复
+
+```bash
+
+SQL>startup nomount pfile='D:\oracle\product\10.2.0\db_1\admin\orcl\pfile\init.ora.27201414210'; #pfile的路径
+RMAN>restore spfile from autobackup;
+SQL>shutdown immediate;
+SQL>startup nomount;
+RMAN>restore controlfile from autobackup;
+RMAN>alter database mount;
+RMAN>restore database;
+SQL>recover database using backup controlfile until cancel;
+SQL>alter database open resetlogs;
+```

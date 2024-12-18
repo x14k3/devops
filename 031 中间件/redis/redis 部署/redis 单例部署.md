@@ -2,6 +2,8 @@
 
 　　下载地址：[https://redis.io/download/](https://redis.io/download/)
 
+　　https://github.com/redis/redis
+
 # 单节 Redis Standalone
 
 ```bash

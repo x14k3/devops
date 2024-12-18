@@ -284,13 +284,13 @@ InitiatorName=iqn.2024-02.storage.oracle:client
 ```bash
 # 发现iscsi存储
 [root@test ~]# iscsiadm -m discovery -t st -p 10.10.0.203
-10.10.0.203:3260,1 iqn.2024-01.storage.oracle:server
+10.10.0.203:3260,1 iqn.2024-01.storage.oracle:rac
 
 
 # 发现了远程服务器上可用的存储资源后，接下来准备登录 iSCSI 服务端   
-[root@test ~]# iscsiadm -m node -T iqn.2024-02.storage.oracle:server -p 10.10.0.203 --login
-Logging in to [iface: default, target: iqn.2024-02.storage.oracle:server, portal: 10.10.0.203,3260] (multiple)
-Login to [iface: default, target: iqn.2024-02.storage.oracle:server, portal: 10.10.0.203,3260] successful.
+[root@test ~]# iscsiadm -m node -T iqn.2024-02.storage.oracle:rac -p 10.10.0.203 --login
+Logging in to [iface: default, target: iqn.2024-02.storage.oracle:rac, portal: 10.10.0.203,3260] (multiple)
+Login to [iface: default, target: iqn.2024-02.storage.oracle:rac, portal: 10.10.0.203,3260] successful.
 
 
 [root@ora19c-rac1 grid]# lsblk
@@ -340,7 +340,7 @@ UID=e45e7884-8204-413e-b45d-00b91da83f55 /iscsi xfs defaults,_netdev 0 0
 [root@test iscsi]# iscsiadm -m node -T iqn.2003-01.org.linux-iscsi.test.x8664:sn.e181f5b7782e -u
 ```
 
-### iscsiadm 命令详解
+# iscsiadm 命令详解
 
 ```bash
 #iscsiadm常用命令：
@@ -360,7 +360,7 @@ iscsiadm -m node -T TARGET -p IP:port -u
 
 　　‍
 
-### 常见错误
+# 常见错误
 
 1. 终端不断弹出以下警告：
 

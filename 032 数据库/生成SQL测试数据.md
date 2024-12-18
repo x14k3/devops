@@ -13,7 +13,7 @@ insert into test select generate_series(1,100), clock_timestamp(), md5(random():
 
 ```sql
 --创建一个表，并同时添加1000000条数据
-create table test as 
+create table t1 as 
 select rownum as id,
                to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
                trunc(dbms_random.value(0, 100)) as random_id,
@@ -41,6 +41,7 @@ insert into test
 create database test default character set utf8mb4;
 
 -------------- create table
+use test;
 CREATE TABLE `app_user`(
     `id` INT  NOT NULL AUTO_INCREMENT COMMENT '主键',
 	`id_` VARCHAR(100) NOT NULL COMMENT '主键2',
@@ -53,7 +54,7 @@ CREATE TABLE `app_user`(
     `create_time` DATETIME DEFAULT NOW(),
     `update_time` DATETIME DEFAULT NOW(),
     PRIMARY KEY (`id`,`id_`) 
-)ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT='app用户表'
+)ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT='app用户表';
 
 -------------- create function - insert data
 SET GLOBAL log_bin_trust_function_creators=TRUE; -- 创建函数一定要写这个

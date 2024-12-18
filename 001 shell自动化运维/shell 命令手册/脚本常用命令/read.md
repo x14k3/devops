@@ -43,4 +43,7 @@ read -n 1 -t 30 -p "Please select your gender[M/F]: " gender
 # 使用“-n 1”选项只接收一个输入字符就会执行（都不用输入回车） 
 echo -e "\n" 
 echo "Sex is $gender"
+
+
+read -p "`echo -e "\n\e[1;36m  Please enter the server host name [oracle] : \e[0m"`" TMP_ORACLE_HOSTNAME
 ```

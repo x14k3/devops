@@ -62,37 +62,36 @@ minio/minio server /data{1...8} --console-address ":9090"
 
 ```bash
 #配置启动配置文件
-$ cat <<EOF >> minio.conf 
-MINIO_VOLUMES="/usr/local/minio/data"
+cat <<EOF >> minio.conf 
+MINIO_VOLUMES="/data/minio/data"
 MINIO_OPTS="--address :9000  --console-address :9001"
 MINIO_ROOT_USER="minioadmin"
 MINIO_ROOT_PASSWORD="minioadmin"
->>EOF
+EOF
 #注：
 #MINIO_VOLUMES 是数据存储地址
 #MINIO_OPTS 开启的端口号  9000 为具体文件访问端口 9001 为控制台页面访问端口
 #MINIO_ROOT_USER 和 MINIO_ROOT_PASSWORD 对应账号密码
 #
 #-------------------------------------------------------
+cat << EOF >> /etc/systemd/system/minio.service
 [Unit]
 Description=MinIO
 Documentation=https://docs.min.io
 Wants=network-online.target
 After=network-online.target
-AssertFileIsExecutable=/usr/local/minio/bin/minio
- 
-[Service]
-WorkingDirectory=/usr/local/minio/
-EnvironmentFile=/usr/local/minio/etc/minio.conf
-ExecStart=/usr/local/minio/bin/minio server $MINIO_OPTS $MINIO_VOLUMES 
-Restart=always
+AssertFileIsExecutable=/data/minio/minio
 
+[Service]
+WorkingDirectory=/data/minio/
+EnvironmentFile=/data/minio/minio.conf
+ExecStart=/data/minio/minio server $MINIO_OPTS $MINIO_VOLUMES
+Restart=always
 LimitNOFILE=65536
-# Disable timeout logic and wait until process is stopped
-TimeoutStopSec=infinity
-SendSIGKILL=no
+
 [Install]
 WantedBy=multi-user.target
+EOF
 #-------------------------------------------------------
 
 #加入开机自启动

@@ -26,5 +26,6 @@
 
   * 📄 [limits.conf 文件](siyuan://blocks/20240724134937-uizbfld)
   * 📄 [linux系统限制进程的cpu使用率](siyuan://blocks/20240724134713-etdkgek)
+* 📄 [8. linux下的 dev-shm](siyuan://blocks/20241030200023-z4ze64y)
 
 　　‍

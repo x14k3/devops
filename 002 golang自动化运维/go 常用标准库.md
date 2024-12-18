@@ -1,5 +1,6 @@
 # go 常用标准库
 
+* 📄 [flag](siyuan://blocks/20241031095128-4v52558)
 * 📄 [fmt](siyuan://blocks/20240624120217-ufdl1hl)
 * 📄 [http](siyuan://blocks/20240624120239-0fjv9is)
 * 📄 [io](siyuan://blocks/20240624120224-qsz80ua)

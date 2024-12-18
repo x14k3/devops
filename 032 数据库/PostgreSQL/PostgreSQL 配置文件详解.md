@@ -125,7 +125,7 @@ select name,setting from pg_setting where name='data_directory'
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.2 连接和验证（CONNECTIONS AND AUTHENTICATION）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.2 连接和验证（CONNECTIONS AND AUTHENTICATION）</span>
 
 　　**连接设置（Connection Settings）** 
 
@@ -420,7 +420,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.7 报告和记录（REPORTING AND LOGGING）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.7 报告和记录（REPORTING AND LOGGING）</span>
 
 　　**记录位置（Where to Log）** 
 
@@ -533,7 +533,7 @@ log_timezone = 'PRC'
 
 　　‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.8 流程标题（PROCESS TITLE）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.8 流程标题（PROCESS TITLE）</span>
 
 ```bash
 #cluster_name = ''      # 如果非空，则添加到进程标题(更改需要重新启动PG数据库生效)
@@ -566,7 +566,7 @@ log_timezone = 'PRC'
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.10 自动清理（AUTOVACUUM）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.10 自动清理（AUTOVACUUM）</span>
 
 　　从PostgreSQL 8.1开始,便提供了autovacuum守护进程,在后台执行日志的自动清理功能.
 
@@ -691,7 +691,7 @@ default_text_search_config = 'pg_catalog.simple'
 #max_pred_locks_per_page = 2            # min 0
 ```
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.14 版本和平台兼容性（VERSION AND PLATFORM COMPATIBILITY）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.14 版本和平台兼容性（VERSION AND PLATFORM COMPATIBILITY）</span>
 
 　　**以前的PostgreSQL版本（Previous PostgreSQL Versions）** 
 
@@ -723,7 +723,7 @@ default_text_search_config = 'pg_catalog.simple'
 #data_sync_retry = off      # fsync数据失败时重试或死机？(更改需要重新启动PG数据库生效)
 ```
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.16 配置文件包括（CONFIG FILE INCLUDES）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.16 配置文件包括（CONFIG FILE INCLUDES）</span>
 
 ```bash
 # 这些选项允许从默认postgresql.conf以外的文件加载设置.

@@ -1,5 +1,6 @@
 # redis
 
+* 📄 [Redis GunYu](siyuan://blocks/20241104172209-7oss1jh)
 * 📄 [redis 分布式锁](siyuan://blocks/20231110105237-9gqc4t8)
 * 📄 [redis 命令操作](siyuan://blocks/20231110105237-6gix5ks)
 * 📄 [redis 批量测试数据](siyuan://blocks/20231114174539-5c7huc9)

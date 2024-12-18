@@ -39,7 +39,7 @@ show parameter target;
 
 ### /dev/shm对自动内存管理的影响
 
-　　若使用自动内存管理，必须要确保** *(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值***。
+　　若使用自动内存管理，必须要确保 *(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值*。
 
 ```sql
 # 修改/dev/shm (默认大小为内存一半)
@@ -50,6 +50,10 @@ tmpfs /dev/shm swap defaults,size=10241m 0 0
 mount -o remount /dev/shm
 # /dev/shm使用的是内存空间
 ```
+
+　　‍
+
+　　‍
 
 # 三、自动共享内存管理
 
@@ -85,22 +89,9 @@ show parameter target;
 --BOTH：指同时修改服务器参数文件和内存中的数据。
 ```
 
-### shmXX对自动共享内存的影响
+　　‍
 
-　　**kernel.shmmax：单个共享内存段**的最大值，单位字节，shmmax 设置应该足够大，最好**能在一个共享内存段下容纳下整个的SGA** ,这个设置的比SGA_MAX_SIZE大比较好,设置的过低可能会导致需要创建多个共享内存段，这样可能导致系统性能的下降
-32G内存的服务期推荐16G的共享内存段=17179869184
-
-　　**Kernel.shmall：**  ​**共享内存总量**,shmall 是全部允许使用的共享内存大小，shmmax 是单个段允许使用的大小。这两个可以设置为内存的 90%。32G内存的服务期推荐的共享内存总量为2\*shmmax\*90%/4k=7549740
-
-　　**kernel.shmmni：**  ​**共享内存段的最大数量**，shmmni 缺省值 4096 ，一般肯定是够用了。
-
-　　`vim /etc/sysctl.conf`
-
-```sql
-kernel.shmall = 4194304      # 共享内存总量 16G (16*1024*1024/4)
-kernel.shmmax = 8589934592   # 单个共享内存段的最大值 8G (8*1024*1024*1024)
-kernel.shmmni = 4096
-```
+　　‍
 
 # 四、自动PGA内存管理
 

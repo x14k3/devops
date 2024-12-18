@@ -1,7 +1,5 @@
 # mysql 二进制安装
 
-　　‍
-
 　　通用二进制版本： 本文档采用此方式安装
 
 　　https://downloads.mysql.com/archives/community/
@@ -44,78 +42,21 @@ source /etc/profile
 ```bash
 [mysqld]
 user=mysql
+port=3306
+mysqlx_port=33060
 basedir=/data/mysql
 datadir=/data/mysql/data
+socket=/data/mysql/mysql.sock
+mysqlx_socket=/data/mysql/mysqlx.sock
+log-error=/data/mysql/logs/mysqld.log
+pid-file=/data/mysql/mysql.pid
+
 default-storage-engine=INNODB
 character-set-server=utf8mb4
 collation_server = utf8mb4_general_ci
  
-#只能用IP地址检查客户端的登录，不用主机名,跳过域名解析
-skip-name-resolve=1
-#忽略大小写检查
-lower_case_table_names=1
- 
-#日志时间
-log_timestamps=SYSTEM
-default-time-zone = '+8:00'
- 
- 
-#慢日志
-long_query_time=3
-slow_query_log=ON
-slow_query_log_file=/data/mysql/logs/slow_query.log
-#不记录未使用索引的查询到慢查询日志中
-log_queries_not_using_indexes = 0
-#管理员执行的慢查询语句记录到慢查询日志中
-log_slow_admin_statements = 1
-#将从服务器执行的慢查询语句记录到慢查询日志中
-log_slow_replica_statements = ON
-#当未使用索引的查询数量达到10次时，开始将这些查询记录到慢查询日志中
-log_throttle_queries_not_using_indexes = 10
- 
- 
-#通用日志
-#general_log=1
-#general_log_file=/data/mysql/logs/mysql_general.log
- 
-#错误日志
-log-error=/data/mysql/logs/mysqld.log
- 
-#innodb配置
-innodb_file_per_table = 1
-innodb_data_file_path = ibdata1:500M:autoextend:max:10G
-innodb_temp_data_file_path = ibtmp1:500M:autoextend:max:20G
- 
- 
- 
-#binlog配置
-server_id=1
-log-bin=mysql-bin
-max_binlog_size = 100M
-binlog_format=row
-log_replica_updates
-#二进制日志(binlog)的过期时间-3天
-#binlog_expire_logs_seconds=604800
-expire_logs_days = 3
- 
- 
-# disable_ssl
-tls_version=''
-port=3306
-socket=/tmp/mysql.sock
-max_connections=1000
-sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
-max_allowed_packet=512M
- 
-[mysql]
-socket=/tmp/mysql.sock
-default-character-set = utf8mb4
- 
- 
 [client]
 default-character-set = utf8mb4
-
-
 ```
 
 ### 初始化数据
@@ -160,20 +101,7 @@ drwxr-x--- 2 mysql mysql     12288  3月 12 13:23 sys
 
 　　‍
 
-### 启动mysql
-
-```bash
-vim support-files/mysql.server
-----------------------------------------
-basedir=/data/mysql
-datadir=/data/mysql/data
-------------------------------------------
-
-./support-files/mysql.server  start
-./support-files/mysql.server  status
-```
-
-#### 或使用systemd管理mysql
+### 使用systemd管理mysql
 
 　　`vim /etc/systemd/system/mysqld.service`​
 

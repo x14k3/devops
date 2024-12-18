@@ -843,6 +843,26 @@ a2ab0cdf-9cf1-41a5-99f4-ae81c58e3fa8
 
 　　可以看到，NetworkManager和直接用ovs-ctl最大的不同，就是把一些细节暴露了出来，本质上把一个接口加到Bridge上不是直接加的，而是加到了Bridge的某个Port上。但是仔细一想也没毛病，对应到现实世界的交换机，你接接线也是接到交换机的某个端口上，如果没有端口，那线往哪插呢？
 
+　　‍
+
+### 命令行连接 wifi
+
+```bash
+
+#显示可用的wifi AP： 
+nmcli device wifi list
+#连接wifi 
+nmcli device wifi connect "$SSID" password "$PASSWORD" 
+nmcli --ask device wifi connect "$SSID"
+#第一种方法会显露密码，不太安全。第二种密码显示为点，相对安全，建议用第二种方法连接wifi。
+#显示wlan设备的详情 
+nmcli -p -f general,wifi-properties device show wlan0
+```
+
+　　‍
+
+　　‍
+
 ### 配置持久化
 
 　　好了，上面举了很多例子实现了一些我们可能会用到的场景，但是一大堆问题又来了，这些配置能持久化么？重启了机器之后还会有么？如果有，那这些配置是保存在哪里的？我能不能不用nmcli这个命令行工具了，使用配置文件，能完成网络的配置么？

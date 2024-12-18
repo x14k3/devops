@@ -49,8 +49,7 @@ systemctl disable --now NetworkManager
 sed -ri 's/(^SELINUX=).*/\1disabled/' /etc/selinux/config
 setenforce 0
 #关闭swap
-sed -ri 's@(^.*swap *swap.*0 0$)@#\1@' /etc/fstab
-swapoff -a
+ 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭 关闭
 ```
 
 ### 3.配置时间同步

@@ -1,6 +1,6 @@
 # mysql RPM安装
 
-　　‍
+　　[https://downloads.mysql.com/archives/community/](https://downloads.mysql.com/archives/community/)
 
 ```bash
 # 下载mysql rpm安装包 [mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar]
@@ -71,8 +71,9 @@ mysql_secure_installation
 
 # 设置root远程登录并修改认证方式
 mysql -uroot -p
-sql> update mysql.user set host='%', plugin='mysql_native_password' where user='root';
-sql> flush privileges;
+sql> CREATE USER 'root'@'%' IDENTIFIED BY 'your_password';
+sql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+sql> FLUSH PRIVILEGES;
 sql> select host, user, plugin from mysql.user;
 ```
 

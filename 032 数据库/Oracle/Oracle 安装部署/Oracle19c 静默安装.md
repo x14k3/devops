@@ -141,7 +141,7 @@ source /home/oracle/.bash_profile
 
 # 安装oracle所需依赖
 # Centos7.x
-yum install -y  vim make gcc gcc-c++ unzip zip net-tools libnsl bc binutils elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc glibc-devel unixODBC-devel ksh libaio libaio-devel libX11 libXau libXi libXtst libXrender libXrender-devel libgcc libstdc++ libstdc++-devel libxcb  nfs-utils targetcli smartmontools sysstat
+yum install -y  vim make gcc gcc-c++ unzip zip net-tools libnsl bc binutils elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc glibc-devel unixODBC-devel ksh libaio libaio-devel libX11 libXau libXi libXtst libXrender libXrender-devel libgcc libstdc++ libstdc++-devel libxcb  nfs-utils targetcli smartmontools sysstat readline-devel
 
 # OpenSuSE15.3
 zypper in -y vim unzip net-tools gcc bc binutils glibc glibc-devel insserv-compat libaio-devel libaio1 libX11-6 libXau6 libXext-devel libXext6 libXi-devel libXi6 libXrender-devel libXrender1 libXtst6 libcap-ng-utils libcap-ng0 libcap-progs libcap1 libcap2 libelf1 libgcc_s1 libjpeg8 libpcap1 libpcre1 libpcre16-0 libpng16-16 libstdc++6 libtiff5 libgfortran4 mksh make pixz rdma-core rdma-core-devel smartmontools sysstat xorg-x11-libs xz compat-libpthread-nonshared readline-devel
@@ -225,6 +225,10 @@ dbca -silent -ignorePreReqs -ignorePrereqFailure -createDatabase \
 tail -f $ORACLE_BASE/cfgtoollogs/dbca
 # 删除数据库实例
 # dbca -silent -deleteDatabase -sourceDB fmsdb -sid fmsdb -sysDBAUserName sys -sysDBAPassword Ninestar2022 -forceArchiveLogDeletion
+
+#-totalMemory 8192   # 自动分配 pga_aggregate_target 和 sga_target
+#-memoryPercentage   # 用于 Oracle 的物理内存百分比
+#-automaticMemoryManagement  # 自动内存管理（内存大于4G时禁止使用）
 ```
 
 - 创建FS存储方式CDB数据库：
@@ -339,13 +343,13 @@ vim $ORACLE_HOME/network/admin/listener.ora
 SID_LIST_LISTENER=
   (SID_LIST=
     (SID_DESC=
-      (GLOBAL_DBNAME = fmsdb)   --db_unique_name
-      (SID_NAME = fmsdb)        --instance_name
+      (GLOBAL_DBNAME = fmsdb)                                  # db_unique_name
+      (SID_NAME = fmsdb)                                       # instance_name
       (ORACLE_HOME = /u01/app/oracle/product/19.3.0/db_1)
     )
     (SID_DESC=
-      (GLOBAL_DBNAME = pdb1)    --pdb_name
-      (SID_NAME = fmsdb)        --instance_name
+      (GLOBAL_DBNAME = pdb1)                                   # pdb_name
+      (SID_NAME = fmsdb)        -                              # instance_name
       (ORACLE_HOME = /u01/app/oracle/product/19.3.0/db_1)
     )
   )

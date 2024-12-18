@@ -16,7 +16,7 @@ sudo apt install youtube-dl
 　　我这里就有下载油管的视频举例。
 
 　　比如我想下载这个视频：[https://www.youtube.com/watch?v=kNU2WCHVVBk](https://www.youtube.com/watch?v=kNU2WCHVVBk)
-视频格式为：[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)\* ************
+视频格式为：[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)\* ********
 
 ### 1.直接下载
 

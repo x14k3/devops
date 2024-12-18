@@ -30,12 +30,6 @@ docker-compose version 1.27.4, build 40524192
 　　Linux 系统请使用以下介绍的方法安装。  
 从 官方 [GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。
 
-```bash
-curl -L https://github.com/docker/compose/releases/download/2.22.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-# bash 补全命令
-curl -L https://raw.githubusercontent.com/docker/compose/2.22.0/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
-```
-
 ## docker compose 命令
 
 ### docker-compose

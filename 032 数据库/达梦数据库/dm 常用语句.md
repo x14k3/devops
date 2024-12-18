@@ -21,6 +21,15 @@ systemctl start DmServiceDmFMSServer.service
 ```bash
 su - dmdba
 disql SYSDBA/Ninestar123@192.168.130.136:5236
+
+#disql连接到实例后，有两种方式执行sql脚本（start命令和`字符)：
+SQL> `/home/dmdba/test.sql
+SQL> start /home/dmdba/test.sql
+
+#------------------------------------------------------------------
+disql SYSDBA/Ninestar123@192.168.130.136:5236 -E "SELECT TOP 1 * FROM LLL.TABLE_1;"
+disql SYSDBA/Ninestar123@192.168.130.136:5236 \`/opt/dm/test.sql
+
 ```
 
 ## 2.创建表空间
@@ -72,7 +81,7 @@ GRANT DBA TO JY2WEB;
 GRANT DBA TO JY2GM;
 ```
 
-## 4.查看当前执行的查询
+## 4.查看数据库相关信息
 
 ```sql
 --查看正在执行的语句：
@@ -81,4 +90,44 @@ select * from v$sessions where state = 'ACTIVE';
 --终止正在执行的语句：
 --sess_id是上面查询出的结果列
 call sp_close_session(sess_id);
+
+
+--查看实例信息
+select name inst_name from v$instance;
+--查询数据库当前状态
+select status$ from v$instance;
+--查询DB_MAGIC
+select db_magic from v$rlog;
+--查询是否归档
+select arch_mode from v$database;
+--查询授权截止有效期
+select EXPIRED_DATE  from v$license;
+--查看数据库配置端口
+select para_name,para_value from v$dm_ini where para_name like '%PORT%';
+--查询数据库最大连接数
+select SF_GET_PARA_VALUE(2,'MAX_SESSIONS');
+--查询数据库字符集[注释：0 表示 GB18030，1 表示 UTF-8，2 表示 EUC-KR]
+select SF_GET_UNICODE_FLAG();
+--查询归档信息
+select * from v$dm_arch_ini;
+--查看控制文件
+select para_value name from v$dm_ini where para_name='CTL_PATH';
+--查询日志文件
+select GROUP_ID ,FILE_ID,PATH,CLIENT_PATH from v$rlogfile;
+--查询数据库占用空间
+select sum(bytes/1024/1024)|| 'M' from dba_data_files;
+--查询数据文件位置
+select GROUP_ID , ID ,path,STATUS$ from v$datafile;
+--查询表空间大小
+select FILE_NAME,FILE_ID,TABLESPACE_NAME,BYTES/1024/1024||'M'  from dba_data_files;
+
+--查询数据库有哪些用户
+select username from dba_users;
+--查询数据库用户信息
+select username,user_id,default_tablespace,profile from dba_users;
+--查看数据库对象
+select t2.name owner,t1.subtype$ object_type,t1.valid status,count(1) count# from sysobjects t1,sysobjects t2 where t1.schid=t2.id and t1.schid!=0 group by t2.name,t1.subtype$,t1.valid;
+--查询当前用户所有表
+select table_name,tablespace_name from user_tables;
+--
 ```

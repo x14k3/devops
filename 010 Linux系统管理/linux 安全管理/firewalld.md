@@ -13,19 +13,19 @@
 ## 防火墙基本使用
 
 ```bash
-yum  -y  install      firewalld              # 安装firewalld
-systemctl  start      firewalld              # 打开防火墙,或systemctl start firewalld.service
+yum  -y  install  firewalld     # 安装firewalld
+systemctl  start  firewalld     # 打开防火墙,或systemctl start firewalld.service
 
-firewall-cmd --version         # 查看版本
+firewall-cmd --version          # 查看版本
 firewall-cmd --help             # 查看帮助
 firewall-cmd --state            # 显示状态
 firewall-cmd --get-active-zones # 查看区域信息
-firewall-cmd --get-service   # 获取所有支持的服务
+firewall-cmd --get-service      # 获取所有支持的服务
 firewall-cmd --get-zone-of-interface=eth0  # 查看指定接口所属区域
-firewall-cmd --panic-on       # 拒绝所有包
-firewall-cmd --panic-off       # 取消拒绝状态
-firewall-cmd --query-panic  # 查看是否拒绝
-firewall-cmd --reload      #更新防火墙规则，修改防火墙规则后，需要重新载入
+firewall-cmd --panic-on         # 拒绝所有包
+firewall-cmd --panic-off        # 取消拒绝状态
+firewall-cmd --query-panic      # 查看是否拒绝
+firewall-cmd --reload           # 更新防火墙规则，修改防火墙规则后，需要重新载入
 ```
 
 ## 区域zone

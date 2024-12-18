@@ -6,14 +6,10 @@
 
 # zip
 
-### 语法
-
 ```shell
 zip(选项)(参数)
 zip [-选项] [-b 路径] [-t 日期] [-n 后缀名] [压缩文件列表] [-xi 列表]
 ```
-
-### 选项
 
 ```shell
 -f: 刷新：仅更改的文件
@@ -46,12 +42,7 @@ zip [-选项] [-b 路径] [-t 日期] [-n 后缀名] [压缩文件列表] [-xi �
 -h2: 显示更多帮助
 ```
 
-### 参数
-
-* zip压缩包：指定要创建的zip压缩包；
-* 文件列表：指定要压缩的文件列表。
-
-### 实例
+　　‍
 
 　　压缩单个文件，这会将 `file.txt`​ 文件压缩到名为 `compressed.zip`​ 的归档文件中
 
@@ -149,19 +140,34 @@ $ zip -r httpdocs.zip httpdocs --exclude *.svn* --exclude *.git*
 $ zip -r httpdocs.zip httpdocs --exclude "*.log"
 ```
 
+　　**应用场景：** 某些文件太大不能直接上传为邮箱附件或者直接上传网盘，需要压缩，压缩之后大小仍然超过限制，那就分割压缩包（分卷压缩）；将多个分割的压缩包下载后，需要合并成一个压缩包再解压（合并解压）。
+
+```bash
+# ----- 分卷压缩 -----
+ 
+# 将文件或者文件件打包为zip压缩包，book.zip大小为38.8M
+zip -r book.zip ./input.pdf
+# 将book.zip分割，每个压缩包不超过20M，生成两个压缩包subbook.zip（17.8M）和subbook.z01（21M）
+zip -s 20m book.zip --out subbook.zip
+ 
+ 
+# ----- 合并解压 -----
+ 
+# 将上述两个压缩包合并为一个压缩文件single.zip
+zip subbook.zip -s=0 --out single.zip
+# 解压single.zip
+
+```
+
 　　‍
 
 # zunip
 
 　　**unzip命令** 用于解压缩由zip命令压缩的“.zip”压缩包。
 
-### 语法
-
 ```shell
 unzip(选项)(参数)
 ```
-
-### 选项
 
 ```shell
 -c：将解压缩的结果显示到屏幕上，并对字符做适当的转换；
@@ -190,11 +196,7 @@ unzip(选项)(参数)
 -Z：unzip-Z等于执行zipinfo指令。
 ```
 
-### 参数
-
-　　压缩包：指定要解压的“.zip”压缩包。
-
-### 实例
+　　‍
 
 　　将压缩文件text.zip在当前目录下解压缩。
 

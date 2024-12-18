@@ -9,6 +9,7 @@
 
   * 📄 [.hidden](siyuan://blocks/20240403220911-b816dvh)
   * 📄 [.netrc](siyuan://blocks/20240211112927-ac7t3tg)
+  * 📄 [CentOS7 升级 Glibc 2.17 到2.28](siyuan://blocks/20241106213608-j8uqd2b)
   * 📄 [opensuse 声卡问题](siyuan://blocks/20240906180735-j730zdc)
 * 📑 [linux 内核](siyuan://blocks/20240414212610-nij0ni7)
 
@@ -16,6 +17,7 @@
   * 📄 [cgroups](siyuan://blocks/20240414212933-txv8edc)
   * 📄 [dattobd](siyuan://blocks/20231110105237-toah5db)
   * 📄 [ipvs](siyuan://blocks/20240507154926-r4py9bt)
+  * 📄 [linux 升级内核版本](siyuan://blocks/20241025140945-sryyelm)
   * 📑 [linux内核的内存管理](siyuan://blocks/20240830115602-lmg0p34)
 
     * 📄 [分享Linux内存占用几个案例](siyuan://blocks/20240830113526-zc2mpwm)
@@ -33,6 +35,10 @@
     * 📄 [iptables配置说明](siyuan://blocks/20240426100632-7ewts48)
     * 📄 [四表五链](siyuan://blocks/20240426095345-fzsr45n)
   * 📄 [linux 安全加固方案](siyuan://blocks/20240520173400-wiqrunn)
+  * 📑 [linux 密码相关设置](siyuan://blocks/20241217161050-va0jqgl)
+
+    * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （CentOS）](siyuan://blocks/20231124222426-bug01uu)
+    * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （openSUSE &amp; SLE 版）](siyuan://blocks/20231124222313-c4vclkc)
 * 📑 [linux 文件属性和权限](siyuan://blocks/20231110105237-z29l1ho)
 
   * 📄 [1. Linux 文件属性和权限详解](siyuan://blocks/20231110105237-6vj74h0)
@@ -54,7 +60,10 @@
     * 📄 [硬盘结构（机械硬盘和固态硬盘）详解](siyuan://blocks/20231110105237-h46cl9m)
     * 📄 [虚拟内存和物理内存](siyuan://blocks/20231110105237-db80cv9)
   * 📄 [2. Linux磁盘配额](siyuan://blocks/20231110105237-tdeo05n)
-  * 📄 [3. Linux LVM（逻辑卷管理）](siyuan://blocks/20231110105237-qai17ft)
+  * 📑 [3. linux 分区](siyuan://blocks/20240919111921-0t1dhqv)
+
+    * 📄 [3.1 Linux 磁盘分区](siyuan://blocks/20240919112013-u467qa0)
+    * 📄 [3.2 Linux LVM（逻辑卷管理）](siyuan://blocks/20231110105237-qai17ft)
   * 📄 [4. Linux RAID（磁盘阵列）](siyuan://blocks/20231110105237-0onhyrr)
   * 📑 [5. linux 日志管理](siyuan://blocks/20231110105237-l95y0r6)
 
@@ -68,6 +77,7 @@
 
     * 📄 [limits.conf 文件](siyuan://blocks/20240724134937-uizbfld)
     * 📄 [linux系统限制进程的cpu使用率](siyuan://blocks/20240724134713-etdkgek)
+  * 📄 [8. linux下的 dev-shm](siyuan://blocks/20241030200023-z4ze64y)
 * 📑 [linux 概念释义](siyuan://blocks/20240403215529-w933ywi)
 
   * 📄 [1. 一切皆文件](siyuan://blocks/20240403215644-0halvvy)
@@ -85,8 +95,12 @@
   * 📄 [3. 用户和组管理命令](siyuan://blocks/20240424160730-v9nq6fl)
   * 📑 [4. 其他用户相关命令](siyuan://blocks/20231110105237-rci0qia)
 
-    * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （CentOS）](siyuan://blocks/20231124222426-bug01uu)
-    * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （openSUSE &amp; SLE 版）](siyuan://blocks/20231124222313-c4vclkc)
+    * 📄 [chage](siyuan://blocks/20241217160901-o6mh8ec)
+    * 📄 [gpasswd](siyuan://blocks/20241217160840-qdih54s)
+    * 📄 [passwd](siyuan://blocks/20241217160648-6gwjdem)
+    * 📄 [sudo](siyuan://blocks/20241217160552-r8lp42i)
+    * 📄 [文件etcgshadow](siyuan://blocks/20241217161010-5goroor)
+    * 📄 [文件etcshadow](siyuan://blocks/20241217160944-dn83ir2)
 * 📑 [linux 网络管理](siyuan://blocks/20231110105237-q0mg0iy)
 
   * 📄 [firewalld](siyuan://blocks/20240809170947-m97709h)
@@ -109,7 +123,9 @@
     * 📄 [Linux 虚拟网络设备之 tuntap](siyuan://blocks/20240404111351-87slx8i)
     * 📄 [Linux 虚拟网络设备之 vRouter](siyuan://blocks/20231110105237-k39nhil)
     * 📄 [理解物理网卡、网卡接口、内核、IP等属性的关系](siyuan://blocks/20240404111533-1wcj9mu)
-* 📄 [linux 软件包管理](siyuan://blocks/20231110105237-u1beis8)
+* 📑 [linux 软件包管理](siyuan://blocks/20231110105237-u1beis8)
+
+  * 📄 [Linux 软件源配置全攻略](siyuan://blocks/20241211154436-os6b48h)
 * 📑 [linux 进程管理](siyuan://blocks/20231110105237-jjrt2xm)
 
   * 📄 [linux proc-pid-status 文件](siyuan://blocks/20231110105237-xkps35d)
@@ -117,15 +133,14 @@
   * 📑 [systemd](siyuan://blocks/20240423111840-rbgqjc1)
 
     * 📄 [systemctl和service、chkconfig命令的关系](siyuan://blocks/20231110105237-rzhqmgg)
-    * 📄 [systemd etcfstab](siyuan://blocks/20240424180039-sizyaj6)
     * 📄 [systemd path 实时监控文件和目录的变动](siyuan://blocks/20240424175548-grq9r5v)
     * 📄 [systemd timer 取代cron和at的定时任务](siyuan://blocks/20240424181008-s6g2sr7)
     * 📄 [systemd timesyncd 做时间同步](siyuan://blocks/20240424181617-nwnjkd7)
     * 📄 [systemd 开机自启动任务](siyuan://blocks/20240424174529-oagnrjj)
-    * 📄 [systemd 日志 journalctl](siyuan://blocks/20240424204436-5usm17t)
+    * 📄 [systemd 挂载任务](siyuan://blocks/20240424180039-sizyaj6)
+    * 📄 [systemd 日志管理 journalctl](siyuan://blocks/20240424204436-5usm17t)
     * 📄 [systemd 服务管理](siyuan://blocks/20240424172244-jhfhzbk)
-    * 📄 [systemd 服务配置文件编写(1)](siyuan://blocks/20240424172850-cgmuntf)
-    * 📄 [systemd 服务配置文件编写(2)](siyuan://blocks/20240424173746-aczkl2b)
+    * 📄 [systemd 服务配置文件示例](siyuan://blocks/20240424173746-aczkl2b)
     * 📄 [systemd 运行级别](siyuan://blocks/20240424175045-s1lcniu)
     * 📄 [前后台进程、孤儿进程和daemon类进程的父子关系](siyuan://blocks/20240424165936-k0gazgk)
 

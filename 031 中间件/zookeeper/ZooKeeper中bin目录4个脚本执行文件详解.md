@@ -36,8 +36,8 @@ zkCleanup.sh  zkCli.sh  zkEnv.sh  zkServer.sh
 * 连接到 ZooKeeper：`./zkCli.sh -server localhost:2181`​
 * 创建节点：`create /path value`​
 * 读取节点数据：`get /path`​
-* **参数介绍**：`zkCli.sh`​ 接受连接参数，如 ZooKeeper 服务器地址。
-* **场景**：用于与 ZooKeeper 交互、创建、读取、更新、删除节点等。
+* 参数介绍：`zkCli.sh`​ 接受连接参数，如 ZooKeeper 服务器地址。
+* 场景：用于与 ZooKeeper 交互、创建、读取、更新、删除节点等。
 
 　　​`zkCli.sh`​ 脚本是 ZooKeeper 提供的命令行客户端工具，用于连接到 ZooKeeper 服务器并执行相关操作。它允许用户交互式地操作 ZooKeeper 数据，例如创建节点、设置节点数据、获取节点信息等。以下是关于 `zkCli.sh`​ 脚本的使用方法和一些常用命令示例：
 
@@ -320,8 +320,8 @@ WantedBy=multi-user.target
 #### 3-1. zkEnv-使用示例
 
 * ​`source zkEnv.sh`​，加载配置到当前 Shell 环境
-* **参数介绍**：该脚本通常不需要额外参数
-* **场景**：在启动 ZooKeeper 实例之前，可以设置 Java 环境、内存配置、JVM 参数等
+* 参数介绍：该脚本通常不需要额外参数
+* 场景：在启动 ZooKeeper 实例之前，可以设置 Java 环境、内存配置、JVM 参数等
 
 #### 3-2. zkEnv-使用方式
 
@@ -391,8 +391,8 @@ export ZOOKEEPER_TICK_TIME=2000
 #### 4-1. zkCleanup-使用示例
 
 * ​`./zkCleanup.sh /path/to/zookeeper/data/version-2 -n 5`​，这将保留最近 5 个快照和事务日志文件。
-* **参数介绍**：`zkCleanup.sh`​ 接受数据目录路径和要保留的文件数作为参数。
-* **场景**：当 ZooKeeper 数据目录中的日志文件和快照文件太多时，用于清理旧文件，释放磁盘空间。
+* 参数介绍：`zkCleanup.sh`​ 接受数据目录路径和要保留的文件数作为参数。
+* 场景：当 ZooKeeper 数据目录中的日志文件和快照文件太多时，用于清理旧文件，释放磁盘空间。
 
 　　​`zkCleanup.sh`​ 脚本主要用于清理 ZooKeeper 数据目录中的快照（snapshot）和事务日志（transaction logs），以减少磁盘占用并保持 ZooKeeper 数据的健康状态。这个脚本允许你限制保留的快照和事务日志的数量，以及清理指定路径下的数据。该脚本一般用于维护 ZooKeeper 的数据目录，清除旧的数据文件，防止数据过于庞大影响性能。
 

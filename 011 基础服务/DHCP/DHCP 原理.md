@@ -2,7 +2,7 @@
 
 ### DHCP 概述
 
-　　DHCP (Dynamic Host Configuration Protocol)，动态主机配置协议是应用层上一种客户端/服务器协议，用于**动态分配 IP 地址**与网关等参数到 DHCP 客户端。
+　　DHCP (Dynamic Host Configuration Protocol)，动态主机配置协议是应用层上一种客户端/服务器协议，用于动态分配 IP 地址与网关等参数到 DHCP 客户端。
 
 　　DHCP 主要是为计算机自动提供 IP 地址、子网掩码和网关。网络管理员会分配某个范围的 IP  地址来分发给局域网上的客户机，当设备接入这个局域网时，会向 DHCP 服务器请求一个 IP 地址。然后 DHCP  服务器为每个请求的设备分配一个地址，直到分配完该范围内的所有 IP 地址为止。已经分配的 IP 地址必须定时地延长借用期，这个延期的过程称做  leasing。
 
@@ -28,7 +28,7 @@
 
 3. DHCP 选择阶段
 
-    如果有多台 DHCP 服务器向 DHCP 客户端发送 DHCP offer 数据包，则 DHCP 客户端只接受第 1 个收到的 DHCP offer 信息（**即先到先得**）。然后它就以广播方式回复一个 DHCP request 数据包，该数据包中包含向它所选定的 DHCP 服务器的 IP 地址与被分配的 IP 地址信息。之所以要以广播方式回答，是为了通知所有 DHCP 服务器。
+    如果有多台 DHCP 服务器向 DHCP 客户端发送 DHCP offer 数据包，则 DHCP 客户端只接受第 1 个收到的 DHCP offer 信息（即先到先得）。然后它就以广播方式回复一个 DHCP request 数据包，该数据包中包含向它所选定的 DHCP 服务器的 IP 地址与被分配的 IP 地址信息。之所以要以广播方式回答，是为了通知所有 DHCP 服务器。
 
 4. DHCP 确认阶段
 

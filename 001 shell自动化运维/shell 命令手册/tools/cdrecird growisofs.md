@@ -24,43 +24,41 @@
 >
 > 可以，如果盘片未满，可以继续添加数据，但不能删除里面的东西。如果光盘上面写着DVD-R（或+R）的话，只能写入一次，但可以多次刻录(不是覆写刻录，是追加刻录，前面已刻录的文件不能删除)，直到用完整张光盘为止。如果光盘上面写着DVD-RW的话可以重复刻录，即删了前面的文件，重新刻入。
 
-## cdrecord 刻录CD
-
-　　**cdrecord命令**用于Linux系统下光盘刻录，它支持[cd](https://man.niaoge.com/cd "cd命令")和DVD格式。linux下一般都带有cdrecord软件。
+## cdrecord 刻录cd
 
 　　‍
 
 ```bash
-# 语法
-cdrecord(选项)(参数)
+## 创建 .iso 文件
+mkisofs -o test.iso -Jrv -V test_disk /home/carla/
 
--v              # 显示刻录光盘的详细过程；
--eject          # 刻录完成后弹出光盘；
-speed=          # 刻录倍速 指定光盘刻录的倍速；
-dev=            # 刻录机设备号 ：指定使用“-scanbus”参数扫描到的刻录机的设备号；
--scanbus：      # 扫描系统中可用的刻录机。
+# -o 为新的 .iso 映像文件命名（test.iso）
+# -J 为了与 Windows 兼容而使用 Joliet 命名记录
+# -r 为了与 UNIX/Linux 兼容而使用 Rock Ridge 命名约定，它使所有文件都公共可读
+# -v 设置详细模式，以便在创建映像时获得运行注释
+# -V 提供了卷标识（test_disk）；该标识就是出现在 Windows 资源管理器中的盘名
+#    列表中的最后一项是选择要打包到 .iso 中的文件（都在 /home/carla/ 中）
 
 
-### 参数
-ISO文件：指定刻录光盘使用的ISO映像文件。
+## 挂装 .iso,确认刻录内容，这一步可以跳过
+mkdir /test_iso 
+mount -t iso9660 -o ro,loop test.iso /test_iso
 
-### 实例
-# 查看系统所有 CD-R[w]设备：
-cdrecord -scanbus
-scsibus0:
-  0,0,0     0) *
-  0,1,0     1) *
-  0,2,0     2) *
-  0,3,0     3) 'HP      ' 'CD-Writer+ 9200 ' '1.0c' Removable CD-ROM
 
-# 用iso文件刻录一张光盘：
-cdrecord -v -eject speed=4 dev=0,3,0 backup.iso
+## 找到 CD-R/RW 的 SCSI 地址
+cdrecord -scanbus 
 
-# 擦写光驱：
-cdrecord --dev=0,3,0 --blank=fast
+## 向盘中写内容
+cdrecord -v -eject speed=8 dev=2,0,0 test.iso
+
+#-v     指详细方式
+#-eject 在完成写任务后弹出盘
+#-speed 指定写速度（8）
+#-dev   是从 cdrecord -scanbus 获得的设备号（0,1,0）
+#       最后一个是所烧录的映像的名称（test.iso）
 ```
 
-## growisofs刻录DVD
+## growisofs刻录dvd
 
 ```bash
 #刻录光盘语法：growisofs -dvd-compat -speed=<刻录速度> -Z <设备名>=<镜像路径>

@@ -5,6 +5,5 @@
 * 📄 [kubernetes知识体系](siyuan://blocks/20231110105237-u7hzejn)
 * 📄 [kubernetes组件](siyuan://blocks/20231110105237-eleulm4)
 * 📄 [二进制安装Kubernetes（k8s）v1.28.3](siyuan://blocks/20240717142110-il6eeb9)
-* 📄 [二进制安装Kubernetes（k8s）v1.30.2](siyuan://blocks/20240717141845-eysxi54)
 
 　　‍

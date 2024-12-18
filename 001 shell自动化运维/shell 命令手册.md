@@ -1,11 +1,15 @@
 # shell 命令手册
 
+* 📑 [shell 三剑客](siyuan://blocks/20231110105237-n1q0g7i)
+
+  * 📄 [awk](siyuan://blocks/20240809174716-ud8g2c7)
+  * 📄 [grep](siyuan://blocks/20231110162840-fwvtqmu)
+  * 📄 [sed](siyuan://blocks/20231110164251-540q6se)
 * 📑 [tools](siyuan://blocks/20240405220807-igtzcic)
 
   * 📄 [base64](siyuan://blocks/20231110105237-7ng3g33)
   * 📄 [cdrecird growisofs](siyuan://blocks/20231115103835-hjm12jh)
   * 📄 [crontab](siyuan://blocks/20231110105237-j6s89rn)
-  * 📄 [curl](siyuan://blocks/20231110105237-iutu4j7)
   * 📄 [flock](siyuan://blocks/20240402201243-fqy8c6q)
   * 📄 [fuser](siyuan://blocks/20231110105237-c4ufcct)
   * 📄 [htpasswd](siyuan://blocks/20231110105237-4dcxe21)
@@ -44,7 +48,7 @@
   * 📄 [dd (Duplicated 2024-04-30 15:19:00)](siyuan://blocks/20240430151900-svn0rdm)
   * 📄 [dump](siyuan://blocks/20231110105237-onn32fn)
   * 📄 [restore](siyuan://blocks/20240430151809-zj5eboi)
-  * 📄 [rsync (Duplicated 2024-04-30 15:52:03)](siyuan://blocks/20240430155203-zy5l2at)
+  * 📄 [rsync](siyuan://blocks/20240430155203-zy5l2at)
 * 📑 [性能监控](siyuan://blocks/20240405214026-dbaayor)
 
   * 📄 [UnixBench](siyuan://blocks/20240408181639-8saj9ke)
@@ -54,6 +58,7 @@
   * 📄 [dmidecode](siyuan://blocks/20231110105237-05adh5q)
   * 📄 [fio](siyuan://blocks/20240726104624-o7nkun7)
   * 📄 [hdparm](siyuan://blocks/20231115130306-86r820v)
+  * 📄 [ipmitool](siyuan://blocks/20241210162811-6ucthj0)
   * 📄 [meminfo](siyuan://blocks/20231110105237-7l8hmjv)
   * 📄 [nice](siyuan://blocks/20240724144329-59k77it)
   * 📄 [pidof](siyuan://blocks/20240408132404-vtqveen)
@@ -103,13 +108,13 @@
 * 📑 [网络相关](siyuan://blocks/20240405220105-p3fp88a)
 
   * 📄 [arping](siyuan://blocks/20231110105237-uu8u1pl)
-  * 📄 [curl (Duplicated 2024-06-12 17:37:39)](siyuan://blocks/20240612173739-ekluj2u)
+  * 📄 [curl](siyuan://blocks/20240612173739-ekluj2u)
   * 📄 [iperf3](siyuan://blocks/20240429152237-h3ij7le)
   * 📄 [nc](siyuan://blocks/20240314200041-l7hgq6t)
   * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
   * 📄 [tcpdump](siyuan://blocks/20231214163310-dut0ld3)
   * 📄 [traceroute](siyuan://blocks/20231110105237-ej1qj6t)
-  * 📄 [wget (Duplicated 2024-06-12 17:37:32)](siyuan://blocks/20240612173732-g2xmeci)
+  * 📄 [wget](siyuan://blocks/20240612173732-g2xmeci)
 * 📑 [脚本常用命令](siyuan://blocks/20240405220754-9gd6h13)
 
   * 📄 [basename](siyuan://blocks/20240311212631-yfd6fnw)
@@ -127,6 +132,7 @@
   * 📄 [arp](siyuan://blocks/20231110105237-apgbdoz)
   * 📄 [dnf](siyuan://blocks/20231110105237-1hl26hy)
   * 📄 [dpkg](siyuan://blocks/20240224200236-2wchsjr)
+  * 📄 [rpm](siyuan://blocks/20241118095016-vd4umyg)
   * 📄 [yum](siyuan://blocks/20231110105237-70luvz1)
   * 📄 [zypper](siyuan://blocks/20231110105237-p2r21wy)
 

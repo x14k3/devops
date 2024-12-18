@@ -118,10 +118,13 @@ git rm            # 将文件从缓存区移除
 ```bash
 git branch                     # 列出分支；-r 列出所有远程分支 -a 列出所有本地分支和远程分支
 git branch (branchname)        # 新建本地分支
-git branch -d (branchname)     # 删除分支
-git branch -dr [remote/branch] # 删除远程分支
+git branch -d localBranchName  # 删除本地分支
+git push origin --delete remoteBranchName # 删除远程分支
+
+git checkout                   # 切换分支
 git checkout -b (branchname)   # 创建新分支，并立即切换到它
-git merge                      # 将分支合并到你的当前分支
+git push --set-upstream origin (branchname) #建立本地到远端仓库的链接 –这样代码才能提交上去
+git merge                       # 将分支合并到你的当前分支
 git log    # 显示一个分支中提交的更改记录，--oneline 选项来查看历史记录的紧凑简洁的版本。 --graph 选项，查看历史中什么时候出现了分支、合并
 git tag [tag] [commit]   # 给历史记录中的某个重要的一点打上标签,新建一个tag在指定commit
 
@@ -193,4 +196,33 @@ git show --name-only [commit]
 git show [commit]:[filename]
 # 显示当前分支的最近几次提交
 git reflog
+```
+
+## [git 从远程仓库获取所有分支](https://www.cnblogs.com/sogeisetsu/p/11922067.html "发布于 2019-11-24 13:05")
+
+　　方法一：
+
+```bash
+git clone只能clone远程库的master分支，无法clone所有分支，解决办法如下：
+
+    找一个干净目录，假设是git_work
+    cd git_work
+    git clone http://myrepo.xxx.com/project/.git ,这样在git_work目录下得到一个project子目录
+    cd project
+    git branch -a，列出所有分支名称如下：
+    remotes/origin/dev
+    remotes/origin/release
+    git checkout -b dev origin/dev，作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
+    git checkout -b release origin/release，作用参见上一步解释
+    git checkout dev，切换回dev分支，并开始开发。
+
+```
+
+　　方法二：
+
+```bash
+git clone xxx
+git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+git fetch --all
+git pull --all
 ```

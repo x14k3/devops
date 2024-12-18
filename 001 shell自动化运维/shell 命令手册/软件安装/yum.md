@@ -6,10 +6,12 @@
 
 　　yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。
 
-### 语法
+　　‍
 
-```
-yum(选项)(参数)
+```bash
+yum (选项) (参数)
+
+################ 选项 ####################
 -h：显示帮助信息；
 -y：对所有的提问都回答“yes”；
 -c：指定配置文件；
@@ -19,54 +21,27 @@ yum(选项)(参数)
 -e：设置错误等级（0-10）；
 -R：设置yum处理一个命令的最大等待时间；
 -C：完全从缓存中运行，而不去下载或者更新任何头文件。
-```
 
-### 参数
 
-```
-install：安装rpm软件包；
-update：更新rpm软件包；
-check-update：检查是否有可用的更新rpm软件包；
-remove：删除指定的rpm软件包；
-list：显示软件包的信息；
-search：检查软件包的信息；
-info：显示指定的rpm软件包的描述信息和概要信息；
-clean：清理yum过期的缓存；
-shell：进入yum的shell提示符；
-resolvedep：显示rpm软件包的依赖关系；
-localinstall：安装本地的rpm软件包；
-localupdate：显示本地rpm软件包进行更新；
-deplist：显示rpm软件包的所有依赖关系；
-provides：查询某个程序所在安装包。
-
-```
-
-### 实例
-
-```bash
-yum install              #全部安装
-yum install package1     #安装指定的安装包package1
-yum groupinsall group1   #安装程序组group1
-yum update               #全部更新
-yum update package1      #更新指定程序包package1
-yum check-update         #检查可更新的程序
-yum upgrade package1     #升级指定程序包package1
-yum groupupdate group1   #升级程序组group1
-# 检查 MySQL 是否已安装
-yum list installed | grep mysql
-yum list installed mysql*
-yum info package1        #显示安装包信息package1
-yum list                 #显示所有已经安装和可以安装的程序包
-yum list package1        #显示指定程序包安装情况package1
-yum groupinfo group1     #显示程序组group1信息yum search string 根据关键字string查找安装包
-
-yum remove &#124; erase package1   #删除程序包package1
-yum groupremove group1             #删除程序组group1
-yum deplist package1               #查看程序package1依赖情况
-
-yum clean packages       # 清除缓存目录下的软件包
-yum clean headers        # 清除缓存目录下的 headers
-yum clean oldheaders     # 清除缓存目录下旧的 headers
+################ 参数 ####################
+yum check-update			#列出所有可更新的软件清单命令：
+yum update					#更新所有软件命令，升级所有包，以及升级软件和系统内核
+yum update <package_name> 	#更新指定程序包<package_name>，   
+yum upgrade <package_name> 	#升级指定程序包<package_name>
+yum install <package_name>	#仅安装指定的软件命令
+# 通过yum命令只下载rpm包不安装
+# yum install   --downloadonly --downloaddir=/tmp/ vsftpd
+# yum reinstall --downloadonly --downloaddir=/tmp/ vsftpd
+yum repolist				#查看已安装好的yum源仓库
+yum list					#列出所有可安裝的软件清单命令
+yum list installed			#列出所有已安装的软件命令
+yum remove <package_name>	#删除软件包命令
+yum search <keyword>		#查找软件包命令
+清除缓存命令:
+yum clean packages			#清除缓存目录下的软件包
+yum clean headers			#清除缓存目录下的 headers
+yum clean oldheaders		#清除缓存目录下旧的 headers
+yum clean, yum clean all (= yum clean packages; yum clean oldheaders) #清除缓存目录下的软件包及旧的 headers
 ```
 
 # 配置 YUM 源
@@ -201,8 +176,8 @@ yum clean all &&  yum makecache
 
 　　如果只想通过 yum 下载软件的软件包，但是不需要进行安装的话，可以使用 yumdownloader 命令；   yumdownloader 命令在软件包 yum-utils 里面。
 
-```
-# yum install yum-utils -y
+```bash
+yum install yum-utils -y
 ```
 
 　　常用参数说明：
@@ -214,8 +189,8 @@ yum clean all &&  yum makecache
 
 　　示例：
 
-```
-# yumdownloader --destdir=/tmp --resolve httpd
+```bash
+yumdownloader --destdir=/tmp --resolve httpd
 ```
 
 ## 方法二：yum --downloadonly
@@ -224,26 +199,25 @@ yum clean all &&  yum makecache
 
 　　示例：
 
-```
-# yum install --downloadonly --downloaddir=/tmp/ vsftpd
-
-# yum reinstall --downloadonly --downloaddir=/tmp/ vsftpd
+```bash
+yum install   --downloadonly --downloaddir=/tmp/ vsftpd
+yum reinstall --downloadonly --downloaddir=/tmp/ vsftpd
 ```
 
 　　说明：如果该服务器已经安装了需要下载的软件包，那么使用 install下载就不行，可以使用reinstall下载。 放心（不会真的安装和重新安装，因为后面加了 --downloadonly，表明只是下载。
 
 　　如果提示没有--downloadonly选项则需要安装yum-plugin-downloadonly软件包；
 
-```
-# yum install yum-plugin-downloadonly
+```bash
+yum install yum-plugin-downloadonly
 ```
 
 ## 方法三：reposync
 
 　　该命令更加强大，可以将远端yum仓库里面的包全部下载到本地。这样构建自己的yum仓库，就不会遇到网络经常更新包而头痛的事情了。 该命令也是来自与 yum-utils 里面。
 
-```
-# yum install yum-utils -y
+```bash
+yum install yum-utils -y
 ```
 
 　　常用参数说明：

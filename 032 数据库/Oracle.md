@@ -5,12 +5,14 @@
 * 📑 [Oracle 备份恢复](siyuan://blocks/20240506143742-texosxn)
 
   * 📄 [Oracle RMAN](siyuan://blocks/20231110105237-b95b8d3)
+  * 📄 [Oracle RMAN与CDB](siyuan://blocks/20241018174246-ycn8tc4)
   * 📄 [Oracle 数据泵](siyuan://blocks/20231110105237-olz151u)
   * 📄 [基于Flashback恢复](siyuan://blocks/20240506151747-qovnxo5)
   * 📄 [基于RMAN实现异机恢复](siyuan://blocks/20231110105237-o1b43ni)
   * 📄 [基于RMAN的不完全恢复](siyuan://blocks/20240506144819-y7xbwg9)
 * 📑 [Oracle 安装部署](siyuan://blocks/20240506143657-lcbi56z)
 
+  * 📄 [Linux下Oracle client（sqlplus）安装和配置](siyuan://blocks/20241022155004-cb6xctp)
   * 📄 [Oracle11g 静默安装](siyuan://blocks/20240111154537-q08w3dz)
   * 📄 [Oracle19c 静默安装](siyuan://blocks/20231110105237-i3wbtoj)
   * 📄 [oracle11g r2 在window server 2012中安装和卸载](siyuan://blocks/20240227181359-xfhdy5x)
@@ -18,7 +20,6 @@
 * 📄 [Oracle 常用语句](siyuan://blocks/20231110105237-4d46t04)
 * 📑 [Oracle 日志归档和闪回区](siyuan://blocks/20231110105237-8m376yh)
 
-  * 📄 [Oracle 检查点](siyuan://blocks/20241012095903-ikqlh19)
   * 📄 [Oracle之redo log 归档](siyuan://blocks/20240314095026-czk7wdz)
   * 📄 [Oracle之redo log 管理](siyuan://blocks/20240314092307-3c0eicl)
   * 📄 [Oracle之事务流程分析](siyuan://blocks/20241014110036-55rxu1v)
@@ -31,16 +32,14 @@
 * 📑 [Oracle 问题归档](siyuan://blocks/20231110105237-ly2ljyl)
 
   * 📄 [archivelog日志占用空间大](siyuan://blocks/20240227181241-j4sf68v)
+  * 📄 [control_files丢失或损坏](siyuan://blocks/20241015174052-5z4ic29)
+  * 📄 [datafile丢失或损坏](siyuan://blocks/20241015173907-wxka150)
+  * 📄 [oracle错误代码大全](siyuan://blocks/20241016160245-kvidg7b)
+  * 📄 [redolog文件损坏或丢失](siyuan://blocks/20241015174223-tipeyr7)
+  * 📄 [temp表空间不足](siyuan://blocks/20241015173714-etsxjke)
   * 📄 [undo表空间文件过大，占用磁盘空间](siyuan://blocks/20240227181310-4hmitvv)
-  * 📑 [报错代码](siyuan://blocks/20241015110232-crelh3u)
-
-    * 📄 [ORA-00205](siyuan://blocks/20241015174052-5z4ic29)
-    * 📄 [ORA-01033](siyuan://blocks/20241015173833-gd859qa)
-    * 📄 [ORA-01034](siyuan://blocks/20241015174223-tipeyr7)
-    * 📄 [ORA-01110](siyuan://blocks/20241015173907-wxka150)
-    * 📄 [ORA-01652](siyuan://blocks/20241015173714-etsxjke)
-    * 📄 [oracle错误代码大全](siyuan://blocks/20241016160245-kvidg7b)
   * 📄 [报错日志目录](siyuan://blocks/20240227181152-b6xmjgw)
+  * 📄 [服务器调整内存后，oracle启动异常](siyuan://blocks/20241021115511-2falyqb)
 * 📑 [Oracle 高可用集群](siyuan://blocks/20240506144137-mq4funh)
 
   * 📑 [Oracle DataGuard](siyuan://blocks/20231110105237-prfvvi6)
@@ -56,7 +55,7 @@
     * 📄 [1. Oracle RAC 介绍](siyuan://blocks/20240131124219-qt7whoo)
     * 📄 [2. Oracle rac集群中的IP类型简介](siyuan://blocks/20240131170055-hv17otm)
     * 📄 [3. Oracle19c RAC-ASM部署](siyuan://blocks/20240130214424-vl6pjpb)
-    * 📄 [4. Oracle RAC 集群 crsctl 常用命令](siyuan://blocks/20240131173132-9tt486e)
+    * 📄 [4. Oracle RAC 常用命令](siyuan://blocks/20240131173132-9tt486e)
 * 📑 [Oracle 高级特性](siyuan://blocks/20240506144018-n64qymn)
 
   * 📑 [Oracle CDB](siyuan://blocks/20240307185827-esjiait)
@@ -68,6 +67,9 @@
     * 📄 [远程克隆PDB](siyuan://blocks/20240726180857-670biph)
   * 📄 [Oracle OEM](siyuan://blocks/20240726152307-aqys4am)
   * 📄 [Oracle OMF](siyuan://blocks/20231110105237-1muwt5l)
-* 📄 [Oralce 基础概念](siyuan://blocks/20240106163022-r6d6dnh)
+* 📑 [Oralce 基础概念](siyuan://blocks/20240106163022-r6d6dnh)
+
+  * 📄 [Oracle基本概念和结构](siyuan://blocks/20241022143840-0bcatya)
+  * 📄 [Oracle检查点](siyuan://blocks/20241012095903-ikqlh19)
 
 　　‍

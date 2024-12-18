@@ -127,7 +127,7 @@ iptables -A FORWARD -o eth0
 ### 14. 查看已添加的规则
 
 ```bash
-iptables -L -n -v
+iptables -nvL
 Chain INPUT (policy DROP 48106 packets, 2690K bytes)
  pkts bytes target     prot opt in     out     source               destination
  5075  589K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0
@@ -161,8 +161,24 @@ iptables -t nat -A POSTROUTING -s 10.66.1.0/24 -o eth0 -j MASQUERADE
 　　本机的 2222 端口映射到内网 虚拟机的 22 端口
 
 ```bash
-iptables  [-t 表名]  管理选项  [链名]  [匹配条件]  [-j 控制类型]
-iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22
+# 开启数据转发功能
+vi /etc/sysctl.conf
+net.ipv4.ip_forward=1
+sysctl -p
+ 
+# 将本地的端口转发到本机端口
+iptables -t nat -A PREROUTING -p tcp --dport 2222 -j REDIRECT --to-port 22
+ 
+# 将本机的端口转发到其他机器
+iptables -t nat -A PREROUTING -d 192.168.172.130 -p tcp --dport 8000 -j DNAT --to-destination 192.168.172.131:80
+iptables -t nat -A POSTROUTING -d 192.168.172.131 -p tcp --dport 80 -j SNAT --to 192.168.172.130
+ 
+# 清空nat表的所有链
+iptables -t nat -F PREROUTING
+
+# 在linux使用iptable转发端口9876端口到windows的3389端口
+nc -lk 9876 &
+iptables -t nat -A PREROUTING  -p tcp --dport 9876  -j DNAT --to-dest 192.168.3.101:3389
 ```
 
 ### 17. 字符串匹配

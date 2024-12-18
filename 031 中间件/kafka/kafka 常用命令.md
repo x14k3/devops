@@ -22,23 +22,29 @@
 ### 查看当前服务器中的所有 topic
 
 ```bash
-./bin/kafka-topics.sh  --list --bootstrap-server 192.168.133.11:9092
+./bin/kafka-topics.sh --list --bootstrap-server 192.168.133.11:9092
+# and
+./bin/kafka-topics.sh --list --zookeeper        192.168.133.11:2181
 ```
 
 ### 创建 first topic
 
 ```bash
-./bin/kafka-topics.sh --bootstrap-server 192.168.133.11:9092 --create --partitions 1 --replication-factor 3 --topic first
-#选项说明：
-#--topic 定义 topic 名
+./bin/kafka-topics.sh --create --bootstrap-server 192.168.133.11:9092 --partitions 1 --replication-factor 1 --topic testTopic1
+# 或者
+./bin/kafka-topics.sh --create --zookeeper        127.0.0.1:2181      --partitions 1 --replication-factor 2 --topic testTopic2
+# 选项说明
+#--topic              定义 topic 名
 #--replication-factor 定义副本数
-#--partitions 定义分区数
+#--partitions         定义分区数
 ```
 
 ### 查看 first 主题的详情
 
 ```shell
-./bin/kafka-topics.sh --bootstrap-server 192.168.133.11:9092 --describe --topic first
+./bin/kafka-topics.sh --describe --bootstrap-server 192.168.133.11:9092 --topic first
+# 
+./bin/kafka-topics.sh --describe --zookeeper 127.0.0.1:2181             --topic first
 ```
 
 ### 修改分区数（注意：分区数只能增加，不能减少）

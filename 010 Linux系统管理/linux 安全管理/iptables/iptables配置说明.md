@@ -13,6 +13,8 @@ iptables  [-t 表名]  管理选项  [链名]  [匹配条件]  [-j 控制类型]
 -   `控制类型`：指数据包的处理方式，比如：`允许accept`、`拒绝reject`、`丢弃drop`、`日志LOG`等；
 ```
 
+​![610](assets/610-20241020124925-j1hlo7k.png)​
+
 ## 1. 常用管理选项
 
 ```bash
@@ -63,7 +65,7 @@ REDIRECT  # 在本机做端口映射。
 LOG       # 在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则，也就是说除了记录以外不对数据包做任何其他操作，仍然让下一条规则去匹配。
 ```
 
-## 规则管理
+## 4. 规则管理
 
 　　**规则的增、删、改、查**  
 最常用的匹配条件是报文的：s（源地址）、d（目标地址）、sport（源端口）、dport（目标端口） 等；  
@@ -71,59 +73,40 @@ LOG       # 在/var/log/messages文件中记录日志信息，然后将数据包
 
 　　==规则的顺序很重要，排序靠前的先执行==
 
-### 新增规则
-
 ```bash
-
+### 新增规则
 # 丢弃192.168.0.104 的报文
 iptables -t filter -I INPUT -s 192.168.0.104 -j DROP
-
 # -I INPUT 2表示在INPUT链中新增规则，新增的规则的编号为2
 iptables -t filter -I INPUT 2 -s 192.168.0.104 -j DROP
-```
 
 ### 删除规则
-
-```bash
-# 清空INPUT链中的规则(-t filter)
-iptables -F INPUT 
+# 清空INPUT链中的规则
+iptables -t filter -F INPUT 
 # 根据规则的编号去删除规则
 iptables -t filter -D INPUT 1 
 # 根据具体的匹配条件与动作删除规则
-iptables -D INPUT -s 192.168.0.104 -j DROP
-```
+iptables -t filter -D INPUT -s 192.168.0.104 -j DROP
 
 ### 修改规则
-
-```bash
-
 # 使用-R选项修改指定的链中的规则，注意：-s选项以及对应的源地址不可省略，否则规则中的源地址会自动变为0.0.0.0/0，那么所有IP的请求都被拒绝了
 iptables -t filter -R INPUT 1 -s 192.168.0.104 -j REJECT
 # 修改默认策略
 iptables -t filter -P FORWARD DROP
-```
 
 ### 保存规则
-
-```bash
 # 当我们对规则进行了修改以后，如果想要修改永久生效，必须使用保存规则
 # centos6中
 service iptables save
 # centos7
 iptables-save >  /etc/sysconfig/iptables-config
-```
 
 ### 重载规则
-
-```bash
 iptables-restore < /etc/sysconfig/iptables-config
-```
 
+#==============================================================================
 ### 查看规则
-
-```bash
-
-iptables -L                     # 默认为filter表的规则          
+iptables -L                     # 默认为filter表的规则        
 iptables -t filter -L INPUT     # 查看INPUT链上的filter表的规则
 iptables --line -t filter -nvxL
 iptables -S                     # 以_iptables_-save命令格式显示fliter链上的规则

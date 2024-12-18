@@ -1,23 +1,18 @@
 # 001 shell自动化运维
 
-* 📑 [shell 三剑客](siyuan://blocks/20231110105237-n1q0g7i)
-
-  * 📑 [awk](siyuan://blocks/20240809174716-ud8g2c7)
-
-    * 📄 [BEGIN和END语句块](siyuan://blocks/20240809174835-lvjfcfu)
-    * 📄 [awk命令结构和awk语法结构](siyuan://blocks/20231110164242-bllf0ol)
-    * 📄 [awk用法入门](siyuan://blocks/20240809174734-mkmjnnl)
-    * 📄 [awk读取行的细节](siyuan://blocks/20240809174952-dzefada)
-  * 📄 [grep](siyuan://blocks/20231110162840-fwvtqmu)
-  * 📄 [sed](siyuan://blocks/20231110164251-540q6se)
+* 📄 [Linux 命令行编辑快捷键](siyuan://blocks/20241025095647-r0bpum6)
 * 📑 [shell 命令手册](siyuan://blocks/20231110105237-errev41)
 
+  * 📑 [shell 三剑客](siyuan://blocks/20231110105237-n1q0g7i)
+
+    * 📄 [awk](siyuan://blocks/20240809174716-ud8g2c7)
+    * 📄 [grep](siyuan://blocks/20231110162840-fwvtqmu)
+    * 📄 [sed](siyuan://blocks/20231110164251-540q6se)
   * 📑 [tools](siyuan://blocks/20240405220807-igtzcic)
 
     * 📄 [base64](siyuan://blocks/20231110105237-7ng3g33)
     * 📄 [cdrecird growisofs](siyuan://blocks/20231115103835-hjm12jh)
     * 📄 [crontab](siyuan://blocks/20231110105237-j6s89rn)
-    * 📄 [curl](siyuan://blocks/20231110105237-iutu4j7)
     * 📄 [flock](siyuan://blocks/20240402201243-fqy8c6q)
     * 📄 [fuser](siyuan://blocks/20231110105237-c4ufcct)
     * 📄 [htpasswd](siyuan://blocks/20231110105237-4dcxe21)
@@ -56,7 +51,7 @@
     * 📄 [dd (Duplicated 2024-04-30 15:19:00)](siyuan://blocks/20240430151900-svn0rdm)
     * 📄 [dump](siyuan://blocks/20231110105237-onn32fn)
     * 📄 [restore](siyuan://blocks/20240430151809-zj5eboi)
-    * 📄 [rsync (Duplicated 2024-04-30 15:52:03)](siyuan://blocks/20240430155203-zy5l2at)
+    * 📄 [rsync](siyuan://blocks/20240430155203-zy5l2at)
   * 📑 [性能监控](siyuan://blocks/20240405214026-dbaayor)
 
     * 📄 [UnixBench](siyuan://blocks/20240408181639-8saj9ke)
@@ -115,13 +110,13 @@
   * 📑 [网络相关](siyuan://blocks/20240405220105-p3fp88a)
 
     * 📄 [arping](siyuan://blocks/20231110105237-uu8u1pl)
-    * 📄 [curl (Duplicated 2024-06-12 17:37:39)](siyuan://blocks/20240612173739-ekluj2u)
+    * 📄 [curl](siyuan://blocks/20240612173739-ekluj2u)
     * 📄 [iperf3](siyuan://blocks/20240429152237-h3ij7le)
     * 📄 [nc](siyuan://blocks/20240314200041-l7hgq6t)
     * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
     * 📄 [tcpdump](siyuan://blocks/20231214163310-dut0ld3)
     * 📄 [traceroute](siyuan://blocks/20231110105237-ej1qj6t)
-    * 📄 [wget (Duplicated 2024-06-12 17:37:32)](siyuan://blocks/20240612173732-g2xmeci)
+    * 📄 [wget](siyuan://blocks/20240612173732-g2xmeci)
   * 📑 [脚本常用命令](siyuan://blocks/20240405220754-9gd6h13)
 
     * 📄 [basename](siyuan://blocks/20240311212631-yfd6fnw)
@@ -139,24 +134,24 @@
     * 📄 [arp](siyuan://blocks/20231110105237-apgbdoz)
     * 📄 [dnf](siyuan://blocks/20231110105237-1hl26hy)
     * 📄 [dpkg](siyuan://blocks/20240224200236-2wchsjr)
+    * 📄 [rpm](siyuan://blocks/20241118095016-vd4umyg)
     * 📄 [yum](siyuan://blocks/20231110105237-70luvz1)
     * 📄 [zypper](siyuan://blocks/20231110105237-p2r21wy)
 * 📑 [shell 开箱即用](siyuan://blocks/20231110105237-eto9jg5)
 
+  * 📄 [Linux下快速比较两个目录的不同](siyuan://blocks/20240403220525-gfnfzmg)
   * 📄 [github自动提交](siyuan://blocks/20231110105237-xswinm4)
   * 📄 [jar包服务启动停止shell脚本](siyuan://blocks/20231110105237-b0y635e)
+  * 📄 [kafka_topic批量提取导入脚本](siyuan://blocks/20241122222957-6o68w2p)
   * 📄 [mysql数据库备份脚本](siyuan://blocks/20231110105237-bj0jy3e)
   * 📄 [pyhton-nacos配置文件转义](siyuan://blocks/20231110105237-1s3el2d)
   * 📄 [ssh免密批量处理](siyuan://blocks/20231110105237-pcmbxs6)
   * 📄 [zabbix监控端口数据（自动发现规则）](siyuan://blocks/20231110105237-v35zha7)
-  * 📄 [扫描主机端口状态](siyuan://blocks/20240403220626-dhgxqte)
-  * 📄 [批量修改服务器用户密码](siyuan://blocks/20240403220700-wxmlxzf)
+  * 📄 [快速生成大量文件](siyuan://blocks/20241030154145-4tfc8ki)
   * 📄 [文件编码转换utf-8](siyuan://blocks/20231110105237-z37ucwa)
   * 📄 [日志压缩清理](siyuan://blocks/20231110105237-19v44ru)
   * 📄 [服务器初始化脚本](siyuan://blocks/20231110105237-r6ouwkk)
-  * 📄 [未命名](siyuan://blocks/20240930140216-b89ubgx)
   * 📄 [根据 web 日志，封禁异常 IP](siyuan://blocks/20240403220745-inxugop)
-  * 📄 [检测两台服务器目录的一致性](siyuan://blocks/20240403220525-gfnfzmg)
   * 📄 [检测网卡流量](siyuan://blocks/20240403220601-7nhxstl)
 * 📑 [shell 用法总结](siyuan://blocks/20231110105237-yd94b2n)
 
@@ -176,7 +171,7 @@
   * 📄 [shell的进程替换 ](siyuan://blocks/20240312204658-kr4zc9h)
   * 📄 [使用dialog创建交互式shell对话框 ](siyuan://blocks/20240312202819-2ebulw8)
   * 📄 [使用whiptail创建交互式shell对话框 ](siyuan://blocks/20240312204108-fdau4vs)
-* 📄 [vim 小技巧](siyuan://blocks/20240401212502-r3thxqt)
+* 📄 [vim 编辑快捷键](siyuan://blocks/20240401212502-r3thxqt)
 * 📄 [正则表达式](siyuan://blocks/20231110105237-eua2g71)
 
 　　‍

@@ -39,7 +39,7 @@ vim /data/alist/data/config.json
   "temp_dir": "data/temp",
   "log": {
     "enable": true,
-    "name": "log/log.log",
+    "name": "log/alist.log",
     "max_size": 10,
     "max_backups": 5,
     "max_age": 28,

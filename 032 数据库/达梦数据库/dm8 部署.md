@@ -102,7 +102,7 @@ su - dmdba
 su - dmdba
 cat  >> .bash_profile <<EOF
 export DM_HOME=/data/dmapp
-export PATH=\$PATH:\$DM_HOME/bin:\$DM_HOME/tool
+export PATH=$PATH:$DM_HOME/bin:$DM_HOME/tool
 EOF
 source .bash_profile
 ```
@@ -152,7 +152,7 @@ INSTANCE_NAME=fmsdb
 
 #实际环境中，簇大小建议选择 16，页大小选择 32K，日志大小选择 2048，字符集和大小写敏感需要和应用厂商对接后，再进行选择。
 -----------------------------------------------------------
-#./dminit path=/dm8/data/ db_name=DMDB instance_name=DBSERVER port_num=5238 SYSDBA_PWD="Dameng123" EXTENT_SIZE=16 PAGE_SIZE=16 LOG_SIZE=300
+#./dminit path=/dm8/data/ db_name=dmdb instance_name=dmdb port_num=5238 SYSDBA_PWD="8ql6,yhY" EXTENT_SIZE=16 PAGE_SIZE=16 LOG_SIZE=300
 #EXTENT_SIZE        簇是进行存储空间分配的基本单位。一个簇是由一系列逻辑上连续的数据页组成的逻辑存储结构【默认16页】
 #PAGE_SIZE          数据文件使用的页大小，可以为 4 KB、8 KB、16 KB 或 32 KB 之一，选择的页大小越大，则 DM 支持的元组长度也越大，但同时空间利用率可能下降，【默认8 KB】
 #CASE_SENSITIVE     标识符大小写敏感，默认值为 Y 。取值 Y、1，N、0 
@@ -169,12 +169,19 @@ INSTANCE_NAME=fmsdb
 cd /data/dmapp/script/root
 ./dm_service_installer.sh -t dmserver -dm_ini /data/dmdata/fmsdb/dm.ini -p fmsdb
 
+#7.1.5以下：
+./root_db_service_installer.sh -n dmdb -f /opt/dmdba/data/dmdb/dm.ini
+
+
+systemctl daemon-reload
+systemctl start DmServicedmdbd
 ```
 
 ## 五、启动数据库
 
 ```bash
 /data/dmapp/bin/DmServiceFMSDB start
+#/home/dmdba/dmdbms/bin/dmserver /home/dmdba/dmdbms/data/dmdb/dm.ini
 ----------------------------------------------------------------
 # 命令行连接
 #disql SYSDBA/Ninestar123@192.168.10.150:8001

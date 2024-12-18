@@ -77,53 +77,73 @@ Killing Xtigervnc process ID 6677... success!
 
   ```bash
   #用法：rdesktop [选项] 服务器[:端口]
-  Usage: rdesktop [options] server[:port]
-     -u: user name
-     -d: domain
-     -s: shell
-     -c: working directory
-     -p: password (- to prompt)
-     -n: client hostname
-     -k: keyboard layout on server (en-us, de, sv, etc.)
-     -g: desktop geometry (WxH)
-     -f: 全屏打开，使用Ctrl + Alt + Enter可以退出全屏模式。
-     -b: force bitmap updates
-     -L: local codepage
-     -A: enable SeamlessRDP mode
-     -B: use BackingStore of X-server (if available)
-     -e: disable encryption (French TS)
-     -E: disable encryption from client to server
-     -m: do not send motion events
-     -C: use private colour map
-     -D: hide window manager decorations
-     -K: keep window manager key bindings
-     -S: caption button size (single application mode)
-     -T: window title
-     -N: enable numlock syncronization
-     -X: embed into another window with a given id.
-     -a: 连接颜色深度
-     -z: enable rdp compression
-     -x: 开启RDP协议的额外功能，如音频重定向、打印机重定向等；
-     -P: use persistent bitmap caching
-     -r: 开启远程桌面的额外功能，如共享文件夹、共享粘贴板、共享打印机等
-           '-r comport:COM1=/dev/ttyS0': enable serial redirection of /dev/ttyS0 to COM1
-           '-r disk:floppy=/mnt/floppy':启用 /mnt/floppy 到 'floppy' 共享的重定向
-           '-r clientname=<client name>': Set the client name displayed for redirected disks
-           '-r lptport:LPT1=/dev/lp0': enable parallel redirection of /dev/lp0 to LPT1
-           '-r printer:mydeskjet': enable printer redirection
-           '-r sound:[local[:driver[:device]]|off|remote]': enable sound redirection remote would leave sound on server available drivers for 'local': alsa:  ALSA output driver, default device: default
-           '-r clipboard:[off|PRIMARYCLIPBOARD|CLIPBOARD]': enable clipboard redirection.
-                        'PRIMARYCLIPBOARD' looks at both PRIMARY and CLIPBOARD when sending data to server.
-                        'CLIPBOARD' looks at only CLIPBOARD.
-           '-r scard[:"Scard Name"="Alias Name[;Vendor Name]"[,...]]
-            example: -r scard:"eToken PRO 00 00"="AKS ifdh 0"
-                     "eToken PRO 00 00" -> Device in Linux/Unix enviroment
-                     "AKS ifdh 0"       -> Device shown in Windows enviroment 
-            example: -r scard:"eToken PRO 00 00"="AKS ifdh 0;AKS"
-                     "eToken PRO 00 00" -> Device in Linux/Unix enviroment
-                     "AKS ifdh 0"       -> Device shown in Windows enviroment 
-                     "AKS"              -> Device vendor name           
-     -0: attach to console
-     -4: use RDP version 4
-     -5: use RDP version 5 (default)
+  -u：用户名
+  -d：域
+  -s：用于远程启动的 shell/无缝应用程序
+  -c：工作目录
+  -p：密码（- 提示）
+  -n：客户端主机名
+  -k：服务器上的键盘布局（en-us、de、sv 等）
+  -g：桌面几何形状（WxH[@DPI][+X[+Y]]）
+  -i：启用智能卡身份验证，密码用作 PIN
+  -f：全屏模式
+  -b：强制位图更新
+  -L：本地代码页
+  -A：SeamlessRDP shell 的路径，这将启用 SeamlessRDP 模式
+  -V：tls 版本（1.0、1.1、1.2，默认为协商）
+  -B：使用 X-server 的 BackingStore（如果可用）
+  -e：禁用加密（法语 TS）
+  -E：禁用从客户端到服务器的加密
+  -m：不发送运动事件
+  -M：使用本地鼠标光标
+  -C：使用私有颜色图
+  -D：隐藏窗口管理器装饰
+  -K：保留窗口管理器键绑定
+  -S：标题按钮大小（单一应用程序模式）
+  -T：窗口标题
+  -t：禁用远程 ctrl
+  -N：启用数字锁定同步
+  -X：嵌入到具有给定 ID 的另一个窗口。
+  -a：连接颜色深度
+  -z：启用 rdp 压缩
+  -x：RDP5 体验（m[odem 28.8]、b[roadband]、l[an] 或十六进制编号）
+  -P：使用持久位图缓存
+  -r：启用指定设备重定向（此标志可以重复）
+  '-r comport：COM1=/dev/ttyS0'：启用 /dev/ttyS0 到 COM1 的串行重定向
+  或 COM1=/dev/ttyS0,COM2=/dev/ttyS1
+  '-r disk：floppy=/mnt/floppy'：启用 /mnt/floppy 到“floppy”共享的重定向
+  或'floppy=/mnt/floppy,cdrom=/mnt/cdrom'
+  '-r clientname=<客户端名称>'：设置显示的客户端名称
+  用于重定向磁盘
+  '-r lptport：LPT1=/dev/lp0'：启用 /dev/lp0 到 LPT1 的并行重定向
+  或 LPT1=/dev/lp0,LPT2=/dev/lp1
+  '-r Printer:mydeskjet': 启用打印机重定向
+  或 mydeskjet="HP LaserJet IIIP" 以同时进入服务器驱动程序
+  '-r Sound:[local[:driver[:device]]|off|remote]': 启用声音重定向
+  远程将声音留在服务器上
+  'local' 可用的驱动程序:
+  alsa: ALSA 输出驱动程序，默认设备：默认
+  oss: OSS 输出驱动程序，默认设备：/dev/dsp 或 $AUDIODEV
+  libao: libao 输出驱动程序，默认设备：系统相关
+  '-r Clipboard:[off|PRIMARYCLIPBOARD|CLIPBOARD]': 启用剪贴板
+  重定向。
+  'PRIMARYCLIPBOARD' 在向服务器发送数据时会同时查看 PRIMARY 和 CLIPBOARD。
+  “剪贴板”仅查看剪贴板。
+  '-r scard[:"Scard Name"="别名[;供应商名称]"[,...]]
+  示例：-r scard:"eToken PRO 00 00"="AKS ifdh 0"
+  "eToken PRO 00 00" -> GNU/Linux 和 UNIX 环境中的设备
+  "AKS ifdh 0" -> Windows 环境中显示的设备
+  示例：-r scard:"eToken PRO 00 00"="AKS ifdh 0;AKS"
+  "eToken PRO 00 00" -> GNU/Linux 和 UNIX 环境中的设备
+  "AKS ifdh 0" -> Microsoft Windows 环境中显示的设备
+  "AKS" -> 设备供应商名称
+  -0：连接到控制台
+  -4：使用 RDP 版本 4
+  -5：使用 RDP 版本 5（默认）
+  -o：名称=值：向 rdesktop 添加附加选项。
+  sc-csp-name 指定用于通过智能卡验证用户的加密服务提供商名称
+  sc-container-name 指定容器名称，通常是用户名
+  sc-reader-name 要使用的智能卡读卡器名称
+  sc-card-name 指定要使用的智能卡的卡名称
+  -v：启用详细日志记录
   ```

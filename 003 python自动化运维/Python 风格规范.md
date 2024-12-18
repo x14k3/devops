@@ -14,7 +14,7 @@
 2. 注释里的URL,路径以及其他的一些长标记
 3. 不便于换行，不包含空格的模块级字符串常量，比如url或者路径
 
-    > 1. Pylint 禁用注释.（例如：[``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id3)\# pylint: disable=invalid-name）
+    > 1. Pylint 禁用注释.（例如：[``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id3)  \# pylint: disable=invalid-name）
     >
 
 　　除非是在 `with`​ 语句需要三个以上的上下文管理器的情况下，否则不要使用反斜杠连接行.
@@ -323,7 +323,7 @@ bar = foo.FunctionBar()
 
 　　Args:
 
-　　列出每个参数的名字, 并在名字后使用一个冒号和一个空格, 分隔对该参数的描述.如果描述太长超过了单行80字符,使用2或者4个空格的悬挂缩进(与文件其他部分保持一致). 描述应该包括所需的类型和含义. 如果一个函数接受*foo(可变长度参数列表)或者**bar (任意关键字参数), 应该详细列出*foo和bar.
+　　列出每个参数的名字, 并在名字后使用一个冒号和一个空格, 分隔对该参数的描述.如果描述太长超过了单行80字符,使用2或者4个空格的悬挂缩进(与文件其他部分保持一致). 描述应该包括所需的类型和含义. 如果一个函数接受*foo(可变长度参数列表)或者bar (任意关键字参数), 应该详细列出*foo和bar.
 
 　　Returns:
 
@@ -886,7 +886,7 @@ def my_method(
 ...
 ```
 
-　　若一个类型注释确实太长,则应优先考虑对过长的类型使用别名 [alias](https://google.github.io/styleguide/pyguide.html#typing-aliases). 其次是考虑在冒号后 [``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id24):[``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id26)进行换行并添加4格空格缩进.
+　　若一个类型注释确实太长,则应优先考虑对过长的类型使用别名 [alias](https://google.github.io/styleguide/pyguide.html#typing-aliases). 其次是考虑在冒号后 [``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id24)  :[``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id26)  进行换行并添加4格空格缩进.
 
 ```python
 Yes:
@@ -1074,7 +1074,7 @@ def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
 from typing import Any, Dict, Optional
 ```
 
-　　以此方式导入的类将被加入到本地的命名空间,因此所有 `typing`​ 模块中的类都应被视为关键字,不要在代码中定义并覆盖它们.若这些类和现行代码中的变量或者方法发生命名冲突,可以考虑使用 [``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id28)import x as y\`\`的导入形式:
+　　以此方式导入的类将被加入到本地的命名空间,因此所有 `typing`​ 模块中的类都应被视为关键字,不要在代码中定义并覆盖它们.若这些类和现行代码中的变量或者方法发生命名冲突,可以考虑使用 [``](https://google-styleguide.readthedocs.io/zh-cn/latest/google-python-styleguide/python_style_rules.html#id28)  import x as y\`\`的导入形式:
 
 ```python
 from typing import Any as AnyType

@@ -28,7 +28,7 @@
 
 　　安装命令：
 
-```shell
+```bash
 # archlinux/manjaro
 sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
 
@@ -41,8 +41,9 @@ sudo apt -y install qemu-kvm libvirt-daemon-system libvirt-daemon  bridge-utils 
 # centos
 yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-tools  virt-viewer  virt-v2v libguestfs-tools-c
 
-# openSUSE 有专门的 pattern 来安装相关软件包。
-sudo zypper install -y patterns-server-kvm_server patterns-server-kvm_tools bridge-utils
+# openSUSE
+#sudo zypper up
+sudo zypper install virt-*  libvirt  bridge-utils qemu-kvm  qemu-img  libvirt-client libvirt-devel
 ```
 
 　　‍
@@ -65,7 +66,7 @@ sudo zypper install -y patterns-server-kvm_server patterns-server-kvm_tools brid
 
 　　学习过程中可能会使用到上述命令，提前安装好总不会有错，安装命令如下：
 
-```shell
+```bash
 # opensuse
 sudo zypper install libguestfs
 
@@ -86,7 +87,7 @@ sudo yum install libguestfs-tools
 
 ```shell
 sudo systemctl enable libvirtd.service
-sudo systemctl start libvirtd.service
+sudo systemctl start  libvirtd.service
 ```
 
 ### 3. 让非 root 用户能正常使用 kvm
