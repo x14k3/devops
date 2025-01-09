@@ -144,7 +144,7 @@ Y
 
 　　这需要用到两个工具：
 
-1. ((20230725140556-t0ud6ll "libguestfs-tool")) : 虚拟机磁盘映像管理工具，前面介绍过了
+1. libguestfs-tool : 虚拟机磁盘映像管理工具，前面介绍过了
 2. qemu-img: qemu 的磁盘映像管理工具，用于创建磁盘、扩缩容磁盘、生成磁盘快照、查看磁盘信息、转换磁盘格式等等。
 
 ```shell
@@ -288,13 +288,13 @@ virt-install \
 --name=CentOS7.9_templ \
 --ram 8192 \
 --vcpus 2 \
---disk path=/data/virthost/CentOS7.9_templ.qcow2,size=55,format=qcow2 \
+--disk path=/data/application/virhost/CentOS7.9_templ.qcow2,size=60,format=qcow2 \
 --location /data/archive/iso/CentOS-7-x86_64-DVD-2207-02.iso \
 --nographics \
 --extra-args='console=tty0 console=ttyS0,115200n8 serial' \
 --virt-type=kvm \
 --hvm \
---network bridge=p2p1-br0,model=virtio \
+--network bridge=br0,model=virtio \
 #--network network=default \
 #--osinfo detect=on,name=centos
 ```

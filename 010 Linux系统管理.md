@@ -1,147 +1,135 @@
 # 010 Linux系统管理
 
-* 📑 [linux SElinux管理](siyuan://blocks/20231113140707-xu4su86)
+* 📑 linux SElinux管理
 
-  * 📄 [1. SELinux 概述](siyuan://blocks/20240302134531-9cykhhh)
-  * 📄 [2. SELinux工作模式设置](siyuan://blocks/20240302135336-lj5dlkv)
-  * 📄 [3. SELinux安全上下文查看方法](siyuan://blocks/20240302135548-2rr5c2m)
-* 📑 [linux 个性配置文件](siyuan://blocks/20240205174137-r9uzzee)
+  * 📄 1. SELinux 概述
+  * 📄 2. SELinux工作模式设置
+  * 📄 3. SELinux安全上下文查看方法
+* 📑 linux 个性配置文件
 
-  * 📄 [.hidden](siyuan://blocks/20240403220911-b816dvh)
-  * 📄 [.netrc](siyuan://blocks/20240211112927-ac7t3tg)
-  * 📄 [CentOS7 升级 Glibc 2.17 到2.28](siyuan://blocks/20241106213608-j8uqd2b)
-  * 📄 [opensuse 声卡问题](siyuan://blocks/20240906180735-j730zdc)
-* 📑 [linux 内核](siyuan://blocks/20240414212610-nij0ni7)
+  * 📄 .hidden
+  * 📄 .netrc
+  * 📄 CentOS7 升级 Glibc 2.17 到2.28
+  * 📄 opensuse 声卡问题
+* 📑 linux 内核
 
-  * 📄 [PAM](siyuan://blocks/20231110105237-vmjw86n)
-  * 📄 [cgroups](siyuan://blocks/20240414212933-txv8edc)
-  * 📄 [dattobd](siyuan://blocks/20231110105237-toah5db)
-  * 📄 [ipvs](siyuan://blocks/20240507154926-r4py9bt)
-  * 📄 [linux 升级内核版本](siyuan://blocks/20241025140945-sryyelm)
-  * 📑 [linux内核的内存管理](siyuan://blocks/20240830115602-lmg0p34)
+  * 📄 PAM
+  * 📄 cgroups
+  * 📄 dattobd
+  * 📄 ipvs
+  * 📄 linux 升级内核版本
+  * 📑 linux内核的内存管理
 
-    * 📄 [分享Linux内存占用几个案例](siyuan://blocks/20240830113526-zc2mpwm)
-    * 📄 [分析procmeminfo文件](siyuan://blocks/20240830114845-pz98924)
-  * 📄 [namespace](siyuan://blocks/20240414213106-fspib9h)
-  * 📄 [sysctl.conf](siyuan://blocks/20231110105237-0j1zwg6)
-  * 📄 [tuntap](siyuan://blocks/20240418114400-4dvd0xp)
-  * 📄 [udev](siyuan://blocks/20240205174149-6m3swxy)
-* 📑 [linux 安全管理](siyuan://blocks/20240415100847-65xicz6)
+    * 📄 分享Linux内存占用几个案例
+    * 📄 分析procmeminfo文件
+  * 📄 namespace
+  * 📄 sysctl.conf
+  * 📄 tuntap
+  * 📄 udev
+* 📑 linux 安全管理
 
-  * 📄 [firewalld](siyuan://blocks/20231110105237-htsujad)
-  * 📑 [iptables](siyuan://blocks/20231110105237-f3d4oum)
+  * 📄 firewalld
+  * 📑 iptables
 
-    * 📄 [iptables示例](siyuan://blocks/20240314194239-attjy4f)
-    * 📄 [iptables配置说明](siyuan://blocks/20240426100632-7ewts48)
-    * 📄 [四表五链](siyuan://blocks/20240426095345-fzsr45n)
-  * 📄 [linux 安全加固方案](siyuan://blocks/20240520173400-wiqrunn)
-  * 📑 [linux 密码相关设置](siyuan://blocks/20241217161050-va0jqgl)
+    * 📄 iptables示例
+    * 📄 iptables配置说明
+    * 📄 四表五链
+  * 📄 linux 安全加固方案
+  * 📑 linux 密码相关设置
 
-    * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （CentOS）](siyuan://blocks/20231124222426-bug01uu)
-    * 📄 [Linux 密码的安全 （设置密码复杂度和加密算法） （openSUSE &amp; SLE 版）](siyuan://blocks/20231124222313-c4vclkc)
-* 📑 [linux 文件属性和权限](siyuan://blocks/20231110105237-z29l1ho)
+    * 📄 Linux 密码的安全 （设置密码复杂度和加密算法） （CentOS）
+    * 📄 Linux 密码的安全 （设置密码复杂度和加密算法） （openSUSE & SLE 版）
+* 📑 linux 文件属性和权限
 
-  * 📄 [1. Linux 文件属性和权限详解](siyuan://blocks/20231110105237-6vj74h0)
-  * 📄 [2. Linux 文件拥有者和所属组](siyuan://blocks/20231110105237-4ptjmen)
-  * 📄 [3. linux文件的三种时间](siyuan://blocks/20240426113738-6brncn4)
-  * 📄 [4. Linux 文件隐藏属性](siyuan://blocks/20231110105237-27tsh3j)
-  * 📄 [5. Linux ACL访问控制权限](siyuan://blocks/20231110105237-3oquv3c)
-  * 📄 [6. Linux mask有效权限详解](siyuan://blocks/20231110105237-cz79885)
-  * 📄 [7. Linux umask详解：令新建文件和目录拥有默认权限](siyuan://blocks/20231110105237-dvi304y)
-  * 📄 [8. Linux sudo命令用法详解](siyuan://blocks/20231110105237-p8m7zix)
-* 📑 [linux 文件系统管理](siyuan://blocks/20231110105237-mekft9v)
+  * 📄 1. Linux 文件属性和权限详解
+  * 📄 2. Linux 文件拥有者和所属组
+  * 📄 3. linux文件的三种时间
+  * 📄 4. Linux 文件隐藏属性
+  * 📄 5. Linux ACL访问控制权限
+  * 📄 6. Linux mask有效权限详解
+  * 📄 7. Linux umask详解：令新建文件和目录拥有默认权限
+  * 📄 8. Linux sudo命令用法详解
+* 📑 linux 文件系统管理
 
-  * 📑 [1. 文件系统相关概念](siyuan://blocks/20240424162414-abfssby)
+  * 📑 1. 文件系统相关概念
 
-    * 📄 [Linux下几种常用文件系统](siyuan://blocks/20231110105237-keh9ag0)
-    * 📄 [Linux系统是如何识别硬盘设备和硬盘分区的](siyuan://blocks/20231110105237-9r96x4b)
-    * 📄 [linux系统启动流程分析](siyuan://blocks/20240312200721-8dlhfph)
-    * 📄 [什么是inode](siyuan://blocks/20240731111419-ydpvf1o)
-    * 📄 [硬盘结构（机械硬盘和固态硬盘）详解](siyuan://blocks/20231110105237-h46cl9m)
-    * 📄 [虚拟内存和物理内存](siyuan://blocks/20231110105237-db80cv9)
-  * 📄 [2. Linux磁盘配额](siyuan://blocks/20231110105237-tdeo05n)
-  * 📑 [3. linux 分区](siyuan://blocks/20240919111921-0t1dhqv)
+    * 📄 Linux下几种常用文件系统
+    * 📄 Linux系统是如何识别硬盘设备和硬盘分区的
+    * 📄 linux系统启动流程分析
+    * 📄 什么是inode
+    * 📄 硬盘结构（机械硬盘和固态硬盘）详解
+    * 📄 虚拟内存和物理内存
+  * 📄 2. Linux磁盘配额
+  * 📑 3. linux 分区
 
-    * 📄 [3.1 Linux 磁盘分区](siyuan://blocks/20240919112013-u467qa0)
-    * 📄 [3.2 Linux LVM（逻辑卷管理）](siyuan://blocks/20231110105237-qai17ft)
-  * 📄 [4. Linux RAID（磁盘阵列）](siyuan://blocks/20231110105237-0onhyrr)
-  * 📑 [5. linux 日志管理](siyuan://blocks/20231110105237-l95y0r6)
+    * 📄 3.1 Linux 磁盘分区
+    * 📄 3.2 Linux LVM（逻辑卷管理）
+  * 📄 4. Linux RAID（磁盘阵列）
+  * 📑 5. linux 日志管理
 
-    * 📄 [linux logrotate-日志切割工具](siyuan://blocks/20231110105237-z4jw6h5)
-    * 📄 [linux rsyslog-日志系统](siyuan://blocks/20231110105237-jcomrbm)
-  * 📑 [6. linux 单用户模式](siyuan://blocks/20240308135222-dmx54af)
+    * 📄 linux logrotate-日志切割工具
+    * 📄 linux rsyslog-日志系统
+  * 📑 6. linux 单用户模式
 
-    * 📄 [CentOS 7 重置 root 密码](siyuan://blocks/20240415163403-xaqe3qu)
-    * 📄 [Centos 服务器 无法启动 Failed to start Login Service ](siyuan://blocks/20240902141257-3hdrc32)
-  * 📑 [7. linux 系统限制](siyuan://blocks/20240724134120-sd2g7lu)
+    * 📄 CentOS 7 重置 root 密码
+    * 📄 Centos 服务器 无法启动 Failed to start Login Service
+  * 📑 7. linux 系统限制
 
-    * 📄 [limits.conf 文件](siyuan://blocks/20240724134937-uizbfld)
-    * 📄 [linux系统限制进程的cpu使用率](siyuan://blocks/20240724134713-etdkgek)
-  * 📄 [8. linux下的 dev-shm](siyuan://blocks/20241030200023-z4ze64y)
-* 📑 [linux 概念释义](siyuan://blocks/20240403215529-w933ywi)
+    * 📄 limits.conf 文件
+    * 📄 linux系统限制进程的cpu使用率
+  * 📄 8. linux下的 dev-shm
+* 📑 linux 概念释义
 
-  * 📄 [1. 一切皆文件](siyuan://blocks/20240403215644-0halvvy)
-  * 📄 [2. inode 索引节点](siyuan://blocks/20240403215659-njenehp)
-  * 📄 [3. 硬链接和软链接](siyuan://blocks/20240403215740-kddenc3)
-  * 📄 [4. 浅析 Linux 的国际化与本地化机制](siyuan://blocks/20240403215818-83qhhse)
-  * 📄 [5. 安全模型与权限](siyuan://blocks/20240403215936-ta4ssfo)
-  * 📄 [6. 计算机端口](siyuan://blocks/20240403220010-xdkagh6)
-  * 📄 [7. 硬盘分区的 UUID](siyuan://blocks/20240403220159-2mts8ei)
-  * 📄 [8. 终端、控制台和 Shell 的区别](siyuan://blocks/20240403220248-jow5p5l)
-* 📑 [linux 用户和组管理](siyuan://blocks/20231110105237-2jz9weo)
+  * 📄 1. 一切皆文件
+  * 📄 2. inode 索引节点
+  * 📄 3. 硬链接和软链接
+  * 📄 4. 浅析 Linux 的国际化与本地化机制
+  * 📄 5. 安全模型与权限
+  * 📄 6. 计算机端口
+  * 📄 7. 硬盘分区的 UUID
+  * 📄 8. 终端、控制台和 Shell 的区别
+* 📑 linux 用户和组管理
 
-  * 📄 [1. 用户和组的基本概念](siyuan://blocks/20240424160034-0ds0vww)
-  * 📄 [2. 用户和组管理相关的文件](siyuan://blocks/20240424160351-fi97cnx)
-  * 📄 [3. 用户和组管理命令](siyuan://blocks/20240424160730-v9nq6fl)
-  * 📑 [4. 其他用户相关命令](siyuan://blocks/20231110105237-rci0qia)
+  * 📄 1. 用户和组的基本概念
+  * 📄 2. 用户和组管理相关的文件
+  * 📄 3. 用户和组管理命令
+  * 📑 4. 其他用户相关命令
 
-    * 📄 [chage](siyuan://blocks/20241217160901-o6mh8ec)
-    * 📄 [gpasswd](siyuan://blocks/20241217160840-qdih54s)
-    * 📄 [passwd](siyuan://blocks/20241217160648-6gwjdem)
-    * 📄 [sudo](siyuan://blocks/20241217160552-r8lp42i)
-    * 📄 [文件etcgshadow](siyuan://blocks/20241217161010-5goroor)
-    * 📄 [文件etcshadow](siyuan://blocks/20241217160944-dn83ir2)
-* 📑 [linux 网络管理](siyuan://blocks/20231110105237-q0mg0iy)
+    * 📄 chage
+    * 📄 gpasswd
+    * 📄 passwd
+    * 📄 sudo
+    * 📄 文件etcgshadow
+    * 📄 文件etcshadow
+* 📑 linux 网络管理
 
-  * 📄 [firewalld](siyuan://blocks/20240809170947-m97709h)
-  * 📄 [iptables](siyuan://blocks/20240809171002-ylasxhm)
-  * 📄 [linux NetworkManager](siyuan://blocks/20231110105237-qn3idd2)
-  * 📑 [linux ip 命令](siyuan://blocks/20231110105237-dx5qn08)
+  * 📄 firewalld
+  * 📄 iptables
+  * 📄 linux NetworkManager
+  * 📑 linux ip 命令
 
-    * 📄 [ip address](siyuan://blocks/20240404124326-senc0gv)
-    * 📄 [ip link](siyuan://blocks/20240404124222-5y0etrc)
-    * 📄 [ip neighbour](siyuan://blocks/20240404124355-musm3jd)
-    * 📄 [ip route](siyuan://blocks/20240404124331-9p2j7il)
-    * 📄 [ip rule](siyuan://blocks/20240404124335-xm1553g)
-    * 📄 [ip tuntap](siyuan://blocks/20240404124340-tjq80vb)
-  * 📄 [linux 策略路由](siyuan://blocks/20231110105237-vk5bdpj)
-  * 📄 [linux 网络配置](siyuan://blocks/20231110105237-b3v59f7)
-  * 📄 [linux 聚合链路](siyuan://blocks/20231110105237-qnhnqtl)
-  * 📑 [网络虚拟化](siyuan://blocks/20240404111729-s75d3ip)
+    * 📄 ip address
+    * 📄 ip link
+    * 📄 ip neighbour
+    * 📄 ip route
+    * 📄 ip rule
+    * 📄 ip tuntap
+  * 📄 linux 策略路由
+  * 📄 linux 网络配置
+  * 📄 linux 聚合链路
+  * 📑 网络虚拟化
 
-    * 📄 [Linux 虚拟网络设备之 Bridge](siyuan://blocks/20231110105237-op3dz8u)
-    * 📄 [Linux 虚拟网络设备之 tuntap](siyuan://blocks/20240404111351-87slx8i)
-    * 📄 [Linux 虚拟网络设备之 vRouter](siyuan://blocks/20231110105237-k39nhil)
-    * 📄 [理解物理网卡、网卡接口、内核、IP等属性的关系](siyuan://blocks/20240404111533-1wcj9mu)
-* 📑 [linux 软件包管理](siyuan://blocks/20231110105237-u1beis8)
+    * 📄 Linux 虚拟网络设备之 Bridge
+    * 📄 Linux 虚拟网络设备之 tuntap
+    * 📄 Linux 虚拟网络设备之 vRouter
+    * 📄 理解物理网卡、网卡接口、内核、IP等属性的关系
+* 📑 linux 软件包管理
 
-  * 📄 [Linux 软件源配置全攻略](siyuan://blocks/20241211154436-os6b48h)
-* 📑 [linux 进程管理](siyuan://blocks/20231110105237-jjrt2xm)
+  * 📄 Linux 软件源配置全攻略
+* 📑 linux 进程管理
 
-  * 📄 [linux proc-pid-status 文件](siyuan://blocks/20231110105237-xkps35d)
-  * 📄 [supervisord](siyuan://blocks/20231110105237-f29gce8)
-  * 📑 [systemd](siyuan://blocks/20240423111840-rbgqjc1)
-
-    * 📄 [systemctl和service、chkconfig命令的关系](siyuan://blocks/20231110105237-rzhqmgg)
-    * 📄 [systemd path 实时监控文件和目录的变动](siyuan://blocks/20240424175548-grq9r5v)
-    * 📄 [systemd timer 取代cron和at的定时任务](siyuan://blocks/20240424181008-s6g2sr7)
-    * 📄 [systemd timesyncd 做时间同步](siyuan://blocks/20240424181617-nwnjkd7)
-    * 📄 [systemd 开机自启动任务](siyuan://blocks/20240424174529-oagnrjj)
-    * 📄 [systemd 挂载任务](siyuan://blocks/20240424180039-sizyaj6)
-    * 📄 [systemd 日志管理 journalctl](siyuan://blocks/20240424204436-5usm17t)
-    * 📄 [systemd 服务管理](siyuan://blocks/20240424172244-jhfhzbk)
-    * 📄 [systemd 服务配置文件示例](siyuan://blocks/20240424173746-aczkl2b)
-    * 📄 [systemd 运行级别](siyuan://blocks/20240424175045-s1lcniu)
-    * 📄 [前后台进程、孤儿进程和daemon类进程的父子关系](siyuan://blocks/20240424165936-k0gazgk)
+  * 📄 linux proc-pid-status 文件
+  * 📄 supervisord
+  * 📄 systemctl
 
 　　‍

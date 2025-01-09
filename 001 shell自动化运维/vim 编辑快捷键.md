@@ -28,6 +28,8 @@
 |​`G`​|移动至文件末尾|
 |​`gg`​|移动至文件开头|
 
+　　‍
+
 ### 浏览文档
 
 |快捷键|功能|
@@ -192,3 +194,21 @@ vim test.txt
 ```
 
 　　此时，文件已经正常解密了，下一次将打开文件。
+
+　　‍
+
+## 常见问题
+
+　　按上下左右键出现ABCD解决方法：
+
+```bash
+echo "set nocp" >> ~/.vimrc
+source ~/.vimrc
+```
+
+　　解决插入模式下delete/backspce键失效问题：
+
+```sql
+
+echo "set backspace=2" >> ~/.vimrc
+```

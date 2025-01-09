@@ -32,11 +32,16 @@ jdk1.8.0_333
 ```bash
 wget https://archive.apache.org/dist/zookeeper/zookeeper-3.9.2/apache-zookeeper-3.9.2-bin.tar.gz
 tar xf apache-zookeeper-3.9.2-bin.tar.gz
-mv apache-zookeeper-3.9.2/bin zookeeper
-vim /etc/profile
------------------------------------
+mkdir -p /data
+mv apache-zookeeper-3.9.2-bin /data/zookeeper
+
+cat <<EOF >> /etc/profile
 export ZK_HOME=/data/zookeeper
-export PATH=$PATH:$ZK_HOME/bin
+export PATH=\${PATH}:\${ZK_HOME}/bin
+EOF
+
+
+source /etc/profile
 ```
 
 ### 4.1 修改zoo.cfg配置文件
@@ -55,11 +60,9 @@ tickTime=2000
 initLimit=10
 # Follower同步Leader的最大时间
 syncLimit=5
-# 主要用来配置zookeeper server数据的存放路径
-dataDir=/data/zookeeper/data
-dataLogDir=/data/zookeeper/log
-# 主要定义客户端连接zookeeper server的端口，默认情况下为2181
-clientPort=2181
+dataDir=/data/zookeeper/data #zk数据保存目录
+dataLogDir=/data/zookeeper/logdata #zk日志保存目录，当不配置时与dataDir一致
+clientPort=2181 #客户端访问zk的端口
 
 # zookeeper server启动的时候，会根据dataDirxia的myid文件确定当前节点的id。
 # 指名集群间通讯端口和选举端口

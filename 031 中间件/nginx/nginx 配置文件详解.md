@@ -1,18 +1,18 @@
 # nginx 配置文件详解
 
-* 📄 [Nginx Location配置](siyuan://blocks/20240801141732-2y8nh4m)
-* 📄 [Nginx 基础功能配置集合](siyuan://blocks/20231110105237-a779ski)
-* 📄 [Nginx与uWSGI服务器的沟通](siyuan://blocks/20240801142155-4l40gf4)
-* 📄 [Nginx双向认证](siyuan://blocks/20231110105237-8uzmy1l)
-* 📄 [Nginx反向代理-http](siyuan://blocks/20231110105237-x20efse)
-* 📄 [Nginx反向代理-tcp](siyuan://blocks/20231110105237-yyxt7uz)
-* 📄 [Nginx日志配置](siyuan://blocks/20240801142004-571rmg7)
-* 📄 [Nginx负载均衡](siyuan://blocks/20240801142102-6ajyu1v)
-* 📄 [Nginx超时设置](siyuan://blocks/20240801142023-1ilarhh)
-* 📄 [Nginx跨域问题](siyuan://blocks/20240321203341-ncktrie)
-* 📄 [Nginx配置HTTPS](siyuan://blocks/20240801141924-g9hldza)
-* 📄 [Nginx静态文件配置](siyuan://blocks/20240801141831-veg230h)
-* 📄 [配置案例](siyuan://blocks/20240910101400-s9d8vsr)
+* 📄 Nginx Location配置
+* 📄 Nginx 基础功能配置集合
+* 📄 Nginx与uWSGI服务器的沟通
+* 📄 Nginx双向认证
+* 📄 Nginx反向代理-http
+* 📄 Nginx反向代理-tcp
+* 📄 Nginx日志配置
+* 📄 Nginx负载均衡
+* 📄 Nginx超时设置
+* 📄 Nginx跨域问题
+* 📄 Nginx配置HTTPS
+* 📄 Nginx静态文件配置
+* 📄 配置案例
 
 ## Nginx配置文件构成
 

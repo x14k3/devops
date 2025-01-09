@@ -1,5 +1,6 @@
 # Oracle GoldenGate
 
-* 📄 [Oracle GoldenGate 介绍](siyuan://blocks/20240315212632-pq75ki0)
+* 📄 Oracle GoldenGate 介绍
+* 📄 Oracle GoldenGate 部署-远程捕获方式
 
 　　‍

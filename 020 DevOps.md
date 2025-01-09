@@ -1,121 +1,130 @@
 # 020 DevOps
 
-* 📑 [VCS](siyuan://blocks/20231110105237-rxl9wzo)
+* 📑 VCS
 
-  * 📄 [Version Control System](siyuan://blocks/20240510171811-lut9j9d)
-  * 📄 [git](siyuan://blocks/20231110105237-x78uhqu)
-  * 📄 [svn](siyuan://blocks/20231110105237-3cwq49l)
-* 📑 [ansible](siyuan://blocks/20231110105237-muwmeww)
+  * 📄 Version Control System
+  * 📄 git
+  * 📄 svn
+* 📑 ansible
 
-  * 📄 [1.ansible入门](siyuan://blocks/20231110105237-ir8wneo)
-  * 📄 [2.ansible常用命令集](siyuan://blocks/20240729181117-m4hw4ij)
-  * 📄 [3.ansible高级用法](siyuan://blocks/20240303170126-6nakbdv)
-  * 📄 [4.ansible进阶](siyuan://blocks/20241028110940-59yykj8)
-  * 📄 [5.ansible实战](siyuan://blocks/20241028111006-pej646k)
-  * 📄 [6.ansible效率优化](siyuan://blocks/20240730104023-4q2swqi)
-  * 📄 [Ansible管理Windows主机](siyuan://blocks/20240731095938-c3nsguv)
-* 📑 [elk](siyuan://blocks/20231110105237-4b7ouf3)
+  * 📄 1.ansible入门
+  * 📄 2.ansible常用命令集
+  * 📄 3.ansible高级用法
+  * 📄 4.ansible进阶
+  * 📄 5.ansible实战
+  * 📄 6.ansible效率优化
+  * 📄 Ansible管理Windows主机
+* 📑 elk
 
-  * 📄 [ELK 概述](siyuan://blocks/20231110105237-stz3a0r)
-  * 📄 [elk 7.17 部署](siyuan://blocks/20231110105237-vgmdydx)
-  * 📄 [elk 8.0.0 部署](siyuan://blocks/20231110105237-lbuh8ql)
-  * 📄 [elk-cerebro](siyuan://blocks/20231110105237-mczrg7o)
-  * 📄 [elk优化-日常运维](siyuan://blocks/20231110105237-ldthbxc)
-* 📑 [gitlab](siyuan://blocks/20231110105237-pvnzxat)
+  * 📄 ELK 概述
+  * 📄 elk 7.17 部署
+  * 📄 elk 8.0.0 部署
+  * 📄 elk-cerebro
+  * 📄 elk优化-日常运维
+* 📑 gitlab
 
-  * 📄 [git 分支模型](siyuan://blocks/20231110105237-de3v78s)
-  * 📄 [gitlab基本使用](siyuan://blocks/20231110105237-pt6h5xl)
-  * 📄 [gitlab备份](siyuan://blocks/20231110105237-uet6iwz)
-  * 📄 [gitlab部署](siyuan://blocks/20231110105237-cbz0ynn)
-* 📑 [jenkins](siyuan://blocks/20231110105237-328haj8)
+  * 📄 git 分支模型
+  * 📄 gitlab基本使用
+  * 📄 gitlab备份
+  * 📄 gitlab部署
+* 📑 jenkins
 
-  * 📄 [Jenkins 流水线](siyuan://blocks/20231110105237-jzbujv8)
-  * 📄 [Jenkins 部署](siyuan://blocks/20231110105237-5vjwl1u)
-* 📑 [jira](siyuan://blocks/20240508143002-cogj8nl)
+  * 📄 Jenkins 流水线
+  * 📄 Jenkins 部署
+* 📑 jira
 
-  * 📄 [jira和confluence的docker部署](siyuan://blocks/20240508144454-x52bnck)
-* 📑 [jumpserver](siyuan://blocks/20231110105237-5qb923l)
+  * 📄 jira和confluence的docker部署
+* 📑 jumpserver
 
-  * 📄 [JumpServer 部署](siyuan://blocks/20231110105237-rp657mq)
-* 📑 [nacos](siyuan://blocks/20231110105237-hbkray9)
+  * 📄 JumpServer 部署
+* 📑 nacos
 
-  * 📄 [nacos 单机部署](siyuan://blocks/20231110105237-aspjd9u)
-  * 📄 [nacos 概述](siyuan://blocks/20231110105237-0v7pqpb)
-  * 📄 [nacos 集群部署](siyuan://blocks/20231110105237-1y89vd5)
-* 📑 [prometheus](siyuan://blocks/20231110105237-r2bgujf)
+  * 📄 nacos 单机部署
+  * 📄 nacos 概述
+  * 📄 nacos 集群部署
+* 📑 prometheus
 
-  * 📑 [1. Prometheus基础](siyuan://blocks/20231110105237-njinktc)
+  * 📑 1. Prometheus基础
 
-    * 📄 [1.1 prometheus简介](siyuan://blocks/20231110105237-zo6qkpc)
-    * 📄 [1.2 prometheus部署](siyuan://blocks/20231110105237-qcxar1z)
-    * 📄 [1.3 Grafana部署](siyuan://blocks/20231110105237-grmshib)
-    * 📄 [1.4 prometheus配置](siyuan://blocks/20231110105237-kfcq59r)
-    * 📄 [1.5 任务和实例](siyuan://blocks/20231110105237-q86oczv)
-    * 📄 [1.6 使用PromQL查询监控数据](siyuan://blocks/20231110105237-fobya6z)
-  * 📑 [2. PromQL使用](siyuan://blocks/20231110105237-ztwrw3g)
+    * 📄 1.1 prometheus简介
+    * 📄 1.2 prometheus部署
+    * 📄 1.3 Grafana部署
+    * 📄 1.4 prometheus配置
+    * 📄 1.5 任务和实例
+    * 📄 1.6 使用PromQL查询监控数据
+  * 📑 2. PromQL使用
 
-    * 📄 [2.1 理解时间序列](siyuan://blocks/20231110105237-wlgrgzh)
-    * 📄 [2.2 Metric类型](siyuan://blocks/20231110105237-4fei10l)
-    * 📄 [2.3 初识PromQL](siyuan://blocks/20231110105237-pqxklne)
-    * 📄 [2.4 PromQL操作符](siyuan://blocks/20231110105237-mkaw9f7)
-    * 📄 [2.5 PromQL聚合操作](siyuan://blocks/20231110105237-qo8gkya)
-    * 📄 [2.6 PromQL内置函数](siyuan://blocks/20231110105237-4mttkhi)
-    * 📄 [2.7 在HTTP API中使用PromQL](siyuan://blocks/20231110105237-yn02tfo)
-    * 📄 [2.8 最佳实践：4个黄金指标和USE方法](siyuan://blocks/20231110105237-4jaoj8y)
-  * 📑 [3. Prometheus告警处理](siyuan://blocks/20231110105237-6emxebx)
+    * 📄 2.1 理解时间序列
+    * 📄 2.2 Metric类型
+    * 📄 2.3 初识PromQL
+    * 📄 2.4 PromQL操作符
+    * 📄 2.5 PromQL聚合操作
+    * 📄 2.6 PromQL内置函数
+    * 📄 2.7 在HTTP API中使用PromQL
+    * 📄 2.8 最佳实践：4个黄金指标和USE方法
+  * 📑 3. Prometheus告警处理
 
-    * 📄 [3.1 Prometheus告警简介](siyuan://blocks/20231110105237-lsmju0d)
-    * 📄 [3.2 自定义Prometheus告警规则](siyuan://blocks/20231110105237-1y0kx9w)
-    * 📄 [3.3 部署Alertmanager](siyuan://blocks/20231110105237-bcxdbtj)
-    * 📄 [3.4 Alertmanager配置概述](siyuan://blocks/20231110105237-ltg6oiq)
-    * 📄 [3.5 基于标签的告警路由](siyuan://blocks/20231110105237-nt46uvl)
-    * 📄 [3.6 内置告警接收器Receiver](siyuan://blocks/20231110105237-0fsy847)
-    * 📄 [3.7 告警模板详解](siyuan://blocks/20231110105237-49nhfix)
-    * 📄 [3.8 屏蔽告警通知](siyuan://blocks/20231110105237-xdn7bkm)
-    * 📄 [3.9 使用Recoding Rules优化性能](siyuan://blocks/20231110105237-hxq37ei)
-  * 📑 [4. Exporter详解](siyuan://blocks/20231110105237-bwrguo3)
+    * 📄 3.1 Prometheus告警简介
+    * 📄 3.2 自定义Prometheus告警规则
+    * 📄 3.3 部署Alertmanager
+    * 📄 3.4 Alertmanager配置概述
+    * 📄 3.5 基于标签的告警路由
+    * 📄 3.6 内置告警接收器Receiver
+    * 📄 3.7 告警模板详解
+    * 📄 3.8 屏蔽告警通知
+    * 📄 3.9 使用Recoding Rules优化性能
+  * 📑 4. exporter详解
 
-    * 📄 [4.1 exporter是什么](siyuan://blocks/20231110105237-g7m0ykz)
-    * 📑 [4.2 常用Exporter](siyuan://blocks/20231110105237-9c2k1zo)
+    * 📄 4.1 exporter是什么
+    * 📑 4.2 常用 exporter
 
-      * 📄 [容器监控：cAdvisor](siyuan://blocks/20231110105237-tt4oq7v)
-      * 📄 [监控MySQL运行状态：MySQLD Exporter](siyuan://blocks/20231110105237-m1qw2br)
-      * 📄 [监控Redis运行状态：Redis Exporter](siyuan://blocks/20231110105237-uepl7o6)
-      * 📄 [监控域名与证书过期](siyuan://blocks/20231110105237-y3p3ksg)
-      * 📄 [网络探测：Blackbox Exporter](siyuan://blocks/20231110105237-od063ts)
-    * 📄 [4.3 Java自定义Exporter](siyuan://blocks/20231110105237-m8lwlh2)
-  * 📑 [5. 集群与高可用](siyuan://blocks/20231110105237-fq7xik5)
+      * 📄 blackbox_exporter
+      * 📄 cAdvisor_exporter
+      * 📄 mysql_exporter
+      * 📄 process_exporter
+      * 📄 redis_exporter
+  * 📑 5. 集群与高可用
 
-    * 📄 [5.1 Prometheus本地存储机制](siyuan://blocks/20231110105237-0ao3fik)
-    * 📄 [5.2 Prometheus远程存储机制](siyuan://blocks/20231110105237-z8as0qa)
-    * 📄 [5.3 Prometheus联邦集群](siyuan://blocks/20231110105237-fwnprry)
-    * 📄 [5.4 Prometheus高可用部署架构](siyuan://blocks/20231110105237-yhxmjd0)
-    * 📄 [5.5 Alertmanager高可用部署架构](siyuan://blocks/20231110105237-xb7oi8s)
-  * 📑 [6. Prometheus服务发现](siyuan://blocks/20231110105237-w3lmsh3)
+    * 📄 5.1 Prometheus本地存储机制
+    * 📄 5.2 Prometheus远程存储机制
+    * 📄 5.3 Prometheus联邦集群
+    * 📄 5.4 Prometheus高可用部署架构
+    * 📄 5.5 Alertmanager高可用部署架构
+  * 📑 6. Prometheus服务发现
 
-    * 📄 [6.1 基于文件的服务发现](siyuan://blocks/20231110105237-gs3x2pe)
-    * 📄 [6.2 基于Consul的服务发现](siyuan://blocks/20231110105237-ifj9i1g)
-    * 📄 [6.3 服务发现与Relabeling](siyuan://blocks/20231110105237-t62yazm)
-  * 📄 [7. 监控Kubernetes](siyuan://blocks/20231110105237-jfohuak)
-* 📑 [sentinel](siyuan://blocks/20240508162532-gnxe14y)
+    * 📄 6.1 基于文件的服务发现
+    * 📄 6.2 基于Consul的服务发现
+    * 📄 6.3 服务发现与Relabeling
+  * 📄 7. 监控Kubernetes
+* 📑 sentinel
 
-  * 📄 [Sentinel单机部署](siyuan://blocks/20240508162544-unzjx5z)
-* 📑 [skywalking](siyuan://blocks/20231110105237-zh0aumb)
+  * 📄 Sentinel单机部署
+* 📑 skywalking
 
-  * 📄 [Skywalking+ELK](siyuan://blocks/20231110105237-fe7ld8z)
-  * 📄 [Skywalking单机部署](siyuan://blocks/20240508161412-eax2bd4)
-* 📑 [zabbix](siyuan://blocks/20231110105237-isddx8s)
+  * 📄 Skywalking+ELK
+  * 📄 Skywalking单机部署
+* 📑 sysbench
 
-  * 📄 [Zabbix 告警通知](siyuan://blocks/20231110105237-c6t9na7)
-  * 📄 [Zabbix 搭建](siyuan://blocks/20231110105237-c8jls7h)
-  * 📄 [Zabbix 简介](siyuan://blocks/20231110105237-vp8lmpw)
-  * 📄 [Zabbix 自动发现与自动注册](siyuan://blocks/20231110105237-ukwl0e1)
-  * 📄 [Zabbix 配置监听多个端口](siyuan://blocks/20231110105237-d34bzzd)
-  * 📄 [Zabbix 配置自定义监控项](siyuan://blocks/20231110105237-j0baios)
-  * 📄 [Zabbix分布式监控系统](siyuan://blocks/20231110105237-taf0gw1)
-* 📑 [一些概念释义](siyuan://blocks/20240408214008-tiy6f39)
+  * 📄 sysbench安装
+  * 📑 数据库性能基准测试
 
-  * 📄 [分布式](siyuan://blocks/20240508140520-3s2hdp4)
-  * 📄 [微服务](siyuan://blocks/20240408213945-a14hm7d)
+    * 📄 对 MySQL 进行基准测试
+    * 📄 对 Oracle 进行基准测试
+    * 📄 对 Postgresql 进行基准测试
+    * 📄 对 达梦 进行基准测试
+  * 📄 磁盘 IO 基准测试
+* 📑 zabbix
+
+  * 📄 Zabbix 告警通知
+  * 📄 Zabbix 搭建
+  * 📄 Zabbix 简介
+  * 📄 Zabbix 自动发现与自动注册
+  * 📄 Zabbix 配置监听多个端口
+  * 📄 Zabbix 配置自定义监控项
+  * 📄 Zabbix分布式监控系统
+* 📑 一些概念释义
+
+  * 📄 分布式
+  * 📄 微服务
 
 　　‍

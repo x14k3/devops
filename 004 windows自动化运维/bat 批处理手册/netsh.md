@@ -130,7 +130,7 @@ netsh interface ip set address name="Ethernet0" source=dhcp    # 自动获取 ip
 # set VIP
 netsh interface ip set address name="Ethernet0" source=static address=192.168.0.10 mask=255.255.255.0 gateway=192.168.1.1 gwmetric=1 store=active 
 
-# 首先set ip 临时有效
+# 首先set vip 临时有效
 netsh interface ip set address source=static name="本地连接" addr=192.168.1.10 mask=255.255.255.0 gateway=192.168.1.1 gwmetric=1 store=active
 # 再 add 管理ip 永久有效
 netsh interface ip set address name="本地连接" addr=10.10.1.10 mask=255.255.255.0 gateway=10.101.1 gwmetric=1  store=persistent skipassource=true

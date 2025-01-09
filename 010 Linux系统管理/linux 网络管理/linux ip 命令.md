@@ -51,11 +51,11 @@
 
 　　‍
 
-* 📄 [ip address](siyuan://blocks/20240404124326-senc0gv)
-* 📄 [ip link](siyuan://blocks/20240404124222-5y0etrc)
-* 📄 [ip neighbour](siyuan://blocks/20240404124355-musm3jd)
-* 📄 [ip route](siyuan://blocks/20240404124331-9p2j7il)
-* 📄 [ip rule](siyuan://blocks/20240404124335-xm1553g)
-* 📄 [ip tuntap](siyuan://blocks/20240404124340-tjq80vb)
+* 📄 ip address
+* 📄 ip link
+* 📄 ip neighbour
+* 📄 ip route
+* 📄 ip rule
+* 📄 ip tuntap
 
 　　‍

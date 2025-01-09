@@ -1,10 +1,10 @@
 # ftp
 
-* 📄 [ftp-windows](siyuan://blocks/20240801162011-2c4z7ar)
-* 📄 [ftp常用命令](siyuan://blocks/20240801162053-egbs4g6)
-* 📄 [sftp-linux](siyuan://blocks/20240801160540-apjqx7b)
-* 📄 [sftp-windwos](siyuan://blocks/20240801160553-3v9eszs)
-* 📄 [vsftp-linux](siyuan://blocks/20240801160631-gk0f2y7)
+* 📄 ftp-windows
+* 📄 ftp常用命令
+* 📄 sftp-linux
+* 📄 sftp-windwos
+* 📄 vsftp-linux
 
 　　‍
 

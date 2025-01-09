@@ -23,19 +23,19 @@
 　　jellyfin/jellyfin 官方镜像下载：
 
 ```bash
-$ sudo docker pull jellyfin/jellyfin:latest
+sudo docker pull jellyfin/jellyfin:latest
 ```
 
 　　linuxserver/jellyfin 镜像下载：
 
 ```bash
-$ sudo docker pull linuxserver/jellyfin:latest
+sudo docker pull linuxserver/jellyfin:latest
 ```
 
 　　nyanmisaka/jellyfin 即插即用镜像下载：
 
 ```bash
-$ sudo docker pull nyanmisaka/jellyfin:latest
+sudo docker pull nyanmisaka/jellyfin:latest
 ```
 
 ### 2.3 容器的创建与启动
@@ -46,7 +46,7 @@ $ sudo docker pull nyanmisaka/jellyfin:latest
 
 ```bash
 # 在系统根目录下创建 /data/jellyfin 文件夹，并在 /data/jellyfin文件夹下再创建 config 和 cache 两个三级文件夹 
-$ sudo mkdir -p /data/jellyfin/{config,cache}
+sudo mkdir -p /data/jellyfin/{config,cache}
 ```
 
 　　2.3.2 创建与启动Jellyfin容器：
@@ -60,15 +60,10 @@ docker run -d --name jellyfin \
 -v /data/application/jellyfin/cache:/cache \
 -v /data/media:/media \
 --device=/dev/dri:/dev/dri \
---add-host=api.themoviedb.org:13.224.161.90 \
---add-host=api.themoviedb.org:13.35.8.65 \
---add-host=api.themoviedb.org:13.35.8.93 \
---add-host=api.themoviedb.org:13.35.8.6 \
---add-host=api.themoviedb.org:13.35.8.54 \
---add-host=image.tmdb.org:138.199.37.230 \
---add-host=image.tmdb.org:108.138.246.49 \
---add-host=api.thetvdb.org:13.225.89.239 \
---add-host=api.thetvdb.org:192.241.234.54 \
+--add-host=api.themoviedb.org:18.66.233.6 \
+--add-host=api.themoviedb.org:18.66.233.94 \
+--add-host=api.themoviedb.org:18.66.233.7 \
+--add-host=api.themoviedb.org:18.66.233.63 \
 --restart unless-stopped nyanmisaka/jellyfin:latest 
 ```
 
@@ -84,9 +79,9 @@ docker run -d --name jellyfin \
 　　2.3.3 确认容器：
 
 ```bash
-$ sudo docker ps -l 
+sudo docker ps -l 
 #查看最后一个创建和启动的容器 #或者 
-$ sudo docker ps 
+sudo docker ps 
 #查看所有正在运行的容器
 ```
 

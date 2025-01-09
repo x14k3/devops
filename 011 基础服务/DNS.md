@@ -1,7 +1,7 @@
 # DNS
 
-* 📄 [DNS服务器搭建与配置 ](siyuan://blocks/20240902113212-nzg3afc)
-* 📄 [DNS概念和原理](siyuan://blocks/20240902110624-qlcks9v)
+* 📄 DNS服务器搭建与配置
+* 📄 DNS概念和原理
 
 　　‍
 

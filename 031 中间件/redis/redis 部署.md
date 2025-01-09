@@ -8,10 +8,10 @@
 
 　　‍
 
-* 📄 [Redis 6.0 新特性 ACL 介绍 ](siyuan://blocks/20241014141409-jhiwmi0)
-* 📄 [redis cluster](siyuan://blocks/20241012162630-tv68iqs)
-* 📄 [redis 主从](siyuan://blocks/20241012162607-yuzgo49)
-* 📄 [redis 单例部署](siyuan://blocks/20231110105237-4madtae)
-* 📄 [redis 哨兵](siyuan://blocks/20241012162620-0lf58fn)
+* 📄 Redis 6.0 新特性 ACL 介绍
+* 📄 redis cluster
+* 📄 redis 主从
+* 📄 redis 单例部署
+* 📄 redis 哨兵
 
 　　‍

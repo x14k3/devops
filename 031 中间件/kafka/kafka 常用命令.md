@@ -100,3 +100,62 @@
 ```shell
 ./bin/kafka-console-consumer.sh --bootstrap-server 192.168.133.11:9092  --from-beginning --topic first
 ```
+
+　　‍
+
+## 附：脚本
+
+　　‍
+
+```bash
+#!/bin/bash
+
+KafkaBin="/data/kafka/bin"
+Cluster="192.168.133.11:9092,192.168.133.12:9092,192.168.133.13:9092"
+# Generate random data
+generData() {
+for((i=1;i<=20;i++))
+do
+    topicName=topic-${i}
+    partNum=$(($RANDOM%2+1))
+    repNum=$(($RANDOM%2+1))
+ 	# Create topic
+	${KafkaBin}/kafka-topics.sh --bootstrap-server ${Cluster} --create --topic ${topicName} --partitions ${partNum} --replication-factor ${repNum}
+	# gener producer
+	for((j=1;j<=5;j++))
+	do
+		${KafkaBin}/kafka-console-producer.sh --bootstrap-server ${Cluster} --topic ${topicName} <<<  "Message-$(date +%s%N)"
+	done
+done
+}
+
+deletData() {
+for topicName in $(${KafkaBin}/kafka-topics.sh --bootstrap-server ${Cluster} --list)
+do
+	${KafkaBin}/kafka-topics.sh --bootstrap-server ${Cluster} --delete --topic ${topicName} 
+done 
+
+}
+
+selecData() {
+${KafkaBin}/kafka-topics.sh --bootstrap-server ${Cluster} --describe
+
+
+}
+
+case $1 in 
+	add)
+		generData
+	;;
+	delete)
+		deletData
+	;;
+	select)
+		selecData
+	;;
+	*)
+		echo "kafka_tools.sh [ add | delete | select ]"
+	;;
+esac
+
+```

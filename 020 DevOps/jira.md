@@ -1,6 +1,6 @@
 # jira
 
-* 📄 [jira和confluence的docker部署](siyuan://blocks/20240508144454-x52bnck)
+* 📄 jira和confluence的docker部署
 
 ## JIRA 介绍
 

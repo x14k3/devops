@@ -88,7 +88,7 @@ mount -t davfs https://your.webdav.link.here /path/to/mount
 
 #### 永久挂载（开机自动挂载）
 
-　　((20230610173764-f6u7nhy 'fstab参数说明'))
+　　fstab参数说明
 
 ```bash
 # 自动挂载

@@ -290,7 +290,7 @@ upstream myapp1 {
 
 # 13.连接&请求频率限制
 
-## ngx_http_limit_conn_module
+## Nginx 的限制模块
 
 　　使用连接频率限制同一IP同时只能有3个连接
 

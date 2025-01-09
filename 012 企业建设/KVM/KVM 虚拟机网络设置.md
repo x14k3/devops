@@ -256,12 +256,14 @@ virt-install ---network bridge=br0
 可能是启用了网络过滤器，调整解决。
 
 ```bash
-cat <<EOF >> /etc/sysctl.conf
+vim /etc/sysctl.conf 
+#-----------------------------------------------
 net.ipv4.ip_forward = 1
 net.bridge.bridge-nf-call-ip6tables = 0
 net.bridge.bridge-nf-call-iptables = 0
 net.bridge.bridge-nf-call-arptables = 0
-<<EOF
+#-----------------------------------------------
+
 sysctl -p
 ```
 

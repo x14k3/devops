@@ -301,7 +301,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.5 复制（REPLICATION）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.5 复制（REPLICATION）</span>
 
 　　**发送服务器（Sending Servers）** 
 
@@ -345,7 +345,7 @@ min_wal_size = 80MB
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.6 查询调优（QUERY TUNING）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.6 查询调优（QUERY TUNING）</span>
 
 　　**计划方法配置（Planner Method Configuration）** 
 
@@ -533,7 +533,7 @@ log_timezone = 'PRC'
 
 　　‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.8 流程标题（PROCESS TITLE）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.8 流程标题（PROCESS TITLE）</span>
 
 ```bash
 #cluster_name = ''      # 如果非空，则添加到进程标题(更改需要重新启动PG数据库生效)
@@ -691,7 +691,7 @@ default_text_search_config = 'pg_catalog.simple'
 #max_pred_locks_per_page = 2            # min 0
 ```
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.14 版本和平台兼容性（VERSION AND PLATFORM COMPATIBILITY）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.14 版本和平台兼容性（VERSION AND PLATFORM COMPATIBILITY）</span>
 
 　　**以前的PostgreSQL版本（Previous PostgreSQL Versions）** 
 

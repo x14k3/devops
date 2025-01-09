@@ -1,139 +1,140 @@
 # shell 命令手册
 
-* 📑 [shell 三剑客](siyuan://blocks/20231110105237-n1q0g7i)
+* 📑 shell 三剑客
 
-  * 📄 [awk](siyuan://blocks/20240809174716-ud8g2c7)
-  * 📄 [grep](siyuan://blocks/20231110162840-fwvtqmu)
-  * 📄 [sed](siyuan://blocks/20231110164251-540q6se)
-* 📑 [tools](siyuan://blocks/20240405220807-igtzcic)
+  * 📄 awk
+  * 📄 grep
+  * 📄 sed
+* 📑 tools
 
-  * 📄 [base64](siyuan://blocks/20231110105237-7ng3g33)
-  * 📄 [cdrecird growisofs](siyuan://blocks/20231115103835-hjm12jh)
-  * 📄 [crontab](siyuan://blocks/20231110105237-j6s89rn)
-  * 📄 [flock](siyuan://blocks/20240402201243-fqy8c6q)
-  * 📄 [fuser](siyuan://blocks/20231110105237-c4ufcct)
-  * 📄 [htpasswd](siyuan://blocks/20231110105237-4dcxe21)
-  * 📄 [k3b](siyuan://blocks/20240910095729-cfk7btb)
-  * 📄 [kill](siyuan://blocks/20231110155733-t0f9u69)
-  * 📄 [lsof](siyuan://blocks/20231110105237-4r3sfie)
-  * 📄 [minicom](siyuan://blocks/20231222133047-w0fkiok)
-  * 📄 [mkisofs](siyuan://blocks/20231121220044-gmhlmvl)
-  * 📄 [mknode](siyuan://blocks/20240508152007-zxfqks8)
-  * 📄 [nohup](siyuan://blocks/20231110105237-87bhtql)
-  * 📄 [openssl](siyuan://blocks/20240411171539-396g2qq)
-  * 📄 [script](siyuan://blocks/20240507182310-uzcb81j)
-  * 📄 [ssh](siyuan://blocks/20240724164831-i4pga8x)
-  * 📄 [tee](siyuan://blocks/20240403214703-a4c2mvd)
-  * 📄 [wall](siyuan://blocks/20240801151724-z56ndzj)
-  * 📄 [wget](siyuan://blocks/20240321201359-e3qz2ba)
-* 📑 [内核模块管理](siyuan://blocks/20240405214125-526xsw4)
+  * 📄 base64
+  * 📄 cdrecird growisofs
+  * 📄 cp
+  * 📄 crontab
+  * 📄 flock
+  * 📄 fuser
+  * 📄 htpasswd
+  * 📄 k3b
+  * 📄 kill
+  * 📄 lsof
+  * 📄 minicom
+  * 📄 mkisofs
+  * 📄 mknode
+  * 📄 nohup
+  * 📄 openssl
+  * 📄 scp
+  * 📄 script
+  * 📄 ssh
+  * 📄 tee
+  * 📄 wall
+  * 📄 wget
+* 📑 内核模块管理
 
-  * 📄 [insmod](siyuan://blocks/20240227111004-f1j5x4j)
-  * 📄 [lsmod](siyuan://blocks/20231110105237-lt7vzhc)
-  * 📄 [modinfo](siyuan://blocks/20231110105237-66gsn8o)
-  * 📄 [modprobe](siyuan://blocks/20231110105237-edx85nc)
-  * 📄 [rmmod](siyuan://blocks/20240405215603-pkculml)
-* 📑 [压缩和解压](siyuan://blocks/20240405214428-wjjwrse)
+  * 📄 insmod
+  * 📄 lsmod
+  * 📄 modinfo
+  * 📄 modprobe
+  * 📄 rmmod
+* 📑 压缩和解压
 
-  * 📄 [7z](siyuan://blocks/20240405215146-7wpbl8u)
-  * 📄 [bunzip2](siyuan://blocks/20240405215347-69sdzwb)
-  * 📄 [bzcat](siyuan://blocks/20240405215434-2ygjzxo)
-  * 📄 [bzip2](siyuan://blocks/20231110105237-28ii7l3)
-  * 📄 [gzip](siyuan://blocks/20240306193931-dfvzqy2)
-  * 📄 [tar](siyuan://blocks/20240405214800-btrtv9d)
-  * 📄 [xz](siyuan://blocks/20240405214608-b53w02j)
-  * 📄 [zip](siyuan://blocks/20240718141815-wi3lvpf)
-* 📑 [备份与恢复](siyuan://blocks/20240430150341-58o2xo0)
+  * 📄 7z
+  * 📄 bunzip2
+  * 📄 bzcat
+  * 📄 bzip2
+  * 📄 gzip
+  * 📄 tar
+  * 📄 xz
+  * 📄 zip
+* 📑 备份与恢复
 
-  * 📄 [dd (Duplicated 2024-04-30 15:19:00)](siyuan://blocks/20240430151900-svn0rdm)
-  * 📄 [dump](siyuan://blocks/20231110105237-onn32fn)
-  * 📄 [restore](siyuan://blocks/20240430151809-zj5eboi)
-  * 📄 [rsync](siyuan://blocks/20240430155203-zy5l2at)
-* 📑 [性能监控](siyuan://blocks/20240405214026-dbaayor)
+  * 📄 dd (Duplicated 2024-04-30 15:19:00)
+  * 📄 dump
+  * 📄 restore
+  * 📄 rsync
+* 📑 性能监控
 
-  * 📄 [UnixBench](siyuan://blocks/20240408181639-8saj9ke)
-  * 📄 [cpuinfo](siyuan://blocks/20231110105237-8f06fmg)
-  * 📄 [cpulimit](siyuan://blocks/20240724145314-pvck5xr)
-  * 📄 [dmesg](siyuan://blocks/20240408133348-xldq05f)
-  * 📄 [dmidecode](siyuan://blocks/20231110105237-05adh5q)
-  * 📄 [fio](siyuan://blocks/20240726104624-o7nkun7)
-  * 📄 [hdparm](siyuan://blocks/20231115130306-86r820v)
-  * 📄 [ipmitool](siyuan://blocks/20241210162811-6ucthj0)
-  * 📄 [meminfo](siyuan://blocks/20231110105237-7l8hmjv)
-  * 📄 [nice](siyuan://blocks/20240724144329-59k77it)
-  * 📄 [pidof](siyuan://blocks/20240408132404-vtqveen)
-  * 📄 [ps](siyuan://blocks/20240405212320-fn0zqq6)
-  * 📄 [pstree](siyuan://blocks/20240801143050-rdp3bjl)
-  * 📄 [strace](siyuan://blocks/20231110105237-fhpi4ld)
-  * 📑 [sysstat](siyuan://blocks/20240726104728-stxcb4e)
+  * 📄 UnixBench
+  * 📄 cpuinfo
+  * 📄 cpulimit
+  * 📄 dmesg
+  * 📄 dmidecode
+  * 📄 fio
+  * 📄 hdparm
+  * 📄 ipmitool
+  * 📄 meminfo
+  * 📄 nice
+  * 📄 pidof
+  * 📄 ps
+  * 📄 pstree
+  * 📄 strace
+  * 📑 sysstat
 
-    * 📄 [iostat](siyuan://blocks/20240220134331-1k31g3o)
-    * 📄 [mpstat](siyuan://blocks/20240726105408-ss5s9hv)
-    * 📄 [pidstat](siyuan://blocks/20240405221937-8y0ncn2)
-    * 📄 [sar](siyuan://blocks/20231110105237-i8nelud)
-  * 📄 [taskset](siyuan://blocks/20240724142312-mfb9kx1)
-  * 📄 [top](siyuan://blocks/20240405213206-1nb75qq)
-  * 📄 [vmstat](siyuan://blocks/20240405222151-bmkrbb7)
-  * 📄 [查看系统版本](siyuan://blocks/20240405120502-alvz3hx)
-* 📑 [文件系统](siyuan://blocks/20240405220513-e7soi8k)
+    * 📄 iostat
+    * 📄 mpstat
+    * 📄 pidstat
+    * 📄 sar
+  * 📄 taskset
+  * 📄 top
+  * 📄 vmstat
+  * 📄 查看系统版本
+* 📑 文件系统
 
-  * 📄 [dd](siyuan://blocks/20231110105237-nz8e8wt)
-  * 📄 [du](siyuan://blocks/20231110105237-qmoqtff)
-  * 📄 [dumpe2fs](siyuan://blocks/20231110105237-wq290rp)
-  * 📄 [fdisk](siyuan://blocks/20231110105237-qvd3pvd)
-  * 📄 [fsck](siyuan://blocks/20231110105237-uti3vbu)
-  * 📄 [initramfs](siyuan://blocks/20240222220430-4zc9rof)
-  * 📄 [lsblk](siyuan://blocks/20231110105237-yaojoxc)
-  * 📄 [mkfs &amp; mke2fx](siyuan://blocks/20231110105237-ajfjv4b)
-  * 📄 [mount](siyuan://blocks/20231110105237-ou6v8gy)
-  * 📄 [parted](siyuan://blocks/20240407213922-d9en39l)
-  * 📄 [partprobe](siyuan://blocks/20240725124410-zumu4o3)
-  * 📄 [snapper](siyuan://blocks/20231227181426-x4507fd)
-  * 📄 [ulimit](siyuan://blocks/20231110105237-an7nqoh)
-* 📑 [文本处理](siyuan://blocks/20240405215737-araolk5)
+  * 📄 dd
+  * 📄 du
+  * 📄 dumpe2fs
+  * 📄 fdisk
+  * 📄 fsck
+  * 📄 initramfs
+  * 📄 lsblk
+  * 📄 mkfs & mke2fx
+  * 📄 mount
+  * 📄 parted
+  * 📄 partprobe
+  * 📄 snapper
+  * 📄 ulimit
+* 📑 文本处理
 
-  * 📄 [bc](siyuan://blocks/20231110105237-zwk6t5r)
-  * 📄 [column](siyuan://blocks/20240507120507-wzgrktz)
-  * 📄 [cp](siyuan://blocks/20231110105237-fv7wfnt)
-  * 📄 [cut](siyuan://blocks/20231110105237-1v3brfj)
-  * 📄 [diff](siyuan://blocks/20231110105237-rz86zem)
-  * 📄 [dos2unix](siyuan://blocks/20231110105237-cxszlc5)
-  * 📄 [find](siyuan://blocks/20231110105237-hk58jbr)
-  * 📄 [iconv](siyuan://blocks/20231110105237-ias8xaa)
-  * 📄 [ln](siyuan://blocks/20231110105237-x8oqa4p)
-  * 📄 [locate](siyuan://blocks/20231110105237-4x71yys)
-  * 📄 [scp](siyuan://blocks/20231110105237-7veq4mh)
-  * 📄 [sort](siyuan://blocks/20240310214750-3tek6dr)
-  * 📄 [tr](siyuan://blocks/20231110105237-6jszkwd)
-* 📑 [网络相关](siyuan://blocks/20240405220105-p3fp88a)
+  * 📄 bc
+  * 📄 column
+  * 📄 cut
+  * 📄 diff
+  * 📄 dos2unix
+  * 📄 find
+  * 📄 iconv
+  * 📄 ln
+  * 📄 locate
+  * 📄 sort
+  * 📄 tr
+* 📑 网络相关
 
-  * 📄 [arping](siyuan://blocks/20231110105237-uu8u1pl)
-  * 📄 [curl](siyuan://blocks/20240612173739-ekluj2u)
-  * 📄 [iperf3](siyuan://blocks/20240429152237-h3ij7le)
-  * 📄 [nc](siyuan://blocks/20240314200041-l7hgq6t)
-  * 📄 [nmap](siyuan://blocks/20231211132704-dpjrmq8)
-  * 📄 [tcpdump](siyuan://blocks/20231214163310-dut0ld3)
-  * 📄 [traceroute](siyuan://blocks/20231110105237-ej1qj6t)
-  * 📄 [wget](siyuan://blocks/20240612173732-g2xmeci)
-* 📑 [脚本常用命令](siyuan://blocks/20240405220754-9gd6h13)
+  * 📄 arping
+  * 📄 curl
+  * 📄 ethtool
+  * 📄 iperf3
+  * 📄 nc
+  * 📄 nmap
+  * 📄 tcpdump
+  * 📄 traceroute
+  * 📄 wget
+* 📑 脚本常用命令
 
-  * 📄 [basename](siyuan://blocks/20240311212631-yfd6fnw)
-  * 📄 [date](siyuan://blocks/20231110105237-rxi9yl4)
-  * 📄 [echo](siyuan://blocks/20240311213733-v5eakp7)
-  * 📄 [exec](siyuan://blocks/20231110105237-aapmdhq)
-  * 📄 [expect](siyuan://blocks/20240311213920-jhloe60)
-  * 📄 [read](siyuan://blocks/20240311213556-98wlhl1)
-  * 📄 [shell 命令小技巧](siyuan://blocks/20240401205118-mbui0qx)
-  * 📄 [shuf](siyuan://blocks/20240229215849-m1c0obh)
-  * 📄 [xargs](siyuan://blocks/20240310214023-7u1yfg6)
-* 📑 [软件安装](siyuan://blocks/20240405214202-om1hgr3)
+  * 📄 basename
+  * 📄 date
+  * 📄 echo
+  * 📄 exec
+  * 📄 expect
+  * 📄 read
+  * 📄 shell 命令小技巧
+  * 📄 shuf
+  * 📄 xargs
+* 📑 软件安装
 
-  * 📄 [apt](siyuan://blocks/20231110105237-uxkolm9)
-  * 📄 [arp](siyuan://blocks/20231110105237-apgbdoz)
-  * 📄 [dnf](siyuan://blocks/20231110105237-1hl26hy)
-  * 📄 [dpkg](siyuan://blocks/20240224200236-2wchsjr)
-  * 📄 [rpm](siyuan://blocks/20241118095016-vd4umyg)
-  * 📄 [yum](siyuan://blocks/20231110105237-70luvz1)
-  * 📄 [zypper](siyuan://blocks/20231110105237-p2r21wy)
+  * 📄 apt
+  * 📄 arp
+  * 📄 dnf
+  * 📄 dpkg
+  * 📄 rpm
+  * 📄 yum
+  * 📄 zypper
 
 　　‍

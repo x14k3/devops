@@ -1,8 +1,8 @@
 # mysql 单机部署
 
-* 📄 [mysql RPM安装](siyuan://blocks/20241018095147-5204gqw)
-* 📄 [mysql my.cnf 配置说明](siyuan://blocks/20241018095436-mqutfop)
-* 📄 [mysql 二进制安装](siyuan://blocks/20241018095405-vhqbj3e)
+* 📄 mysql RPM安装
+* 📄 mysql my.cnf 配置说明
+* 📄 mysql 二进制安装
 
 　　‍
 
