@@ -2,7 +2,7 @@
 
 ## centos7 部署DRBD
 
-　　step1（两节点都要执行）：配置hosts文件，配置免密
+step1（两节点都要执行）：配置hosts文件，配置免密
 
 ```bash
 # step1（两节点都要执行）: 配置hosts文件，配置免密
@@ -18,7 +18,7 @@ ssh-keygen -t rsa
 ssh-copy-id -i ~/.ssh/id_rsa.pub node2
 ```
 
-　　step2（两节点都要执行）：关闭防火墙，SELINUX，同步系统时间
+step2（两节点都要执行）：关闭防火墙，SELINUX，同步系统时间
 
 ```bash
 systemctl stop firewalld
@@ -30,7 +30,7 @@ vi /etc/selinux/config
 # 同步系统时间
 ```
 
-　　step3（两节点都要执行）：安装和配置DRBD
+step3（两节点都要执行）：安装和配置DRBD
 
 ```bash
 # step3（两节点都要执行）：安装和配置DRBD
@@ -123,7 +123,7 @@ Command 'drbdsetup new-resource test 1' terminated with exit code 20
 modprobe: FATAL: Module drbd not found.
 ```
 
-　　上面报错是因为内核中没有drbd模块，可通过升级内核版本解决，升级完后需要重启。升级内核的步骤参考：
+上面报错是因为内核中没有drbd模块，可通过升级内核版本解决，升级完后需要重启。升级内核的步骤参考：
 
 ```bash
 [root@node1 ~]# uname -a
@@ -201,7 +201,7 @@ test role:Primary
     replication:Established peer-disk:UpToDate
 ```
 
-　　‍
+‍
 
 ```bash
 [root@node1 ~]# mkfs -t ext4 /dev/drbd0
@@ -240,7 +240,7 @@ a  b  c  d  e  f  lost+found
 [root@node1 ~]# drbdadm secondary test
 ```
 
-　　上面在node1为主设备的时候，创建了一些文件和文件夹。现在切换成node2为主设备，发现数据都同步过来了。
+上面在node1为主设备的时候，创建了一些文件和文件夹。现在切换成node2为主设备，发现数据都同步过来了。
 
 ```javascript
 [root@node2 ~]# drbdadm primary test
@@ -253,19 +253,19 @@ a  b  c  d  e  f  lost+found
 
 ## DRBD的应用：云主机的高可用存储方案
 
-　　[云主机](https://cloud.tencent.com/product/cvm?from_column=20065&from=20065)的系统盘是放在本地存储上的（用的是所在节点的硬盘），一旦云主机所在节点硬盘故障了，可以通过nova的疏散命令，将云主机疏散至DRBD的备份从节点上，从而实现云主机的高可用。
+[云主机](https://cloud.tencent.com/product/cvm?from_column=20065&from=20065)的系统盘是放在本地存储上的（用的是所在节点的硬盘），一旦云主机所在节点硬盘故障了，可以通过nova的疏散命令，将云主机疏散至DRBD的备份从节点上，从而实现云主机的高可用。
 
-　　例如：两个计算节点compute313或compute314，compute313的多块硬盘其中一块为主设备，compute314的多块硬盘其中一块为从设备，组成一对设备。compute313节点的硬盘坏了，且宕机且系统无法恢复。
+例如：两个计算节点compute313或compute314，compute313的多块硬盘其中一块为主设备，compute314的多块硬盘其中一块为从设备，组成一对设备。compute313节点的硬盘坏了，且宕机且系统无法恢复。
 
-　　将需要恢复的云主机的目录（目录名是云主机的uuid），cp 6fceaf2f-e201-4165-ba3a-f5d9c78160ab /var/lib/nova/instances/，多个云主机就复制多个目录。然后执行疏散命令 nova evacuate [instance uuid] [目的计算节点] –on-shared-storage 。
+将需要恢复的云主机的目录（目录名是云主机的uuid），cp 6fceaf2f-e201-4165-ba3a-f5d9c78160ab /var/lib/nova/instances/，多个云主机就复制多个目录。然后执行疏散命令 nova evacuate [instance uuid] [目的计算节点] –on-shared-storage 。
 
-　　将上面的步骤写成程序就是云主机的高可用组件比如Openstack Masakari等。
+将上面的步骤写成程序就是云主机的高可用组件比如Openstack Masakari等。
 
 > 过去[分布式存储](https://cloud.tencent.com/product/cos?from_column=20065&from=20065)方案还不成熟，DRBD还有一定的市场，现在处了少量老的需要维护的云计算中心还在使用，DRBD技术方案已经淘汰了。
 
 ## 附
 
-　　本篇部署DRBD的步骤中的`step2（两节点都要执行）：关闭防火墙，SELINUX`​，的方式是采用最便捷的方式：直接关闭。实际中还需要使用防火墙和selinux服务，可以通过下面的方式加入drbd的配置：
+本篇部署DRBD的步骤中的`step2（两节点都要执行）：关闭防火墙，SELINUX`​，的方式是采用最便捷的方式：直接关闭。实际中还需要使用防火墙和selinux服务，可以通过下面的方式加入drbd的配置：
 
 ```javascript
 # 两个节点都执行

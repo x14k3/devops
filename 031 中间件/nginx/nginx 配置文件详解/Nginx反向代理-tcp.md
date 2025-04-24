@@ -1,6 +1,6 @@
 # Nginx反向代理-tcp
 
-　　nginx1.9以后新增了对tcp协议的支持。[nginx](https://so.csdn.net/so/search?q=nginx\&spm=1001.2101.3001.7020 "nginx")使用了一个新的模块`stream`​ 来支持tcp协议，这个模块与 `http`​ 模块比较类似。安装 nginx 时，需要加上--with-stream --with-stream\_ssl\_module
+nginx1.9以后新增了对tcp协议的支持。[nginx](https://so.csdn.net/so/search?q=nginx\&spm=1001.2101.3001.7020 "nginx")使用了一个新的模块`stream`​ 来支持tcp协议，这个模块与 `http`​ 模块比较类似。安装 nginx 时，需要加上--with-stream --with-stream\_ssl\_module
 
 ```nginx
 worker_processes  1;
@@ -22,4 +22,4 @@ stream {
 
 ```
 
-　　‍
+‍

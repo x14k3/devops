@@ -1,6 +1,6 @@
 # err-oracle错误代码大全
 
-　　ORA-00001: 违反唯一约束条件 (.)
+ORA-00001: 违反唯一约束条件 (.)
 错误说明：当在唯一索引所对应的列上键入重复值时，会触发此异常。
 ORA-00017: 请求会话以设置跟踪事件
 ORA-00018: 超出最大会话数
@@ -1217,7 +1217,7 @@ SELECT \*
    AND a.ltt\_id = 0
    AND a.g3e\_fno = 156;
 
-　　    ORA-01720: 授权选项对于'.'不存在
+    ORA-01720: 授权选项对于'.'不存在
 ORA-01721: USERENV(COMMITSCN) 在事务处理中调用了多次
 ORA-01722: 无效数字
 说明：当内嵌sql语句不能有效地将字符转变成数字时，会隐含地触发此异常。
@@ -1665,7 +1665,7 @@ ORA-02261: 表中已存在这样的唯一关键字或主键
 ORA-02270：no matching unique or primary key for this column-list(此列列表的唯一或主键不匹配)
 错误说明：外键的定义必须是另外一张表的主键，否则就会报这个错
 
-　　  ORA-02292：违反一致性约束
+  ORA-02292：违反一致性约束
 ORA-02436: 日期或系统变量在 CHECK 约束条件中指定错误
 说明：expiry\_date date CHECK (expiry\_date > SYSDATE)这样时报错，sysdate是变量。
 解决：约束条件必须是确定值，不能是变量。
@@ -4564,7 +4564,7 @@ ORA-39171: Job is experiencing a resumable wait.
 说明：执行IMPDP的时候报的错，表空间满了。
 ORA-41400：绑定字符集与数据库字符集不匹配
 
-　　    关于ORA-01034 和ORA-27101联合报错的处理
+    关于ORA-01034 和ORA-27101联合报错的处理
 今天在测试库上遇到了ORA-27101的错误，当通过客户端连接到db时返回如下：
 \[oracle@bluerin admin\]$ sqlplus system/oracle@test
 SQL\*Plus: Release 11.1.0.6.0 - Production on Tue Aug 10 11:05:04 2010
@@ -4584,5 +4584,5 @@ With the Partitioning, OLAP, Data Mining and Real Application Testing options
 SQL>
 这种情况是监听器的SID\_NAME配错了，SID\_NAME应该等于select instance\_name from  V$instance，且区分大小写。
 
-　　关于ORA-29913和ORA-29400联合报错的处理
+关于ORA-29913和ORA-29400联合报错的处理
 说明：创建外部表的时候，directory所指的路径不存在。请准确路径信息。

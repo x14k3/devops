@@ -1,8 +1,8 @@
 # du
 
-　　显示每个文件和目录的磁盘使用空间
+显示每个文件和目录的磁盘使用空间
 
-　　**du命令** 也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的。
+**du命令** 也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的。
 
 ### 语法
 
@@ -44,7 +44,7 @@ du [选项][文件]
 
 ### 实例
 
-　　文件从大到小排序
+文件从大到小排序
 
 ```
 ubuntu@VM-0-14-ubuntu:~/git-work/linux-command$ du -sh * |sort -rh
@@ -60,7 +60,7 @@ ubuntu@VM-0-14-ubuntu:~/git-work/linux-command$ du -sh * |sort -rh
 4.0K    LICENSE
 ```
 
-　　只显示当前目录下子目录的大小。
+只显示当前目录下子目录的大小。
 
 ```
 ubuntu@VM-0-14-ubuntu:~/git-work/linux-command$ du -sh ./*/
@@ -71,7 +71,7 @@ ubuntu@VM-0-14-ubuntu:~/git-work/linux-command$ du -sh ./*/
 148K    ./template/
 ```
 
-　　查看指定目录下文件所占的空间：
+查看指定目录下文件所占的空间：
 
 ```
 ubuntu@VM-0-14-ubuntu:~/git-work/linux-command/assets$ du ./*
@@ -82,18 +82,18 @@ ubuntu@VM-0-14-ubuntu:~/git-work/linux-command/assets$ du ./*
 16      ./qr.png
 ```
 
-　　只显示总和的大小:
+只显示总和的大小:
 
 ```
 ubuntu@VM-0-14-ubuntu:~/git-work/linux-command/assets$ du -s .
 1932    .
 ```
 
-　　显示总和的大小且易读:
+显示总和的大小且易读:
 
 ```
 ubuntu@VM-0-14-ubuntu:~/git-work/linux-command/assets$ du -sh .
 1.9M    .
 ```
 
-　　‍
+‍

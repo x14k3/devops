@@ -1,95 +1,96 @@
 # Oracle
 
-* 📄 Oracle 体系结构
-* 📄 Oracle 内存管理
-* 📑 Oracle 备份恢复
+* 📄 [Oracle 体系结构](Oracle/Oracle%20体系结构.md)
+* 📄 [Oracle 内存管理](Oracle/Oracle%20内存管理.md)
+* 📑 [Oracle 备份恢复](Oracle/Oracle%20备份恢复.md)
 
-  * 📄 Oracle RMAN
-  * 📄 Oracle RMAN与CDB
-  * 📄 Oracle 数据泵
-  * 📄 基于Flashback恢复
-  * 📄 基于RMAN实现异机恢复
-  * 📄 基于RMAN的不完全恢复
-* 📑 Oracle 安装部署
+  * 📄 [Oracle RMAN](Oracle/Oracle%20备份恢复/Oracle%20RMAN.md)
+  * 📄 [Oracle RMAN与CDB](Oracle/Oracle%20备份恢复/Oracle%20RMAN与CDB.md)
+  * 📄 [Oracle 数据泵](Oracle/Oracle%20备份恢复/Oracle%20数据泵.md)
+  * 📄 [基于Flashback恢复](Oracle/Oracle%20备份恢复/基于Flashback恢复.md)
+  * 📄 [基于RMAN实现异机恢复](Oracle/Oracle%20备份恢复/基于RMAN实现异机恢复.md)
+  * 📄 [基于RMAN的不完全恢复](Oracle/Oracle%20备份恢复/基于RMAN的不完全恢复.md)
+* 📑 [Oracle 安装部署](Oracle/Oracle%20安装部署.md)
 
-  * 📄 Linux下Oracle client（sqlplus）安装和配置
-  * 📄 Oracle11g 静默安装
-  * 📄 Oracle19c 静默安装
-  * 📄 oracle11g r2 在window server 2012中安装和卸载
-  * 📄 优化相关
-* 📑 Oracle 常用语句
+  * 📄 [Linux下Oracle client（sqlplus）安装和配置](Oracle/Oracle%20安装部署/Linux下Oracle%20client（sqlplus）安装和配置.md)
+  * 📄 [Oracle11g 静默安装](Oracle/Oracle%20安装部署/Oracle11g%20静默安装.md)
+  * 📄 [Oracle19c 静默安装](Oracle/Oracle%20安装部署/Oracle19c%20静默安装.md)
+  * 📄 [oracle11g r2 在window server 2012中安装和卸载](Oracle/Oracle%20安装部署/oracle11g%20r2%20在window%20server%202012中安装和卸载.md)
+  * 📄 [优化相关](Oracle/Oracle%20安装部署/优化相关.md)
+* 📑 [Oracle 常用语句](Oracle/Oracle%20常用语句.md)
 
-  * 📄 1.SQLplus常用命令
-  * 📄 2.用户管理
-  * 📄 3.表的管理
-  * 📄 4.基本查询
-  * 📄 5.复杂查询
-  * 📄 6.表连接
-* 📑 Oracle 日志归档和闪回区
+  * 📄 [1.SQLplus常用命令](Oracle/Oracle%20常用语句/1.SQLplus常用命令.md)
+  * 📄 [2.用户管理](Oracle/Oracle%20常用语句/2.用户管理.md)
+  * 📄 [3.表的管理](Oracle/Oracle%20常用语句/3.表的管理.md)
+  * 📄 [4.基本查询](Oracle/Oracle%20常用语句/4.基本查询.md)
+  * 📄 [5.复杂查询](Oracle/Oracle%20常用语句/5.复杂查询.md)
+  * 📄 [6.表连接](Oracle/Oracle%20常用语句/6.表连接.md)
+* 📑 [Oracle 日志归档和闪回区](Oracle/Oracle%20日志归档和闪回区.md)
 
-  * 📄 Oracle之redo log 归档
-  * 📄 Oracle之redo log 管理
-  * 📄 Oracle之事务流程分析
-  * 📄 Oracle之闪回区
-* 📑 Oracle 配置详解
+  * 📄 [Oracle之redo log 归档](Oracle/Oracle%20日志归档和闪回区/Oracle之redo%20log%20归档.md)
+  * 📄 [Oracle之redo log 管理](Oracle/Oracle%20日志归档和闪回区/Oracle之redo%20log%20管理.md)
+  * 📄 [Oracle之事务流程分析](Oracle/Oracle%20日志归档和闪回区/Oracle之事务流程分析.md)
+  * 📄 [Oracle之闪回区](Oracle/Oracle%20日志归档和闪回区/Oracle之闪回区.md)
+* 📑 [Oracle 配置详解](Oracle/Oracle%20配置详解.md)
 
-  * 📄 listener.ora 详解
-  * 📄 sqlnet.ora 详解
-  * 📄 tnsnames.ora 详解
-* 📑 Oracle 问题总结
+  * 📄 [listener.ora 详解](Oracle/Oracle%20配置详解/listener.ora%20详解.md)
+  * 📄 [sqlnet.ora 详解](Oracle/Oracle%20配置详解/sqlnet.ora%20详解.md)
+  * 📄 [tnsnames.ora 详解](Oracle/Oracle%20配置详解/tnsnames.ora%20详解.md)
+* 📑 [Oracle 问题总结](Oracle/Oracle%20问题总结.md)
 
-  * 📄 err-control_files丢失或损坏
-  * 📄 err-datafile丢失或损坏
-  * 📄 err-oracle错误代码大全
-  * 📄 err-redolog文件损坏或丢失
-  * 📄 err-temp表空间不足
-  * 📄 err-报错日志目录
-  * 📄 err-调整内存后，oracle启动异常
-  * 📄 other-ORACLE修改ORACLE_SID总结
-  * 📄 other-ORACLE数据库中ORACLE_SID与INSTANCE_NAME的差异
-  * 📄 other-Oracle表空间使用情况脚本
-  * 📄 other-口令文件介绍
-  * 📄 other-异步IO概念
-  * 📄 other-裸设备知识介绍
-  * 📄 other-解析awr报告
-  * 📄 warn-Linux标准大页设置不合理案例
-  * 📄 warn-archivelog日志占用空间大
-  * 📄 warn-undo表空间文件过大，占用磁盘空间
-* 📑 Oracle 高可用集群
+  * 📄 [err-control_files丢失或损坏](Oracle/Oracle%20问题总结/err-control_files丢失或损坏.md)
+  * 📄 [err-datafile丢失或损坏](Oracle/Oracle%20问题总结/err-datafile丢失或损坏.md)
+  * 📄 [err-oracle错误代码大全](Oracle/Oracle%20问题总结/err-oracle错误代码大全.md)
+  * 📄 [err-redolog文件损坏或丢失](Oracle/Oracle%20问题总结/err-redolog文件损坏或丢失.md)
+  * 📄 [err-temp表空间不足](Oracle/Oracle%20问题总结/err-temp表空间不足.md)
+  * 📄 [err-报错日志目录](Oracle/Oracle%20问题总结/err-报错日志目录.md)
+  * 📄 [err-调整内存后，oracle启动异常](Oracle/Oracle%20问题总结/err-调整内存后，oracle启动异常.md)
+  * 📄 [other-ORACLE修改ORACLE_SID总结](Oracle/Oracle%20问题总结/other-ORACLE修改ORACLE_SID总结.md)
+  * 📄 [other-ORACLE数据库中ORACLE_SID与INSTANCE_NAME的差异](Oracle/Oracle%20问题总结/other-ORACLE数据库中ORACLE_SID与INSTANCE_NAME的差异.md)
+  * 📄 [other-Oracle表空间使用情况脚本](Oracle/Oracle%20问题总结/other-Oracle表空间使用情况脚本.md)
+  * 📄 [other-口令文件介绍](Oracle/Oracle%20问题总结/other-口令文件介绍.md)
+  * 📄 [other-异步IO概念](Oracle/Oracle%20问题总结/other-异步IO概念.md)
+  * 📄 [other-裸设备知识介绍](Oracle/Oracle%20问题总结/other-裸设备知识介绍.md)
+  * 📄 [other-解析awr报告](Oracle/Oracle%20问题总结/other-解析awr报告.md)
+  * 📄 [warn-Linux标准大页设置不合理案例](Oracle/Oracle%20问题总结/warn-Linux标准大页设置不合理案例.md)
+  * 📄 [warn-archivelog日志占用空间大](Oracle/Oracle%20问题总结/warn-archivelog日志占用空间大.md)
+  * 📄 [warn-undo表空间文件过大，占用磁盘空间](Oracle/Oracle%20问题总结/warn-undo表空间文件过大，占用磁盘空间.md)
+* 📑 [Oracle 高可用集群](Oracle/Oracle%20高可用集群.md)
 
-  * 📑 Oracle DataGuard
+  * 📑 [Oracle DataGuard](Oracle/Oracle%20高可用集群/Oracle%20DataGuard.md)
 
-    * 📄 1. Oracle Dataguard 介绍
-    * 📄 2. Oracle-19c 单机DG搭建
-    * 📄 3. Oracle-19c rac DG搭建
-  * 📑 Oracle GoldenGate
+    * 📄 [1. Oracle Dataguard 介绍](Oracle/Oracle%20高可用集群/Oracle%20DataGuard/1.%20Oracle%20Dataguard%20介绍.md)
+    * 📄 [2. Oracle-19c 单机DG搭建](Oracle/Oracle%20高可用集群/Oracle%20DataGuard/2.%20Oracle-19c%20单机DG搭建.md)
+    * 📄 [3. Oracle-19c rac DG搭建](Oracle/Oracle%20高可用集群/Oracle%20DataGuard/3.%20Oracle-19c%20rac%20DG搭建.md)
+  * 📑 [Oracle GoldenGate](Oracle/Oracle%20高可用集群/Oracle%20GoldenGate.md)
 
-    * 📄 Oracle GoldenGate 介绍
-  * 📑 Oracle RAC
+    * 📄 [Oracle GoldenGate 介绍](Oracle/Oracle%20高可用集群/Oracle%20GoldenGate/Oracle%20GoldenGate%20介绍.md)
+    * 📄 [Oracle GoldenGate 部署-远程捕获方式](Oracle/Oracle%20高可用集群/Oracle%20GoldenGate/Oracle%20GoldenGate%20部署-远程捕获方式.md)
+  * 📑 [Oracle RAC](Oracle/Oracle%20高可用集群/Oracle%20RAC.md)
 
-    * 📄 1. Oracle RAC 介绍
-    * 📄 2. Oracle rac集群中的IP类型简介
-    * 📄 3. Oracle19c RAC-ASM部署
-    * 📄 4. Oracle RAC 常用命令
-* 📑 Oracle 高级特性
+    * 📄 [1. Oracle RAC 介绍](Oracle/Oracle%20高可用集群/Oracle%20RAC/1.%20Oracle%20RAC%20介绍.md)
+    * 📄 [2. Oracle rac集群中的IP类型简介](Oracle/Oracle%20高可用集群/Oracle%20RAC/2.%20Oracle%20rac集群中的IP类型简介.md)
+    * 📄 [3. Oracle19c RAC-ASM部署](Oracle/Oracle%20高可用集群/Oracle%20RAC/3.%20Oracle19c%20RAC-ASM部署.md)
+    * 📄 [4. Oracle RAC 常用命令](Oracle/Oracle%20高可用集群/Oracle%20RAC/4.%20Oracle%20RAC%20常用命令.md)
+* 📑 [Oracle 高级特性](Oracle/Oracle%20高级特性.md)
 
-  * 📑 Oracle CDB
+  * 📑 [Oracle CDB](Oracle/Oracle%20高级特性/Oracle%20CDB.md)
 
-    * 📄 CDB 概念
-    * 📄 安装 CDB 数据库
-    * 📄 将11g数据库插入到12c成为pdb
-    * 📄 管理 CDB 数据库
-    * 📄 远程克隆PDB
-  * 📄 Oracle OEM
-  * 📄 Oracle OMF
-* 📑 Oralce 基础概念
+    * 📄 [CDB 概念](Oracle/Oracle%20高级特性/Oracle%20CDB/CDB%20概念.md)
+    * 📄 [安装 CDB 数据库](Oracle/Oracle%20高级特性/Oracle%20CDB/安装%20CDB%20数据库.md)
+    * 📄 [将11g数据库插入到12c成为pdb](Oracle/Oracle%20高级特性/Oracle%20CDB/将11g数据库插入到12c成为pdb.md)
+    * 📄 [管理 CDB 数据库](Oracle/Oracle%20高级特性/Oracle%20CDB/管理%20CDB%20数据库.md)
+    * 📄 [远程克隆PDB](Oracle/Oracle%20高级特性/Oracle%20CDB/远程克隆PDB.md)
+  * 📄 [Oracle OEM](Oracle/Oracle%20高级特性/Oracle%20OEM.md)
+  * 📄 [Oracle OMF](Oracle/Oracle%20高级特性/Oracle%20OMF.md)
+* 📑 [Oralce 基础概念](Oracle/Oralce%20基础概念.md)
 
-  * 📄 ORACLE存储过程
-  * 📄 ORACLE数据字典
-  * 📄 ORACLE表连接
-  * 📄 Oracle基本概念和结构
-  * 📄 Oracle检查点
-  * 📄 Oracle视图
-  * 📄 oracle表分区
+  * 📄 [ORACLE存储过程](Oracle/Oralce%20基础概念/ORACLE存储过程.md)
+  * 📄 [ORACLE数据字典](Oracle/Oralce%20基础概念/ORACLE数据字典.md)
+  * 📄 [ORACLE表连接](Oracle/Oralce%20基础概念/ORACLE表连接.md)
+  * 📄 [Oracle基本概念和结构](Oracle/Oralce%20基础概念/Oracle基本概念和结构.md)
+  * 📄 [Oracle检查点](Oracle/Oralce%20基础概念/Oracle检查点.md)
+  * 📄 [Oracle视图](Oracle/Oralce%20基础概念/Oracle视图.md)
+  * 📄 [oracle表分区](Oracle/Oralce%20基础概念/oracle表分区.md)
 
-　　‍
+‍

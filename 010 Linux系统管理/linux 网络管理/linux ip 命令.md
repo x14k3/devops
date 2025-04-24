@@ -2,7 +2,7 @@
 
 ## ip 命令的语法
 
-　　​`ip [OPTIONS] OBJECT [COMMAND [ARGUMENTS]]`​
+​`ip [OPTIONS] OBJECT [COMMAND [ARGUMENTS]]`​
 
 * **OPTIONS**
 
@@ -49,13 +49,13 @@
   是命令的一些参数，它们倚赖于对象和命令。
   ip 支持两种类型的参数：flag 和 parameter。flag 由一个关键词组成；parameter 由一个关键词加一个数值组成。
 
-　　‍
+‍
 
-* 📄 ip address
-* 📄 ip link
-* 📄 ip neighbour
-* 📄 ip route
-* 📄 ip rule
-* 📄 ip tuntap
+* 📄 [ip address](linux%20ip%20命令/ip%20address.md)
+* 📄 [ip link](linux%20ip%20命令/ip%20link.md)
+* 📄 [ip neighbour](linux%20ip%20命令/ip%20neighbour.md)
+* 📄 [ip route](linux%20ip%20命令/ip%20route.md)
+* 📄 [ip rule](linux%20ip%20命令/ip%20rule.md)
+* 📄 [ip tuntap](linux%20ip%20命令/ip%20tuntap.md)
 
-　　‍
+‍

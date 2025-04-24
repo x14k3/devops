@@ -150,7 +150,7 @@ k8s118-node2
 
 ### 创建datastore
 
-　　创建NFS类型的Datastore
+创建NFS类型的Datastore
 
 ```
 # ESXI安装Synology NFS VAAI
@@ -184,7 +184,7 @@ Mount Point                                        Volume Name  UUID            
 
 ### 查看指定虚拟机设备信息
 
-　　其中包括网卡型号、MC地址等信息。
+其中包括网卡型号、MC地址等信息。
 
 ```
 vim-cmd vmsvc/getallvms
@@ -204,7 +204,7 @@ vim-cmd vmsvc/get.summary 101
 
 ## 3、其他命令
 
-　　查看虚拟网卡接口
+查看虚拟网卡接口
 
 ## 二、挂载本地磁盘上VMFS文件系统分区
 
@@ -226,13 +226,13 @@ esxcfg-volume -M UUID
 
 ## 三、ESXI网络抓包工具
 
-​![](assets/net-img-tcpdump-uw-vs-pktcap-uw-20240401203158-q1biwsg.png)​
+![](assets/net-img-tcpdump-uw-vs-pktcap-uw-20240401203158-q1biwsg.png)
 
-　　[https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/](https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/)
+[https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/](https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/)
 
 ## 1、tcpdump-uw
 
-　　详细文档：[https://kb.vmware.com/s/article/1031186](https://kb.vmware.com/s/article/1031186)
+详细文档：[https://kb.vmware.com/s/article/1031186](https://kb.vmware.com/s/article/1031186)
 
 ```
 esxcfg-vmknic -l
@@ -244,7 +244,7 @@ tcpdump-uw -i vmk0
 
 ## 2、pktcap-uw
 
-　　详细文档：[https://kb.vmware.com/s/article/2051814?lang=zh_CN](https://kb.vmware.com/s/article/2051814?lang=zh_CN)
+详细文档：[https://kb.vmware.com/s/article/2051814?lang=zh_CN](https://kb.vmware.com/s/article/2051814?lang=zh_CN)
 
 ```
 net-stats -l
@@ -256,15 +256,15 @@ pktcap-uw --vmk vmk0
 
 ## 1、ESXI VAAI
 
-　　在虚拟化环境中，从资源角度来看，传统上的存储操作非常昂贵。与主机相比，存储设备可以更高效地执行克隆和快照等功能。VMware vSphere存储API阵列集成（VAAI），也称为硬件加速或硬件卸载API，是一组API，用于启用VMware vSphere ESXi主机与存储设备之间的通信。这些API定义了一组“存储原语”，它们使ESXi主机能够将某些存储操作卸载到阵列上，从而减少了ESXi主机上的资源开销，并可以显着提高存储密集型操作（如存储克隆，清零等）的性能。VAAI的目标是帮助存储供应商提供硬件帮助，以加快在存储硬件中更有效地完成的VMware I / O操作。
+在虚拟化环境中，从资源角度来看，传统上的存储操作非常昂贵。与主机相比，存储设备可以更高效地执行克隆和快照等功能。VMware vSphere存储API阵列集成（VAAI），也称为硬件加速或硬件卸载API，是一组API，用于启用VMware vSphere ESXi主机与存储设备之间的通信。这些API定义了一组“存储原语”，它们使ESXi主机能够将某些存储操作卸载到阵列上，从而减少了ESXi主机上的资源开销，并可以显着提高存储密集型操作（如存储克隆，清零等）的性能。VAAI的目标是帮助存储供应商提供硬件帮助，以加快在存储硬件中更有效地完成的VMware I / O操作。
 
-　　参考：[https://www.vmware.com/techpapers/2012/vmware-vsphere-storage-apis-array-integration-10337.html](https://www.vmware.com/techpapers/2012/vmware-vsphere-storage-apis-array-integration-10337.html)
+参考：[https://www.vmware.com/techpapers/2012/vmware-vsphere-storage-apis-array-integration-10337.html](https://www.vmware.com/techpapers/2012/vmware-vsphere-storage-apis-array-integration-10337.html)
 
 ## 2、ESXI安装Synology NFS VAAI
 
-　　下载地址：[https://www.synology.cn/en-global/support/download/DS110+#utilities](https://www.synology.cn/en-global/support/download/DS110+#utilities)
+下载地址：[https://www.synology.cn/en-global/support/download/DS110+#utilities](https://www.synology.cn/en-global/support/download/DS110+#utilities)
 
-　　安装参看：[https://global.download.synology.com/download/www-res/dsm/Tools/NFSVAAIPlugin/README](https://global.download.synology.com/download/www-res/dsm/Tools/NFSVAAIPlugin/README)
+安装参看：[https://global.download.synology.com/download/www-res/dsm/Tools/NFSVAAIPlugin/README](https://global.download.synology.com/download/www-res/dsm/Tools/NFSVAAIPlugin/README)
 
 ```
 scp synonfs-vaai-plugin.vib root@192.168.1.103:/tmp
@@ -282,4 +282,4 @@ esxcli software vib list | more
 esxcli software vib remove -n {PLUGIN_NAME}
 ```
 
-　　参考：[https://www.jonathanmedd.net/category/nfs](https://www.jonathanmedd.net/category/nfs)
+参考：[https://www.jonathanmedd.net/category/nfs](https://www.jonathanmedd.net/category/nfs)

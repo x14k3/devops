@@ -2,13 +2,13 @@
 
 ## 开始部署
 
-　　1.安装
+1.安装
 
-　　​`yum install -y vsftpd`​
+​`yum install -y vsftpd`​
 
-　　2.修改配置文件
+2.修改配置文件
 
-　　​`cp /etc/vsftpd/vsftpd.conf{,.bak} ; vim /etc/vsftpd/vsftpd.conf`​
+​`cp /etc/vsftpd/vsftpd.conf{,.bak} ; vim /etc/vsftpd/vsftpd.conf`​
 
 ```bash
 anonymous_enable=NO                   # 禁用匿名登录和本地用户登录
@@ -26,22 +26,22 @@ ascii_download_enable=YES
 
 ```
 
-　　3.创建目录
+3.创建目录
 
-　　​`mkdir -p /etc/vsftpd/userconf`​
+​`mkdir -p /etc/vsftpd/userconf`​
 
-　　4.定义用户配置文件
+4.定义用户配置文件
 
-　　​`vim /etc/vsftpd/userconf/ftp_dzhd `​  # 文件名要和ftp用名相同
+​`vim /etc/vsftpd/userconf/ftp_dzhd `​  # 文件名要和ftp用名相同
 
 ```bash
 # 设置ftp_dzhd这个用户的根目录为/data/bps/data/sdq
 local_root=/data/bps/data/sdq
 ```
 
-　　5.修改pam
+5.修改pam
 
-　　​`cp /etc/pam.d/vsftpd{,.bak} ; vim /etc/pam.d/vsftpd`​
+​`cp /etc/pam.d/vsftpd{,.bak} ; vim /etc/pam.d/vsftpd`​
 
 ```bash
 # 删除或注释该行
@@ -51,7 +51,7 @@ local_root=/data/bps/data/sdq
 #  配置项的含义为仅允许用户的shell为 /etc/shells文件内的shell命令时，才能够成功
 ```
 
-　　6.创建用户
+6.创建用户
 
 ```bash
 groupadd ftpuser
@@ -62,14 +62,14 @@ chown ftp_dzhd:ftpuser /data/bps/data/sdq
 
 ```
 
-　　7.重启vsftp  
+7.重启vsftp  
 ​`systemctl restart vsftpd`​
 
 ## 被动模式
 
-　　1.修改配置文件
+1.修改配置文件
 
-　　​`vim /etc/vsftpd/vsftpd.conf`​
+​`vim /etc/vsftpd/vsftpd.conf`​
 
 ```bash
 # linux ftp 客户端默认使用被动模式
@@ -79,14 +79,14 @@ pasv_min_port=2024
 pasv_max_port=2034
 ```
 
-　　2.重启vsftp  
+2.重启vsftp  
 ​`systemctl restart vsftpd`​
 
 ## 启用ssl
 
-　　1.修改配置文件
+1.修改配置文件
 
-　　​`vim /etc/vsftpd/vsftpd.conf`​
+​`vim /etc/vsftpd/vsftpd.conf`​
 
 ```bash
 #添加如下选项
@@ -104,7 +104,7 @@ ssl_ciphers=HIGH
 
 ```
 
-　　2.制作ssl证书
+2.制作ssl证书
 
 ```bash
 yum install -y openssl
@@ -113,16 +113,16 @@ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /etc/vsftpd/vsftpd.p
 chmod 400 vsftpd.pem
 ```
 
-　　3.重启vsftp  
+3.重启vsftp  
 ​`systemctl restart vsftpd`​
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## vsftpd.conf 配置文件说明
 
-　　ftp的配置文件主要有三个，位于/etc/vsftpd/目录下，分别是：
+ftp的配置文件主要有三个，位于/etc/vsftpd/目录下，分别是：
 
 ```nginx
 ftpusers    # 不受任何配制项的影响，它总是有效，它是一个黑名单！
@@ -199,7 +199,7 @@ user_config_dir=/etc/vsftpd/userconf
 
 ```
 
-　　对于chroot\_local\_user与chroot\_list\_enable的组合效果，可以参考下表：
+对于chroot\_local\_user与chroot\_list\_enable的组合效果，可以参考下表：
 
 ||chroot\_local\_user=YES|chroot\_local\_user=NO|
 | ------------------------------------------------------------------------------| --------------------------------| ------------------------------|
@@ -239,7 +239,7 @@ pam_service_name=vsftpd
 
 ```
 
-　　范例：
+范例：
 
 ```bash
 [11:00:56 root@ftp ~]#ldd /usr/sbin/vsftpd | grep pam
@@ -270,7 +270,7 @@ anon_max_rate=0    # 匿名用户的最大传输速率,以字节为单位,比如
 local_max_rate=0   # 本地用户的最大传输速率
 ```
 
-　　**范例：**
+**范例：**
 
 ```bash
 #限速
@@ -299,7 +299,7 @@ idle_session_timeout=60     # 无命令操作超时时长
 
 ### 以文本方式传输
 
-　　以文本方式传输文件时,会自动对文件进行格式转换,比如转换成windows的文本格式
+以文本方式传输文件时,会自动对文件进行格式转换,比如转换成windows的文本格式
 
 ```bash
 #启用此选项可使服务器在ASCII模式下实际对文件进行ASCII处理。

@@ -1,8 +1,8 @@
 # ngx_http_upstream_module
 
-　　‍
+‍
 
-　　​`ngx_http_upstream_module`​ 模块用于定义可被 [proxy_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_pass)、[fastcgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_pass)、[uwsgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_uwsgi_module#uwsgi_pass)、[scgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_scgi_module#scgi_pass)、[memcached_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_memcached_module#memcached_pass) 和 [grpc_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_grpc_module#grpc_pass) 指令引用的服务器组。
+​`ngx_http_upstream_module`​ 模块用于定义可被 [proxy_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_pass)、[fastcgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_pass)、[uwsgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_uwsgi_module#uwsgi_pass)、[scgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_scgi_module#scgi_pass)、[memcached_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_memcached_module#memcached_pass) 和 [grpc_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_grpc_module#grpc_pass) 指令引用的服务器组。
 
 ## 示例配置
 
@@ -23,7 +23,7 @@ server {
 }
 ```
 
-　　动态可配置组定期[健康检查](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_hc_module)为[商业订阅](http://nginx.com/products/?_ga=2.192708585.259929927.1564163363-1186072494.1564163363)部分：
+动态可配置组定期[健康检查](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_hc_module)为[商业订阅](http://nginx.com/products/?_ga=2.192708585.259929927.1564163363-1186072494.1564163363)部分：
 
 ```
 resolver 10.0.0.1;
@@ -59,9 +59,9 @@ server {
 |**默认**|——|
 |**上下文**|http|
 
-　　定义一组服务器。服务器可以监听不同的端口。此外，可以混合监听 TCP 和 UNIX 域套接字。
+定义一组服务器。服务器可以监听不同的端口。此外，可以混合监听 TCP 和 UNIX 域套接字。
 
-　　例如：
+例如：
 
 ```
 upstream backend {
@@ -73,7 +73,7 @@ upstream backend {
 }
 ```
 
-　　默认情况下，使用加权轮询均衡算法在服务器间分配请求。在上面的示例中，每 7 个请求将按如下方式分发：5 个请求转到 `backend1.example.com`​，另外 2 个请求分别转发给第二个和第三个服务器。如果在与服务器通信期间发生错误，请求将被传递到下一个服务器，依此类推，直到尝试完所有正常的服务器。如果无法从这些服务器中获得成功响应，则客户端将接收到与最后一个服务器的通信结果。
+默认情况下，使用加权轮询均衡算法在服务器间分配请求。在上面的示例中，每 7 个请求将按如下方式分发：5 个请求转到 `backend1.example.com`​，另外 2 个请求分别转发给第二个和第三个服务器。如果在与服务器通信期间发生错误，请求将被传递到下一个服务器，依此类推，直到尝试完所有正常的服务器。如果无法从这些服务器中获得成功响应，则客户端将接收到与最后一个服务器的通信结果。
 
 ### server
 
@@ -83,9 +83,9 @@ upstream backend {
 |**默认**|——|
 |**上下文**|upstream|
 
-　　定义服务器的地址（`address`​）和其他参数（`parameters`​）。可以将地址指定为域名或 IP 地址，端口可选，或者指定为以 `unix:`​ 为前缀的 UNIX 域套接字路径。如果未指定端口，则使用 80 端口。解析为多个 IP 地址的域名一次定义多个服务器。
+定义服务器的地址（`address`​）和其他参数（`parameters`​）。可以将地址指定为域名或 IP 地址，端口可选，或者指定为以 `unix:`​ 为前缀的 UNIX 域套接字路径。如果未指定端口，则使用 80 端口。解析为多个 IP 地址的域名一次定义多个服务器。
 
-　　可定义以下参数：
+可定义以下参数：
 
 * ​`weight=number`​  
   设置服务器的权重，默认为 1。
@@ -134,7 +134,7 @@ upstream backend {
   server backend.example.com service=http resolve;
 ```
 
-　　如果服务名称包含一个或多个点，则通过加入服务前缀和服务器名称来构造名称。例如，要查找 `_http._tcp.backend.example.com和server1.backend.example.com`​ SRV 记录，必须指定指令：
+如果服务名称包含一个或多个点，则通过加入服务前缀和服务器名称来构造名称。例如，要查找 `_http._tcp.backend.example.com和server1.backend.example.com`​ SRV 记录，必须指定指令：
 
 * ```
     server backend.example.com service=_http._tcp resolve;
@@ -164,9 +164,9 @@ upstream backend {
 |**上下文**|upstream|
 |**提示**|该指令在 1.9.0 版本中出现|
 
-　　定义共享内存区域的名称（`name`​）和大小（`size`​），该区域在 wo'r'kr之间共享组配置和运行时状态。几个组可能共享同一个区域。在这种情况下，仅需指定一次大小（`size`​）即可。
+定义共享内存区域的名称（`name`​）和大小（`size`​），该区域在 wo'r'kr之间共享组配置和运行时状态。几个组可能共享同一个区域。在这种情况下，仅需指定一次大小（`size`​）即可。
 
-　　此外，作为[商业订阅](http://nginx.com/products/?_ga=2.242046977.2090741542.1564472262-1186072494.1564163363)部分，此类组允许更改组成员身份或修改特定服务器的设置，无需重新启动 nginx。 可以通过 [API](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md) 模块（1.13.3）访问配置。
+此外，作为[商业订阅](http://nginx.com/products/?_ga=2.242046977.2090741542.1564472262-1186072494.1564163363)部分，此类组允许更改组成员身份或修改特定服务器的设置，无需重新启动 nginx。 可以通过 [API](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md) 模块（1.13.3）访问配置。
 
 > 在 1.13.3 版之前，只能通过 [upstream_conf](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_conf_module#upstream_conf) 处理的特殊 location 访问配置。
 
@@ -179,16 +179,16 @@ upstream backend {
 |**上下文**|upstream|
 |**提示**|该指令在 1.9.7 版本中出现|
 
-　　指定一个保持动态可配置组状态的文件（`file`​）。
+指定一个保持动态可配置组状态的文件（`file`​）。
 
-　　示例：
+示例：
 
 ```
 state /var/lib/nginx/state/servers.conf; # path for Linux
 state /var/db/nginx/state/servers.conf;  # path for FreeBSD
 ```
 
-　　该状态目前仅限于有参数的服务器列表。解析配置时会读取文件，每次[更改](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md#http_upstreams_http_upstream_name_servers_) upstream 配置时都会更新该文件。应避免直接更改文件内容。该指令不能与 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#server) 指令一起使用。
+该状态目前仅限于有参数的服务器列表。解析配置时会读取文件，每次[更改](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md#http_upstreams_http_upstream_name_servers_) upstream 配置时都会更新该文件。应避免直接更改文件内容。该指令不能与 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#server) 指令一起使用。
 
 > [配置重新加载](https://docshome.gitbook.io/nginx-docs/readme/kong-zhi-nginx#reconfiguration)或[二进制升级](https://docshome.gitbook.io/nginx-docs/readme/kong-zhi-nginx#upgrade)期间所做的更改可能会丢失。
 >
@@ -203,9 +203,9 @@ state /var/db/nginx/state/servers.conf;  # path for FreeBSD
 |**上下文**|upstream|
 |**提示**|该指令在 1.7.2 版本中出现|
 
-　　指定服务器组的负载均衡策略，其中客户端/服务器映射基于哈希 `key`​ 值。`key`​ 可以包含文本、变量及其组合。请注意，从组中添加或删除服务器可能会导致大部分 key 重新映射到不同的服务器。该方法与 [Cache::Memcached](https://metacpan.org/pod/Cache::Memcached) Perl 库兼容。
+指定服务器组的负载均衡策略，其中客户端/服务器映射基于哈希 `key`​ 值。`key`​ 可以包含文本、变量及其组合。请注意，从组中添加或删除服务器可能会导致大部分 key 重新映射到不同的服务器。该方法与 [Cache::Memcached](https://metacpan.org/pod/Cache::Memcached) Perl 库兼容。
 
-　　如果指定了 `consistent`​ 参数，则将使用 [ketama](https://www.metabrew.com/article/libketama-consistent-hashing-algo-memcached-clients) 一致性哈希策略。该策略确保在向组中添加或删除服务器时，只有少数 key 被重新映射到不同的服务器。这有助于为缓存服务器实现更高的缓存命中率。该方法与 [Cache::Memcached::Fast](https://metacpan.org/pod/Cache::Memcached::Fast) Perl 库兼容，`ketama_points`​ 参数设置为 160。
+如果指定了 `consistent`​ 参数，则将使用 [ketama](https://www.metabrew.com/article/libketama-consistent-hashing-algo-memcached-clients) 一致性哈希策略。该策略确保在向组中添加或删除服务器时，只有少数 key 被重新映射到不同的服务器。这有助于为缓存服务器实现更高的缓存命中率。该方法与 [Cache::Memcached::Fast](https://metacpan.org/pod/Cache::Memcached::Fast) Perl 库兼容，`ketama_points`​ 参数设置为 160。
 
 ### ip\_hash
 
@@ -215,13 +215,13 @@ state /var/db/nginx/state/servers.conf;  # path for FreeBSD
 |**默认**|——|
 |**上下文**|upstream|
 
-　　指定一个组应使用基于客户端 IP 地址在服务器之间分发请求的负载均衡方式。客户端 IPv4 地址的前三个八位字节或整个 IPv6 地址作为哈希 key。该方法确保来自同一客户端的请求始终传递到同一服务器，除非服务器不可用。后一种情况下，客户端请求将被传递到另一个服务器。大多数情况下始终是同一台服务器。
+指定一个组应使用基于客户端 IP 地址在服务器之间分发请求的负载均衡方式。客户端 IPv4 地址的前三个八位字节或整个 IPv6 地址作为哈希 key。该方法确保来自同一客户端的请求始终传递到同一服务器，除非服务器不可用。后一种情况下，客户端请求将被传递到另一个服务器。大多数情况下始终是同一台服务器。
 
 > 从 1.3.2 和 1.2.2 版本开始支持 IPv6 地址。
 
-　　如果需要临时删除其中一个服务器，则应使用 `down`​ 参数进行标记，以保留客户端 IP 地址的当前哈希值。
+如果需要临时删除其中一个服务器，则应使用 `down`​ 参数进行标记，以保留客户端 IP 地址的当前哈希值。
 
-　　示例：
+示例：
 
 ```
 upstream backend {
@@ -245,13 +245,13 @@ upstream backend {
 |**上下文**|upstream|
 |**提示**|该指令在 1.1.4 版本中出现|
 
-　　激活缓存以连接到 upstream 服务器。
+激活缓存以连接到 upstream 服务器。
 
-　　​`connections`​ 参数设置在每个 worker（worker）的缓存中保留的 upstream 服务器的最大空闲 keepalive 连接数。超过此数量时，将关闭最近最少使用的连接。
+​`connections`​ 参数设置在每个 worker（worker）的缓存中保留的 upstream 服务器的最大空闲 keepalive 连接数。超过此数量时，将关闭最近最少使用的连接。
 
 > 需要特别注意的是，`keepalive`​ 指令不限制 nginx worker 进程可以打开的 upstream 服务器的连接总数。`connections`​ 参数应设置为足够小的数字，以便 upstream 服务器也可以处理新的传入连接。
 
-　　使用 keepalive 连接的 memcached upstream 示例配置：
+使用 keepalive 连接的 memcached upstream 示例配置：
 
 ```
 upstream memcached_backend {
@@ -272,7 +272,7 @@ server {
 }
 ```
 
-　　对于 HTTP，[proxy_http_version](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_http_version) 指令应设置为 `1.1`​，并且应清除 **Connection** header 字段：
+对于 HTTP，[proxy_http_version](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_http_version) 指令应设置为 `1.1`​，并且应清除 **Connection** header 字段：
 
 ```
 upstream http_backend {
@@ -295,7 +295,7 @@ server {
 
 > 或者，可以通过将 **Connection: Keep-Alive** header 字段传递给 upstream 服务器来使用 HTTP/1.0 持久连接，但不建议使用此方法。
 
-　　对于 FastCGI 服务器，需要设置 [fastcgi_keep_conn](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_keep_conn) 才能使 keepalive 连接正常工作：
+对于 FastCGI 服务器，需要设置 [fastcgi_keep_conn](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_keep_conn) 才能使 keepalive 连接正常工作：
 
 ```
 upstream fastcgi_backend {
@@ -328,7 +328,7 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.15.3 版本中出现|
 
-　　设置可通过一个 keepalive 连接提供的最大请求数。在达到最大请求数后，连接将关闭。
+设置可通过一个 keepalive 连接提供的最大请求数。在达到最大请求数后，连接将关闭。
 
 ### keepalive\_timeout
 
@@ -339,7 +339,7 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.15.3 版本中出现|
 
-　　设置超时时间，在此期间与 upstream 服务器的空闲 keepalive 连接将保持打开状态。
+设置超时时间，在此期间与 upstream 服务器的空闲 keepalive 连接将保持打开状态。
 
 ### ntlm
 
@@ -350,9 +350,9 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.9.2 版本中出现|
 
-　　允许使用 [NTLM 身份验证](https://en.wikipedia.org/wiki/Integrated_Windows_Authentication)代理请求。一旦客户端发送有以 `Negotiate`​ 或 `NTLM`​ 开头的 `Authorization`​ header 字段值的请求，upstream 连接将绑定到客户端连接。之后的客户端请求将通过相同的 upstream 连接进行代理，从而保持身份验证上下文。
+允许使用 [NTLM 身份验证](https://en.wikipedia.org/wiki/Integrated_Windows_Authentication)代理请求。一旦客户端发送有以 `Negotiate`​ 或 `NTLM`​ 开头的 `Authorization`​ header 字段值的请求，upstream 连接将绑定到客户端连接。之后的客户端请求将通过相同的 upstream 连接进行代理，从而保持身份验证上下文。
 
-　　为了使 NTLM 身份验证生效，必须启用与 upstream 服务器的 keepalive 连接。[proxy_http_version](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_http_version) 指令应设置为 `1.1`​，并且应清除 **Connection** header 字段：
+为了使 NTLM 身份验证生效，必须启用与 upstream 服务器的 keepalive 连接。[proxy_http_version](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_http_version) 指令应设置为 `1.1`​，并且应清除 **Connection** header 字段：
 
 ```
 upstream http_backend {
@@ -386,7 +386,7 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.3.1 和 1.2.2 版本中出现|
 
-　　指定组应使用将请求传递到活动连接数最少的服务器，同时考虑服务器权重的负载均衡策略。如果多个同样的服务器，则使用加权轮询均衡方式依次尝试。
+指定组应使用将请求传递到活动连接数最少的服务器，同时考虑服务器权重的负载均衡策略。如果多个同样的服务器，则使用加权轮询均衡方式依次尝试。
 
 ### least\_time
 
@@ -397,9 +397,9 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.7.10 版本中出现|
 
-　　指定组应使用将请求传递到有最短平均响应时间和最少活动连接数的服务器，同时考虑服务器权重的负载均衡策略。如果有多个同样的服务器，则使用加权轮询均衡方式依次尝试。
+指定组应使用将请求传递到有最短平均响应时间和最少活动连接数的服务器，同时考虑服务器权重的负载均衡策略。如果有多个同样的服务器，则使用加权轮询均衡方式依次尝试。
 
-　　如果指定了 `header`​ 参数，则使用接收[响应头](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_header_time)的时间。如果指定了 `last_byte`​ 参数，则使用接收[完整响应](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_response_time)的时间。如果指定了 `inflight`​ 参数（1.11.6），则还会考虑不完整的请求。
+如果指定了 `header`​ 参数，则使用接收[响应头](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_header_time)的时间。如果指定了 `last_byte`​ 参数，则使用接收[完整响应](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_response_time)的时间。如果指定了 `inflight`​ 参数（1.11.6），则还会考虑不完整的请求。
 
 > 在 1.11.6 版本之前，默认情况下会考虑未完成的请求。
 >
@@ -414,9 +414,9 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.5.12 版本中出现|
 
-　　如果在处理请求时无法立即选择 upstream 服务器，则请求将被放在队列中。该指令指定可以同时在队列中的最大请求数（`number`​）。如果队列已满，或者在超时参数（`timeout`​）指定的时间段内无法选择要传递请求的服务器，则会将 **502 (Bad Gateway)**  错误返回给客户端。
+如果在处理请求时无法立即选择 upstream 服务器，则请求将被放在队列中。该指令指定可以同时在队列中的最大请求数（`number`​）。如果队列已满，或者在超时参数（`timeout`​）指定的时间段内无法选择要传递请求的服务器，则会将 **502 (Bad Gateway)**  错误返回给客户端。
 
-　　​`timeout`​ 参数的默认值为 60 秒。
+​`timeout`​ 参数的默认值为 60 秒。
 
 > 使用除默认的轮询策略之外的负载均衡策略时，必须在 `queue`​ 指令之前激活它们。
 >
@@ -431,11 +431,11 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.15.1 版本中出现|
 
-　　指定组应使用将请求随机传递给服务器，同时考虑服务器权重的负载均衡策略。
+指定组应使用将请求随机传递给服务器，同时考虑服务器权重的负载均衡策略。
 
-　　可选的 `two`​ 参数指示 nginx 随机选择[两个](https://homes.cs.washington.edu/~karlin/papers/balls.pdf)服务器，然后使用指定的方法（`method`​）选择服务器。默认方法是 `least_conn`​，它将请求传递给活动连接数最少的服务器。
+可选的 `two`​ 参数指示 nginx 随机选择[两个](https://homes.cs.washington.edu/~karlin/papers/balls.pdf)服务器，然后使用指定的方法（`method`​）选择服务器。默认方法是 `least_conn`​，它将请求传递给活动连接数最少的服务器。
 
-　　​`least_time`​ 方法将请求传递给平均响应时间最短且活动连接数最少的服务器。如果指定了 `least_time=header`​，则使用接收[响应头](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_header_time)的时间。如果指定了 `least_time=last_byte`​，则使用接收[完整响应](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_response_time)的时间。
+​`least_time`​ 方法将请求传递给平均响应时间最短且活动连接数最少的服务器。如果指定了 `least_time=header`​，则使用接收[响应头](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_header_time)的时间。如果指定了 `least_time=last_byte`​，则使用接收[完整响应](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#var_upstream_response_time)的时间。
 
 > ​`least_time`​ 方法作为[商业订阅](http://nginx.com/products/?_ga=2.27050036.860729840.1564753618-1186072494.1564163363)部分提供。
 
@@ -448,7 +448,7 @@ server {
 |**上下文**|upstream|
 |**提示**|该指令在 1.5.7 版本中出现|
 
-　　启用会话关联，这会将来自同一客户端的请求传递到一组服务器中的同一服务器。有三种方法可供选择：
+启用会话关联，这会将来自同一客户端的请求传递到一组服务器中的同一服务器。有三种方法可供选择：
 
 * ​`cookie`​  
   使用 `cookie`​ 方法时，有关指定服务器的信息将在 nginx 生成的 HTTP cookie 中传递：
@@ -462,9 +462,9 @@ server {
   }
 ```
 
-　　来自尚未绑定到特定服务器的客户端的请求将由配置的均衡方法选择服务器传递。使用此 cookie 的后续请求将传递到指定的服务器。如果指定的服务器无法处理请求，则选择新服务器，与客户端未绑定特定服务器的情况一样处理。
+来自尚未绑定到特定服务器的客户端的请求将由配置的均衡方法选择服务器传递。使用此 cookie 的后续请求将传递到指定的服务器。如果指定的服务器无法处理请求，则选择新服务器，与客户端未绑定特定服务器的情况一样处理。
 
-　　第一个参数设置为要审查或检查的 cookie 的名称。cookie 值是一个 IP 地址和端口的 MD5 哈希值或 UNIX 域套接字路径的十六进制表示形式。但如果指定了 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#server) 指令的 `route`​ 参数，则 cookie 值将是 `route`​ 参数的值：
+第一个参数设置为要审查或检查的 cookie 的名称。cookie 值是一个 IP 地址和端口的 MD5 哈希值或 UNIX 域套接字路径的十六进制表示形式。但如果指定了 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#server) 指令的 `route`​ 参数，则 cookie 值将是 `route`​ 参数的值：
 
 * ```
     upstream backend {
@@ -542,7 +542,7 @@ server {
 |**默认**|——|
 |**上下文**|upstream|
 
-　　从 1.5.7 版本开始，该指令已过时。应使用新的 [sticky](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#sticky) 指令代替：
+从 1.5.7 版本开始，该指令已过时。应使用新的 [sticky](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#sticky) 指令代替：
 
 ```
 sticky cookie name [expires=time] [domain=domain] [path=path];
@@ -550,7 +550,7 @@ sticky cookie name [expires=time] [domain=domain] [path=path];
 
 ## 内部变量
 
-　　​`ngx_http_upstream_module`​ 模块支持以下内部变量：
+​`ngx_http_upstream_module`​ 模块支持以下内部变量：
 
 * ​`$upstream_addr`​  
   保存 IP 地址和端口，或 upstream 服务器的 UNIX 域套接字的路径。如果在请求处理期间接触了多个服务器，则它们的地址用逗号分隔，例如 `192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock`​。如果从一个服务器组到另一个服务器组的内部发生重定向，由 `X-Accel-Redirect`​ 或 `error_page`​ 发起，则来自不同组的服务器地址由冒号分隔，例如 `192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock : 192.168.10.1:80, 192.168.10.2:80`​。 如果无法选择服务器，则变量将保留服务器组的名称。
@@ -579,4 +579,4 @@ sticky cookie name [expires=time] [domain=domain] [path=path];
 * ​`$upstream_trailer_name`​  
   保存从 upstream 服务器（1.13.10）获得的响应结束时的字段。
 
-　　‍
+‍

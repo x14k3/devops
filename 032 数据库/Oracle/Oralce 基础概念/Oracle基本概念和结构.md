@@ -4,11 +4,11 @@
 2. 什么是数据库? 数据库是存储介质上的文件—>物理存储结构
 3. 什么是实例instance？ 内存中运行的数据库进程，包括读入内容的数据库文件； 数据库和实例可用是1:1，也可用是1:N的关系
 
-​![DE22FBD4-EA19-46CC-B0B2-A8D082C887E5.jpeg](assets/network-asset-DE22FBD4-EA19-46CC-B0B2-A8D082C887E5-20241022144428-5grir68.jpeg)​
+![DE22FBD4-EA19-46CC-B0B2-A8D082C887E5.jpeg](assets/network-asset-DE22FBD4-EA19-46CC-B0B2-A8D082C887E5-20241022144428-5grir68.jpeg)​
 
 ## 架构-存储结构
 
-​![Untitled](assets/network-asset-Untitled-20241022144429-sia6x1p.png)​
+![Untitled](assets/network-asset-Untitled-20241022144429-sia6x1p.png)
 
 ### 物理存储结构
 
@@ -76,7 +76,7 @@ total 2428380
   4. 如果此时内存发生崩溃等情况，可用通过log文件恢复丢失的数据，称作实例恢复
   5. 当触发了检查点Checkpoint的时候，会以最高优先级唤醒数据库的写进程。来写脏数据到数据文件
 
-      > 什么是检查点 参考：Oracle检查点
+      > 什么是检查点 参考：[Oracle检查点](Oracle检查点.md)
       >
 
 * 控制文件（.CTL） 控制文件是一个二进制文件，它主要记录数据库的名称、数据库的数据文件存放位置等信息。一个控制文件只能属于一个数据库。 如果控制文件丢失，这数据库就无法操作。
@@ -106,9 +106,9 @@ total 2428380
 
 ### 逻辑存储结构
 
-　　通过逻辑存储结构管理物理存储结构
+通过逻辑存储结构管理物理存储结构
 
-​![Untitled](assets/network-asset-Untitled%202-20241022144429-lrjbf9g.png)​
+![Untitled](assets/network-asset-Untitled%202-20241022144429-lrjbf9g.png)
 
 1. 数据库
 2. 表空间，重点关注[表空间](https://www.notion.so/ae1c306764744032b0f7d8b4679605fb)
@@ -128,12 +128,12 @@ db_block_size                        integer     8192
 
 ## 架构-进程结构
 
-　　Oracle 进程是运行 Oracle 数据库代码的执行单元。在多线程体系结构中，Oracle 进程可以是操作系统进程，也可以是操作系统进程中的线程。Oracle 进程包括以下子类型：
+Oracle 进程是运行 Oracle 数据库代码的执行单元。在多线程体系结构中，Oracle 进程可以是操作系统进程，也可以是操作系统进程中的线程。Oracle 进程包括以下子类型：
 
 * 后台进程从数据库实例开始，执行维护任务，如执行实例恢复、清理进程、将重做缓冲区写入磁盘等。
 * 服务器进程根据客户端请求执行工作（1-3）。
 
-​![F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C.jpeg](assets/network-asset-F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C-20241022144429-cyc79w0.jpeg)​
+![F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C.jpeg](assets/network-asset-F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C-20241022144429-cyc79w0.jpeg)​
 
 ```bash
 [oracle@oracle-12 prod]$ ps -ef |grep ora_ |grep -v grep
@@ -189,7 +189,7 @@ oracle   23523     1  0 22:00 ?        00:00:00 ora_w007_prod
     1. 当系统出现错误的时候，负责清理现场
 6. 其他
 
-　　[Database Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/cncpt/process-architecture.html#GUID-2E691FEA-9027-47E4-A3D0-1B235BBA295A)
+[Database Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/cncpt/process-architecture.html#GUID-2E691FEA-9027-47E4-A3D0-1B235BBA295A)
 
 ## 架构-内存结构
 
@@ -216,23 +216,23 @@ Database Buffers         3.7447E+10 bytes
 Redo Buffers              118505472 bytes
 ```
 
-　　sga\_target big integer 41216M，这是在数据库配置的时候设定的值；
+sga\_target big integer 41216M，这是在数据库配置的时候设定的值；
 
-　　默认情况，sga\_target 为 0，表示sga的值有系统自动指定
+默认情况，sga\_target 为 0，表示sga的值有系统自动指定
 
-​![75218C39-F4D4-421A-B8BC-BD2D25B54E47.jpeg](assets/network-asset-75218C39-F4D4-421A-B8BC-BD2D25B54E47-20241022144429-wlpw3qq.jpeg)​
+![75218C39-F4D4-421A-B8BC-BD2D25B54E47.jpeg](assets/network-asset-75218C39-F4D4-421A-B8BC-BD2D25B54E47-20241022144429-wlpw3qq.jpeg)
 
 #### SGA-BufferCache
 
-​![3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E.jpeg](assets/network-asset-3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E-20241022144429-sb2dhly.jpeg)​
+![3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E.jpeg](assets/network-asset-3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E-20241022144429-sb2dhly.jpeg)
 
 1. 客户端在buffercache中查询数据
 2. BufferCache如果有数据，称为一次命中
 3. 如果没有数据，读取数据文件＊.dbf直接返回数据
 
-　　‍
+‍
 
-　　查看buffercache大小,0表示有Oracle自动指定
+查看buffercache大小,0表示有Oracle自动指定
 
 ```bash
 SQL> show parameter cache_size
@@ -253,7 +253,7 @@ db_recycle_cache_size                big integer 0
 
 #### SGA-Shared Pool
 
-　　数据字典、SQL、执行计划，
+数据字典、SQL、执行计划，
 
 ```bash
 SQL> show parameter shared_pool
@@ -265,7 +265,7 @@ shared_pool_size                     big integer 0
 
 #### SGA-log Buffer
 
-　　有明确的值
+有明确的值
 
 ```bash
 SQL> show parameter log_buffer
@@ -293,7 +293,7 @@ NAME                                 TYPE        VALUE
 streams_pool_size                    big integer 0
 ```
 
-　　‍
+‍
 
 ### PGA：Process Global Area
 
@@ -307,7 +307,7 @@ pga_aggregate_target                 big integer 10282M
 #默认情况，sga_target  为 0
 ```
 
-　　11g以后提供2个功能。
+11g以后提供2个功能。
 
 * AMM，Automatic memory management。设置一个总内存，让Oracle自动分配SGA和PGA。memory\_target = SGA + n\*PGA
 

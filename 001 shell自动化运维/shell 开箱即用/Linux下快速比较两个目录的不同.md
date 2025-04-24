@@ -11,7 +11,7 @@ rsync  -avnic  --delete /directory1/ root@192.168.141.102:/directory2/ | sed -n 
 #--delete directory2有，directory1没有的列出来
 ```
 
-　　脚本
+脚本
 
 ```bash
 #!/bin/bash

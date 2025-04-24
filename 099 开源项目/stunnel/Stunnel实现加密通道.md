@@ -2,7 +2,7 @@
 
 ## 创建自签名证书
 
-　　在要做为stunnel server的服务器上使用下面命令生成自签名证书：
+在要做为stunnel server的服务器上使用下面命令生成自签名证书：
 
 ```bash
 openssl req -new -x509 -days 3650 -nodes -out stunnel.pem -keyout stunnel.pem
@@ -16,7 +16,7 @@ openssl req -new -x509 -days 3650 -nodes -out stunnel.pem -keyout stunnel.pem
   # -keyout参数，要生成的私钥(private key)文件名（上面使用了跟证书一样的文件名，并不会覆盖该文件，而是追加到一起）
 ```
 
-　　‍
+‍
 
 ## 安装配置stunnel
 
@@ -26,7 +26,7 @@ openssl req -new -x509 -days 3650 -nodes -out stunnel.pem -keyout stunnel.pem
 sudo apt-get install stunnel
 ```
 
-　　stunnel在ubuntu上的配置文件是要放在/etc/stunnel/目录下的，用vim打开这个目录下的/etc/stunnel/README文件（`vim /etc/stunnel/README`​ ），就可以看到给的示例文件是在下边的路径上，实例文件可以参考使用
+stunnel在ubuntu上的配置文件是要放在/etc/stunnel/目录下的，用vim打开这个目录下的/etc/stunnel/README文件（`vim /etc/stunnel/README`​ ），就可以看到给的示例文件是在下边的路径上，实例文件可以参考使用
 
 ```hljs
 /usr/share/doc/stunnel4/examples/stunnel.conf-sample
@@ -34,7 +34,7 @@ sudo apt-get install stunnel
 
 ### 配置stunnel server
 
-　　默认的stunnel配置文件在/etc/stunnel/stunnel.conf。关于更多参数信息，可以参考：[https://www.stunnel.org/static/stunnel.html](https://www.stunnel.org/static/stunnel.html)
+默认的stunnel配置文件在/etc/stunnel/stunnel.conf。关于更多参数信息，可以参考：[https://www.stunnel.org/static/stunnel.html](https://www.stunnel.org/static/stunnel.html)
 
 ```conf
 ; 设置工作目录
@@ -88,11 +88,11 @@ connect = 3128
 ;CAfile = /etc/stunnel/stunnel-client.pem
 ```
 
-　　‍
+‍
 
 ### 配置stunnel client
 
-　　因为我会在client的配置中开启了证书验证，就是对于对方发过来的证书文件，client需要去CAfile中进行匹配，匹配到的证书才是受信证书，才允许建立连接。这样的话，我们就需要把server端的证书拷贝过来。我是直接打开server端的stunnel.pem，然后将里面CERITIFICATE拷贝到client端新建的/etc/stunnel/stunnel-server.pem文件中。
+因为我会在client的配置中开启了证书验证，就是对于对方发过来的证书文件，client需要去CAfile中进行匹配，匹配到的证书才是受信证书，才允许建立连接。这样的话，我们就需要把server端的证书拷贝过来。我是直接打开server端的stunnel.pem，然后将里面CERITIFICATE拷贝到client端新建的/etc/stunnel/stunnel-server.pem文件中。
 
 ```conf
 ; stunnel工作目录
@@ -130,15 +130,15 @@ CAfile = /etc/stunnel/stunnel-server.pem
 
 ### 双向认证
 
-　　上面的配置中，client需验证来自对方的证书是否可信，而server不需要验证对方的证书，这是常规的https的做法，可以有效防止中间人攻击。
+上面的配置中，client需验证来自对方的证书是否可信，而server不需要验证对方的证书，这是常规的https的做法，可以有效防止中间人攻击。
 
-　　但如果我们不希望stunnel server被别人利用，就应该进行双向认证，实现client的access  control。即在连接时候，client也需要给server发送自己的证书，server验证对方证书可信才进行连接，这样可以避免server被其他人搭建的client利用（当然这个可能性很小）。
+但如果我们不希望stunnel server被别人利用，就应该进行双向认证，实现client的access  control。即在连接时候，client也需要给server发送自己的证书，server验证对方证书可信才进行连接，这样可以避免server被其他人搭建的client利用（当然这个可能性很小）。
 
-　　但是！如果进行双向认证的话，肯定要比单向认证更耗时间，降低连接效率。我觉得更好的办法是在stunnel  server的防火墙上限制对server端口的访问，只允许来自我们自建的client-ip的连接，对于其他ip则直接拒绝。同理，也可以在client端去掉对server证书的认证，通过防火墙进行限制。注意这只是忽略掉了对证书的认证，server-client之间的连接还是需要用ssl进行加密的，server还是得传递共有证书给client。
+但是！如果进行双向认证的话，肯定要比单向认证更耗时间，降低连接效率。我觉得更好的办法是在stunnel  server的防火墙上限制对server端口的访问，只允许来自我们自建的client-ip的连接，对于其他ip则直接拒绝。同理，也可以在client端去掉对server证书的认证，通过防火墙进行限制。注意这只是忽略掉了对证书的认证，server-client之间的连接还是需要用ssl进行加密的，server还是得传递共有证书给client。
 
-　　‍
+‍
 
-　　**a. 在client端操作**
+**a. 在client端操作**
 
 ```bash
 openssl req -x509 -newkey rsa:4096 -days 7300 -nodes -keyout client.key.pem -out client.crt.pem
@@ -156,7 +156,7 @@ CAfile        = /etc/stunnel/server.crt.pem
 -------------------------------------------------------------------------------
 ```
 
-　　**b. 在server端操作**
+**b. 在server端操作**
 
 ```bash
 # 
@@ -177,9 +177,9 @@ CAfile        = /etc/stunnel/client.crt.pem
 
 ### 配置日志文件
 
-　　注：在client/server端同时操作
+注：在client/server端同时操作
 
-　　**a. 准备日志路径**
+**a. 准备日志路径**
 
 ```bash
 mkdir -p /var/log/stunnel/
@@ -188,9 +188,9 @@ chmod 644 /var/log/stunnel/
 
 ```
 
-　　**b. 日志轮转**
+**b. 日志轮转**
 
-　　创建文件`/etc/logrotate.d/stunnel`​
+创建文件`/etc/logrotate.d/stunnel`​
 
 ```bash
 /var/log/stunnel/*.log {
@@ -232,7 +232,7 @@ EOF
 
 ```
 
-　　设置开机启动
+设置开机启动
 
 ```bash
 systemctl enable stunnel.service 

@@ -2,7 +2,7 @@
 
 # 1. ipmitool使用
 
-　　ipmitool这个程序能够使你通过一个kernel设备驱动或者一个远程系统，利用IPMI v1.5或IPMIv2.0来管理本地系统的任何一个智能平台管理接口（IPMI)功能。 这些功能包括打印FRU（现场可替换装置）信息、LAN配置、传感器读数、以及远程机架电源控制。  一个本地系统接口的IPMI管理功能需要一个兼容IPMI的kernel驱动程序被安装以及配置。在linux中，这个驱动叫做OpenIPMI，他被包括在了标准化分配中。在Solaris系统中，这个驱动叫做BMC，他被包括在了Solaris 10中。远程控制的管理需要授权以及配置IPMI-over-LAN接口。根据每个系统独特的需要，它可以通过系统接口来使LAN接口使用  ipmitool。
+ipmitool这个程序能够使你通过一个kernel设备驱动或者一个远程系统，利用IPMI v1.5或IPMIv2.0来管理本地系统的任何一个智能平台管理接口（IPMI)功能。 这些功能包括打印FRU（现场可替换装置）信息、LAN配置、传感器读数、以及远程机架电源控制。  一个本地系统接口的IPMI管理功能需要一个兼容IPMI的kernel驱动程序被安装以及配置。在linux中，这个驱动叫做OpenIPMI，他被包括在了标准化分配中。在Solaris系统中，这个驱动叫做BMC，他被包括在了Solaris 10中。远程控制的管理需要授权以及配置IPMI-over-LAN接口。根据每个系统独特的需要，它可以通过系统接口来使LAN接口使用  ipmitool。
 
 ## 1.1. 获取帮助信息
 
@@ -22,7 +22,7 @@ Chassis Commands:  status, power, identify, policy, restart_cause, poh, bootdev,
 
 ## 1.2. 带外接口
 
-　　访问带外时需要指定访问接口类型，默认是本地openIPMI接口。 常用的主要有open/lan/lanplus这三种
+访问带外时需要指定访问接口类型，默认是本地openIPMI接口。 常用的主要有open/lan/lanplus这三种
 
 |接口种类||
 | -----------------| -------------------------------------------------------------------------|
@@ -42,7 +42,7 @@ Chassis Commands:  status, power, identify, policy, restart_cause, poh, bootdev,
 Ipmitool sensor list
 ```
 
-　　获取传感器中的各种监测值和该值的监测阈值，包括（CPU温度，电压，风扇转速，电源调制模块温度，电源电压等信息）
+获取传感器中的各种监测值和该值的监测阈值，包括（CPU温度，电压，风扇转速，电源调制模块温度，电源电压等信息）
 
 ### 1.3.2. 获取传感器指定值
 
@@ -50,7 +50,7 @@ Ipmitool sensor list
 Ipmitool sensor get "CPU0Temp"
 ```
 
-　　获取ID为CPU0Temp监测值，CPU0Temp是sensor的ID，服务器不同，ID表示也不同
+获取ID为CPU0Temp监测值，CPU0Temp是sensor的ID，服务器不同，ID表示也不同
 
 ### 1.3.3. 传感器阀值
 
@@ -58,7 +58,7 @@ Ipmitool sensor get "CPU0Temp"
 Ipmitool –I open sensor thresh 
 ```
 
-　　设置ID值等于id的监测项的各种限制值
+设置ID值等于id的监测项的各种限制值
 
 ## 1.4. 系统事件日志管理 (sel)
 
@@ -85,7 +85,7 @@ SEL Commands:  info clear delete list elist get add time save readraw writeraw i
 |writeraw||
 |interpret||
 
-　　如果系统事件日志量较大，会导致带外存储不足，在获取信息时会卡住。如果确认日志不需要可以清除系统日志
+如果系统事件日志量较大，会导致带外存储不足，在获取信息时会卡住。如果确认日志不需要可以清除系统日志
 
 ## 1.5. 电源管理(power)
 
@@ -108,7 +108,7 @@ chassis power Commands: status, on, off, cycle, reset, diag, soft
 
 ## 1.6. 磁盘管理
 
-　　查看底盘状态，其中包括了底盘电源信息，底盘工作状态等
+查看底盘状态，其中包括了底盘电源信息，底盘工作状态等
 
 ### 1.6.1. ipmitool chassis help
 
@@ -200,7 +200,7 @@ Possible privilege levels are:
 
 ## 1.9. 用户管理
 
-　　说明：[ChannelNo] 字段是可选的，ChannoNo为1或者8；BMC默认有2个用户：user id为1的匿名用户，user id为2的ADMIN用户；<>字段为必选内容；<privilege level>：2为user权限，3为Operator权限，4为Administrator权限；
+说明：[ChannelNo] 字段是可选的，ChannoNo为1或者8；BMC默认有2个用户：user id为1的匿名用户，user id为2的ADMIN用户；<>字段为必选内容；<privilege level>：2为user权限，3为Operator权限，4为Administrator权限；
 
 ```bash
 #1. 查看用户信息：
@@ -221,7 +221,7 @@ ipmitool –H (BMC的管理IP地址) –I lanplus –U (BMC登录用户名) –P
 ipmitool -I lanplus -H $host -U $username -P $pwd chassis status
 ```
 
-　　远程登录带外并执行命令
+远程登录带外并执行命令
 
 * -I : 接口类型
 * -H : 带外IP地址
@@ -244,7 +244,7 @@ ipmitool lan print
 
 ### 1.11.2. 设置带外网络
 
-　　说明：[ChannelNo] 字段是可选的，ChannoNo为1(Share Nic网络)或者8（BMC独立管理网络）；设置网络参数，必须首先设置IP为静态，然后再进行其他设置；
+说明：[ChannelNo] 字段是可选的，ChannoNo为1(Share Nic网络)或者8（BMC独立管理网络）；设置网络参数，必须首先设置IP为静态，然后再进行其他设置；
 
 ```bash
 #1. 查看网络信息：
@@ -356,9 +356,9 @@ Commands:
     ekanalyzer    run FRU-Ekeying analyzer using FRU files
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ```bash
 # 电源管理

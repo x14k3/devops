@@ -26,11 +26,11 @@ Endpoint       # 通过网络来访问和定位某个Openstack service的地址�
 
 ![](assets/image-20221127212632051-20230610173810-sauixva.png)
 
-　　1.Keystone根据User提供的Credentials从SQL Database中进行身份和权限校验，验证通过返回User一个Token和Endpoint 。
+1.Keystone根据User提供的Credentials从SQL Database中进行身份和权限校验，验证通过返回User一个Token和Endpoint 。
 
-　　2.首先User向Keystone提供自己的Credentials(凭证：用于确认用户身份的数据，EG. username/password)。
+2.首先User向Keystone提供自己的Credentials(凭证：用于确认用户身份的数据，EG. username/password)。
 
-　　3.User得到授权(Token)和Endpoint后根据自身权限操作OpenStack的资源
+3.User得到授权(Token)和Endpoint后根据自身权限操作OpenStack的资源
 
 ## 2.在各个组件中的作用
 
@@ -40,11 +40,11 @@ Endpoint       # 通过网络来访问和定位某个Openstack service的地址�
 
 ![](assets/image-20221127212645236-20230610173810-rtwss6n.png)
 
-　　**openstack endpoint类型**
+**openstack endpoint类型**
 
-　　Endpoint是一个可以通过网络来访问和定位某个Openstack service的地址，通常是一个URL。
+Endpoint是一个可以通过网络来访问和定位某个Openstack service的地址，通常是一个URL。
 
-　　openstack endpoint有三种类型admin，internal，public。
+openstack endpoint有三种类型admin，internal，public。
 
 ```bash
 admin      # 给admin用户使用

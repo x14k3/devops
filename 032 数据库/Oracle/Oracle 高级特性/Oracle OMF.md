@@ -1,6 +1,6 @@
 # Oracle OMF
 
-　　使用OMF (Oracle Managed Files )可以简化Oracle 数据库的管理，通过OMF，可以指定filesystem 目录，之后就可以在这个目录下创建和管理数据库。 比如创建表空间时，不需要指定datafile的名称，默认会将数据文件创建到这个目录下面。在初始化参数里指定特殊类型文件的文件系统目录，这样就可以保证文件的唯一性。
+使用OMF (Oracle Managed Files )可以简化Oracle 数据库的管理，通过OMF，可以指定filesystem 目录，之后就可以在这个目录下创建和管理数据库。 比如创建表空间时，不需要指定datafile的名称，默认会将数据文件创建到这个目录下面。在初始化参数里指定特殊类型文件的文件系统目录，这样就可以保证文件的唯一性。
 
 1. 开启该功能会简化DBA的日常操作
 2. 开启后Oracle会按照规则自动生成唯一的文件名
@@ -14,16 +14,16 @@
    - 闪回日志文件(Flashback logs)
    - RMAN备份文件(RMAN backups)
 
-　　**使用的好处**
+**使用的好处**
 
 1. 简化DBA工作
 2. 减少由于人为指定错误文件导致的错误
 3. 减少建立测试和开发环境耗费的时间
 4. 会自动删除不需要的文件而不用担心删除错误，减少服务器空间的浪费
 
-　　‍
+‍
 
-　　使用OMF前提条件:必须设置3个相关参数。分别如下：
+使用OMF前提条件:必须设置3个相关参数。分别如下：
 
 |初始化参数|描述|
 | -----------------------------| ---------------------------------------------------------------------------------------------------------------------------|
@@ -42,26 +42,26 @@ ALTER SYSTEM SET DB_RECOVERY_FILE_DEST = '/data/ora_recover';
 ALTER SYSTEM SET LOG_ARCHIVE_DEST_1 = 'LOCATION=USE_DB_RECOVERY_FILE_DEST';
 ```
 
-　　使用 OMF 参数之后，会存放在默认生成的文件路径下。
+使用 OMF 参数之后，会存放在默认生成的文件路径下。
 
-　　**格式为：**
+**格式为：**
 
 * 数据文件：`OMF路径/ORACLE_SID/datafile/`​
 * 日志文件：`OMF路径/ORACLE_SID/onlinelog/`​
 
-　　omf文件的命名规则:
+omf文件的命名规则:
 
-　　​`dest_参数路径/db_unique_name_or_db_name/datafile/o1_mf_%t_%u_.dbf`​
+​`dest_参数路径/db_unique_name_or_db_name/datafile/o1_mf_%t_%u_.dbf`​
 
-　　位置优先级:
+位置优先级:
 
-　　​`control_files初始化参数 > db_create_online_log_dest_n > db_recovery_file_dest >= db_create_file_dest`​
+​`control_files初始化参数 > db_create_online_log_dest_n > db_recovery_file_dest >= db_create_file_dest`​
 
-　　此处的等于号比较有意思：如果没有db_create_online_log_dest_n,而存在db_create_file_dest时，db_recovery_file_dest就相当于db_create_online_log_dest_2，db_create_file_dest则相当于db_create_online_log_dest_1
+此处的等于号比较有意思：如果没有db_create_online_log_dest_n,而存在db_create_file_dest时，db_recovery_file_dest就相当于db_create_online_log_dest_2，db_create_file_dest则相当于db_create_online_log_dest_1
 
 ## 使用OMF为表空间创建数据文件
 
-　　1）如果指定了*DB_CREATE_FILE_DEST*初始化参数，那么Oracle管理的数据文件将创建在参数指定的位置中。
+1）如果指定了*DB_CREATE_FILE_DEST*初始化参数，那么Oracle管理的数据文件将创建在参数指定的位置中。
 
 ```sql
 -- 查询
@@ -91,7 +91,7 @@ ALTER TABLESPACE undotbs_1 ADD DATAFILE AUTOEXTEND ON MAXSIZE 800M;
 
 ## 使用OMF创建redo日志文件
 
-　　使用语句ALTER DATABASE ADD LOGFILE可以在后来增加新组到当前的redo日志中。
+使用语句ALTER DATABASE ADD LOGFILE可以在后来增加新组到当前的redo日志中。
 如果使用OMF，ADD LOGFILE子语句中的文件名是可选的。如果没有提供文件名称，redo日志文件创建在缺省的日志文件目的地。
 
 ```sql

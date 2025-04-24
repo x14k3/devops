@@ -80,7 +80,7 @@ def func2():
 func2()
 ```
 
-　　nonlocal
+nonlocal
 
 ### 语法
 

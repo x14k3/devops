@@ -1,8 +1,8 @@
 # PostgreSQL 备份恢复
 
-　　有三种不同的基本方法来备份PostgreSQL数据：
+有三种不同的基本方法来备份PostgreSQL数据：
 
-　　‍
+‍
 
 * 「SQL转储」，用pg_dump或pgdump_all进行备份，也是一种逻辑备份的方法，这种方法很容易操作，但是缺点就是一旦数据库太大，导入导出文件的效率就会降低。但是有了并行备份恢复和split拆分，也可以在这方面稍微优化。另一个缺点是无法恢复到故障发生的时刻。例如，你使用crontab定时任务在凌晨3点进行备份，结果12点就出故障，如果进行恢复，就会损失9小时的数据。
 
@@ -10,11 +10,11 @@
 
 * 「连续归档和时间点恢复(PRIP)」  。要了解PITR，首先必须了解什么是wal，wal代表预写日志文件，基本上对数据库每次插入、更新、删除在实际应用之前，就写入了日志中。这样就算数据库突然出现了crash，在重新启动的过程中，PostgreSQL能够查看wal文件进行恢复并将数据库还原到可用的状态。
 
-　　‍
+‍
 
 # SQL转储
 
-　　在Postgresql中提供了pg_dump， pg_dumpall工具进行数据库的逻辑备份。pg_dumpall是备份全库，而pg_dump可以选择一个数据库或部分表进行备份。
+在Postgresql中提供了pg_dump， pg_dumpall工具进行数据库的逻辑备份。pg_dumpall是备份全库，而pg_dump可以选择一个数据库或部分表进行备份。
 
 ## pg_dump
 
@@ -94,27 +94,27 @@ pg_restore -d dbname bakfile
 --role=ROLENAME        # 指定用于创建备份的角色名。
 ```
 
-　　‍
+‍
 
 ## copy
 
-　　‍
+‍
 
-　　postgresql提供了copy命令用于表与文件(和标准输出，标准输入)之间的相互拷贝，copy to由表至文件，copy from由文件至表。
+postgresql提供了copy命令用于表与文件(和标准输出，标准输入)之间的相互拷贝，copy to由表至文件，copy from由文件至表。
 
 * copy 必须使用超级用户;
 * copy .. to file ,copy file to ..中的文件都是数据库服务器所在的服务器上的文件。
 * \copy 一般用户即可执行
 * \copy 保存或者读取的文件是在客户端所在的服务器
 
-　　比如
+比如
 
-　　当使用192.168.17.53连上192.168.17.52的数据库,使用 copy tb1 to ‘/home/postgres/aa.txt’,该文件是存放在192.168.17.52上；  
+当使用192.168.17.53连上192.168.17.52的数据库,使用 copy tb1 to ‘/home/postgres/aa.txt’,该文件是存放在192.168.17.52上；  
 当使用192.168.17.53连上192.168.17.52的数据库,使用\copy tb1 to ‘/home/postgres/aa.sql’,该文件是存放在192.168.17.53上；
 
-　　‍
+‍
 
-　　语法：
+语法：
 
 ```pgsql
 -- copy to 复制数据到文件中
@@ -162,9 +162,9 @@ FORCE QUOTE    -- 在 CSV COPY TO 模式下，强制在每个声明的字段周�
 FORCE NOT NULL -- 在 CSV COPY FROM 模式下，把声明的每个字段都当作它们有引号包围来处理，因此就没有 NULL 值。对于在 CSV 模式下的缺省空字符串('')，这样导致一个缺失的数值当作一个零长字符串输入。
 ```
 
-　　‍
+‍
 
-　　**copy命令可以操作的文件类型有：txt、sql、csv、压缩文件、二进制格式**
+**copy命令可以操作的文件类型有：txt、sql、csv、压缩文件、二进制格式**
 
 ```pgsql
 -- 示例1.将整张表拷贝至标准输出
@@ -182,6 +182,6 @@ FORCE NOT NULL -- 在 CSV COPY FROM 模式下，把声明的每个字段都当�
 \copy tbl_test1(a,b,c) from '/tmp/tbl_test1.csv' delimiter ',' csv header encoding 'GBK';
 ```
 
-　　‍
+‍
 
-　　‍
+‍

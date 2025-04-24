@@ -2,15 +2,15 @@
 
 ## 远程克隆PDB
 
-　　在12.2版本以前，如果要克隆pdb或non-CDB，需要先将源pdb或者non-CDB关闭或者置于read-only模式，不过12.2开始及不需要了，可以在不影响源端使用的情况下进行在线clone。
+在12.2版本以前，如果要克隆pdb或non-CDB，需要先将源pdb或者non-CDB关闭或者置于read-only模式，不过12.2开始及不需要了，可以在不影响源端使用的情况下进行在线clone。
 
-　　当源pdb是属于一个远端cdb时，需要通过数据链来克隆到本地。数据链必须建在本地CDB中，当在本地CDB中执行`CREATE PLUGGABLE DATABASE`​语句时，必须要指定指向远端CDB的数据链。这个数据链要么连接到远端的CDB，要么指向远端的PDB。
+当源pdb是属于一个远端cdb时，需要通过数据链来克隆到本地。数据链必须建在本地CDB中，当在本地CDB中执行`CREATE PLUGGABLE DATABASE`​语句时，必须要指定指向远端CDB的数据链。这个数据链要么连接到远端的CDB，要么指向远端的PDB。
 
-　　下面这张图展示了如何从远端pdb克隆到本地
+下面这张图展示了如何从远端pdb克隆到本地
 
-　　​![remote-pdb](assets/net-img-remote-pdb-20240726181040-6doy5us.png)[*](https://www.xbdba.com/img/remote-pdb.png)
+![remote-pdb](assets/net-img-remote-pdb-20240726181040-6doy5us.png)[*](https://www.xbdba.com/img/remote-pdb.png)
 
-　　这里准备了三个环境：
+这里准备了三个环境：
 
 * ora12c 本地cdb
 * noncdb 远端non-cdb
@@ -35,7 +35,7 @@ sys@CDB1> show pdbs;
          4 PDB3                           READ WRITE NO
 ```
 
-　　现在测试将cdb1上的pdb3克隆到本地，先在远端cdb环境上创建用户，赋予创建pdb等权限
+现在测试将cdb1上的pdb3克隆到本地，先在远端cdb环境上创建用户，赋予创建pdb等权限
 
 ```sqlplus
 create user c#xb identified by xb container=all;
@@ -47,7 +47,7 @@ sys@CDB1> grant create session, create pluggable database to c#xb container=all;
 Grant succeeded.
 ```
 
-　　检查cdb1是否启用了归档和本地undo，因为只有这样源库就不需要关闭或置于read-only
+检查cdb1是否启用了归档和本地undo，因为只有这样源库就不需要关闭或置于read-only
 
 ```sqlplus
 col property_name format a20
@@ -70,7 +70,7 @@ Next log sequence to archive   130
 Current log sequence           130
 ```
 
-　　在本地cdb上创建一个指向远端cdb的数据链
+在本地cdb上创建一个指向远端cdb的数据链
 
 ```sqlplus
 drop public database link to_remote;
@@ -92,7 +92,7 @@ sys@ORA12C> @desc user_tables@to_remote;
     2      TABLESPACE_NAME                          VARCHAR2(30)
 ```
 
-　　测试可以正常访问，则通过这个数据链克隆一个新pdb
+测试可以正常访问，则通过这个数据链克隆一个新pdb
 
 ```sqlplus
 sys@ORA12C> create pluggable database pdb3new from pdb3@to_remote;
@@ -136,7 +136,7 @@ PDB3NEW(5):JIT: pid 95653 requesting stop
 Completed: create pluggable database pdb3new from pdb3@to_remote
 ```
 
-　　将克隆完毕的新pdb打开
+将克隆完毕的新pdb打开
 
 ```sqlplus
 sys@ORA12C> set linesize 300
@@ -165,9 +165,9 @@ PDB3NEW
 
 ## 远程克隆non-CDB
 
-​![remote-noncdb](assets/net-img-remote-noncdb-20240726181040-3ofwvux.png)​
+![remote-noncdb](assets/net-img-remote-noncdb-20240726181040-3ofwvux.png)
 
-　　过程基本类似，创建用户和数据链
+过程基本类似，创建用户和数据链
 
 ```sqlplus
 sys@NONCDB> create user xb identified by xb ;
@@ -199,7 +199,7 @@ create public database link to_remote connect to xb identified by xb using '(DES
   )';
 ```
 
-　　克隆远程noncdb
+克隆远程noncdb
 
 ```sqlplus
 sys@ORA12C> create pluggable database noncdbnew from noncdb@to_remote;
@@ -218,7 +218,7 @@ PDB3NEW                                                                         
 NONCDBNEW  
 ```
 
-　　因为是从non-CDB克隆过来的，所以需要执行转换sql
+因为是从non-CDB克隆过来的，所以需要执行转换sql
 
 ```sqlplus
 alter session set container=noncdbnew;
@@ -226,7 +226,7 @@ alter session set container=noncdbnew;
 @$ORACLE_HOME/rdbms/admin/noncdb_to_pdb.sql;
 ```
 
-　　打开新克隆的pdb
+打开新克隆的pdb
 
 ```sqlplus
 alter pluggable database noncdbnew open;

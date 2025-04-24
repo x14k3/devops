@@ -1,6 +1,6 @@
 # 基于binlog恢复数据
 
-　　‍
+‍
 
 ## 1.准备工作(测试机为centos)
 
@@ -10,7 +10,7 @@
 show variables like 'log_%';
 ```
 
-　　如果没有开启,则修改etc/my.cnf文件,添加以下内容:
+如果没有开启,则修改etc/my.cnf文件,添加以下内容:
 
 ```bash
 #保存日志的路径
@@ -25,7 +25,7 @@ max-binlog-size = 500M
 server-id=1
 ```
 
-　　binlog\_format的选择,以下是摘自网上内容:
+binlog\_format的选择,以下是摘自网上内容:
 
 ```bash
 binlog有三种格式：Statement、Row以及Mixed。
@@ -60,7 +60,7 @@ ps:新版本的MySQL中对row level模式也被做了优化，并不是所有的
 在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。
 ```
 
-　　出现无法启动问题,查看日志,可以看到是binlog路径没有权限导致,赋予mysql权限;
+出现无法启动问题,查看日志,可以看到是binlog路径没有权限导致,赋予mysql权限;
 
 ```bash
 #查看日志位置
@@ -79,7 +79,7 @@ mysqld: File '/opt/mysql/mysql-bin.index' not found (Errcode: 13 - Permission de
 
 ###### (1)使用mysqlbinlog查看binlog
 
-　　mysql查看binlog信息命令:
+mysql查看binlog信息命令:
 
 ```bash
  #查看binlog文件列表
@@ -92,7 +92,7 @@ mysqld: File '/opt/mysql/mysql-bin.index' not found (Errcode: 13 - Permission de
  flush logs;
 ```
 
-　　mysqlbinlog命令:
+mysqlbinlog命令:
 
 ```bash
 --base64-output=decode-rows -v 可解析完整sql语句
@@ -104,7 +104,7 @@ mysqld: File '/opt/mysql/mysql-bin.index' not found (Errcode: 13 - Permission de
 --stop-position                结束坐标
 ```
 
-　　我这里先用 flush logs刷新,然后解析新文件,并新增一条数据:
+我这里先用 flush logs刷新,然后解析新文件,并新增一条数据:
 
 ```bash
 #此处可以使用通配符,解析多个文件
@@ -165,7 +165,7 @@ DELIMITER ;
 /*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/;
 ```
 
-　　然后我修改一条数据:
+然后我修改一条数据:
 
 ```bash
 ### UPDATE `binlog_test`.`wf_icon`
@@ -192,7 +192,7 @@ DELIMITER ;
 # at 840
 ```
 
-　　删除一条数据
+删除一条数据
 
 ```bash
 ### DELETE FROM `binlog_test`.`wf_icon`
@@ -209,11 +209,11 @@ DELIMITER ;
 # at 1166
 ```
 
-　　可以看到日志很完整的记录了数据的变化过程,所以我们能够依靠数据来还原被误操作的数据;
+可以看到日志很完整的记录了数据的变化过程,所以我们能够依靠数据来还原被误操作的数据;
 
 ###### (3)演示还原数据
 
-　　1.我先模拟误删除所有数据,可以看到日志:
+1.我先模拟误删除所有数据,可以看到日志:
 
 ```bash
 BEGIN
@@ -245,9 +245,9 @@ DELIMITER ;
 
 ```
 
-　　2.恢复数据
+2.恢复数据
 
-　　首先看到删除的开始坐标在1341;
+首先看到删除的开始坐标在1341;
 
 ```bash
 #mysql-bin.000001的完整日志和mysql-bin.000002坐标1341前得日志还原,此处不要解析转码;
@@ -261,17 +261,17 @@ mysqlbinlog --no-defaults --database=binlog_test  mysql-bin.000001|mysql
 mysqlbinlog --no-defaults --database=binlog_test  --stop-position=1341  mysql-bin.000002 |mysql
 ```
 
-　　3.总结
+3.总结
 
-　　使用mysql自带工具mysqlbinlog来还原数据,相当于是将历史操作日志进行修改(排除误操作的行为日志)后,'重放'来达到还原数据的目的;
+使用mysql自带工具mysqlbinlog来还原数据,相当于是将历史操作日志进行修改(排除误操作的行为日志)后,'重放'来达到还原数据的目的;
 
-　　所有如果出现了勿操作导致数据出问题,则要保证用来还原的历史数据存在,否则无法完全恢复;
+所有如果出现了勿操作导致数据出问题,则要保证用来还原的历史数据存在,否则无法完全恢复;
 
-　　例如以下问题,则无法进行完整的还原:
+例如以下问题,则无法进行完整的还原:
 
 ```
 1.使用delete命令误删除了全部数据;
 2.并且binlog只保留了最近几天的数据;
 ```
 
-　　‍
+‍

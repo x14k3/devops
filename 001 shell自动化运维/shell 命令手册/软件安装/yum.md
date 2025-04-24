@@ -1,12 +1,12 @@
 # yum
 
-　　基于RPM的软件包管理器
+基于RPM的软件包管理器
 
-　　**yum命令** 是在Fedora和RedHat以及SUSE中基于rpm的软件包管理器，它可以使系统管理人员交互和自动化地更新与管理RPM软件包，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。
+**yum命令** 是在Fedora和RedHat以及SUSE中基于rpm的软件包管理器，它可以使系统管理人员交互和自动化地更新与管理RPM软件包，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。
 
-　　yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。
+yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。
 
-　　‍
+‍
 
 ```bash
 yum (选项) (参数)
@@ -46,9 +46,9 @@ yum clean, yum clean all (= yum clean packages; yum clean oldheaders) #清除缓
 
 # 配置 YUM 源
 
-## **阿里源**
+## <span id="20231110105237-zk1o7um" style="display: none;"></span>**阿里源**
 
-　　[https://developer.aliyun.com/mirror/](https://developer.aliyun.com/mirror/ "https://developer.aliyun.com/mirror/")
+[https://developer.aliyun.com/mirror/](https://developer.aliyun.com/mirror/ "https://developer.aliyun.com/mirror/")
 
 ```bash
 # 备份Linux本地现有的yum仓库文件
@@ -102,8 +102,8 @@ yum clean all &&  yum makecache
 
 ## **局域网源**
 
-　　*配置本地源*
-nginx 部署
+*配置本地源*
+[nginx 部署](031%20中间件/nginx/nginx%20部署.md)
 
 ```bash
 # 安装nginx
@@ -143,7 +143,7 @@ server {
 
 ```
 
-　　*在客户端配置局域网yum源*
+*在客户端配置局域网yum源*
 
 ```bash
 # 备份
@@ -170,24 +170,24 @@ yum clean all &&  yum makecache
 
 # 通过yum命令只下载rpm包不安装
 
-　　经常遇到服务器没有网络的情况下部署环境，或者创建自己的 yum 仓库等。每次都是在网上搜搜搜，都是五花八门，自己整理了下自己用到的以下三种方式，这里没有太多废话，只是如何安装并示例经常用到的方式，如果还需要更多参数 ，可以通过 --help 查看手册：
+经常遇到服务器没有网络的情况下部署环境，或者创建自己的 yum 仓库等。每次都是在网上搜搜搜，都是五花八门，自己整理了下自己用到的以下三种方式，这里没有太多废话，只是如何安装并示例经常用到的方式，如果还需要更多参数 ，可以通过 --help 查看手册：
 
 ## 方法一：yumdownloader
 
-　　如果只想通过 yum 下载软件的软件包，但是不需要进行安装的话，可以使用 yumdownloader 命令；   yumdownloader 命令在软件包 yum-utils 里面。
+如果只想通过 yum 下载软件的软件包，但是不需要进行安装的话，可以使用 yumdownloader 命令；   yumdownloader 命令在软件包 yum-utils 里面。
 
 ```bash
 yum install yum-utils -y
 ```
 
-　　常用参数说明：
+常用参数说明：
 
 ```
 --destdir 指定下载的软件包存放路径
 --resolve 解决依赖关系并下载所需的包
 ```
 
-　　示例：
+示例：
 
 ```bash
 yumdownloader --destdir=/tmp --resolve httpd
@@ -195,18 +195,18 @@ yumdownloader --destdir=/tmp --resolve httpd
 
 ## 方法二：yum --downloadonly
 
-　　yum命令的参数有很多，其中就有只是下载而不需要安装的命令，并且也会自动解决依赖；通常和 --downloaddir 参数一起使用。
+yum命令的参数有很多，其中就有只是下载而不需要安装的命令，并且也会自动解决依赖；通常和 --downloaddir 参数一起使用。
 
-　　示例：
+示例：
 
 ```bash
 yum install   --downloadonly --downloaddir=/tmp/ vsftpd
 yum reinstall --downloadonly --downloaddir=/tmp/ vsftpd
 ```
 
-　　说明：如果该服务器已经安装了需要下载的软件包，那么使用 install下载就不行，可以使用reinstall下载。 放心（不会真的安装和重新安装，因为后面加了 --downloadonly，表明只是下载。
+说明：如果该服务器已经安装了需要下载的软件包，那么使用 install下载就不行，可以使用reinstall下载。 放心（不会真的安装和重新安装，因为后面加了 --downloadonly，表明只是下载。
 
-　　如果提示没有--downloadonly选项则需要安装yum-plugin-downloadonly软件包；
+如果提示没有--downloadonly选项则需要安装yum-plugin-downloadonly软件包；
 
 ```bash
 yum install yum-plugin-downloadonly
@@ -214,26 +214,26 @@ yum install yum-plugin-downloadonly
 
 ## 方法三：reposync
 
-　　该命令更加强大，可以将远端yum仓库里面的包全部下载到本地。这样构建自己的yum仓库，就不会遇到网络经常更新包而头痛的事情了。 该命令也是来自与 yum-utils 里面。
+该命令更加强大，可以将远端yum仓库里面的包全部下载到本地。这样构建自己的yum仓库，就不会遇到网络经常更新包而头痛的事情了。 该命令也是来自与 yum-utils 里面。
 
 ```bash
 yum install yum-utils -y
 ```
 
-　　常用参数说明：
+常用参数说明：
 
 ```
 -r    指定已经本地已经配置的 yum 仓库的 repo源的名称。
 -p    指定下载的路径
 ```
 
-　　示例：
+示例：
 
 ```
 # reposync -r epel -p /opt/local_epel
 ```
 
-　　‍
+‍
 
 # createrepo - 创建YUM仓库
 
@@ -241,7 +241,7 @@ yum install yum-utils -y
 createrepo [选项] <目录>
 ```
 
-　　​`createrepo`​是一个程序，它从一组RPM创建一个RPM元数据存储库，即YUM仓库。
+​`createrepo`​是一个程序，它从一组RPM创建一个RPM元数据存储库，即YUM仓库。
 
 ## 选项
 
@@ -367,7 +367,7 @@ createrepo [选项] <目录>
 
 ## 返回值
 
-　　返回状态为成功除非给出了非法选项或非法参数。
+返回状态为成功除非给出了非法选项或非法参数。
 
 ## 例子
 

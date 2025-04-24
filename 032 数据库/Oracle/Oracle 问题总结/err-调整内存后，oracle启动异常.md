@@ -1,6 +1,6 @@
 # err-调整内存后，oracle启动异常
 
-　　ORA-00845: MEMORY\_TARGET not supported on this system
+ORA-00845: MEMORY\_TARGET not supported on this system
 
 ```bash
 [oracle@oracle ~]$ sqlplus / as sysdba
@@ -17,11 +17,11 @@ ORA-27104: system-defined limits for shared memory was misconfigured
 SQL>
 ```
 
-　　原因：原机器8G内存，正常关机后由8G减少到4G，开机后数据库无法startup
+原因：原机器8G内存，正常关机后由8G减少到4G，开机后数据库无法startup
 
-　　原配为 自动共享内存管理
+原配为[ 自动共享内存管理](032%20数据库/Oracle/Oracle%20内存管理.md#20231110105237-urlqjtd)
 
-　　解决如下：
+解决如下：
 
 ```bash
 # 1.备份现有spfile

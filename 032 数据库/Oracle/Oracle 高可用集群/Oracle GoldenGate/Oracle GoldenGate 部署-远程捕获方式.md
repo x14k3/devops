@@ -4,11 +4,11 @@
 
 ### 1.1 文档简介
 
-　　Oracle GoldenGate 是一个全面的软件包，用于在异构数据环境中复制数据。该产品集支持高可用性解决方案、实时数据集成、事务性变更数据捕获、数据复制、转换以及运营和分析企业系统之间的验证。
+Oracle GoldenGate 是一个全面的软件包，用于在异构数据环境中复制数据。该产品集支持高可用性解决方案、实时数据集成、事务性变更数据捕获、数据复制、转换以及运营和分析企业系统之间的验证。
 
-　　Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳抽取
+Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳抽取
 
-　　参考文档：[OGG 19C 远程部署（单独部署）安装配置详细过程.pdf](assets/OGG%2019C%20远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf)
+参考文档：[OGG 19C 远程部署（单独部署）安装配置详细过程.pdf](assets/OGG%2019C%20远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf)
 
 ### 1.2 安装环境
 
@@ -19,13 +19,13 @@
 |主机名|test_01|test_02|test_03|
 |IP地址|192.168.3.201|192.168.3.202|192.168.3.203|
 
-　　‍
+‍
 
-　　源端数据库和目标数据库参照：Oracle19c 静默安装 进行单机安装
+源端数据库和目标数据库参照：[Oracle19c 静默安装](032%20数据库/Oracle/Oracle%20安装部署/Oracle19c%20静默安装.md) 进行单机安装
 
-　　下载Oracle GoldenGate ：[https://edelivery.oracle.com/](https://edelivery.oracle.com/)
+下载Oracle GoldenGate ：[https://edelivery.oracle.com/](https://edelivery.oracle.com/)
 
-　　下载 instantclient-basic-linux.x64：[https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html](https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html)
+下载 instantclient-basic-linux.x64：[https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html](https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html)
 
 ## 二、数据库配置
 
@@ -35,7 +35,7 @@
 SQL> alter database archivelog;
 ```
 
-　　ps:源端数据库没有开归档要开启归档,已经打开可以忽略 。
+ps:源端数据库没有开归档要开启归档,已经打开可以忽略 。
 
 ### 2.2 源端开启强制日志
 
@@ -68,9 +68,9 @@ SQL>
 SQL> alter system set enable_goldengate_replication=true;
 ```
 
-　　note: 11.2.0.4以上需要配置
+note: 11.2.0.4以上需要配置
 
-　　‍
+‍
 
 ### 2.5 源和目标端创建 OGG 用户
 
@@ -90,11 +90,11 @@ grant alter any table to ggadmin;
 exec dbms_goldengate_auth.grant_admin_privilege('GGADMIN','*',TRUE)
 ```
 
-　　note: 除了必要权限 , 其他权限可以根据实际情况而定 。
+note: 除了必要权限 , 其他权限可以根据实际情况而定 。
 
-　　‍
+‍
 
-　　目标端的OGG 用户 , 还需要下列 权 限 :
+目标端的OGG 用户 , 还需要下列 权 限 :
 
 ```sql
 grant create session to ggadmin;
@@ -110,11 +110,11 @@ grant execute on dbms_flashback to ggadmin;
 grant comment any table to ggadmin;
 ```
 
-　　‍
+‍
 
 ## 三、 OGG 软件安装
 
-　　以下步骤都是在 OGG 单独部署机器上操作
+以下步骤都是在 OGG 单独部署机器上操作
 
 ### 3.1 创建用户和目录
 
@@ -148,23 +148,23 @@ alias ggsci='cd $GG_HOME; ggsci'
 source /home/oracle/.bash_profile
 ```
 
-　　‍
+‍
 
 ### 3.3 Oracle客户端静默安装
 
-　　最基础客户端包即可,主要是ggsci命令需要他里面的依赖库
+最基础客户端包即可,主要是ggsci命令需要他里面的依赖库
 
 ```bash
 unzip -d /ogg/oraclient instantclient-basic-linux.x64-11.2.0.4.0
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 3.4 OGG 静默安装
 
-　　解压
+解压
 
 ```bash
 su - oracle
@@ -172,9 +172,9 @@ unzip 191004_fbo_ggs_Linux_x64_shiphome.zip
 cd fbo_ggs_Linux_x64_shiphome/Disk1/
 ```
 
-　　编辑响应文件
+编辑响应文件
 
-　　​`vi /home/oracle/fbo_ggs_Linux_x64_shiphome/Disk1/response/oggcore.rsp`​
+​`vi /home/oracle/fbo_ggs_Linux_x64_shiphome/Disk1/response/oggcore.rsp`​
 
 ```bash
 INSTALL_OPTION=ORA19c
@@ -186,7 +186,7 @@ INVENTORY_LOCATION=/ogg/oraInventory
 UNIX_GROUP_NAME=oinstall
 ```
 
-　　静默安装
+静默安装
 
 ```bash
 [oracle@test Disk1]$ ./runInstaller -silent -showProgress -responseFile /home/oracle/fbo_ggs_Linux_x64_shiphome/Disk1/response/oggcore.rsp
@@ -240,7 +240,7 @@ As a root user, execute the following script(s):
 Successfully Setup Software.
 ```
 
-　　以root用户执行以下脚本
+以root用户执行以下脚本
 
 ```bash
 [root@test ~]# cd /ogg/oraInventory/
@@ -261,24 +261,24 @@ The execution of the script is complete.
 [root@test oraInventory]# 
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## 四、 OGG 配置
 
-　　note: 以下配 置均为远程捕获和交付的方式 , 无需在数据库本地安装部署 。
+note: 以下配 置均为远程捕获和交付的方式 , 无需在数据库本地安装部署 。
 
 ### 4.1 配置 TNSNAMES
 
-　　创建目录
+创建目录
 
 ```bash
 su - oracle
 mkdir -p /ogg/oraclient/instantclient_19_25/network/admin
 ```
 
-　　配置 tnsnames.ora
+配置 tnsnames.ora
 
 ```bash
 cd /ogg/oraclient/instantclient_19_25/network/admin
@@ -339,11 +339,11 @@ Dump files                     /ogg/ogg191/dirdmp: created.
 # 6、dirtmp:临时文件目录，用于长事务处理；
 ```
 
-　　‍
+‍
 
 ### 4.3 配置 MGR 进程
 
-　　编辑参数
+编辑参数
 
 ```sql
 GGSCI (oggmc) 2> edit param mgr
@@ -358,7 +358,7 @@ LAGINFOMINUTES 30
 LAGCRITICALMINUTES 45
 ```
 
-　　校验mgr 参数
+校验mgr 参数
 
 ```bash
 [oracle@test ogg191]$ ./checkprm /ogg/ogg191/dirprm/mgr.prm -C mgr -V
@@ -397,7 +397,7 @@ Runtime parameter validation is not reflected in the above check.
 
 ```
 
-　　启动
+启动
 
 ```bash
 [oracle@test ogg191]$ ./ggsci 
@@ -419,13 +419,13 @@ MANAGER     RUNNING
 GGSCI (test) 3> 
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 4.4 配置用户凭证
 
-　　配置
+配置
 
 ```sql
 GGSCI (test) 3> add credentialstore
@@ -440,7 +440,7 @@ GGSCI (test) 5> alter credentialstore add user ggadmin@target, password ggadmin 
 Credential store altered.
 ```
 
-　　验证
+验证
 
 ```bash
 GGSCI (test) 6> info credentialstore
@@ -458,13 +458,13 @@ Default domain: OracleGoldenGate
 GGSCI (test) 7> 
 ```
 
-　　‍
+‍
 
 ### 4.5 配置 extract 进程
 
 #### 4.5.1 经典模式(可选)
 
-　　添加附加日志
+添加附加日志
 
 ```sql
 --在配置OGG时，需要给同步的表添加补充日志，在ggsci命令行执行 [add trandata user.table]
@@ -485,7 +485,7 @@ Oracle Goldengate support native capture on table JY2WEB.T_COUSE.
 Oracle Goldengate marked following column as key columns on table JY2WEB.T_COUSE: COUSEID.
 ```
 
-　　配置参数
+配置参数
 
 ```bash
 GGSCI (test as ggadmin@orcl) 10> edit param extcsa
@@ -504,11 +504,11 @@ REPORTCOUNT EVERY 60 SECONDS, RATE
 table jy2web.t_couse;
 ```
 
-　　Note:dblogreader 最低支持版本为11.2.0.4,通过数据字典的方式获取日志信息 , 需要 select any transaction 权限
+Note:dblogreader 最低支持版本为11.2.0.4,通过数据字典的方式获取日志信息 , 需要 select any transaction 权限
 
-　　‍
+‍
 
-　　校验extract参数
+校验extract参数
 
 ```sql
 [oracle@test ogg191]$ ./checkprm /ogg/ogg191/dirprm/extcsa.prm -C extract -V
@@ -552,7 +552,7 @@ table                                : jy2web.t_couse
 Runtime parameter validation is not reflected in the above check.
 ```
 
-　　添加进程
+添加进程
 
 ```bash
 GGSCI (test) 1> add extract extcsa, tranlog, begin now,threads 1    --节点数
@@ -562,7 +562,7 @@ GGSCI (test) 2> add exttrail ./dirdat/wl, extract extcsa, MEGABYTES 1024
 EXTTRAIL added.
 ```
 
-　　启动
+启动
 
 ```bash
 ---启动
@@ -577,42 +577,42 @@ MANAGER RUNNING
 EXTRACT RUNNING EXTCSA 00:00:00 00:00:25
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 #### 4.5.2 集成模式(可选)
 
-　　note: 推  成模式,性能更好,原理是整合 logminer, 多租户环境只能用集成模式
+note: 推  成模式,性能更好,原理是整合 logminer, 多租户环境只能用集成模式
 
-　　数据库 stream 参数调整 , 一个进程建议1.25g
+数据库 stream 参数调整 , 一个进程建议1.25g
 
 ```bash
 alter system set streams_pool_size=10g;
 ```
 
-　　添加附加日志
+添加附加日志
 
 ```sql
 GGSCI (test) 8> dblogin useridalias sdb
 GGSCI (test) 8> add trandata jy2web.*
 ```
 
-　　添加进程
+添加进程
 
 ```bash
 GGSCI (test) 8> ADD EXTRACT ie_e INTEGRATED TRANLOG BEGIN NOW
 GGSCI (test) 8> ADD EXTTRAIL ./dirdat/ie EXTRACT ie_e MEGABYTES 1024
 ```
 
-　　注册进程
+注册进程
 
 ```sql
 GGSCI (test) 8> dblogin useridalias sdb
 GGSCI (test) 8> REGISTER EXTRACT ie_e DATABASE
 ```
 
-　　编辑参数
+编辑参数
 
 ```sql
 GGSCI (test) 8> edit param ie_e
@@ -633,9 +633,9 @@ REPORTCOUNT EVERY 60 SECONDS, RATE
 table jy2web.t_couse;
 ```
 
-　　Note : 因为通过 logminer 挖掘日志 , 日志参数无需指定 , 可以利用参数配置 logminer 的并发数和内存大小
+Note : 因为通过 logminer 挖掘日志 , 日志参数无需指定 , 可以利用参数配置 logminer 的并发数和内存大小
 
-　　启动
+启动
 
 ```sql
 GGSCI (test) 8> start ie_e
@@ -643,13 +643,13 @@ GGSCI (test) 8> start ie_e
 GGSCI (test) 8> info all
 ```
 
-　　‍
+‍
 
 ### 4.6 配置 pump 进程
 
-　　如果OGG 的 replicat 进程和抽取进程都在同一台 ,可以不需要配置这个pump进程
+如果OGG 的 replicat 进程和抽取进程都在同一台 ,可以不需要配置这个pump进程
 
-　　编 辑 参 数
+编 辑 参 数
 
 ```sql
 GGSCI (test) 8> edit param dpecs
@@ -662,14 +662,14 @@ PASSTHRU
 table jy2web.t_couse;
 ```
 
-　　添加进程
+添加进程
 
 ```bash
 GGSCI (test) 8> add extract dpecs EXTTRAILSOURCE ./dirdat/wl
 GGSCI (test) 8> add rmttrail /ogg/ogg191/dirdat/rt extract dpecs MEGABYTES 1024
 ```
 
-　　启动
+启动
 
 ```bash
 GGSCI (test) 8> start dpecs
@@ -679,7 +679,7 @@ GGSCI (test) 8> info all
 
 ### 4.7 配置 replicat 进程
 
-　　添加数据库检查点表
+添加数据库检查点表
 
 ```sql
 GGSCI (oggmc) 1> dblogin useridalias tdb
@@ -689,7 +689,7 @@ point
 Successfully created checkpoint table ggadmin.checkpoint.
 ```
 
-　　编辑参数
+编辑参数
 
 ```sql
 GGSCI (oggmc) 1> edit param repcs
@@ -707,14 +707,14 @@ MAP jy2web.t_couse, TARGET jy2web.t_couse;
 
 ```
 
-　　添加进程
+添加进程
 
 ```bash
 GGSCI (oggmc) 1> ADD REPLICAT repcs EXTTRAIL /ogg/ogg191/dirdat/wl checkpointtable gg
 GGSCI (oggmc) 1> admin.checkpoint
 ```
 
-　　查看
+查看
 
 ```bash
 GGSCI (oggmc as ggadmin@ora11g) 5> info all
@@ -726,13 +726,13 @@ REPLICAT STOPPED REPCS 00:00:00 00:00:05
 
 ```
 
-　　‍
+‍
 
 ## 五、OGG 同步设置
 
 ### 5.1 数据导出导入
 
-　　源库创建数据泵目录
+源库创建数据泵目录
 
 ```sql
 
@@ -748,7 +748,7 @@ OWNER DIRECTORY_NAME DIRECTORY_PATH
 SYS EXPOGG /backup/expdir
 ```
 
-　　源库获取数据库当前 SCN
+源库获取数据库当前 SCN
 
 ```sql
 --查看数据中的交易
@@ -775,7 +775,7 @@ GET_SYSTEM_CHANGE_NUMBER
 123231017915
 ```
 
-　　源库基于 SCN 号导出数据
+源库基于 SCN 号导出数据
 
 ```sql
 --如果不需要 procedure,trigger,ref_constraint,job,statistics,package 这些可以
@@ -843,7 +843,7 @@ exit;
 EOF
 ```
 
-　　目标库匹配导入导出数据行数
+目标库匹配导入导出数据行数
 
 ```bash
 [oracle@ expdp]$ grep " rows" expogg0908.log |sort -n| awk '{print $4,$7,$8}'|awk -F "." '{print $2}'> /tmp/exp.a
@@ -852,7 +852,7 @@ EOF
 #此时没有结果输出说明导入导出数据行数一致
 ```
 
-　　禁用目标库约束
+禁用目标库约束
 
 ```bash
 #参数 owner_list 里面的用户名请根据实际情况修改
@@ -889,7 +889,7 @@ end;
 spool off
 ```
 
-　　禁用目标库触发器
+禁用目标库触发器
 
 ```bash
 #参数 owner_list 里面的用户名请根据实际情况修改
@@ -918,7 +918,7 @@ end;
 spool off
 ```
 
-　　禁用 job
+禁用 job
 
 ```sql
 conn oggspa/spaora
@@ -979,4 +979,4 @@ Sending START request to MANAGER ...
 REPLICAT RPEE starting
 ```
 
-　　‍
+‍

@@ -1,10 +1,10 @@
 # v2ray
 
-　　V2Rray 官网：[https://www.v2ray.com/](https://www.v2ray.com/)  
+V2Rray 官网：[https://www.v2ray.com/](https://www.v2ray.com/)  
 V2Rray 下载地址：[https://github.com/v2fly/v2ray-core/releases](https://github.com/v2fly/v2ray-core/releases)  
 参考：[https://www.v2ray.com/awesome/tools.html](https://www.v2ray.com/awesome/tools.html)
 
-　　v2ray(Project V) 相对于 Shadowsocks，v2ray 更像全能选手，拥有更多可选择的协议 / 传输载体 (Socks、HTTP、TLS、TCP、mKCP、WebSocket )，还有强大的路由功能，不仅仅于此，它亦包含 Shadowsocks 组件，你只需要安装 v2ray，你就可以使用所有的 v2ray 相关的特性包括使用 Shadowsocks，由于 v2ray 是使用 GO 语言所撰写的，天生的平台部署优势，下载即可使用，
+v2ray(Project V) 相对于 Shadowsocks，v2ray 更像全能选手，拥有更多可选择的协议 / 传输载体 (Socks、HTTP、TLS、TCP、mKCP、WebSocket )，还有强大的路由功能，不仅仅于此，它亦包含 Shadowsocks 组件，你只需要安装 v2ray，你就可以使用所有的 v2ray 相关的特性包括使用 Shadowsocks，由于 v2ray 是使用 GO 语言所撰写的，天生的平台部署优势，下载即可使用，
 
 # v2ray服务端部署
 
@@ -73,7 +73,7 @@ cat /proc/sys/kernel/random/uuid
 
 ```
 
-　　‍
+‍
 
 ## 配置VLESS协议
 
@@ -115,7 +115,7 @@ cat /proc/sys/kernel/random/uuid
 
 ```
 
-　　‍
+‍
 
 ## 配置 WebSocket + TLS + Web
 
@@ -156,7 +156,7 @@ cat /proc/sys/kernel/random/uuid
 }
 ```
 
-　　修改nginx配置
+修改nginx配置
 
 ```bash
     server {
@@ -189,17 +189,17 @@ cat /proc/sys/kernel/random/uuid
 
 ## windows
 
-　　如果服务端的配置为 [vmess 协议](#vmess%20协议)
+如果服务端的配置为 [vmess 协议](#vmess%20协议)
 
 ![](assets/image-20221127210933123-20230610173813-wthc3c7.png)
 
-　　如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
+如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
 
 ![](assets/image-20221127210912432-20230610173813-dx832bp.png)
 
 ## linux
 
-　　linux环境下v2ray程序不区分客户端和服务端，客户端同样适用服务端的程序
+linux环境下v2ray程序不区分客户端和服务端，客户端同样适用服务端的程序
 
 ```bash
 # 手动安装
@@ -233,7 +233,7 @@ source .bashrc
 start_v2ray
 ```
 
-　　配置文件参考
+配置文件参考
 
 ```json
 
@@ -366,9 +366,9 @@ start_v2ray
 
 ```
 
-　　‍
+‍
 
-　　使用守护进程管理
+使用守护进程管理
 
 ```bash
 useradd -M -s /sbin/nologin v2ray
@@ -401,7 +401,7 @@ systemctl start v2ray
 
 ```
 
-　　‍
+‍
 
 ## 路由规则
 

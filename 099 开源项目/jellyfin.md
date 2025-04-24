@@ -1,18 +1,18 @@
 # jellyfin
 
-　　‍
+‍
 
 ## 1、安装前准备
 
-　　docker 部署
+[docker 部署](021%20docker/docker%20部署.md)
 
-　　​​
+​​
 
 ## 2、Jellyfin Docer 版本安装
 
 ### 2.1 版本的选择
 
-　　目前在官方的 Docker 仓库里，有三个主流的Jellyfin的容器，分别是 jellyfin/jellyfin、linuxserver/jellyfin和nyanmisaka/jellyfin。
+目前在官方的 Docker 仓库里，有三个主流的Jellyfin的容器，分别是 jellyfin/jellyfin、linuxserver/jellyfin和nyanmisaka/jellyfin。
 
 * jellyfin/jellyfin 为官方镜像，貌似仅限 x86/amd64 平台；
 * linuxserver/jellyfin 镜像，根据说明，可以使用在 x86/amd64 平台上，也可以使用在 ARM 的平台上;
@@ -20,19 +20,19 @@
 
 ### 2.2 镜像下载
 
-　　jellyfin/jellyfin 官方镜像下载：
+jellyfin/jellyfin 官方镜像下载：
 
 ```bash
 sudo docker pull jellyfin/jellyfin:latest
 ```
 
-　　linuxserver/jellyfin 镜像下载：
+linuxserver/jellyfin 镜像下载：
 
 ```bash
 sudo docker pull linuxserver/jellyfin:latest
 ```
 
-　　nyanmisaka/jellyfin 即插即用镜像下载：
+nyanmisaka/jellyfin 即插即用镜像下载：
 
 ```bash
 sudo docker pull nyanmisaka/jellyfin:latest
@@ -40,16 +40,16 @@ sudo docker pull nyanmisaka/jellyfin:latest
 
 ### 2.3 容器的创建与启动
 
-　　2.3.1 应用程序必要文件夹的准备：
+2.3.1 应用程序必要文件夹的准备：
 
-　　在创建与启动 Jellyfin 容器前，先要在 Linux 系统下创建两个文件夹，分别用于保存配置文件，应用程序缓存，定位一个媒体库文件夹，假设你的媒体库文件夹在  */media* 文件中。
+在创建与启动 Jellyfin 容器前，先要在 Linux 系统下创建两个文件夹，分别用于保存配置文件，应用程序缓存，定位一个媒体库文件夹，假设你的媒体库文件夹在  */media* 文件中。
 
 ```bash
 # 在系统根目录下创建 /data/jellyfin 文件夹，并在 /data/jellyfin文件夹下再创建 config 和 cache 两个三级文件夹 
 sudo mkdir -p /data/jellyfin/{config,cache}
 ```
 
-　　2.3.2 创建与启动Jellyfin容器：
+2.3.2 创建与启动Jellyfin容器：
 
 ```bash
 docker run -d --name jellyfin \
@@ -67,7 +67,7 @@ docker run -d --name jellyfin \
 --restart unless-stopped nyanmisaka/jellyfin:latest 
 ```
 
-　　端口说明：
+端口说明：
 
 |端口号|用途|可选项|
 | --------| ------------------------------------| --------|
@@ -76,7 +76,7 @@ docker run -d --name jellyfin \
 |7359|让同一局域网中的客户端设备自动发现|可选|
 |1900|DLNA的端口|可选|
 
-　　2.3.3 确认容器：
+2.3.3 确认容器：
 
 ```bash
 sudo docker ps -l 
@@ -87,7 +87,7 @@ sudo docker ps
 
 ### 2.4 系统环境调试
 
-　　‍
+‍
 
 ```bash
 #进入 Jellyfin 的 Bash 模式：
@@ -106,23 +106,23 @@ apt install intel-media-va-driver
 /usr/lib/jellyfin-ffmpeg/vainfo
 ```
 
-　　​​​​
+​​​​
 
-　　PS：VAProfile输出的多少，视显卡而定，示例机的CPU是J4125，显卡是UHD600。
+PS：VAProfile输出的多少，视显卡而定，示例机的CPU是J4125，显卡是UHD600。
 
-　　都确认没问题后，系统的环境设置就已经完成，可以输入 ***exit*** 命令退出配置环境。
+都确认没问题后，系统的环境设置就已经完成，可以输入 ***exit*** 命令退出配置环境。
 
 ## 3、启动并初始化Jellyfin
 
-　　Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可以打开浏览器，输入Jellyfin服务器地址加端口号打开Jellyfin的页面，比如 [http://xxx.xxx.xxx.xxx:8096](https://link.zhihu.com/?target=http%3A//xxx.xxx.xxx.xxx%3A8096) 。
+Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可以打开浏览器，输入Jellyfin服务器地址加端口号打开Jellyfin的页面，比如 [http://xxx.xxx.xxx.xxx:8096](https://link.zhihu.com/?target=http%3A//xxx.xxx.xxx.xxx%3A8096) 。
 
-　　启动后可以根据提示进行设置，媒体库设置可以先跳过，然后一路下一步即可。
+启动后可以根据提示进行设置，媒体库设置可以先跳过，然后一路下一步即可。
 
 ### 3.1 媒体库设置
 
-　　菜单中选择“控制台”- 再选择 ”媒体库“：
+菜单中选择“控制台”- 再选择 ”媒体库“：
 
-　　右侧点击“添加媒体库”，然后根据提示完成媒体库的添加。​​
+右侧点击“添加媒体库”，然后根据提示完成媒体库的添加。​​
 
 * 内容类型：电影内容选“电影”；电视剧选“节目”；
 * 显示名称：自定义：
@@ -132,7 +132,7 @@ apt install intel-media-va-driver
 * 图片获取程序：只保留 “TheMovieDb”；
 * 没提到的，则根据情况自行选择；
 
-　　全部设置完点“确定”，之后系统便会自动生成电影和电视剧的海报列表，完成的速度和你使用的网络环境相关。
+全部设置完点“确定”，之后系统便会自动生成电影和电视剧的海报列表，完成的速度和你使用的网络环境相关。
 
 ### 3.2 网络设置：
 
@@ -152,24 +152,24 @@ apt install intel-media-va-driver
 * 没有提到的选择项均不选，其他参数均使用默认值；
 * 最后确定完成设置。
 
-　　注意，千万不要选择”启用色调映射“，这是个坑，选中后，很多HEVC/HDR的片子在播放时会报错，提示没有合适的容器，最终无法播放。
+注意，千万不要选择”启用色调映射“，这是个坑，选中后，很多HEVC/HDR的片子在播放时会报错，提示没有合适的容器，最终无法播放。
 
-　　‍
+‍
 
 ## 4、电视直播配置
 
 ### 4.1 m3u 文件
 
-　　[https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u](https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u)
+[https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u](https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u)
 
-　　注意使用iptv6需要设置光猫和路由器设置ipv6，docker-jellyfin 使用`docker run --net=host`​参数
+注意使用iptv6需要设置光猫和路由器设置ipv6，docker-jellyfin 使用`docker run --net=host`​参数
 
-　　确认开启ipv6测试地址：[http://test-ipv6.com/](ipv6测试网址)
+确认开启ipv6测试地址：[http://test-ipv6.com/](ipv6测试网址)
 
 ### 4.2 XMLTV 文件
 
-　　[https://epg.112114.xyz/pp.xml](http://epg.51zmt.top:8000/e.xml)
+[https://epg.112114.xyz/pp.xml](http://epg.51zmt.top:8000/e.xml)
 
-　　http://epg.51zmt.top:8000/e.xml
+http://epg.51zmt.top:8000/e.xml
 
-　　‍
+‍

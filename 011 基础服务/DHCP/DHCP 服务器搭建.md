@@ -37,7 +37,7 @@ log-facility [日志属性]                   # 定义自身的日志属性（�
 
 ### 编辑DHCP配置文件
 
-　　dhcp配置文件地址是/etc/dhcp/dhcpd.conf
+dhcp配置文件地址是/etc/dhcp/dhcpd.conf
 
 ```bash
 
@@ -102,9 +102,9 @@ ONBOOT=yes
 [root@rhel8 ~]# nmcli connection up ens192
 ```
 
-　　如果想要IP绑定MAC
+如果想要IP绑定MAC
 
-　　修改DHCP服务器上的配置文件，重启dhcp服务
+修改DHCP服务器上的配置文件，重启dhcp服务
 
 ```bash
 [root@ct78 ~]# vim /etc/dhcp/dhcpd.conf
@@ -131,7 +131,7 @@ subnet 192.168.137.0 netmask 255.255.255.0 {
 [root@ct78 ~]# systemctl restart dhcpd
 ```
 
-　　重启测试主机上的network服务
+重启测试主机上的network服务
 
 ```
 [root@rhel8 ~]# nmcli device disconnect ens192
@@ -145,9 +145,9 @@ subnet 192.168.137.0 netmask 255.255.255.0 {
        valid_lft forever preferred_lft forever
 ```
 
-　　常看相关文件
+常看相关文件
 
-　　DHCP服务器上的租约数据库文件
+DHCP服务器上的租约数据库文件
 
 ```
 [root@ct78 ~]# cat /var/lib/dhcpd/dhcpd.leases
@@ -175,7 +175,7 @@ lease 192.168.137.102 {
 server-duid "\000\001\000\001%<\256\351\000\014)\376\270\002";
 ```
 
-　　在测试主机上查看DNS
+在测试主机上查看DNS
 
 ```
 [root@rhel8 ~]# cat /etc/resolv.conf
@@ -184,7 +184,7 @@ search 192.168.137.78
 nameserver 192.168.137.1
 ```
 
-　　查看网关
+查看网关
 
 ```
 [root@rhel8 ~]# route -n

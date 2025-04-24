@@ -2,11 +2,11 @@
 
 > 适用范围：Windows Server 2022、Windows Server 2019、Windows Server 2016、Windows Server 2012 R2、Windows Server 2012
 
-　　结束一个或多个任务或进程。 可以通过进程 ID 或图像名称结束进程。 可以使用 [tasklist](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/tasklist) 命令来确定要结束的进程的进程 ID (PID)。
+结束一个或多个任务或进程。 可以通过进程 ID 或图像名称结束进程。 可以使用 [tasklist](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/tasklist) 命令来确定要结束的进程的进程 ID (PID)。
 
-　　 备注
+ 备注
 
-　　该命令替换 kill 工具。
+该命令替换 kill 工具。
 
 ## 语法
 
@@ -51,36 +51,36 @@ taskkill [/s <computer> [/u [<domain>\]<username> [/p [<password>]]]] {[/fi <fil
 
 ## 示例
 
-　　若要结束进程 ID 为 1230、1241 和 1253 的进程，请键入：
+若要结束进程 ID 为 1230、1241 和 1253 的进程，请键入：
 
-　　‍
+‍
 
 ```
 taskkill /pid 1230 /pid 1241 /pid 1253
 ```
 
-　　如果进程 Notepad.exe 是由系统启动的，要强行结束它，请键入：
+如果进程 Notepad.exe 是由系统启动的，要强行结束它，请键入：
 
 ```
 taskkill /f /fi "USERNAME eq NT AUTHORITY\SYSTEM" /im notepad.exe
 ```
 
-　　若要结束远程计算机 Srvmain 上映像名称以 note 开头的所有进程，同时使用用户帐户 Hiropln 的凭据，请键入：
+若要结束远程计算机 Srvmain 上映像名称以 note 开头的所有进程，同时使用用户帐户 Hiropln 的凭据，请键入：
 
 ```
 taskkill /s srvmain /u maindom\hiropln /p p@ssW23 /fi "IMAGENAME eq note*" /im *
 ```
 
-　　若要结束进程 ID 为 2134 的进程及其它启动的任何子进程，但前提是这些进程是由管理员帐户启动的，请键入：
+若要结束进程 ID 为 2134 的进程及其它启动的任何子进程，但前提是这些进程是由管理员帐户启动的，请键入：
 
 ```
 taskkill /pid 2134 /t /fi "username eq administrator"
 ```
 
-　　若要结束进程 ID 大于或等于 1000 的所有进程，无论其映像名称如何，请键入：
+若要结束进程 ID 大于或等于 1000 的所有进程，无论其映像名称如何，请键入：
 
 ```
 taskkill /f /fi "PID ge 1000" /im *
 ```
 
-　　‍
+‍

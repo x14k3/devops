@@ -1,9 +1,9 @@
 # docker 数据卷
 
-　　docker的理念：将应用和环境打包成一个镜像如果数据都在容器中，那么删除容器，数据将会丢失！
+docker的理念：将应用和环境打包成一个镜像如果数据都在容器中，那么删除容器，数据将会丢失！
 为了很好的实现数据保存和数据共享，Docker提出了Volume这个概念，简单的说就是绕过默认的联合文件系统，而以正常的文件或者目录的形式存在于宿主机上。又被称作数据卷。
 
-　　**数据卷的特点**
+**数据卷的特点**
 
 1. 数据卷存在于宿主机的文件系统中，独立于容器，和容器的生命周期是分离的；
 2. 数据卷可以是目录也可以是文件，容器可以利用数据卷与宿主机进行数据共享，实现了容器间的数据共享和交换；
@@ -13,7 +13,7 @@
 
 # Docker 数据持久化
 
-　　`bind mounts`、`Volumes`、和`tepfs mounts`三种方式，还有就是共享其他容器的数据卷，其中`tmpfs`是一种基于内存的临时文件系统。`tmpfs mounts`数据不会存储在磁盘上。
+`bind mounts`、`Volumes`、和`tepfs mounts`三种方式，还有就是共享其他容器的数据卷，其中`tmpfs`是一种基于内存的临时文件系统。`tmpfs mounts`数据不会存储在磁盘上。
 
 ![](assets/image-20221127212013265-20230610173810-zgeo48m.png)
 
@@ -30,11 +30,11 @@ docker run -d --name test --mount type=bind,source=/path/on/host,destination=/pa
 docker run -d --name test -v /path/on/host:/path/in/container  镜像id
 ```
 
-　　如果host机器上的目录不存在，docker会自动创建该目录。
+如果host机器上的目录不存在，docker会自动创建该目录。
 
-　　如果container中的目录不存在，docker会自动创建该目录。
+如果container中的目录不存在，docker会自动创建该目录。
 
-　　如果container中的目录已经有内容，那么docker会使用host上的目录将其覆盖掉。
+如果container中的目录已经有内容，那么docker会使用host上的目录将其覆盖掉。
 
 ## volume
 
@@ -54,15 +54,15 @@ docker volume create my-olume
 docker run -dit --mount type=volume,source=my-volume,destination=/path/in/container  ImageID
 ```
 
-　　**Dockerfile中的VOLUME**
+**Dockerfile中的VOLUME**
 
-　　在Dockerfile中，我们也可以使用VOLUME指令来申明contaienr中的某个目录需要映射到某个volume：
+在Dockerfile中，我们也可以使用VOLUME指令来申明contaienr中的某个目录需要映射到某个volume：
 
-　　`#Dockerfile VOLUME /foo`
+`#Dockerfile VOLUME /foo`
 
-　　这表示，在docker运行时，docker会创建一个匿名的volume，并将此volume绑定到container的/foo目录中，如果container的/foo目录下已经有内容，则会将内容拷贝的volume中。也即，Dockerfile中的`VOLUME /foo`与`docker run -v /foo alpine`的效果一样。
+这表示，在docker运行时，docker会创建一个匿名的volume，并将此volume绑定到container的/foo目录中，如果container的/foo目录下已经有内容，则会将内容拷贝的volume中。也即，Dockerfile中的`VOLUME /foo`与`docker run -v /foo alpine`的效果一样。
 
-　　Dockerfile中的VOLUME使每次运行一个新的container时，都会为其自动创建一个匿名的volume，如果需要在不同container之间共享数据，那么我们依然需要通过`docker run -it -v my-volume:/foo`的方式将/foo中数据存放于指定的my-volume中。
+Dockerfile中的VOLUME使每次运行一个新的container时，都会为其自动创建一个匿名的volume，如果需要在不同container之间共享数据，那么我们依然需要通过`docker run -it -v my-volume:/foo`的方式将/foo中数据存放于指定的my-volume中。
 
 ```bash
 docker run -d --name test2 --volumes-from test1 mysql:5.7
@@ -70,11 +70,11 @@ docker run -d --name test2 --volumes-from test1 mysql:5.7
 
 # volume(-v)与mount的使用总结
 
-　　用户可以通过docker run的--volume/-v或--mount选项来创建带有数据卷的容器，但这两个选项有些微妙的差异，在这里总结梳理一下。
+用户可以通过docker run的--volume/-v或--mount选项来创建带有数据卷的容器，但这两个选项有些微妙的差异，在这里总结梳理一下。
 
 ## --volume(-v)
 
-　　参数--volume（或简写为-v）只能创建bind mount。示例：
+参数--volume（或简写为-v）只能创建bind mount。示例：
 
 ```bash
 docker run -d --name test -v /path/on/host:/path/in/container:rw  镜像id
@@ -85,13 +85,13 @@ docker run -d --name test -v /path/on/host:/path/in/container:rw  镜像id
 
 ## --mount
 
-　　参数--mount默认情况下用来挂载volume，但也可以用来创建bind  mount和tmpfs。如果不指定type选项，则默认为挂载volume，volume是一种更为灵活的数据管理方式，volume可以通过docker  volume命令集被管理。示例：
+参数--mount默认情况下用来挂载volume，但也可以用来创建bind  mount和tmpfs。如果不指定type选项，则默认为挂载volume，volume是一种更为灵活的数据管理方式，volume可以通过docker  volume命令集被管理。示例：
 
 ```bash
 docker run -dit --mount type=volume,source=my-volume,destination=/path/in/container  ImageID
 ```
 
-　　创建bind mount和挂载volume的比较
+创建bind mount和挂载volume的比较
 
 |对比项|bind mount|volume|
 | --------------| -------------------| --------------------------|
@@ -102,4 +102,4 @@ docker run -dit --mount type=volume,source=my-volume,destination=/path/in/contai
 |可移植性|一般（自行维护）|强（docker托管）|
 |宿主直接访问|容易（仅需chown）|受限（需登陆root用户）*|
 
-　　*注释：Docker无法简单地通过sudo chown someuser: -R  /var/lib/docker/volumes/somevolume来将volume的内容开放给主机上的普通用户访问，如果开放更多权限则有安全风险。而这点上Podman的设计就要理想得多，volume存放在$HOME/.local/share/containers/storage/volumes/路径下，即提供了便捷性，又保障了安全性。无需root权限即可运行容器，这正是Podman的优势之一，实际使用过程中的确受益良多。
+*注释：Docker无法简单地通过sudo chown someuser: -R  /var/lib/docker/volumes/somevolume来将volume的内容开放给主机上的普通用户访问，如果开放更多权限则有安全风险。而这点上Podman的设计就要理想得多，volume存放在$HOME/.local/share/containers/storage/volumes/路径下，即提供了便捷性，又保障了安全性。无需root权限即可运行容器，这正是Podman的优势之一，实际使用过程中的确受益良多。

@@ -1,14 +1,14 @@
 # mysql 二进制安装
 
-　　通用二进制版本： 本文档采用此方式安装
+通用二进制版本： 本文档采用此方式安装
 
-　　https://downloads.mysql.com/archives/community/
+https://downloads.mysql.com/archives/community/
 
-　　选择版本，再选择Operating System: Linux - Generic
+选择版本，再选择Operating System: Linux - Generic
 
-​![img](http://jpg.fxkjnj.com/picgo/202212051359315.png)​
+![img](http://jpg.fxkjnj.com/picgo/202212051359315.png)​
 
-　　‍
+‍
 
 ### 下载、环境准备
 
@@ -37,7 +37,7 @@ source /etc/profile
 
 ### 准备my.cnf 配置文件
 
-　　​`vim /etc/my.cnf`​
+​`vim /etc/my.cnf`​
 
 ```bash
 [mysqld]
@@ -61,9 +61,9 @@ default-character-set = utf8mb4
 
 ### 初始化数据
 
-　　初始化数据，初始化管理员的密码为空
+初始化数据，初始化管理员的密码为空
 
-　　**如果已经初始化过了，就需要把数据目录数据情况，再次初始化 rm -rf  /data/mysql/data/***
+**如果已经初始化过了，就需要把数据目录数据情况，再次初始化 rm -rf  /data/mysql/data/***
 
 ```bash
 mysqld --defaults-file=/etc/my.cnf --initialize-insecure    #--initialize-insecure初始化后root密码为空
@@ -99,11 +99,11 @@ drwxr-x--- 2 mysql mysql     12288  3月 12 13:23 sys
 
 ```
 
-　　‍
+‍
 
 ### 使用systemd管理mysql
 
-　　`vim /etc/systemd/system/mysqld.service`​
+`vim /etc/systemd/system/mysqld.service`​
 
 ```bash
 
@@ -156,11 +156,11 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### 可能遇到的问题
 
-　　mysql登录报错
+mysql登录报错
 
-　　mysql: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
+mysql: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
 
-　　解决方法：
+解决方法：
 
 ```bash
 #找到libtinfo.so.6.3
@@ -169,4 +169,4 @@ find /usr/ -name 'libtinfo*'
 ln -s /usr/lib64/libtinfo.so.6.3 /usr/lib64/libtinfo.so.5
 ```
 
-　　‍
+‍

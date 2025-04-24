@@ -1,12 +1,12 @@
 # fmt
 
-　　在日常使用`fmt`​包的过程中，各种眼花缭乱的`print`​是否让你莫名的不知所措呢,更让你茫然的是各种格式化的占位符。。简直就是噩梦。今天就让我们来征服格式化输出，做一个会输出的Goer。
+在日常使用`fmt`​包的过程中，各种眼花缭乱的`print`​是否让你莫名的不知所措呢,更让你茫然的是各种格式化的占位符。。简直就是噩梦。今天就让我们来征服格式化输出，做一个会输出的Goer。
 
-　　‍
+‍
 
 ## fmt.Print
 
-　　​`fmt.Print`​有几个变种：
+​`fmt.Print`​有几个变种：
 
 ```go
 Print:   输出到控制台,不接受任何格式化操作
@@ -26,7 +26,7 @@ Fprintf：来格式化并输出到 io.Writers 而不是 os.Stdout
 %%    百分号,字面上的%,非占位符含义
 ```
 
-　　默认格式`%v`​下，对于不同的数据类型，底层会去调用默认的格式化方式：
+默认格式`%v`​下，对于不同的数据类型，底层会去调用默认的格式化方式：
 
 ```perl
 bool:                    %t 
@@ -38,7 +38,7 @@ chan:                    %p
 pointer:                 %p
 ```
 
-　　如果是复杂对象的话,按照如下规则进行打印：
+如果是复杂对象的话,按照如下规则进行打印：
 
 ```css
 struct:            {field0 field1 ...} 
@@ -47,7 +47,7 @@ maps:              map[key1:value1 key2:value2]
 pointer to above:  &{}, &[], &map[]
 ```
 
-　　示例:
+示例:
 
 ```go
 package main
@@ -107,7 +107,7 @@ main.User
 %U     Unicode格式：123，等同于 "U+007B"
 ```
 
-　　示例：
+示例：
 
 ```go
 package main
@@ -162,7 +162,7 @@ U+007B
 %G     根据情况选择 %E 或 %f 以产生更紧凑的（无末尾的0）输出
 ```
 
-　　示例：
+示例：
 
 ```go
 package main
@@ -211,7 +211,7 @@ func main() {
 %X     十六进制，大写字母，每字节两个字符
 ```
 
-　　示例：
+示例：
 
 ```go
 package main
@@ -245,7 +245,7 @@ I'm a girl
 %p 十六进制表示，前缀 0x
 ```
 
-　　示例：
+示例：
 
 ```go
 package main
@@ -275,7 +275,7 @@ func main() {
 0     填充前导的0而非空格；对于数字，这会将填充移到正负号之后
 ```
 
-　　示例：
+示例：
 
 ```go
 func main() {
@@ -304,7 +304,7 @@ aaaa
 
 #### 2.7 格式化错误的提示
 
-　　格式化错误．所有的错误都始于“%!”，有时紧跟着单个字符（占位符），并以小括号括住的描述结尾。
+格式化错误．所有的错误都始于“%!”，有时紧跟着单个字符（占位符），并以小括号括住的描述结尾。
 
 ```go
 func main() {
@@ -312,25 +312,25 @@ func main() {
 }
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## ftm.scan
 
-　　在go语言中如果想获取用户输入，会用到Scan方法。scan在go语言中有很多中，今天介绍一下他们的使用方法和不同点。
+在go语言中如果想获取用户输入，会用到Scan方法。scan在go语言中有很多中，今天介绍一下他们的使用方法和不同点。
 
-　　和print类似，scan也分为三大类：
+和print类似，scan也分为三大类：
 
 * Scan、Scanf和Scanln:    从标准输入os.Stdin读取文本(从终端获取数据)
 * Fscan、Fscanf、Fscanln: 从指定的io.Reader接口读取文本(通用)
 * Sscan、Sscanf、Sscanln:  从一个参数字符串读取文本(从字符串string获取数据)
 
-　　本文介绍了Go语言中`fmt`​包中从标准输入获取数据的的`Scan`​系列函数、从`io.Reader`​中获取数据的`Fscan`​系列函数以及从字符串中获取数据的`Sscan`​系列函数的用法。
+本文介绍了Go语言中`fmt`​包中从标准输入获取数据的的`Scan`​系列函数、从`io.Reader`​中获取数据的`Fscan`​系列函数以及从字符串中获取数据的`Sscan`​系列函数的用法。
 
 ### fmt.Scan
 
-　　**语法**
+**语法**
 
 ```go
 func Scan(a ...interface{}) (n int, err error)
@@ -339,7 +339,7 @@ func Scan(a ...interface{}) (n int, err error)
 * Scan从标准输入扫描文本，读取由空白符分隔的值保存到传递给本函数的参数中，换行符视为空白符。
 * 本函数返回成功扫描的数据个数和遇到的任何错误。如果读取的数据个数比提供的参数少，会返回一个错误报告原因。
 
-　　**代码示例**
+**代码示例**
 
 ```go
 func main() {
@@ -353,9 +353,9 @@ func main() {
 }
 ```
 
-　　‍
+‍
 
-　　将上面的代码编译后在终端执行，在终端依次输入`小明`​、`18`​和`false`​使用空格分隔。
+将上面的代码编译后在终端执行，在终端依次输入`小明`​、`18`​和`false`​使用空格分隔。
 
 ```go
 $ ./scan_demo 
@@ -363,11 +363,11 @@ $ ./scan_demo
 扫描结果 name:小明 age:18 married:false 
 ```
 
-　　​`fmt.Scan`​从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。
+​`fmt.Scan`​从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。
 
 ### fmt.Scanf
 
-　　**语法**
+**语法**
 
 ```
 func Scanf(format string, a ...interface{}) (n int, err error)
@@ -376,7 +376,7 @@ func Scanf(format string, a ...interface{}) (n int, err error)
 * Scanf从标准输入扫描文本，根据format参数指定的格式去读取由空白符分隔的值保存到传递给本函数的参数中。
 * 本函数返回成功扫描的数据个数和遇到的任何错误。
 
-　　**代码示例**
+**代码示例**
 
 ```go
 func main() {
@@ -390,7 +390,7 @@ func main() {
 }
 ```
 
-　　将上面的代码编译后在终端执行，在终端按照指定的格式依次输入小明、`18`​和`false。`​
+将上面的代码编译后在终端执行，在终端按照指定的格式依次输入小明、`18`​和`false。`​
 
 ```
 $ ./scan_demo 
@@ -398,9 +398,9 @@ $ ./scan_demo
 扫描结果 name:小明 age:18 married:false 
 ```
 
-　　​`fmt.Scanf`​不同于`fmt.Scan`​简单的以空格作为输入数据的分隔符，`fmt.Scanf`​为输入数据指定了具体的输入内容格式，只有按照格式输入数据才会被扫描并存入对应变量。
+​`fmt.Scanf`​不同于`fmt.Scan`​简单的以空格作为输入数据的分隔符，`fmt.Scanf`​为输入数据指定了具体的输入内容格式，只有按照格式输入数据才会被扫描并存入对应变量。
 
-　　例如，我们还是按照上个示例中以空格分隔的方式输入，`fmt.Scanf`​就不能正确扫描到输入的数据。
+例如，我们还是按照上个示例中以空格分隔的方式输入，`fmt.Scanf`​就不能正确扫描到输入的数据。
 
 ```
 $ ./scan_demo 
@@ -410,7 +410,7 @@ $ ./scan_demo
 
 ### fmt.Scanln
 
-　　**语法**
+**语法**
 
 ```
 func Scanln(a ...interface{}) (n int, err error)
@@ -419,9 +419,9 @@ func Scanln(a ...interface{}) (n int, err error)
 * Scanln类似Scan，它在遇到换行时才停止扫描。最后一个数据后面必须有换行或者到达结束位置。
 * 本函数返回成功扫描的数据个数和遇到的任何错误。
 
-　　**代码示例**
+**代码示例**
 
-　　‍
+‍
 
 ```go
 func main() {
@@ -435,9 +435,9 @@ func main() {
 }
 ```
 
-　　‍
+‍
 
-　　将上面的代码编译后在终端执行，在终端依次输入`小明`​、`18`​和`false`​使用空格分隔。
+将上面的代码编译后在终端执行，在终端依次输入`小明`​、`18`​和`false`​使用空格分隔。
 
 ```bash
 $ ./scan_demo 
@@ -445,7 +445,7 @@ $ ./scan_demo
 扫描结果 name:小明 age:18 married:false 
 ```
 
-　　​`fmt.Scanln`​遇到回车就结束扫描了，这个比较常用。
+​`fmt.Scanln`​遇到回车就结束扫描了，这个比较常用。
 
 ### Fscan系列
 
@@ -455,7 +455,7 @@ func Fscanln(r io.Reader, a ...interface{}) (n int, err error)
 func Fscanf(r io.Reader, format string, a ...interface{}) (n int, err error)
 ```
 
-　　这几个函数功能分别类似于`fmt.Scan`​、`fmt.Scanf`​、`fmt.Scanln`​三个函数，只不过它们不是从标准输入中读取数据而是从`io.Reader`​中读取数据。
+这几个函数功能分别类似于`fmt.Scan`​、`fmt.Scanf`​、`fmt.Scanln`​三个函数，只不过它们不是从标准输入中读取数据而是从`io.Reader`​中读取数据。
 
 ### Sscan系列
 
@@ -465,4 +465,4 @@ func Sscanln(str string, a ...interface{}) (n int, err error)
 func Sscanf(str string, format string, a ...interface{}) (n int, err error)
 ```
 
-　　这几个函数功能分别类似于`fmt.Scan`​、`fmt.Scanf`​、`fmt.Scanln`​三个函数，只不过它们不是从标准输入中读取数据而是从指定字符串中读取数据。
+这几个函数功能分别类似于`fmt.Scan`​、`fmt.Scanf`​、`fmt.Scanln`​三个函数，只不过它们不是从标准输入中读取数据而是从指定字符串中读取数据。

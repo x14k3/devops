@@ -15,4 +15,4 @@ crosscheck archivelog all;
 delete noprompt expired archivelog all;
 ```
 
-　　‍
+‍

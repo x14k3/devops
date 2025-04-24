@@ -1,6 +1,6 @@
 # Nginx配置HTTPS
 
-　　Nginx双向认证
+[Nginx双向认证](Nginx双向认证.md)
 
 ```nginx
 # 负载均衡，设置HTTPS

@@ -1,6 +1,6 @@
 # findstr
 
-　　搜索文件中的文本模式。
+搜索文件中的文本模式。
 
 ## 语法
 
@@ -64,52 +64,52 @@ findstr [/b] [/e] [/l | /r] [/s] [/i] [/x] [/v] [/n] [/m] [/o] [/p] [/f:<file>] 
 
 ### 示例
 
-　　若要在文件 *x.y* 中搜索 *hello* 或 *there*，请键入：
+若要在文件 *x.y* 中搜索 *hello* 或 *there*，请键入：
 
 ```
 findstr hello there x.y
 ```
 
-　　若要在文件 *x.y* 中搜索 *hello*，请键入：
+若要在文件 *x.y* 中搜索 *hello*，请键入：
 
 ```
 findstr /c:"hello there" x.y
 ```
 
-　　若要查找文件 *proposal.txt* 文件中 *Windows*（首字母为大写 W）的所有匹配项，请键入：
+若要查找文件 *proposal.txt* 文件中 *Windows*（首字母为大写 W）的所有匹配项，请键入：
 
 ```
 findstr Windows proposal.txt
 ```
 
-　　若要搜索当前目录和所有子目录中包含单词 *Windows* 的所有文件，无论字母大小写如何，请键入：
+若要搜索当前目录和所有子目录中包含单词 *Windows* 的所有文件，无论字母大小写如何，请键入：
 
 ```
 findstr /s /i Windows *.*
 ```
 
-　　若要查找以 *FOR* 开头且前面有零个或多个空格（如计算机程序循环中所示）的行的所有匹配项，并显示找到的每个匹配项的行号，请键入：
+若要查找以 *FOR* 开头且前面有零个或多个空格（如计算机程序循环中所示）的行的所有匹配项，并显示找到的每个匹配项的行号，请键入：
 
 ```
 findstr /b /n /r /c:^ *FOR *.bas
 ```
 
-　　若要列出要在文本文件中搜索的确切文件，请使用文件 *stringlist.txt* 中的搜索条件，搜索在 *filelist.txt * 中列出的文件，然后将结果存储在文件 *results.out*中，请键入：
+若要列出要在文本文件中搜索的确切文件，请使用文件 *stringlist.txt* 中的搜索条件，搜索在 *filelist.txt * 中列出的文件，然后将结果存储在文件 *results.out*中，请键入：
 
 ```
 findstr /g:stringlist.txt /f:filelist.txt > results.out
 ```
 
-　　若要列出当前目录和所有子目录中包含单词 *computer* 的每个文件，无论大小写如何，请键入：
+若要列出当前目录和所有子目录中包含单词 *computer* 的每个文件，无论大小写如何，请键入：
 
 ```
 findstr /s /i /m \<computer\> *.*
 ```
 
-　　若要列出包含单词 computer 和以 comp 开头的任何其他单词（如 compliment 和 compete）的文件，请键入：
+若要列出包含单词 computer 和以 comp 开头的任何其他单词（如 compliment 和 compete）的文件，请键入：
 
 ```
 findstr /s /i /m \<comp.* *.*
 ```
 
-　　‍
+‍

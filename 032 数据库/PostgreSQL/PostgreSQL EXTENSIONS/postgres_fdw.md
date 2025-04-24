@@ -1,6 +1,6 @@
 # postgres_fdw
 
-　　postgres fdw是一种外部访问接口，它可以被用来访问存储在外部的数据，这些数据可以是外部的pg数据库，也可以oracle、mysql等数据库，甚至可以是文件。  
+postgres fdw是一种外部访问接口，它可以被用来访问存储在外部的数据，这些数据可以是外部的pg数据库，也可以oracle、mysql等数据库，甚至可以是文件。  
   
  使用postgres_fdw产要有以下步骤：
 
@@ -9,13 +9,13 @@
 * 创建用户映射
 * 创建与访问表对应的外表
 
-　　到此就可以使用SELECT从外部表中访问存储在其底层远程表中的数据。同时可以 UPDATE,INSERT,DELETE远程表数据库，前提是在用户映射中指定的远程用户必须具有执行这些操作的权限。
+到此就可以使用SELECT从外部表中访问存储在其底层远程表中的数据。同时可以 UPDATE,INSERT,DELETE远程表数据库，前提是在用户映射中指定的远程用户必须具有执行这些操作的权限。
 
-　　‍
+‍
 
 # 1.安装使用
 
-　　这里创建2个数据库db01,db02,2个用户user01,user02分别用来作为本地和远端的数据库和用户。
+这里创建2个数据库db01,db02,2个用户user01,user02分别用来作为本地和远端的数据库和用户。
 
 ## 1.1 初始化数据
 
@@ -52,7 +52,7 @@ CREATE EXTENSION
 
 ### 1.2.2 查看系统表
 
-　　 通过下列系统表可以查看数据库外部表信息。
+ 通过下列系统表可以查看数据库外部表信息。
 
 |系统表|简命令操作|含义|
 | ------------------------| ------------| --------------------|
@@ -166,7 +166,7 @@ db01=# \det
 
 ## 1.6 fdw 维护
 
-　　**查看数据库已经创建的外部数据表**
+**查看数据库已经创建的外部数据表**
 
 ```pgsql
 select * from pg_foreign_table;
@@ -184,9 +184,9 @@ DROP FOREIGN TABLE  table2;
 \det  --查看创建的外部表
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 # 2.使用示例
 
@@ -227,7 +227,7 @@ db01=# SELECT t1.id, t2.crt_time FROM table1 t1 INNER JOIN table2 t2 ON t1.id = 
 
 ## 2.2 写操作
 
-　　postgres_fdw 外部表一开始只支持读，PostgreSQL9.3 版本开始支持可写。  
+postgres_fdw 外部表一开始只支持读，PostgreSQL9.3 版本开始支持可写。  
 写操作需要保证：1. 映射的用户对有表由写权限；2. 版本需要9.3 以上
 
 ```pgsql
@@ -274,13 +274,13 @@ db01=# select * from table1 where  id =5 ;
 
 ```
 
-　　‍
+‍
 
 # 3.补充
 
 ## 3.1支持聚合下推
 
-　　PostgreSQL10 增强了postgres_fdw  扩展模块的特性，可以将聚合、关联操作下推到远程PostgreSQL数据库进行，而之前的版本是将外部表相应的远程数据全部取到本地再做聚合，10版本这个心特性大幅度减少了从远程传输到本地库的数据量。提升了postgres_fdw外部表上聚合查询的性能。
+PostgreSQL10 增强了postgres_fdw  扩展模块的特性，可以将聚合、关联操作下推到远程PostgreSQL数据库进行，而之前的版本是将外部表相应的远程数据全部取到本地再做聚合，10版本这个心特性大幅度减少了从远程传输到本地库的数据量。提升了postgres_fdw外部表上聚合查询的性能。
 
 ```pgsql
 db01=# EXPLAIN(ANALYZE on,VERBOSE on) select id,count(*) from table1  where id < 100 group by id;
@@ -300,14 +300,14 @@ db01=# EXPLAIN(ANALYZE on,VERBOSE on) select id,count(*) from table1  where id <
 
 ## 3.2 FDW在PG14的新功能
 
-　　1.批入导入性能提升  
+1.批入导入性能提升  
  INSERT SELECT 语句将 100 万行从另一个表插入到该表所用的时间如下。postgres_fdw OPTIONS的  batch_size 参数设置为 100。这意味着一次最多向外部服务器发送 100 行：
 
 * 没有 FDW 的本地表：6.1 秒
 * 带 FDW 的远程表（改进前）：125.3 秒
 * 带 FDW 的远程表（改进后）：11.1 秒
 
-　　2.FDW 外部表接口支持 truncate [only|cascade] ，可能通过truncatable 参数选项控制默认为true  
+2.FDW 外部表接口支持 truncate [only|cascade] ，可能通过truncatable 参数选项控制默认为true  
  3.远程更新参数控制 ，默认情况下，所有使用的外部表postgres_fdw都假定是可更新的 。可能通过updatable参数选项控制默认为true  
  4.支持并行/异步 外部扫描，充许一个查询引用多个外部表，并行执行外部表扫描。选项async_capable，它允许并行计划和执行外部表扫描。  
  5.LIMIT TO 子分区,如果指定IMPORT FOREIGN SCHEMA … LIMIT  TO，则允许postgres_fdw导入表分区。默认情况下postgres_fdw不允许导入表分区，因为可以使用根分区访问数据。如果用户想要导入分区表分区，PostgreSQL  14添加了一个新的选项LIMIT TO指定子分区导入。  
@@ -316,9 +316,9 @@ db01=# EXPLAIN(ANALYZE on,VERBOSE on) select id,count(*) from table1  where id <
 * 如果在关闭这个选项，可以使用  ALTER SERVER youserrvername  OPTIONS (keep_connections ‘off’);
 * 打开使用ALTER SERVER youserrvername   options (set keep_connections ‘on’);
 
-　　7.活动和有效的连接列表，添加postgres_fdw_get_connections函数以报告打开的外部服务连接。该函数将打开的连接名本地会话返回到postgres_fdw的外部服务。它还输出连接的有效性。
+7.活动和有效的连接列表，添加postgres_fdw_get_connections函数以报告打开的外部服务连接。该函数将打开的连接名本地会话返回到postgres_fdw的外部服务。它还输出连接的有效性。
 
 * 查询从本地会话到外部服务器建立的所有打开连接的外部服务器名称: SELECT * FROM postgres_fdw_get_connections() ORDER BY 1;
 * 丢弃从本地会话到外部服务器建立的所有打开连接： select postgres_fdw_disconnect_all();
 
-　　‍
+‍

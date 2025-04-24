@@ -1,6 +1,6 @@
 # zabbix监控端口数据（自动发现规则）
 
-　　‍
+‍
 
 ```bash
 #!/usr/bin/python

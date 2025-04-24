@@ -1,6 +1,6 @@
 # other-Oracle表空间使用情况脚本
 
-　　个人一直使用下面这个脚本查看、分析Oracle数据库表空间的使用情况，这个脚本经过我不断的调整、完善，已经接近完美了。已经很长时间没有改动过了，个人累积的脚本名为get\_tablespace\_used\_v2.sql
+个人一直使用下面这个脚本查看、分析Oracle数据库表空间的使用情况，这个脚本经过我不断的调整、完善，已经接近完美了。已经很长时间没有改动过了，个人累积的脚本名为get\_tablespace\_used\_v2.sql
 
 ```sql
 SET PAGESIZE 9999 LINESIZE 180;
@@ -39,7 +39,7 @@ WHERE D.TABLESPACE_NAME = F.TABLESPACE_NAME
 ORDER BY "ACT_USED_RATE(%)" DESC;
 ```
 
-　　但是今天在看一篇英文博文时，看到了一个更加完善的脚本，个人对其做了一些调整和修改，将其命名为get\_tablespace\_used\_v3.sql，它主要是加入了表空间类型，以及临时表空间的数据等。以及自动扩展的数据文件和非自动扩展数据文件的数量。
+但是今天在看一篇英文博文时，看到了一个更加完善的脚本，个人对其做了一些调整和修改，将其命名为get\_tablespace\_used\_v3.sql，它主要是加入了表空间类型，以及临时表空间的数据等。以及自动扩展的数据文件和非自动扩展数据文件的数量。
 
 ```sql
 set pagesize 1000 linesize 180

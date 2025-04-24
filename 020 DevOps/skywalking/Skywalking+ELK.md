@@ -2,17 +2,17 @@
 
 # skywalking部署
 
-　　1.下载地址：[https://archive.apache.org/dist/skywalking/](https://links.jianshu.com/go?to=https://archive.apache.org/dist/skywalking/ "https://archive.apache.org/dist/skywalking/")
+1.下载地址：[https://archive.apache.org/dist/skywalking/](https://links.jianshu.com/go?to=https://archive.apache.org/dist/skywalking/ "https://archive.apache.org/dist/skywalking/")
 
-　　2.下载好了之后，上传到服务器
+2.下载好了之后，上传到服务器
 
-　　3.解压 `tar -zxvf apache-skywalking-apm-8.8.1.tar.gz`
+3.解压 `tar -zxvf apache-skywalking-apm-8.8.1.tar.gz`
 
-　　4.安装elasticsearch存储，参考 [elk 7.17 部署](../ELK/elk%207.17%20部署.md)
+4.安装elasticsearch存储，参考 [elk 7.17 部署](../ELK/elk%207.17%20部署.md)
 
-　　5.配置skywalking
+5.配置skywalking
 
-　　`vim /data/apache-skywalking-apm-bin/config/application.yml `
+`vim /data/apache-skywalking-apm-bin/config/application.yml `
 
 ```bash
 # 定位到storage部分，将默认的H2存储库改为elasticsearch，并按照以下配置。
@@ -37,7 +37,7 @@ user          # Elasticsearch实例的访问用户名，默认为elastic。
 password      # 对应用户的密码。elastic用户的密码在创建实例时指定
 ```
 
-　　6.安装jdk1.8
+6.安装jdk1.8
 
 ```bash
 tar -zxf jdk-8u301-linux-x64.tar.gz -C /usr/local
@@ -51,19 +51,19 @@ EOF
 source /etc/profile
 ```
 
-　　7.启动服务
+7.启动服务
 
-　　`sh /data/apache-skywalking-apm-bin/bin/startup.sh ;tail -f /data/apache-skywalking-apm-bin/logs/oap.log`
+`sh /data/apache-skywalking-apm-bin/bin/startup.sh ;tail -f /data/apache-skywalking-apm-bin/logs/oap.log`
 
 # skywalking-agent部署
 
-　　1.下载地址：[https://archive.apache.org/dist/skywalking/](https://links.jianshu.com/go?to=https://archive.apache.org/dist/skywalking/ "https://archive.apache.org/dist/skywalking/")
+1.下载地址：[https://archive.apache.org/dist/skywalking/](https://links.jianshu.com/go?to=https://archive.apache.org/dist/skywalking/ "https://archive.apache.org/dist/skywalking/")
 
-　　2.下载好了之后，上传到java应用程序所在服务器
+2.下载好了之后，上传到java应用程序所在服务器
 
-　　3.解压 `tar -zxvf apache-skywalking-java-agent-8.8.0.tgz`
+3.解压 `tar -zxvf apache-skywalking-java-agent-8.8.0.tgz`
 
-　　4.安装jdk1.8
+4.安装jdk1.8
 
 ```bash
 tar -zxf jdk-8u301-linux-x64.tar.gz -C /usr/local
@@ -77,9 +77,9 @@ EOF
 source /etc/profile
 ```
 
-　　5.修改探针默认配置&#x20;
+5.修改探针默认配置&#x20;
 
-　　`vim /data/skywalking-agent/config/agent.config`
+`vim /data/skywalking-agent/config/agent.config`
 
 ```bash
 # skywalking 服务端ip
@@ -88,7 +88,7 @@ collector.backend_service=${SW_AGENT_COLLECTOR_BACKEND_SERVICES:192.168.10.142:1
 agent.sample_n_per_3_secs=${SW_AGENT_SAMPLE:-1}
 ```
 
-　　6.通过设置启动参数的方式检测系统，没有代码侵入
+6.通过设置启动参数的方式检测系统，没有代码侵入
 
 ```bash
  nohup java -javaagent:/data/skywalking-agent/skywalking-agent.jar \

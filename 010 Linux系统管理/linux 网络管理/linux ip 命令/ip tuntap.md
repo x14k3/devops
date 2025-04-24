@@ -1,6 +1,6 @@
 # ip tuntap
 
-　　输入 `ip tuntap help`​ 查看详细使用命令：
+输入 `ip tuntap help`​ 查看详细使用命令：
 
 ```dockerfile
 [root@localhost ~]# ip tuntap help
@@ -14,7 +14,7 @@ Where: USER  := { STRING | NUMBER }
 
 ## ip tuntap add
 
-　　创建 tap/tun 设备：
+创建 tap/tun 设备：
 
 ```csharp
 ip tuntap add dev tap0 mod tap # 创建 tap 
@@ -23,7 +23,7 @@ ip tuntap add dev tun0 mod tun # 创建 tun
 
 ## ip tuntap del
 
-　　删除 tap/tun 设备：
+删除 tap/tun 设备：
 
 ```python
 ip tuntap del dev tap0 mod tap # 删除 tap 

@@ -24,7 +24,7 @@ purge-kernels  # 删除旧内核。
 zypper se -i -t package
 ```
 
-　　一些基本命令选项（以mr为例）
+一些基本命令选项（以mr为例）
 
 ```bash
 -n, --name 为软件源设置一个描述性名称。
@@ -53,9 +53,9 @@ zypper se -i -t package
 -m, --medium-type 应用修改到指定类型的软件源。
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## opensuse 修改阿里源
 

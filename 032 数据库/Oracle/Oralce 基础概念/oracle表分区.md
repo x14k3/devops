@@ -1,65 +1,65 @@
 # oracle表分区
 
-　　Oracle作为一款成熟的数据库软件产品，就提供了多种数据表存储结构。我们最常见的就是三种，**分别为堆表（Heap Table）、索引组织表（Index Organization Table，简称为IOT）和聚簇表（Cluster Table）** 。其他类型的表：分区表、临时表、压缩表等
+Oracle作为一款成熟的数据库软件产品，就提供了多种数据表存储结构。我们最常见的就是三种，**分别为堆表（Heap Table）、索引组织表（Index Organization Table，简称为IOT）和聚簇表（Cluster Table）** 。其他类型的表：分区表、临时表、压缩表等
 
 ## <span data-type="text" style="background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);">1.Heap Table</span>
 
-　　是我们在Oracle中最常使用的数据表，也是Oracle的默认数据表存储结构。在Heap Table中，数据行是按照“随机存取”的方式进行管理。从段头块之后，一直到高水位线以下的空间，Oracle都是按照随机的方式进行“粗放式”管理。当一条数据需要插入到数据表中时，默认情况下，Oracle会在高水位线以下寻找有没有空闲的地方，能够容纳这个新数据行。如果可以找到这样的地方，Oracle就将这行数据放在空位上。注意，这个空位选择完全依“能放下”的原则，这个空位可能是被删除数据行的覆盖位。
+是我们在Oracle中最常使用的数据表，也是Oracle的默认数据表存储结构。在Heap Table中，数据行是按照“随机存取”的方式进行管理。从段头块之后，一直到高水位线以下的空间，Oracle都是按照随机的方式进行“粗放式”管理。当一条数据需要插入到数据表中时，默认情况下，Oracle会在高水位线以下寻找有没有空闲的地方，能够容纳这个新数据行。如果可以找到这样的地方，Oracle就将这行数据放在空位上。注意，这个空位选择完全依“能放下”的原则，这个空位可能是被删除数据行的覆盖位。
 
-　　如果Heap Table段的HWM下没有找到合适的位置，Oracle堆表才去向上推高水位线。在数据行存储上，Heap Table的数据行是完全没有次序之分的。我们称之为“随机存取”特征。
+如果Heap Table段的HWM下没有找到合适的位置，Oracle堆表才去向上推高水位线。在数据行存储上，Heap Table的数据行是完全没有次序之分的。我们称之为“随机存取”特征。
 
-　　 对Heap Table，索引独立段的添加一般可以有效的缓解由于随机存取带来的检索压力。Index叶子节点上记录的数据行键值和Rowid取值，可以让Server Process直接定位到数据行的块位置。
+ 对Heap Table，索引独立段的添加一般可以有效的缓解由于随机存取带来的检索压力。Index叶子节点上记录的数据行键值和Rowid取值，可以让Server Process直接定位到数据行的块位置。
 
 ## <span data-type="text" style="background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);">2. 聚簇（Cluster Table）</span>
 
-　　是一种合并段存储的情况。Oracle认为，如果一些数据表更新频率不高，但是经常和另外一个数据表进行连接查询（Join）显示，就可以将其组织在一个存储结构中，这样可以最大限度的提升性能效率。对聚簇表而言，多个数据表按照连接键的顺序保存在一起。
+是一种合并段存储的情况。Oracle认为，如果一些数据表更新频率不高，但是经常和另外一个数据表进行连接查询（Join）显示，就可以将其组织在一个存储结构中，这样可以最大限度的提升性能效率。对聚簇表而言，多个数据表按照连接键的顺序保存在一起。
 
-　　通常系统环境下，我们使用Cluster Table的情况不太多。Oracle中的数据字典大量的使用聚簇。相比是各种关联的基表之间固定连接检索的场景较多，从而确定的方案。
+通常系统环境下，我们使用Cluster Table的情况不太多。Oracle中的数据字典大量的使用聚簇。相比是各种关联的基表之间固定连接检索的场景较多，从而确定的方案。
 
-　　IOT（Index Organization Table）同Cluster Table一样，IOT是在Oracle数据表策略的一种“非主流”，应用的场景比较窄。但是一些情况下使用它，往往可以起到非常好的效果。
+IOT（Index Organization Table）同Cluster Table一样，IOT是在Oracle数据表策略的一种“非主流”，应用的场景比较窄。但是一些情况下使用它，往往可以起到非常好的效果。
 
-　　简单的说，IOT区别于堆表的最大特点，就在于数据行的组织并不是随机的，而是依据数据表主键，按照索引树进行保存。从段segment结构上看，IOT索引段就包括了所有数据行列，不存在单独的数据表段。
+简单的说，IOT区别于堆表的最大特点，就在于数据行的组织并不是随机的，而是依据数据表主键，按照索引树进行保存。从段segment结构上看，IOT索引段就包括了所有数据行列，不存在单独的数据表段。
 
 ## <span data-type="text" style="background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);">3. 分区表</span>
 
-　　随着表中行数的增多，管理和性能影响也将随之增加。备份、恢复、对整个数据表的查询将花费更多时间。通过把一个表中的行分为几个部分，可以减少大型表的管理和性能问题，以这种方式划分表数据的方法称为对表的分区。
+随着表中行数的增多，管理和性能影响也将随之增加。备份、恢复、对整个数据表的查询将花费更多时间。通过把一个表中的行分为几个部分，可以减少大型表的管理和性能问题，以这种方式划分表数据的方法称为对表的分区。
 
-　　分区表的优势:
+分区表的优势:
 
 * (1). 改善查询性能：对分区对象的查询可以仅搜索自己关心的分区，提高检索速度;
 * (2). 方便数据管理：因为分区表的数据存储在多个部分中，所以按分区加载和删除数据比在大表中加载和删除数据更容易；
 * (3). 方便备份恢复：因为分区比被分区的表要小，所以针对分区的备份和恢复方法要比备份和恢复整个表的方法多。
 
-　　‍
+‍
 
 ## 一、分区表的概念
 
-　　分区表：
+分区表：
 
-　　当表中的数据量不断增大，查询数据的速度就会变慢，应用程序的性能就会下降，这时就应该考虑对表进行分区。表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个“表空间”(物理文件上)，这样查询数据时，不至于每次都扫描整张表而只是从当前的分区查到所要的数据大大提高了数据查询的速度。
+当表中的数据量不断增大，查询数据的速度就会变慢，应用程序的性能就会下降，这时就应该考虑对表进行分区。表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个“表空间”(物理文件上)，这样查询数据时，不至于每次都扫描整张表而只是从当前的分区查到所要的数据大大提高了数据查询的速度。
 
 ### 分区表的具体作用
 
-　　Oracle的表分区功能通过改善可管理性、性能和可用性，从而为各式应用程序带来了极大的好处。通常，分区可以使某些查询以及维护操作的性能大大提高。此外,分区还可以极大简化常见的管理任务，分区是构建千兆字节数据系统或超高可用性系统的关键工具。 分区功能能够将表、索引或索引组织表进一步细分为段，这些数据库对象的段叫做分区。每个分区有自己的名称，还可以选择自己的存储特性。从数据库管理员的角度来看，一个分区后的对象具有多个段，这些段既可进行集体管理，也可单独管理，这就使数据库管理员在管理分区后的对象时有相当大的灵活性。但是，从应用程序的角度来看，分区后的表与非分区表完全相同，使用 SQL DML 命令访问分区后的表时，无需任何修改。
+Oracle的表分区功能通过改善可管理性、性能和可用性，从而为各式应用程序带来了极大的好处。通常，分区可以使某些查询以及维护操作的性能大大提高。此外,分区还可以极大简化常见的管理任务，分区是构建千兆字节数据系统或超高可用性系统的关键工具。 分区功能能够将表、索引或索引组织表进一步细分为段，这些数据库对象的段叫做分区。每个分区有自己的名称，还可以选择自己的存储特性。从数据库管理员的角度来看，一个分区后的对象具有多个段，这些段既可进行集体管理，也可单独管理，这就使数据库管理员在管理分区后的对象时有相当大的灵活性。但是，从应用程序的角度来看，分区后的表与非分区表完全相同，使用 SQL DML 命令访问分区后的表时，无需任何修改。
 
 ### 分区表使用场景
 
-　　1、表的大小超过2GB。  
+1、表的大小超过2GB。  
 2、表中包含历史数据，新的数据被增加到新的分区中。
 
 ### 分区表的优缺点
 
-　　优点：  
+优点：  
 1、改善查询性能：对分区对象的查询可以仅搜索自己关心的分区，提高检索速度。  
 2、增强可用性：如果表的某个分区出现故障，表在其他分区的数据仍然可用；  
 3、维护方便：如果表的某个分区出现故障，需要修复数据，只修复该分区即可；  
 4、均衡I/O：可以把不同的分区映射到不同磁盘以平衡I/O，改善整个系统性能。
 
-　　缺点：
+缺点：
 
-　　分区表相关：已经存在的表没有方法可以直接转化为分区表。不过 Oracle 提供了在线重定义表的功能。
+分区表相关：已经存在的表没有方法可以直接转化为分区表。不过 Oracle 提供了在线重定义表的功能。
 
-　　‍
+‍
 
 ## 二、分区表相关视图
 
@@ -96,7 +96,7 @@ DBA_SUBPART_KEY_COLUMNS
 
 ### 1、RANGE分区表
 
-　　说明：针对记录字段的值在某个范围。  
+说明：针对记录字段的值在某个范围。  
 规则：  
 （1）、每一个分区都必须有一个VALUES LESS THEN子句，它指定了一个不包括在该分区中的上限值。  
 分区键的任何值等于或者大于这个上限值的记录都会被加入到下一个高一些的分区中。  
@@ -104,7 +104,7 @@ DBA_SUBPART_KEY_COLUMNS
 （3）、在最高的分区中，MAXVALUE被定义。MAXVALUE代表了一个不确定的值。这个值高于其它分区中的任何分区键的值，  
 也可以理解为高于任何分区中指定的VALUE LESS THEN的值，同时包括空值。若不添加maxvalue的分区插入数值一旦超过设置的最大上限会报错。
 
-　　分区表分区处于同一表空间
+分区表分区处于同一表空间
 
 ```sql
 create table part_range_t1(
@@ -139,7 +139,7 @@ TABLE_NAME		       PARTITION
 PART_RANGE_T1		       RANGE
 ```
 
-　　使用数字列做为分区列
+使用数字列做为分区列
 
 ```sql
 create table p_t3(
@@ -152,7 +152,7 @@ partition p3 values less than(maxvalue))
 
 ```
 
-　　分区表分区处于不同表空间
+分区表分区处于不同表空间
 
 ```sql
 create table part_range_t3(
@@ -188,13 +188,13 @@ PART_RANGE_T3		       RANGE
 
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 2、LIST分区表
 
-　　说明：该分区的特点是某列的值只有有限个值，基于这样的特点我们可以采用列表分区。 规则：默认分区为DEFAULT，若不添加DEFAULT的分区插入数值不属于所设置的分区会报错。 在定义范围分区时，每个分区定义必须使用 values（'value01','value02'....）子句。表示该分区存储包含相关value值的数据行。 在定义范围分区时，最后一个分区可以是values（DEFAULT）。表示该分区存储未在其他分区定义的数据行。
+说明：该分区的特点是某列的值只有有限个值，基于这样的特点我们可以采用列表分区。 规则：默认分区为DEFAULT，若不添加DEFAULT的分区插入数值不属于所设置的分区会报错。 在定义范围分区时，每个分区定义必须使用 values（'value01','value02'....）子句。表示该分区存储包含相关value值的数据行。 在定义范围分区时，最后一个分区可以是values（DEFAULT）。表示该分区存储未在其他分区定义的数据行。
 
 ```sql
 create table part_list_t1(
@@ -237,7 +237,7 @@ partition p3 values(default) tablespace users)
 default --存储age列上除了10、20外的其他值
 ```
 
-　　指定多个值
+指定多个值
 
 ```sql
 create table part_list_t2(
@@ -261,15 +261,15 @@ PART_LIST_T2		       AGE_40_50		      USERS	 40, 50
 PART_LIST_T2		       AGE_DEFAULT		      USERS	 default
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 3、HASH 散列分区表
 
-　　说明：这类分区是在列值上使用散列算法，以确定将行放入哪个分区中。 规则：当列的值没有合适的条件，没有范围的规律，也没有固定的值，建议使用散列分区。 散列分区为通过指定分区编号来均匀分布数据的一种分区类型，因为通过在I/O设备上进行散列分区， 使得这些分区大小一致。建议分区的数量采用2的n次方，这样可以使得各个分区间数据分布更加均匀。 Example: 创建hash分区有两种方法：一种方法是指定分区的名字，另一种方法是指定分区数量。
+说明：这类分区是在列值上使用散列算法，以确定将行放入哪个分区中。 规则：当列的值没有合适的条件，没有范围的规律，也没有固定的值，建议使用散列分区。 散列分区为通过指定分区编号来均匀分布数据的一种分区类型，因为通过在I/O设备上进行散列分区， 使得这些分区大小一致。建议分区的数量采用2的n次方，这样可以使得各个分区间数据分布更加均匀。 Example: 创建hash分区有两种方法：一种方法是指定分区的名字，另一种方法是指定分区数量。
 
-　　例一、常规方法指定分区名字
+例一、常规方法指定分区名字
 
 ```sql
 create table part_hash_t1(id number,name varchar2(20),age int)
@@ -280,7 +280,7 @@ partition p2 tablespace tbs2)
 
 ```
 
-　　例二、指定分区数量
+例二、指定分区数量
 
 ```sql
 create table part_hash_t2(id number,name varchar2(20),age int)
@@ -310,14 +310,14 @@ SCOTT	   PART_HASH_T2    TABLE AGE
 --往往我们不需要知道bash分区的名字，因为数据放在哪个分区是oracle根据bash算法存放的，并不是用户指定，所以当用户插入一条记录，并不能确定放在哪个分区，这个不同于range和list
 ```
 
-　　‍
+‍
 
 ### 4、引用分区表
 
-　　如果父表是分区表，子表想要按照父表的方式进行分区。  
+如果父表是分区表，子表想要按照父表的方式进行分区。  
 父表中被引用的主键列不一定要是分区键。
 
-　　父表：
+父表：
 
 ```sql
 create table part_range_t4(
@@ -332,7 +332,7 @@ partition p3 values less than(maxvalue))
 /
 ```
 
-　　子表：
+子表：
 
 ```sql
 create table part_ref_t4(
@@ -364,15 +364,15 @@ TABLE_NAME		       PARTITION
 PART_REF_T4		       REFERENCE
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 5、组合分区表
 
-　　组合分区中，主要通过在不同列上，使用“范围分区”、“列表分区”以及“HASH分区”不同组合方式，进而实现组合分区。 组合分区中，分区本身没有相应的segment，可以认为是一个逻辑容器，只有子分区拥有实际的segment，用于存放数据。 在11g以后，组合分区新增了四种组合方式：“RANGE\-RANGE”、“LIST\-RANGE”、“LIST\-HASH”以及“LIST\-LIST”。 Example: 以LIST\-LIST的组合方式为例，创建组合分区
+组合分区中，主要通过在不同列上，使用“范围分区”、“列表分区”以及“HASH分区”不同组合方式，进而实现组合分区。 组合分区中，分区本身没有相应的segment，可以认为是一个逻辑容器，只有子分区拥有实际的segment，用于存放数据。 在11g以后，组合分区新增了四种组合方式：“RANGE\-RANGE”、“LIST\-RANGE”、“LIST\-HASH”以及“LIST\-LIST”。 Example: 以LIST\-LIST的组合方式为例，创建组合分区
 
 ```sql
 CREATE TABLE "EMPLOYEE_LIST_LIST_PART"
@@ -457,7 +457,7 @@ TABLE_NAME		       PARTITION SUBPARTIT
 PART_LIST_LIST_T1	       LIST	 LIST
 ```
 
-　　‍
+‍
 
 ## 四、分区表管理
 
@@ -490,7 +490,7 @@ SCOTT@TNS_PDB01>alter table part_range_t1 add partition p3 values less than(to_d
 alter table part_range_t1 add partition p3 values less than(to_date('2014-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'))
 ```
 
-　　增加的分区必须比最后一个分区更高级
+增加的分区必须比最后一个分区更高级
 
 ```sql
 ERROR at line 1:
@@ -506,7 +506,7 @@ PART_RANGE_T1		       P_MAXVALUE		      USERS
 
 ```
 
-　　删除分区
+删除分区
 
 ```sql
 SCOTT@TNS_PDB01>alter table part_range_t1 drop partition p_maxvalue;
@@ -604,7 +604,7 @@ SCOTT@TNS_PDB01>alter table part_list_t1 modify partition age_20 drop values(20)
 Table altered.
 ```
 
-　　LIST分区增加多个值
+LIST分区增加多个值
 
 ```sql
 SCOTT@TNS_PDB01>alter table part_list_t1 modify partition age_20 add values(20,50,60);
@@ -726,25 +726,25 @@ PART_COMPOSIT_T1	       DEPT_20			      DEPT_20_JOB_ANALYST
 ALTER TABLE range_hash_example MODIFY PARTITION part_1 ADD SUBPARTITION part_1_sub_4; --注意复合分区这里是MODIFY
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 2、删除分区
 
-　　对range分区表删除分区
+对range分区表删除分区
 
 ```sql
 ALTER TABLE PART_TAB_SALE_RANGE_LIST DROP PARTITION P3; 
 ```
 
-　　对range分区表list子分区删除子分区
+对range分区表list子分区删除子分区
 
 ```sql
 ALTER TABLE PART_TAB_SALE_RANGE_LIST DROP SUBPARTITION P4SUB1;
 ```
 
-　　对于哈希分区表,哈希复合分区表,range\-hash分区表
+对于哈希分区表,哈希复合分区表,range\-hash分区表
 
 ```sql
 -- 减少hash 分区的个数，一次减少一个。不能指定减少partition的名称。
@@ -807,9 +807,9 @@ PART_COMPOSIT_T1	       DEPT_10			      DEPT_10_JOB_MANAGER
 
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 3、合并分区
 
@@ -821,7 +821,7 @@ UPDATE INDEXES;
 ALTER TABLE range_example MODIFY PARTITION part02 REBUILD UNUSABLE LOCAL INDEXES;
 ```
 
-　　‍
+‍
 
 ```sql
 SCOTT@TNS_PDB01>select table_name,partition_name,high_value from dba_tab_partitions where table_name = 'PART_LIST_T1';
@@ -848,7 +848,7 @@ SCOTT@TNS_PDB01>alter table part_list_t1 modify partition age_10_20 rebuild unus
 Table altered.
 ```
 
-　　‍
+‍
 
 ### 4、分割分区
 
@@ -948,13 +948,13 @@ PART_LIST_T2		       AGE_40_50		      40, 50
 PART_LIST_T2		       AGE_DEFAULT		      default
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 #### Range\_Hash类型分区的分割
 
-　　新分区会对原有分区的subpartition做rehash的动作。如果在分割是指定subpartition的个数，则按新规则rehash subpartition，如果没有指定则保留原有subpartition的个数不变。
+新分区会对原有分区的subpartition做rehash的动作。如果在分割是指定subpartition的个数，则按新规则rehash subpartition，如果没有指定则保留原有subpartition的个数不变。
 
 ```sql
 ALTER TABLE range_hash_example SPLIT PARTITION part_1
@@ -1004,7 +1004,7 @@ PART_HASH_T3		       AGE_1
 PART_HASH_T3		       AGE_2
 ```
 
-　　查询分区数据
+查询分区数据
 
 ```sql
 SCOTT@TNS_PDB01>select * from part_hash_t3 partition(age_1);
@@ -1022,11 +1022,11 @@ SCOTT@TNS_PDB01>select * from part_hash_t3 partition(age_2);
   1 xiao zhang		    10
 ```
 
-　　重命名分区
+重命名分区
 
-　　​`alter table part_range_t1 rename partition p2_1 to p2;`​
+​`alter table part_range_t1 rename partition p2_1 to p2;`​
 
-　　‍
+‍
 
 ## 五、分区索引
 
@@ -1038,9 +1038,9 @@ SCOTT@TNS_PDB01>create index idx_part_range_t1_birthday on part_range_t1(birthda
 Index created.
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 #### 本地索引
 
@@ -1050,9 +1050,9 @@ SCOTT@TNS_PDB01>create index idx_part_range_t1_birthday_local on part_range_t1(b
 Index created.
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 #### 全局索引
 

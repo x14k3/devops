@@ -1,17 +1,17 @@
 # sysctl.conf
 
-　　Sysctl是一个功能强大的工具，用于在内核运行时动态地修改内核的参数，在这个命令的帮助下，可以修改内核参数，而无需重新编译内核或重启系统。
+Sysctl是一个功能强大的工具，用于在内核运行时动态地修改内核的参数，在这个命令的帮助下，可以修改内核参数，而无需重新编译内核或重启系统。
 
 ### **使用sysctl命令修改内核参数**
 
-　　内核参数可以临时或永久修改。内核参数的临时修改如下：
+内核参数可以临时或永久修改。内核参数的临时修改如下：
 
 ```bash
 # 读取当前内核的参数：
 [root@localhost ~]# sysctl -a
 ```
 
-　　使用`-w`​临时修改内核参数。例如，禁止其他设备ping本机：
+使用`-w`​临时修改内核参数。例如，禁止其他设备ping本机：
 
 ```bash
 [root@localhost ~]# sysctl -w net.ipv4.icmp_echo_ignore_all=1
@@ -22,9 +22,9 @@ net.ipv4.icmp_echo_ignore_all = 1
 
 #### **forward数据包转发**
 
-　　仅在充当网关的服务器上启用IP数据包转发。在其他服务器中，可以禁用此功能。
+仅在充当网关的服务器上启用IP数据包转发。在其他服务器中，可以禁用此功能。
 
-　　​`# 1表示开启；0表示禁用，可以使用echo 修改，临时效果`​
+​`# 1表示开启；0表示禁用，可以使用echo 修改，临时效果`​
 
 ```bash
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf 
@@ -33,9 +33,9 @@ echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 
 #### **swap分区停用**
 
-　　在使用kubernetes环境的时候需要关掉swap分区，为了性能考虑。
+在使用kubernetes环境的时候需要关掉swap分区，为了性能考虑。
 
-　　​`# 1表示开启；0表示禁用，可以使用echo 修改，临时效果`​
+​`# 1表示开启；0表示禁用，可以使用echo 修改，临时效果`​
 
 ```bash
 echo "vm.swappiness = 0" >> /etc/sysctl.conf 
@@ -44,9 +44,9 @@ sysctl -p
 
 #### **SYN防洪**
 
-　　防止SYN Flood攻击，需要开启此项。
+防止SYN Flood攻击，需要开启此项。
 
-　　​`# 1表示开启；0表示禁用，可以使用echo 修改，临时效果`​
+​`# 1表示开启；0表示禁用，可以使用echo 修改，临时效果`​
 
 ```bash
 echo "net.ipv4.tcp_syncookies = 1" >> /etc/sysctl.conf 
@@ -62,7 +62,7 @@ sysctl -p
 
 #### **icmp允许/禁止ping**
 
-　　​`# 1表示不可以ping；0表示可以ping，可以使用echo 修改，临时效果`​
+​`# 1表示不可以ping；0表示可以ping，可以使用echo 修改，临时效果`​
 
 ```bash
 echo "net.ipv4.icmp_echo_ignore_all=0" >> /etc/sysctl.conf
@@ -80,7 +80,7 @@ sysctl net.ipv4.tcp_available_congestion_control
 sysctl net.ipv4.tcp_congestion_control
 ```
 
-　　‍
+‍
 
 ### sysctl.conf  优化模板
 
@@ -201,7 +201,7 @@ net.ipv4.tcp_keepalive_time = 30
 net.ipv4.ip_local_port_range = 10240 65535
 ```
 
-　　‍
+‍
 
 ‍
 
@@ -255,7 +255,7 @@ yum remove kernel-3.10.0-1160.71.1.el7.x86_64
 
 ### ubuntu
 
-　　升级/降级 Kernel 到指定版本
+升级/降级 Kernel 到指定版本
 
 ```bash
 #查看当前版本。
@@ -293,7 +293,7 @@ dpkg -l | tail -n +6| grep -E 'linux-image-[0-9]+'| grep -Fv $(uname -r)
 dpkg --purge linux-image-4.15.0-213-generic
 ```
 
-　　Kernel 状态：
+Kernel 状态：
 
 * rc：表示已经被移除。
 * ii：表示符合移除条件（可移除）。

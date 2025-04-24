@@ -1,8 +1,8 @@
 # ngx_http_rewrite_module
 
-　　​`ngx_http_rewrite_module`​ 模块使用 PCRE 正则表达式更改请求 URI、返回重定向和有条件地选择配置。
+​`ngx_http_rewrite_module`​ 模块使用 PCRE 正则表达式更改请求 URI、返回重定向和有条件地选择配置。
 
-　　[break](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#break)、[if](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#if)、[return](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#return)、[rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 和 [set](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#set) 指令将按以下顺序处理：
+[break](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#break)、[if](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#if)、[return](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#return)、[rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 和 [set](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#set) 指令将按以下顺序处理：
 
 * 在 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#server) 级别下，该模块的指令按顺序执行
 * 重复执行：
@@ -21,11 +21,11 @@
 |**默认**|——|
 |**上下文**|server、location、if|
 
-　　停止处理当前的 `ngx_http_rewrite_module`​ 指令集。
+停止处理当前的 `ngx_http_rewrite_module`​ 指令集。
 
-　　如果在该 [location](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location) 内指定了指令，则请求的下一步处理在该位置将继续。
+如果在该 [location](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location) 内指定了指令，则请求的下一步处理在该位置将继续。
 
-　　示例：
+示例：
 
 ```
 if ($slow) {
@@ -42,9 +42,9 @@ if ($slow) {
 |**默认**|——|
 |**上下文**|server、location|
 
-　　指定的 `condition`​ 求值之后，如果为 `true`​，则执行在大括号内指定的该模块的指令，并在 `if`​ 指令内为该请求分配配置。`if`​ 指令内的配置继承自上一层的配置级别。
+指定的 `condition`​ 求值之后，如果为 `true`​，则执行在大括号内指定的该模块的指令，并在 `if`​ 指令内为该请求分配配置。`if`​ 指令内的配置继承自上一层的配置级别。
 
-　　​`condition`​ 可以是以下任何一种：
+​`condition`​ 可以是以下任何一种：
 
 * 变量名，如果变量的值为空字符串或 `0`​，则为 `false`​  
   在 1.0.1版本 之前，任何以 `0`​ 开头的字符串都被视为错误值。
@@ -88,11 +88,11 @@ if ($invalid_referer) {
 |**默认**|——|
 |**上下文**|server、location、if|
 
-　　停止处理并将指定的 `code`​ 返回给客户端。非标准代码 444 在不发送响应头的情况下关闭连接。
+停止处理并将指定的 `code`​ 返回给客户端。非标准代码 444 在不发送响应头的情况下关闭连接。
 
-　　从 0.8.42 版本开始，可以指定重定向 URL（对 301、302、303、307 和 308 代码有效）或响应正文 `text`​（对其他代码有效）。响应正文和重定向 URL 都可以包含变量。特殊情况下，可以将重定向 URL 指定为此服务器的本地 URI，在这种情况下，根据请求模式（`$scheme`​）以及 [server_name_in_redirect](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#server_name_in_redirect) 和 [port_in_redirect](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#port_in_redirect) 指令形成完整重定向 URL。
+从 0.8.42 版本开始，可以指定重定向 URL（对 301、302、303、307 和 308 代码有效）或响应正文 `text`​（对其他代码有效）。响应正文和重定向 URL 都可以包含变量。特殊情况下，可以将重定向 URL 指定为此服务器的本地 URI，在这种情况下，根据请求模式（`$scheme`​）以及 [server_name_in_redirect](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#server_name_in_redirect) 和 [port_in_redirect](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#port_in_redirect) 指令形成完整重定向 URL。
 
-　　另外，可以将代码为 302 的临时重定向的 `URL`​ 指定为唯一参数。这样的参数应该以 `http://`​、`https://`​ 或 `$scheme`​ 字符串开头。`URL`​ 可以包含变量。
+另外，可以将代码为 302 的临时重定向的 `URL`​ 指定为唯一参数。这样的参数应该以 `http://`​、`https://`​ 或 `$scheme`​ 字符串开头。`URL`​ 可以包含变量。
 
 > 在 0.7.51 版本之前只能返回以下代码：204、400、402-406、408、410、411、413、416 和 500-504。
 >
@@ -100,7 +100,7 @@ if ($invalid_referer) {
 >
 > 在 1.13.0 版本之前，代码 308 不被视为重定向。
 
-　　另请参见 [error_page](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#error_page) 指令。
+另请参见 [error_page](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#error_page) 指令。
 
 ### rewrite
 
@@ -110,9 +110,9 @@ if ($invalid_referer) {
 |**默认**|——|
 |**上下文**|server、location、if|
 
-　　如果指定的正则表达式与请求 URI 匹配，则 URI 将根据 `replacement`​ 中的指定进行更改。`rewrite`​ 指令按照它们在配置文件中的出现顺序依次执行。可以使用标志来终止指令的下一步处理。如果替换以 `http://`​、`https://`​ 或 `$scheme`​ 开头的字符串，则处理流程将停止并将重定向返回给客户端。
+如果指定的正则表达式与请求 URI 匹配，则 URI 将根据 `replacement`​ 中的指定进行更改。`rewrite`​ 指令按照它们在配置文件中的出现顺序依次执行。可以使用标志来终止指令的下一步处理。如果替换以 `http://`​、`https://`​ 或 `$scheme`​ 开头的字符串，则处理流程将停止并将重定向返回给客户端。
 
-　　可选的 `flag`​ 参数可以是以下之一：
+可选的 `flag`​ 参数可以是以下之一：
 
 * ​`last`​  
   停止处理当前的 `ngx_http_rewrite_module`​ 指令集并开始搜索新的 location 来匹配变更的 URI
@@ -124,7 +124,7 @@ if ($invalid_referer) {
   返回 301 代码的永久重定向  
   完整重定向 URL 根据请求模式（`$scheme`​）以及 [server_name_in_redirect](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_core_module.hmdtml#server_name_in_redirect) 和 [port_in_redirect](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#port_in_redirect) 指令形成。
 
-　　示例：
+示例：
 
 ```
 server {
@@ -136,7 +136,7 @@ server {
 }
 ```
 
-　　但是如果这些指令放在 `/download/`​ 位置，`last`​ 标志应该用 `break`​ 替换，否则 nginx 会产生 10 个循环并返回 500 错误：
+但是如果这些指令放在 `/download/`​ 位置，`last`​ 标志应该用 `break`​ 替换，否则 nginx 会产生 10 个循环并返回 500 错误：
 
 ```
 location /download/ {
@@ -146,13 +146,13 @@ location /download/ {
 }
 ```
 
-　　如果 `replacement`​ 包含新请求参数，则先前的请求参数将最加在它们之后。如果不希望这样，可在 `replacement`​ 的末尾加上一个问号可以避免追加，例如：
+如果 `replacement`​ 包含新请求参数，则先前的请求参数将最加在它们之后。如果不希望这样，可在 `replacement`​ 的末尾加上一个问号可以避免追加，例如：
 
 ```
 rewrite ^/users/(.*)$ /show?user=$1? last;
 ```
 
-　　如果正则表达式包含 `}`​ 或 `;`​ 字符，则整个表达式应使用单引号或双引号包围。
+如果正则表达式包含 `}`​ 或 `;`​ 字符，则整个表达式应使用单引号或双引号包围。
 
 ### rewrite\_log
 
@@ -162,7 +162,7 @@ rewrite ^/users/(.*)$ /show?user=$1? last;
 |**默认**|rewrite\_log off;|
 |**上下文**|http、server、location、if|
 
-　　启用或禁用在 `notice`​ 级别将 `ngx_http_rewrite_module`​ 模块指令处理结果记录到 [error_log](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#error_log) 中。
+启用或禁用在 `notice`​ 级别将 `ngx_http_rewrite_module`​ 模块指令处理结果记录到 [error_log](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#error_log) 中。
 
 ### set
 
@@ -172,7 +172,7 @@ rewrite ^/users/(.*)$ /show?user=$1? last;
 |**默认**|——|
 |**上下文**|server、location、if|
 
-　　为指定的 `variable`​ 设置一个 `value`​，`value`​ 可以包含文本、变量及其组合。
+为指定的 `variable`​ 设置一个 `value`​，`value`​ 可以包含文本、变量及其组合。
 
 ### uninitialized\_variable\_warn
 
@@ -182,13 +182,13 @@ rewrite ^/users/(.*)$ /show?user=$1? last;
 |**默认**|uninitialized\_variable\_warn on;|
 |**上下文**|http、server、location、if|
 
-　　控制是否记录有关未初始化变量的警告。
+控制是否记录有关未初始化变量的警告。
 
 ## 内部实现
 
-　　​`ngx_http_rewrite_module`​ 模块指令在配置阶段编译为内部指令，其在请求处理期间被解释执行。解释器是一个简单的虚拟栈机器。
+​`ngx_http_rewrite_module`​ 模块指令在配置阶段编译为内部指令，其在请求处理期间被解释执行。解释器是一个简单的虚拟栈机器。
 
-　　例如以下指令（directive）：
+例如以下指令（directive）：
 
 ```
 location /download/ {
@@ -204,7 +204,7 @@ location /download/ {
 }
 ```
 
-　　将会翻译成以下指令（instruction）：
+将会翻译成以下指令（instruction）：
 
 ```
 variable $forbidden
@@ -223,21 +223,21 @@ end of regular expression
 end of code
 ```
 
-　　请注意，上面的 [limit_rate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#limit_rate) 指令没有相关指令（instruction)，因为它与 `ngx_http_rewrite_module`​ 模块无关。这些单独配置是为 [if](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#id) 块创建的。如果条件成立，则为此配置分配一个请求，其中 `limit_rate`​ 等于 10k。
+请注意，上面的 [limit_rate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#limit_rate) 指令没有相关指令（instruction)，因为它与 `ngx_http_rewrite_module`​ 模块无关。这些单独配置是为 [if](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#id) 块创建的。如果条件成立，则为此配置分配一个请求，其中 `limit_rate`​ 等于 10k。
 
-　　指令：
+指令：
 
 ```
 rewrite ^/(download/.*)/media/(.*)\..*$ /$1/mp3/$2.mp3 break;
 ```
 
-　　如果正则表达式中的第一个斜杠放在括号内，可以让生成的指令（instruction）变得更轻：
+如果正则表达式中的第一个斜杠放在括号内，可以让生成的指令（instruction）变得更轻：
 
 ```
 rewrite ^(/download/.*)/media/(.*)\..*$ $1/mp3/$2.mp3 break;
 ```
 
-　　生成的指令如下：
+生成的指令如下：
 
 ```
 match of regular expression

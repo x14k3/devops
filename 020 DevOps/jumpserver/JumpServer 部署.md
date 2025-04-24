@@ -1,8 +1,8 @@
 # JumpServer 部署
 
-　　​![JumpServer](https://camo.githubusercontent.com/146dbe1ac7d35fcf717691084de90943eff26c411b6047473b1d5e05df1e914b/68747470733a2f2f646f776e6c6f61642e6a756d707365727665722e6f72672f696d616765732f6a756d707365727665722d6c6f676f2e737667)[https://jumpserver.org/](https://jumpserver.org/)
+![JumpServer](https://camo.githubusercontent.com/146dbe1ac7d35fcf717691084de90943eff26c411b6047473b1d5e05df1e914b/68747470733a2f2f646f776e6c6f61642e6a756d707365727665722e6f72672f696d616765732f6a756d707365727665722d6c6f676f2e737667)[https://jumpserver.org/](https://jumpserver.org/)
 
-　　环境要求
+环境要求
 
 * MariaDB Server >= 10.6
 * Redis Server >= 6.0
@@ -24,9 +24,9 @@ docker exec -i jms_core bash -c './jms upgrade_db'
 docker-compose -f docker-compose-network.yml -f docker-compose-redis.yml -f docker-compose-mariadb.yml -f docker-compose.yml up -d
 ```
 
-　　默认登录信息：admin/admin
+默认登录信息：admin/admin
 
-　　默认持久化目录：/opt/jumpserver
+默认持久化目录：/opt/jumpserver
 
 ## 标准部署
 
@@ -113,7 +113,7 @@ docker exec -i jms_core bash -c './jms upgrade_db'
 docker-compose -f docker-compose-network.yml -f docker-compose.yml up -d
 ```
 
-　　build
+build
 
 ```shell
 # 如果希望手动构建镜像, 可以使用下面的命令
@@ -131,4 +131,4 @@ TARGETARCH=amd64
 docker-compose -f docker-compose-build.yml up
 ```
 
-　　‍
+‍

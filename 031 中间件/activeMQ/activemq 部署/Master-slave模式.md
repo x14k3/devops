@@ -1,11 +1,11 @@
 # Master-slave模式
 
-　　Master-Slave集群由至少3个节点组成，一个Master节点，其他为Slave节点。只有Master节点对外提供服务，Slave节点处于等待状态。当主节点宕机后，从节点会推举出一个节点出来成为新的Master节点，继续提供服务。  
+Master-Slave集群由至少3个节点组成，一个Master节点，其他为Slave节点。只有Master节点对外提供服务，Slave节点处于等待状态。当主节点宕机后，从节点会推举出一个节点出来成为新的Master节点，继续提供服务。  
 **优点是可以解决多服务热备的高可用问题，缺点是无法解决负载均衡和分布式的问题。**
 
-​![](assets/image-20221127213133868-20230610173811-0m0mcwu.png)​
+![](assets/image-20221127213133868-20230610173811-0m0mcwu.png)
 
-　　Master-Slave模式常用持久化方式：
+Master-Slave模式常用持久化方式：
 
 |主从类型|必备条件|优点|缺点|
 | -------------------------------------------------| --------------------------------| -------------------------------------------------------| -------------------------------------|
@@ -15,9 +15,9 @@
 
 ### shared filesystem Master-Slave
 
-　　如果集群搭建在一台机器上需要改端口；如果搭建在多台服务器上，那么共享目录需要通过磁盘挂载的方式挂载到主从机器上。
+如果集群搭建在一台机器上需要改端口；如果搭建在多台服务器上，那么共享目录需要通过磁盘挂载的方式挂载到主从机器上。
 
-　　​`vim conf/activemq.xml`​
+​`vim conf/activemq.xml`​
 
 ```xml
 <persistenceAdapter>
@@ -25,10 +25,10 @@
 </persistenceAdapter>
 ```
 
-　　在启动时，master会获取broker file directory的独占文件锁 - 所有其他的brokers都是slave，并且处于等待独占锁的pause状态。  
+在启动时，master会获取broker file directory的独占文件锁 - 所有其他的brokers都是slave，并且处于等待独占锁的pause状态。  
 **确保KahaDB正确使用**。不要在CIFS / SMB上运行共享存储，也不要将其保存在任何类型的基于NTFS的文件系统上。通过使用iSCSI协议和GFS2之类的多用户文件系统，可以获得最佳吞吐量。
 
-　　客户端使用 failover 作为连接串
+客户端使用 failover 作为连接串
 
 ```java
 ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
@@ -39,9 +39,9 @@ ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
 
 ### shared database Master-Slave
 
-　　该方式与共享文件系统方式类似，只是共享的存储介质由文件系统改成了数据库。
+该方式与共享文件系统方式类似，只是共享的存储介质由文件系统改成了数据库。
 
-　　配置文件的Beans标签中添加：
+配置文件的Beans标签中添加：
 
 ```xml
 <!-- persistent=true-->  
@@ -64,15 +64,15 @@ ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
 
 ```
 
-　　在每个ActiveMQ的lib目录下加入mysql的驱动包和数据库连接池Druid包。
+在每个ActiveMQ的lib目录下加入mysql的驱动包和数据库连接池Druid包。
 
 ### ZooKeeper+Replicated LevelDB Store
 
-　　这种主备方式是ActiveMQ5.9以后才新增的特性，使用ZooKeeper协调选择一个node作为master。被选择的master broker node开启并接受客户端连接，类似于redis的哨兵模式。
+这种主备方式是ActiveMQ5.9以后才新增的特性，使用ZooKeeper协调选择一个node作为master。被选择的master broker node开启并接受客户端连接，类似于redis的哨兵模式。
 
-​![](assets/image-20221129175501864-20230610173811-z79c28o.png)​
+![](assets/image-20221129175501864-20230610173811-z79c28o.png)
 
-　　==原理说明：==  
+==原理说明：==  
 1）使用Zookeeper集群注册所有的ActiveMQ Broker，但只有其中一个Broker可以提供服务，它将被视为Master,其他的Broker处于待机状态被视为Slave。如果Master因故障而不能提供服务，Zookeeper会从Slave中选举出一个Broker充当Master。  
 2）Slave连接Master并同步他们的存储状态，Slave不接受客户端连接。所有的存储操作都将被复制到连接至Maste的Slaves。
 3）如果Master宕机得到了最新更新的Slave会变成Master。故障节点在恢复后会重新加入到集群中并连接Master进入Slave模式。
@@ -86,11 +86,11 @@ ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
 
 #### 1. zookeeper集群
 
-　　参考：[4、zookeeper集群环境搭建](../zookeeper/zookeeper%20概述.md#4、zookeeper集群环境搭建)
+参考：[4、zookeeper集群环境搭建](../zookeeper/zookeeper%20概述.md#4、zookeeper集群环境搭建)
 
 #### 2. activemq集群
 
-　　主要修改 conf/activemq.xml 文件，持久化配置，三台activemq都修改  
+主要修改 conf/activemq.xml 文件，持久化配置，三台activemq都修改  
 注意：每个 ActiveMQ 的 BrokerName 必須相同，否則不能加入集群
 
 ```xml
@@ -128,7 +128,7 @@ weight：权重 具有最高权重的最新更新的从节点将成为主节点�
 
 ```
 
-　　主要修改 conf/jetty.xml 文件，修改控制台host，三台activemq都修改
+主要修改 conf/jetty.xml 文件，修改控制台host，三台activemq都修改
 
 ```bash
         <property name="host" value="0.0.0.0"/>
@@ -137,7 +137,7 @@ weight：权重 具有最高权重的最新更新的从节点将成为主节点�
 
 #### 3. 启动集群
 
-　　先启动zookeeper集群再启动activemq集群
+先启动zookeeper集群再启动activemq集群
 
 ```bash
 # 三台机器启动zookeeper服务
@@ -150,7 +150,7 @@ weight：权重 具有最高权重的最新更新的从节点将成为主节点�
 
 #### 4. 查看集群状态
 
-　　登陆zookeeper
+登陆zookeeper
 
 ```bash
 /data/zookeeper/bin/zkCli.sh -server 127.0.0.1:2181

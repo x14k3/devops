@@ -8,7 +8,7 @@
 * EXPDP/IMPDP 在备份和恢复时间上要比EXP/IMP有着优势.并且EXPDP/IMPDP 管理灵活。
 * 对于10g以上的服务器，使用exp通常不能导出0行数据的空表，而此时必须使用expdp导出。
 
-　　‍
+‍
 
 ## expdp/impdp
 
@@ -57,7 +57,7 @@ impdp user/passwd DIRECTORY=DATA_PUMP_DIR DUMPFILE=expdp.dmpdp remap_schema=user
 4. truncate   # 清空了表后导入数据
 ```
 
-　　并行导出：使用一个以上的线程来显著地加速作业
+并行导出：使用一个以上的线程来显著地加速作业
 
 ```sql
 expdp xxx/xxx directory=DATA_PUMP_DIR dumpfile=xxxx_%U.dmpdp parallel=3
@@ -266,7 +266,7 @@ STOP_JOB
 有效的关键字值为: IMMEDIATE。
 ```
 
-　　‍
+‍
 
 ### impdp参数
 
@@ -478,7 +478,7 @@ STOP_JOB
 有效的关键字为: IMMEDIATE。
 ```
 
-　　‍
+‍
 
 ## exp/imp
 
@@ -496,7 +496,7 @@ exp jy2web/Ninestar2022 file=/tmp/jy2web_20220510.dmp direct=y log=/tmp/imp.log
 # ignore=y buffer=100000000; 修改缓冲区大小，有时sql语句过长，会造成缓冲区空间不足
 ```
 
-　　**exp客户端远程导出oracle数据库**
+**exp客户端远程导出oracle数据库**
 
 ```bash
 # 下载4个rpm工具包
@@ -525,6 +525,6 @@ exp jy2web/Ninestar2022@192.168.10.150:1521/orcl file=/tmp/jy2web_20220510.dmp
 
 ```
 
-　　‍
+‍
 
-　　‍
+‍

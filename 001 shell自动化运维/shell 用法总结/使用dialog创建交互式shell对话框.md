@@ -23,7 +23,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 ## 通用选项
 
-　　这个选项用来设置dialog box的背景、颜色和标题等。
+这个选项用来设置dialog box的背景、颜色和标题等。
 
 * ​`--title <title>`​：窗体的标题
 * ​`--backtitle <backtitle>`​：窗体的背景标题
@@ -47,7 +47,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 ## 窗体类型选项
 
-　　常见的对话框控件选项如下所示：
+常见的对话框控件选项如下所示：
 
 * ​`--calendar`​：提供了一个日历，让你可以选择日期。
 * ​`--checklist`​：允许你显示一个选项列表，每个选项都可以被单独的选择(复选框)。
@@ -87,7 +87,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-01-msgbox-20240312202925-8dck6f1.png)​
+  ![](assets/net-img-01-msgbox-20240312202925-8dck6f1.png)​
 
 ## 创建输入框
 
@@ -107,7 +107,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-02-inputbox-20240312203010-dw776uz.png)​
+  ![](assets/net-img-02-inputbox-20240312203010-dw776uz.png)​
 
 ## 创建文本信息框
 
@@ -125,7 +125,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-03-textbox-20240312203843-sjpmzg0.png)​
+  ![](assets/net-img-03-textbox-20240312203843-sjpmzg0.png)​
 
 ## 创建yesno对话框
 
@@ -143,7 +143,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-04-yesnobox-20240312203843-vgvz01p.png)​
+  ![](assets/net-img-04-yesnobox-20240312203843-vgvz01p.png)
 
 ## 创建一个菜单栏
 
@@ -162,7 +162,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-05-menubox-20240312203844-b72l6zy.png)​
+  ![](assets/net-img-05-menubox-20240312203844-b72l6zy.png)
 
 ## 创建文件选框
 
@@ -180,7 +180,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-06-fselect-20240312203844-8h45pj1.png)​
+  ![](assets/net-img-06-fselect-20240312203844-8h45pj1.png)
 
 ## 创建复选框
 
@@ -198,7 +198,7 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-07-checklist-20240312203845-te5ov4l.png)​
+  ![](assets/net-img-07-checklist-20240312203845-te5ov4l.png)​
 
 ## 创建密码框
 
@@ -216,9 +216,9 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-08-passwordbox-20240312203845-lorom84.png)​
+  ![](assets/net-img-08-passwordbox-20240312203845-lorom84.png)
 
-　　‍
+‍
 
 ## 创建一个进度框
 
@@ -263,6 +263,6 @@ Usage: dialog --common-options --boxType "Text" Height Width --box-specific-opti
 
 * 效果
 
-  ​![](assets/net-img-10-gauge-20240312203845-8pt7x0u.png)​
+  ![](assets/net-img-10-gauge-20240312203845-8pt7x0u.png)
 
-　　‍
+‍

@@ -1,8 +1,8 @@
 # fastDFS
 
-　　FastDFS是一个开源的轻量级分布式文件系统，它对文件进行管理，功能包括：文件存储、文件同步、文件访问（文件上传、文件下载）等，解决了大容量存储和负载均衡的问题。
+FastDFS是一个开源的轻量级分布式文件系统，它对文件进行管理，功能包括：文件存储、文件同步、文件访问（文件上传、文件下载）等，解决了大容量存储和负载均衡的问题。
 
-　　FastDFS 系统有三个角色：跟踪服务器(Tracker Server)、存储服务器(Storage Server)和客户端(Client)。
+FastDFS 系统有三个角色：跟踪服务器(Tracker Server)、存储服务器(Storage Server)和客户端(Client)。
 
 > **Tracker Server**：跟踪服务器，主要做调度工作，起到均衡的作用；负责管理所有的 storage server和 group，每个 storage 在启动后会连接 Tracker，告知自己所属 group 等信息，并保持周期性心跳。
 
@@ -25,13 +25,13 @@
 
 # 一、下载安装libfastcommon
 
-　　**1.1 下载libfastcommon**
+**1.1 下载libfastcommon**
 
 ```bash
 wget https://github.com/happyfish100/libfastcommon/archive/refs/tags/V1.0.52.tar.gz
 ```
 
-　　**1.2 解压libfastcommon**
+**1.2 解压libfastcommon**
 
 ```bash
 #解压
@@ -40,7 +40,7 @@ tar -xvf V1.0.52.tar.gz
 cd libfastcommon-1.0.52/
 ```
 
-　　**1.3 编译安装**
+**1.3 编译安装**
 
 ```bash
 # 执行这步需要gcc依赖 yum install gcc gcc-c++
@@ -48,7 +48,7 @@ sudo ./make.sh
 sudo ./make.sh install
 ```
 
-　　**1.4 创建软连接**
+**1.4 创建软连接**
 
 ```bash
 # 注意：由于FastDFS程序引用usr/lib目录所以需要将/usr/lib64下的库文件拷贝至/usr/lib下
@@ -60,20 +60,20 @@ sudo ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
 
 # 二、下载安装fastdfs
 
-　　**2.1 下载FastDFS**
+**2.1 下载FastDFS**
 
 ```bash
 wget https://github.com/happyfish100/fastdfs/archive/refs/tags/V6.07.tar.gz
 ```
 
-　　**2.2 解压FastDFS**
+**2.2 解压FastDFS**
 
 ```bash
 tar -xvf ./V6.07.tar.gz
 cd fastdfs-6.07/
 ```
 
-　　**2.3 编译安装**
+**2.3 编译安装**
 
 ```bash
 sudo ./make.sh
@@ -82,7 +82,7 @@ sudo ./make.sh install
 
 # 三、配置Tracker服务
 
-　　安装成功后，在`/etc`目录下会有一个`fdfs`的目录。进入目录，可以看到示例配置文件：
+安装成功后，在`/etc`目录下会有一个`fdfs`的目录。进入目录，可以看到示例配置文件：
 
 ```bash
 [winbert@sd-vm-0004433 fastdfs-6.07]$ cd /etc/fdfs/
@@ -95,13 +95,13 @@ total 32
 -rw-r--r-- 1 root root  9138 Jul  3 10:04 tracker.conf.sample
 ```
 
-　　复制一份`tracker.conf.sample`并重命名为`tracker.conf`:
+复制一份`tracker.conf.sample`并重命名为`tracker.conf`:
 
 ```bash
 cp ./tracker.conf.sample ./tracker.conf
 ```
 
-　　编辑`tracker.conf`配置文件，主要配置项如下：
+编辑`tracker.conf`配置文件，主要配置项如下：
 
 ```bash
 # false 启用  
@@ -232,7 +232,7 @@ http.check_alive_uri=/status.html
 
 ```
 
-　　使用`ln -s`建立软链接：
+使用`ln -s`建立软链接：
 
 ```bash
 sudo ln -s /usr/bin/fdfs_trackerd /usr/local/bin
@@ -241,7 +241,7 @@ sudo ln -s /usr/bin/restart.sh /usr/local/bin
 
 ```
 
-　　启动服务：
+启动服务：
 
 ```bash
 # 创建tracker目录
@@ -250,7 +250,7 @@ service fdfs_trackerd start
 
 ```
 
-　　启动成功后，在你配置的`base_path`下，会形成如下目录结构：
+启动成功后，在你配置的`base_path`下，会形成如下目录结构：
 
 ```bash
 ${base_path}
@@ -263,7 +263,7 @@ ${base_path}
 
 # 四、配置Storage服务
 
-　　进入`/etc/fdfs`目录，复制FastDFS存储器样例配置文件`storage.conf.sample`，并重命名为`storage.conf`：
+进入`/etc/fdfs`目录，复制FastDFS存储器样例配置文件`storage.conf.sample`，并重命名为`storage.conf`：
 
 ```bash
 cd /etc/fdfs/
@@ -271,7 +271,7 @@ sudo cp ./storage.conf.sample ./storage.conf
 
 ```
 
-　　编辑`storage.conf`，主要编辑以下内容：
+编辑`storage.conf`，主要编辑以下内容：
 
 ```bash
 # false 生效
@@ -455,13 +455,13 @@ http.server_port=8888
 
 ```
 
-　　使用`ln -s`建立软链接:
+使用`ln -s`建立软链接:
 
 ```bash
 sudo ln -s /usr/bin/fdfs_storaged /usr/local/bin
 ```
 
-　　启动`storage`服务，启动前请确保`Tracker`是启动的，初次启动成功，会在/data/fdfs/storage目录(你的路径可能不叫这个名字)下创建`data`、`logs`两个目录。
+启动`storage`服务，启动前请确保`Tracker`是启动的，初次启动成功，会在/data/fdfs/storage目录(你的路径可能不叫这个名字)下创建`data`、`logs`两个目录。
 
 ```bash
 # 创建storage目录
@@ -472,7 +472,7 @@ service fdfs_storaged start
 
 ```
 
-　　查看Storage和Tracker是否在通信:
+查看Storage和Tracker是否在通信:
 
 ```bash
 /usr/bin/fdfs_monitor /etc/fdfs/storage.conf
@@ -480,7 +480,7 @@ service fdfs_storaged start
 
 # 五、fdfs和nginx整合
 
-　　1.安装fastdfs-nginx-module
+1.安装fastdfs-nginx-module
 
 ```bash
 tar -zxvf fastdfs-nginx-module_v1.16.tar.gz -C /usr/local
@@ -493,13 +493,13 @@ sudo ln -s /usr/lib64/libfdfsclient.so /usr/locale/lib/libfdfsclient.so
 cd /usr/local/fastdfs-nginx-module/src/
 ```
 
-　　2.修改config文件，将文件中的所有 /usr/local/ 路径改为 /usr/
+2.修改config文件，将文件中的所有 /usr/local/ 路径改为 /usr/
 
 ![](assets/image-20221127213311234-20230610173810-9f9uomf.png)
 
-　　3.将`fastdfs-nginx-module/src/mod_fastdfs.conf`拷贝至`/etc/fdfs`
+3.将`fastdfs-nginx-module/src/mod_fastdfs.conf`拷贝至`/etc/fdfs`
 
-　　并修改 /etc/fdfs/mod\_fastdfs.conf
+并修改 /etc/fdfs/mod\_fastdfs.conf
 
 ```bash
 # #连接超时时间

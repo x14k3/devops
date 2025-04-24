@@ -1,12 +1,12 @@
 # MongoDB安装
 
-　　下载地址：[https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-7.0.9.tgz](https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-7.0.9.tgz)
+下载地址：[https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-7.0.9.tgz](https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-7.0.9.tgz)
 
-　　‍
+‍
 
 ## 下载安装
 
-　　二进制安装
+二进制安装
 
 ```bash
 # 下载
@@ -23,7 +23,7 @@ echo "export PATH=/data/mongodb/bin:\$PATH" >> /etc/profile
 source /etc/profile
 ```
 
-　　rpm包安装个
+rpm包安装个
 
 ```bash
 wget https://repo.mongodb.org/yum/redhat/7/mongodb-org/7.0/x86_64/RPMS/mongodb-org-server-7.0.9-1.el7.x86_64.rpm
@@ -32,7 +32,7 @@ rpm -ivh mongodb-org-server-7.0.9-1.el7.x86_64.rpm
 mkdir -p /data/mongodb/data /data/mongodb/log
 ```
 
-　　‍
+‍
 
 ## 启动mongodb服务
 
@@ -88,9 +88,9 @@ systemLog:
   path: /data/mongodb/log/mongodb.log
 ```
 
-　　删除`outputConfig: true`​这一行，然后将其余内容复制到mongo.conf中
+删除`outputConfig: true`​这一行，然后将其余内容复制到mongo.conf中
 
-　　‍
+‍
 
 * 关于配置参数的详细信息可以查看[官方文档](https://www.mongodb.com/docs/v7.0/reference/configuration-options/)
 
@@ -102,7 +102,7 @@ mongod -f /data/mongodb/mongo.conf
 mongod -f /data/mongodb/mongo.conf --shutdown
 ```
 
-　　‍
+‍
 
 ### 安装mongoDB时可能遇到的问题
 
@@ -119,19 +119,19 @@ ln -s /usr/local/lib64/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1
 ln -s /usr/local/lib64/libssl.so.1.1 /usr/lib64/libssl.so.1.1
 ```
 
-　　‍
+‍
 
 ## shell客户端mongosh
 
-　　使用`.tgz`​包安装服务器时，需要按照[mongosh安装说明](https://www.mongodb.com/docs/mongodb-shell/install/)下载并安装[mongosh](https://www.mongodb.com/docs/mongodb-shell/)。
+使用`.tgz`​包安装服务器时，需要按照[mongosh安装说明](https://www.mongodb.com/docs/mongodb-shell/install/)下载并安装[mongosh](https://www.mongodb.com/docs/mongodb-shell/)。
 
-　　rpm 安装
+rpm 安装
 
 * 从mongodb6开始不再支持mongo命令，而是需要使用mongosh命令，关于mongosh命令的使用可以查看[官方文档](https://www.mongodb.com/docs/mongodb-shell/)
 * mongosh命令的使用方式与mongo命令基本一致
 * 下载地址：[mongosh下载地址](https://www.mongodb.com/try/download/shell)
 
-　　二进制安装
+二进制安装
 
 ```bash
 wget https://downloads.mongodb.com/compass/mongosh-2.2.2-linux-x64-openssl11.tgz
@@ -161,7 +161,7 @@ mongosh --host=127.0.0.1 --port=27017
 # --port: mongodb server端口
 ```
 
-　　‍
+‍
 
 ### mongosh 使用说明
 

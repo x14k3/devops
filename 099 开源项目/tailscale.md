@@ -1,14 +1,14 @@
 # tailscale
 
-　　Tailscale 是一种利用 NAT 穿透(aka: P2P 穿透)技术的 VPN 工具. Tailscale 客户端等是开源的, 不过遗憾的是中央控制服务器目前并不开源; Tailscale 目前也提供免费的额度给用户使用, 在 NAT 穿透成功的情况下也能保证满速运行.
+Tailscale 是一种利用 NAT 穿透(aka: P2P 穿透)技术的 VPN 工具. Tailscale 客户端等是开源的, 不过遗憾的是中央控制服务器目前并不开源; Tailscale 目前也提供免费的额度给用户使用, 在 NAT 穿透成功的情况下也能保证满速运行.
 
-　　不过一旦无法 NAT 穿透需要做中转时, Tailscale 官方的服务器由于众所周知的原因在国内访问速度很拉胯; 不过万幸的是开源社区大佬们搓了一个开源版本的中央控制服务器(Headscale), 也就是说: **我们可以自己搭建中央服务器啦, 完全 “自主可控” 啦**
+不过一旦无法 NAT 穿透需要做中转时, Tailscale 官方的服务器由于众所周知的原因在国内访问速度很拉胯; 不过万幸的是开源社区大佬们搓了一个开源版本的中央控制服务器(Headscale), 也就是说: **我们可以自己搭建中央服务器啦, 完全 “自主可控” 啦**
 
-　　P2P内网穿透原理：[NAT 概述](../计算机网络/NAT%20概述.md)    [NAT 穿透](../计算机网络/NAT%20穿透.md)
+P2P内网穿透原理：[NAT 概述](../计算机网络/NAT%20概述.md)    [NAT 穿透](../计算机网络/NAT%20穿透.md)
 
 ## headscale 部署
 
-　　下载地址：[https://github.com/juanfont/headscale/releases/](https://github.com/juanfont/headscale/releases/)
+下载地址：[https://github.com/juanfont/headscale/releases/](https://github.com/juanfont/headscale/releases/)
 
 ```bash
 # 创建部署目录
@@ -55,7 +55,7 @@ nohup ./headscale serve >> ./headscale.log 2>&1 &
 
 ## tailscale 客户端接入
 
-　　下载地址：[https://tailscale.com/download/linux/static](https://tailscale.com/download/linux/static)
+下载地址：[https://tailscale.com/download/linux/static](https://tailscale.com/download/linux/static)
 
 ### linux
 
@@ -93,13 +93,13 @@ To authenticate, visit:
 
 ### windows
 
-　　Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.xx:220xx/windows`​，便会出现如下的界面：
+Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.xx:220xx/windows`​，便会出现如下的界面：
 
 ![](assets/Pasted%20image%2020221222215323-20230610173813-1i6nu9z.png)
 
-　　**注册客户端到headscale控制服务器**
+**注册客户端到headscale控制服务器**
 
-　　打开 windows CMD命令行界面，执行以下命令
+打开 windows CMD命令行界面，执行以下命令
 
 ```bash
 # 将 <HEADSCALE_PUB_IP> 换成你的 Headscale 公网 IP 或域名
@@ -107,23 +107,23 @@ tailscale up --login-server=https://doshell.cn:22051 --accept-routes=true --acce
 tailscale up --login-server=https://doshell.top:11051 --accept-routes=true --accept-dns=false
 ```
 
-　　然后将浏览器弹出的命令在服务端执行：
+然后将浏览器弹出的命令在服务端执行：
 
 ![](assets/Pasted%20image%2020221222220854-20230610173813-c77ouoo.png)
 
-　　**客户端开启路由转发功能**
+**客户端开启路由转发功能**
 
-　　搜索框输入`regedit`，打开注册表编辑器，在注册表编辑器中将参数**IPEnableRouter**的值从0修改为1，然后关闭注册表编辑器并重新启动系统。
+搜索框输入`regedit`，打开注册表编辑器，在注册表编辑器中将参数**IPEnableRouter**的值从0修改为1，然后关闭注册表编辑器并重新启动系统。
 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters`
 
 ## 开启路由转发
 
-　　大多数时候我们可能并不会在每个服务器上都安装 Tailscale 客户端, 通常只安装 2、3 台, 然后想通过这两三台转发该内网的所有流量. **此时你需要**
+大多数时候我们可能并不会在每个服务器上都安装 Tailscale 客户端, 通常只安装 2、3 台, 然后想通过这两三台转发该内网的所有流量. **此时你需要**
 
 - 启动 tailscale 时设置正确的路由提示 `--advertise-routes=192.168.1.0/24` 来告诉 Headscale 服务器 “我这个节点可以转发这些地址的路由”
 - 其他节点启动时需要增加 `--accept-routes=true` 选项来声明 “我接受外部其他节点发布的路由”
 
-　　然后在headscale服务端启用客户端发布的子网
+然后在headscale服务端启用客户端发布的子网
 
 ```bash
 # 查看注册的节点

@@ -1,10 +1,10 @@
 # fio
 
-　　fio命令来自于英文词组”Flexible IO Tester“的缩写， 其功能是用于对磁盘进行压力测试。硬盘I/O吞吐率是性能的重要指标之一，运维人员可以使用fio命令对其进行测试，测试又可以细分为顺序读写和随机读写两大类。
+fio命令来自于英文词组”Flexible IO Tester“的缩写， 其功能是用于对磁盘进行压力测试。硬盘I/O吞吐率是性能的重要指标之一，运维人员可以使用fio命令对其进行测试，测试又可以细分为顺序读写和随机读写两大类。
 
-　　**语法格式：** fio \[参数\]
+**语法格式：** fio \[参数\]
 
-　　**常用参数：**
+**常用参数：**
 
 ```bash
 filename=/dev/sdb1       # 测试文件名称，通常选择需要测试的盘的data目录。
@@ -36,33 +36,33 @@ nrfiles=8                # 每个进程生成文件的数量。
 ## 6. Read=70% Ramdon=100% rw=randrw, rwmixread=70, rwmixwrite=30 (70%随机读，30%随机写)
 ```
 
-　　**参考实例**
+**参考实例**
 
-　　随机读取测试：
+随机读取测试：
 
 ```bash
 fio -filename=/var/test.file -direct=1 -iodepth 1 -thread -rw=read      -ioengine=psync -bs=16k -size=200G -numjobs=10 -runtime=300 -group_reporting -name=mytest
 ```
 
-　　随机写入测试：
+随机写入测试：
 
 ```bash
 fio -filename=/var/test.file -direct=1 -iodepth 1 -thread -rw=randwrite -ioengine=psync -bs=16k -size=200G -numjobs=10 -runtime=300 -group_reporting -name=mytest
 ```
 
-　　顺序写测试：
+顺序写测试：
 
 ```bash
 fio -filename=/var/test.file -direct=1 -iodepth 1 -thread -rw=write     -ioengine=psync -bs=16k -size=200G -numjobs=10 -runtime=300 -group_reporting -name=mytest
 ```
 
-　　顺序读测试：
+顺序读测试：
 
 ```
 fio -filename=/var/test.file -direct=1 -iodepth 1 -thread -rw=read      -ioengine=psync -bs=16k -size=200G -numjobs=10 -runtime=300 -group_reporting -name=mytest
 ```
 
-　　混合随机读写：
+混合随机读写：
 
 ```
 fio -filename=/var/test.file -direct=1 -iodepth 1 -thread -rw=randrw -rwmixread=70 -ioengine=psync -bs=16k -size=200G -numjobs=10 -runtime=300 -group_reporting -name=mytest -ioscheduler=noop

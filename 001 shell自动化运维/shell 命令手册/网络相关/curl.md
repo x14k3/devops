@@ -1,6 +1,6 @@
 # curl
 
-　　**curl命令** 是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称curl为下载工具。作为一款强力工具，curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl可以助一臂之力。
+**curl命令** 是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称curl为下载工具。作为一款强力工具，curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl可以助一臂之力。
 
 ### 语法
 
@@ -114,34 +114,34 @@ curl(选项)(参数)
 --dns-servers                  # 使用自定义的dns服务器进行解析
 ```
 
-　　centos7 一键升级 curl版本
+centos7 一键升级 curl版本
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://i.wulicode.com/op/file/centos-curl.sh?version=8.1.1)"
 ```
 
-　　‍
+‍
 
 ### 实例
 
 #### **文件下载**
 
-　　curl命令可以用来执行下载、发送各种HTTP请求，指定HTTP头部等操作。如果系统没有curl可以使用`yum install curl`​安装，也可以下载安装。curl是将下载文件输出到stdout，将进度信息输出到stderr，不显示进度信息使用`--silent`​选项。
+curl命令可以用来执行下载、发送各种HTTP请求，指定HTTP头部等操作。如果系统没有curl可以使用`yum install curl`​安装，也可以下载安装。curl是将下载文件输出到stdout，将进度信息输出到stderr，不显示进度信息使用`--silent`​选项。
 
 ```bash
 curl URL --silent
 ```
 
-　　这条命令是将下载文件输出到终端，所有下载的数据都被写入到stdout。
+这条命令是将下载文件输出到终端，所有下载的数据都被写入到stdout。
 
-　　使用选项`-O`​将下载的数据写入到文件，必须使用文件的绝对地址：
+使用选项`-O`​将下载的数据写入到文件，必须使用文件的绝对地址：
 
 ```bash
 curl http://example.com/text.iso --silent -O
 # 文件名是text.iso
 ```
 
-　　选项`-o`​将下载数据写入到指定名称的文件中，并使用`--progress`​显示进度条：
+选项`-o`​将下载数据写入到指定名称的文件中，并使用`--progress`​显示进度条：
 
 ```bash
 curl http://example.com/test.iso -o filename.iso --progress
@@ -151,14 +151,14 @@ curl http://example.com/test.iso -o filename.iso --progress
 
 #### **不输出错误和进度信息**
 
-　　​`-s`​ 参数将不输出错误和进度信息。
+​`-s`​ 参数将不输出错误和进度信息。
 
 ```
 curl -s https://www.example.com
 # 上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
 ```
 
-　　如果想让 curl 不产生任何输出，可以使用下面的命令。
+如果想让 curl 不产生任何输出，可以使用下面的命令。
 
 ```
 curl -s -o /dev/null https://example.com
@@ -166,7 +166,7 @@ curl -s -o /dev/null https://example.com
 
 #### **断点续传**
 
-　　curl能够从特定的文件偏移处继续下载，它可以通过指定一个便宜量来下载部分文件：
+curl能够从特定的文件偏移处继续下载，它可以通过指定一个便宜量来下载部分文件：
 
 ```
 curl URL/File -C 偏移量
@@ -177,9 +177,9 @@ curl -C -URL
 
 #### **使用curl设置参照页字符串**
 
-　　参照页是位于HTTP头部中的一个字符串，用来表示用户是从哪个页面到达当前页面的，如果用户点击网页A中的某个连接，那么用户就会跳转到B网页，网页B头部的参照页字符串就包含网页A的URL。
+参照页是位于HTTP头部中的一个字符串，用来表示用户是从哪个页面到达当前页面的，如果用户点击网页A中的某个连接，那么用户就会跳转到B网页，网页B头部的参照页字符串就包含网页A的URL。
 
-　　使用 `--referer`​ 选项指定参照页字符串：
+使用 `--referer`​ 选项指定参照页字符串：
 
 ```
 curl --referer http://www.example.com http://example.com
@@ -187,14 +187,14 @@ curl --referer http://www.example.com http://example.com
 
 #### **用curl设置用户代理字符串**
 
-　　有些网站访问会提示只能使用IE浏览器来访问，这是因为这些网站设置了检查用户代理，可以使用curl把用户代理设置为IE，这样就可以访问了。使用 `--user-agent`​ 或者 `-A`​ 选项：
+有些网站访问会提示只能使用IE浏览器来访问，这是因为这些网站设置了检查用户代理，可以使用curl把用户代理设置为IE，这样就可以访问了。使用 `--user-agent`​ 或者 `-A`​ 选项：
 
 ```
 curl URL --user-agent "Mozilla/5.0"
 curl URL -A "Mozilla/5.0"
 ```
 
-　　其他HTTP头部信息也可以使用curl来发送，使用`-H`​"头部信息" 传递多个头部信息，例如：
+其他HTTP头部信息也可以使用curl来发送，使用`-H`​"头部信息" 传递多个头部信息，例如：
 
 ```
 curl -H "Host:example.com" -H "accept-language:zh-cn" URL
@@ -202,21 +202,21 @@ curl -H "Host:example.com" -H "accept-language:zh-cn" URL
 
 #### **curl的带宽控制和下载配额**
 
-　　使用`--limit-rate`​限制curl的下载速度：
+使用`--limit-rate`​限制curl的下载速度：
 
 ```
 curl URL --limit-rate 50k
 ```
 
-　　命令中用k（千字节）和m（兆字节）指定下载速度限制。
+命令中用k（千字节）和m（兆字节）指定下载速度限制。
 
-　　使用`--max-filesize`​指定可下载的最大文件大小：
+使用`--max-filesize`​指定可下载的最大文件大小：
 
 ```
 curl URL --max-filesize bytes
 ```
 
-　　如果文件大小超出限制，命令则返回一个非0退出码，如果命令正常则返回0。
+如果文件大小超出限制，命令则返回一个非0退出码，如果命令正常则返回0。
 
 ```
 curl --limit-rate 200k https://example.com
@@ -225,7 +225,7 @@ curl --limit-rate 200k https://example.com
 
 #### **用curl进行认证**
 
-　　使用curl选项 -u 可以完成HTTP或者FTP的认证，可以指定密码，也可以不指定密码在后续操作中输入密码：
+使用curl选项 -u 可以完成HTTP或者FTP的认证，可以指定密码，也可以不指定密码在后续操作中输入密码：
 
 ```
 curl -u user:pwd http://example.com
@@ -234,7 +234,7 @@ curl -u user http://example.com
 
 #### **只打印响应头部信息**
 
-　　通过`-I`​或者`-head`​可以只打印出HTTP头部信息：
+通过`-I`​或者`-head`​可以只打印出HTTP头部信息：
 
 ```
 [root@localhost text]# curl -I http://example.com
@@ -270,7 +270,7 @@ curl -d'login=emma＆password=123' -X POST https://example.com/login
 curl -d 'login=emma' -d 'password=123' -X POST  https://example.com/login
 ```
 
-　　​`--data-urlencode`​ 参数等同于 `-d`​，发送 `POST`​ 请求的数据体，区别在于会自动将发送的数据进行 `URL`​ 编码。
+​`--data-urlencode`​ 参数等同于 `-d`​，发送 `POST`​ 请求的数据体，区别在于会自动将发送的数据进行 `URL`​ 编码。
 
 ```
 curl --data-urlencode 'comment=hello world' https://example.com/login
@@ -292,19 +292,19 @@ curl -l -H "Content-type: application/json" -X POST -d '{"phone":"13888888888","
 
 #### **向服务器发送 Cookie**
 
-　　使用`--cookie "COKKIES"`​选项来指定cookie，多个cookie使用分号分隔：
+使用`--cookie "COKKIES"`​选项来指定cookie，多个cookie使用分号分隔：
 
 ```
 curl http://example.com --cookie "user=root;pass=123456"
 ```
 
-　　将cookie另存为一个文件，使用`--cookie-jar`​选项：
+将cookie另存为一个文件，使用`--cookie-jar`​选项：
 
 ```
 curl URL --cookie-jar cookie_file
 ```
 
-　　​`-b`​ 参数用来向服务器发送 Cookie。
+​`-b`​ 参数用来向服务器发送 Cookie。
 
 ```
 curl -b 'foo=bar' https://example.com
@@ -329,14 +329,14 @@ curl -c cookies.txt https://www.example.com
 
 #### **请求的来源**
 
-　　​`-e`​ 参数用来设置 `HTTP`​ 的标头 `Referer`​，表示请求的来源。
+​`-e`​ 参数用来设置 `HTTP`​ 的标头 `Referer`​，表示请求的来源。
 
 ```
 curl -e 'https://example.com?q=example' https://www.example.com
 # 上面命令将Referer标头设为 https://example.com?q=example。
 ```
 
-　　​`-H`​ 参数可以通过直接添加标头 `Referer`​，达到同样效果。
+​`-H`​ 参数可以通过直接添加标头 `Referer`​，达到同样效果。
 
 ```
 curl -H 'Referer: https://example.com?q=example' https://www.example.com
@@ -344,21 +344,21 @@ curl -H 'Referer: https://example.com?q=example' https://www.example.com
 
 #### **上传二进制文件**
 
-　　​`-F`​ 参数用来向服务器上传二进制文件。
+​`-F`​ 参数用来向服务器上传二进制文件。
 
 ```
 curl -F 'file=@photo.png' https://example.com/profile
 # 上面命令会给 HTTP 请求加上标头 Content-Type: multipart/form-data ，然后将文件photo.png作为file字段上传。
 ```
 
-　　​`-F`​ 参数可以指定 `MIME`​ 类型。
+​`-F`​ 参数可以指定 `MIME`​ 类型。
 
 ```
 curl -F 'file=@photo.png;type=image/png' https://example.com/profile
 # 上面命令指定 MIME 类型为image/png，否则 curl 会把 MIME 类型设为 application/octet-stream。
 ```
 
-　　​`-F`​ 参数也可以指定文件名。
+​`-F`​ 参数也可以指定文件名。
 
 ```
 curl -F 'file=@photo.png;filename=me.png' https://example.com/profile
@@ -367,7 +367,7 @@ curl -F 'file=@photo.png;filename=me.png' https://example.com/profile
 
 #### **设置请求头**
 
-　　​`-H`​ 参数添加 `HTTP`​ 请求的标头。
+​`-H`​ 参数添加 `HTTP`​ 请求的标头。
 
 ```
 curl -H 'Accept-Language: en-US' https://example.com
@@ -393,13 +393,13 @@ curl -k https://www.example.com
 
 #### **请求跟随服务器的重定向**
 
-　　​`-L`​ 参数会让 `HTTP`​ 请求跟随服务器的重定向。`curl`​ 默认不跟随重定向。
+​`-L`​ 参数会让 `HTTP`​ 请求跟随服务器的重定向。`curl`​ 默认不跟随重定向。
 
 ```
 curl -L -d 'tweet=hi' https://api.example.com/tweet
 ```
 
-　　值得注意的是，这种重定向方式不适用于在返回的 HTML 中的重定向，比如这种是不被 curl 识别的重定向(这部分内容由 `curl -v -L <url>`​ 生成)
+值得注意的是，这种重定向方式不适用于在返回的 HTML 中的重定向，比如这种是不被 curl 识别的重定向(这部分内容由 `curl -v -L <url>`​ 生成)
 
 ```
 * Connected to example.com (*.*.*.*) port 80 (#0)
@@ -420,7 +420,7 @@ curl -L -d 'tweet=hi' https://api.example.com/tweet
 
 #### **调试参数**
 
-　　​`-v`​ 参数输出通信的整个过程，用于调试。
+​`-v`​ 参数输出通信的整个过程，用于调试。
 
 ```
 curl -v https://www.example.com
@@ -439,9 +439,9 @@ curl ipecho.net/plain
 
 #### **使用 curl 测试网站加载速度**
 
-　　命令有一个鲜为人知的选项，`-w`​，该选项在请求结束之后打印本次请求的统计数据到标准输出。
+命令有一个鲜为人知的选项，`-w`​，该选项在请求结束之后打印本次请求的统计数据到标准输出。
 
-　　首先，我们定义控制打印行为的格式化字符串。新建文本文件 `fmt.txt`​，并填入下面的内容：
+首先，我们定义控制打印行为的格式化字符串。新建文本文件 `fmt.txt`​，并填入下面的内容：
 
 ```
 \n
@@ -455,7 +455,7 @@ Start-transfer Time:\t\t%{time_starttransfer}s\n\n
 Total Time:\t\t\t%{time_total}s\n
 ```
 
-　　curl 提供了很多置换变量，可以在格式化字符串中通过 `%{var}`​ 的形式使用。完整的变量列表可以在 `curl`​ 的 `manpage`​ 中查看。简单介绍一下我们使用的这几个变量：
+curl 提供了很多置换变量，可以在格式化字符串中通过 `%{var}`​ 的形式使用。完整的变量列表可以在 `curl`​ 的 `manpage`​ 中查看。简单介绍一下我们使用的这几个变量：
 
 * ​`url_effective`​: 执行完地址重定向之后的最终 URL；
 * ​`time_namelookup`​: 从请求开始至完成名称解析所花的时间，单位为秒，下同；
@@ -466,13 +466,13 @@ Total Time:\t\t\t%{time_total}s\n
 * ​`time_starttransfer`​: 从请求开始至服务器准备传送第一个字节所花的时间；
 * ​`time_total`​: 完整耗时。
 
-　　然后执行请求，通过 @filename 指定保存了格式化字符串的文件：
+然后执行请求，通过 @filename 指定保存了格式化字符串的文件：
 
 ```
 curl -L -s -w @fmt.txt -o /dev/null http://www.example.com
 ```
 
-　　输出：
+输出：
 
 ```
 Response Time for: http://www.google.co.jp/?gfe_rd=cr&dcr=0&ei=cjIaWpTkHeiQ8QfnxYzoBA
@@ -513,4 +513,4 @@ Installing Yarn!
 100   832  100   832    0     0   1107      0 --:--:-- --:--:-- --:--:--  812k
 ```
 
-　　‍
+‍

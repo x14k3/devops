@@ -1,10 +1,10 @@
 # PostgreSQL 内置命令
 
-　　‍
+‍
 
 ## pg_ctl
 
-　　pg_ctl是一个用于初始化PostgreSQL数据库集簇，启动、停止或重启PostgreSQL数据库服务器，或者显示一个正在运行服务器的状态的工具。
+pg_ctl是一个用于初始化PostgreSQL数据库集簇，启动、停止或重启PostgreSQL数据库服务器，或者显示一个正在运行服务器的状态的工具。
 
 ```bash
 pg_ctl initdb   # init或initdb模式会创建一个新的PostgreSQL数据库集簇，也就是将由一个单一服务器实例管理的数据库集合。这个模式会调用`initdb`命令
@@ -22,7 +22,7 @@ pg_ctl kill signal_name process_id  # kill模式向一个指定进程发送一�
 
 ```
 
-　　option
+option
 
 ```bash
 -D, --pgdata=DATADIR   # 指定数据库配置文件的文件系统位置。如果这个选项被忽略，将使用环境变量PGDATA
@@ -42,7 +42,7 @@ pg_ctl kill signal_name process_id  # kill模式向一个指定进程发送一�
 #Immediate 模式将立刻中止所有服务器进程，而不是做一次干净的关闭，这种选择将导致下一次重启时进行一次崩溃恢复
 ```
 
-　　使用示例
+使用示例
 
 ```bash
 pg_ctl promote -D /data/pg      # 将备库提升为主库
@@ -53,18 +53,18 @@ pg_ctl -o "-F -p 5433" restart  # 使用端口 5433 重启并在重启时禁用`
 
 ## initdb
 
-　　initdb会创建一个新的PostgreSQL数据库集簇。一个数据库集簇是由一个单一服务器实例管理的数据库的集合。
+initdb会创建一个新的PostgreSQL数据库集簇。一个数据库集簇是由一个单一服务器实例管理的数据库的集合。
 
-　　一个数据库集簇的创建包括创建存放数据库数据的目录、生成共享目录表（属于整个集簇而不是任何特定数据库的表）并且创建`template1`​和`postgres`​数据库。当你后来创建一个新的数据库时，任何在`template1`​数据库中的东西都会被复制（因此，任何已安装在`template1`​中的东西都会被自动地复制到后来创建的每一个数据库中）。postgres数据库是便于用户、工具和第三方应用使用的默认数据库。由于安全原因，由`initdb`​
+一个数据库集簇的创建包括创建存放数据库数据的目录、生成共享目录表（属于整个集簇而不是任何特定数据库的表）并且创建`template1`​和`postgres`​数据库。当你后来创建一个新的数据库时，任何在`template1`​数据库中的东西都会被复制（因此，任何已安装在`template1`​中的东西都会被自动地复制到后来创建的每一个数据库中）。postgres数据库是便于用户、工具和第三方应用使用的默认数据库。由于安全原因，由`initdb`​
 
-　　创建的新集簇默认将只能由集簇拥有者访问。`--allow-group-access`​选项允许与集簇拥有者同组的任何用户读取集簇中的文件。这对非特权用户执行备份很有用。
+创建的新集簇默认将只能由集簇拥有者访问。`--allow-group-access`​选项允许与集簇拥有者同组的任何用户读取集簇中的文件。这对非特权用户执行备份很有用。
 
-　　initdb可以通过`pg_ctl initdb`​被调用。
+initdb可以通过`pg_ctl initdb`​被调用。
 
-　　**命令格式：** 
+**命令格式：** 
 initdb [option...] [--pgdata | -D] directory
 
-　　option
+option
 
 ```bash
 -A , --auth=METHOD       # 这个选项为本地用户指定在pg_hba.conf中使用的默认认证方法（host和local行）。initdb将使用指定的认证方法为非复制连接以及复制连接填充pg_hba.conf项
@@ -85,9 +85,9 @@ initdb [option...] [--pgdata | -D] directory
 --wal-segsize=SIZE       # 设置_WAL段尺寸_，以兆字节为单位。这是WAL日志中每个文件的尺寸。默认的尺寸为16兆字节
 ```
 
-　　‍
+‍
 
-　　​**​`initdb -D $PG_DATA`​**​ **初始化过程**
+​**​`initdb -D $PG_DATA`​**​ **初始化过程**
 
 ```
 1.从参数中获取到PGDATA的路径(也可以从环境变量中获取PG_DATA的环境变量获取)
@@ -114,11 +114,11 @@ initdb [option...] [--pgdata | -D] directory
 
 ## psql
 
-　　psql是PostgreSQL的交互式终端，可以通过psql工具交互式的键入查询。
+psql是PostgreSQL的交互式终端，可以通过psql工具交互式的键入查询。
 **命令格式：** 
 psql [option...] [dbname[username]]
 
-　　**Input and output options:**
+**Input and output options:**
 
 ```bash
 -a, --echo-all            # 显示脚本中的所有输入参数，这等效于把变量ECHO设置为all
@@ -133,7 +133,7 @@ psql [option...] [dbname[username]]
 -S, --single-line         # 运行在单行模式中，其中新行会终止一个 SQL 命令，就像分号的作用一样。
 ```
 
-　　**Output format options:**
+**Output format options:**
 
 ```bash
 -A, --no-align                # 切换到非对齐输出模式（默认输出模式是对齐的）。这等效于\pset format unaligned
@@ -149,7 +149,7 @@ psql [option...] [dbname[username]]
 -0, --record-separator-zero   # 设置非对齐输出的记录分隔符为零字节。例如，这对与xargs -0配合有关。这等效于\pset recordsep_zero。
 ```
 
-　　**General options:**
+**General options:**
 
 ```bash
 
@@ -166,7 +166,7 @@ psql [option...] [dbname[username]]
 --help=variables         # 列出特殊变量
 ```
 
-　　**Connection options:**
+**Connection options:**
 
 ```bash
 -h, --host=HOSTNAME       # 指定运行服务器的机器的主机名
@@ -209,18 +209,18 @@ psql postgresql://jy2web@127.0.0.1:5432/jy2db
 \x                   -- 已列的形式展示
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　使用示例
+使用示例
 
 ```bash
 #指定主机名、端口、数据库名和用户名进入该数据库
 psql -h localhost -p 5432 test postgres
 ```
 
-　　‍
+‍
 
 ## show
 

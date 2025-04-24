@@ -13,7 +13,7 @@ echo "Ninestar123" | passwd stdin ftpuser
 
 ## 2.修改配置
 
-　　​`vim /etc/ssh/sshd_config`​
+​`vim /etc/ssh/sshd_config`​
 
 ```bash
 # 指定sshd使用内置sshd的SFTP服务器代码，而不是运行另一个进程

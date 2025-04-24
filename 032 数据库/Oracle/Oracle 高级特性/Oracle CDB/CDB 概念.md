@@ -4,17 +4,17 @@
 
 > **实例**（INSTANCE）是操作Oracle数据库的一种手段。它是由OS分配的一块内存（包括SGA和PGA）和一些后台进程（PMON、SMON、LGWR、CKPT、DBWn等）组成的。实例在启动时会读取初始化参数文件（SPFILE或PFILE），获取数据库运行时的参数的值。实例名称由INSTANCE_NAME来标识。
 
-　　在Oracle 12c之前，一个数据库可以被1个实例（Single Instance，单实例）或多个实例访问或挂载（RAC，集群），也就是说*一个实例只能对应一个数据库，一个数据库可以被多个实例挂载（RAC）*
+在Oracle 12c之前，一个数据库可以被1个实例（Single Instance，单实例）或多个实例访问或挂载（RAC，集群），也就是说*一个实例只能对应一个数据库，一个数据库可以被多个实例挂载（RAC）*
 
 ## **插接式数据库简介**
 
-　　插接式数据库由一个使用 CDB（Container Database）选项创建的**容器**数据库和一个或多个 PDB（Pluggable Database）组成，CDB 作为容器容纳 PDB，而 PDB 彼此隔离，就像一个独立的数据库般在 CDB 中存在。
+插接式数据库由一个使用 CDB（Container Database）选项创建的**容器**数据库和一个或多个 PDB（Pluggable Database）组成，CDB 作为容器容纳 PDB，而 PDB 彼此隔离，就像一个独立的数据库般在 CDB 中存在。
 
-　　<span data-type="text" style="background-color: var(--b3-font-background8);">当进入ORACLE 12C后，</span>**实例与数据库可以是一对多的关系**<span data-type="text" style="background-color: var(--b3-font-background8);">。下面是官方文档关于CDB与PDB的关系图。</span>
+<span data-type="text" style="background-color: var(--b3-font-background8);">当进入ORACLE 12C后，</span>**实例与数据库可以是一对多的关系**<span data-type="text" style="background-color: var(--b3-font-background8);">。下面是官方文档关于CDB与PDB的关系图。</span>
 
 ## **CDB 的组成**
 
-​![](assets/image-20221127211228967-20230610173813-oj2b00c.png)​
+![](assets/image-20221127211228967-20230610173813-oj2b00c.png)​
 
 - ROOT组件
   ROOT又叫CDB$ROOT,存储着ORACLE提供的元数据和Common User,元数据的一个例子是ORACLE提供的PL/SQL包的源代码，Common User 是指在每个容器中都存在的用户。
@@ -24,11 +24,11 @@
   CDB中可以有一个或多个PDBS，PDBS向后兼容，可以像以前在数据库中那样操作PDBS，这里指大多数常规操作。
   这些组件中的每一个都可以被称为一个容器。因此，ROOT(根)是一个容器，Seed(种子)是一个容器，每个PDB是一个容器。每个容器在CDB中都有一个独一无二的的ID和名称
 
-　　‍
+‍
 
 ## CDB 与 非CDB 环境区别
 
-　　在物理级别，CDB与非CDB一样有一个数据库实例和多个数据库文件。
+在物理级别，CDB与非CDB一样有一个数据库实例和多个数据库文件。
 
 * **SYSTEM/SYSAUX**：  
   在CDB的数据库环境中，SYSTEM/SYSAUX表空间并不是公用，CDB$ROOT以及每个PDB都拥有自己的SYSTEM和SYSAUX表空间。每个容器都将自己的数据字典存储在相应的SYSTEM表空间（其中包含自己的元数据）中，还有一个SYSAUX表空间。

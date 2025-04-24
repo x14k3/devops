@@ -55,7 +55,7 @@ $ echo `eval echo '$'"$name""_p"`
 123
 ```
 
-　　或者
+或者
 
 ```
 $ var="world"
@@ -64,7 +64,7 @@ $ echo $hello_world
 value
 ```
 
-　　或者（ `bash`​ 4.3+）
+或者（ `bash`​ 4.3+）
 
 ```
 $ hello_world="value"
@@ -74,7 +74,7 @@ $ echo $ref
 value
 ```
 
-　　或者
+或者
 
 ```
 $ hello_world="value"

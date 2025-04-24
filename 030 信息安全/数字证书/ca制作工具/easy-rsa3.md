@@ -1,8 +1,8 @@
 # easy-rsa3
 
-　　easy-rsa 是一个 CLI 实用程序，用于构建和管理 PKI CA。通俗地说，这意味着创建根证书颁发机构，并请求和签署证书，包括中间 CA 和证书吊销列表 （CRL）。
+easy-rsa 是一个 CLI 实用程序，用于构建和管理 PKI CA。通俗地说，这意味着创建根证书颁发机构，并请求和签署证书，包括中间 CA 和证书吊销列表 （CRL）。
 
-　　下载地址：https://github.com/OpenVPN/easy-rsa
+下载地址：https://github.com/OpenVPN/easy-rsa
 
 ## 一、安装easy-rsa3
 
@@ -119,7 +119,7 @@ cd /etc/openvpn/server
 
 ```
 
-　　至此，server和client端证书已制作完毕
+至此，server和client端证书已制作完毕
 
 ```bash
 openvpn server端：

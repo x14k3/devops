@@ -1,16 +1,16 @@
 # other-解析awr报告
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## 1. 数据库细节
 
-​![Alt text](assets/network-asset-1-20241211175759-dy9c2wa.png)​
+![Alt text](assets/network-asset-1-20241211175759-dy9c2wa.png)
 
-　　这部分可以看到
+这部分可以看到
 
 * 数据库的版本
 * 数据库 DBID
@@ -21,9 +21,9 @@
 
 ## 2. 主机配置信息
 
-​![Alt text](assets/network-asset-2-20241211175759-hjligc1.png)​
+![Alt text](assets/network-asset-2-20241211175759-hjligc1.png)
 
-　　这部分可以看到
+这部分可以看到
 
 * 数据库主机名
 * 数据库主机平台
@@ -33,39 +33,39 @@
 
 ## 3. SnapShot信息
 
-​![Alt text](assets/network-asset-3-20241211175759-dbqf32c.png)​
+![Alt text](assets/network-asset-3-20241211175759-dbqf32c.png)
 
-　　这部分可以看到
+这部分可以看到
 
 * awr报告的起止时间以及当时的session数量等
 * awr报告持续时间
 * DB 时间
 
-　　DB Time\= session time spent in database.
+DB Time\= session time spent in database.
 
-　　DB Time\= CPU Time + Non IDLE wait time.
+DB Time\= CPU Time + Non IDLE wait time.
 
-　　可以看到DB Time比 Elapsed大，如果大很多并且有性能问题，需再进一步分析，后面章节再说
+可以看到DB Time比 Elapsed大，如果大很多并且有性能问题，需再进一步分析，后面章节再说
 
 ## 4. Shared Pool Statistics
 
-　　该视图显示的是Shared pool的状态
+该视图显示的是Shared pool的状态
 
-​![Alt text](assets/network-asset-4-20241211175759-ao3zsub.png)​
+![Alt text](assets/network-asset-4-20241211175759-ao3zsub.png)
 
-　　% SQL with executions\>1指的是执行次数大于1的SQL比例，越大越好，如过小则可能是为使用绑定变量导致
+% SQL with executions\>1指的是执行次数大于1的SQL比例，越大越好，如过小则可能是为使用绑定变量导致
 
 ## 5. Load Profile
 
-　　这里我们可以了解系统负载的情况
+这里我们可以了解系统负载的情况
 
-​![Alt text](assets/network-asset-5-20241211175759-p0smhyw.png)​
+![Alt text](assets/network-asset-5-20241211175759-p0smhyw.png)
 
-　　首先是 **DB CPU(s) per second**，它说明的是每秒钟同时工作的CPU数量
+首先是 **DB CPU(s) per second**，它说明的是每秒钟同时工作的CPU数量
 
-　　从主机配置可以看到共24个虚拟cpu，而DB CPU(s) per second只有0.4 则说明cpu没有瓶颈
+从主机配置可以看到共24个虚拟cpu，而DB CPU(s) per second只有0.4 则说明cpu没有瓶颈
 
-　　其次我们关注hard parses和 parses的比例，如硬解析率非常高则需要查看cursor\_sharing参数和应用程序的绑定变量问题，一般都是由于绑定变量引起的
+其次我们关注hard parses和 parses的比例，如硬解析率非常高则需要查看cursor\_sharing参数和应用程序的绑定变量问题，一般都是由于绑定变量引起的
 
 * Redo Size ：用来显示平均每秒的日志大小和平均每个事务的日志大小，有时候可以结合 Transactions 每秒事务数，**分析当前事务的繁忙程度**。
 * Logical Read：逻辑读耗CPU，主频和CPU核数都很重要，逻辑读高则DB CPU往往高，也往往可以看到 `latch: cache buffer chains`​ 等待。
@@ -75,15 +75,15 @@
 
 > 注意 Load Profile 中的指标提供了 Per second 和 Per transaction 两个维度。Per second  主要是把快照抓到的值除以两个快照之间的秒数。这是我们用来判断性能的主要维度。Per transaction  是基于事务的维度，主要是把快照抓到的值除以两个快照之间的事务数。
 
-　　‍
+‍
 
 ## 6. Instance Efficiency Percentages
 
-​![Alt text](assets/network-asset-6-20241211175759-fwrf3c4.png)​
+![Alt text](assets/network-asset-6-20241211175759-fwrf3c4.png)
 
-　　上面的百分比越高越好，后面会针对每个做介绍
+上面的百分比越高越好，后面会针对每个做介绍
 
-　　Instance Efficiency Percentages 是一些命中率指标。Buffer Hit、Library Hit  等表示SGA ( System global area )的命中率。Soft Parse  指标表示共享池的软解析率，如果小于90%，就说明存在未绑定变量的情况。这些指标应当尽可能接近100%，如果过低一定是发生了性能问题。
+Instance Efficiency Percentages 是一些命中率指标。Buffer Hit、Library Hit  等表示SGA ( System global area )的命中率。Soft Parse  指标表示共享池的软解析率，如果小于90%，就说明存在未绑定变量的情况。这些指标应当尽可能接近100%，如果过低一定是发生了性能问题。
 
 * **Buffer Nowait**  ******  **表示在内存获得数据的未等待比例。在缓冲区中获取Buffer的未等待比率。** Buffer Nowait的这个值一般需要大于99%\*\*。否则可能存在争用，可以在后面的等待事件中进一步确认。
 * **Buffer Hit** 表示进程从内存中找到数据块的比率，监视这个值是否发生重大变化比这个值本身更重要。对于一般的OLTP系统，如果此值低于80%，应该给数据库分配更多的内存。数据块在数据缓冲区中的命中率，通常应在95%以上。
@@ -98,38 +98,38 @@
 
 ## 7. Top 10 Foreground Events by Total Wait Time
 
-　　这里是排名前十的前台等待事件
+这里是排名前十的前台等待事件
 
-​![Alt text](assets/network-asset-7-20241211175759-8uquby7.png)​
+![Alt text](assets/network-asset-7-20241211175759-8uquby7.png)
 
 1. 首先看wait class栏位，如果是 User I/O , System I/O, Others这种的可以不用太担心，如发现Concurrency这类等待需要特别关心
 2. 其次看等待时间，wait avg\=total wait time(总等待时间)/waits(等待次数),最主要看平均等待时间是否正常
 
-　　后面章节会详细说明每个等待时间
+后面章节会详细说明每个等待时间
 
 ## 8. Time Model Statistics
 
-　　该视图说明的是各过程所占的资源比例
+该视图说明的是各过程所占的资源比例
 
-​![Alt text](assets/network-asset-8-20241211175759-sqem5z8.png)​
+![Alt text](assets/network-asset-8-20241211175759-sqem5z8.png)
 
-　　我们注意到所有 % of DB Time总和大于100%，因为这是一个累计的比例，下面DB CPU相关的过程包含在DB CPU中
+我们注意到所有 % of DB Time总和大于100%，因为这是一个累计的比例，下面DB CPU相关的过程包含在DB CPU中
 
-　　我们需要注意的是一些异常的高占用情况，如hard parse elapsed time (硬解析时间)占用时间过长等
+我们需要注意的是一些异常的高占用情况，如hard parse elapsed time (硬解析时间)占用时间过长等
 
 ## 9. Operating System Statistics
 
-　　该视图是操作系统层面的性能指标
+该视图是操作系统层面的性能指标
 
-​![Alt text](assets/network-asset-9-20241211175759-t4xmxrq.png)​
+![Alt text](assets/network-asset-9-20241211175759-t4xmxrq.png)
 
-　　这里需要注意%iowait，他代表CPU在等待io操作完成，这个可能是io过慢或者io操作过多导致。
+这里需要注意%iowait，他代表CPU在等待io操作完成，这个可能是io过慢或者io操作过多导致。
 
 ## 10. SQL Statistics
 
-​![Alt text](assets/network-asset-10-20241211175759-xtk2ho0.png)​
+![Alt text](assets/network-asset-10-20241211175759-xtk2ho0.png)
 
-　　SQL Statistics 从 `11`​ 个维度对SQL进行排序并给出了Top SQL的详细内容，可以点击查看具体的SQL内容，进一步分析调优方案。* SQL ordered by Elapsed Time。记录了执行总和时间的 TOP SQL(请注意是监控范围内该SQL的执行时间总和，而不是单次SQL执行时间 Elapsed Time \= CPU Time + Wait Time)。
+SQL Statistics 从 `11`​ 个维度对SQL进行排序并给出了Top SQL的详细内容，可以点击查看具体的SQL内容，进一步分析调优方案。* SQL ordered by Elapsed Time。记录了执行总和时间的 TOP SQL(请注意是监控范围内该SQL的执行时间总和，而不是单次SQL执行时间 Elapsed Time \= CPU Time + Wait Time)。
 
 * SQL ordered by CPU Time。记录了执行占CPU时间总和时间最长的TOP SQL(请注意是监控范围内该SQL的执行占CPU时间总和，而不是单次SQL执行时间)。
 * SQL ordered by Gets。记录了执行占总 buffer gets (逻辑IO)的TOP SQL(请注意是监控范围内该SQL的执行占Gets总和，而不是单次SQL执行所占的Gets)。
@@ -140,21 +140,21 @@
 * SQL ordered by Version Count。记录了SQL的打开子游标的TOP SQL。
 * SQL ordered by Cluster Wait Time。记录了集群的等待时间的TOP SQL。
 
-　　‍
+‍
 
-　　**SQL ordered by Elapsed Time**
+**SQL ordered by Elapsed Time**
 
-​![Alt text](assets/network-asset-11-20241211175759-6k26qlg.png)​
+![Alt text](assets/network-asset-11-20241211175759-6k26qlg.png)
 
-　　上图为根据持续时间排序的SQL语句
+上图为根据持续时间排序的SQL语句
 
-　　所有栏位可根据字面上意思得出意义
+所有栏位可根据字面上意思得出意义
 
 * 如executions过多可能会引起CPU占用率高
 * 如executions低，而elapsed time很高，则需要优化该SQL，降低执行时间
 
-　　需要注意的是execution如果为0不代表未执行，代表在awr报告的持续范围内该语句未执行完成
+需要注意的是execution如果为0不代表未执行，代表在awr报告的持续范围内该语句未执行完成
 
-　　这里只举持续时间这个例子，其他后面章节详细说明
+这里只举持续时间这个例子，其他后面章节详细说明
 
-　　‍
+‍

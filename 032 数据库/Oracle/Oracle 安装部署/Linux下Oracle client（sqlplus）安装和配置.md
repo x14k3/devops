@@ -2,7 +2,7 @@
 
 #### 1、下载rpm包
 
-　　[https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html](https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html)      (搜索：Oracle Instant Client Downloads for Linux x86-64 (64-bit))
+[https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html](https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html)      (搜索：Oracle Instant Client Downloads for Linux x86-64 (64-bit))
 
 ```
 [root@node1 ~]# ls
@@ -58,7 +58,7 @@ TPADCTEST =
 [root@node1 ~]# vi ~/.bashrc
 ```
 
-　　 增加几行
+ 增加几行
 
 ```
 export  ORACLE_HOME=/usr/lib/oracle/11.2/client64
@@ -101,13 +101,13 @@ SQL>
 
 #### 5、Linux环境下Oracle SqlPlus中方向键问题的解决方法
 
-　　 （1）问题
+ （1）问题
 
 ```
 SQL> ^[[A^[[A^[[B 
 ```
 
-　　 （2）下载rlwrap
+ （2）下载rlwrap
 
 ```
 wget https://mirrors.aliyun.com/epel/7/x86_64/Packages/r/rlwrap-0.45.2-2.el7.x86_64.rpm    # centos7.x
@@ -115,7 +115,7 @@ yum install readline-devel rlwrap-0.45.2-2.el7.x86_64.rpm
 
 ```
 
-　　 （3）运行sqlplus
+ （3）运行sqlplus
 
 ```
 rlwrap sqlplus test/test@//192.168.1.81:1521/TPADC
@@ -126,4 +126,4 @@ alias sqlplus=’rlwrap sqlplus’
 alias rman=’rlwrap rman
 ```
 
-　　‍
+‍

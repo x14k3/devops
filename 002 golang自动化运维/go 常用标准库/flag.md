@@ -1,6 +1,6 @@
 # flag
 
-　　‍
+‍
 
 ```bash
 import (
@@ -42,6 +42,6 @@ func main() {
 }
 ```
 
-　　​`./fileClient_linux_x86_64 -ip=127.0.0.1:9981 -watch=/path/test`​
+​`./fileClient_linux_x86_64 -ip=127.0.0.1:9981 -watch=/path/test`​
 
-　　‍
+‍

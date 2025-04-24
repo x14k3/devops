@@ -1,6 +1,6 @@
 # CentOS7 升级 Glibc 2.17 到2.28
 
-　　在手动升级 alist 从 3.2.0 版本到 3.6.0 版本的时候，发现环境中现有的 Glibc 版本已经无法满足alist的要求了，遂升级一波，记录一下。
+在手动升级 alist 从 3.2.0 版本到 3.6.0 版本的时候，发现环境中现有的 Glibc 版本已经无法满足alist的要求了，遂升级一波，记录一下。
 
 ```
 ./alist: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by ./alist)
@@ -8,18 +8,18 @@
 
 ---
 
-　　‍
+‍
 
-　　默认的GCC 版本无法无法编译 Glibc 2.28。 安装GLIBC所需的依赖，该版本需要 GCC 4.9 以上 及 make 4.0 以上。 GCC 11.2版本太新，无法与Glibc 2.28兼容。
+默认的GCC 版本无法无法编译 Glibc 2.28。 安装GLIBC所需的依赖，该版本需要 GCC 4.9 以上 及 make 4.0 以上。 GCC 11.2版本太新，无法与Glibc 2.28兼容。
 
-　　安装gcc-8.2.0所依赖的环境
+安装gcc-8.2.0所依赖的环境
 
 ```
 yum install bison -y
 yum -y install wget bzip2 gcc gcc-c++ glibc-headers
 ```
 
-　　升级GNU Make
+升级GNU Make
 
 ```
 wget http://ftp.gnu.org/gnu/make/make-4.2.1.tar.gz
@@ -33,7 +33,7 @@ ln -s /usr/local/make/bin/make /usr/local/make/bin/gmake
 make -v
 ```
 
-　　升级GCC
+升级GCC
 
 ```
 wget http://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
@@ -91,7 +91,7 @@ strings /usr/lib64/libstdc++.so.6 | grep CXXABI
 #其他版本在该目录下寻找对应的动态库libstdc++.so.6.X.XX
 ```
 
-　　下载、编译安装 Glibc
+下载、编译安装 Glibc
 
 ```
 wget https://ftp.gnu.org/gnu/glibc/glibc-2.28.tar.xz
@@ -104,7 +104,7 @@ make -j4
 make install
 ```
 
-　　查询支持的 Glibc
+查询支持的 Glibc
 
 ```
 strings /lib64/libc.so.6 | grep GLIBC

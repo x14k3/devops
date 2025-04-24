@@ -2,23 +2,23 @@
 
 ## vnc
 
-　　Debian 11软件源中还有几种不同的VNC服务器，例如TightVNC ，TigerVNC和x11vnc。每个VNC服务器在速度和安全性方面都有其优点和缺点。
+Debian 11软件源中还有几种不同的VNC服务器，例如TightVNC ，TigerVNC和x11vnc。每个VNC服务器在速度和安全性方面都有其优点和缺点。
 
-　　我们将使用TigerVNC，它是积极维护的高性能VNC服务器。
+我们将使用TigerVNC，它是积极维护的高性能VNC服务器。
 
-　　要在您的Debian 11服务器安装TigerVNC，请运行命令`sudo apt install tigervnc-standalone-server tigervnc-common`​。
+要在您的Debian 11服务器安装TigerVNC，请运行命令`sudo apt install tigervnc-standalone-server tigervnc-common`​。
 
-　　当VNC服务器安装成后，请运行`vncserver`​命令以创建初始配置并设置密码。
+当VNC服务器安装成后，请运行`vncserver`​命令以创建初始配置并设置密码。
 
 ```bash
 sudo apt install tigervnc-standalone-server tigervnc-common vncserver
 ```
 
-　　系统将提示您输入并确认密码，以及是否将其设置为仅供查看的密码。Would you like to enter a view-only password (y/n)?n。
+系统将提示您输入并确认密码，以及是否将其设置为仅供查看的密码。Would you like to enter a view-only password (y/n)?n。
 
-　　如果您选择设置仅查看密码，则用户将无法使用鼠标和键盘与VNC实例进行交互。
+如果您选择设置仅查看密码，则用户将无法使用鼠标和键盘与VNC实例进行交互。
 
-　　首次运行`vncserver`​命令时，它将创建密码文件并将其存储在`~/.vnc`​目录中。
+首次运行`vncserver`​命令时，它将创建密码文件并将其存储在`~/.vnc`​目录中。
 
 ```
 You will require a password to access your desktops.
@@ -33,11 +33,11 @@ Log file is /home/myfreax/.vnc/myfreax.myfreax.local:1.log
 Use xtigervncviewer -SecurityTypes VncAuth -passwd /home/myfreax/.vnc/passwd :1 to connect to the VNC server
 ```
 
-　　请注意上面输出中[主机名](https://www.myfreax.com/how-to-change-hostname-on-debian-9/)后的`:1`​，这是vnc服务器的显示端口好。vnc服务器将会监听TCP端口`5901`​，即5900 + 1。
+请注意上面输出中[主机名](https://www.myfreax.com/how-to-change-hostname-on-debian-9/)后的`:1`​，这是vnc服务器的显示端口好。vnc服务器将会监听TCP端口`5901`​，即5900 + 1。
 
-　　如果运行`vncserver`​命令创建第二个实例，它将在使用下一个显示端口即`:2`​，这意味着VNC服务器将会监听端口`5902`​，即5900 + 2。
+如果运行`vncserver`​命令创建第二个实例，它将在使用下一个显示端口即`:2`​，这意味着VNC服务器将会监听端口`5902`​，即5900 + 2。
 
-　　在继续下一步之前，请先停止VNC实例。在我们的例子中，VNC服务器在端口5901运行，显示端口是`:1`​。因此停止显示端口`:1`​的是命令`vncserver -kill :1`​。
+在继续下一步之前，请先停止VNC实例。在我们的例子中，VNC服务器在端口5901运行，显示端口是`:1`​。因此停止显示端口`:1`​的是命令`vncserver -kill :1`​。
 
 ```bash
 vncserver -kill :1
@@ -47,7 +47,7 @@ vncserver -kill :1
 Killing Xtigervnc process ID 6677... success!
 ```
 
-　　‍
+‍
 
 ## rdesktop
 

@@ -2,11 +2,11 @@
 
 ## 请求限制
 
-　　请求限制 [limit_req_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_limit_req_module.html) 比连接限制更优化，由于一个连接可以被多次复用。
+请求限制 [limit_req_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_limit_req_module.html) 比连接限制更优化，由于一个连接可以被多次复用。
 
 ### 1\. limit\_req\_zone
 
-　　首先需要在 `http`​ 作用域定义 `limit_req_zone`​。
+首先需要在 `http`​ 作用域定义 `limit_req_zone`​。
 
 ```
 Syntax: limit_req_zone key zone=name:size rate=rate [sync];
@@ -19,7 +19,7 @@ limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
 
 ### 2\. limit\_req
 
-　　再在指定的作用域启用。
+再在指定的作用域启用。
 
 ```
 Syntax: limit_req zone=name [burst=number] [nodelay | delay=number];
@@ -40,11 +40,11 @@ server {
 }
 ```
 
-　　​`$binary_remote_addr`​ 相对 `remote_addr`​ 占用的空间更少。
+​`$binary_remote_addr`​ 相对 `remote_addr`​ 占用的空间更少。
 
 ## 连接限制
 
-　　[limit_conn_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_limit_conn_module.html) 步骤基本与请求限制一致。
+[limit_conn_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_limit_conn_module.html) 步骤基本与请求限制一致。
 
 ### 1\. limit\_conn\_zone
 
@@ -76,7 +76,7 @@ server {
 
 ## 访问 IP 限制
 
-　　[access_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_access_module.html) 可用来限制访问的 IP，用法比较简单。
+[access_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_access_module.html) 可用来限制访问的 IP，用法比较简单。
 
 ```
 Syntax: allow address | CIDR | unix: | all;
@@ -99,7 +99,7 @@ location / {
 
 ## 访问 账号 限制
 
-　　[auth_basic_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_auth_basic_module.html) 可以为路径添加用户密码访问，可配合 IP 限制使用。
+[auth_basic_moduleopen in new window](https://nginx.org/en/docs/http/ngx_http_auth_basic_module.html) 可以为路径添加用户密码访问，可配合 IP 限制使用。
 
 ### 1\. 生成密码
 

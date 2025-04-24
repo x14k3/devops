@@ -2,9 +2,9 @@
 
 ## docker run
 
-　　`docker run [OPTIONS] IMAGE`  根据镜像新建并启动容器。IMAGE是镜像ID或镜像名
+`docker run [OPTIONS] IMAGE`  根据镜像新建并启动容器。IMAGE是镜像ID或镜像名
 
-　　`docker run --name nginx -p 80:80 --restart=always -dit 4cdc /bin/bash`
+`docker run --name nginx -p 80:80 --restart=always -dit 4cdc /bin/bash`
 
 ```bash
 #OPTIONS说明：
@@ -91,7 +91,7 @@ docker save         # 将镜像保存成tar文件 [docker save -o alpine.tar  al
 docker load         # 从tar中恢复镜像 [docker load < alpine.tar]
 ```
 
-　　**总结一下docker save和docker export的区别：**
+**总结一下docker save和docker export的区别：**
 
 - docker save   保存的是镜像；docker load   用来载入镜像包，
 - docker export 保存的是容器；docker import 用来载入容器包，但两者都会恢复为镜像。
@@ -104,11 +104,11 @@ docker load         # 从tar中恢复镜像 [docker load < alpine.tar]
 
 ## 数据卷管理
 
-　　docker 数据卷
+[docker 数据卷](docker%20数据卷.md)
 
 ## 网络管理
 
-　　docker 网络
+[docker 网络](docker%20网络.md)
 
 ## 仓库管理
 
@@ -140,7 +140,7 @@ docker service            # docker服务管理
 
 ### 1.在创建容器的时候指定
 
-　　`docker run --name mytomcat -d -p 8888:8080 tomcat`
+`docker run --name mytomcat -d -p 8888:8080 tomcat`
 
 ### 2.修改hostconfig.json和config.v2.json配置文件
 
@@ -163,4 +163,4 @@ docker inspect 容器id | grep IPAddress
 iptables -t nat -A DOCKER -p tcp --dport 8888 -j DNAT --to-destination 192.168.1.15:8080
 ```
 
-　　‍
+‍

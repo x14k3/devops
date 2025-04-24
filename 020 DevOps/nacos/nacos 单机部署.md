@@ -1,6 +1,6 @@
 # nacos 单机部署
 
-　　Nacos定义为一个IDC内部应用组件，并非面向公网环境的产品，建议在内部隔离网络环境中部署，强烈不建议部署在公共网络环境。
+Nacos定义为一个IDC内部应用组件，并非面向公网环境的产品，建议在内部隔离网络环境中部署，强烈不建议部署在公共网络环境。
 
 * [官网：https://nacos.io/](https://links.jianshu.com/go?to=https://nacos.io/ "官网：https://nacos.io/")
 * [下载地址：https://github.com/alibaba/nacos/releases](https://links.jianshu.com/go?to=https://github.com/alibaba/nacos/releases "下载地址：https://github.com/alibaba/nacos/releases")
@@ -105,7 +105,7 @@ curl -X POST "http://192.168.10.135:8101/nacos/v1/cs/configs?tenant=jy2v&dataId=
 curl -X GET "http://192.168.10.167:8101/nacos/v1/cs/configs?dataId=gds&group=DEFAULT_GROUP&tenant=jy2v"
 ```
 
-　　使用python将nacos配置文件转义为url格式，然后通过curl 上传到nacos控制台
+使用python将nacos配置文件转义为url格式，然后通过curl 上传到nacos控制台
 
 ```python
 #!/bin/python

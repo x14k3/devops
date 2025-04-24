@@ -1,12 +1,12 @@
 # Oracle之闪回区
 
-　　**开启闪回功能必须是在归档模式下，请参考上面的操作**Oracle之redo log 归档
+**开启闪回功能必须是在归档模式下，请参考上面的操作**​[Oracle之redo log 归档](Oracle之redo%20log%20归档.md)
 
-　　当启用闪回就必须使用**logarchivedestn**参数来指定归档日志目录。
+当启用闪回就必须使用**logarchivedestn**参数来指定归档日志目录。
 
-　　Oracle的闪回技术提供了一组功能，可以访问过去某一时间的数据并从人为错误中恢复。闪回技术是Oracle 数据库独有的，支持任何级别的恢复，包括行、事务、表和数据库范围。使用闪回特性，可以查询以前的数据版本，还可以执行更改分析和自助式修复，以便在保持数据库联机的同时从逻辑损坏中恢复。
+Oracle的闪回技术提供了一组功能，可以访问过去某一时间的数据并从人为错误中恢复。闪回技术是Oracle 数据库独有的，支持任何级别的恢复，包括行、事务、表和数据库范围。使用闪回特性，可以查询以前的数据版本，还可以执行更改分析和自助式修复，以便在保持数据库联机的同时从逻辑损坏中恢复。
 
-　　Flashback技术是以Undo Segment中的内容为基础的， 因此受限于`UNDO_RETENTON`​参数。要使用flashback 的特性，必须启用自动撤销管理表空间。闪回参数如下：
+Flashback技术是以Undo Segment中的内容为基础的， 因此受限于`UNDO_RETENTON`​参数。要使用flashback 的特性，必须启用自动撤销管理表空间。闪回参数如下：
 
 ```sql
 SQL> show parameter undo;
@@ -19,7 +19,7 @@ undo_tablespace        string     UNDO1
 
 ```
 
-　　**单实例：**
+**单实例：**
 
 ```sql
 
@@ -53,13 +53,13 @@ SQL> alter tablespace abc flashback off;    -- 关闭表空间闪回
 SQL> alter database open;
 ```
 
-　　**RAC：**
+**RAC：**
 
 ```bash
 
 ```
 
-　　**闪回区和归档目录**
+**闪回区和归档目录**
 
 ```bash
 # 使用闪回区需先设置其大小和路径：

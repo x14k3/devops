@@ -1,8 +1,8 @@
 # ngx_stream_ssl_module 
 
-　　Nginx配置四层代理使用到`stream`​模块，需要在编译时指定`--with-stream`​。本地演示环境还需要添加`--with-stream_ssl_module`​模块； ngx\_stream\_ssl\_module 提供了基于 SSL/TLS 协议的 TCP 连接监听
+Nginx配置四层代理使用到`stream`​模块，需要在编译时指定`--with-stream`​。本地演示环境还需要添加`--with-stream_ssl_module`​模块； ngx\_stream\_ssl\_module 提供了基于 SSL/TLS 协议的 TCP 连接监听
 
-　　编译参数如下
+编译参数如下
 
 ```
 root@abcdocker:/opt/nginx-1.24.0# ./sbin/nginx -V
@@ -13,11 +13,11 @@ TLS SNI support enabled
 configure arguments: --prefix=/opt/nginx-1.24.0 --with-openssl=/usr/local/src/openssl-1.1.1t --with-pcre=/usr/local/src/pcre-8.45 --with-zlib=/usr/local/src/zlib-1.2.13 --with-http_ssl_module --with-http_stub_status_module --with-stream --with-http_stub_status_module --with-http_gzip_static_module --with-stream_ssl_module
 ```
 
-　　‍
+‍
 
 ## 示例配置
 
-　　为了减少处理器负载，建议
+为了减少处理器负载，建议
 
 * 将 [work 进程](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_processes)数设置为与处理器核心数相同
 * 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_cache_shared)会话缓存
@@ -45,7 +45,7 @@ stream {
     }
 ```
 
-　　‍
+‍
 
 ## 指令
 
@@ -57,9 +57,9 @@ stream {
 |**默认**|——|
 |**上下文**|stream、server|
 
-　　为给定服务器指定一个 PEM 格式的证书文件。如果除主证书之外还要指定中间证书，则应按以下顺序在同一文件中指定它们：首先是主证书，然后是中间证书。PEM 格式的密钥可以放在同一文件中。
+为给定服务器指定一个 PEM 格式的证书文件。如果除主证书之外还要指定中间证书，则应按以下顺序在同一文件中指定它们：首先是主证书，然后是中间证书。PEM 格式的密钥可以放在同一文件中。
 
-　　从 1.11.0 版本开始，可以重复使用指令以加载不同类型的证书，例如 RSA 和 ECDSA：
+从 1.11.0 版本开始，可以重复使用指令以加载不同类型的证书，例如 RSA 和 ECDSA：
 
 ```
 server {
@@ -77,16 +77,16 @@ server {
 
 > 仅 OpenSSL 1.0.2 或更高版本支持不同证书的独立证书链。对于较旧的版本，只能使用一个证书链。
 
-　　从 1.15.9 版本开始，使用 OpenSSL 1.0.2 或更高版本时，可以在文件名中使用变量：
+从 1.15.9 版本开始，使用 OpenSSL 1.0.2 或更高版本时，可以在文件名中使用变量：
 
 ```
 ssl_certificate     $ssl_server_name.crt;
 ssl_certificate_key $ssl_server_name.key;
 ```
 
-　　请注意，使用变量意味着每次 SSL 握手都会加载证书，可能会对性能产生负面影响。
+请注意，使用变量意味着每次 SSL 握手都会加载证书，可能会对性能产生负面影响。
 
-　　可以指定值 `data:$variable`​ 代替 `file`​（1.15.10），nginx 将从变量加载证书，无需通过文件加载。请注意，不正确使用此语法可能会带来安全隐患，例如将密钥数据写入[错误日志](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#error_log)。
+可以指定值 `data:$variable`​ 代替 `file`​（1.15.10），nginx 将从变量加载证书，无需通过文件加载。请注意，不正确使用此语法可能会带来安全隐患，例如将密钥数据写入[错误日志](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#error_log)。
 
 ### ssl\_certificate\_key
 
@@ -96,13 +96,13 @@ ssl_certificate_key $ssl_server_name.key;
 |**默认**|——|
 |**上下文**|stream、server|
 
-　　指定一个保存有指定服务器密钥的 PEM 文件。
+指定一个保存有指定服务器密钥的 PEM 文件。
 
-　　可以指定值 `engine:name:id`​ 来代替 `file`​，nginx 将从 OpenSSL 引擎名为 `name`​ 中加载 ID 为 `id`​ 的密钥。
+可以指定值 `engine:name:id`​ 来代替 `file`​，nginx 将从 OpenSSL 引擎名为 `name`​ 中加载 ID 为 `id`​ 的密钥。
 
-　　可以指定值 `data:$variable`​ 来代替 `file`​（1.15.10），无需使用中间文件即可从变量直接加载密钥。请注意，不正确使用此语法可能会带来安全隐患，例如将密钥数据写入[错误日志](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#error_log)。
+可以指定值 `data:$variable`​ 来代替 `file`​（1.15.10），无需使用中间文件即可从变量直接加载密钥。请注意，不正确使用此语法可能会带来安全隐患，例如将密钥数据写入[错误日志](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#error_log)。
 
-　　从 1.15.9 版本开始，使用 OpenSSL 1.0.2 或更高版本时，可以在文件名中使用变量。
+从 1.15.9 版本开始，使用 OpenSSL 1.0.2 或更高版本时，可以在文件名中使用变量。
 
 ### ssl\_ciphers
 
@@ -112,13 +112,13 @@ ssl_certificate_key $ssl_server_name.key;
 |**默认**|ssl\_ciphers HIGH:!aNULL:!MD5;|
 |**上下文**|stream、server|
 
-　　指定启用的密码算法。仅限 OpenSSL 库支持的算法，例如：
+指定启用的密码算法。仅限 OpenSSL 库支持的算法，例如：
 
 ```
 ssl_ciphers ALL:!aNULL:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
 ```
 
-　　可以使用 `openssl ciphers`​ 命令查看完整 openssl 支持的密码算法列表。
+可以使用 `openssl ciphers`​ 命令查看完整 openssl 支持的密码算法列表。
 
 ### ssl\_client\_certificate
 
@@ -129,9 +129,9 @@ ssl_ciphers ALL:!aNULL:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.8 版本中出现|
 
-　　指定一个用于[验证](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_verify_client)客户端证书的可信 CA 证书 PEM 文件。
+指定一个用于[验证](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_verify_client)客户端证书的可信 CA 证书 PEM 文件。
 
-　　证书列表将发送给客户端。如果不希望这样做，可以使用 [ssl_trusted_certificate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_trusted_certificate) 指令修改配置。
+证书列表将发送给客户端。如果不希望这样做，可以使用 [ssl_trusted_certificate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_trusted_certificate) 指令修改配置。
 
 ### ssl\_crl
 
@@ -142,7 +142,7 @@ ssl_ciphers ALL:!aNULL:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.8 版本中出现|
 
-　　指定一个 PEM 格式的吊销证书（CRL）文件，用于[验证](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_verify_client)客户端证书。
+指定一个 PEM 格式的吊销证书（CRL）文件，用于[验证](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_verify_client)客户端证书。
 
 ### ssl\_dhparam
 
@@ -152,9 +152,9 @@ ssl_ciphers ALL:!aNULL:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
 |**默认**|——|
 |**上下文**|stream、server|
 
-　　指定一个存储有 DHE 密码的 DH 参数的文件。
+指定一个存储有 DHE 密码的 DH 参数的文件。
 
-　　默认情况下，未设置任何参数，因此不会使用 DHE 密码。
+默认情况下，未设置任何参数，因此不会使用 DHE 密码。
 
 > 在 1.11.0 版本之前，默认情况下使用内置参数。
 
@@ -166,15 +166,15 @@ ssl_ciphers ALL:!aNULL:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
 |**默认**|ssl\_ecdh\_curve auto|
 |**上下文**|stream、server|
 
-　　为 ECDHE 密码指定一个椭圆曲线（`curve`​）。
+为 ECDHE 密码指定一个椭圆曲线（`curve`​）。
 
-　　使用 OpenSSL 1.0.2 或更高版本时，可以指定多条椭圆曲线（1.11.0），例如：
+使用 OpenSSL 1.0.2 或更高版本时，可以指定多条椭圆曲线（1.11.0），例如：
 
 ```
 ssl_ecdh_curve prime256v1:secp384r1;
 ```
 
-　　当使用 OpenSSL 1.0.2 或更高版本或带有较旧版本的 `prime256v1`​ 时，特殊值 `auto`​（1.11.0）指示 nginx 使用内置在 OpenSSL 库中的椭圆曲线。
+当使用 OpenSSL 1.0.2 或更高版本或带有较旧版本的 `prime256v1`​ 时，特殊值 `auto`​（1.11.0）指示 nginx 使用内置在 OpenSSL 库中的椭圆曲线。
 
 > 在 1.11.0 版本之前，默认使用 `prime256v1`​ 椭圆曲线。
 
@@ -186,7 +186,7 @@ ssl_ecdh_curve prime256v1:secp384r1;
 |**默认**|ssl\_handshake\_timeout 60s;|
 |**上下文**|stream、server|
 
-　　指定 SSL 握手完成的超时时间。
+指定 SSL 握手完成的超时时间。
 
 ### ssl\_password\_file
 
@@ -196,9 +196,9 @@ ssl_ecdh_curve prime256v1:secp384r1;
 |**默认**|——|
 |**上下文**|stream、server|
 
-　　指定一个存储有[密钥](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_certificate_key)口令的文件，每个口令独占一行。加载密钥时依次尝试使用这些口令。
+指定一个存储有[密钥](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_certificate_key)口令的文件，每个口令独占一行。加载密钥时依次尝试使用这些口令。
 
-　　示例：
+示例：
 
 ```
 stream {
@@ -228,7 +228,7 @@ stream {
 |**默认**|rssl\_prefer\_server\_ciphers off;|
 |**上下文**|stream、server|
 
-　　指定当使用 SSLv3 和 TLS 协议时，服务器密码算法应优先于客户端密码算法。
+指定当使用 SSLv3 和 TLS 协议时，服务器密码算法应优先于客户端密码算法。
 
 ### ssl\_protocols
 
@@ -238,7 +238,7 @@ stream {
 |**默认**|rssl\_protocols TLSv1 TLSv1.1 TLSv1.2;|
 |**上下文**|stream、server|
 
-　　启用指定的协议。
+启用指定的协议。
 
 > ​`TLSv1.1`​ 和 `TLSv1.2`​ 参数仅在使用 OpenSSL 1.0.1 或更高版本时有效。
 
@@ -252,7 +252,7 @@ stream {
 |**默认**|ssl\_session\_cache none;|
 |**上下文**|stream、server|
 
-　　设置存储会话参数的缓存的类型和大小。缓存可以是以下任何一种：
+设置存储会话参数的缓存的类型和大小。缓存可以是以下任何一种：
 
 * ​`off`​  
   严格禁止使用会话缓存：nginx 明确告知客户端不得重复使用会话
@@ -268,7 +268,7 @@ stream {
 ssl_session_cache builtin:1000 shared:SSL:10m;
 ```
 
-　　但关闭内置缓存仅使用共享缓存会更有效率。
+但关闭内置缓存仅使用共享缓存会更有效率。
 
 ### ssl\_session\_ticket\_key
 
@@ -278,22 +278,22 @@ ssl_session_cache builtin:1000 shared:SSL:10m;
 |**默认**|——|
 |**上下文**|stream、server|
 
-　　设置一个存有用于加密和解密 TLS 会话票证的密钥文件。如果必须在多个服务器之间共享同一密钥，则该指令是必需的。默认情况下，使用随机生成的密钥。
+设置一个存有用于加密和解密 TLS 会话票证的密钥文件。如果必须在多个服务器之间共享同一密钥，则该指令是必需的。默认情况下，使用随机生成的密钥。
 
-　　如果指定了多个密钥，则仅第一个密钥用于加密 TLS 会话票证。也可以配置键轮转，例如：
+如果指定了多个密钥，则仅第一个密钥用于加密 TLS 会话票证。也可以配置键轮转，例如：
 
 ```
 ssl_session_ticket_key current.key;
 ssl_session_ticket_key previous.key;
 ```
 
-　　该文件必须包含 80 或 48 个字节的随机数，可以使用以下命令创建：
+该文件必须包含 80 或 48 个字节的随机数，可以使用以下命令创建：
 
 ```
 openssl rand 80> ticket.key
 ```
 
-　　根据文件大小，使用 AES256（针对 80 字节的密钥，1.11.8）或 AES128（针对 48 字节的密钥）进行加密。
+根据文件大小，使用 AES256（针对 80 字节的密钥，1.11.8）或 AES128（针对 48 字节的密钥）进行加密。
 
 ### ssl\_session\_tickets
 
@@ -303,7 +303,7 @@ openssl rand 80> ticket.key
 |**默认**|rssl\_session\_tickets on;|
 |**上下文**|stream、server|
 
-　　通过 [TLS 会话票证](https://tools.ietf.org/html/rfc5077)启用或禁用会话恢复。
+通过 [TLS 会话票证](https://tools.ietf.org/html/rfc5077)启用或禁用会话恢复。
 
 ### ssl\_session\_timeout
 
@@ -313,7 +313,7 @@ openssl rand 80> ticket.key
 |**默认**|ssl\_session\_timeout 5m;|
 |**上下文**|stream、server|
 
-　　指定一个客户端可以重用会话参数的时间时长。
+指定一个客户端可以重用会话参数的时间时长。
 
 ### ssl\_trusted\_certificate
 
@@ -324,9 +324,9 @@ openssl rand 80> ticket.key
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.8 版本中出现|
 
-　　指定一个用于[验证](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_verify_client)客户端证书的可信 CA 证书 PEM 文件。
+指定一个用于[验证](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_verify_client)客户端证书的可信 CA 证书 PEM 文件。
 
-　　与 [ssl_client_certificate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_client_certificate) 设置的证书相反，这些证书的列表不会发送给客户端。
+与 [ssl_client_certificate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_client_certificate) 设置的证书相反，这些证书的列表不会发送给客户端。
 
 ### ssl\_verify\_client
 
@@ -337,11 +337,11 @@ openssl rand 80> ticket.key
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.8 版本中出现|
 
-　　启用客户端证书的验证。验证结果存储在 [$ssl_client_verify](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#var_ssl_client_verify) 变量中。如果在验证客户端证书期间发生错误，或者客户端未提供所需的证书，则连接将关闭。
+启用客户端证书的验证。验证结果存储在 [$ssl_client_verify](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#var_ssl_client_verify) 变量中。如果在验证客户端证书期间发生错误，或者客户端未提供所需的证书，则连接将关闭。
 
-　　​`optional`​ 参数请求客户端证书，当证书存在时对其进行验证。
+​`optional`​ 参数请求客户端证书，当证书存在时对其进行验证。
 
-　　​`optional_no_ca`​ 参数请求客户端证书，但不需要由可信 CA 证书对其进行签名。这用于在 nginx 外部的服务执行实际证书验证的情况下使用。可以通过 [$ssl_client_cert](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#var_ssl_client_cert) 变量访问证书的内容。
+​`optional_no_ca`​ 参数请求客户端证书，但不需要由可信 CA 证书对其进行签名。这用于在 nginx 外部的服务执行实际证书验证的情况下使用。可以通过 [$ssl_client_cert](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#var_ssl_client_cert) 变量访问证书的内容。
 
 ### ssl\_verify\_depth
 
@@ -352,11 +352,11 @@ openssl rand 80> ticket.key
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.8 版本中出现|
 
-　　设置客户端证书链的验证深度。
+设置客户端证书链的验证深度。
 
 ## 内置变量
 
-　　自 1.11.2 版本起，`ngx_stream_ssl_module`​ 模块支持以下变量：
+自 1.11.2 版本起，`ngx_stream_ssl_module`​ 模块支持以下变量：
 
 * ​`$ssl_cipher`​  
   返回用于已建立的 SSL 连接使用的密码算法的名称
@@ -408,4 +408,4 @@ openssl rand 80> ticket.key
 * ​`$ssl_session_reused`​  
   如果 SSL 会话被复用，则返回 `r`​，否则返回 `.`​
 
-　　‍
+‍

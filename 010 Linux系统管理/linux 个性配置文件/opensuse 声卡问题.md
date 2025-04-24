@@ -1,6 +1,6 @@
 # opensuse 声卡问题
 
-　　GRUB_CMDLINE_LINUX_DEFAULT="xxx" 后面添加 `snd_hda_intel.dmic_detect=0`​
+GRUB_CMDLINE_LINUX_DEFAULT="xxx" 后面添加 `snd_hda_intel.dmic_detect=0`​
 
 ```bash
 doshell:/data/backup # cat /etc/default/grub

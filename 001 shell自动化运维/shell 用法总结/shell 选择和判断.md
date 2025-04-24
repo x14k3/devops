@@ -1,12 +1,12 @@
 # shell 选择和判断
 
-　　面向过程的语句结构：
+面向过程的语句结构：
 
 * 顺序结构：逐条运行
 * 选择结构：两个或以上的,满足条件时只会执行其中一个满足条件的分支
 * 循环结构：某循环体需要执行多次
 
-　　‍
+‍
 
 # If语句分支
 
@@ -119,15 +119,15 @@ fi
   单纯用 (( )) 也可重定义变量值，比如 a=5; ((a++)) 可将 $a 重定义为6  
   常用于算术运算比较，双括号中的变量可以不使用$符号前缀。
 
-　　‍
+‍
 
-　　‍
+‍
 
 # select语句分支
 
-　　​`select`​ 表达式是 bash 的一种扩展应用，擅长于交互式场合。用户可以从一组不同的值中进行选择
+​`select`​ 表达式是 bash 的一种扩展应用，擅长于交互式场合。用户可以从一组不同的值中进行选择
 
-　　语法格式
+语法格式
 
 ```bash
 select varname in "string1" "string2" ; do
@@ -137,7 +137,7 @@ select varname in "string1" "string2" ; do
 done
 ```
 
-　　示例
+示例
 
 ```bash
 #!/bin/bash
@@ -148,7 +148,7 @@ done
 echo "You have selected $var"
 ```
 
-　　运行结果
+运行结果
 
 ```bash
 What is your favourite OS?
@@ -162,7 +162,7 @@ You have selected Linux
 
 # case语句分支
 
-　　语法格式
+语法格式
 
 ```
 case $1 in

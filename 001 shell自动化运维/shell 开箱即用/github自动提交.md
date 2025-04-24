@@ -19,7 +19,7 @@ remote.git.url=https://github.com/x14k3/devops.git
 remote.git.fetch=+refs/heads/*:refs/remotes/git/*
 ```
 
-　　‍
+‍
 
 ```bash
 #!/bin/bash

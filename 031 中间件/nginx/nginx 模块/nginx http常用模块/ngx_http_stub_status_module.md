@@ -1,8 +1,8 @@
 # ngx_http_stub_status_module
 
-　　​`ngx_http_stub_status_module`​ 模块提供对基本状态信息的访问的支持。
+​`ngx_http_stub_status_module`​ 模块提供对基本状态信息的访问的支持。
 
-　　默认不构建此模块，可在构建时使用 `--with-http_stub_status_module`​ 配置参数启用。
+默认不构建此模块，可在构建时使用 `--with-http_stub_status_module`​ 配置参数启用。
 
 ## 示例配置
 
@@ -12,7 +12,7 @@ location = /basic_status {
 }
 ```
 
-　　此配置将创建一个简单的网页，其基本状态数据可能如下：
+此配置将创建一个简单的网页，其基本状态数据可能如下：
 
 ```
 Active connections: 291 
@@ -31,13 +31,13 @@ Reading: 6 Writing: 179 Waiting: 106
 |**默认**|——|
 |**上下文**|server、location|
 
-　　可以从包含该指令的 location 访问基本状态信息。
+可以从包含该指令的 location 访问基本状态信息。
 
 > 在 1.7.5 之前的版本中，指令语法需要一个任意参数，例如 `stub_status on`​。
 
 ## 数据
 
-　　提供以下状态信息：
+提供以下状态信息：
 
 * ​`Active connections`​  
   当前活动客户端连接数，包括等待连接。
@@ -56,7 +56,7 @@ Reading: 6 Writing: 179 Waiting: 106
 
 ## 内嵌变量
 
-　　​`ngx_http_stub_status_module`​ 模块支持以下内嵌变量（1.3.14）：
+​`ngx_http_stub_status_module`​ 模块支持以下内嵌变量（1.3.14）：
 
 * ​`$connections_active`​  
   与 `Active connections`​ 的值相同

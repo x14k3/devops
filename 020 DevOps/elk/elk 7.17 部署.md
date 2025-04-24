@@ -1,6 +1,6 @@
 # elk 7.17 部署
 
-　　ELK访问信息
+ELK访问信息
 
 ```bash
 客户端: http://192.168.10.142:5601
@@ -76,9 +76,9 @@ nohup redis-server /data/redis/redis.conf >> /data/logs/redis.log 2>&1 &
 
 ## 配置elasticsearch
 
-　　`cd /data/elasticsearch/`
+`cd /data/elasticsearch/`
 
-　　`vim config/elasticsearch.yml`
+`vim config/elasticsearch.yml`
 
 ```bash
 # 本地单机模式，基本不用修改任何配置
@@ -105,7 +105,7 @@ cluster.initial_master_nodes: ["192.168.10.142"]
 action.destructive_requires_name: true
 ```
 
-　　启动
+启动
 
 ```bash
 /data/elasticsearch/bin/elasticearch -d
@@ -113,9 +113,9 @@ action.destructive_requires_name: true
 
 ## 配置kibana
 
-　　`cd /data/kibana/`
+`cd /data/kibana/`
 
-　　` vim config/kibana.yml`
+` vim config/kibana.yml`
 
 ```
 # 修改服务端口
@@ -131,7 +131,7 @@ elasticsearch.hosts: ["http://192.168.10.142:9200"]
 
 ```
 
-　　启动kibana
+启动kibana
 
 ```
 nohup /data/kibana/bin/kibana >> /data/logs/kibana.log 2>&1 & ; 
@@ -142,11 +142,11 @@ nohup /data/kibana/bin/kibana >> /data/logs/kibana.log 2>&1 & ;
 
 ![](assets/image-20221127214009311-20230610173808-l39nnkc.png)
 
-　　Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
+Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
 
-　　创建logstash管道配置文件
+创建logstash管道配置文件
 
-　　`vim /data/logstash/config/logstash.conf`
+`vim /data/logstash/config/logstash.conf`
 
 ```yaml
 input {
@@ -214,7 +214,7 @@ output {
     }
 ```
 
-　　启动logstash
+启动logstash
 
 ```bash
 nohup /data/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /data/logs/logstash/logstash.log 2>&1 &
@@ -222,7 +222,7 @@ nohup /data/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /dat
 
 ## 客户端上配置filebeat
 
-　　`cd /data/filebeat; vim filebeat.yml`
+`cd /data/filebeat; vim filebeat.yml`
 
 ```
 filebeat.inputs:
@@ -300,5 +300,5 @@ multiline.negate  # 取值true 或 false；
 multiline.match   # after 或 before，就是指定将要合并到上一行的内容，合并到上一行的末尾或开头；
 ```
 
-　　启动filebeat
+启动filebeat
 `nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebeat/filebeat.log 2>&1 &`

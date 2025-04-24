@@ -1,10 +1,10 @@
 # Nginx与uWSGI服务器的沟通
 
-　　在前面的案例中，Nginx都是使用`proxy_pass`​转发的动态请求，`proxy_pass`​使用普通的HTTP协议与应用服务器进行沟通。如果你部署的是Python Web应用(Django, Flask), 你的应用服务器(`uwsgi`​, `gunicorn`​)一般是遵守uwsgi协议的，对于这种情况，建议使用`uwsgi_pass`​转发请求。
+在前面的案例中，Nginx都是使用`proxy_pass`​转发的动态请求，`proxy_pass`​使用普通的HTTP协议与应用服务器进行沟通。如果你部署的是Python Web应用(Django, Flask), 你的应用服务器(`uwsgi`​, `gunicorn`​)一般是遵守uwsgi协议的，对于这种情况，建议使用`uwsgi_pass`​转发请求。
 
 ### Python Web应用部署负载均衡Nginx配置文件参考
 
-　　如果你部署的是Django或则Flask Web应用，一个完整的nginx配置文件如下所示：
+如果你部署的是Django或则Flask Web应用，一个完整的nginx配置文件如下所示：
 
 ```nginx
 # nginx配置文件，nginx.conf
@@ -94,7 +94,7 @@ http {
 
 ```
 
-　　如果你的nginx与uwsgi在同一台服务器上，用不到负载均衡，你还可以通过本地机器的unix socket进行通信，这样速度更快，如下所示：
+如果你的nginx与uwsgi在同一台服务器上，用不到负载均衡，你还可以通过本地机器的unix socket进行通信，这样速度更快，如下所示：
 
 ```highlight
 location / {   
@@ -103,7 +103,7 @@ location / {
 }
 ```
 
-　　**注意**：取决于Nginx采用那种方式与uWSGI服务器进行通信(本地socket, 网络TCP socket和http协议)，uWSGI的配置文件也会有所不同。这里以`uwsgi.ini`​为例展示了不同。
+**注意**：取决于Nginx采用那种方式与uWSGI服务器进行通信(本地socket, 网络TCP socket和http协议)，uWSGI的配置文件也会有所不同。这里以`uwsgi.ini`​为例展示了不同。
 
 ```highlight
 # uwsgi.ini配置文件
@@ -119,4 +119,4 @@ socket=0.0.0.0:8000
 http=0.0.0.0:8000
 ```
 
-　　‍
+‍

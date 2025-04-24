@@ -2,9 +2,9 @@
 
 ## 一、磁盘热扩容
 
-　　通过组合合适的VM文件系统功能（例如支持在线resize的XFS文件系统）和QEMU底层 `virsh qemu-monitor-command`​ 指令可以实现在线动态调整虚拟机磁盘容量，无需停机，对维护在线应用非常方便。不过，这里虚拟机磁盘扩容（resize）部分步骤需要在VM内部使用操作系统命令，所以适合自建自用的测试环境。
+通过组合合适的VM文件系统功能（例如支持在线resize的XFS文件系统）和QEMU底层 `virsh qemu-monitor-command`​ 指令可以实现在线动态调整虚拟机磁盘容量，无需停机，对维护在线应用非常方便。不过，这里虚拟机磁盘扩容（resize）部分步骤需要在VM内部使用操作系统命令，所以适合自建自用的测试环境。
 
-　　生产环境reize虚拟机磁盘系统，可采用 [libguestfs](http://libguestfs.org/) 来修改虚拟机磁盘镜像。 `libguestfs`​ 可以查看和编辑guest内部文件，脚本化修改VM，监控磁盘使用和空闲状态，以及创建虚拟机，P2V,V2V，以及备份，clone虚拟机，构建虚拟机，格式化磁盘，resize磁盘等等。
+生产环境reize虚拟机磁盘系统，可采用 [libguestfs](http://libguestfs.org/) 来修改虚拟机磁盘镜像。 `libguestfs`​ 可以查看和编辑guest内部文件，脚本化修改VM，监控磁盘使用和空闲状态，以及创建虚拟机，P2V,V2V，以及备份，clone虚拟机，构建虚拟机，格式化磁盘，resize磁盘等等。
 
 ### 动态添加虚拟机磁盘
 
@@ -39,9 +39,9 @@
   mount /data
   ```
 
-　　‍
+‍
 
-　　此时，刚才5G空间的 `/dev/vdb`​ 已挂载到目录 `/data`​ 。所以，我们下一步开始在线扩容。
+此时，刚才5G空间的 `/dev/vdb`​ 已挂载到目录 `/data`​ 。所以，我们下一步开始在线扩容。
 
 ### 调整磁盘空间，需要关闭虚拟机
 
@@ -78,7 +78,7 @@
 
   ```
 
-　　备注：对于最新的Guest内核， `virtio-blk`​ 设备大小是自动更新的，所以会马上看到容量改变。对于旧内核需要重启guest系统。对于SCSI设备，需要在guest操作系统中触发一次扫描:
+备注：对于最新的Guest内核， `virtio-blk`​ 设备大小是自动更新的，所以会马上看到容量改变。对于旧内核需要重启guest系统。对于SCSI设备，需要在guest操作系统中触发一次扫描:
 
 ```
 echo > /sys/class/scsi_device/0:0:0:0/device/rescan
@@ -91,17 +91,17 @@ echo > /sys/class/scsi_device/0:0:0:0/device/rescan
   xfs_growfs /data
   ```
 
-　　‍
+‍
 
 ### 在线添加光盘
 
-　　在线添加光盘命令比较简单，直接使用下面命令即可，注意`vdd`​应当没有被使用
+在线添加光盘命令比较简单，直接使用下面命令即可，注意`vdd`​应当没有被使用
 
 ```
 virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
 ```
 
-　　‍
+‍
 
 ## 二、网卡热添加
 
@@ -131,7 +131,7 @@ virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
 
 - 网卡剥离
 
-　　剥离要指定剥离网卡的Mac地址
+剥离要指定剥离网卡的Mac地址
 
 ```
 永久剥离
@@ -145,7 +145,7 @@ virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
 
 ## 三、内存热添加
 
-　　**扩容内存**
+**扩容内存**
 
 ```bash
 内存热添加的基础是必须设置最大内存的容量，否则无法添加，最大扩展不能超过最大分配
@@ -157,15 +157,15 @@ virsh setmem    test1 8G --config
 #--live 运行的机器
 ```
 
-　　创建机器时可以指定
+创建机器时可以指定
 
 ```
 --memory memory=1024,currentMemory=512
 ```
 
-　　**缩小内存**
+**缩小内存**
 
-　　同样的方法，指定内存目标容量即可
+同样的方法，指定内存目标容量即可
 
 ```bash
 virsh setmem  centos8-3  512M --live 
@@ -175,9 +175,9 @@ virsh setmem  centos8-3  512M --live --config
 
 ## 四、CPU热添加
 
-　　**添加CPU**
+**添加CPU**
 
-　　该虚拟机必须指定了最大cpu数量 –**vcpu**s 5,max**vcpu**s=10
+该虚拟机必须指定了最大cpu数量 –**vcpu**s 5,max**vcpu**s=10
 
 ```
 临时
@@ -187,11 +187,11 @@ virsh setmem  centos8-3  512M --live --config
 [root@zutuanxue ~]# virsh setvcpus --domain centos8-3 6 --live --config 
 ```
 
-　　注意：CPU目前是不支持回收的。
+注意：CPU目前是不支持回收的。
 
 ## 五、通过修改配置文件
 
-　　**注意：** 增大虚拟机内存、增加虚拟机 CPU 个数需要首先关机虚拟机
+**注意：** 增大虚拟机内存、增加虚拟机 CPU 个数需要首先关机虚拟机
 
 ### 1.关闭虚拟机
 
@@ -201,9 +201,9 @@ virsh shutdown ehs-jboss-01
 
 ### 2.编辑虚拟机配置文件
 
-　　修改内存**memory 和 currentMemory 参数来调整内存大小；**
+修改内存**memory 和 currentMemory 参数来调整内存大小；**
 
-　　修改 CPU vcpu 参数来调整 CPU 个数(核数)；
+修改 CPU vcpu 参数来调整 CPU 个数(核数)；
 
 ```
 [root@ehs-as-04 ~]# virsh edit ehs-jboss-01
@@ -252,7 +252,7 @@ CPU 时间：   32.8s
 
 ### 6.验证
 
-　　查看当前内存大小
+查看当前内存大小
 
 ```
 [root@kvm01 ~]# virsh dominfo ehs-jboss-01 | grep memory
@@ -260,7 +260,7 @@ Max memory: 1048432 KiB
 Used memory: 1048432 KiB
 ```
 
-　　查看当前CPU个数
+查看当前CPU个数
 
 ```
 [root@kvm01 ~]# virsh dominfo ehs-jboss-01 | grep CPU

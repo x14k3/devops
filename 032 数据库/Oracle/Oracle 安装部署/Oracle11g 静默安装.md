@@ -167,9 +167,9 @@ chown -R oracle.oinstall database
 
 ### 2.静默安装数据库
 
-　　修改db_install.rsp
+修改db_install.rsp
 
-　　​`vim /opt/database/response/db_install.rsp`​
+​`vim /opt/database/response/db_install.rsp`​
 
 ```bash
 oracle.install.option=INSTALL_DB_SWONLY
@@ -187,7 +187,7 @@ DECLINE_SECURITY_UPDATES=true
 
 ```
 
-　　执行安装脚本
+执行安装脚本
 
 ```shell
 su - oracle
@@ -195,7 +195,7 @@ su - oracle
 ./runInstaller -silent -responseFile /data/etc/db_install.rsp -ignorePrereq
 ```
 
-　　按照上述提示进行操作，使用`root`​用户运行脚本
+按照上述提示进行操作，使用`root`​用户运行脚本
 
 ```bash
 su - root
@@ -206,7 +206,7 @@ sh /data/u01/app/oracle/product/11.2.0/db_1/root.sh
 
 ### 3.静默创建数据库
 
-　　编辑应答文`/data/u01/app/oracle/product/11.2.0/db_1/assistants/dbca/dbca.rsp`​
+编辑应答文`/data/u01/app/oracle/product/11.2.0/db_1/assistants/dbca/dbca.rsp`​
 
 ```bash
 [GENERAL]
@@ -226,7 +226,7 @@ CHARACTERSET = "AL32UTF8"  # 字符集，根据需求设置，建议前期确定
 TOTALMEMORY = "102400"  # 分配给Oracle的内存总量，根据服务器内存总量进行分配
 ```
 
-　　执行静默建库
+执行静默建库
 
 ```bash
 su - oracle
@@ -240,7 +240,7 @@ dbca -silent -responseFile /data/u01/app/oracle/product/11.2.0/db_1/assistants/d
 
 ### 1. 修改 listener.ora
 
-　　配置详解 见 listener.ora 详解
+配置详解 见 [listener.ora 详解](032%20数据库/Oracle/Oracle%20配置详解.md#20231110105237-0vzx5pj)
 
 ```bash
 #- listener.ora是oracle监听程序，里面有oracle服务器端的socket监听地址和端口,使局域网中的其他人能够访问oracle
@@ -272,7 +272,7 @@ ADR_BASE_LISTENER = /data/u01/app/oracle
 
 ### 2. 修改 tnsnames.ora
 
-　　配置详解 见 tnsnames.ora 详解
+配置详解 见[ tnsnames.ora 详解](032%20数据库/Oracle/Oracle%20配置详解.md#20231110105237-v5tltkf)
 
 ```bash
 ## 编辑 tnsnames.ora文件
@@ -310,7 +310,7 @@ su - oracle    # 切换到oracle用户
 lsnrctl start   # 启动监听
 ```
 
-　　‍
+‍
 
 ## 四、自动化部署脚本
 

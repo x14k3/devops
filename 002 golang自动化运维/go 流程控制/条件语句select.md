@@ -2,13 +2,13 @@
 
 ## select 语句
 
-　　select 语句类似于 switch 语句，但是select会随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。
+select 语句类似于 switch 语句，但是select会随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。
 
-　　select 是Go中的一个控制结构，类似于用于通信的switch语句。每个case必须是一个通信操作，要么是发送要么是接收。 select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。
+select 是Go中的一个控制结构，类似于用于通信的switch语句。每个case必须是一个通信操作，要么是发送要么是接收。 select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。
 
 #### 语法
 
-　　Go 编程语言中 select 语句的语法如下：
+Go 编程语言中 select 语句的语法如下：
 
 ```
 select {
@@ -22,7 +22,7 @@ select {
 }
 ```
 
-　　以下描述了 select 语句的语法：
+以下描述了 select 语句的语法：
 
 ```
 每个case都必须是一个通信
@@ -62,17 +62,17 @@ func main() {
 }
 ```
 
-　　以上代码执行结果为：
+以上代码执行结果为：
 
 ```
 no communication
 ```
 
-　　select可以监听channel的数据流动
+select可以监听channel的数据流动
 
-　　select的用法与switch语法非常类似，由select开始的一个新的选择块，每个选择条件由case语句来描述
+select的用法与switch语法非常类似，由select开始的一个新的选择块，每个选择条件由case语句来描述
 
-　　与switch语句可以选择任何使用相等比较的条件相比，select由比较多的限制，其中最大的一条限制就是每个case语句里必须是一个IO操作
+与switch语句可以选择任何使用相等比较的条件相比，select由比较多的限制，其中最大的一条限制就是每个case语句里必须是一个IO操作
 
 ```
 select { //不停的在这里检测
@@ -88,25 +88,25 @@ default:
 }
 ```
 
-　　在一个select语句中，Go会按顺序从头到尾评估每一个发送和接收的语句。
+在一个select语句中，Go会按顺序从头到尾评估每一个发送和接收的语句。
 
-　　如果其中的任意一个语句可以继续执行（即没有被阻塞），那么就从那些可以执行的语句中任意选择一条来使用。 如果没有任意一条语句可以执行（即所有的通道都被阻塞），那么有两种可能的情况： ①如果给出了default语句，那么就会执行default的流程，同时程序的执行会从select语句后的语句中恢复。 ②如果没有default语句，那么select语句将被阻塞，直到至少有一个case可以进行下去。
+如果其中的任意一个语句可以继续执行（即没有被阻塞），那么就从那些可以执行的语句中任意选择一条来使用。 如果没有任意一条语句可以执行（即所有的通道都被阻塞），那么有两种可能的情况： ①如果给出了default语句，那么就会执行default的流程，同时程序的执行会从select语句后的语句中恢复。 ②如果没有default语句，那么select语句将被阻塞，直到至少有一个case可以进行下去。
 
 ## Golang select的使用及典型用法
 
 #### 基本使用
 
-　　select是Go中的一个控制结构，类似于switch语句，用于处理异步IO操作。select会监听case语句中channel的读写操作，当case中channel读写操作为非阻塞状态（即能读写）时，将会触发相应的动作。 select中的case语句必须是一个channel操作
+select是Go中的一个控制结构，类似于switch语句，用于处理异步IO操作。select会监听case语句中channel的读写操作，当case中channel读写操作为非阻塞状态（即能读写）时，将会触发相应的动作。 select中的case语句必须是一个channel操作
 
-　　select中的default子句总是可运行的。
+select中的default子句总是可运行的。
 
-　　如果有多个case都可以运行，select会随机公平地选出一个执行，其他不会执行。
+如果有多个case都可以运行，select会随机公平地选出一个执行，其他不会执行。
 
-　　如果没有可运行的case语句，且有default语句，那么就会执行default的动作。
+如果没有可运行的case语句，且有default语句，那么就会执行default的动作。
 
-　　如果没有可运行的case语句，且没有default语句，select将阻塞，直到某个case通信可以运行
+如果没有可运行的case语句，且没有default语句，select将阻塞，直到某个case通信可以运行
 
-　　例如：
+例如：
 
 ```go
 package main

@@ -1,6 +1,6 @@
 # os
 
-* 📄 exec
-* 📄 open
+* 📄 [exec](os/exec.md)
+* 📄 [open](os/open.md)
 
-　　‍
+‍

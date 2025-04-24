@@ -17,7 +17,7 @@
 
 ## 3.Block Storage Service
 
-　　块存储服务提供对 volume 从创建到删除整个生命周期的管理。从 instance 的角度看，挂载的每一个 Volume 都是一块硬盘。OpenStack 提供 Block Storage Service 的是 Cinder，其具体功能是：
+块存储服务提供对 volume 从创建到删除整个生命周期的管理。从 instance 的角度看，挂载的每一个 Volume 都是一块硬盘。OpenStack 提供 Block Storage Service 的是 Cinder，其具体功能是：
 
 1. 提供 REST API 使用户能够查询和管理 volume、volume snapshot 以及 volume type。
 2. 提供 scheduler 调度 volume 创建请求，合理优化存储资源的分配
@@ -31,7 +31,7 @@
 
 ![](assets/image-20221127212437564-20230610173810-mnxbk4y.png)
 
-　　2\. cinder-sheduler通过filter进行删选，允许使用第三方的filter，自定义筛选内容。
+2\. cinder-sheduler通过filter进行删选，允许使用第三方的filter，自定义筛选内容。
 
 ![](assets/image-20221127212444515-20230610173810-hhpblxy.png)
 

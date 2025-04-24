@@ -1,28 +1,28 @@
 # nginx 配置文件详解
 
-* 📄 Nginx Location配置
-* 📄 Nginx 基础功能配置集合
-* 📄 Nginx与uWSGI服务器的沟通
-* 📄 Nginx双向认证
-* 📄 Nginx反向代理-http
-* 📄 Nginx反向代理-tcp
-* 📄 Nginx日志配置
-* 📄 Nginx负载均衡
-* 📄 Nginx超时设置
-* 📄 Nginx跨域问题
-* 📄 Nginx配置HTTPS
-* 📄 Nginx静态文件配置
-* 📄 配置案例
+* 📄 [Nginx Location配置](nginx%20配置文件详解/Nginx%20Location配置.md)
+* 📄 [Nginx 基础功能配置集合](nginx%20配置文件详解/Nginx%20基础功能配置集合.md)
+* 📄 [Nginx与uWSGI服务器的沟通](nginx%20配置文件详解/Nginx与uWSGI服务器的沟通.md)
+* 📄 [Nginx双向认证](nginx%20配置文件详解/Nginx双向认证.md)
+* 📄 [Nginx反向代理-http](nginx%20配置文件详解/Nginx反向代理-http.md)
+* 📄 [Nginx反向代理-tcp](nginx%20配置文件详解/Nginx反向代理-tcp.md)
+* 📄 [Nginx日志配置](nginx%20配置文件详解/Nginx日志配置.md)
+* 📄 [Nginx负载均衡](nginx%20配置文件详解/Nginx负载均衡.md)
+* 📄 [Nginx超时设置](nginx%20配置文件详解/Nginx超时设置.md)
+* 📄 [Nginx跨域问题](nginx%20配置文件详解/Nginx跨域问题.md)
+* 📄 [Nginx配置HTTPS](nginx%20配置文件详解/Nginx配置HTTPS.md)
+* 📄 [Nginx静态文件配置](nginx%20配置文件详解/Nginx静态文件配置.md)
+* 📄 [配置案例](nginx%20配置文件详解/配置案例.md)
 
 ## Nginx配置文件构成
 
-　　一个Nginx配置文件通常包含3个模块：
+一个Nginx配置文件通常包含3个模块：
 
 * 全局块：比如工作进程数，定义日志路径；
 * Events块：设置处理轮询事件模型，每个工作进程最大连接数及http层的keep-alive超时时间；
 * http块：路由匹配、静态文件服务器、反向代理、负载均衡等。
 
-　　其中http块又可以进一步分成3块，http全局块里的配置对所有站点生效，server块配置仅对单个站点生效，而location块的配置仅对单个页面或url生效。
+其中http块又可以进一步分成3块，http全局块里的配置对所有站点生效，server块配置仅对单个站点生效，而location块的配置仅对单个页面或url生效。
 
 ### Nginx配置文件示例
 
@@ -114,8 +114,8 @@ http { # http全局块
 }
 ```
 
-　　接下来，我们仔细分析下Nginx各个模块的配置选项。
+接下来，我们仔细分析下Nginx各个模块的配置选项。
 
-　　‍
+‍
 
-　　‍
+‍

@@ -61,7 +61,7 @@ asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel -y
 
 ## 多用户配置
 
-　　多用户配置时，应用ss-manager而不是ss-server
+多用户配置时，应用ss-manager而不是ss-server
 
 ```json
 {
@@ -100,7 +100,7 @@ git submodule update --init --recursive
 setcap cap_net_bind_service+ep /usr/local/bin/obfs-server
 ```
 
-　　==修改shadowsocks配置文件，使用单用户模式==
+==修改shadowsocks配置文件，使用单用户模式==
 
 ```json
 {
@@ -140,7 +140,7 @@ sudo vim /etc/shadowsocks-libev/config.json
 
 ### 浏览器代理
 
-　　下载 SwitchyOmega
+下载 SwitchyOmega
 
 ### 系统全局代理
 

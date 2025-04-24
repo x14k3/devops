@@ -1,27 +1,27 @@
 # nfs
 
-　　NFS：Network File System 网络文件系统，基于内核的文件系统。Sun 公司开发，通过使用 NFS，用户和程序可以像访问本地文件一样访问远端系统上的文件，基于RPC（Remote Procedure Call Protocol 远程过程调用）实现。
+NFS：Network File System 网络文件系统，基于内核的文件系统。Sun 公司开发，通过使用 NFS，用户和程序可以像访问本地文件一样访问远端系统上的文件，基于RPC（Remote Procedure Call Protocol 远程过程调用）实现。
 
-　　**NFS优势**
+**NFS优势**
 
-　　可以把服务器上的文件像本地一样的操作，节省本地的存储空间
+可以把服务器上的文件像本地一样的操作，节省本地的存储空间
 nfs配置简单，而且服务本身对系统资源占用较少
 nfs服务可以支持很多其它的服务，如kickstart，配合在一起，可以实现更多功能
 
-　　**工作原理**
+**工作原理**
 
-　　NFS体系有两个主要部分：
+NFS体系有两个主要部分：
 
-　　NFS服务端机器：通过NFS协议将文件共享到网络。
+NFS服务端机器：通过NFS协议将文件共享到网络。
 NFS客户端机器：通过网络挂载NFS共享目录到本地。
 
-　　NFS服务器与客户端在进行数据传输时，需要先确定端口，而这个端口的确定需要借助RPC(Remote Procedure Call,远程过程调用)协议的协助。RPC最主要的功能就是在指定每个NFS服务所对应的端口号，并且告知客户端，让客户端可以连接到正确的端口上去。当我们启动NFS服务时会随机取用数个端口，并主动向RPC注册，因此RPC可以知道每个端口对应的NFS，而RPC又是固定使用 port 111监听客户端的需求并且能够准确的告知客户端正确的端口。
+NFS服务器与客户端在进行数据传输时，需要先确定端口，而这个端口的确定需要借助RPC(Remote Procedure Call,远程过程调用)协议的协助。RPC最主要的功能就是在指定每个NFS服务所对应的端口号，并且告知客户端，让客户端可以连接到正确的端口上去。当我们启动NFS服务时会随机取用数个端口，并主动向RPC注册，因此RPC可以知道每个端口对应的NFS，而RPC又是固定使用 port 111监听客户端的需求并且能够准确的告知客户端正确的端口。
 
-　　1.客户端向服务器的111端口发送nfs请求
+1.客户端向服务器的111端口发送nfs请求
 2.RPC找到对应的nfs端口并告知客户端
 3.客户端知道正确的端口后，直接与nfs server端建立连接
 
-　　**相关文件**
+**相关文件**
 
 ```bash
 /etc/exports        # 共享配置文件，用来设置共享
@@ -70,7 +70,7 @@ EOF
 
 # 配置说明
 
-　　`/etc/exports`
+`/etc/exports`
 
 ```bash
 # 格式：
@@ -101,7 +101,7 @@ anongid=xxx       # 指定NFS服务器/etc/passwd文件中匿名用户的GID
 
 # 相关命令
 
-　　exportfs - 管理NFS共享文件系统列表
+exportfs - 管理NFS共享文件系统列表
 
 ```bash
 -a     # 发布获取消所有目录共享。
@@ -117,7 +117,7 @@ anongid=xxx       # 指定NFS服务器/etc/passwd文件中匿名用户的GID
 #exportfs   -au	  //卸载所有共享目录。
 ```
 
-　　showmount	可以在server/client上使用此命令来查看server
+showmount	可以在server/client上使用此命令来查看server
 
 ```bash
 #showmount	[-ae]	hostname/ip

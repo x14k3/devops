@@ -1,18 +1,18 @@
 # Oracle之redo log 归档
 
-　　我们知道，Oracle 数据库需要至少两组联机日志，每当一组 联机日志写满后会发生日志切换，继续向下一组联机日志写入。  
+我们知道，Oracle 数据库需要至少两组联机日志，每当一组 联机日志写满后会发生日志切换，继续向下一组联机日志写入。  
 如果是归档模式，日志切换会触发归档进程 （ARCn）进行归档，生成归档日志。Oracle 保证归档完成前，联机日志不会被覆盖，如果是非归档模式， 则不会触发归档动作。
 
-　　不管数据库是否是归档模式，重做日志是肯定要写的。而只有数据库在归档模式下，重做日志才会备份，形成归档日志。
+不管数据库是否是归档模式，重做日志是肯定要写的。而只有数据库在归档模式下，重做日志才会备份，形成归档日志。
 一般来说，归档日志结合全备份，用于数据库出现问题后的恢复使用
 
-　　**开启归档模式**
+**开启归档模式**
 
 ```sql
 -- 查看是否开启归档模式
 SQL> archive log list;
 -- 设置归档文件格式   
-SQL> alter system set log_archive_format='%t_%s_%r.dbf' scope=spfile;
+SQL> alter system set log_archive_format='arc_%t_%s_%r.dbf' scope=spfile;
 -- 设置归档文件保存路径,路径中最好包含实例名，确保目录存在，且拥有者为oracle用户
 SQL> alter system set log_archive_dest_1 ='location=/data/arch/fmsdb' scope=spfile;
 -- 重启数据库至mount模式
@@ -26,9 +26,21 @@ SQL> alter database open;
 SQL> alter system archive log current;
 ```
 
-　　**配置参数详解**
+说明
 
-　　log\_archive\_dest\_n   # 设置归档日志路径
+```h3c
+'%t_%s_%r.arc' 是新的格式，表示：
+
+ %t：线程号
+ %s：序列号
+ %r：重做日志组号
+```
+
+‍
+
+**配置参数详解**
+
+log\_archive\_dest\_n   # 设置归档日志路径
 
 ```bash
 LOG_ARCHIVE_DEST_n   # 参数可以设置最多10个不同的归档路径，通过设置关键词location或service，该参数指向的路径可以是本地或远程的。
@@ -39,7 +51,7 @@ LOG_ARCHIVE_DEST_3 = 'LOCATION = /disk3/archive'
 LOG_ARCHIVE_DEST_4 = 'SERVICE = standby1'
 ```
 
-　　scope（范围）说明：
+scope（范围）说明：
 
 ```bash
 # Oracle 里面有个叫做spfile的东西，就是动态参数文件，里面设置了Oracle 的各种参数。
@@ -51,4 +63,4 @@ scope=both    # 内存和spfile都更改
 
 ```
 
-　　‍
+‍

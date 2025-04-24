@@ -1,22 +1,22 @@
 # cpulimit
 
-　　Cpulimit 是一个限制进程的 CPU 使用率的工具（以百分比表示，而不是以 CPU 时间表示）。 当您不希望批处理作业占用太多 CPU  周期时，控制批处理作业很有用。 目标是防止进程运行超过指定的时间比率。它不会更改 nice 值或其他调度优先级设置，而是更改真实的 CPU  使用率。 此外，它能够动态且快速地适应整个系统负载。 使用的 CPU 数量的控制是通过向进程发送 SIGSTOP 和 SIGCONT POSIX 信号来完成的。 指定进程的所有子进程和线程将共享相同百分比的 CPU。
+Cpulimit 是一个限制进程的 CPU 使用率的工具（以百分比表示，而不是以 CPU 时间表示）。 当您不希望批处理作业占用太多 CPU  周期时，控制批处理作业很有用。 目标是防止进程运行超过指定的时间比率。它不会更改 nice 值或其他调度优先级设置，而是更改真实的 CPU  使用率。 此外，它能够动态且快速地适应整个系统负载。 使用的 CPU 数量的控制是通过向进程发送 SIGSTOP 和 SIGCONT POSIX 信号来完成的。 指定进程的所有子进程和线程将共享相同百分比的 CPU。
 
 ## CPULimit 安装方法
 
-　　CPULimit 并不是系统自带的工具，使用前要先安装。在 Debian 或 Ubuntu 系列的 Linux 中，可以使用 apt 来安装：
+CPULimit 并不是系统自带的工具，使用前要先安装。在 Debian 或 Ubuntu 系列的 Linux 中，可以使用 apt 来安装：
 
 ```
 sudo apt-get install cpulimit
 ```
 
-　　若在 CentOS、RHEL 或者是 Fedora Linux 中，可在启用 EPEL 套件库后，再以 yum 安装：
+若在 CentOS、RHEL 或者是 Fedora Linux 中，可在启用 EPEL 套件库后，再以 yum 安装：
 
 ```
 sudo yum install cpulimit
 ```
 
-　　或者直接：
+或者直接：
 
 ```
 sudo yum install epel-release cpulimit
@@ -43,4 +43,4 @@ Usage: cpulimit [OPTIONS...] TARGET
 Process 27677 found
 ```
 
-　　‍
+‍

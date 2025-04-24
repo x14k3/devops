@@ -1,6 +1,6 @@
 # ngx_stream_core_module
 
-　　​`ngx_stream_core_module`​ 模块自版本 1.9.0 起可用。默认构建情况下不包含模块，可在构建时使用 `--with-stream`​ 配置参数启用。
+​`ngx_stream_core_module`​ 模块自版本 1.9.0 起可用。默认构建情况下不包含模块，可在构建时使用 `--with-stream`​ 配置参数启用。
 
 ## 示例配置
 
@@ -57,7 +57,7 @@ stream {
 |**默认**|——|
 |**上下文**|server|
 
-　　为接受连接服务器的 socket 设置 `address`​ 和 `port`​。可仅指定端口。地址也可以是主机名，例如：
+为接受连接服务器的 socket 设置 `address`​ 和 `port`​。可仅指定端口。地址也可以是主机名，例如：
 
 ```
 listen 127.0.0.1:12345;
@@ -66,28 +66,28 @@ listen 12345;     # same as *:12345
 listen localhost:12345;
 ```
 
-　　IPv6 地址需要在方括号中指定：
+IPv6 地址需要在方括号中指定：
 
 ```
 listen [::1]:12345;
 listen [::]:12345;
 ```
 
-　　UNIX 域套接字务必加上 `unix:`​ 前缀：
+UNIX 域套接字务必加上 `unix:`​ 前缀：
 
 ```
 listen unix:/var/run/nginx.sock;
 ```
 
-　　​`ssl`​ 参数允许端口上接受的所有连接都在 SSL 模式下工作。
+​`ssl`​ 参数允许端口上接受的所有连接都在 SSL 模式下工作。
 
-　　​`udp`​ 参数配置一个监听 socket 以处理数据报（1.9.13）。
+​`udp`​ 参数配置一个监听 socket 以处理数据报（1.9.13）。
 
-　　​`proxy_protocol`​ 参数（1.11.4）允许指定端口上接受的所有连接都使用 [PROXY 协议](http://www.haproxy.org/download/1.5/doc/proxy-protocol.txt)。
+​`proxy_protocol`​ 参数（1.11.4）允许指定端口上接受的所有连接都使用 [PROXY 协议](http://www.haproxy.org/download/1.5/doc/proxy-protocol.txt)。
 
 > 自 1.13.11 版本起支持 PROXY 协议版本 2。
 
-　　​`listen`​ 指令有几个专门与套接字相关的系统调用的附加参数。
+​`listen`​ 指令有几个专门与套接字相关的系统调用的附加参数。
 
 * ​`backlog=number`​  
   在 `listen()`​ 调用中设置 `backlog`​ 参数，该参数限制挂起连接队列的最大长度（1.9.2）。默认情况下，`backlog`​ 在 FreeBSD、DragonFly BSD 和 macOS 上设置为 -1，在其他平台上设置为 511。
@@ -122,7 +122,7 @@ listen unix:/var/run/nginx.sock;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.5 版本中出现|
 
-　　指定[预读缓冲区](https://docshome.gitbook.io/nginx-docs/readme/nginx-ru-he-chu-li-qing-qiu)的 `size`​（大小）。
+指定[预读缓冲区](https://docshome.gitbook.io/nginx-docs/readme/nginx-ru-he-chu-li-qing-qiu)的 `size`​（大小）。
 
 ### preread\_timeout
 
@@ -133,7 +133,7 @@ listen unix:/var/run/nginx.sock;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.5 版本中出现|
 
-　　指定[预读缓冲区](https://docshome.gitbook.io/nginx-docs/readme/nginx-ru-he-chu-li-qing-qiu)的 `timeout`​（超时时间）。
+指定[预读缓冲区](https://docshome.gitbook.io/nginx-docs/readme/nginx-ru-he-chu-li-qing-qiu)的 `timeout`​（超时时间）。
 
 ### proxy\_protocol\_timeout
 
@@ -144,7 +144,7 @@ listen unix:/var/run/nginx.sock;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.4 版本中出现|
 
-　　指定读取 PROXY 协议头完成的 `timeout`​（超时时间）。如果在此时间内未传输完整个头，则关闭连接。
+指定读取 PROXY 协议头完成的 `timeout`​（超时时间）。如果在此时间内未传输完整个头，则关闭连接。
 
 ### resolver
 
@@ -155,17 +155,17 @@ listen unix:/var/run/nginx.sock;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.11.3 版本中出现|
 
-　　将用于解析上游服务器名称的域名服务器（Name Server）配置到地址列表中，例如：
+将用于解析上游服务器名称的域名服务器（Name Server）配置到地址列表中，例如：
 
 ```
 resolver 127.0.0.1 [::1]:5353;
 ```
 
-　　可以将地址指定为一个域名或 IP 地址，以及可附带一个可选端口。如果未指定端口，则使用 53 端口。域名服务器将以循环方式查询。
+可以将地址指定为一个域名或 IP 地址，以及可附带一个可选端口。如果未指定端口，则使用 53 端口。域名服务器将以循环方式查询。
 
-　　默认情况下，nginx 将在解析时查找 IPv4 和 IPv6 地址。如果不需要查找 IPv6 地址，可以配置 `ipv6=off`​ 参数。
+默认情况下，nginx 将在解析时查找 IPv4 和 IPv6 地址。如果不需要查找 IPv6 地址，可以配置 `ipv6=off`​ 参数。
 
-　　默认情况下，nginx 使用响应 TTL 值缓存响应。可选的 `valid`​ 参数可改写该行为：
+默认情况下，nginx 使用响应 TTL 值缓存响应。可选的 `valid`​ 参数可改写该行为：
 
 ```
 resolver 127.0.0.1 [::1]:5353 valid=30s;
@@ -181,7 +181,7 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 |**默认**|——|
 |**上下文**|stream|
 
-　　配置 server。
+配置 server。
 
 ### stream
 
@@ -191,7 +191,7 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 |**默认**|——|
 |**上下文**|main|
 
-　　为指定 stream server 指令的提供配置文件上下文。
+为指定 stream server 指令的提供配置文件上下文。
 
 ### tcp\_nodelay
 
@@ -202,7 +202,7 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 |**上下文**|stream、server|
 |**提示**|该指令在 1.9.4 版本中出现|
 
-　　启用或禁用 `TCP_NODELAY`​ 选项。该选项对客户端和代理服务器连接都有作用。
+启用或禁用 `TCP_NODELAY`​ 选项。该选项对客户端和代理服务器连接都有作用。
 
 ### variables\_hash\_bucket\_size
 
@@ -213,11 +213,11 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 |**上下文**|stream|
 |**提示**|该指令在 1.11.2 版本中出现|
 
-　　设置变量哈希表的桶大小。设置哈希表的详细信息在单独的[文档](https://docshome.gitbook.io/nginx-docs/readme/she-zhi-ha-xi)有详细说明。
+设置变量哈希表的桶大小。设置哈希表的详细信息在单独的[文档](https://docshome.gitbook.io/nginx-docs/readme/she-zhi-ha-xi)有详细说明。
 
 ## 内嵌变量
 
-　　​`ngx_stream_core_module`​ 模块自 1.11.2 版本起支持变量。
+​`ngx_stream_core_module`​ 模块自 1.11.2 版本起支持变量。
 
 * ​`$binary_remote_addr`​  
   客户端地址采用二进制形式，值的长度始终为 IPv4 地址的 4 个字节或 IPv6 地址的 16 个字节
@@ -275,4 +275,4 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 * ​`$time_local`​  
   通用日志（Common Log）格式的本地时间
 
-　　‍
+‍

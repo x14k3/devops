@@ -68,7 +68,7 @@ select host, user, plugin from mysql.user;
 
 ```
 
-　　mysql 8.0+ 首次更改密码报错解决  You must reset your password using ALTER USER statement before
+mysql 8.0+ 首次更改密码报错解决  You must reset your password using ALTER USER statement before
 
 ```bash
 #修改密码
@@ -76,9 +76,9 @@ mysql> alter user 'root'@'localhost' identified by 'Ninestar@123';
 mysql>flush privileges；
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## 权限相关
 
@@ -125,4 +125,4 @@ select concat("alter DEFINER=`jy2gm`@`%` SQL SECURITY DEFINER VIEW `",TABLE_SCHE
 
 ```
 
-　　‍
+‍

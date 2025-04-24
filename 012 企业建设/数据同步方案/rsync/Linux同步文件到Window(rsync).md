@@ -1,12 +1,12 @@
 # Linux同步文件到Window(rsync)
 
-　　最近接到一个需求，要将centos服务器的一些文件，定时增量下载到本地的winserver中。
+最近接到一个需求，要将centos服务器的一些文件，定时增量下载到本地的winserver中。
 
-　　测试环境如下：
+测试环境如下：
 
-　　服务端（Centos 7.9）
+服务端（Centos 7.9）
 
-　　客户端（window 10）
+客户端（window 10）
 
 # 服务端配置
 
@@ -65,7 +65,7 @@
 
 1. 下载[cwrsync](https://www.itefix.net/cwrsync)
 
-    ​![Untitled](assets/network-asset-47753b50d4b28a9845bc4381bd844a56-20241214140404-qob7777.png)​
+    ![Untitled](assets/network-asset-47753b50d4b28a9845bc4381bd844a56-20241214140404-qob7777.png)​
 2. 添加密码文件(rsync.passwd)
 
     文件内容和服务器的保持一致，我放在cwrsync的bin目录

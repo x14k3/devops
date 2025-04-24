@@ -4,11 +4,11 @@
 
 ### rman只备份cdb
 
-　　只备份CDB数据库需要具有SYSDBA或SYSBACKUP权限用户连接到CDB的root环境下，执行backupdatabase root命令即可完成对CDB的备份，方法如下：
+只备份CDB数据库需要具有SYSDBA或SYSBACKUP权限用户连接到CDB的root环境下，执行backupdatabase root命令即可完成对CDB的备份，方法如下：
 
-　　​`RMAN> backup database root;`​
+​`RMAN> backup database root;`​
 
-　　注：执行backup database root不给数据文件保存位置时，备份文件默认存放在快速恢复区中。
+注：执行backup database root不给数据文件保存位置时，备份文件默认存放在快速恢复区中。
 
 ```
 [oracle@jydb1 ~]$ rman target /
@@ -43,9 +43,9 @@ RMAN> backup database root;
 在 09-11月-18 完成了 Control File and SPFILE Autobackup
 ```
 
-　　查看备份
+查看备份
 
-　　​`RMAN> list backupset;`​
+​`RMAN> list backupset;`​
 
 ```bash
 RMAN> list backupset;
@@ -81,9 +81,9 @@ BS 关键字  类型 LV 大小       设备类型 经过时间 完成时间
 
 ### rman备份cdb及所有pdb
 
-　　备份整个CDB数据库及其下面的所有PDB类似于非CDB数据库方法相同，使用具有SYSDBA或SYSBACKUP权限用户连接到CDB的root环境下面，然后执行backupdatabase命令即可完成整个CDB的备份，方法如下：
+备份整个CDB数据库及其下面的所有PDB类似于非CDB数据库方法相同，使用具有SYSDBA或SYSBACKUP权限用户连接到CDB的root环境下面，然后执行backupdatabase命令即可完成整个CDB的备份，方法如下：
 
-　　​`RMAN> backup database;`​
+​`RMAN> backup database;`​
 
 ```
 RMAN> backup database;
@@ -128,7 +128,7 @@ RMAN> backup database;
 在 09-11月-18 完成了 Control File and SPFILE Autobackup
 ```
 
-　　 查看备份结果
+ 查看备份结果
 
 ```
 RMAN> list backupset;
@@ -192,13 +192,13 @@ BS 关键字  类型 LV 大小       设备类型 经过时间 完成时间
 
 ### 备份单个或多个pdb
 
-　　1、在CDB根（root）使用BACKUP PLUGGABLE DATABASE命令备份一个或多个PDB数据库。
+1、在CDB根（root）使用BACKUP PLUGGABLE DATABASE命令备份一个或多个PDB数据库。
 
 ```
 RMAN> backuppluggable database pdb1;   //备份多个的话可以pdb1，pdb2这种形式。
 ```
 
-　　2、在PDB中使用BACKUP DATABASE备份当前连接的PDB数据库，前提条件是需要配置好TNSNAMES.ORA文件。
+2、在PDB中使用BACKUP DATABASE备份当前连接的PDB数据库，前提条件是需要配置好TNSNAMES.ORA文件。
 
 ```
 [oracle@jydb1 ~]$ rman target sys/******@jydb1/RACDB1PDB
@@ -233,27 +233,27 @@ RMAN> backup database;
 
 ### 整体数据库恢复（cdb和所有pdb）
 
-　　12C数据库加强了RMAN恢复的功能，恢复的方式基本同以前的模式一样，如果是在一个全新的异地进行恢复
+12C数据库加强了RMAN恢复的功能，恢复的方式基本同以前的模式一样，如果是在一个全新的异地进行恢复
 
-　　操作步骤
+操作步骤
 
-　　1、首先准备同版本系统和数据库软件，仅安装数据库软件；
+1、首先准备同版本系统和数据库软件，仅安装数据库软件；
 
-　　2、备份完将所有备份介质传到异地服务器B(如果两台机器是内连网络，可以考虑结合NFS服务从一开始就备份到服务器B上)。
+2、备份完将所有备份介质传到异地服务器B(如果两台机器是内连网络，可以考虑结合NFS服务从一开始就备份到服务器B上)。
 
-　　3、通过RMAN命令或者拷贝原始库的控制文件到新库上，修改参数文件、创建数据文件路径等，启动CDB数据库到mount状态，声明恢复目录
+3、通过RMAN命令或者拷贝原始库的控制文件到新库上，修改参数文件、创建数据文件路径等，启动CDB数据库到mount状态，声明恢复目录
 
-　　4、restore还原数据文件
+4、restore还原数据文件
 
-　　5、recover恢复到故障时间点
+5、recover恢复到故障时间点
 
-　　6、其他调整
+6、其他调整
 
-　　‍
+‍
 
 ### 单个pdb数据库恢复
 
-　　 恢复单个PDB的前提是CDB已经能够正常启动，在CDB启动的情况下在RMAN中采用restore pluggable database pdb名称指定单个PDB数据库进行恢复，如下
+ 恢复单个PDB的前提是CDB已经能够正常启动，在CDB启动的情况下在RMAN中采用restore pluggable database pdb名称指定单个PDB数据库进行恢复，如下
 
 ```
 RMAN>restore pluggable database orcl;
@@ -266,9 +266,9 @@ SQL>alter pluggable database pdb1 orcl resetlogs;
 
 ### 恢复pdb数据文件
 
-　　数据库在open的时候，会对当前的数据的所有数据文件进行检查。如果数据文件出现异常，则从报错中获取数据文件id，到rman下进行还原和恢复后方能正常启动数据库。（还原的前提是你有数据库的rman备份数据，包括：数据文件备份、归档日志备份、还可能用到redo文件）
+数据库在open的时候，会对当前的数据的所有数据文件进行检查。如果数据文件出现异常，则从报错中获取数据文件id，到rman下进行还原和恢复后方能正常启动数据库。（还原的前提是你有数据库的rman备份数据，包括：数据文件备份、归档日志备份、还可能用到redo文件）
 
-　　当cdb在打开的时候，数据库不会检查pdb中的数据文件。
+当cdb在打开的时候，数据库不会检查pdb中的数据文件。
 
 ```
 RMAN>restore datafile datafile_id;
@@ -279,4 +279,4 @@ RMAN>recover datafile datafile_id;
 SQL>alter  database open;
 ```
 
-　　‍
+‍

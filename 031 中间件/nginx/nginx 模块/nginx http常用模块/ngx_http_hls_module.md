@@ -1,9 +1,9 @@
 # ngx_http_hls_module
 
-　　  
+  
 ​`ngx_http_hls_module`​ 模块为 MP4 和 MOV 媒体文件提供 HTTP Live Streaming（HLS）服务器端支持。这些文件通常具有 `.mp4`​、`.m4v`​、`.m4a`​、`.mov`​ 或 `.qt`​ 扩展名。该模块支持 H.264 视频编解码器、AAC 和 MP3 音频编解码器。
 
-　　对于每个媒体文件，支持两种 URI：
+对于每个媒体文件，支持两种 URI：
 
 * 带有 `.m3u8`​ 文件扩展名的播放列表 URI。该 URI 可以接受可选参数：
 
@@ -16,7 +16,7 @@
 
 > 该模块可作为我们[商业订阅](http://nginx.com/products/?_ga=2.248085959.1917722686.1520954456-1859001452.1520648382)的一部分。
 
-　　‍
+‍
 
 ## 示例配置
 
@@ -31,7 +31,7 @@ location / {
 }
 ```
 
-　　在此配置中，`/var/video/test.mp4`​ 文件支持以下 URI：
+在此配置中，`/var/video/test.mp4`​ 文件支持以下 URI：
 
 ```
 http://hls.example.com/test.mp4.m3u8?offset=1.000&start=1.000&end=2.200
@@ -39,7 +39,7 @@ http://hls.example.com/test.mp4.m3u8?len=8.000
 http://hls.example.com/test.mp4.ts?start=1.000&end=2.200
 ```
 
-　　‍
+‍
 
 ## 指令
 
@@ -51,9 +51,9 @@ http://hls.example.com/test.mp4.ts?start=1.000&end=2.200
 |**默认**|——|
 |**上下文**|location|
 
-　　为当前 location 打开 HLS 流。
+为当前 location 打开 HLS 流。
 
-　　‍
+‍
 
 ### hls\_buffers
 
@@ -63,9 +63,9 @@ http://hls.example.com/test.mp4.ts?start=1.000&end=2.200
 |**默认**|hls\_buffers 8 2m;|
 |**上下文**|http、server、location|
 
-　　设置用于读取和写入数据帧的缓冲区的最大数量（`number`​）和大小（`size`​）。
+设置用于读取和写入数据帧的缓冲区的最大数量（`number`​）和大小（`size`​）。
 
-　　‍
+‍
 
 ### hls\_forward\_args
 
@@ -76,9 +76,9 @@ http://hls.example.com/test.mp4.ts?start=1.000&end=2.200
 |**上下文**|http、server、location|
 |**提示**|该指令在 1.5.12 版本中出现|
 
-　　将播放列表请求中的参数添加到片段的 URI 中。这对于在请求片段时或在使用 [ngx_http_secure_link_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_secure_link_module) 模块保护 HLS 流时执行客户端授权非常有用。
+将播放列表请求中的参数添加到片段的 URI 中。这对于在请求片段时或在使用 [ngx_http_secure_link_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_secure_link_module) 模块保护 HLS 流时执行客户端授权非常有用。
 
-　　例如，如果客户端请求播放列表 `http://example.com/hls/test.mp4.m3u8?a=1&b=2`​，参数 `a=1`​ 和 `b=2`​ 将在参数 `start`​ 和 `end`​ 后面添加到片段 URI 中：
+例如，如果客户端请求播放列表 `http://example.com/hls/test.mp4.m3u8?a=1&b=2`​，参数 `a=1`​ 和 `b=2`​ 将在参数 `start`​ 和 `end`​ 后面添加到片段 URI 中：
 
 ```
 #EXTM3U
@@ -102,7 +102,7 @@ test.mp4.ts?start=42.583&end=52.209&a=1&b=2
 #EXT-X-ENDLIST
 ```
 
-　　如果 HLS 流受到 [ngx_http_secure_link_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_secure_link_module) 模块的保护，则不应在 [secure_link_md5](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_secure_link_module#secure_link_md5) 表达式中使用 `$uri`​，因为这会在请求片段时触发错误。应该使用 [Base URI](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_map_module#map) 而不是 `$uri`​（在示例中为 `$hls_uri`​）：
+如果 HLS 流受到 [ngx_http_secure_link_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_secure_link_module) 模块的保护，则不应在 [secure_link_md5](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_secure_link_module#secure_link_md5) 表达式中使用 `$uri`​，因为这会在请求片段时触发错误。应该使用 [Base URI](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_map_module#map) 而不是 `$uri`​（在示例中为 `$hls_uri`​）：
 
 ```
 http {
@@ -138,7 +138,7 @@ http {
 }
 ```
 
-　　‍
+‍
 
 ### hls\_fragment
 
@@ -148,9 +148,9 @@ http {
 |**默认**|hls\_fragment 5s;|
 |**上下文**|http、server、location|
 
-　　定义未使用 `len`​ 参数请求的播放列表 URI 的默认片段长度。
+定义未使用 `len`​ 参数请求的播放列表 URI 的默认片段长度。
 
-　　‍
+‍
 
 ### hls\_mp4\_buffer\_size
 
@@ -160,9 +160,9 @@ http {
 |**默认**|hls\_mp4\_buffer\_size 512k;|
 |**上下文**|http、server、location|
 
-　　设置用于处理 MP4 和 MOV 文件的缓冲区的初始大小（`size`​）。
+设置用于处理 MP4 和 MOV 文件的缓冲区的初始大小（`size`​）。
 
-　　‍
+‍
 
 ### hls\_mp4\_max\_buffer\_size
 
@@ -172,7 +172,7 @@ http {
 |**默认**|hls\_mp4\_max\_buffer\_size 10m;|
 |**上下文**|http、server、location|
 
-　　在元数据处理期间，可能需要更大的缓冲区。其大小不能超过指定的大小（`size`​），否则 nginx 将返回 500 状态码（内部服务器错误），并记录以下消息：
+在元数据处理期间，可能需要更大的缓冲区。其大小不能超过指定的大小（`size`​），否则 nginx 将返回 500 状态码（内部服务器错误），并记录以下消息：
 
 ```
 "/some/movie/file.mp4" mp4 moov atom is too large:

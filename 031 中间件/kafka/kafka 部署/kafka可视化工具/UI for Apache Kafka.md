@@ -4,21 +4,21 @@
 
 ### 安装 jdk
 
-　　首先安装jdk 部署 17版本
+首先安装[jdk 部署](031%20中间件/jdk.md#20231110105237-94a9b5j) 17版本
 
 ### 安装 kafka-ui
 
-　　其实 kafka-ui 是没有安装过程的，在 github 上已经打包成了 jar 包，当前最新版本为 0.7,下载地址如下：
+其实 kafka-ui 是没有安装过程的，在 github 上已经打包成了 jar 包，当前最新版本为 0.7,下载地址如下：
 
-　　[https://github.com/provectus/kafka-ui/releases](https://github.com/provectus/kafka-ui/releases)
+[https://github.com/provectus/kafka-ui/releases](https://github.com/provectus/kafka-ui/releases)
 
 ```bash
 wget https://github.com/provectus/kafka-ui/releases/download/v0.7.2/kafka-ui-api-v0.7.2.jar
 ```
 
-　　我们下载最新的 jar 后，放到服务器上
+我们下载最新的 jar 后，放到服务器上
 
-　　创建一个 application.yml 文件:
+创建一个 application.yml 文件:
 
 ```yaml
 kafka:
@@ -69,7 +69,7 @@ management:
 
 #### clusters
 
-　　 在 `kafka`​ 中配置相关的 kafka 集群，每一个 `clusters`​ 为一个集群，需要配置：
+ 在 `kafka`​ 中配置相关的 kafka 集群，每一个 `clusters`​ 为一个集群，需要配置：
 
 * name
 
@@ -105,13 +105,13 @@ management:
 java -jar "./kafka-ui-api-v0.7.2.jar" --spring.config.additional-location="./application.yml"
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## docker环境运行
 
-　　kafka-ui 不允许在运行时更改其配置。当应用程序启动时，它会从系统环境、配置文件（例如 application.yaml）和 JVM  参数（由-D）读取配置。一旦配置被读取，它就被视为不可变，即使配置源（例如文件）发生更改也不会刷新。从 0.6  版本开始，我们添加了在运行时更改集群配置的功能。默认情况下禁用此选项，应隐式启用。要启用它，您应该设置DYNAMIC\_CONFIG\_ENABLEDenv 属性true或将dynamic.config.enabled: true属性添加到 yaml 配置文件。示例 docker compose  配置
+kafka-ui 不允许在运行时更改其配置。当应用程序启动时，它会从系统环境、配置文件（例如 application.yaml）和 JVM  参数（由-D）读取配置。一旦配置被读取，它就被视为不可变，即使配置源（例如文件）发生更改也不会刷新。从 0.6  版本开始，我们添加了在运行时更改集群配置的功能。默认情况下禁用此选项，应隐式启用。要启用它，您应该设置DYNAMIC\_CONFIG\_ENABLEDenv 属性true或将dynamic.config.enabled: true属性添加到 yaml 配置文件。示例 docker compose  配置
 
 ```dockerfile
 services:
@@ -131,4 +131,4 @@ mkdir ~/kui/  && touch ~/kui/config.yml && chmod 777 ~/kui/config.yml
 sudo docker-compose -f docker-compose.yml up -d
 ```
 
-　　‍
+‍

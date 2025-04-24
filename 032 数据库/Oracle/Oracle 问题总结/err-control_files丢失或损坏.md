@@ -3,7 +3,7 @@
 * ORA-00205: 标识控制文件出错，有关详情，请检查警告日志​
 * `sqlplus`​登录报错 ERROR: ORA-01033: ORACLE 正在初始化或关闭 Process
 
-　　数据库实例无法startup，一般为控制文件丢失或损坏
+数据库实例无法startup，一般为控制文件丢失或损坏
 
 ### **检查如下**<span data-type="text" style="color: var(--b3-font-color7);">:</span>
 
@@ -91,7 +91,7 @@ Additional information:
 
 ```
 
-　　注意：上面81行显示`/data/oradata/ORCL/control01.ctl`​这个控制文件丢失
+注意：上面81行显示`/data/oradata/ORCL/control01.ctl`​这个控制文件丢失
 
 ### **解决方法1：从备份恢复控制文件**
 
@@ -297,4 +297,4 @@ Tablespace altered.
 >
 > （5）MAXLOGHISTORY    指定控制文件的日志历史记录中可以记录的最大重做日志文件数。日志历史记录用于 Oracle Real Application Clusters 的自动介质恢复。对于 Oracle Real Application Clusters，请将 MAXLOGHISTORY 设置为较大的值，例如 100。然后，控制文件可以存储有关此重做日志文件数的信息。当日志历史记录超过此限制时，Oracle 服务器将覆盖日志历史记录中最旧的条目。MAXLOGHISTORY 的默认值为 0（零），这将禁用日志历史记录。
 
-　　‍
+‍

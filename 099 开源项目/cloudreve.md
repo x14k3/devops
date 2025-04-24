@@ -1,10 +1,10 @@
 # cloudreve
 
-　　Cloudreve是一款免费开源的网盘系统， 支持腾讯云COS、本机、OneDrive等作为存储端，支持上传/下载，支持客户端直传，支持下载限速，可对接Aria2实现离线下载，支持在线压缩/解压、多文件打包下载。Cloudreve同时也支持多用户注册和使用，视频、图像、音频、文本、Office 文档在线预览。覆盖全部存储策略的 WebDAV 协议支持，将网盘映射到本地管理。
+Cloudreve是一款免费开源的网盘系统， 支持腾讯云COS、本机、OneDrive等作为存储端，支持上传/下载，支持客户端直传，支持下载限速，可对接Aria2实现离线下载，支持在线压缩/解压、多文件打包下载。Cloudreve同时也支持多用户注册和使用，视频、图像、音频、文本、Office 文档在线预览。覆盖全部存储策略的 WebDAV 协议支持，将网盘映射到本地管理。
 
-　　下载地址：[https://github.com/cloudreve/Cloudreve](https://github.com/cloudreve/Cloudreve)
+下载地址：[https://github.com/cloudreve/Cloudreve](https://github.com/cloudreve/Cloudreve)
 
-　　✨ 特性
+✨ 特性
 
 - ☁️ 支持本机、从机、七牛、阿里云 OSS、腾讯云 COS、又拍云、OneDrive (包括世纪互联版) 作为存储端
 - 上传/下载 支持客户端直传，支持下载限速
@@ -33,9 +33,9 @@ tar xvf cloudreve_3.8.3_linux_amd64.tar.gz
 ./cloudreve -c /path/to/conf.ini
 ```
 
-　　进程守护
+进程守护
 
-　　​`vim /usr/lib/systemd/system/cloudreve.service`​
+​`vim /usr/lib/systemd/system/cloudreve.service`​
 
 ```ini
 [Unit]
@@ -59,7 +59,7 @@ StandardError=syslog
 WantedBy=multi-user.target
 ```
 
-　　反向代理
+反向代理
 
 ```ini
 location / {
@@ -162,17 +162,17 @@ max_worker_num = 50
 
 ## OnlyOffice
 
-　　OnlyOffice 在 6.4 版本后支持了 WOPI 协议，请参考 官方文档 部署你的 [OnlyOffice](https://helpcenter.onlyoffice.com/) 实例。推荐使用 [Docker-DocumentServer](https://github.com/ONLYOFFICE/Docker-DocumentServer) 来快速部署。
+OnlyOffice 在 6.4 版本后支持了 WOPI 协议，请参考 官方文档 部署你的 [OnlyOffice](https://helpcenter.onlyoffice.com/) 实例。推荐使用 [Docker-DocumentServer](https://github.com/ONLYOFFICE/Docker-DocumentServer) 来快速部署。
 
-　　参考 [官方文档](https://helpcenter.onlyoffice.com/installation/docs-developer-configuring.aspx#WOPI) 配置 OnlyOffice 开启 WOPI 功能。如果使用 Docker，可在创建 Contianer 时指定 `WOPI_ENABLED`​ 为 `true`​ 来开启：
+参考 [官方文档](https://helpcenter.onlyoffice.com/installation/docs-developer-configuring.aspx#WOPI) 配置 OnlyOffice 开启 WOPI 功能。如果使用 Docker，可在创建 Contianer 时指定 `WOPI_ENABLED`​ 为 `true`​ 来开启：
 
 ```
 docker pull onlyoffice/documentserver
 docker run -i -t -d -p 8080:80 -e WOPI_ENABLED=true onlyoffice/documentserver
 ```
 
-　　你可以手动访问 `<你的 OnlyOffice 主机>/hosting/discovery`​ 来确认是否返回了预期的 XML 响应。
+你可以手动访问 `<你的 OnlyOffice 主机>/hosting/discovery`​ 来确认是否返回了预期的 XML 响应。
 
-　　在 后台 - 参数设置 - 图像与预览 - 文件预览 - WOPI 客户端 中开启 `使用 WOPI`​ 并在 `WOPI Discovery Endpoint`​ 中填入`<你的服务主机>/hosting/discovery`​。保存后可在前台测试文档预览和编辑。
+在 后台 - 参数设置 - 图像与预览 - 文件预览 - WOPI 客户端 中开启 `使用 WOPI`​ 并在 `WOPI Discovery Endpoint`​ 中填入`<你的服务主机>/hosting/discovery`​。保存后可在前台测试文档预览和编辑。
 
-　　‍
+‍

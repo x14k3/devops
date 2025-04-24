@@ -210,7 +210,7 @@ func main() {
   * 首先在本地启动 consul
   * 并在 consul 上设置名为 config 的 json 配置文件
 
-    ​![ILyDXtfCXG](assets/ILyDXtfCXG-20240624135230-eg5lwpr.png)​
+    ![ILyDXtfCXG](assets/ILyDXtfCXG-20240624135230-eg5lwpr.png)
   * 代码如下
 
   ```go

@@ -1,6 +1,6 @@
 # ngx_mail_core_module
 
-　　默认不构建此模块，可使用 `--with-mail`​ 配置参数启用。
+默认不构建此模块，可使用 `--with-mail`​ 配置参数启用。
 
 ## 示例配置
 
@@ -56,7 +56,7 @@ mail {
 |**默认**|——|
 |**上下文**|server|
 
-　　为将接受请求的服务器的套接字设置地址（`address`​）和端口（`port`​）。可以仅指定端口。地址也可以是主机名，例如：
+为将接受请求的服务器的套接字设置地址（`address`​）和端口（`port`​）。可以仅指定端口。地址也可以是主机名，例如：
 
 ```
 listen 127.0.0.1:110;
@@ -65,24 +65,24 @@ listen 110;     # same as *:110
 listen localhost:110;
 ```
 
-　　IPv6 地址在方括号中指定（0.7.58）：
+IPv6 地址在方括号中指定（0.7.58）：
 
 ```
 listen [::1]:110;
 listen [::]:110;
 ```
 
-　　UNIX 域套接字使用 `unix:`​ 前缀指定（1.3.5）：
+UNIX 域套接字使用 `unix:`​ 前缀指定（1.3.5）：
 
 ```
 listen unix:/var/run/nginx.sock;
 ```
 
-　　不同的服务器必须侦听不同的 `address:port`​ 对，不能重复。
+不同的服务器必须侦听不同的 `address:port`​ 对，不能重复。
 
-　　​`ssl`​ 参数指定该端口上接受的所有连接均应以 SSL 模式工作。
+​`ssl`​ 参数指定该端口上接受的所有连接均应以 SSL 模式工作。
 
-　　​`listen`​ 指令可以指定几个额外的参数给套接字相关的系统调用。
+​`listen`​ 指令可以指定几个额外的参数给套接字相关的系统调用。
 
 * ​`backlog=number`​  
   在 `listen()`​ 调用中设置 `backlog`​ 参数，该参数限制挂起的连接队列的最大长度（1.9.2）。默认情况下，在 FreeBSD、DragonFly BSD 和 mac OS上，`backlog`​ 设置为 -1，而在其他平台上则设置为 511。
@@ -110,7 +110,7 @@ listen unix:/var/run/nginx.sock;
 |**默认**|——|
 |**上下文**|main|
 
-　　在指定的邮件服务器指令中提供配置文件上下文。
+在指定的邮件服务器指令中提供配置文件上下文。
 
 ### protocol
 
@@ -120,9 +120,9 @@ listen unix:/var/run/nginx.sock;
 |**默认**|——|
 |**上下文**|server|
 
-　　设置代理服务器的协议。支持的协议有 [IMAP](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_imap_module)、[POP3](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_pop3_module) 和 [SMTP](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_smtp_module)。
+设置代理服务器的协议。支持的协议有 [IMAP](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_imap_module)、[POP3](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_pop3_module) 和 [SMTP](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_smtp_module)。
 
-　　如果未设置该指令，则可以基于 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_core_module#listen) 指令中指定的为人熟知的默认端口来自动检测协议：
+如果未设置该指令，则可以基于 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_core_module#listen) 指令中指定的为人熟知的默认端口来自动检测协议：
 
 * ​`imap`​：143、993
 * ​`pop3`​：110、995
@@ -137,21 +137,21 @@ listen unix:/var/run/nginx.sock;
 |**默认**|resolver off;|
 |**上下文**|mail、server|
 
-　　配置用于查找客户端主机名以将其传递给[身份验证服务器](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_auth_http_module)的名称服务器，以及代理 SMTP 时的 [XCLIENT](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_proxy_module#xclient) 命令。 例如：
+配置用于查找客户端主机名以将其传递给[身份验证服务器](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_auth_http_module)的名称服务器，以及代理 SMTP 时的 [XCLIENT](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_proxy_module#xclient) 命令。 例如：
 
 ```
 resolver 127.0.0.1 [::1]:5353;
 ```
 
-　　可以使用可选端口（1.3.1、1.2.2）将地址指定为域名或 IP 地址。如果未指定端口，则使用端口 53。以轮询方式查询名称服务器。
+可以使用可选端口（1.3.1、1.2.2）将地址指定为域名或 IP 地址。如果未指定端口，则使用端口 53。以轮询方式查询名称服务器。
 
 > 在 1.1.7 版本之前，只能配置一个名称服务器。从 1.3.1 和 1.2.2 版本开始，支持使用 IPv6 地址指定名称服务器。
 
-　　默认情况下，nginx 将在解析时同时查找 IPv4 和 IPv6 地址。如果不需要查找 IPv6 地址，则可以指定 `ipv6=off`​ 参数。
+默认情况下，nginx 将在解析时同时查找 IPv4 和 IPv6 地址。如果不需要查找 IPv6 地址，则可以指定 `ipv6=off`​ 参数。
 
 > 从 1.5.8 版本开始，支持将名称解析为 IPv6 地址。
 
-　　默认情况下，nginx 使用响应的 TTL 值缓存应答。可选的 `valid`​ 参数可覆盖它：
+默认情况下，nginx 使用响应的 TTL 值缓存应答。可选的 `valid`​ 参数可覆盖它：
 
 ```
 resolver 127.0.0.1 [::1]:5353 valid=30s;
@@ -161,9 +161,9 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 >
 > 为防止 DNS 欺骗，建议在适当安全的受信任本地网络中配置 DNS 服务器。
 
-　　可选的 `status_zone`​ 参数（1.17.1）启用对指定区域中的请求和响应的 DNS 服务器统计信息的[收集]功能(../http/ngx*http_api_module.md#resolvers*)。该参数为我们的[商业订阅](http://nginx.com/products/?_ga=2.151996858.282650095.1578660485-1105498734.1571247330)部分。
+可选的 `status_zone`​ 参数（1.17.1）启用对指定区域中的请求和响应的 DNS 服务器统计信息的[收集]功能(../http/ngx*http_api_module.md#resolvers*)。该参数为我们的[商业订阅](http://nginx.com/products/?_ga=2.151996858.282650095.1578660485-1105498734.1571247330)部分。
 
-　　特殊值 `off`​ 禁用解析。
+特殊值 `off`​ 禁用解析。
 
 ### resolver\_timeout
 
@@ -173,7 +173,7 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 |**默认**|resolver\_timeout 30s;|
 |**上下文**|mail、server|
 
-　　设置 DNS 操作的超时时间，例如：
+设置 DNS 操作的超时时间，例如：
 
 ```
 resolver_timeout 5s;
@@ -187,7 +187,7 @@ resolver_timeout 5s;
 |**默认**|——|
 |**上下文**|mail|
 
-　　设置服务器的配置。
+设置服务器的配置。
 
 ### server\_name
 
@@ -197,7 +197,7 @@ resolver_timeout 5s;
 |**默认**|server\_name hostname;|
 |**上下文**|mail、server|
 
-　　设置服务器名称，在以下场景中使用的：
+设置服务器名称，在以下场景中使用的：
 
 * 最开始的 POP3/SMTP 服务器问候语中
 * SASL CRAM-MD5 身份验证中的盐值中
@@ -212,4 +212,4 @@ resolver_timeout 5s;
 |**默认**|timeout 60s;|
 |**上下文**|mail、server|
 
-　　设置超时时间，在代理到后端开始之前使用。
+设置超时时间，在代理到后端开始之前使用。

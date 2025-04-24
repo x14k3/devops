@@ -1,10 +1,10 @@
 # haproxy 简单部署
 
-　　LVS： 是基于四层的转发  
+LVS： 是基于四层的转发  
 HAproxy： 是基于四层和七层的转发，是专业的代理服务器  
 Nginx： 是WEB服务器，缓存服务器，又是反向代理服务器，可以做七层的转发
 
-　　HAProxy相比较nginx的优点
+HAProxy相比较nginx的优点
 
 * 支持Session的保持，Cookie的引导。nginx需要基于ip_hash来实现；
 * HAProxy跟LVS类似，本身就只是一款负载均衡软件；
@@ -25,9 +25,9 @@ yum -y install haproxy
 * backend : 后端服务集群的配置，真实服务器，一个Backend对应一个或者多个实体服务器。
 * Listen : Fronted和backend的组合体；比如haproxy实例状态监控部分配置。
 
-　　​`vim /etc/haproxy/haproxy.cfg`​
+​`vim /etc/haproxy/haproxy.cfg`​
 
-　　示例1（只使用listen 关联“前端”和“后端”定义了一个完整的代理，进行端口转发和负载均衡。通常只对TCP流量有用 ）
+示例1（只使用listen 关联“前端”和“后端”定义了一个完整的代理，进行端口转发和负载均衡。通常只对TCP流量有用 ）
 
 ```bash
 global
@@ -100,7 +100,7 @@ listen mqweb
 
 ```
 
-　　示例2（采用frontend+backend模式 大多适用于http请求）  
+示例2（采用frontend+backend模式 大多适用于http请求）  
 假设客户端访问 http://do1.test.com 时，要把请求分发到192.168.5.171:8080、192.168.5.174:8080、192.168.5.178:8080，这三台服务器上，我们可以这样配置。
 
 ```bash
@@ -148,4 +148,4 @@ systemctl status haproxy
 
 ## 集群
 
-　　Haproxy本身本身是没有集群配置的，但是我们可以通过将Haproxy配置到多台服务器配置可以是一样的。然后再使用Keepalived通过虚拟IP来切换Haproxy达到我们想要的效果。
+Haproxy本身本身是没有集群配置的，但是我们可以通过将Haproxy配置到多台服务器配置可以是一样的。然后再使用Keepalived通过虚拟IP来切换Haproxy达到我们想要的效果。

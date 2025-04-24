@@ -10,7 +10,7 @@
 |**默认**|pop3\_auth plain;|
 |**上下文**|mail、server|
 
-　　为 POP3 客户端设置允许的认证方法。支持的方法有：
+为 POP3 客户端设置允许的认证方法。支持的方法有：
 
 * ​`plain`​  
   [USER/PASS](https://tools.ietf.org/html/rfc1939)、[AUTH PLAIN](https://tools.ietf.org/html/rfc4616)、[AUTH LOGIN](https://tools.ietf.org/html/draft-murchison-sasl-login-00)。不可能禁用这些方法。
@@ -29,6 +29,6 @@
 |**默认**|pop3\_capabilities TOP USER UIDL;|
 |**上下文**|mail、server|
 
-　　设置响应 `CAPA`​ 命令传送给客户端的 [POP3 协议](https://tools.ietf.org/html/rfc2449) 扩展列表。根据 [starttls](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#starttls) 指令值，[pop3_auth](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_pop3_module#pop3_auth) 指令（[SASL](https://tools.ietf.org/html/rfc2449) 扩展）和 [STLS](https://tools.ietf.org/html/rfc2595) 中指定的认证方法将自动添加到此列表。
+设置响应 `CAPA`​ 命令传送给客户端的 [POP3 协议](https://tools.ietf.org/html/rfc2449) 扩展列表。根据 [starttls](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#starttls) 指令值，[pop3_auth](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_pop3_module#pop3_auth) 指令（[SASL](https://tools.ietf.org/html/rfc2449) 扩展）和 [STLS](https://tools.ietf.org/html/rfc2595) 中指定的认证方法将自动添加到此列表。
 
-　　指定客户端代理的 POP3 后端支持的扩展（当 nginx 透明地代理到后端的客户端连接，如果这些扩展与认证后使用的命令相关），则是有意义的。
+指定客户端代理的 POP3 后端支持的扩展（当 nginx 透明地代理到后端的客户端连接，如果这些扩展与认证后使用的命令相关），则是有意义的。

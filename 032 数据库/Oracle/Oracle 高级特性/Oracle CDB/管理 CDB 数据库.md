@@ -1,6 +1,6 @@
 # 管理 CDB 数据库
 
-　　‍
+‍
 
 ## 1. 开启和关闭所有的PDB
 
@@ -56,7 +56,7 @@ FILE_NAME_CONVERT = ('/data/oradata/ORCL/pdbseed','/data/oradata/ORCL/pdb2');
 --FILE_NAME_CONVERT    设置子容器和数据文件副本的位置
 ```
 
-　　OMF下创建pdb
+OMF下创建pdb
 
 ```sqlplus
 CREATE PLUGGABLE DATABASE pdb2 ADMIN USER pdb2 IDENTIFIED BY Ninestar123 
@@ -65,7 +65,7 @@ STORAGE (MAXSIZE 2G)
 FILE_NAME_CONVERT = ('/home/ora/oradata/ORCL/pdbseed','/home/ora/oradata/ORCL/pdb2');
 ```
 
-　　‍
+‍
 
 ## 4. 查看默认创建的表空间的对应的数据文件
 
@@ -92,4 +92,4 @@ SQL>
 
 ```
 
-　　‍
+‍

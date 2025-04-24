@@ -34,7 +34,7 @@ disql SYSDBA/Ninestar123@192.168.130.136:5236 \`/opt/dm/test.sql
 
 ## 2.创建表空间
 
-　　达梦数据库中表空间的数据文件的初始大小必须是数据库实例页大小的4096倍,比如创建的数据库实例是32K，那么数据文件的最小限制为4096\*32k/1024=128M，也就是说创建表空间的起始值要≥128M，默认单位M。
+达梦数据库中表空间的数据文件的初始大小必须是数据库实例页大小的4096倍,比如创建的数据库实例是32K，那么数据文件的最小限制为4096\*32k/1024=128M，也就是说创建表空间的起始值要≥128M，默认单位M。
 
 ```bash
 #创建表空间
@@ -66,9 +66,9 @@ select * from v$tablespace;
 |修改表空间数据文件大小|alter tablespace XXX resize datafile ‘xxx/xxx/xxx.dbf’ to aa;（注意：不能将数据文件的大小变小，例如：256M.dbf==>128M.dbf）|
 |修改表空间数据文件路径|alter tablespace XXX rename datafile ‘xxx/xxx/xxx.dbf’ to ‘yyy/yyy/yyy.dbf’;|
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## 3.创建用户
 

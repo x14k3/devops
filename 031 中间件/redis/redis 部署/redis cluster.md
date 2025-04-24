@@ -1,10 +1,10 @@
 # redis cluster
 
-　　Redis 的哨兵模式基本已经可以实现高可用，读写分离 ，但是在这种模式下每台 Redis 服务器都存储相同的数据，很浪费内存，所以在 redis3.0 上加入了 Cluster 集群模式，实现了 Redis 的分布式存储，对数据进行分片，也就是说每台 Redis 节点上存储不同的内容；
+Redis 的哨兵模式基本已经可以实现高可用，读写分离 ，但是在这种模式下每台 Redis 服务器都存储相同的数据，很浪费内存，所以在 redis3.0 上加入了 Cluster 集群模式，实现了 Redis 的分布式存储，对数据进行分片，也就是说每台 Redis 节点上存储不同的内容；
 
-​![](assets/image-20221127213612182-20230610173812-75vujc9.png)​
+![](assets/image-20221127213612182-20230610173812-75vujc9.png)
 
-　　根据官方推荐，集群部署至少要 3 台以上的 master 节点，最好使用 3 主 3 从六个节点的模式。测试时，也可以在一台机器上部署这六个实例，通过端口区分出来。
+根据官方推荐，集群部署至少要 3 台以上的 master 节点，最好使用 3 主 3 从六个节点的模式。测试时，也可以在一台机器上部署这六个实例，通过端口区分出来。
 
 |机器名称|IP|端口|
 | ----------| ---------------| ------|
@@ -17,7 +17,7 @@
 
 ### 1. 配置集群
 
-　　6台服务器都进行以下配置，修改redis.conf
+6台服务器都进行以下配置，修改redis.conf
 
 ```bash
 vim redis.conf
@@ -49,16 +49,16 @@ cluster-node-timeout 5000
 
 #### 使用Docker或者内网情况下，外网无法访问集群
 
-　　上述我们知道了Cluster集群在启动时，会在数据目录下生成一个`nodes.conf`​记录集群信息，其中包含了每个节点的地址和端口，这也是为什么我们通常连接一个节点就可以操作整个集群，在默认情况下：
+上述我们知道了Cluster集群在启动时，会在数据目录下生成一个`nodes.conf`​记录集群信息，其中包含了每个节点的地址和端口，这也是为什么我们通常连接一个节点就可以操作整个集群，在默认情况下：
 
 * 每次集群启动，每个节点会自动获取自己的内网地址并广播给其它节点，这样每个节点将各自节点地址记录在`nodes.conf`​中，并且每次启动`nodes.conf`​都会被刷新
 * 通过客户端进行连接时，客户端会先通过连接的节点，获取整个集群每个节点的地址，再重新连接每个集群节点，而客户端获取的集群节点地址，就是对应节点中`nodes.conf`​中的地址
 
-　　可见这就会导致一个问题：当我们在Docker或者内网环境搭建了一个Cluster集群，客户端在连接时得到的每个节点地址是内网地址，这就导致客户端在外网无法成功连接集群。
+可见这就会导致一个问题：当我们在Docker或者内网环境搭建了一个Cluster集群，客户端在连接时得到的每个节点地址是内网地址，这就导致客户端在外网无法成功连接集群。
 
-　　事实上这个问题很好解决，我们让每个节点在广播自己地址端口给其它节点时，指定广播自己的外网地址和端口，而不是自动检测到的内网地址端口就可以了。
+事实上这个问题很好解决，我们让每个节点在广播自己地址端口给其它节点时，指定广播自己的外网地址和端口，而不是自动检测到的内网地址端口就可以了。
 
-　　在每个Cluster的节点配置文件中，加入下列配置：
+在每个Cluster的节点配置文件中，加入下列配置：
 
 ```config
 cluster-announce-ip               #所在服务器外网地址
@@ -73,15 +73,15 @@ Warning: Using a password with '-a' or '-u' option on the command line interface
 429f4b2bdc99347cb429279da18b7fc02e2ddc0f 192.168.133.11:6380@16380 master - 0 1728881559281 2 connected 5461-10922
 ```
 
-　　通过上述配置，我们可以指定每个节点启动时，广播给其它节点的自己的地址和端口信息，分别是：
+通过上述配置，我们可以指定每个节点启动时，广播给其它节点的自己的地址和端口信息，分别是：
 
 * ​`cluster-announce-ip`​ 配置该节点广播给其它节点的自己的地址，通常填写这个节点所在服务器外网地址即可
 * ​`cluster-announce-port`​ 配置该节点广播给其它节点的自己的端口，通常就是`port`​的配置（或者Docker暴露的端口），需保证该端口防火墙已放行
 * ​`cluster-announce-bus-port`​ 配置该节点广播给其它节点的自己的集群交互端口（用于集群节点间相互通信、连结的端口），通常是`cluster-announce-port`​配置值加上`10000`​，需保证该端口防火墙已放行
 
-　　‍
+‍
 
-　　挨个启动所有 redis 节点
+挨个启动所有 redis 节点
 
 ```bash
 /data/redis/bin/redis-server /data/redis/redis.conf &
@@ -89,14 +89,14 @@ Warning: Using a password with '-a' or '-u' option on the command line interface
 
 ### 2. 启动集群
 
-　　自动分配主从节点
+自动分配主从节点
 
 ```bash
 redis-cli -a Ninestar123 --cluster create 192.168.0.200:6379  192.168.0.202:6379 192.168.0.203:6379 192.168.0.204:6379 192.168.0.205:6379 192.168.0.206:6379  --cluster-replicas 1
 #--cluster-replicas 1       创建master的时候同时创建一个slave，默认是0 都是主节点
 ```
 
-　　手动分配主从节点
+手动分配主从节点
 
 ```bash
 # --cluster-replicas 0 所有节点都是master，使用以下命令创建3个主节点：
@@ -109,13 +109,13 @@ redis-cli -a Ninestar123 --cluster add-node 192.168.0.204:6379 192.168.0.200:637
 # 192.168.0.200:6379 作为谁的的从主节点，即主节点
 ```
 
-　　注意：
+注意：
 
 * ​`redis-trib.rb`​是在`redis3.x`​版本时所用的一种部署redis集群的工具，`redis-cli`​是`redis4.x`​及更高版本所支持创建集群的工具，在`redis3.x`​版本时`redis-cli`​只是一个客户端连接管理工具。
 * ​`redis-cli`​比`redis-trib.rb`​多了一个可以认证集群密码的功能，后者创建的集群不能对有密码的集群节点进行很好的管理，所以后来官方直接废弃了这个工具。
 * 用`redis-trib.rb`​创建集群之前需要`配置ruby环境`​，新版本的`redis-cli`​可以直接创建集群环境而不用配置ruby环境。
 
-　　redis-trib.rb创建集群
+redis-trib.rb创建集群
 
 ```bash
 ./bin/redis-trib.rb create 192.168.0.100:6379 192.168.0.100:6380 192.168.0.100:6381
@@ -124,7 +124,7 @@ redis-cli -a Ninestar123 --cluster add-node 192.168.0.204:6379 192.168.0.200:637
 ./bin/redis-trib.rb create --replicas 1 192.168.0.100:6379 192.168.0.100:6380 192.168.0.100:6381 192.168.0.100:6382 192.168.0.100:6383 192.168.0.100:6384
 ```
 
-　　‍
+‍
 
 ### 3. 数据验证
 
@@ -185,7 +185,7 @@ redis-cli -a Ninestar123 -p 6379 -c
 
 #### 4.5 动态**添加集群主节点**
 
-　　集群中新加的主节点默认是没有分solt(hash槽)，需要在添加后手动添加
+集群中新加的主节点默认是没有分solt(hash槽)，需要在添加后手动添加
 
 ```bash
 ./redis-cli -a 123456 --cluster add-node new_host:new_port last_existing_host:last_existing_port --cluster-master-id  node_id
@@ -194,7 +194,7 @@ redis-cli -a Ninestar123 -p 6379 -c
 # node_id:主节点的ID值
 ```
 
-　　新加的主节点分配hash槽
+新加的主节点分配hash槽
 
 ```bash
 ./redis-cli  -a 123456 --cluster reshard 20.200.35.202:6479 --cluster-from  7ee28a15eba6daeeb5e6c297faa0d31ff1e883e5 --cluster-to 9be83b00dd145d46c523750654ac7929fdd8db91 --cluster-slots 1365 --cluster-yes
@@ -207,29 +207,29 @@ redis-cli -a Ninestar123 -p 6379 -c
 
 #### 4.6 **删除集群主节点**
 
-　　由于主节点的槽中保留key-value数据信息，所以在删除主节点之前需要把数据信息移动到其他主节点上（把节点中hash槽移动到其他节点）
+由于主节点的槽中保留key-value数据信息，所以在删除主节点之前需要把数据信息移动到其他主节点上（把节点中hash槽移动到其他节点）
 
 ```bash
 ./redis-cli  -a 123456 --cluster reshard 20.200.35.200:6482 --cluster-from  9be83b00dd145d46c523750654ac7929fdd8db91 --cluster-to 7ee28a15eba6daeeb5e6c297faa0d31ff1e883e5 --cluster-slots 1365 --cluster-yes
 ```
 
-　　查看hash槽移动后的节点信息
+查看hash槽移动后的节点信息
 
 ```bash
 ./redis-cli -c -h 20.200.35.200 -p 6479 -a 123456 cluster nodes
 ```
 
-　　删除主节点
+删除主节点
 
 ```bash
 ./redis-cli -a 123456 --cluster del-node 20.200.35.200:6482 9be83b00dd145d46c523750654ac7929fdd8db91
 ```
 
-　　‍
+‍
 
 ### 5. redis集群手动主备切换
 
-　　Redis 集群中主备切换原则：是使用要升备节点为主节点的地址进行操作。
+Redis 集群中主备切换原则：是使用要升备节点为主节点的地址进行操作。
 
 ```bash
 ./redis-cli -c -h slave_ip -p slave_port -a password cluster failover
@@ -320,4 +320,4 @@ esac
 
 ```
 
-　　‍
+‍

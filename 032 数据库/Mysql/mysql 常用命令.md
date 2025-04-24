@@ -1,12 +1,12 @@
 # mysql 常用命令
 
-　　‍
+‍
 
 ## 启动命令
 
 ### mysqld
 
-　　（1）mysqld是mysql的守护进程，直接使用这种方式启动，会加载MySQL配置（如：/etc/my.cnf）中的[mysqld]和[server]组下的参数内容~  
+（1）mysqld是mysql的守护进程，直接使用这种方式启动，会加载MySQL配置（如：/etc/my.cnf）中的[mysqld]和[server]组下的参数内容~  
 （2）一般通过手动调用mysqld来启动mysql服务，这种方式只有一个mysqld进程，没有守护进程，如果mysql服务挂了，没有检查重启的机制，生产环境不会使用这种方式启动mysql服务~
 
 ```bash
@@ -16,9 +16,9 @@ mysqladmin -uroot -p -S /data/mysql/mysql.sock shut
 
 ### mysql_safe
 
-　　**通过**​**​`mysqld_safe`​**​**启动mysql服务这种方式是生产运维建议使用的启动方式~**
+**通过**​**​`mysqld_safe`​**​**启动mysql服务这种方式是生产运维建议使用的启动方式~**
 
-　　（1）打开mysqld_safe，可以看到其实是一个Shell脚本，这种方式启动除了会加载MySQL配置（如：/etc/my.cnf）中的[mysqld]和[server]组下的参数内容之外，为了兼容老版本，还会加载[safe_mysqld]组下的内容~  
+（1）打开mysqld_safe，可以看到其实是一个Shell脚本，这种方式启动除了会加载MySQL配置（如：/etc/my.cnf）中的[mysqld]和[server]组下的参数内容之外，为了兼容老版本，还会加载[safe_mysqld]组下的内容~  
 （2）执行脚本mysqld_safe时，脚本中会去调用mysqld启动mysqld和monitor mysqld两个进程，monitor即监视的意思，这样如果mysql服务挂了，那么mysqld_safe会重新启动mysqld进程
 
 ```bash
@@ -28,7 +28,7 @@ mysqladmin -uroot -p -S /data/mysql/mysql.sock shut
 
 ### mysql.server
 
-　　（1）脚本mysql.server是mysql安装目录support-files下的一个文件，也是一个启动Shell脚本，脚本中会去调用mysqld_safe脚本  
+（1）脚本mysql.server是mysql安装目录support-files下的一个文件，也是一个启动Shell脚本，脚本中会去调用mysqld_safe脚本  
 （2）主要通过拷贝mysql.server脚本刀片/etc/init.d/目录下，并命名为mysql，实现便捷启动和停止~  
 （3）启动service mysql start、停止service mysql start，非常适合开发环境的运维~
 

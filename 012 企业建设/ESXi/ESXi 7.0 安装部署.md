@@ -1,24 +1,24 @@
 # ESXi 7.0 安装部署
 
-　　下载地址：
+下载地址：
 
-　　[https://customerconnect.vmware.com/cn/evalcenter?p=free-esxi7](https://customerconnect.vmware.com/cn/evalcenter?p=free-esxi7)   
+[https://customerconnect.vmware.com/cn/evalcenter?p=free-esxi7](https://customerconnect.vmware.com/cn/evalcenter?p=free-esxi7)   
 
-　　[https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7](https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7)
+[https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7](https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7)
 
-　　当我还没有深入了解VMware虚拟化的时候，就了解到他下边事实上有不少的子产品，如果没有从中走一遍，还真的很容易绕晕在里边，毕竟有些东西会的人觉得这个太简单，没有说的必要，而不会的人也就终究不会着，百度一下，竟不乏关于这方面的问题，看到一张图，感觉还不错，借鉴过来（事实上这是VCSA安装完成之后首页展示的一张图）。
+当我还没有深入了解VMware虚拟化的时候，就了解到他下边事实上有不少的子产品，如果没有从中走一遍，还真的很容易绕晕在里边，毕竟有些东西会的人觉得这个太简单，没有说的必要，而不会的人也就终究不会着，百度一下，竟不乏关于这方面的问题，看到一张图，感觉还不错，借鉴过来（事实上这是VCSA安装完成之后首页展示的一张图）。
 
-​![image](assets/net-img-237689b7797076fc-20230904173917-tx9wfae.jpg)​
+![image](assets/net-img-237689b7797076fc-20230904173917-tx9wfae.jpg)
 
 > ESXI就是单台服务器部署的工具，当类似这样的单台服务器达到一定数量，再通过UI一台一台登陆来管理就有点不太现实了，因此VCSA就应运而生，它可以作为一台虚拟机部署在某个ESXI当中，并把网络中的所有ESXI添加进来进行集中管理，组成虚拟化集群，同理，当这样的VCSA多了以后，为了管理方便，Vsphere就产生了，这些都是有道理的，而且用了之后绝对好用的。
 
-　　也正如上图中所展示的，最底层由多个主机（ESXI）或者虚拟机组成虚拟机群，通过VCSA来进行管理，而VCSA又是通过Vsphere来管理的。
+也正如上图中所展示的，最底层由多个主机（ESXI）或者虚拟机组成虚拟机群，通过VCSA来进行管理，而VCSA又是通过Vsphere来管理的。
 
-　　今天就来先从最小单位的部署起，ESXi-6.5的安装，6.5较之之前的都有非常大的改进，不仅在各个功能上大有丰富，还加入了web UI的管理方式，极大的方便了日常的使用管理 ，虚拟化优选。
+今天就来先从最小单位的部署起，ESXi-6.5的安装，6.5较之之前的都有非常大的改进，不仅在各个功能上大有丰富，还加入了web UI的管理方式，极大的方便了日常的使用管理 ，虚拟化优选。
 
-　　由于公司服务器已经在使用当中，因此我这里的试验就在本地的VMware workstation里边来进行了。
+由于公司服务器已经在使用当中，因此我这里的试验就在本地的VMware workstation里边来进行了。
 
-　　‍
+‍
 
 ## 1. 准备工作
 
@@ -33,7 +33,7 @@
   BIOS：Advanced（高级菜单）内的CPU Configuration（处理器设置），其中就有一项：Intel Virtualization Technology（Intel虚拟化技术），把它改为Enabled（启用）就可以了，保存后即可。
   ```
 
-　　‍
+‍
 
 ## 2. ESXi7.0 安装
 
@@ -81,7 +81,7 @@
 3. 然后打开防火墙进入【允许应用或功能通过Windows Defender防火墙】；
 4. 点击左上角的【更改设置】然后将列表拉到最下面勾选【远程桌面】最后点击确定完成设置；
 
-　　‍
+‍
 
 > **VMware虚拟机磁盘有厚置备、精简置备两种格式。精简置备磁盘按需增长，厚置备磁盘立刻分配所需空间。**
 >
@@ -90,7 +90,7 @@
 > 如果频繁增加、删除、修改数据，精简置备磁盘实际占用的空间会超过为其分配的空间。例如某个VMware Workstation或VMware ESXi的虚拟机，为虚拟硬盘分配了40GB的空间（精简置备）。如果这台虚拟机反复添加、删除数据，在虚拟机中看到硬盘剩余空间只能还有很多，例如剩余一半，但这个虚拟硬盘所占用的物理空间可能已经超过了40GB，如果是厚置备磁盘则不会存在这个问题。  
 > 实际的生产环境中，虚拟机选择厚置备磁盘还是精简置备磁盘，要根据实际情况选择。如果虚拟机强调性能、并且数据量不大，则选择“厚置备立刻置零”，这将获得最好的性能。如果数据量持续增长、但变动不大，只是持续的增加，则可以选择“精简置备”磁盘。
 
-　　‍
+‍
 
 ## 在KVM中嵌套安装ESXi
 

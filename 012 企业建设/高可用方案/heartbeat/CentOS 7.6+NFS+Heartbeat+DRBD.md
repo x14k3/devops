@@ -2,11 +2,11 @@
 
 ### 架构
 
-　　MySQL+heartbeat+drbd+lvs是一套成熟的集群解决方案在现在多数企业里面，通过heartbeat+DRBD完成MySQL的主节点写操作的高可用性，通过MySQL+lvs实现MySQL数据库的主从复制和MySQL读写的负载均衡。这个方案在读写方面进行了分离，融合了写操作的高可用和读操作的负载均衡。
+MySQL+heartbeat+drbd+lvs是一套成熟的集群解决方案在现在多数企业里面，通过heartbeat+DRBD完成MySQL的主节点写操作的高可用性，通过MySQL+lvs实现MySQL数据库的主从复制和MySQL读写的负载均衡。这个方案在读写方面进行了分离，融合了写操作的高可用和读操作的负载均衡。
 
 ### NFS
 
-　　NFS作为业界常用的共享存储方案，被众多公司采用。使用NFS作为共享存储，为前端WEB server提供服务，主要存储网页代码以及其他文件。
+NFS作为业界常用的共享存储方案，被众多公司采用。使用NFS作为共享存储，为前端WEB server提供服务，主要存储网页代码以及其他文件。
 
 * 常用同步技术
 
@@ -15,18 +15,18 @@
 
 ## 架构部署
 
-　　采用MySQL读写分离的方案；而读写之间的数据同步采用MySQL的单项或者双向复制技术实现。 MySQL写操作采用基于heartbeat+DRBD+MySQL搭建高可用集群；读操作普遍采用基于LVS+keepalived搭建高可用扩展集群方案
+采用MySQL读写分离的方案；而读写之间的数据同步采用MySQL的单项或者双向复制技术实现。 MySQL写操作采用基于heartbeat+DRBD+MySQL搭建高可用集群；读操作普遍采用基于LVS+keepalived搭建高可用扩展集群方案
 
-　　本案例中暂时没部署MySQL，实现思路：ct74和ct75两台机器，分别安装nfs，heartbeat，ct74，DRBD。
+本案例中暂时没部署MySQL，实现思路：ct74和ct75两台机器，分别安装nfs，heartbeat，ct74，DRBD。
 
 * nfs可以另找一台服务器搭建专门用为共享存储。
 * nfs的控制权交给了heartbeat。
 
-　　架构拓扑
+架构拓扑
 
-​![CentOS 7.6数据库架构之NFS+Heartbeat+DRBD实测](assets/network-asset-19051714146047-20241016181221-hek8ep5.png)​
+![CentOS 7.6数据库架构之NFS+Heartbeat+DRBD实测](assets/network-asset-19051714146047-20241016181221-hek8ep5.png)
 
-　　环境全部都是CentOS7.6 系统
+环境全部都是CentOS7.6 系统
 
 |主机名|IP|担任角色|
 | -----------| ----------------| :-------------------------------: |
@@ -300,7 +300,7 @@ tmpfs          tmpfs     152M     0  152M   0% /run/user/0
 再按相同的方法将状态切换回来
 ```
 
-　　‍
+‍
 
 ### 部署heartbeat
 
@@ -431,7 +431,7 @@ auth 1
 #口令（HISHA1）随便给 主从配置相同即可
 ```
 
-　　dbdackup也是同样的安装方法，配置文件直接scp过去就可以了，然后修改
+dbdackup也是同样的安装方法，配置文件直接scp过去就可以了，然后修改
 
 ```
 [root@ct74 ~]# scp -r /usr/local/heartbeat/etc/ha.d/{authkeys,haresources,ha.cf} root@ct75:/usr/local/heartbeat/etc/ha.d/
@@ -480,7 +480,7 @@ Export list for 192.168.137.82
 #查看VIP共享的目录
 ```
 
-　　配置nfs自动挂载
+配置nfs自动挂载
 
 ```
 [root@localhost ~]# mkdir /nfs
@@ -494,7 +494,7 @@ Export list for 192.168.137.82
 #intr参数为了解决当网络出现故障时，我们可以通过按下ctrl+c组合键来终止操作
 ```
 
-　　验证：接下来我们在主上把nfs服务关掉，模拟故障，看VIP是否切换主机
+验证：接下来我们在主上把nfs服务关掉，模拟故障，看VIP是否切换主机
 
 ```
 [root@ct74 ~]# systemctl stop nfs
@@ -515,7 +515,7 @@ Export list for 192.168.137.82
 5月 14 18:21:09 ct74 systemd[1]: Stopped NFS server and services.
 ```
 
-　　我在主被两台机器上查看debug日志，没有任何变动
+我在主被两台机器上查看debug日志，没有任何变动
 
 ```
 [root@ct75 ~]# cd /nfs
@@ -523,9 +523,9 @@ Export list for 192.168.137.82
 #我在挂载了VIP的机器上查看共享目录能否使用，卡死终端
 ```
 
-　　总结下原因：heartbeat没有监控到nfs的服务状态，它自身想当然的认为，只有heartbeat服务出故障，才切VIP。
+总结下原因：heartbeat没有监控到nfs的服务状态，它自身想当然的认为，只有heartbeat服务出故障，才切VIP。
 
-　　解决：我们将nfs，和heartbeat服务做一个捆绑，类似于事物性质。即nfs出问题，heartbeat也要宕掉。这里通过脚本实现。
+解决：我们将nfs，和heartbeat服务做一个捆绑，类似于事物性质。即nfs出问题，heartbeat也要宕掉。这里通过脚本实现。
 
 ```
 [root@ct74 ~]# vim /opt/monitornfs.sh
@@ -557,7 +557,7 @@ echo "nohup /opt/monitornfs.sh &" >>/etc/rc.local
 #以上关于脚本操作，在ct75上重复
 ```
 
-　　测试
+测试
 
 ```
 [root@ct74 ~]# systemctl stop nfs
@@ -568,6 +568,6 @@ echo "nohup /opt/monitornfs.sh &" >>/etc/rc.local
 #VIP切换到备机了
 ```
 
-　　但是nfs客户端的使用并不影响，切换的时候会有轻微的延迟。
+但是nfs客户端的使用并不影响，切换的时候会有轻微的延迟。
 
-　　nfs切记要挂载到别的机器上不要为了省事，省机器
+nfs切记要挂载到别的机器上不要为了省事，省机器

@@ -2,7 +2,7 @@
 
 ## 1. 客户端字符集配置
 
-　　NLS_LANG这个参数由三个组成部分，分别是【语言\_区域.字符集】
+NLS_LANG这个参数由三个组成部分，分别是【语言\_区域.字符集】
 
 ```bash
 # 数据库字符集如果使用ZHS16GBK
@@ -21,19 +21,19 @@ export NLS_LANG="SIMPLIFIED CHINESE_CHINA".AL32UTF8# 终端字符集使用gbk
 
 ```
 
-## 2. listener.ora 详解
+## <span id="20231110105237-0vzx5pj" style="display: none;"></span>2. [listener.ora 详解](Oracle%20配置详解/listener.ora%20详解.md)
 
-　　文件位置：`$ORACLE_HOME/network/admin`​
+文件位置：`$ORACLE_HOME/network/admin`​
 
-## 3. tnsnames.ora 详解
+## <span id="20231110105237-v5tltkf" style="display: none;"></span>3. [tnsnames.ora 详解](Oracle%20配置详解/tnsnames.ora%20详解.md)
 
-　　文件位置：`$ORACLE_HOME/network/admin`​
+文件位置：`$ORACLE_HOME/network/admin`​
 
-## 4. sqlnet.ora 详解
+## 4. [sqlnet.ora 详解](Oracle%20配置详解/sqlnet.ora%20详解.md)
 
-　　文件位置：`$ORACLE_HOME/network/admin`​
+文件位置：`$ORACLE_HOME/network/admin`​
 
-## 5. db_install.rsp参数
+## <span id="20231110105237-m3rpppz" style="display: none;"></span>5. db_install.rsp参数
 
 ```bash
 ####################################################################
@@ -395,7 +395,7 @@ oracle.install.db.config.asm.ASMSNMPPassword=
 
 ```
 
-## 6. dbca.rsp参数
+## <span id="20231110105237-kl3gy6u" style="display: none;"></span>6. dbca.rsp参数
 
 ```bash
 ##############################################################################

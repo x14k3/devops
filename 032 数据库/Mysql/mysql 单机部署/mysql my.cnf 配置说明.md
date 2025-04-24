@@ -1,6 +1,6 @@
 # mysql my.cnf 配置说明
 
-　　‍
+‍
 
 ```bash
 

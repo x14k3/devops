@@ -1,10 +1,10 @@
 # limits.conf 文件
 
-　　‍
+‍
 
 ## 一、 /etc/security/limits.conf 详解
 
-　　​`/etc/security/limits.conf`​ 文件实际是 Linux PAM（插入式认证模块，Pluggable Authentication Modules）中 `pam_limits.so`​ 的配置文件，而且只针对于单个会话。 该设置不会影响系统服务的资源限制。还要注意 `/etc/security/limits.d/`​ 的这个目录，
+​`/etc/security/limits.conf`​ 文件实际是 Linux PAM（插入式认证模块，Pluggable Authentication Modules）中 `pam_limits.so`​ 的配置文件，而且只针对于单个会话。 该设置不会影响系统服务的资源限制。还要注意 `/etc/security/limits.d/`​ 的这个目录，
 
 ### /etc/security/limits.conf 配置解析
 
@@ -104,7 +104,7 @@
 
 ### 配置注意事项
 
-　　注意不能设置 `nofile`​为 `unlimited`​，`noproc`​可以.
+注意不能设置 `nofile`​为 `unlimited`​，`noproc`​可以.
 当我们设置了 `nofile`​为 `unlimited`​ 后，我们进行 ssh 登录，是登录不了的，并且报错下面的内容。nofile的上限应该在1048576以内，否则就会被解析为0，从而导致无法正常登入服务器……
 
 ```bash
@@ -113,10 +113,10 @@ Dec 1 14:57:57 localhost sshd[1543]: pam_limits(sshd:session): Could not set lim
 
 ### 基础配置
 
-　　我们不将所有的配置配置在`/etc/security/limits.conf`​ 而是将配置放在 `/etc/security/limits.d/`​ 下。
+我们不将所有的配置配置在`/etc/security/limits.conf`​ 而是将配置放在 `/etc/security/limits.d/`​ 下。
 比如我们将 nofile的配置放在 `/etc/security/limits.d/20-nofile.conf`​ ，nproc 的配置放在 `/etc/security/limits.d/20-nproc.conf`​.
 
-　　一般我们需要配置的 `/etc/security/limits.d/20-nofile.conf`​ 为。
+一般我们需要配置的 `/etc/security/limits.d/20-nofile.conf`​ 为。
 
 ```markdown
 root soft nofile 65535 
@@ -125,7 +125,7 @@ root hard nofile 65535
 * hard nofile 65535
 ```
 
-　　​`/etc/security/limits.d/20-nproc.conf`​ 设置为
+​`/etc/security/limits.d/20-nproc.conf`​ 设置为
 
 ```bash
 * - nproc 65535 
@@ -135,7 +135,7 @@ root hard nproc unlimited
 
 ### 注意覆盖点的问题。
 
-　　**示例一：** 
+**示例一：** 
 当 `/etc/security/limits.conf`​ 配置了:
 
 ```markdown
@@ -145,9 +145,9 @@ root hard nofile 65538
 * hard nofile 65539
 ```
 
-　　这个root 用户的 默认取值是 65538 ，\* 统配符虽然在 root 配置后面，但是 root 的配置只能被 root 进行覆盖。
+这个root 用户的 默认取值是 65538 ，\* 统配符虽然在 root 配置后面，但是 root 的配置只能被 root 进行覆盖。
 
-　　我们看下这个配置，当这样配置的时候
+我们看下这个配置，当这样配置的时候
 
 ```verilog
 root soft nofile 65538 
@@ -157,9 +157,9 @@ root hard nofile 65538
 root soft nofile 65539
 ```
 
-　　这个的 root 用户的取值还是 65538 ，因为虽然 `root soft nofile 65539`​ 会覆盖我们之前的配置，但是这个配置是不生效的。因为 `root soft nofile 65539`​ 配置的值大于`root hard nofile 65538`​ , `soft`​ 配置的值不能大于 `hard`​.
+这个的 root 用户的取值还是 65538 ，因为虽然 `root soft nofile 65539`​ 会覆盖我们之前的配置，但是这个配置是不生效的。因为 `root soft nofile 65539`​ 配置的值大于`root hard nofile 65538`​ , `soft`​ 配置的值不能大于 `hard`​.
 
-　　**示例二：** 
+**示例二：** 
 当我们在 `/etc/security/limits.conf`​ 配置了:
 
 ```markdown
@@ -169,7 +169,7 @@ root hard nofile 65538
 * hard nofile 65539
 ```
 
-　　然后我们在 `/etc/security/limits.d/20-nofile.conf`​ 配置了：
+然后我们在 `/etc/security/limits.d/20-nofile.conf`​ 配置了：
 
 ```markdown
 root soft nofile 65536 
@@ -178,7 +178,7 @@ root hard nofile 65536
 * hard nofile 65540
 ```
 
-　　最后的取值是会取 `/etc/security/limits.d/20-nofile.conf`​ 里面的值。
+最后的取值是会取 `/etc/security/limits.d/20-nofile.conf`​ 里面的值。
 
 > 1. 配置，只能被特定覆盖。
 > 2. ​`/etc/security/limits.d/`​ 下文件的相同配置可以覆盖 `/etc/security/limits.conf`​
@@ -187,23 +187,23 @@ root hard nofile 65536
 > 5. ​`nofile`​可以设置的最大值为 1048576(2\*\*20)，设置的值大于该数，就会进行登录不了。
 > 6. soft 设置的值 一定要小于或等于 hard 的值。
 
-　　具体详细配置根据应用情况进行配置。
+具体详细配置根据应用情况进行配置。
 
 ## 三、ulimit 配置后生效
 
 ### 临时配置
 
-　　设置可以打开文件的最大数为 65536
+设置可以打开文件的最大数为 65536
 
 ```bash
 ulimit -SHn 65536
 ```
 
-　　重启后失效。
+重启后失效。
 
 ### 永久配置
 
-　　配置到配置文件`/etc/security/limits.conf`​或者 `/etc/security/limits.d/`​ 中。
+配置到配置文件`/etc/security/limits.conf`​或者 `/etc/security/limits.d/`​ 中。
 然后退出当前会话，重新登录。 即可生效，重启配置也会保留。
 
 ## 四、ulimit 常用命令
@@ -234,22 +234,22 @@ ulimit -SHn 65536
 
 ```
 
-　　查看所有的配置
+查看所有的配置
 
 ```bash
 ulimit -a
 ```
 
-　　查看配置的最大打开文件数
+查看配置的最大打开文件数
 
 ```bash
 ulimit -n
 ```
 
-　　更改配置
+更改配置
 
 ```bash
 ulimit -SHn 65536
 ```
 
-　　‍
+‍

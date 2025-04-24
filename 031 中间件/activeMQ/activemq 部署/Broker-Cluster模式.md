@@ -1,13 +1,13 @@
 # Broker-Cluster模式
 
-　　Broker-Cluster部署方式中，各个broker通过网络互相连接，并共享queue。当broker-A上面指定的queue-A中接收到一个message处于pending状态，而此时没有consumer连接broker-A时。如果cluster中的broker-B上面有一个consumer在消费queue-A的消息，那么broker-B会先通过内部网络获取到broker-A上面的message，并通知自己的consumer来消费。  
+Broker-Cluster部署方式中，各个broker通过网络互相连接，并共享queue。当broker-A上面指定的queue-A中接收到一个message处于pending状态，而此时没有consumer连接broker-A时。如果cluster中的broker-B上面有一个consumer在消费queue-A的消息，那么broker-B会先通过内部网络获取到broker-A上面的message，并通知自己的consumer来消费。  
 **优点是可以解决负载均衡和分布式的问题。但不支持高可用。**
 
-​![](assets/image-20221130145157307-20230610173811-argxfbq.png)​
+![](assets/image-20221130145157307-20230610173811-argxfbq.png)
 
 ## static Broker-Cluster
 
-　　static 方式就是在broker的配置中，静态指定要连接到其它broker的地址，格式：
+static 方式就是在broker的配置中，静态指定要连接到其它broker的地址，格式：
 
 1. 修改192.168.0.10上的 ~/activemq/conf/activemq.xml，在`<broker></broker>`​标签中添加以下代码
 
@@ -35,7 +35,7 @@
 
 ## Dynamic Broker-Cluster
 
-　　ActiveMQ 通过组播方式将自己的信息发送出去，接收到的信息的机器再来连接这个发送源。默认情况下，ActiveMQ 发送的是机器名，可以通过配置修改成发送IP地址。**注意机器间的网络**。
+ActiveMQ 通过组播方式将自己的信息发送出去，接收到的信息的机器再来连接这个发送源。默认情况下，ActiveMQ 发送的是机器名，可以通过配置修改成发送IP地址。**注意机器间的网络**。
 
 1. 修改每台机器上的 ~/activemq/conf/activemq.xml，在<broker></broker>标签中添加以下代码
 
@@ -71,7 +71,7 @@
 |alwaysSyncSend|false|如果为true，非持久化消息也将使用request/reply方式代替oneway方式发送到远程broker（V5.6+ 的版本中可以使用）。|
 |staticBridge|false|如果为true，只有staticallyIncludedDestinations中配置的destination可以被处理（V5.6+ 的版本中可以使用）。|
 
-　　以下这些属性，**只能在静态Network Connectors模式下使用**
+以下这些属性，**只能在静态Network Connectors模式下使用**
 
 |属性名称|默认值|属性意义|
 | -----------------------| --------| ----------------------------------------------------------------------|
@@ -82,7 +82,7 @@
 
 ## Master-Slave与Broker-Cluster结合部署
 
-　　这里使用ZK搭建两组MASTER SLAVE，然后使用BROKER CLUSTER把两个“组”合并在一起
+这里使用ZK搭建两组MASTER SLAVE，然后使用BROKER CLUSTER把两个“组”合并在一起
 
 1. 搭建两组[3.ZooKeeper+Replicated LevelDB Store](#3.ZooKeeper+Replicated%20LevelDB%20Store)
 2. 将两组结合[1.static Broker-Cluster](#1.static%20Broker-Cluster)，注意：每组的name属性不一样，同组的要一样。

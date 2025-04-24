@@ -1,12 +1,12 @@
 # ethtool
 
-　　[纠正错误](https://github.com/jaywcjlove/linux-command/edit/master/command/ethtool.md) [添加实例](https://github.com/jaywcjlove/linux-command/edit/master/command/ethtool.md)
+[纠正错误](https://github.com/jaywcjlove/linux-command/edit/master/command/ethtool.md) [添加实例](https://github.com/jaywcjlove/linux-command/edit/master/command/ethtool.md)
 
-　　显示或修改以太网卡的配置信息
+显示或修改以太网卡的配置信息
 
 ## 补充说明
 
-　　ethtool命令用于获取以太网卡的配置信息，或者修改这些配置。这个命令比较复杂，功能特别多。
+ethtool命令用于获取以太网卡的配置信息，或者修改这些配置。这个命令比较复杂，功能特别多。
 
 ### 语法
 
@@ -50,15 +50,15 @@ ethtool [-s] ethX [speed 10|100|1000] [duplex half|full] [autoneg on|off] [port 
 
 ### 数据来源
 
-　　Ethtool命令显示的信息来源于网卡驱动层，即TCP/ip协议的链路层。该命令在Linux内核中实现的逻辑层次为：
+Ethtool命令显示的信息来源于网卡驱动层，即TCP/ip协议的链路层。该命令在Linux内核中实现的逻辑层次为：
 
-　　最重要的结构体`struct ethtool_ops`​，该结构体成员为用于显示或修改以太网卡配置的一系列函数指针，见下表中的第二列。
+最重要的结构体`struct ethtool_ops`​，该结构体成员为用于显示或修改以太网卡配置的一系列函数指针，见下表中的第二列。
 
-　　网卡驱动负责实现（部分）这些函数，并将其封装入`ethtool_ops`​结构体，为网络核心层提供统一的调用接口。因此，不同的网卡驱动会给应用层返回不同的信息。`Ethtool命令选项`​、`struct ethtool_ops成员函数`​、`Ethtool命令显示参数的来源`​，三者间的对应关系如下表所示：
+网卡驱动负责实现（部分）这些函数，并将其封装入`ethtool_ops`​结构体，为网络核心层提供统一的调用接口。因此，不同的网卡驱动会给应用层返回不同的信息。`Ethtool命令选项`​、`struct ethtool_ops成员函数`​、`Ethtool命令显示参数的来源`​，三者间的对应关系如下表所示：
 
-　　由上可见，ethtool命令用于显示/配置网卡硬件（寄存器）。
+由上可见，ethtool命令用于显示/配置网卡硬件（寄存器）。
 
-　　‍
+‍
 
 ```bash
  [root@vworkstation ~]# ethtool enp4s0
@@ -93,7 +93,7 @@ ethtool [-s] ethX [speed 10|100|1000] [duplex half|full] [autoneg on|off] [port 
 
 1. 网口驱动信息
 
-　　​`ethtool -i ethX`​
+​`ethtool -i ethX`​
 
 ```javascript
  driver: r8169//驱动
@@ -108,18 +108,18 @@ ethtool [-s] ethX [speed 10|100|1000] [duplex half|full] [autoneg on|off] [port 
  supports-priv-flags: no
 ```
 
-　　    3. 设置网口工作方式
+    3. 设置网口工作方式
 
-　　(1)关闭/打开网卡对数据包的校验功能
+(1)关闭/打开网卡对数据包的校验功能
 
-　　    关闭/打开网卡对收到的数据包的校验功能，请输入：`ethtool -K eth0 rx off/on`​
+    关闭/打开网卡对收到的数据包的校验功能，请输入：`ethtool -K eth0 rx off/on`​
 
-　　    关闭/打开网卡对发送的数据包的校验功能，请输入：`ethtool -K eth0 tx off/on`​
+    关闭/打开网卡对发送的数据包的校验功能，请输入：`ethtool -K eth0 tx off/on`​
 
-　　    操作完毕后可以输入`ethtool -k eth0`​查看校验功能是否已关闭
+    操作完毕后可以输入`ethtool -k eth0`​查看校验功能是否已关闭
 
-　　(2)定位ethX对应的网卡
+(2)定位ethX对应的网卡
 
-　　    输入`ethtool -p eth0 10`​，操作完毕后eth0网卡的led灯会闪烁。
+    输入`ethtool -p eth0 10`​，操作完毕后eth0网卡的led灯会闪烁。
 
-　　注：本文为小yip原创，未经许可不得在任何平台转载。如需转载，与作者联系\~
+注：本文为小yip原创，未经许可不得在任何平台转载。如需转载，与作者联系\~

@@ -1,16 +1,16 @@
 # KVM 部署及使用
 
-　　QEMU/KVM 是目前最流行的虚拟化技术，它基于 Linux 内核提供的 kvm 模块，结构精简，性能损失小，而且开源免费（对比收费的 vmware），因此成了大部分企业的首选虚拟化方案。
+QEMU/KVM 是目前最流行的虚拟化技术，它基于 Linux 内核提供的 kvm 模块，结构精简，性能损失小，而且开源免费（对比收费的 vmware），因此成了大部分企业的首选虚拟化方案。
 
-　　目前各大云厂商的虚拟化方案，新的服务器实例基本都是用的 KVM 技术。即使是起步最早，一直重度使用 Xen 的 AWS，从 EC2 C5 开始就改用了基于 KVM 定制的 Nitro 虚拟化技术。
+目前各大云厂商的虚拟化方案，新的服务器实例基本都是用的 KVM 技术。即使是起步最早，一直重度使用 Xen 的 AWS，从 EC2 C5 开始就改用了基于 KVM 定制的 Nitro 虚拟化技术。
 
-　　但是 KVM 作为一个企业级的底层虚拟化技术，却没有对桌面使用做深入的优化，因此如果想把它当成桌面虚拟化软件来使用，替代掉 VirtualBox/VMware，有一定难度。
+但是 KVM 作为一个企业级的底层虚拟化技术，却没有对桌面使用做深入的优化，因此如果想把它当成桌面虚拟化软件来使用，替代掉 VirtualBox/VMware，有一定难度。
 
-　　‍
+‍
 
 ## 一、安装 QUEU/KVM
 
-　　QEMU/KVM 环境需要安装很多的组件，它们各司其职：
+QEMU/KVM 环境需要安装很多的组件，它们各司其职：
 
 1. qemu: 模拟各类输入输出设备（网卡、磁盘、USB端口等）
 
@@ -26,7 +26,7 @@
     * bridge-utils: 顾名思义，提供网络桥接相关的工具。
     * openbsd-netcat: TCP/IP 的瑞士军刀，详见 [socat &amp; netcat](https://thiscute.world/posts/socat-netcat/)，这里不清楚是哪个网络组件会用到它。
 
-　　安装命令：
+安装命令：
 
 ```bash
 # archlinux/manjaro
@@ -46,13 +46,13 @@ yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-t
 sudo zypper install virt-*  libvirt  bridge-utils qemu-kvm  qemu-img  libvirt-client libvirt-devel
 ```
 
-　　‍
+‍
 
 ### 1. libguestfs - 虚拟机磁盘映像处理工具
 
-　　[libguestfs](https://libguestfs.org/) 是一个虚拟机磁盘映像处理工具，可用于直接修改/查看/虚拟机映像、转换映像格式等。
+[libguestfs](https://libguestfs.org/) 是一个虚拟机磁盘映像处理工具，可用于直接修改/查看/虚拟机映像、转换映像格式等。
 
-　　它提供的命令列表如下：
+它提供的命令列表如下：
 
 1. ​`virt-df centos.img`​: 查看硬盘使用情况
 2. ​`virt-ls centos.img /`​: 列出目录文件
@@ -64,7 +64,7 @@ sudo zypper install virt-*  libvirt  bridge-utils qemu-kvm  qemu-img  libvirt-cl
 8. ​`virt-v2v`​: 将其他格式的虚拟机(比如 ova) 转换成 kvm 虚拟机。
 9. ​`virt-p2v`​: 将一台物理机转换成虚拟机。
 
-　　学习过程中可能会使用到上述命令，提前安装好总不会有错，安装命令如下：
+学习过程中可能会使用到上述命令，提前安装好总不会有错，安装命令如下：
 
 ```bash
 # opensuse
@@ -83,7 +83,7 @@ sudo yum install libguestfs-tools
 
 ### 2. 启动 QEMU/KVM
 
-　　通过 systemd 启动 libvirtd 后台服务：
+通过 systemd 启动 libvirtd 后台服务：
 
 ```shell
 sudo systemctl enable libvirtd.service
@@ -92,19 +92,19 @@ sudo systemctl start  libvirtd.service
 
 ### 3. 让非 root 用户能正常使用 kvm
 
-　　qumu/kvm 装好后，默认情况下需要 root 权限才能正常使用它。 为了方便使用，首先编辑文件 `/etc/libvirt/libvirtd.conf`​:
+qumu/kvm 装好后，默认情况下需要 root 权限才能正常使用它。 为了方便使用，首先编辑文件 `/etc/libvirt/libvirtd.conf`​:
 
 1. ​`unix_sock_group = "libvirt"`​，取消这一行的注释，使 `libvirt`​ 用户组能使用 unix 套接字。
 2. ​`unix_sock_rw_perms = "0770"`​，取消这一行的注释，使用户能读写 unix 套接字。
 
-　　然后新建 libvirt 用户组，将当前用户加入该组：
+然后新建 libvirt 用户组，将当前用户加入该组：
 
 ```shell
 newgrp libvirt
 sudo usermod -aG libvirt $USER 
 ```
 
-　　最后重启 libvirtd 服务，应该就能正常使用了：
+最后重启 libvirtd 服务，应该就能正常使用了：
 
 ```shell
 sudo systemctl restart libvirtd.service 
@@ -112,7 +112,7 @@ sudo systemctl restart libvirtd.service
 
 ### 4. 启用嵌套虚拟化
 
-　　如果你需要**在虚拟机中运行虚拟机**（比如在虚拟机里测试 katacontainers 等安全容器技术），那就需要启用内核模块 kvm_intel 实现嵌套虚拟化。
+如果你需要**在虚拟机中运行虚拟机**（比如在虚拟机里测试 katacontainers 等安全容器技术），那就需要启用内核模块 kvm_intel 实现嵌套虚拟化。
 
 ```shell
 # 临时启用 kvm_intel 嵌套虚拟化
@@ -123,14 +123,14 @@ echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
 
 ```
 
-　　验证嵌套虚拟化已经启用：
+验证嵌套虚拟化已经启用：
 
 ```shell
 $ cat /sys/module/kvm_intel/parameters/nested 
 Y
 ```
 
-　　至此，KVM 的安装就大功告成啦，现在应该可以在系统中找到 virt-manager 的图标，进去就可以使用了。 virt-manager 的使用方法和 virtualbox/vmware workstation 大同小异，这里就不详细介绍了，自己摸索摸索应该就会了。
+至此，KVM 的安装就大功告成啦，现在应该可以在系统中找到 virt-manager 的图标，进去就可以使用了。 virt-manager 的使用方法和 virtualbox/vmware workstation 大同小异，这里就不详细介绍了，自己摸索摸索应该就会了。
 
 ---
 
@@ -138,13 +138,13 @@ Y
 
 ## [二、虚拟机磁盘映像管理](https://github.com/0voice/kernel_awsome_feature/blob/main/QEMU-KVM%20%E8%99%9A%E6%8B%9F%E5%8C%96%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8.md#%E4%BA%8C%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%98%A0%E5%83%8F%E7%AE%A1%E7%90%86)
 
-　　**raw** ：裸格式，创建时就需要指定存储容量，占用全部容量，不支持动态扩容，不支持快照，性能好。
+**raw** ：裸格式，创建时就需要指定存储容量，占用全部容量，不支持动态扩容，不支持快照，性能好。
 
-　　**qcow2**：quickcopyonwrite2,写时复制，开始只占用少许容量，支持动态扩容，支持压缩，支持AES加密，支持快照，性能较好。
+**qcow2**：quickcopyonwrite2,写时复制，开始只占用少许容量，支持动态扩容，支持压缩，支持AES加密，支持快照，性能较好。
 
-　　这需要用到两个工具：
+这需要用到两个工具：
 
-1. libguestfs-tool : 虚拟机磁盘映像管理工具，前面介绍过了
+1. ((20230725140556-t0ud6ll "libguestfs-tool")) : 虚拟机磁盘映像管理工具，前面介绍过了
 2. qemu-img: qemu 的磁盘映像管理工具，用于创建磁盘、扩缩容磁盘、生成磁盘快照、查看磁盘信息、转换磁盘格式等等。
 
 ```shell
@@ -165,13 +165,13 @@ qemu-img convert -f qcow2 -O raw vm01.qcow2 vm01.img  # qcow2 => raw
 
 ### [1. 导入 vmware 镜像](https://github.com/0voice/kernel_awsome_feature/blob/main/QEMU-KVM%20%E8%99%9A%E6%8B%9F%E5%8C%96%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8.md#1-%E5%AF%BC%E5%85%A5-vmware-%E9%95%9C%E5%83%8F)
 
-　　直接从 vmware ova 文件导入 kvm，这种方式转换得到的镜像应该能直接用（网卡需要重新配置）：
+直接从 vmware ova 文件导入 kvm，这种方式转换得到的镜像应该能直接用（网卡需要重新配置）：
 
 ```shell
 virt-v2v -i ova centos7-test01.ova -o local -os /vmhost/centos7-01  -of qcow2
 ```
 
-　　也可以先从 ova 中解压出 vmdk 磁盘映像，将 vmware 的 vmdk 文件转换成 qcow2 格式，然后再导入 kvm（网卡需要重新配置）：
+也可以先从 ova 中解压出 vmdk 磁盘映像，将 vmware 的 vmdk 文件转换成 qcow2 格式，然后再导入 kvm（网卡需要重新配置）：
 
 ```shell
 # 转换映像格式
@@ -181,11 +181,11 @@ qemu-img info centos7-test01.qcow2
 
 ```
 
-　　直接转换 vmdk 文件得到的 qcow2 镜像，启会报错，比如「磁盘无法挂载」。 根据 [Importing Virtual Machines and disk images - ProxmoxVE Docs](https://pve.proxmox.com/pve-docs/chapter-qm.html#_importing_virtual_machines_and_disk_images) 文档所言，需要在网上下载安装 MergeIDE.zip 组件， 另外启动虚拟机前，需要将硬盘类型改为 IDE，才能解决这个问题。
+直接转换 vmdk 文件得到的 qcow2 镜像，启会报错，比如「磁盘无法挂载」。 根据 [Importing Virtual Machines and disk images - ProxmoxVE Docs](https://pve.proxmox.com/pve-docs/chapter-qm.html#_importing_virtual_machines_and_disk_images) 文档所言，需要在网上下载安装 MergeIDE.zip 组件， 另外启动虚拟机前，需要将硬盘类型改为 IDE，才能解决这个问题。
 
 ### 2. 导入 img 镜像
 
-　　img 镜像文件，就是所谓的 raw 格式镜像，也被称为裸镜像，IO 速度比 qcow2 快，但是体积大，而且不支持快照等高级特性。 如果不追求 IO 性能的话，建议将它转换成 qcow2 再使用。
+img 镜像文件，就是所谓的 raw 格式镜像，也被称为裸镜像，IO 速度比 qcow2 快，但是体积大，而且不支持快照等高级特性。 如果不追求 IO 性能的话，建议将它转换成 qcow2 再使用。
 
 ```shell
 qemu-img convert -f raw -O qcow2 vm01.img vm01.qcow2 
@@ -193,26 +193,26 @@ qemu-img convert -f raw -O qcow2 vm01.img vm01.qcow2
 
 ## 三、虚拟机管理
 
-　　虚拟机管理可以使用命令行工具 `virsh`​/`virt-install`​，也可以使用 GUI 工具 `virt-manager`​.
+虚拟机管理可以使用命令行工具 `virsh`​/`virt-install`​，也可以使用 GUI 工具 `virt-manager`​.
 
-　　GUI 很傻瓜式，就不介绍了，这里主要介绍命令行工具 `virsh`​/`virt-install`​
+GUI 很傻瓜式，就不介绍了，这里主要介绍命令行工具 `virsh`​/`virt-install`​
 
-　　先介绍下 libvirt 中的几个概念：
+先介绍下 libvirt 中的几个概念：
 
 1. Domain: 指代运行在虚拟机器上的操作系统的实例 - 一个虚拟机，或者用于启动虚拟机的配置。
 2. Guest OS: 运行在 domain 中的虚拟操作系统。
 
-　　大部分情况下，你都可以把下面命令中涉及到的 `domain`​ 理解成虚拟机。
+大部分情况下，你都可以把下面命令中涉及到的 `domain`​ 理解成虚拟机。
 
 ### 0. 设置默认 URI
 
-　　​`virsh`​/`virt-install`​/`virt-viewer`​ 等一系列 libvirt 命令，sudo virsh net-list –all 默认情况下会使用 `qemu:///session`​ 作为 URI 去连接 QEMU/KVM，只有 root 账号才会默认使用 `qemu:///system`​.
+​`virsh`​/`virt-install`​/`virt-viewer`​ 等一系列 libvirt 命令，sudo virsh net-list –all 默认情况下会使用 `qemu:///session`​ 作为 URI 去连接 QEMU/KVM，只有 root 账号才会默认使用 `qemu:///system`​.
 
-　　另一方面 `virt-manager`​ 这个 GUI 工具，默认也会使用 `qemu:///system`​ 去连接 QEMU/KVM（和 root 账号一致）
+另一方面 `virt-manager`​ 这个 GUI 工具，默认也会使用 `qemu:///system`​ 去连接 QEMU/KVM（和 root 账号一致）
 
-　　​`qemu:///system`​ 是系统全局的 qemu 环境，而 `qemu:///session`​ 的环境是按用户隔离的。 另外 `qemu:///session`​ 没有默认的 `network`​，创建虚拟机时会出毛病。。。
+​`qemu:///system`​ 是系统全局的 qemu 环境，而 `qemu:///session`​ 的环境是按用户隔离的。 另外 `qemu:///session`​ 没有默认的 `network`​，创建虚拟机时会出毛病。。。
 
-　　因此，你需要将默认的 URI 改为 `qemu:///system`​，否则绝对会被坑:
+因此，你需要将默认的 URI 改为 `qemu:///system`​，否则绝对会被坑:
 
 ```shell
 echo 'export LIBVIRT_DEFAULT_URI="qemu:///system"' >> ~/.bashrc 
@@ -220,9 +220,9 @@ echo 'export LIBVIRT_DEFAULT_URI="qemu:///system"' >> ~/.bashrc
 
 ### 1. 虚拟机网络
 
-　　qemu-kvm 安装完成后，`qemu:///system`​ 环境中默认会创建一个 `default`​ 网络，而 `qemu:///session`​ 不提供默认的网络，需要手动创建。
+qemu-kvm 安装完成后，`qemu:///system`​ 环境中默认会创建一个 `default`​ 网络，而 `qemu:///session`​ 不提供默认的网络，需要手动创建。
 
-　　我们通常使用 `qemu:///system`​ 环境就好，可以使用如下方法查看并启动 default 网络，这样后面创建虚拟机时才有网络可用。
+我们通常使用 `qemu:///system`​ 环境就好，可以使用如下方法查看并启动 default 网络，这样后面创建虚拟机时才有网络可用。
 
 ```shell
 # 列出所有虚拟机网络
@@ -247,7 +247,7 @@ $ sudo virsh net-list --all
 
 ```
 
-　　也可以创建新的虚拟机网络，这需要手动编写网络的 xml 配置，然后通过 `virsh net-define --file my-network.xml`​ 创建，这里就不详细介绍了，因为暂时用不到…
+也可以创建新的虚拟机网络，这需要手动编写网络的 xml 配置，然后通过 `virsh net-define --file my-network.xml`​ 创建，这里就不详细介绍了，因为暂时用不到…
 
 ### 2. virt-intall-创建虚拟机 
 
@@ -269,17 +269,17 @@ virt-install
 
 
 # windows7x86
-virt-install --name win7_test --ram 4096 --vcpus 2 --disk path=/data/virhost/win7.qcow2,size=40,format=qcow2 --cdrom=/data/archive/iso/cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso --boot=cdrom --graphics vnc,listen=0.0.0.0   --virt-type=kvm --hvm --network network=default
+virt-install --name win7_test  --memory 4096 --vcpus 2 --disk path=/data/virhost/win7.qcow2,size=40,format=qcow2  --cdrom=/data/archive/iso/cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso --network network=default --graphics vnc,listen=0.0.0.0 --boot=cdrom    --virt-type=kvm --hvm 
 
 # windwos10
-virt-install --name win10-test --memory 4096 --vcpus 4 --disk path=/data/virhost/win10-test.qcow2,size=60,format=qcow2 --os-variant=win10 --cdrom /data/archive/iso/Win10_22H2_Chinese_Simplified_x64v1.iso  --network network=default --graphics vnc,listen=0.0.0.0 --noautoconsole
+virt-install --name win10-test --memory 4096 --vcpus 4 --disk path=/data/virhost/win10.qcow2,size=60,format=qcow2 --cdrom /data/archive/iso/Win10_22H2_Chinese_Simplified_x64v1.iso                         --network network=default  --graphics vnc,listen=0.0.0.0 --os-variant=win10  --noautoconsole
 
 
 ```
 
-　　再通过VNC客户端连接
+再通过VNC客户端连接
 
-​![](assets/image-20230529111937619-20230610173809-7z1emhl.png)​
+![](assets/image-20230529111937619-20230610173809-7z1emhl.png)​
 
 #### 2.2 使用conlsole命令行
 
@@ -299,9 +299,9 @@ virt-install \
 #--osinfo detect=on,name=centos
 ```
 
-　　‍
+‍
 
-​![](assets/image-20230529144458469-20230610173809-lqelwb4.png)​
+![](assets/image-20230529144458469-20230610173809-lqelwb4.png)​
 
 #### 2.3 参数说明
 
@@ -426,7 +426,7 @@ virsh snapshot-restore <domain> <snapshotname>
 virsh snapshot-delete <domain> <snapshotname>
 ```
 
-　　‍
+‍
 
 #### 3.5 cpu/内存修改
 
@@ -486,12 +486,12 @@ virt-viewer 8
 virt-viewer --wait opensuse15
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ### 4. virsh-manager-图形界面管理虚拟机
 
-　　‍
+‍
 
-　　‍
+‍

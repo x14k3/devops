@@ -4,7 +4,7 @@
 
 #### 适用场景
 
-　　CentOS、EulerOS系列操作系统。
+CentOS、EulerOS系列操作系统。
 
 #### 操作步骤
 
@@ -61,11 +61,11 @@
     taskset -pc 1 10825
     ```
 
-　　CPU的标号是从0开始的，所以CPU1表示第二个CPU（第一个CPU的标号是0），这样就把应用程序test.sh绑定到了CPU1上运行。
+CPU的标号是从0开始的，所以CPU1表示第二个CPU（第一个CPU的标号是0），这样就把应用程序test.sh绑定到了CPU1上运行。
 
-　　也可以使用如下命令在启动程序时绑定CPU（启动时绑定到第二个CPU）上。
+也可以使用如下命令在启动程序时绑定CPU（启动时绑定到第二个CPU）上。
 
-　　​`taskset -c 1 ./test.sh&amp;`​
+​`taskset -c 1 ./test.sh&amp;`​
 
 ```bash
 # taskset -pc 0 1467

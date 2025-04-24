@@ -1,14 +1,14 @@
 # WMIC
 
-　　wmic（Windows Management InstrumentationCommand Line） ，提供了从命令行接口和批命令脚本执行系统管理的支持
+wmic（Windows Management InstrumentationCommand Line） ，提供了从命令行接口和批命令脚本执行系统管理的支持
 
-　　WMIC可以以两种模式执行：
+WMIC可以以两种模式执行：
 
-　　交互模式(Interactive mode)：命令窗口下输入wimic
+交互模式(Interactive mode)：命令窗口下输入wimic
 
-　　eg：
+eg：
 
-　　查看进程为QQ.exe进程的信息
+查看进程为QQ.exe进程的信息
 
 ```bat
 >wmic
@@ -17,13 +17,13 @@ HandleCount  Name    Priority  ProcessId  ThreadCount  WorkingSetSize
 1320         QQ.exe  8         6172       69           220016640
 ```
 
-　　非交互模式(Non-Interactive mode)：wimic+命令参数
+非交互模式(Non-Interactive mode)：wimic+命令参数
 
-　　帮助文档查看
+帮助文档查看
 
-　　​`wmic / ?`​
+​`wmic / ?`​
 
-​![798214-20200511085700788-1068395130](assets/798214-20200511085700788-1068395130-20240628155114-5eabrj8.png)​
+![798214-20200511085700788-1068395130](assets/798214-20200511085700788-1068395130-20240628155114-5eabrj8.png)
 
 ## 使用示例
 
@@ -35,17 +35,17 @@ Manufacturer              Name                                        SerialNumb
 American Megatrends Inc.  BIOS Date: 07/12/12 13:29:34 Ver: 04.06.05  To be filled by O.E.M.  F3        _ASUS_ - 1072009
 ```
 
-　　ist决定显示的信息格式与范围，它有
+ist决定显示的信息格式与范围，它有
 
-　　　　full为默认参数，表示显示所有的信息
+　　full为默认参数，表示显示所有的信息
 
-　　　　Brief表示只显示摘要信息
+　　Brief表示只显示摘要信息
 
-　　　　Instance表示只显示对象实例
+　　Instance表示只显示对象实例
 
-　　　　Status表示显示对象状态
+　　Status表示显示对象状态
 
-　　　　Writeable表示只显示该对象的可写入的属性信息等
+　　Writeable表示只显示该对象的可写入的属性信息等
 
 ### 2.cpu信息
 
@@ -55,7 +55,7 @@ Caption                               DeviceID  Manufacturer  MaxClockSpeed  Nam
 Intel64 Family 6 Model 58 Stepping 9  CPU0      GenuineIntel  3901           Intel(R) Core(TM) i7-37   70K CPU @ 3.50GHz  Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
 ```
 
-　　cpu型号
+cpu型号
 
 ```
 >wmic cpu get name
@@ -63,7 +63,7 @@ Name
 Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
 ```
 
-　　cpu当前的速度
+cpu当前的速度
 
 ```
 >wmic cpu get CurrentClockSpeed
@@ -100,7 +100,7 @@ BlockSize  CacheSpeed  CacheType  DeviceID        InstalledSize  Level  MaxCache
 
 ### 6.本地存储设备管理
 
-　　获取硬盘系统格式、总大小、可用空间等
+获取硬盘系统格式、总大小、可用空间等
 
 ```
 >wmic logicaldisk list brief
@@ -112,7 +112,7 @@ F:        5
 G:        5
 ```
 
-　　‍
+‍
 
 ### 7.声音设备管理
 
@@ -126,7 +126,7 @@ NVIDIA        NVIDIA Virtual Audio Device (Wave Extensible) (WDM)  OK      3
 
 ### 8.进程管理
 
-　　列出进程的核心信息
+列出进程的核心信息
 
 ```
 >wmic process list brief
@@ -142,7 +142,7 @@ HandleCount  Name                       Priority  ProcessId  ThreadCount  Workin
 ……
 ```
 
-　　wmic 获取进程名称以及可执行路径
+wmic 获取进程名称以及可执行路径
 
 ```
 >wmic process get name,executablepath
@@ -158,7 +158,7 @@ C:\Windows\system32\winlogon.exe winlogon.exe
 ……
 ```
 
-　　获得某个进程当前占用的内存和最大占用内存的大小
+获得某个进程当前占用的内存和最大占用内存的大小
 
 ```
 >wmic process where caption='QQ.exe' get WorkingSetSize,PeakWorkingSetSize
@@ -176,7 +176,7 @@ PeakWorkingSetSize  WorkingSetSize
 35952               36720640
 ```
 
-　　‍
+‍
 
 ### 9.获取正在运行的服务列表
 

@@ -1,12 +1,12 @@
 # elk 8.0.0 部署
 
-　　**ELK-8.0.0主要升级内容：**
+**ELK-8.0.0主要升级内容：**
 
-　　**安全功能在默认情况下被启用和配置** 从 Elasticsearch 8.0 开始，当第一次启动 Elasticsearch 时，安全功能被默认启用和配置。
+**安全功能在默认情况下被启用和配置** 从 Elasticsearch 8.0 开始，当第一次启动 Elasticsearch 时，安全功能被默认启用和配置。
 
-　　在启动时，Elasticsearch 8.0 会生成注册令牌，你可以用它来连接 Kibana 实例或在安全的 Elasticsearch 集群中注册其他节点，而无需生成安全证书或更新 YAML 配置文件。只需在启动新节点或 Kibana 实例时使用生成的注册令牌，Elastic Stack 就会为你处理所有安全配置。
+在启动时，Elasticsearch 8.0 会生成注册令牌，你可以用它来连接 Kibana 实例或在安全的 Elasticsearch 集群中注册其他节点，而无需生成安全证书或更新 YAML 配置文件。只需在启动新节点或 Kibana 实例时使用生成的注册令牌，Elastic Stack 就会为你处理所有安全配置。
 
-　　**已知问题：**
+**已知问题：**
 
 - 如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
 
@@ -77,9 +77,9 @@ nohup redis-server /data/redis/redis.conf >> /data/logs/redis.log 2>&1 &
 
 ## 2.配置elasticsearch
 
-　　`cd /data/elasticsearch/`
+`cd /data/elasticsearch/`
 
-　　`vim config/elasticsearch.yml`
+`vim config/elasticsearch.yml`
 
 ```Bash
 # 配置es的集群名称(单机模式，不要开启注释)
@@ -104,20 +104,20 @@ cluster.initial_master_nodes: ["node-1"]
 action.destructive_requires_name: true
 ```
 
-　　`vim config/jvm.options`
+`vim config/jvm.options`
 
 ```Bash
 -Xms4g #设置最小堆的值为2g
 -Xmx4g #设置组大堆的值为2g
 ```
 
-　　启动
+启动
 
 ```Bash
 /data/elasticsearch/bin/elasticearch -d
 ```
 
-　　生成elasticsearch用户和密码，用于其他与其连接
+生成elasticsearch用户和密码，用于其他与其连接
 
 ```Bash
 cd /data/elasticsearch/bin
@@ -125,7 +125,7 @@ cd /data/elasticsearch/bin
 
 ```
 
-　　创建kibana注册令牌，用于kibana连接
+创建kibana注册令牌，用于kibana连接
 
 ```Bash
 cd /data/elasticsearch/bin
@@ -137,9 +137,9 @@ cd /data/elasticsearch/bin
 
 ## 3.配置kibana
 
-　　`cd /data/kibana/`
+`cd /data/kibana/`
 
-　　`vim config/kibana.yml`
+`vim config/kibana.yml`
 
 ```
 # 修改服务端口
@@ -159,7 +159,7 @@ server.name: "elk-srv"
 # elasticsearch.serviceAccountToken: ""
 ```
 
-　　启动kibana
+启动kibana
 
 ```
 nohup /data/kibana/bin/kibana >> /data/logs/kibana.log 2>&1 & ; 
@@ -172,24 +172,24 @@ tail -f /data/logs/kibana.log
 ![](assets/image-20221127214108186-20230610173808-syk0jej.png)
 ![](assets/image-20221127214123394-20230610173808-vo92xqm.png)
 
-　　再输入上面生成的kibana_system用户和密码
+再输入上面生成的kibana_system用户和密码
 ![](assets/image-20221127214134165-20230610173808-kibk71j.png)
 
 ## 4.配置logstash
 
 ![](assets/image-20221127214156296-20230610173808-wcg982r.png)
 
-　　Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
+Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
 
-　　从 Elasticsearch目录复制[自签名 CA 证书。](https://www.elastic.co/guide/en/elasticsearch/reference/8.0/configuring-stack-security.html#stack-security-certificates)​`config/certs`
+从 Elasticsearch目录复制[自签名 CA 证书。](https://www.elastic.co/guide/en/elasticsearch/reference/8.0/configuring-stack-security.html#stack-security-certificates)​`config/certs`
 
 ```Bash
 cp -r /data/elasticsearch/config/certs/ /data/logstash/config/
 ```
 
-　　创建logstash管道配置文件
+创建logstash管道配置文件
 
-　　`vim /data/logstash/config/logstash.conf`
+`vim /data/logstash/config/logstash.conf`
 
 ```
 input {
@@ -265,7 +265,7 @@ output {
 }
 ```
 
-　　启动logstash
+启动logstash
 
 ```Bash
 nohup /data/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /data/logs/logstash/logstash.log 2>&1 &
@@ -273,7 +273,7 @@ nohup /data/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /dat
 
 ## 5.客户端上配置filebeat
 
-　　`cd /data/filebeat; vim filebeat.yml`
+`cd /data/filebeat; vim filebeat.yml`
 
 ```
 filebeat.inputs:
@@ -313,7 +313,7 @@ output.redis:
   
 ```
 
-　　启动filebeat
+启动filebeat
 
 ```
 nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebeat/filebeat.log 2>&1 &
@@ -323,19 +323,19 @@ nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebea
 
 ### 1.elasticsearch 数据存储方案
 
-　　略
+略
 
 ### 2.elasticsearch 用户权限管理
 
-　　略
+略
 
 ### 3.安全功能在默认情况下被启用和配置
 
-　　在没有安全保障的情况下运行 Elasticsearch 会让你的集群暴露在任何可以向 Elasticsearch 发送请求的用户面前。在以前的版本中，你必须明确地启用 Elasticsearch 的安全功能，如认证、授权和网络加密（TLS）。从 Elasticsearch 8.0 开始，当第一次启动 Elasticsearch 时，安全功能被默认启用和配置。
+在没有安全保障的情况下运行 Elasticsearch 会让你的集群暴露在任何可以向 Elasticsearch 发送请求的用户面前。在以前的版本中，你必须明确地启用 Elasticsearch 的安全功能，如认证、授权和网络加密（TLS）。从 Elasticsearch 8.0 开始，当第一次启动 Elasticsearch 时，安全功能被默认启用和配置。
 
-　　在启动时，Elasticsearch 8.0 会生成注册令牌，你可以用它来连接 Kibana 实例或在安全的 Elasticsearch 集群中注册其他节点，而无需生成安全证书或更新 YAML 配置文件。只需在启动新节点或 Kibana 实例时使用生成的注册令牌，Elastic Stack 就会为你处理所有安全配置。
+在启动时，Elasticsearch 8.0 会生成注册令牌，你可以用它来连接 Kibana 实例或在安全的 Elasticsearch 集群中注册其他节点，而无需生成安全证书或更新 YAML 配置文件。只需在启动新节点或 Kibana 实例时使用生成的注册令牌，Elastic Stack 就会为你处理所有安全配置。
 
-　　**已知问题：**
+**已知问题：**
 
 * 如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
 

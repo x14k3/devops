@@ -1,18 +1,18 @@
 # Redis GunYu
 
-　　​![CI](https://github.com/mgtv-tech/redis-GunYu/workflows/goci/badge.svg)[https://github.com/mgtv-tech/redis-GunYu/actions/workflows/goci.yml](https://github.com/mgtv-tech/redis-GunYu/actions/workflows/goci.yml)  
+![CI](https://github.com/mgtv-tech/redis-GunYu/workflows/goci/badge.svg)[https://github.com/mgtv-tech/redis-GunYu/actions/workflows/goci.yml](https://github.com/mgtv-tech/redis-GunYu/actions/workflows/goci.yml)  
 ​![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)[https://github.com/mgtv-tech/redis-GunYu/blob/master/LICENSE](https://github.com/mgtv-tech/redis-GunYu/blob/master/LICENSE)  
 ​![release](https://img.shields.io/github/release/mgtv-tech/redis-GunYu)[https://github.com/mgtv-tech/redis-GunYu/releases](https://github.com/mgtv-tech/redis-GunYu/releases)
 
 ## 简介
 
-　　​`redis-GunYu`​是一款redis数据治理工具，可以进行数据实时同步，数据迁移，备份、校验恢复，数据分析等等。
+​`redis-GunYu`​是一款redis数据治理工具，可以进行数据实时同步，数据迁移，备份、校验恢复，数据分析等等。
 
 ## 特性
 
 ### 数据实时同步
 
-　　​`Redis-GunYu`​的实时同步功能矩阵
+​`Redis-GunYu`​的实时同步功能矩阵
 
 |功能点|是否支持|
 | :-----------------------------------| :---------|
@@ -23,7 +23,7 @@
 |数据过滤|支持|
 |数据一致性|最终/弱|
 
-　　​`redis-GunYu`​还有一些其他优势，如下
+​`redis-GunYu`​还有一些其他优势，如下
 
 * 对稳定性影响更小
 
@@ -52,15 +52,15 @@
 
 ### RDB导入到redis
 
-　　此功能是解析RDB文件，然后将数据回放到正在运行的redis中，可以对RDB文件进行过滤。
+此功能是解析RDB文件，然后将数据回放到正在运行的redis中，可以对RDB文件进行过滤。
 
 ### 其他
 
-　　其他功能，仍在开发中。
+其他功能，仍在开发中。
 
 ## 产品比较
 
-　　从产品需求上，对redis-GunYu和几个主流工具的实时同步功能进行比较
+从产品需求上，对redis-GunYu和几个主流工具的实时同步功能进行比较
 
 |功能点|redis-shake/v2|DTS|xpipe|redis-GunYu|
 | ----------------| ----------------| -----| -------| -----------------------------|
@@ -72,15 +72,15 @@
 
 ## 实现
 
-　　​`redis-GunYu`​同步功能的技术实现如图所示，具体技术原理请见[技术实现](docs/tech_zh.md)
+​`redis-GunYu`​同步功能的技术实现如图所示，具体技术原理请见[技术实现](docs/tech_zh.md)
 
-​![架构图](https://github.com/mgtv-tech/redis-GunYu/raw/master/docs/imgs/sync.png)​
+![架构图](https://github.com/mgtv-tech/redis-GunYu/raw/master/docs/imgs/sync.png)
 
 ## 快速开始
 
 ### 安装
 
-　　可以自行编译，也可以直接运行容器
+可以自行编译，也可以直接运行容器
 
 * 下载二进制
 
@@ -102,28 +102,28 @@
 
 ### 使用
 
-　　​`redisGunYu`​不同的功能以子命令的方式来启动，子命令有
+​`redisGunYu`​不同的功能以子命令的方式来启动，子命令有
 
 * ​`sync`​ : 实时同步功能
 * ​`rdb`​ : rdb相关功能
 
-　　我们以使用同步功能为例
+我们以使用同步功能为例
 
-　　**配置文件的方式启动**
+**配置文件的方式启动**
 
 ```
 ./redisGunYu -conf ./config.yaml -cmd=sync
 ```
 
-　　​`-cmd=sync`​ 可忽略
+​`-cmd=sync`​ 可忽略
 
-　　**命令行传递参数的方式启动**
+**命令行传递参数的方式启动**
 
 ```
 ./redisGunYu --sync.input.redis.addresses=127.0.0.1:6379 --sync.output.redis.addresses=127.0.0.1:16379
 ```
 
-　　**以容器方式运行**
+**以容器方式运行**
 
 ```
 docker run mgtvtech/redisgunyu:latest --sync.input.redis.addresses=172.10.10.10:6379 --sync.output.redis.addresses=172.10.10.11:6379
@@ -135,7 +135,7 @@ docker run --network=host mgtvtech/redisgunyu:latest --sync.input.redis.addresse
 
 ### 运行demo
 
-　　**启动demo服务**
+**启动demo服务**
 
 ```
 docker run --rm -p 16379:16379 -p 26379:26379 -p 18001:18001 mgtvtech/redisgunyudemo:latest
@@ -145,41 +145,41 @@ docker run --rm -p 16379:16379 -p 26379:26379 -p 18001:18001 mgtvtech/redisgunyu
 * 目标redis ： 端口26379
 * 同步工具： 端口 18001
 
-　　**目的redis**
+**目的redis**
 
 ```
 redis-cli -p 26379
 127.0.0.1:26379> monitor
 ```
 
-　　在目的redis-cli中输入monitor
+在目的redis-cli中输入monitor
 
-　　**源redis**
+**源redis**
 
-　　连接到源redis，写入一个key，同步工具会将命令同步到目的redis，查看redis-cli连接到的源redis输出
+连接到源redis，写入一个key，同步工具会将命令同步到目的redis，查看redis-cli连接到的源redis输出
 
 ```
 redis-cli -p 16300
 127.0.0.1:16379> set a 1
 ```
 
-　　**检查状态**
+**检查状态**
 
 ```
 curl http://localhost:18001/syncer/status
 ```
 
-　　‍
+‍
 
 ---
 
 # 同步的配置
 
-　　​`redisGunYu`​支持以配置文件启动，或者以命令参数方式启动。
+​`redisGunYu`​支持以配置文件启动，或者以命令参数方式启动。
 
 ## 配置文件
 
-　　配置文件分为以下几个配置组：
+配置文件分为以下几个配置组：
 
 * input ：输入端redis（源端）的配置
 * output ： 输出端redis（目标端）的配置
@@ -191,7 +191,7 @@ curl http://localhost:18001/syncer/status
 
 ### redis配置
 
-　　redis配置
+redis配置
 
 * addresses ： redis地址， 数组。如果redis是cluster部署的，则`addresses`​最好配置多于1个节点的IP地址，避免1个节点故障而无法联系redis集群。
 * userName ： redis用户名
@@ -208,7 +208,7 @@ curl http://localhost:18001/syncer/status
 
 ### 输入端
 
-　　input配置如下
+input配置如下
 
 * redis ： redis配置
 * rdbParallel ： 同一时刻进行rdb的限制数，默认没有限制
@@ -224,7 +224,7 @@ curl http://localhost:18001/syncer/status
 
 ### 输出端
 
-　　output配置如下：
+output配置如下：
 
 * redis ： redis配置
 * replay: 回放配置，参考[回放](#replay配置)
@@ -273,7 +273,7 @@ curl http://localhost:18001/syncer/status
     * keySlotBlacklist : slot黑名单
     * keySlotWhitelist : slot白名单
 
-　　**filter配置示例**  
+**filter配置示例**  
 如下配置，不同步del命令，也不同步redisGunYu开头的key
 
 ```
@@ -291,7 +291,7 @@ filter:
 
 ### 缓存区
 
-　　配置
+配置
 
 * storer ： rdb和aof存储区
 
@@ -309,7 +309,7 @@ filter:
 
 ### 集群
 
-　　集群模式配置
+集群模式配置
 
 * groupName ： 集群名，此名字在etcd集群中作为集群名使用，所以请确保唯一性
 * metaEtcd ： etcd配置 [可选]，如果没有配置etcd地址，则会使用源redis作为锁和注册中心
@@ -320,7 +320,7 @@ filter:
 * leaseTimeout ： leader租期时间，如果在leaseTimeout时间内，leader没有续租，则表示leader过期了，会重新发起选举；默认10秒，值范围为[3s, 600s]
 * leaseRenewInterval ： leader发起租期时间间隔，默认3.33秒，一般选为leaseTimeout的1/3，值范围为[1s, 200s]
 
-　　如下配置：
+如下配置：
 
 ```
 cluster:
@@ -331,7 +331,7 @@ cluster:
       - 127.0.0.1:2379
 ```
 
-　　或
+或
 
 ```
 cluster:
@@ -341,7 +341,7 @@ cluster:
 
 ### 日志
 
-　　日志配置
+日志配置
 
 * level ： 级别，默认info，级别有debug, info, warn, error, panic, fatal
 * handler ：
@@ -359,7 +359,7 @@ cluster:
 
 ### 服务器
 
-　　服务器配置
+服务器配置
 
 * listen : 监听地址，默认"127.0.0.1:18001"
 * listenPeer: 和其他`redis-GunYu`​进程通信用途，IP:Port，默认和listen一样。注意不要写成127.0.0.1
@@ -420,15 +420,15 @@ cluster:
 
 ## 命令行参数
 
-　　我们可以使用命令行参数的方式启动redisGunYu
+我们可以使用命令行参数的方式启动redisGunYu
 
 ```
 redisGunYu --sync.input.redis.addresses=127.0.0.1:6379 --sync.output.redis.addresses=127.0.0.1:16379
 ```
 
-　　参数名都以`--sync.`​作为前缀名，后面则以配置的字段名，用`.`​连接起来；数组以`,`​进行分隔符。
+参数名都以`--sync.`​作为前缀名，后面则以配置的字段名，用`.`​连接起来；数组以`,`​进行分隔符。
 
-　　如源端redis地址，配置文件如下，
+如源端redis地址，配置文件如下，
 
 ```
 input:
@@ -436,9 +436,9 @@ input:
     addresses: [127.0.0.1:6379, 127.0.0.2:6379]
 ```
 
-　　则命令行名为`--sync.input.redis.addresses=127.0.0.1:6379,127.0.0.2:6379`​
+则命令行名为`--sync.input.redis.addresses=127.0.0.1:6379,127.0.0.2:6379`​
 
-　　如槽位白名单，配置文件如下，
+如槽位白名单，配置文件如下，
 
 ```
 output:
@@ -449,30 +449,30 @@ output:
         - [1002] 
 ```
 
-　　则命令行名为`--sync.output.filter.slotFilter.keySlotWhitelist=[0,1000],[1002]`​
+则命令行名为`--sync.output.filter.slotFilter.keySlotWhitelist=[0,1000],[1002]`​
 
-　　可以通过`redisGunYu -h`​来查看都有哪些参数。
+可以通过`redisGunYu -h`​来查看都有哪些参数。
 
-　　‍
+‍
 
 ---
 
-　　‍
+‍
 
 # RDB 命令
 
 ## RDB命令
 
-　　此功能是解析RDB文件，然后将数据回放到正在运行的redis中，可以对RDB文件进行过滤。
+此功能是解析RDB文件，然后将数据回放到正在运行的redis中，可以对RDB文件进行过滤。
 
-　　通过配置文件运行，可以参考config/rdb_load.yaml配置文件。
+通过配置文件运行，可以参考config/rdb_load.yaml配置文件。
 将`/tmp/test.rdb`​文件导入到`127.0.0.1:6379,127.0.0.1:6479`​的redis集群中，且忽略掉DB 1，忽略test_ignore前缀的keys。
 
 ```
 ./redisGunYu -cmd=rdb -conf=config/rdb_load.yaml
 ```
 
-　　通过命令行参数运行
+通过命令行参数运行
 
 ```
 ./redisGunYu -cmd=rdb -rdb.action=load -rdb.rdbPath=/tmp/test.rdb -rdb.load.redis.addresses=127.0.0.1:6379,127.0.0.1:6479 -rdb.load.redis.type=cluster -rdb.load.filter.dbBlacklist=1 -rdb.load.filter.keyFilter.prefixKeyBlacklist=test_ignore
@@ -480,7 +480,7 @@ output:
 
 ## 配置
 
-　　配置文件分为：
+配置文件分为：
 
 * action : 执行的子命令
 * rdbPath : RDB文件路径
@@ -490,7 +490,7 @@ output:
   * replay : 回放相关配置，可以参考[同步配置replay配置](sync_configuration_zh.md#replay配置)
   * filter : 过滤相关配置
 
-　　以下是一个简单的演示配置文件
+以下是一个简单的演示配置文件
 
 ```
 action: load

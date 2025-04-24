@@ -6,7 +6,7 @@
 # vim /etc/pam.d/common-password-pc
 ```
 
-　　将以下内容：
+将以下内容：
 
 ```
 ......
@@ -14,7 +14,7 @@ password        requisite       pam_cracklib.so ......
 ......
 ```
 
-　　修改为：
+修改为：
 
 ```
 ......
@@ -22,7 +22,7 @@ password        requisite       pam_cracklib.so try_first_pass local_users_only 
 ......
 ```
 
-　　并添加以下内容：
+并添加以下内容：
 
 ```
 ......
@@ -50,7 +50,7 @@ password    sufficient    pam_unix.so sha512 shadow try_first_pass remember=24 u
 # vim /etc/security/pwquality.conf
 ```
 
-　　将部分内容修改如下：
+将部分内容修改如下：
 
 ```
 ......
@@ -93,7 +93,7 @@ difok = 3
 # vim /etc/login.defs
 ```
 
-　　将以下内容：
+将以下内容：
 
 ```
 ......
@@ -101,7 +101,7 @@ ENCRYPT_METHOD ......
 ......
 ```
 
-　　修改为：
+修改为：
 
 ```
 ......
@@ -109,4 +109,4 @@ ENCRYPT_METHOD SHA512
 ......
 ```
 
-　　（补充：这里以使用 SHA512 哈希算法加密密码为例）
+（补充：这里以使用 SHA512 哈希算法加密密码为例）

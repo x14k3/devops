@@ -10,7 +10,7 @@ jdk1.8.0_333
 
 ## 2. 配置主机名称
 
-　　三台机器均需要配置
+三台机器均需要配置
 
 ```
 [root@dn1 /root]# vi /etc/hosts
@@ -21,13 +21,13 @@ jdk1.8.0_333
 
 ## 3. 配置jdk环境
 
-　　3台服务器都安装jdk 参考jdk 部署
+3台服务器都安装jdk 参考[jdk 部署](031%20中间件/jdk.md#20231110105237-94a9b5j)
 
 ## 4. 安装zookeeper
 
-　　下载对应版本 Zookeeper,官方下载地址：[https://archive.apache.org/dist/zookeeper/](https://archive.apache.org/dist/zookeeper/)
+下载对应版本 Zookeeper,官方下载地址：[https://archive.apache.org/dist/zookeeper/](https://archive.apache.org/dist/zookeeper/)
 
-　　配置zookeeper的环境变量，三台机器均需要配置
+配置zookeeper的环境变量，三台机器均需要配置
 
 ```bash
 wget https://archive.apache.org/dist/zookeeper/zookeeper-3.9.2/apache-zookeeper-3.9.2-bin.tar.gz
@@ -46,7 +46,7 @@ source /etc/profile
 
 ### 4.1 修改zoo.cfg配置文件
 
-　　首先需要创建zoo.cfg，创建zookeeper数据目录zkdatas，再对zoo.cfg文件进行修改，三台机器均要配置
+首先需要创建zoo.cfg，创建zookeeper数据目录zkdatas，再对zoo.cfg文件进行修改，三台机器均要配置
 
 ```bash
 cd $ZK_HOME/conf
@@ -87,7 +87,7 @@ mkdir -p /data/zookeeper/data
 
 ### 4.2 添加myid配置文件
 
-　　在$ZK\_HOME/data路径下创建myid文件，第一台机器内容为1，第二台为2，第三台为3
+在$ZK\_HOME/data路径下创建myid文件，第一台机器内容为1，第二台为2，第三台为3
 
 ```bash
 # 第一台
@@ -108,6 +108,6 @@ echo "3" > /data/zookeeper/data/myid
 jcmd
 ```
 
-　　‍
+‍
 
-　　‍
+‍

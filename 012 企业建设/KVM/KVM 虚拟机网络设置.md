@@ -1,14 +1,14 @@
 # KVM 虚拟机网络设置
 
-　　‍
+‍
 
 ## NAT
 
-　　NAT方式是kvm安装后的默认方式。它支持主机与虚拟机的互访，同时也支持虚拟机访问互联网，但不支持外界访问虚拟机。
+NAT方式是kvm安装后的默认方式。它支持主机与虚拟机的互访，同时也支持虚拟机访问互联网，但不支持外界访问虚拟机。
 
-​![697113-20190830210928368-636958087](assets/697113-20190830210928368-636958087-20240201160830-564s7xm.png)
+![697113-20190830210928368-636958087](assets/697113-20190830210928368-636958087-20240201160830-564s7xm.png)
 
-　　使用命令
+使用命令
 
 ```bash
 # 列出所有虚拟机网络
@@ -32,9 +32,9 @@ $ sudo virsh net-list --all
  default   active   yes         yes
 ```
 
-　　其中的default是宿主机安装虚拟机支持模块的时候自动安装的。default的配置文件在/etc/libvirt/qemu/networks/default.xml中，
+其中的default是宿主机安装虚拟机支持模块的时候自动安装的。default的配置文件在/etc/libvirt/qemu/networks/default.xml中，
 
-　　如果想要修改默认的virbr0网址，可以修改/etc/libvirt/qemu/networks/目录下的default.xml或者autostart/default.xml文件，其他内容不用动，virbr0网址可修改“ip address”一行，并可指定子网掩码，另外要设置新的地址池范围。修改完毕重启libvirtd服务，如果没有显示新的IP，需要重启服务器生效。
+如果想要修改默认的virbr0网址，可以修改/etc/libvirt/qemu/networks/目录下的default.xml或者autostart/default.xml文件，其他内容不用动，virbr0网址可修改“ip address”一行，并可指定子网掩码，另外要设置新的地址池范围。修改完毕重启libvirtd服务，如果没有显示新的IP，需要重启服务器生效。
 
 ```xml
 <network>
@@ -52,9 +52,9 @@ $ sudo virsh net-list --all
 
 ```
 
-　　是使用ifconf命令查看网络设置，其中virbr0是由宿主机虚拟机支持模块安装时产生的虚拟网络接口。
+是使用ifconf命令查看网络设置，其中virbr0是由宿主机虚拟机支持模块安装时产生的虚拟网络接口。
 
-　　修改虚拟机配置加入以下内容
+修改虚拟机配置加入以下内容
 
 ```xml
   <interface type='network'>
@@ -65,9 +65,9 @@ $ sudo virsh net-list --all
     </interface>
 ```
 
-　　开启ip_forward功能
+开启ip_forward功能
 
-　　由于所有后期创建的虚拟机网关必须指向virbr0网址，即172.16.0.1，然后经过NAT转换后才能访问外网，宿主机需要开启ip_forward功能。
+由于所有后期创建的虚拟机网关必须指向virbr0网址，即172.16.0.1，然后经过NAT转换后才能访问外网，宿主机需要开启ip_forward功能。
 
 ```bash
 vim /etc/sysctl.conf
@@ -83,7 +83,7 @@ sysctl -p
 virsh net-define /usr/share/libvirt/networks/default.xml
 ```
 
-　　此命令定义一个虚拟网络，default.xml的内容：
+此命令定义一个虚拟网络，default.xml的内容：
 
 ```xml
 <network>
@@ -98,31 +98,31 @@ virsh net-define /usr/share/libvirt/networks/default.xml
 </network>
 ```
 
-　　也可以修改xml，创建自己的虚拟网络。
+也可以修改xml，创建自己的虚拟网络。
 
-　　标记为自动启动：
+标记为自动启动：
 
 ```bash
 virsh net-autostart default
 Network default marked as autostarted
 ```
 
-　　启动网络：
+启动网络：
 
 ```bash
 virsh net-start default
 Network default started
 ```
 
-　　网络启动后可以用命令brctl show 查看和验证。
+网络启动后可以用命令brctl show 查看和验证。
 
-　　修改/etc/sysctl.conf中参数，允许ip转发：
+修改/etc/sysctl.conf中参数，允许ip转发：
 
 ```bash
 net.ipv4.ip_forward=1
 ```
 
-　　‍
+‍
 
 ### 查看vrish所有网络相关命令
 
@@ -149,22 +149,22 @@ net.ipv4.ip_forward=1
     net-port-delete                delete the specified network port
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## bridge
 
-　　Bridge方式即虚拟网桥的网络连接方式，是客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。
+Bridge方式即虚拟网桥的网络连接方式，是客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。
 桥接网络（也叫物理设备共享）被用作把一个物理设备复制到一台虚拟机。网桥多用作高级设置，特别是主机多个网络接口的情况。
 
-​![697113-20190830210734350-1126923956](assets/697113-20190830210734350-1126923956-20240201160748-kkiotvb.png)​
+![697113-20190830210734350-1126923956](assets/697113-20190830210734350-1126923956-20240201160748-kkiotvb.png)
 
-　　‍
+‍
 
 ### 创建步骤
 
-　　首先在宿主机中配置网桥虚拟网卡
+首先在宿主机中配置网桥虚拟网卡
 
 * 方式一：
 
@@ -220,25 +220,25 @@ net.ipv4.ip_forward=1
 
 * 方式二
 
-  创建网桥
+  [创建网桥](010%20Linux系统管理/linux%20网络管理/linux%20NetworkManager.md#20231110105237-r3tvdsx)
 
-　　‍
+‍
 
-　　重启网络服务
+重启网络服务
 
-　　`systemctl restart network`
+`systemctl restart network`
 
-　　校验桥接接口
+校验桥接接口
 
-　　`brctl show`
+`brctl show`
 
-　　使用方式-新建虚拟机的时候使用方式
+使用方式-新建虚拟机的时候使用方式
 
 ```bash
 virt-install ---network bridge=br0
 ```
 
-　　使用方式-已有虚拟机可以通过修改配置文件方式
+使用方式-已有虚拟机可以通过修改配置文件方式
 编辑修改虚拟机配置文件 /etc/libvirt/qemu/v1.xml，增加如下内容
 
 ```xml
@@ -252,7 +252,7 @@ virt-install ---network bridge=br0
 
 ### 问题发现
 
-　　**问题1：虚拟机能ping通宿主机，但ping不通局域网和网关**  
+**问题1：虚拟机能ping通宿主机，但ping不通局域网和网关**  
 可能是启用了网络过滤器，调整解决。
 
 ```bash
@@ -267,13 +267,13 @@ net.bridge.bridge-nf-call-arptables = 0
 sysctl -p
 ```
 
-　　‍
+‍
 
-　　**问题2：安装windows虚拟机的时候，windows虚拟机没有网卡，不能配置网络**
+**问题2：安装windows虚拟机的时候，windows虚拟机没有网卡，不能配置网络**
 
-　　解决：下载kvm-windows虚拟机专用网络驱动镜像【Stable virtio-win ISO】
+解决：下载kvm-windows虚拟机专用网络驱动镜像【Stable virtio-win ISO】
 
-　　https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
+https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
 
 ```bash
 Downloads
@@ -290,17 +290,17 @@ The stable builds of virtio-win roughly correlate to what was shipped with the m
     virtio-win direct-downloads full archive with links to other bits like qemu-ga, a changelog, etc.
 ```
 
-　　然后通过virsh-manager将该镜像挂载到windows虚拟机进行安装
+然后通过virsh-manager将该镜像挂载到windows虚拟机进行安装
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## bridge和nat模式共存
 
-　　用virt install 完成虚拟机的安装后，发现里面只有一块网卡，有些时候我们需要两块或多块网卡怎么办？ 可以通过virsh attach-iterface来实现
+用virt install 完成虚拟机的安装后，发现里面只有一块网卡，有些时候我们需要两块或多块网卡怎么办？ 可以通过virsh attach-iterface来实现
 
-　　例如原来的虚拟机是这样的， 只有一块网卡：
+例如原来的虚拟机是这样的， 只有一块网卡：
 
 ```bash
 root@localhost:~ # virsh domiflist test_01
@@ -325,7 +325,7 @@ root@localhost:~ # virsh domiflist test_01
 
 ```
 
-　　添加网卡有两种途径：
+添加网卡有两种途径：
 
 ```bash
 root@localhost:/data/backup/script # nmcli c show
@@ -357,9 +357,9 @@ virsh domiflist test_01
 virsh detach-interface test_01 --type bridge --mac 52:54:00:ab:2d:39 --config
 ```
 
-　　‍
+‍
 
-　　注：添加网卡时候出现的报错
+注：添加网卡时候出现的报错
 
 ```bash
 root@localhost:/tmp/downloads # virsh attach-interface oracle_rac02 --type bridge --source virbr0 
@@ -367,7 +367,7 @@ error: Failed to attach interface
 error: 内部错误：没有更多可用 PCI 插槽
 ```
 
-　　可尝试使用以下方法添加，添加完成后，重启虚拟机即可
+可尝试使用以下方法添加，添加完成后，重启虚拟机即可
 
 ```bash
 

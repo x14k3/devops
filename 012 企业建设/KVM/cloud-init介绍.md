@@ -1,8 +1,8 @@
 # cloud-init介绍 
 
-　　目前大部分公有云（openstack, AWS, Aliyun）都在使用cloud-init,  已经成为虚拟机元数据管理和OS系统配置初始化的事实标准.最早cloud-init由ubuntu的母公司 Canonical  开发。主要思想是当用户首次创建虚拟机时，将前台设置的主机名，密码或者秘钥等存入metadata  server(顾名思义，存放元数据的服务器）。在openstack环境下当cloud-init随虚拟机启动而运行时，通过http协议访问metadata  server，获取这些信息并修改主机配置。完成系统的环境初始化。本文以openstack + centos7 + cloud-init  0.7.9 为例,分两篇介绍基本概念，工作原理和源码解读。
+目前大部分公有云（openstack, AWS, Aliyun）都在使用cloud-init,  已经成为虚拟机元数据管理和OS系统配置初始化的事实标准.最早cloud-init由ubuntu的母公司 Canonical  开发。主要思想是当用户首次创建虚拟机时，将前台设置的主机名，密码或者秘钥等存入metadata  server(顾名思义，存放元数据的服务器）。在openstack环境下当cloud-init随虚拟机启动而运行时，通过http协议访问metadata  server，获取这些信息并修改主机配置。完成系统的环境初始化。本文以openstack + centos7 + cloud-init  0.7.9 为例,分两篇介绍基本概念，工作原理和源码解读。
 
-　　如下是一些cloud-init的关键信息：  
+如下是一些cloud-init的关键信息：  
 源码： [https://github.com/cloud-init/cloud-init](https://github.com/cloud-init/cloud-init)  
 文档： [https://cloudinit.readthedocs.io/en/latest/](https://cloudinit.readthedocs.io/en/latest/)  
 配置文件： /etc/cloud/cloud.cfg  
@@ -13,12 +13,12 @@
 
 ### datasources [#](https://xixiliguo.github.io/linux/cloud-init.html#datasources)
 
-　　cloud-init将openstack, AWS, Aliyun等众多云平台抽象成数据源，使用统一的接口适配所有平台。  
+cloud-init将openstack, AWS, Aliyun等众多云平台抽象成数据源，使用统一的接口适配所有平台。  
 具体地，openstack下获取数据的方法是访问http://169.254.169.254 下的 userdata和metadata
 
 ### userdata [#](https://xixiliguo.github.io/linux/cloud-init.html#userdata)
 
-　　可以是文件，shell脚本或者cloud-init配置文件。租户可以在前台输入。  
+可以是文件，shell脚本或者cloud-init配置文件。租户可以在前台输入。  
 具体的格式,请参考  
 [https://cloudinit.readthedocs.io/en/latest/topics/format.html](https://cloudinit.readthedocs.io/en/latest/topics/format.html)  
 如下是一个shell脚本的userdata, openstack下用它来初始化root用户的密码
@@ -32,7 +32,7 @@ echo 'root:$6$O9wyDQ$LYGAz6V/dy66Ve8eJkeATAbXOwjkWGpLbr4QoxkH8iQ0nsLa7.n3lzSlOer
 
 ### metadata [#](https://xixiliguo.github.io/linux/cloud-init.html#metadata)
 
-　　包含主机名，实例id和其他服务器相关的信息
+包含主机名，实例id和其他服务器相关的信息
 
 ```bash
 [root@ecs-test-wangbo log]# curl http://169.254.169.254/openstack/2015-10-15/meta_data.json | python -m json.tool
@@ -65,11 +65,11 @@ echo 'root:$6$O9wyDQ$LYGAz6V/dy66Ve8eJkeATAbXOwjkWGpLbr4QoxkH8iQ0nsLa7.n3lzSlOer
 
 ### stage [#](https://xixiliguo.github.io/linux/cloud-init.html#stage)
 
-　　cloud-init对系统的配置分为四个阶段， 内部叫stage。 分别是local, network,config, final
+cloud-init对系统的配置分为四个阶段， 内部叫stage。 分别是local, network,config, final
 
 ### modules [#](https://xixiliguo.github.io/linux/cloud-init.html#modules)
 
-　　具体的定制化配置是由模块完成。每个模块根据获取的元数据和配置文件完成相关配置  
+具体的定制化配置是由模块完成。每个模块根据获取的元数据和配置文件完成相关配置  
 cloud.cfg里的部分配置：
 
 ```bash
@@ -90,20 +90,20 @@ cloud_init_modules:  // 定义init阶段需要执行的模块
 
 ### handlers [#](https://xixiliguo.github.io/linux/cloud-init.html#handlers)
 
-　　用于具体处理userdata.目前有四类默认的handler： boot hook， cloud config ，shell script， upstart job
+用于具体处理userdata.目前有四类默认的handler： boot hook， cloud config ，shell script， upstart job
 
 ### frequencies [#](https://xixiliguo.github.io/linux/cloud-init.html#frequencies)
 
-　　handler/module的运行频率， 目前有三个有效值:  
+handler/module的运行频率， 目前有三个有效值:  
 once-per-instance  
 always  
 once
 
 ### /var/lib/cloud/目录解读 [#](https://xixiliguo.github.io/linux/cloud-init.html#var-lib-cloud-目录解读)
 
-　　该目录主要保存元数据和其他一些运行时需要的信息
+该目录主要保存元数据和其他一些运行时需要的信息
 
-　　/var/lib/cloud/data 文件夹存放具体的数据源，主机名和实例ID  
+/var/lib/cloud/data 文件夹存放具体的数据源，主机名和实例ID  
 result.json 记录了一些数据源信息  
 status.json 记录了每个stage运行的开始时间，结束时间和遇到的error
 
@@ -118,7 +118,7 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ```
 
-　　/var/lib/cloud/instance 存放元数据和其他一些缓存文件
+/var/lib/cloud/instance 存放元数据和其他一些缓存文件
 
 ```bash
 /var/lib/cloud/instance
@@ -139,7 +139,7 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ## 工作原理 [#](https://xixiliguo.github.io/linux/cloud-init.html#工作原理)
 
-　　前面提到cloudinit分四个阶段执行，具体它们以服务的形式注册到系统中按如下顺序依次运行:  
+前面提到cloudinit分四个阶段执行，具体它们以服务的形式注册到系统中按如下顺序依次运行:  
  local - cloud-init-local.service  
  nework - cloud-init.service  
  config - cloud-config.service  
@@ -168,7 +168,7 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ### local 阶段 [#](https://xixiliguo.github.io/linux/cloud-init.html#local-阶段)
 
-　　此时  instance 尝试从ConfigDrive等本地源获取信息。在openstack环境下是不存在的，然后cloud-init  检查系统是否有默认网卡，有则配置为dhcp, 并写入 /etc/sysconfig/network-scripts/ifcfg-eth0.  只有配置了dhcp, 该网卡有了ip, 才能进一步连接metadataserver获取元数据 因为使用了dhcp, 所有也会从dhcp  server获取dns配置并写入/etc/resolv.conf。 这个和vpc里配置的dns服务器是一致的。
+此时  instance 尝试从ConfigDrive等本地源获取信息。在openstack环境下是不存在的，然后cloud-init  检查系统是否有默认网卡，有则配置为dhcp, 并写入 /etc/sysconfig/network-scripts/ifcfg-eth0.  只有配置了dhcp, 该网卡有了ip, 才能进一步连接metadataserver获取元数据 因为使用了dhcp, 所有也会从dhcp  server获取dns配置并写入/etc/resolv.conf。 这个和vpc里配置的dns服务器是一致的。
 
 ```bash
 2017-10-18 09:57:50,500 - main.py[DEBUG]: No local datasource found
@@ -184,14 +184,14 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ### network 阶段 [#](https://xixiliguo.github.io/linux/cloud-init.html#network-阶段)
 
-　　此时 instance 已经有自己的ip, 然后搜索所有网路源如下
+此时 instance 已经有自己的ip, 然后搜索所有网路源如下
 
 ```bash
 2017-10-18 09:57:56,102 - __init__.py[DEBUG]: Searching for network data source in: [u'DataSourceNoCloudNet', u'DataSourceAzureNet', u'DataSourceAltCloud', u'DataSourceOVFNet', u'DataSourceMAAS', u'DataSourceGCE', u'DataSourceOpenStack', u'DataSourceEc2', u'DataSourceCloudStack', u'DataSourceBigstep', u'DataSourceNone']
 
 ```
 
-　　最终通过访问 169.254.169.254成功获取openstack下的数据,
+最终通过访问 169.254.169.254成功获取openstack下的数据,
 
 ```bash
 2017-10-18 09:58:31,288 - __init__.py[DEBUG]: Seeing if we can get any data from <class 'cloudinit.sources.DataSourceOpenStack.DataSourceOpenStack'>
@@ -201,25 +201,25 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ```
 
-　　下面日志表明抓取数据成功，并写入`/var/lib/cloud/instances/e9f15094-8157-4c78-96a1-674cbaf26baf`​
+下面日志表明抓取数据成功，并写入`/var/lib/cloud/instances/e9f15094-8157-4c78-96a1-674cbaf26baf`​
 
 ```bash
 2017-10-18 09:58:43,120 - util.py[DEBUG]: Crawl of openstack metadata service took 11.168 seconds
 
 ```
 
-　　其他步骤如下:
+其他步骤如下:
 
 1. 解析userdata,并执行
 2. 按cloud.cfg里的配置顺序，依次运行各模块
 
 ### config 阶段 [#](https://xixiliguo.github.io/linux/cloud-init.html#config-阶段)
 
-　　执行一些配置模块。
+执行一些配置模块。
 
 ### final 阶段 [#](https://xixiliguo.github.io/linux/cloud-init.html#final-阶段)
 
-　　此时大部分定制化已经完成， 这里只是一些简单的收尾工作 比如 final-message 模块，只是在日志里打印cloud-init启动结束
+此时大部分定制化已经完成， 这里只是一些简单的收尾工作 比如 final-message 模块，只是在日志里打印cloud-init启动结束
 
 ```bash
 2017-10-18 09:58:44,236 - handlers.py[DEBUG]: start: modules-final/config-final-message: running config-final-message with frequency always
@@ -234,7 +234,7 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ## cloud-init 源码结构 [#](https://xixiliguo.github.io/linux/cloud-init.html#cloud-init-源码结构)
 
-　　大部分代码存放于 /lib/python2.7/site-packages/cloudinit
+大部分代码存放于 /lib/python2.7/site-packages/cloudinit
 
 ```bash
 ├── cmd                   // 所有命令的主入口
@@ -255,7 +255,7 @@ status.json 记录了每个stage运行的开始时间，结束时间和遇到的
 
 ## 运行的主入口 [#](https://xixiliguo.github.io/linux/cloud-init.html#运行的主入口)
 
-　　local, network, config, final三个不同阶段通过不同的参数，传递给主程序.比如local的具体命令行为 `/usr/bin/cloud-init init --local`​.首先主入口是 `cmd/main.py`​, 解析命令行参数
+local, network, config, final三个不同阶段通过不同的参数，传递给主程序.比如local的具体命令行为 `/usr/bin/cloud-init init --local`​.首先主入口是 `cmd/main.py`​, 解析命令行参数
 
 ```bash
 def main(sysv_args=None):
@@ -267,9 +267,9 @@ def main(sysv_args=None):
 
 ```
 
-　　local, init会走入 `main_init`​这个函数， local主要是寻找本地源（比如configdriver）, init阶段是寻找网络源（比如通过http消息获取metadata）
+local, init会走入 `main_init`​这个函数， local主要是寻找本地源（比如configdriver）, init阶段是寻找网络源（比如通过http消息获取metadata）
 
-　　当前华为云的裸金属镜像使用configdriver这种方式，原理如下：
+当前华为云的裸金属镜像使用configdriver这种方式，原理如下：
 
 > 物理机启动minios, 下载镜像和metadata  
 > 给一块硬盘分区，将镜像dd写入第一分区  
@@ -278,7 +278,7 @@ def main(sysv_args=None):
 > OS启动后，里面的cloud-init会挂载分区 /dev/sr0类似这样的  
 > mount后将读取普通文件一样获取metadata
 
-　　​`main_init`​主要做的事情如下：
+​`main_init`​主要做的事情如下：
 
 1. 读取配置文件
 2. 初始化日志信息
@@ -293,15 +293,15 @@ def main(sysv_args=None):
 
 ## 常见模板介绍 [#](https://xixiliguo.github.io/linux/cloud-init.html#常见模板介绍)
 
-　　config文件下包含所有模块，通过名字很容易识别其对应的功能。 比如 `cc_set_hostname.py`​ 用于创建虚拟机时设置主机名。 ``cc_update_hostname.py`用于每次启动时更新主机名。 模块都根据对应的配置项执行， 同时每个模块有自己固定的运行频率（per isntance, per always等）
+config文件下包含所有模块，通过名字很容易识别其对应的功能。 比如 `cc_set_hostname.py`​ 用于创建虚拟机时设置主机名。 ``cc_update_hostname.py`用于每次启动时更新主机名。 模块都根据对应的配置项执行， 同时每个模块有自己固定的运行频率（per isntance, per always等）
 
 ### cc_set_hostname.py [#](https://xixiliguo.github.io/linux/cloud-init.html#cc-set-hostname-py)
 
-　　只在创建虚拟机时运行一次， 如果perserve_hostname为false, 则模块不运行。 从metadata里提取hostname, 然后运行对应OS下的设置主机名命令
+只在创建虚拟机时运行一次， 如果perserve_hostname为false, 则模块不运行。 从metadata里提取hostname, 然后运行对应OS下的设置主机名命令
 
 ### cc_update_hostname.py [#](https://xixiliguo.github.io/linux/cloud-init.html#cc-update-hostname-py)
 
-　　每次虚拟机重启都会运行一次（包括第一次新建虚拟机）， 如果perserve_hostname为true, 则模块不运行。
+每次虚拟机重启都会运行一次（包括第一次新建虚拟机）， 如果perserve_hostname为true, 则模块不运行。
 
 1. 首先检查是否存在/var/lib/cloud/data/previous-hostname文件，有则对比当前OS的主机名， 如果不一样认为管理员维护主机名。提前退出
 2. 发现当前元数据和当前OS的主机名不一样，则直接更新
@@ -309,11 +309,11 @@ def main(sysv_args=None):
 
 ### cc_growpart.py [#](https://xixiliguo.github.io/linux/cloud-init.html#cc-growpart-py)
 
-　　每次虚拟机重启都会运行一次（包括第一次新建虚拟机）， 它会调整分区， 实现自动扩容，默认对根盘所有的虚拟磁盘执行。若要正常工作，还需要安装cloud-utils-growpart等辅助软件包
+每次虚拟机重启都会运行一次（包括第一次新建虚拟机）， 它会调整分区， 实现自动扩容，默认对根盘所有的虚拟磁盘执行。若要正常工作，还需要安装cloud-utils-growpart等辅助软件包
 
 ### cc_resizefs.py [#](https://xixiliguo.github.io/linux/cloud-init.html#cc-resizefs-py)
 
-　　每次虚拟机重启都会运行一次（包括第一次新建虚拟机）, 它主要配置growpart, 对文件系统扩容。 growpart主要针对磁盘。 不同的文件系统，调用不同的命令
+每次虚拟机重启都会运行一次（包括第一次新建虚拟机）, 它主要配置growpart, 对文件系统扩容。 growpart主要针对磁盘。 不同的文件系统，调用不同的命令
 
 ```bash
 def _resize_btrfs(mount_point, devpth):
@@ -346,15 +346,15 @@ RESIZE_FS_PREFIXES_CMDS = [
 
 ## 数据源实现 [#](https://xixiliguo.github.io/linux/cloud-init.html#数据源实现)
 
-　　​`sources`​下面是每个数据源的具体实现，openstack, aliyun这些都继承`__init__.py`​中的元类`DataSource`​. 这个metaclass实现了一些通用的操作。
+​`sources`​下面是每个数据源的具体实现，openstack, aliyun这些都继承`__init__.py`​中的元类`DataSource`​. 这个metaclass实现了一些通用的操作。
 
-　　openstack中通过访问 `http://169.254.169.254`​获取信息  
+openstack中通过访问 `http://169.254.169.254`​获取信息  
 aliyun通过`http://100.100.100.200`​获取  
 configdirve 查找`/dev/sr0`​,`/dev/sr1`​,`/dev/cd0`​,`/dev/cd1`​等设备，有则mount 后访问文件
 
 ## 配置文件 [#](https://xixiliguo.github.io/linux/cloud-init.html#配置文件)
 
-　　cloud-init采用yaml格式的文件。yaml格式的具体说明参见 [http://www.ruanyifeng.com/blog/2016/07/yaml.html](http://www.ruanyifeng.com/blog/2016/07/yaml.html)  
+cloud-init采用yaml格式的文件。yaml格式的具体说明参见 [http://www.ruanyifeng.com/blog/2016/07/yaml.html](http://www.ruanyifeng.com/blog/2016/07/yaml.html)  
 特别注意：yaml不支持tab键，支持多个空格，但相同层级的元素左侧对齐。 cloud-init对布尔有特殊处理。 如下， true, 1, on, yes 均认为是true
 
 ```bash
@@ -362,4 +362,4 @@ TRUE_STRINGS = ('true', '1', 'on', 'yes')
 FALSE_STRINGS = ('off', '0', 'no', 'false')
 ```
 
-　　‍
+‍

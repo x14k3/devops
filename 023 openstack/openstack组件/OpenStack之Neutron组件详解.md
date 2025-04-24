@@ -86,14 +86,14 @@
 
 ### 2.ML2 Core Plugin 详解
 
-　　1.  Neutron 可以通过开发不同的 plugin 和 agent 支持不同的网络技术，但是随着支持的 network provider 数量的增加，开发人员面临两个突出的问题：
+1.  Neutron 可以通过开发不同的 plugin 和 agent 支持不同的网络技术，但是随着支持的 network provider 数量的增加，开发人员面临两个突出的问题：
 
 * 只能在 OpenStack 中使用一种 core plugin，多种 network provider 无法共存。只使用一个 core plugin 本身没有问题。但问题在于传统的 core plugin 与 core plugin agent 是一一对应的。也就是说，如果选择了 linux bridge plugin，那么 linux bridge agent 将是唯一选择，就必须在 OpenStack 的所有节点上使用 linux bridge 作为虚拟交换机（即 network provider）。
 * 不同 plugin 之间存在大量重复代码，开发新的 plugin 工作量大。所有传统的 core plugin 都需要编写大量重复和类似的数据库访问的代码，大大增加了 plugin 开发和维护的工作量。
 
-　　2\. Moduler Layer 2（ML2）：是 Neutron 在 Havana 版本实现的一个新的 core plugin，用于替代原有的 linux bridge plugin 和 open vswitch plugin。 作为新一代的 core plugin，提供了一个框架，允许在 OpenStack 网络中同时使用多种 Layer 2 网络技术，不同的节点可以使用不同的网络实现机制。
+2\. Moduler Layer 2（ML2）：是 Neutron 在 Havana 版本实现的一个新的 core plugin，用于替代原有的 linux bridge plugin 和 open vswitch plugin。 作为新一代的 core plugin，提供了一个框架，允许在 OpenStack 网络中同时使用多种 Layer 2 网络技术，不同的节点可以使用不同的网络实现机制。
 
-　　3\. ML2 对二层网络进行抽象和建模，引入了 type driver 和 mechansim driver。这两类 driver 解耦了 Neutron 所支持的网络类型（type）与访问这些网络类型的机制（mechanism），其结果就是使得 ML2 具有非常好的弹性，易于扩展，能够灵活支持多种 type 和 mechanism。
+3\. ML2 对二层网络进行抽象和建模，引入了 type driver 和 mechansim driver。这两类 driver 解耦了 Neutron 所支持的网络类型（type）与访问这些网络类型的机制（mechanism），其结果就是使得 ML2 具有非常好的弹性，易于扩展，能够灵活支持多种 type 和 mechanism。
 
 * Type Driver：Neutron 支持的每一种网络类型都有一个对应的 ML2 type driver。type driver 负责维护网络类型的状态，执行验证，创建网络等。 ML2 支持的网络类型包括 local, flat, vlan, vxlan 和 gre。&#x20;
 * Mechansim Driver：Neutron 支持的每一种网络机制都有一个对应的 ML2 mechansim driver。mechanism driver 负责获取由 type driver 维护的网络状态，并确保在相应的网络设备（物理或虚拟）上正确实现这些状态。

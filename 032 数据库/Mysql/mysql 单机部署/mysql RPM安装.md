@@ -1,6 +1,6 @@
 # mysql RPM安装
 
-　　[https://downloads.mysql.com/archives/community/](https://downloads.mysql.com/archives/community/)
+[https://downloads.mysql.com/archives/community/](https://downloads.mysql.com/archives/community/)
 
 ```bash
 # 下载mysql rpm安装包 [mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar]
@@ -77,11 +77,11 @@ sql> FLUSH PRIVILEGES;
 sql> select host, user, plugin from mysql.user;
 ```
 
-　　‍
+‍
 
-　　数据库数据目录迁移步骤
+数据库数据目录迁移步骤
 
-　　该操作一定要在刚部署完数据库软件后进行。
+该操作一定要在刚部署完数据库软件后进行。
 
 ```bash
 # 停止数据库服务

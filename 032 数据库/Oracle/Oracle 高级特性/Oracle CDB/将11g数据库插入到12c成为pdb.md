@@ -1,10 +1,10 @@
 # 将11g数据库插入到12c成为pdb
 
-　　为了将以前的旧库整合起来，需要将旧库都插入到12c数据库当中统一管理
+为了将以前的旧库整合起来，需要将旧库都插入到12c数据库当中统一管理
 
-　　这篇文章主要介绍如何将原有的11g数据库作为pdb插到已有的12c数据库当中去
+这篇文章主要介绍如何将原有的11g数据库作为pdb插到已有的12c数据库当中去
 
-　　现有环境
+现有环境
 
 |SID|版本|CDB|
 | --------| ----------| -----|
@@ -13,11 +13,11 @@
 
 ## 升级11g数据库
 
-　　参考[通过DBUA升级11g到12.2](https://www.xbdba.com/2018/12/11/oracle-11g-dbua-upgrade-12cr2/ "通过DBUA升级11g到12.2")，不过多介绍
+参考[通过DBUA升级11g到12.2](https://www.xbdba.com/2018/12/11/oracle-11g-dbua-upgrade-12cr2/ "通过DBUA升级11g到12.2")，不过多介绍
 
-　　从NO-CDB插入到CDB示意图
+从NO-CDB插入到CDB示意图
 
-​![plug-in-a-non-cdb-to-cdb](assets/plug-in-a-non-cdb-to-cdb-20240227181535-vihelhu.png)​
+![plug-in-a-non-cdb-to-cdb](assets/plug-in-a-non-cdb-to-cdb-20240227181535-vihelhu.png)
 
 ## 确认源库信息
 
@@ -42,9 +42,9 @@ test
 
 ## DBMS_PDB包
 
-　　这个包的作用主要是用于生成源数据库的元数据信息，通过它允许一个非CDB的库插入到一个已经存在的CDB当中
+这个包的作用主要是用于生成源数据库的元数据信息，通过它允许一个非CDB的库插入到一个已经存在的CDB当中
 
-　　首先要保持源库的干净，没有数据处于恢复状态等等情况，可以正常关闭然后启动到read only状态
+首先要保持源库的干净，没有数据处于恢复状态等等情况，可以正常关闭然后启动到read only状态
 
 ```bash
 sys@TEST> shutdown immediate
@@ -54,7 +54,7 @@ ORACLE instance shut down.
 sys@TEST> startup open read only
 ```
 
-　　查看数据文件位置，后面`FILE_NAME_CONVERT`​会用到
+查看数据文件位置，后面`FILE_NAME_CONVERT`​会用到
 
 ```bash
 sys@TEST> select file_name from dba_data_files;
@@ -67,7 +67,7 @@ FILE_NAME
 /u01/app/oracle/oradata/test/users01.dbf
 ```
 
-　　执行`DBMS_PDB.DESCRIBE`​,生成一个XML文件，其实就跟拔下一个PDB的操作一样
+执行`DBMS_PDB.DESCRIBE`​,生成一个XML文件，其实就跟拔下一个PDB的操作一样
 
 ```bash
 BEGIN
@@ -77,7 +77,7 @@ END;
 /
 ```
 
-　　正常关闭源库
+正常关闭源库
 
 ```bash
 sys@TEST> shutdown immediate
@@ -86,7 +86,7 @@ Database dismounted.
 ORACLE instance shut down.
 ```
 
-　　连到目标库上
+连到目标库上
 
 ```bash
 sys@ORA12C> select name, CDB from v$database;
@@ -96,7 +96,7 @@ NAME                        CDB
 ORA12C                      YES
 ```
 
-　　检查源库是否能被插入到目标库
+检查源库是否能被插入到目标库
 
 ```bash
 set serveroutput on
@@ -113,7 +113,7 @@ END;
 /
 ```
 
-　　如果返回`NO`​,则需要检查原因
+如果返回`NO`​,则需要检查原因
 
 ```bash
 col cause for a30
@@ -122,7 +122,7 @@ col message for a80
 select name,cause,type,message,status from PDB_PLUG_IN_VIOLATIONS where name='TEST';
 ```
 
-　　用刚才生成的XML文件创建一个新的PDB
+用刚才生成的XML文件创建一个新的PDB
 
 ```bash
 CREATE PLUGGABLE DATABASE test USING '/u01/app/oracle/oradata/test/test.xml'
@@ -132,7 +132,7 @@ CREATE PLUGGABLE DATABASE test USING '/u01/app/oracle/oradata/test/test.xml'
 Pluggable database created.
 ```
 
-　　切换到新建的PDB，通过`$ORACLE_HOME/rdbms/admin/noncdb_to_pdb.sql`​语句清除一些PDB不需要的信息
+切换到新建的PDB，通过`$ORACLE_HOME/rdbms/admin/noncdb_to_pdb.sql`​语句清除一些PDB不需要的信息
 
 ```bash
 ALTER SESSION SET CONTAINER=test;
@@ -140,7 +140,7 @@ ALTER SESSION SET CONTAINER=test;
 @?/rdbms/admin/noncdb_to_pdb.sql
 ```
 
-　　启动pdb
+启动pdb
 
 ```bash
 sys@ORA12C> alter session set container=test;
@@ -158,4 +158,4 @@ NAME       OPEN_MODE
 TEST       READ WRITE
 ```
 
-　　至此，原有的11g库正式转成了12c的一个pdb。
+至此，原有的11g库正式转成了12c的一个pdb。

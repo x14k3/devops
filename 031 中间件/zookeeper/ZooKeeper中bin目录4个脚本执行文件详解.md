@@ -1,6 +1,6 @@
 # ZooKeeper中bin目录4个脚本执行文件详解
 
-　　ZooKeeper中bin目录中有如下4个可执行脚本：
+ZooKeeper中bin目录中有如下4个可执行脚本：
 
 ```shell
 [root@poc01 ~]# cd /opt/module/zookeeper-3.4.6/bin/
@@ -8,7 +8,7 @@
 zkCleanup.sh  zkCli.sh  zkEnv.sh  zkServer.sh
 ```
 
-　　这些脚本是 ZooKeeper 的一部分，用于管理和操作 ZooKeeper 实例。
+这些脚本是 ZooKeeper 的一部分，用于管理和操作 ZooKeeper 实例。
 
 1. zkCleanup.sh：
 
@@ -27,7 +27,7 @@ zkCleanup.sh  zkCli.sh  zkEnv.sh  zkServer.sh
     * 用途：zkServer.sh 脚本用于启动、停止和管理 ZooKeeper 服务实例。
     * 使用方法：通过运行 zkServer.sh 脚本并指定启动、停止等参数，可以对 ZooKeeper 服务进行管理。例如，`zkServer.sh start`​ 用于启动 ZooKeeper 服务，`zkServer.sh stop`​ 用于停止服务。
 
-　　下文将逐个详细介绍4个 ZooKeeper 相关脚本的使用、参数、场景和注意事项
+下文将逐个详细介绍4个 ZooKeeper 相关脚本的使用、参数、场景和注意事项
 
 ### 1\. zkCli.sh
 
@@ -39,7 +39,7 @@ zkCleanup.sh  zkCli.sh  zkEnv.sh  zkServer.sh
 * 参数介绍：`zkCli.sh`​ 接受连接参数，如 ZooKeeper 服务器地址。
 * 场景：用于与 ZooKeeper 交互、创建、读取、更新、删除节点等。
 
-　　​`zkCli.sh`​ 脚本是 ZooKeeper 提供的命令行客户端工具，用于连接到 ZooKeeper 服务器并执行相关操作。它允许用户交互式地操作 ZooKeeper 数据，例如创建节点、设置节点数据、获取节点信息等。以下是关于 `zkCli.sh`​ 脚本的使用方法和一些常用命令示例：
+​`zkCli.sh`​ 脚本是 ZooKeeper 提供的命令行客户端工具，用于连接到 ZooKeeper 服务器并执行相关操作。它允许用户交互式地操作 ZooKeeper 数据，例如创建节点、设置节点数据、获取节点信息等。以下是关于 `zkCli.sh`​ 脚本的使用方法和一些常用命令示例：
 
 #### 1-2. zkCli-连接方式
 
@@ -81,7 +81,7 @@ help
 
 #### 1-5. zkCli-高级使用方法
 
-　　​`zkCli.sh`​ 是 ZooKeeper 提供的基本命令行客户端工具，用于与 ZooKeeper 服务器交互执行各种操作。虽然它是一个命令行工具，但仍然提供了一些较为复杂和高级的功能，可以用于节点监控、权限管理、Watcher 监听等。
+​`zkCli.sh`​ 是 ZooKeeper 提供的基本命令行客户端工具，用于与 ZooKeeper 服务器交互执行各种操作。虽然它是一个命令行工具，但仍然提供了一些较为复杂和高级的功能，可以用于节点监控、权限管理、Watcher 监听等。
 
 * **监控节点状态变化**
 
@@ -200,7 +200,7 @@ help
   * ​`crwda`​ 权限（`create`​、`read`​、`update`​、`delete`​）
   * ZooKeeper 的 ACL 权限管理较为复杂，需要小心谨慎操作，以免影响节点的访问权限
 
-　　‍
+‍
 
 ### 2\. zkServer.sh
 
@@ -211,7 +211,7 @@ help
 * 参数介绍：接受启动、停止等命令。
 * 场景：用于管理 ZooKeeper 服务的启动和停止。
 
-　　​`zkServer.sh`​ 脚本是 ZooKeeper 提供的用于启动、停止和管理 ZooKeeper 服务器的脚本。它提供了一系列的命令用于管理 ZooKeeper 服务器的运行状态，例如启动、停止、重启等。
+​`zkServer.sh`​ 脚本是 ZooKeeper 提供的用于启动、停止和管理 ZooKeeper 服务器的脚本。它提供了一系列的命令用于管理 ZooKeeper 服务器的运行状态，例如启动、停止、重启等。
 
 #### 2-2. zkServer-使用方法
 
@@ -220,7 +220,7 @@ zkServer.sh {start|stop|restart|status|upgrade|print-cmd}
 
 ```
 
-　　参数说明：
+参数说明：
 
 * ​`start`​：启动 ZooKeeper 服务器。`zkServer.sh start`​
 * ​`stop`​：停止 ZooKeeper 服务器。`zkServer.sh stop`​
@@ -235,9 +235,9 @@ zkServer.sh {start|stop|restart|status|upgrade|print-cmd}
 * 在执行 ZooKeeper 相关操作前，请确保已经配置了正确的环境变量，例如使用了 `zkEnv.sh`​ 脚本设置了环境。
 * 对于 `start`​、`stop`​、`restart`​ 操作，可能需要具有相应的权限才能执行。
 
-　　使用 `zkServer.sh`​ 脚本可以方便地管理 ZooKeeper 服务器的启动、停止和重启，同时也可以通过 `status`​ 命令查看 ZooKeeper 服务器的运行状态，以确保服务正常运行。
+使用 `zkServer.sh`​ 脚本可以方便地管理 ZooKeeper 服务器的启动、停止和重启，同时也可以通过 `status`​ 命令查看 ZooKeeper 服务器的运行状态，以确保服务正常运行。
 
-　　​`zkServer.sh`​ 脚本是 ZooKeeper 提供的用于管理 ZooKeeper 服务器的脚本，包括启动、停止、重启和状态查询等功能。虽然这个脚本本身功能较为基础，但可以结合其他高级用法来提高 ZooKeeper 的运维效率和管理。
+​`zkServer.sh`​ 脚本是 ZooKeeper 提供的用于管理 ZooKeeper 服务器的脚本，包括启动、停止、重启和状态查询等功能。虽然这个脚本本身功能较为基础，但可以结合其他高级用法来提高 ZooKeeper 的运维效率和管理。
 
 #### 2-4. zkServer-高级使用方法
 
@@ -277,9 +277,9 @@ zkServer.sh {start|stop|restart|status|upgrade|print-cmd}
   systemctl stop zookeeper
   ```
 
-　　实现方法：
+实现方法：
 
-　　在 `/lib/systemd/system/`​ 目录下创建 `zookeeper.service`​文件
+在 `/lib/systemd/system/`​ 目录下创建 `zookeeper.service`​文件
 
 ```shell
 [root@poc01 bin]# vim /lib/systemd/system/zookeeper.service
@@ -325,7 +325,7 @@ WantedBy=multi-user.target
 
 #### 3-2. zkEnv-使用方式
 
-　　​`source zkEnv.sh`​
+​`source zkEnv.sh`​
 
 ```bash
 [root@poc01 ~]# source /opt/module/zookeeper-3.4.6/bin/zkEnv.sh 
@@ -338,7 +338,7 @@ WantedBy=multi-user.target
 
 * 在运行 ZooKeeper 相关命令之前，默认会执行 `source zkEnv.sh`​ 以配置环境变量，确保 ZooKeeper 能够正确运行。
 
-　　在zkServer.sh中可以看到如下代码：
+在zkServer.sh中可以看到如下代码：
 
 ```shell
 if [ -e "$ZOOBIN/../libexec/zkEnv.sh" ]; then
@@ -348,13 +348,13 @@ else
 fi
 ```
 
-　　​`zkEnv.sh`​ 脚本主要用于配置 ZooKeeper 运行时的环境变量，确保 ZooKeeper 的运行所需的环境设置正确，进而保证 ZooKeeper 服务的正常运行。
+​`zkEnv.sh`​ 脚本主要用于配置 ZooKeeper 运行时的环境变量，确保 ZooKeeper 的运行所需的环境设置正确，进而保证 ZooKeeper 服务的正常运行。
 
 #### 3-4. zkEnv-高级使用方法
 
 * 配置 JVM 参数
 
-　　通过 `zkEnv.sh`​ 设置 JVM 相关的参数，比如内存大小、GC 策略等，可以提高 ZooKeeper 的性能和稳定性。
+通过 `zkEnv.sh`​ 设置 JVM 相关的参数，比如内存大小、GC 策略等，可以提高 ZooKeeper 的性能和稳定性。
 
 ```bash
 export SERVER_JVMFLAGS="-Xmx2G -XX:+UseG1GC"
@@ -362,7 +362,7 @@ export SERVER_JVMFLAGS="-Xmx2G -XX:+UseG1GC"
 
 * 定制 ZooKeeper 日志
 
-　　设置 ZooKeeper 的日志级别、输出路径等，以便更好地监控和调试 ZooKeeper 的运行状态。
+设置 ZooKeeper 的日志级别、输出路径等，以便更好地监控和调试 ZooKeeper 的运行状态。
 
 ```bash
 export ZOO_LOG4J_PROP="INFO,ROLLINGFILE" 
@@ -371,7 +371,7 @@ export ZOO_LOG_DIR="/path/to/zookeeper/logs"
 
 * 设置认证信息
 
-　　对于需要安全认证的情况，可以配置 ZooKeeper 的认证信息，使用用户名和密码进行访问控制。
+对于需要安全认证的情况，可以配置 ZooKeeper 的认证信息，使用用户名和密码进行访问控制。
 
 ```bash
 export ZOOKEEPER_SERVER_OPTS="$ZOOKEEPER_SERVER_OPTS -Dzookeeper.DigestAuthenticationProvider.superDigest=super:user:password"
@@ -379,7 +379,7 @@ export ZOOKEEPER_SERVER_OPTS="$ZOOKEEPER_SERVER_OPTS -Dzookeeper.DigestAuthentic
 
 * 配置网络参数
 
-　　调整网络相关的参数，例如端口号、连接超时等，以适应特定的网络环境。
+调整网络相关的参数，例如端口号、连接超时等，以适应特定的网络环境。
 
 ```bash
 export ZOOKEEPER_CLIENT_PORT=2181 
@@ -394,7 +394,7 @@ export ZOOKEEPER_TICK_TIME=2000
 * 参数介绍：`zkCleanup.sh`​ 接受数据目录路径和要保留的文件数作为参数。
 * 场景：当 ZooKeeper 数据目录中的日志文件和快照文件太多时，用于清理旧文件，释放磁盘空间。
 
-　　​`zkCleanup.sh`​ 脚本主要用于清理 ZooKeeper 数据目录中的快照（snapshot）和事务日志（transaction logs），以减少磁盘占用并保持 ZooKeeper 数据的健康状态。这个脚本允许你限制保留的快照和事务日志的数量，以及清理指定路径下的数据。该脚本一般用于维护 ZooKeeper 的数据目录，清除旧的数据文件，防止数据过于庞大影响性能。
+​`zkCleanup.sh`​ 脚本主要用于清理 ZooKeeper 数据目录中的快照（snapshot）和事务日志（transaction logs），以减少磁盘占用并保持 ZooKeeper 数据的健康状态。这个脚本允许你限制保留的快照和事务日志的数量，以及清理指定路径下的数据。该脚本一般用于维护 ZooKeeper 的数据目录，清除旧的数据文件，防止数据过于庞大影响性能。
 
 #### 4-2. zkCleanup-使用方式
 

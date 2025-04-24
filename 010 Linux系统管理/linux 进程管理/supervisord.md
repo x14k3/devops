@@ -1,8 +1,8 @@
 # supervisord
 
-　　Supervisor是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。它是通过fork/exec的方式把这些被管理的进程当作supervisor的子进程来启动，这样只要在supervisor的配置文件中，把要管理的进程的可执行文件的路径写进去即可。也实现当子进程挂掉的时候，父进程可以准确获取子进程挂掉的信息的，可以选择是否自己启动和报警。supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程
+Supervisor是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。它是通过fork/exec的方式把这些被管理的进程当作supervisor的子进程来启动，这样只要在supervisor的配置文件中，把要管理的进程的可执行文件的路径写进去即可。也实现当子进程挂掉的时候，父进程可以准确获取子进程挂掉的信息的，可以选择是否自己启动和报警。supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程
 
-　　**Supervisord VS Systemd**
+**Supervisord VS Systemd**
 
 * Systemd
 
@@ -181,16 +181,16 @@ serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接superv
 
 ### program 配置实例
 
-　　面我们已经把 supervisrod 运行起来了，现在可以添加我们要管理的进程的配置文件。这些配置可以都写到 supervisord.conf 文件里，如果应用程序很多，最好通过 include 的方式把不同的程序（组）写到不同的配置文件里。
+面我们已经把 supervisrod 运行起来了，现在可以添加我们要管理的进程的配置文件。这些配置可以都写到 supervisord.conf 文件里，如果应用程序很多，最好通过 include 的方式把不同的程序（组）写到不同的配置文件里。
 
-　　为了举例，我们新建一个目录 `/etc/supervisord.d`​​用于存放这些配置文件，相应的，把 /etc/supervisord.conf 里 include 部分的的配置修改一下：
+为了举例，我们新建一个目录 `/etc/supervisord.d`​​用于存放这些配置文件，相应的，把 /etc/supervisord.conf 里 include 部分的的配置修改一下：
 
 ```ini
 [include]
 files = /etc/supervisord.d
 ```
 
-　　​`vim /etc/supervisord.d/prometheus`​
+​`vim /etc/supervisord.d/prometheus`​
 
 ```ini
 [program:prometheus]
@@ -224,7 +224,7 @@ supervisorctl start grafana
 
 ### 配置 http 服务
 
-　　supervisord 可以开启 http 服务，通过 web 页面来查看和管理任务。  
+supervisord 可以开启 http 服务，通过 web 页面来查看和管理任务。  
 如果需要开启，可以打开`inet_http_server`​配置，大概在39行。
 
 ```bash
@@ -234,11 +234,11 @@ port=0.0.0.0:9001        ; ip_address:port specifier, *:port for all iface
 ;password=thepassword    ; default is no password (open server)
 ```
 
-​![image](assets/image-20230801221948-deuzqc5.png)​
+![image](assets/image-20230801221948-deuzqc5.png)​
 
 ## supervisorctl 操作
 
-　　supervisorctl 是 supervisord 的命令行客户端工具，使用的配置和 supervisord 一样，这里就不再说了。下面，主要介绍 supervisorctl 操作的常用命令：
+supervisorctl 是 supervisord 的命令行客户端工具，使用的配置和 supervisord 一样，这里就不再说了。下面，主要介绍 supervisorctl 操作的常用命令：
 
 ```ini
 status    ;查看程序状态
@@ -250,4 +250,4 @@ reload    ;载入最新的配置文件，停止原有的进程并按照新的配
 update    ;重启配置文件修改过的程序，配置没有改动的进程不会收到影响而重启
 ```
 
-　　‍
+‍

@@ -1,6 +1,6 @@
 # svn
 
-　　SVN全称Subversion，是一个开放源代码的版本控制系统，Subversion 在 2000 年由 CollabNet Inc 开发，现在发展成为 Apache 软件基金会的一个项目，同样是一个丰富的开发者和用户社区的一部分。
+SVN全称Subversion，是一个开放源代码的版本控制系统，Subversion 在 2000 年由 CollabNet Inc 开发，现在发展成为 Apache 软件基金会的一个项目，同样是一个丰富的开发者和用户社区的一部分。
 
 ## 基本概念
 
@@ -18,11 +18,11 @@
 3. 进入自己的分支，进行工作，每隔一个小时向服务器自己的分支提交一次代码（很多人都有这个习惯。因为有时候自己对代码改来改去，最后又想还原到前一个小时的版本，或者看看前一个小时自己修改了哪些代码，就需要这样做了）（Commit）
 4. 下班时间快到了，把自己的分支合并到服务器主分支上，一天的工作完成，并反映给服务器 （Commit）
 
-　　**注意**：如果两个程序员同时修改了同一个文件， SVN可以合并这两个程序员的改动，实际上SVN管理源代码是以行为单位的，就是说两个程序员只要不是修改了同一行程序，SVN都会自动合并两种修改。如果是同一行，SVN会提示文件Confict, 冲突，需要手动确认。
+**注意**：如果两个程序员同时修改了同一个文件， SVN可以合并这两个程序员的改动，实际上SVN管理源代码是以行为单位的，就是说两个程序员只要不是修改了同一行程序，SVN都会自动合并两种修改。如果是同一行，SVN会提示文件Confict, 冲突，需要手动确认。
 
 ![](assets/image-20230607102144967-20230610173809-qlkb5rh.png)
 
-　　‍
+‍
 
 ## svn 服务端部署
 
@@ -61,7 +61,7 @@ root@devops conf $
 
 #### SVN权限配置
 
-　　配置svnserve.conf
+配置svnserve.conf
 
 ```bash
 ### This file controls the configuration of the svnserve daemon, if you
@@ -111,7 +111,7 @@ realm = My First Repository
 # max-encryption = 256
 ```
 
-　　在passwd配置文件设置项目库人员的用户和密码
+在passwd配置文件设置项目库人员的用户和密码
 
 ```bash
 [root@SVN conf]# vi /svn/test/conf/passwd
@@ -124,7 +124,7 @@ u1=123456
 u2=123456
 ```
 
-　　在authz配置文设置组和用户对应版本库的权限
+在authz配置文设置组和用户对应版本库的权限
 
 ```bash
 [root@SVN conf]# vi /svn/test/conf/authz
@@ -154,7 +154,7 @@ svnserve -d -r /home/svn/project   # 启用svn的版本库
 
 #### 配置 svnserve
 
-　　首先按以上步骤安装 [部署svnserve访问SVN](#部署svnserve访问SVN)]
+首先按以上步骤安装 [部署svnserve访问SVN](#部署svnserve访问SVN)]
 
 ```bash
 # 运行以下命令安装httpd。
@@ -201,7 +201,7 @@ systemctl start httpd.service
 
 ## svn 常用命令
 
-　　SVN 的命令通常都很少用，在 windows 上，我们通常都是使用图形化的操作界面，例如 [TortoiseSVN](https://svnbucket.com/posts/svn-tutorial/)，提供了很好的图形化操作界面，上手简单方便。
+SVN 的命令通常都很少用，在 windows 上，我们通常都是使用图形化的操作界面，例如 [TortoiseSVN](https://svnbucket.com/posts/svn-tutorial/)，提供了很好的图形化操作界面，上手简单方便。
 但是有时候我们需要在服务器这类没有图形化操作界面的机器上使用 SVN，这时候我们就需要用到 SVN 的命令来操作了。
 本篇给大家讲解一些 SVN 的常用命令，日常使用学会这些就足够了。
 
@@ -392,4 +392,4 @@ svn help
 svn help commit
 ```
 
-　　‍
+‍

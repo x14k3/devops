@@ -1,10 +1,10 @@
 # linux 升级内核版本
 
-　　‍
+‍
 
-　　linux内核官网：[https://www.kernel.org/](https://www.kernel.org/)
+linux内核官网：[https://www.kernel.org/](https://www.kernel.org/)
 
-　　[https://mirrors.edge.kernel.org/pub/linux/kernel/](https://mirrors.edge.kernel.org/pub/linux/kernel/)
+[https://mirrors.edge.kernel.org/pub/linux/kernel/](https://mirrors.edge.kernel.org/pub/linux/kernel/)
 
 ## Centos
 
@@ -56,7 +56,7 @@ reboot
 
 ### rpm安装
 
-　　[http://mirrors.coreix.net/elrepo-archive-archive/kernel/el7/x86_64/RPMS/](http://mirrors.coreix.net/elrepo-archive-archive/kernel/el7/x86_64/RPMS/)
+[http://mirrors.coreix.net/elrepo-archive-archive/kernel/el7/x86_64/RPMS/](http://mirrors.coreix.net/elrepo-archive-archive/kernel/el7/x86_64/RPMS/)
 
 ```bash
 wget http://mirrors.coreix.net/elrepo-archive-archive/kernel/el7/x86_64/RPMS/kernel-ml-devel-5.18.9-1.el7.elrepo.x86_64.rpm
@@ -95,4 +95,4 @@ reboot
 yum -y remove kernel-3.10.0-1160.71.1.el7.x86_64 
 ```
 
-　　‍
+‍

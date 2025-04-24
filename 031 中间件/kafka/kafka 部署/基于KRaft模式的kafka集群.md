@@ -2,16 +2,16 @@
 
 ## 1.集群规划
 
-　　一般模式下，元数据在 zookeeper 中，运行时动态选举 controller，由controller 进行 Kafka 集群管理。kraft 模式架构（实验性）下，不再依赖 zookeeper 集群，而是用三台 controller 节点代替 zookeeper，元数据保存在 controller 中，由 controller 直接进行 Kafka 集群管理。
+一般模式下，元数据在 zookeeper 中，运行时动态选举 controller，由controller 进行 Kafka 集群管理。kraft 模式架构（实验性）下，不再依赖 zookeeper 集群，而是用三台 controller 节点代替 zookeeper，元数据保存在 controller 中，由 controller 直接进行 Kafka 集群管理。
 
-　　好处有以下几个：
+好处有以下几个：
 
 * Kafka 不再依赖外部框架，而是能够独立运行
 * controller 管理集群时，不再需要从 zookeeper 中先读取数据，集群性能上升
 * 由于不依赖 zookeeper，集群扩展时不再受到 zookeeper 读写能力限制
 * controller 不再动态选举，而是由配置文件规定。可以有针对性的加强controller 节点的配置，而不是像以前一样对随机 controller 节点的高负载束手无策。
 
-　　‍
+‍
 
 |名称|ip地址|<br />|
 | :------: | :--------------: | ----|
@@ -23,7 +23,7 @@
 
 ### 1.下载kafka二进制包
 
-　　[https://kafka.apache.org/downloads](https://kafka.apache.org/downloads)
+[https://kafka.apache.org/downloads](https://kafka.apache.org/downloads)
 
 ```bash
 wget https://downloads.apache.org/kafka/3.8.0/kafka_2.12-3.8.0.tgz
@@ -43,7 +43,7 @@ cd /usr/kafka/kafka_2.13-3.6.1/config/kraft
 vi server.properties
 ```
 
-　　​`注：Kraft模式的配置文件在config目录的kraft子目录下`​
+​`注：Kraft模式的配置文件在config目录的kraft子目录下`​
 
 ```properties
 # Licensed to the Apache Software Foundation (ASF) under one or more
@@ -177,19 +177,19 @@ log.retention.check.interval.ms=300000
 
 ### 4.在其他节点上修改配置文件
 
-　　在 192.168.58.131 和 192.168.58.132 上修改配置文件`server.properties`​中
+在 192.168.58.131 和 192.168.58.132 上修改配置文件`server.properties`​中
 
 #### 1.`node.id`​
 
-　　注：node.id 不得重复，整个集群中唯一，且值需要和controller.quorum.voters 对应。
+注：node.id 不得重复，整个集群中唯一，且值需要和controller.quorum.voters 对应。
 
 #### 2.`dvertised.Listeners`​地址
 
-　　根据各自的主机名称，修改相应的 dvertised.Listeners 地址
+根据各自的主机名称，修改相应的 dvertised.Listeners 地址
 
 #### 3.`listeners`​地址
 
-　　根据各自的主机IP修改
+根据各自的主机IP修改
 
 ```properties
 # 节点 ID
@@ -223,7 +223,7 @@ advertised.listeners=PLAINTEXT://192.168.58.132:9092
 bin/kafka-storage.sh random-uuid
 ```
 
-　　输出ID：`7TraW-eCQXCx-HYoNY5VKw`​
+输出ID：`7TraW-eCQXCx-HYoNY5VKw`​
 
 #### 2.用该 ID 格式化 kafka 存储目录（每个节点都需要执行）
 
@@ -233,7 +233,7 @@ bin/kafka-storage.sh format -t 7TraW-eCQXCx-HYoNY5VKw -c /usr/kafka/kafka_2.13-3
 
 ### 6.配置环境变量
 
-　　在/etc/profile.d中配置
+在/etc/profile.d中配置
 
 #### 1.新建kafka.sh
 

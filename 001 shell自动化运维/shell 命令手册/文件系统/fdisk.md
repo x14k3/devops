@@ -1,6 +1,6 @@
 # fdisk
 
-　　**fdisk命令** 用于观察硬盘实体使用情况，也可对硬盘分区。它采用传统的问答式界面，而非类似DOS fdisk的cfdisk互动式操作界面，因此在使用上较为不便，但功能却丝毫不打折扣。
+**fdisk命令** 用于观察硬盘实体使用情况，也可对硬盘分区。它采用传统的问答式界面，而非类似DOS fdisk的cfdisk互动式操作界面，因此在使用上较为不便，但功能却丝毫不打折扣。
 
 ### 语法
 
@@ -40,17 +40,17 @@ fdisk [选项] -l [<磁盘>...]   列出分区表
 
 ### 参数
 
-　　设备文件：指定要进行分区或者显示分区的硬盘设备文件。
+设备文件：指定要进行分区或者显示分区的硬盘设备文件。
 
 ### 实例
 
-　　首先选择要进行操作的磁盘：
+首先选择要进行操作的磁盘：
 
 ```
 [root@localhost ~]# fdisk /dev/sdb
 ```
 
-　　输入`m`​列出可以执行的命令：
+输入`m`​列出可以执行的命令：
 
 ```
 command (m for help): m
@@ -73,7 +73,7 @@ Command action
    x   extra functionality (experts only)
 ```
 
-　　输入`p`​列出磁盘目前的分区情况：
+输入`p`​列出磁盘目前的分区情况：
 
 ```
 Command (m for help): p
@@ -87,7 +87,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 /dev/sdb2               2          26      200812+  83  Linux
 ```
 
-　　输入`d`​然后选择分区，删除现有分区：
+输入`d`​然后选择分区，删除现有分区：
 
 ```
 Command (m for help): d
@@ -97,7 +97,7 @@ Command (m for help): d
 Selected partition 2
 ```
 
-　　查看分区情况，确认分区已经删除：
+查看分区情况，确认分区已经删除：
 
 ```
 Command (m for help): print
@@ -111,7 +111,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 Command (m for help):
 ```
 
-　　输入`n`​建立新的磁盘分区，首先建立两个主磁盘分区：
+输入`n`​建立新的磁盘分区，首先建立两个主磁盘分区：
 
 ```
 Command (m for help): n
@@ -135,7 +135,7 @@ Using default value 101
 Last cylinder or +size or +sizeM or +sizeK (101-391, default 391): +200M  //分区结束位置，单位为M
 ```
 
-　　确认分区建立成功：
+确认分区建立成功：
 
 ```
 Command (m for help): p
@@ -149,7 +149,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 /dev/sdb2             101         125      200812+  83  Linux
 ```
 
-　　再建立一个逻辑分区：
+再建立一个逻辑分区：
 
 ```
 Command (m for help): n
@@ -164,7 +164,7 @@ Last cylinder or +size or +sizeM or +sizeK (126-391, default 391):
 Using default value 391
 ```
 
-　　确认扩展分区建立成功：
+确认扩展分区建立成功：
 
 ```
 Command (m for help): p
@@ -179,7 +179,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 /dev/sdb3             126         391     2136645    5  Extended
 ```
 
-　　在扩展分区上建立两个逻辑分区：
+在扩展分区上建立两个逻辑分区：
 
 ```
 Command (m for help): n
@@ -202,7 +202,7 @@ Last cylinder or +size or +sizeM or +sizeK (176-391, default 391):
 Using default value 391
 ```
 
-　　确认逻辑分区建立成功：
+确认逻辑分区建立成功：
 
 ```
 Command (m for help): p
@@ -221,11 +221,11 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 Command (m for help):
 ```
 
-　　从上面的结果我们可以看到，在硬盘sdb我们建立了2个主分区（sdb1，sdb2），1个扩展分区（sdb3），2个逻辑分区（sdb5，sdb6）
+从上面的结果我们可以看到，在硬盘sdb我们建立了2个主分区（sdb1，sdb2），1个扩展分区（sdb3），2个逻辑分区（sdb5，sdb6）
 
-　　注意：主分区和扩展分区的磁盘号位1-4，也就是说最多有4个主分区或者扩展分区，逻辑分区开始的磁盘号为5，因此在这个实验中试没有sdb4的。
+注意：主分区和扩展分区的磁盘号位1-4，也就是说最多有4个主分区或者扩展分区，逻辑分区开始的磁盘号为5，因此在这个实验中试没有sdb4的。
 
-　　最后对分区操作进行保存：
+最后对分区操作进行保存：
 
 ```
 Command (m for help): w
@@ -235,9 +235,9 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-　　建立好分区之后我们还需要对分区进行格式化才能在系统中使用磁盘。
+建立好分区之后我们还需要对分区进行格式化才能在系统中使用磁盘。
 
-　　在sdb1上建立ext2分区：
+在sdb1上建立ext2分区：
 
 ```
 [root@localhost ~]# mkfs.ext2 /dev/sdb1
@@ -263,7 +263,7 @@ This filesystem will be automatically checked every 32 mounts or
 180 days, whichever comes first.  Use tune2fs -c or -i to override.
 ```
 
-　　在sdb6上建立ext3分区：
+在sdb6上建立ext3分区：
 
 ```
 [root@localhost ~]# mkfs.ext3 /dev/sdb6
@@ -291,7 +291,7 @@ This filesystem will be automatically checked every 32 mounts or
 [root@localhost ~]#
 ```
 
-　　建立两个目录`/oracle`​和`/web`​，将新建好的两个分区挂载到系统：
+建立两个目录`/oracle`​和`/web`​，将新建好的两个分区挂载到系统：
 
 ```
 [root@localhost ~]# mkdir /oracle
@@ -300,7 +300,7 @@ This filesystem will be automatically checked every 32 mounts or
 [root@localhost ~]# mount /dev/sdb6 /web
 ```
 
-　　查看分区挂载情况：
+查看分区挂载情况：
 
 ```
 [root@localhost ~]# df -h
@@ -313,7 +313,7 @@ tmpfs                 125M     0  125M   0% /dev/shm
 /dev/sdb6             1.7G   35M  1.6G   3% /web
 ```
 
-　　如果需要每次开机自动挂载则需要修改`/etc/fstab`​文件，加入两行配置：
+如果需要每次开机自动挂载则需要修改`/etc/fstab`​文件，加入两行配置：
 
 ```
 [root@localhost ~]# vim /etc/fstab
@@ -329,9 +329,9 @@ proc                    /proc                   proc    defaults        0 0
 /dev/sdb6               /web                    ext3    defaults        0 0
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## 总结
 

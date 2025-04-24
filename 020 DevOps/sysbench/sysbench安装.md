@@ -1,24 +1,24 @@
 # sysbench安装
 
-　　sysbench 是一款开源的多线程性能测试工具，可以执行 CPU/内存/线程/IO/数据库等方面的性能测试。
+sysbench 是一款开源的多线程性能测试工具，可以执行 CPU/内存/线程/IO/数据库等方面的性能测试。
 
 ## 安装
 
 ### 源码编译安装
 
-　　1、安装依赖包
+1、安装依赖包
 
 ```bash
 yum -y install gcc gcc-c++ autoconf automake libtool  git
 ```
 
-　　2、下载源码
+2、下载源码
 
 ```bash
 git clone https://github.com/akopytov/sysbench.git
 ```
 
-　　3、编译安装
+3、编译安装
 
 ```bash
 cd sysbench/
@@ -27,11 +27,11 @@ cd sysbench/
 make && make install
 ```
 
-　　‍
+‍
 
 ### 使用 yum 安装
 
-　　sysbench 在 epel-release 这个包里面，因此要先安装 epel-release
+sysbench 在 epel-release 这个包里面，因此要先安装 epel-release
 
 ```bash
 yum -y install epel-release
@@ -40,17 +40,17 @@ yum -y install sysbench
 
 > 如果需要比较新的版本，可以直接使用 git 上面的源码进行编译。yum 安装就比较方便了，省去编译的时间。
 
-　　‍
+‍
 
 ## sysbench 用法讲解
 
-　　sysbench 命令语法如下
+sysbench 命令语法如下
 
 ```css
 sysbench [options]... [testname] [command]
 ```
 
-　　​**​`testname`​**​**是测试项名称**。sysbench 支持的测试项包括：
+​**​`testname`​**​**是测试项名称**。sysbench 支持的测试项包括：
 
 * \*.lua          数据库性能基准测试。
 * fileio          磁盘 IO 基准测试。
@@ -59,9 +59,9 @@ sysbench [options]... [testname] [command]
 * threads      基于线程的调度程序基准测试。
 * mutex         POSIX 互斥量基准测试。
 
-　　​**​`command`​**​**是 sysbench 要执行的命令**，支持的选项有：`prepare`​，`prewarm`​，`run`​，`cleanup`​，`help`​。注意，不是所有的测试项都支持这些选项。
+​**​`command`​**​**是 sysbench 要执行的命令**，支持的选项有：`prepare`​，`prewarm`​，`run`​，`cleanup`​，`help`​。注意，不是所有的测试项都支持这些选项。
 
-　　​**​`options`​**​**是配置项**。sysbench 中的配置项主要包括以下两部分：
+​**​`options`​**​**是配置项**。sysbench 中的配置项主要包括以下两部分：
 
 1. 通用配置项。这部分配置项可通过 `sysbench --help`​ 查看。
 
@@ -137,12 +137,12 @@ sysbench [options]... [testname] [command]
       --memory-access-mode=STRING memory access mode {seq,rnd} [seq]
     ```
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　‍
+‍

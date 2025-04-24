@@ -22,7 +22,7 @@ fileio options:
 
 ### 第1步创建测试文件
 
-　　这个命令会在当前工作目录下创建测试文件，后续的运行阶段将通过读写这些文件进行测试。
+这个命令会在当前工作目录下创建测试文件，后续的运行阶段将通过读写这些文件进行测试。
 
 ```sql
 sysbench --test=fileio --file-total-size=50G prepare
@@ -34,7 +34,7 @@ Creating files for the test...
 
 ### 第2步就是运行
 
-　　针对不同的`IO`​类型有不同的测试选项：
+针对不同的`IO`​类型有不同的测试选项：
 
 * ​`seqwr`​ 顺序写入
 * ​`seqrewr`​ 顺序重写
@@ -43,7 +43,7 @@ Creating files for the test...
 * ​`rndwr`​ 随机写入
 * ​`rndrw`​ 混合随机读/写
 
-　　例如，混合随机读/写测试：
+例如，混合随机读/写测试：
 
 ```yaml
 sysbench --test=fileio --file-total-size=50G --file-test-mode=rndrw --time=60 run
@@ -86,13 +86,13 @@ Threads fairness:
     execution time (avg/stddev):   291.4656/0.00
 ```
 
-　　输出结果中包含了大量的信息，这些数据对于评估磁盘性能十分有用：
+输出结果中包含了大量的信息，这些数据对于评估磁盘性能十分有用：
 
 * 每秒请求数 `453.63 Requests/sec`​
 * 吞吐量 `7.0879Mb/sec`​
 * 时间分布 `95 percentile: 6.46ms`​
 
-　　测试完成以后，运行清除操作删除第一步生成的测试文件：
+测试完成以后，运行清除操作删除第一步生成的测试文件：
 
 ```bash
 sysbench --test=fileio --file-total-size=50G cleanup
@@ -101,4 +101,4 @@ sysbench 0.4.12:  multi-threaded system evaluation benchmark
 Removing test files...
 ```
 
-　　‍
+‍

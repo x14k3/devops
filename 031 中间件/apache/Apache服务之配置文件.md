@@ -27,7 +27,7 @@
 └── run -> ../../var/run/httpd  # 运行路径
 ```
 
-　　‍
+‍
 
 ```bash
 # CentOS7通过yum安装的Apache服务
@@ -162,7 +162,7 @@ ServerName www.escape.com
 ServerName 12.34.56.78
 ```
 
-　　‍
+‍
 
 ```bash
 # host.conf文件说明
@@ -263,7 +263,7 @@ User apache
 Group apche
 ```
 
-　　‍
+‍
 
 ```bash
 [root@MiWiFi-R3-srv ~]# ps -aux | grep httpd
@@ -327,11 +327,11 @@ ErrorDocument 402 http://www.example.com/subscription_info.html
 
 #### 2.1.10 `Options`​指令
 
-　　**指令介绍**
+**指令介绍**
 
 * ​`Options`​指令决定在那些目录中使用哪些服务器的特性
 
-　　**指令参数**
+**指令参数**
 
 * ​**​`None`​**​
 
@@ -564,21 +564,21 @@ Include /etc/httpd24/extra/httpd-autoindex.conf
 
 > 在`Apache`​中，通常都是使用`httpd.conf`​文件对服务器进行配置，但是对于一些管理员来说，可以使用`.htaccess`​文件对目录进行更简单、更精细的配置。
 
-　　**好处**
+**好处**
 
 * 随时对目录功能和权限进行控制
 * 输入`.htaccess`​文件的配置无需重启`Apache`​服务就能生效
 
-　　**坏处**
+**坏处**
 
 * 会导致服务器性能急剧下降
 * 安全问题，导致服务器难以配置
 
-　　**总结**
+**总结**
 
 * 所以在`Apache`​中不建议使用`.htaccess`​文件，如果非要是用的话，应在`httpd.conf`​的`<Directory>`​容器中使用`AllowOverride`​指令来开启，这样能够有效的降低服务器的性能损失。
 
-　　**注意事项**
+**注意事项**
 
 * 使用`.htaccess`​文件需要先开启`AllowOverride`​功能，默认是关闭的
 * 只需要在指定的目录下，创建一个`.htaccess`​文件就可以使用`.htaccess`​功能了
@@ -589,7 +589,7 @@ Include /etc/httpd24/extra/httpd-autoindex.conf
 
 > 使用`AllowOverride`​指令就是配置，让`.htaccess`​文件支持哪些指令
 
-　　**参数选项**
+**参数选项**
 
 * ​**​`None`​**​
 
@@ -664,11 +664,11 @@ http://192.168.31.94/~escape
 
 > 为网站自动添加索引功能，实现网站`http://www.escape.com`​自动匹配`http://www.escape.com/index.html`​
 
-　　**所需模块**
+**所需模块**
 
 * 需要使用`mod_dir`​和`mod_autoindex`​模块实现服务器的索引支持
 
-　　**提供两种索引方式**
+**提供两种索引方式**
 
 * 由`mod_dir`​模块提供
 
@@ -697,11 +697,11 @@ Include conf/extra/httpd-autoindex.conf
 
 ### 4.1 `Webmin`​
 
-　　**介绍**
+**介绍**
 
 * 最强大的基于`Web`​页面的`Linux`​系统管理工具
 
-　　**安装**
+**安装**
 
 ```bash
 # 下载、解压
@@ -720,11 +720,11 @@ http://192.168.31.94:10000
 
 ### 4.2 `Zecos ApacheConf`​
 
-　　**介绍**
+**介绍**
 
 * 最强大的基于`Web`​页面的`Windos`​系统管理工具
 
-　　**安装**
+**安装**
 
 * 官网下载安装  `http://www.apache-gui.com`​
 
@@ -732,10 +732,10 @@ http://192.168.31.94:10000
 
 ### 4.3 `redhat-config-httpd`​
 
-　　**介绍**
+**介绍**
 
 * 红帽的`Apache`​配置程序
 
-　　**安装**
+**安装**
 
 * ​`yum install redhat-config-httpd`​

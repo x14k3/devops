@@ -1,8 +1,8 @@
 # other-mysql8.0.3版本之后的认证插件问题
 
-　　‍
+‍
 
-　　从MySQL 8.0开始，默认身份验证插件已从`mysql_native_password`​更改为`caching_sha2_password`​。如果你使用的是较旧的MySQL客户端，它可能无法连接到数据库服务器，并显示错误提示_“无法加载身份验证插件’caching\_sha2\_password’”。
+从MySQL 8.0开始，默认身份验证插件已从`mysql_native_password`​更改为`caching_sha2_password`​。如果你使用的是较旧的MySQL客户端，它可能无法连接到数据库服务器，并显示错误提示_“无法加载身份验证插件’caching\_sha2\_password’”。
 
 ```bash
 [root@kvm-test ~]# mysql -utest -p8ql6yhy -h 10.10.0.11
@@ -12,9 +12,9 @@ ERROR 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be load
 
 ### 方案一：升级客户端版本
 
-　　这个比较简单，不用展开。
+这个比较简单，不用展开。
 
-　　‍
+‍
 
 ### 方案二：设置使用旧的 `mysql_native_password`​ 方式
 
@@ -35,11 +35,11 @@ flush privileges;
 alter user 'root'@'localhost' identified by 'dgdggdgdg';
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
-　　附：
+附：
 
 ```bash
 ------------------- 修改用户密码 -------------------
@@ -58,4 +58,4 @@ flush privileges;
 --6.重启数据库
 ```
 
-　　‍
+‍

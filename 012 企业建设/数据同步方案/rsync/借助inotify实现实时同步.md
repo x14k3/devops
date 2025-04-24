@@ -4,9 +4,9 @@
 
 > **工具官方地址:**  **[https://github.com/rvoicilas/inotify-tools](https://github.com/rvoicilas/inotify-tools)**
 
-　　​`Inotify`​ 是一种文件变化通知机制，`Linux`​ 内核从 `2.6.13`​ 开始引入。在 `BSD`​ 和 `Mac OS`​ 系统中比较有名的是 `kqueue`​，它可以高效地实时跟踪 `Linux`​ 文件系统的变化。近些年来，以 `fsnotify`​ 作为后端，几乎所有的主流 `Linux`​ 发行版都支持 `Inotify`​ 机制。
+​`Inotify`​ 是一种文件变化通知机制，`Linux`​ 内核从 `2.6.13`​ 开始引入。在 `BSD`​ 和 `Mac OS`​ 系统中比较有名的是 `kqueue`​，它可以高效地实时跟踪 `Linux`​ 文件系统的变化。近些年来，以 `fsnotify`​ 作为后端，几乎所有的主流 `Linux`​ 发行版都支持 `Inotify`​ 机制。
 
-　　​`inotify-tools`​ 提供了一系列的命令行工具，这些工具可以用来监控文件系统的事件，除了要求内核支持 `inotify`​ 外不依赖于其他。`inotify-tools`​ 提供两种工具，第一个命令是 `inotifywait`​，它是用来监控文件或目录的变化；第二个命令是 `inotifywatch`​，它是用来统计文件系统访问的次数。
+​`inotify-tools`​ 提供了一系列的命令行工具，这些工具可以用来监控文件系统的事件，除了要求内核支持 `inotify`​ 外不依赖于其他。`inotify-tools`​ 提供两种工具，第一个命令是 `inotifywait`​，它是用来监控文件或目录的变化；第二个命令是 `inotifywatch`​，它是用来统计文件系统访问的次数。
 
 ```bash
 # inotifywait   实时监控/home的所有事件
@@ -80,7 +80,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
 |14|​`delete_self`​|文件或目录移除，之后不再监听此文件或目录|
 |15|​`unmount`​|文件系统取消挂载，之后不再监听此文件系统|
 
-　　‍
+‍
 
 #### rsync+inotify-tools
 
@@ -236,12 +236,12 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
 
 #### rsync+inotify-tools 与 rsync+sersync 架构的区别
 
-　　**rsync+inotify-tools**
+**rsync+inotify-tools**
 
 1. inotify只能记录下被监听的目录发生了变化（增，删，改）并没有把具体是哪个文件或者哪个目录发生了变化记录下来；
 2. rsync在同步的时候，并不知道具体是哪个文件或目录发生了变化，每次都是对整个目录进行同步，当数据量很大时，整个目录同步非常耗时（rsync要对整个目录遍历查找对比文件），因此效率很低
 
-　　**rsync+sersync**
+**rsync+sersync**
 
 1. sersync可以记录被监听目录中发生变化的（增，删，改）具体某个文件或目录的名字；
 2. rsync在同步时，只同步发生变化的文件或目录（每次发生变化的数据相对整个同步目录数据来说很小，rsync在遍历查找对比文件时，速度很快），因此效率很高。

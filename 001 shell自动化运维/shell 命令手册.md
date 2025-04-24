@@ -1,140 +1,140 @@
 # shell 命令手册
 
-* 📑 shell 三剑客
+* 📑 [shell 三剑客](shell%20命令手册/shell%20三剑客.md)
 
-  * 📄 awk
-  * 📄 grep
-  * 📄 sed
-* 📑 tools
+  * 📄 [awk](shell%20命令手册/shell%20三剑客/awk.md)
+  * 📄 [grep](shell%20命令手册/shell%20三剑客/grep.md)
+  * 📄 [sed](shell%20命令手册/shell%20三剑客/sed.md)
+* 📑 [tools](shell%20命令手册/tools.md)
 
-  * 📄 base64
-  * 📄 cdrecird growisofs
-  * 📄 cp
-  * 📄 crontab
-  * 📄 flock
-  * 📄 fuser
-  * 📄 htpasswd
-  * 📄 k3b
-  * 📄 kill
-  * 📄 lsof
-  * 📄 minicom
-  * 📄 mkisofs
-  * 📄 mknode
-  * 📄 nohup
-  * 📄 openssl
-  * 📄 scp
-  * 📄 script
-  * 📄 ssh
-  * 📄 tee
-  * 📄 wall
-  * 📄 wget
-* 📑 内核模块管理
+  * 📄 [base64](shell%20命令手册/tools/base64.md)
+  * 📄 [cdrecird growisofs](shell%20命令手册/tools/cdrecird%20growisofs.md)
+  * 📄 [cp](shell%20命令手册/tools/cp.md)
+  * 📄 [crontab](shell%20命令手册/tools/crontab.md)
+  * 📄 [flock](shell%20命令手册/tools/flock.md)
+  * 📄 [fuser](shell%20命令手册/tools/fuser.md)
+  * 📄 [htpasswd](shell%20命令手册/tools/htpasswd.md)
+  * 📄 [k3b](shell%20命令手册/tools/k3b.md)
+  * 📄 [kill](shell%20命令手册/tools/kill.md)
+  * 📄 [lsof](shell%20命令手册/tools/lsof.md)
+  * 📄 [minicom](shell%20命令手册/网络相关/minicom.md)
+  * 📄 [mkisofs](shell%20命令手册/tools/mkisofs.md)
+  * 📄 [mknode](shell%20命令手册/tools/mknode.md)
+  * 📄 [nohup](shell%20命令手册/tools/nohup.md)
+  * 📄 [openssl](shell%20命令手册/tools/openssl.md)
+  * 📄 [scp](shell%20命令手册/tools/scp.md)
+  * 📄 [script](shell%20命令手册/tools/script.md)
+  * 📄 [ssh](shell%20命令手册/tools/ssh.md)
+  * 📄 [tee](shell%20命令手册/tools/tee.md)
+  * 📄 [wall](shell%20命令手册/tools/wall.md)
+  * 📄 [wget](shell%20命令手册/tools/wget.md)
+* 📑 [内核模块管理](shell%20命令手册/内核模块管理.md)
 
-  * 📄 insmod
-  * 📄 lsmod
-  * 📄 modinfo
-  * 📄 modprobe
-  * 📄 rmmod
-* 📑 压缩和解压
+  * 📄 [insmod](shell%20命令手册/内核模块管理/insmod.md)
+  * 📄 [lsmod](shell%20命令手册/内核模块管理/lsmod.md)
+  * 📄 [modinfo](shell%20命令手册/内核模块管理/modinfo.md)
+  * 📄 [modprobe](shell%20命令手册/内核模块管理/modprobe.md)
+  * 📄 [rmmod](shell%20命令手册/内核模块管理/rmmod.md)
+* 📑 [压缩和解压](shell%20命令手册/压缩和解压.md)
 
-  * 📄 7z
-  * 📄 bunzip2
-  * 📄 bzcat
-  * 📄 bzip2
-  * 📄 gzip
-  * 📄 tar
-  * 📄 xz
-  * 📄 zip
-* 📑 备份与恢复
+  * 📄 [7z](shell%20命令手册/压缩和解压/7z.md)
+  * 📄 [bunzip2](shell%20命令手册/压缩和解压/bunzip2.md)
+  * 📄 [bzcat](shell%20命令手册/压缩和解压/bzcat.md)
+  * 📄 [bzip2](shell%20命令手册/压缩和解压/bzip2.md)
+  * 📄 [gzip](shell%20命令手册/压缩和解压/gzip.md)
+  * 📄 [tar](shell%20命令手册/压缩和解压/tar.md)
+  * 📄 [xz](shell%20命令手册/压缩和解压/xz.md)
+  * 📄 [zip](shell%20命令手册/压缩和解压/zip.md)
+* 📑 [备份与恢复](shell%20命令手册/备份与恢复.md)
 
-  * 📄 dd (Duplicated 2024-04-30 15:19:00)
-  * 📄 dump
-  * 📄 restore
-  * 📄 rsync
-* 📑 性能监控
+  * 📄 [dd (Duplicated 2024-04-30 15:19:00)](shell%20命令手册/备份与恢复/dd%20(Duplicated%202024-04-30%2015_19_00).md)
+  * 📄 [dump](shell%20命令手册/备份与恢复/dump.md)
+  * 📄 [restore](shell%20命令手册/备份与恢复/restore.md)
+  * 📄 [rsync](shell%20命令手册/备份与恢复/rsync.md)
+* 📑 [性能监控](shell%20命令手册/性能监控.md)
 
-  * 📄 UnixBench
-  * 📄 cpuinfo
-  * 📄 cpulimit
-  * 📄 dmesg
-  * 📄 dmidecode
-  * 📄 fio
-  * 📄 hdparm
-  * 📄 ipmitool
-  * 📄 meminfo
-  * 📄 nice
-  * 📄 pidof
-  * 📄 ps
-  * 📄 pstree
-  * 📄 strace
-  * 📑 sysstat
+  * 📄 [UnixBench](shell%20命令手册/性能监控/UnixBench.md)
+  * 📄 [cpuinfo](shell%20命令手册/性能监控/cpuinfo.md)
+  * 📄 [cpulimit](shell%20命令手册/性能监控/cpulimit.md)
+  * 📄 [dmesg](shell%20命令手册/性能监控/dmesg.md)
+  * 📄 [dmidecode](shell%20命令手册/性能监控/dmidecode.md)
+  * 📄 [fio](shell%20命令手册/性能监控/fio.md)
+  * 📄 [hdparm](shell%20命令手册/性能监控/hdparm.md)
+  * 📄 [ipmitool](shell%20命令手册/性能监控/ipmitool.md)
+  * 📄 [meminfo](shell%20命令手册/性能监控/meminfo.md)
+  * 📄 [nice](shell%20命令手册/性能监控/nice.md)
+  * 📄 [pidof](shell%20命令手册/性能监控/pidof.md)
+  * 📄 [ps](shell%20命令手册/性能监控/ps.md)
+  * 📄 [pstree](shell%20命令手册/性能监控/pstree.md)
+  * 📄 [strace](shell%20命令手册/性能监控/strace.md)
+  * 📑 [sysstat](shell%20命令手册/性能监控/sysstat.md)
 
-    * 📄 iostat
-    * 📄 mpstat
-    * 📄 pidstat
-    * 📄 sar
-  * 📄 taskset
-  * 📄 top
-  * 📄 vmstat
-  * 📄 查看系统版本
-* 📑 文件系统
+    * 📄 [iostat](shell%20命令手册/性能监控/sysstat/iostat.md)
+    * 📄 [mpstat](shell%20命令手册/性能监控/sysstat/mpstat.md)
+    * 📄 [pidstat](shell%20命令手册/性能监控/sysstat/pidstat.md)
+    * 📄 [sar](shell%20命令手册/性能监控/sysstat/sar.md)
+  * 📄 [taskset](shell%20命令手册/性能监控/taskset.md)
+  * 📄 [top](shell%20命令手册/性能监控/top.md)
+  * 📄 [vmstat](shell%20命令手册/性能监控/vmstat.md)
+  * 📄 [查看系统版本](shell%20命令手册/性能监控/查看系统版本.md)
+* 📑 [文件系统](shell%20命令手册/文件系统.md)
 
-  * 📄 dd
-  * 📄 du
-  * 📄 dumpe2fs
-  * 📄 fdisk
-  * 📄 fsck
-  * 📄 initramfs
-  * 📄 lsblk
-  * 📄 mkfs & mke2fx
-  * 📄 mount
-  * 📄 parted
-  * 📄 partprobe
-  * 📄 snapper
-  * 📄 ulimit
-* 📑 文本处理
+  * 📄 [dd](shell%20命令手册/文件系统/dd.md)
+  * 📄 [du](shell%20命令手册/文件系统/du.md)
+  * 📄 [dumpe2fs](shell%20命令手册/文件系统/dumpe2fs.md)
+  * 📄 [fdisk](shell%20命令手册/文件系统/fdisk.md)
+  * 📄 [fsck](shell%20命令手册/文件系统/fsck.md)
+  * 📄 [initramfs](shell%20命令手册/文件系统/initramfs.md)
+  * 📄 [lsblk](shell%20命令手册/文件系统/lsblk.md)
+  * 📄 [mkfs & mke2fx](shell%20命令手册/文件系统/mkfs%20&%20mke2fx.md)
+  * 📄 [mount](shell%20命令手册/文件系统/mount.md)
+  * 📄 [parted](shell%20命令手册/文件系统/parted.md)
+  * 📄 [partprobe](shell%20命令手册/文件系统/partprobe.md)
+  * 📄 [snapper](shell%20命令手册/文件系统/snapper.md)
+  * 📄 [ulimit](shell%20命令手册/文件系统/ulimit.md)
+* 📑 [文本处理](shell%20命令手册/文本处理.md)
 
-  * 📄 bc
-  * 📄 column
-  * 📄 cut
-  * 📄 diff
-  * 📄 dos2unix
-  * 📄 find
-  * 📄 iconv
-  * 📄 ln
-  * 📄 locate
-  * 📄 sort
-  * 📄 tr
-* 📑 网络相关
+  * 📄 [bc](shell%20命令手册/文本处理/bc.md)
+  * 📄 [column](shell%20命令手册/文本处理/column.md)
+  * 📄 [cut](shell%20命令手册/文本处理/cut.md)
+  * 📄 [diff](shell%20命令手册/文本处理/diff.md)
+  * 📄 [dos2unix](shell%20命令手册/文本处理/dos2unix.md)
+  * 📄 [find](shell%20命令手册/文本处理/find.md)
+  * 📄 [iconv](shell%20命令手册/文本处理/iconv.md)
+  * 📄 [ln](shell%20命令手册/文本处理/ln.md)
+  * 📄 [locate](shell%20命令手册/文本处理/locate.md)
+  * 📄 [sort](shell%20命令手册/文本处理/sort.md)
+  * 📄 [tr](shell%20命令手册/文本处理/tr.md)
+* 📑 [网络相关](shell%20命令手册/网络相关.md)
 
-  * 📄 arping
-  * 📄 curl
-  * 📄 ethtool
-  * 📄 iperf3
-  * 📄 nc
-  * 📄 nmap
-  * 📄 tcpdump
-  * 📄 traceroute
-  * 📄 wget
-* 📑 脚本常用命令
+  * 📄 [arping](shell%20命令手册/网络相关/arping.md)
+  * 📄 [curl](shell%20命令手册/网络相关/curl.md)
+  * 📄 [ethtool](shell%20命令手册/网络相关/ethtool.md)
+  * 📄 [iperf3](shell%20命令手册/网络相关/iperf3.md)
+  * 📄 [nc](shell%20命令手册/网络相关/nc.md)
+  * 📄 [nmap](shell%20命令手册/网络相关/nmap.md)
+  * 📄 [tcpdump](shell%20命令手册/网络相关/tcpdump.md)
+  * 📄 [traceroute](shell%20命令手册/网络相关/traceroute.md)
+  * 📄 [wget](shell%20命令手册/网络相关/wget.md)
+* 📑 [脚本常用命令](shell%20命令手册/脚本常用命令.md)
 
-  * 📄 basename
-  * 📄 date
-  * 📄 echo
-  * 📄 exec
-  * 📄 expect
-  * 📄 read
-  * 📄 shell 命令小技巧
-  * 📄 shuf
-  * 📄 xargs
-* 📑 软件安装
+  * 📄 [basename](shell%20命令手册/脚本常用命令/basename.md)
+  * 📄 [date](shell%20命令手册/脚本常用命令/date.md)
+  * 📄 [echo](shell%20命令手册/脚本常用命令/echo.md)
+  * 📄 [exec](shell%20命令手册/脚本常用命令/exec.md)
+  * 📄 [expect](shell%20命令手册/脚本常用命令/expect.md)
+  * 📄 [read](shell%20命令手册/脚本常用命令/read.md)
+  * 📄 [shell 命令小技巧](shell%20命令手册/脚本常用命令/shell%20命令小技巧.md)
+  * 📄 [shuf](shell%20命令手册/脚本常用命令/shuf.md)
+  * 📄 [xargs](shell%20命令手册/脚本常用命令/xargs.md)
+* 📑 [软件安装](shell%20命令手册/软件安装.md)
 
-  * 📄 apt
-  * 📄 arp
-  * 📄 dnf
-  * 📄 dpkg
-  * 📄 rpm
-  * 📄 yum
-  * 📄 zypper
+  * 📄 [apt](shell%20命令手册/软件安装/apt.md)
+  * 📄 [arp](shell%20命令手册/软件安装/arp.md)
+  * 📄 [dnf](shell%20命令手册/软件安装/dnf.md)
+  * 📄 [dpkg](shell%20命令手册/软件安装/dpkg.md)
+  * 📄 [rpm](shell%20命令手册/软件安装/rpm.md)
+  * 📄 [yum](shell%20命令手册/软件安装/yum.md)
+  * 📄 [zypper](shell%20命令手册/软件安装/zypper.md)
 
-　　‍
+‍

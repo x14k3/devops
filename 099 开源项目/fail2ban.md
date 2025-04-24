@@ -1,10 +1,10 @@
 # fail2ban
 
-　　随着云计算的普及，很多人都会在各大云服务商购买云服务器，只要有互联网就可以登录云服务器。但云服务器直接暴露到互联网上，始终存在被黑客攻击入侵的风险，虽然有安全组功能可以做访问限制，但是对于 Linux 服务器的 SSH 远程登录端口 (默认 22)，很多时候客户端的公网出口 IP 是动态变化的，无法进行安全组规则的收敛。为了降低被暴力破解的风险，本文以 CentOS7 为例，介绍如何使用 fail2ban 防范 SSH 暴力破解攻击。
+随着云计算的普及，很多人都会在各大云服务商购买云服务器，只要有互联网就可以登录云服务器。但云服务器直接暴露到互联网上，始终存在被黑客攻击入侵的风险，虽然有安全组功能可以做访问限制，但是对于 Linux 服务器的 SSH 远程登录端口 (默认 22)，很多时候客户端的公网出口 IP 是动态变化的，无法进行安全组规则的收敛。为了降低被暴力破解的风险，本文以 CentOS7 为例，介绍如何使用 fail2ban 防范 SSH 暴力破解攻击。
 
 ---
 
-　　fail2ban 是一款利用 Python 开发的工具，通过扫描 `/var/log/auth.log`​ 等日志文件并自动封禁进行过多次失败登录尝试的 IP 地址，它通过更新系统防火墙来实现这一点。fail2ban 可以读取许多标准日志文件，例如 SSH 和 Apache 的日志文件，并且可以根据需要配置读取任何你指定的日志文件。
+fail2ban 是一款利用 Python 开发的工具，通过扫描 `/var/log/auth.log`​ 等日志文件并自动封禁进行过多次失败登录尝试的 IP 地址，它通过更新系统防火墙来实现这一点。fail2ban 可以读取许多标准日志文件，例如 SSH 和 Apache 的日志文件，并且可以根据需要配置读取任何你指定的日志文件。
 
 * 项目地址：[https://github.com/fail2ban/fail2ban](https://github.com/fail2ban/fail2ban)
 * 安装文档：[https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages](https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages)
@@ -15,11 +15,11 @@
 
 ### 下载 fail2ban
 
-　　在 [https://github.com/fail2ban/fail2ban/releases](https://github.com/fail2ban/fail2ban/releases) 下载 fail2ban 的源码包 `Source code(tar.gz)`​
+在 [https://github.com/fail2ban/fail2ban/releases](https://github.com/fail2ban/fail2ban/releases) 下载 fail2ban 的源码包 `Source code(tar.gz)`​
 
 ### 安装 fail2ban
 
-　　解压并安装 fail2ban
+解压并安装 fail2ban
 
 ```bash
 tar zxf fail2ban-1.0.2.tar.gz
@@ -28,7 +28,7 @@ python setup.py  install
 
 ```
 
-　　将 fail2ban 服务添加到 Systemd 管理
+将 fail2ban 服务添加到 Systemd 管理
 
 ```bash
 cp -a build/fail2ban.service /usr/lib/systemd/system/
@@ -36,7 +36,7 @@ systemctl daemon-reload
 
 ```
 
-　　启动 fail2ban，设置开机自启动
+启动 fail2ban，设置开机自启动
 
 ```bash
 systemctl start fail2ban
@@ -47,16 +47,16 @@ systemctl status fail2ban
 
 ### 配置 fail2ban
 
-　　根据 [fail2ban 官网 wiki](https://github.com/fail2ban/fail2ban/wiki/Proper-fail2ban-configuration) 建议，在配置 fail2ban 的时候应该避免直接更改由 fail2ban 安装创建的`.conf`​ 文件（例如 `fail2ban.conf`​ 和 `jail.conf`​），相反，应该创建扩展名为`.local`​ 的新文件（例如 `jail.local`​）来进行自定义配置。`.local`​ 文件将覆盖`.conf`​ 文件相同部分的参数
+根据 [fail2ban 官网 wiki](https://github.com/fail2ban/fail2ban/wiki/Proper-fail2ban-configuration) 建议，在配置 fail2ban 的时候应该避免直接更改由 fail2ban 安装创建的`.conf`​ 文件（例如 `fail2ban.conf`​ 和 `jail.conf`​），相反，应该创建扩展名为`.local`​ 的新文件（例如 `jail.local`​）来进行自定义配置。`.local`​ 文件将覆盖`.conf`​ 文件相同部分的参数
 
-　　创建 `/etc/fail2ban/jail.local`​ 文件
+创建 `/etc/fail2ban/jail.local`​ 文件
 
 ```bash
 touch /etc/fail2ban/jail.local
 
 ```
 
-　　编辑 `/etc/fail2ban/jail.local`​ 文件，添加如下内容：
+编辑 `/etc/fail2ban/jail.local`​ 文件，添加如下内容：
 
 ```bash
 [DEFAULT]
@@ -84,7 +84,7 @@ action = hostsdeny
 > **maxretry：** 配置在 findtime 时间内发生多少次失败登录然后将 IP 封禁。
 > **action：** 配置封禁 IP 的手段（位于 `/etc/fail2ban/action.d`​ 目录中），可通过 `iptables`​、`firewalld`​ 或者 `TCP Wrapper`​ 等，此处设置为 `hostsdeny`​ 代表使用 `TCP Wrapper`​
 
-　　重启 fail2ban 使配置生效
+重启 fail2ban 使配置生效
 
 ```bash
 systemctl restart fail2ban
@@ -110,13 +110,13 @@ systemctl enable firewalld
 
 ### 安装 fail2ban
 
-　　安装 EPEL repository
+安装 EPEL repository
 
 ```bash
 yum install epel-release -y
 ```
 
-　　安装并启动 fail2ban，设置开机自启动
+安装并启动 fail2ban，设置开机自启动
 
 ```bash
 yum install fail2ban -y
@@ -128,15 +128,15 @@ systemctl status fail2ban
 
 ### 配置 fail2ban
 
-　　根据 [fail2ban 官网 wiki](https://github.com/fail2ban/fail2ban/wiki/Proper-fail2ban-configuration) 建议，在配置 fail2ban 的时候应该避免直接更改由 fail2ban 安装创建的`.conf`​ 文件（例如 `fail2ban.conf`​ 和 `jail.conf`​），相反，应该创建扩展名为`.local`​ 的新文件（例如 `jail.local`​）来进行自定义配置。`.local`​ 文件将覆盖`.conf`​ 文件相同部分的参数
+根据 [fail2ban 官网 wiki](https://github.com/fail2ban/fail2ban/wiki/Proper-fail2ban-configuration) 建议，在配置 fail2ban 的时候应该避免直接更改由 fail2ban 安装创建的`.conf`​ 文件（例如 `fail2ban.conf`​ 和 `jail.conf`​），相反，应该创建扩展名为`.local`​ 的新文件（例如 `jail.local`​）来进行自定义配置。`.local`​ 文件将覆盖`.conf`​ 文件相同部分的参数
 
-　　创建 `/etc/fail2ban/jail.local`​ 文件
+创建 `/etc/fail2ban/jail.local`​ 文件
 
 ```bash
 touch /etc/fail2ban/jail.local
 ```
 
-　　编辑 `/etc/fail2ban/jail.local`​ 文件，添加如下内容：
+编辑 `/etc/fail2ban/jail.local`​ 文件，添加如下内容：
 
 ```bash
 
@@ -162,7 +162,7 @@ maxretry = 3
 > **findtime：** 配置从当前时间的多久之前开始计算失败次数（秒或时间缩写格式:years/months/weeks/days/hours/minutes/seconds）
 > **maxretry：** 配置在 findtime 时间内发生多少次失败登录然后将 IP 封禁。
 
-　　重启 fail2ban 使配置生效
+重启 fail2ban 使配置生效
 
 ```bash
 systemctl restart fail2ban
@@ -172,7 +172,7 @@ systemctl status fail2ban
 
 ## 验证
 
-　　通过 SSH 登录，然后故意输错三次密码，然后查看 fail2ban 日志
+通过 SSH 登录，然后故意输错三次密码，然后查看 fail2ban 日志
 
 ```bash
 
@@ -183,7 +183,7 @@ systemctl status fail2ban
 2023-10-13 17:05:08,415 fail2ban.actions        [29824]: NOTICE  [sshd] Ban 36.250.4.182
 ```
 
-　　日志显示 `36.250.4.182`​ 存在三次失败登录，该 IP 已被封禁，具体可以通过执行 `fail2ban-client status sshd`​ 查看 `Banned IP list`​ 确认
+日志显示 `36.250.4.182`​ 存在三次失败登录，该 IP 已被封禁，具体可以通过执行 `fail2ban-client status sshd`​ 查看 `Banned IP list`​ 确认
 
 ```bash
 # fail2ban-client status sshd
@@ -214,7 +214,7 @@ Status for the jail: sshd
 
 ## 解封 IP
 
-　　如果发现有 IP 被 fail2ban 误封了，或者确认登录 IP 是安全的，可以通过以下命令进行手动解封
+如果发现有 IP 被 fail2ban 误封了，或者确认登录 IP 是安全的，可以通过以下命令进行手动解封
 
 ```bash
 # 解封所有IP

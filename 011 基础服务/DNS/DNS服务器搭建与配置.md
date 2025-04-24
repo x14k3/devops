@@ -2,7 +2,7 @@
 
 ## BIND简介
 
-　　BIND（Berkeley Internet Name  Domain，伯克利因特网名称域）服务是全球范围内使用最广泛、最安全可靠且高效的域名解析服务程序。DNS域名解析服务作为互联网基础设施服务，其责任之重可想而知，因此建议大家在生产环境中安装部署bind服务程序时加上chroot（俗称牢笼机制）扩展包，以便有效地限制bind服务程序仅能对自身的配置文件进行操作，以确保整个服务器的安全。
+BIND（Berkeley Internet Name  Domain，伯克利因特网名称域）服务是全球范围内使用最广泛、最安全可靠且高效的域名解析服务程序。DNS域名解析服务作为互联网基础设施服务，其责任之重可想而知，因此建议大家在生产环境中安装部署bind服务程序时加上chroot（俗称牢笼机制）扩展包，以便有效地限制bind服务程序仅能对自身的配置文件进行操作，以确保整个服务器的安全。
 
 ## 安装bind服务和启动步骤
 
@@ -32,7 +32,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/named.service t
   用于将localhost名字转换为本地回送IP地址（127.0.0.1）
 *  **/etc/named.rfc1912.zones**　　区块设置文件
 
-　　**name.conf文件的主要配置信息：**
+**name.conf文件的主要配置信息：**
 
 * **acl**　         　定义ip地址的访问控制清单
 * **control**　　定义rndc使用的控制通道
@@ -158,19 +158,19 @@ value字段：
 
 ## 配置DNS正向解析
 
-　　在配置Bind服务时，主要用到以下三个配置文件：
+在配置Bind服务时，主要用到以下三个配置文件：
 
 * **主配置文件（/etc/named.conf）** ：用来定义bind服务程序的运行。
 * **区域配置文件（/etc/named.rfc1912.zones）** ：用来保存域名和IP地址对应关系的所在位置。类似于图书的目录，对应着每个域和相应IP地址所在的具体位置，当需要查看或修改时，可根据这个位置找到相关文件。
 * **数据配置文件目录（/var/named）** ：该目录用来保存域名和IP地址真实对应关系的数据配置文件。
 
-　　**第一步：修改主配置文件/etc/named.conf**。将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。
+**第一步：修改主配置文件/etc/named.conf**。将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。
 
-​![主配置文件](assets/network-asset-主配置文件-20240902114233-4le5uh4.png)​
+![主配置文件](assets/network-asset-主配置文件-20240902114233-4le5uh4.png)
 
-　　图：主配置文件要修改的地方
+图：主配置文件要修改的地方
 
-　　**第二步：修改区域配置文件（/etc/named.rfc1912.zones）** 。用来保存域名和IP地址对应关系的所在位置。在这个文件中，定义了域名与IP地址解析规则保存的文件位置以及服务类型等内容，而没有包含具体的域名、IP地址对应关系等信息。服务类型有三种，分别为hint（根区域）、master（主区域）、slave（辅助区域），其中常用的master和slave指的就是主服务器和从服务器。
+**第二步：修改区域配置文件（/etc/named.rfc1912.zones）** 。用来保存域名和IP地址对应关系的所在位置。在这个文件中，定义了域名与IP地址解析规则保存的文件位置以及服务类型等内容，而没有包含具体的域名、IP地址对应关系等信息。服务类型有三种，分别为hint（根区域）、master（主区域）、slave（辅助区域），其中常用的master和slave指的就是主服务器和从服务器。
 
 ```bash
 zone "example.com" IN {
@@ -208,9 +208,9 @@ zone "example.com" IN {
 >
 > 　　　　　　　　　　 **allow-update {}: 允许更新区域数据库中的内容**
 
-　　‍
+‍
 
-　　**第三步：编辑数据配置文件。** 从/var/named目录中复制一份正向解析的模板文件（named.localhost），然后把域名和IP地址的对应数据填写数据配置文件中并保存。在复制时记得加上-a参数，这可以保留原始文件的所有者、所属组、权限属性等信息，以便让bind服务程序顺利读取文件内容：
+**第三步：编辑数据配置文件。** 从/var/named目录中复制一份正向解析的模板文件（named.localhost），然后把域名和IP地址的对应数据填写数据配置文件中并保存。在复制时记得加上-a参数，这可以保留原始文件的所有者、所属组、权限属性等信息，以便让bind服务程序顺利读取文件内容：
 
 ```bash
 [root@localhost named]# cp -a named.localhost example.com
@@ -239,13 +239,13 @@ bbs     CNAME   www           #别名记录
 #“*”代表所有，即便主机www写错，DNS也能正确解析出来。这就是泛域名解析
 ```
 
-​![正向解析](assets/network-asset-正向解析-20240902114234-j9lqhbt.png)​
+![正向解析](assets/network-asset-正向解析-20240902114234-j9lqhbt.png)
 
-　　图：正向解析文件配置
+图：正向解析文件配置
 
-　　**第四步：检查配置,重启服务和测试。**
+**第四步：检查配置,重启服务和测试。**
 
-　　检查和重启服务：
+检查和重启服务：
 
 ```bash
 [root@localhost ~]# named-checkconf   #检查主配置文件语法
@@ -261,21 +261,21 @@ zone eample.com/IN: loaded serial 20181001
 [root@localhost ~]# systemctl restart named  #重启服务
 ```
 
-　　测试：
+测试：
 
-​![测试1](assets/network-asset-测试1-20240902114234-stbxg8e.png)​
+![测试1](assets/network-asset-测试1-20240902114234-stbxg8e.png)
 
-　　‍
+‍
 
-​![正向解析测试](assets/network-asset-正向解析测试-20240902114234-flxfis0.png)​
+![正向解析测试](assets/network-asset-正向解析测试-20240902114234-flxfis0.png)
 
-　　‍
+‍
 
 ## 配置DNS反向解析
 
-　　在DNS域名解析服务中，反向解析的作用是将用户提交的IP地址解析为对应的域名信息，它一般用于对某个IP地址上绑定的所有域名进行整体屏蔽，屏蔽由某些域名发送的垃圾邮件。它也可以针对某个IP地址进行反向解析，大致判断出有多少个网站运行在上面。当购买虚拟主机时，可以使用这一功能验证虚拟主机提供商是否有严重的超售问题。
+在DNS域名解析服务中，反向解析的作用是将用户提交的IP地址解析为对应的域名信息，它一般用于对某个IP地址上绑定的所有域名进行整体屏蔽，屏蔽由某些域名发送的垃圾邮件。它也可以针对某个IP地址进行反向解析，大致判断出有多少个网站运行在上面。当购买虚拟主机时，可以使用这一功能验证虚拟主机提供商是否有严重的超售问题。
 
-　　**第一步：配置区域文件。**
+**第一步：配置区域文件。**
 
 > **反向解析是把IP地址解析成域名格式，因此在定义zone（区域）时应该要把IP地址反写，比如原来是192.168.10.0，反写后应该就是10.168.192，而且只需写出IP地址的网络位即可。**
 
@@ -288,7 +288,7 @@ zone "245.168.192.in-addr.arpa" IN {
 };
 ```
 
-　　**第二步：编辑数据配置文件。**
+**第二步：编辑数据配置文件。**
 
 > **反向解析是把IP地址解析成域名格式，因此在定义zone（区域）时应该要把IP地址反写，比如原来是192.168.10.0，反写后应该就是10.168.192，而且只需写出IP地址的网络位即可。**
 
@@ -299,11 +299,11 @@ zone "245.168.192.in-addr.arpa" IN {
 #PTR为指针记录，仅用于反向解析中。
 ```
 
-​![反向配置文件](assets/network-asset-反向配置文件-20240902114234-jr4zjtd.png)​
+![反向配置文件](assets/network-asset-反向配置文件-20240902114234-jr4zjtd.png)
 
-　　图：反向配置文件
+图：反向配置文件
 
-　　**第三步：检查配置文件，重启服务，测试。**
+**第三步：检查配置文件，重启服务，测试。**
 
 ```bash
 [root@localhost ~]# named-checkconf 
@@ -313,13 +313,13 @@ OK
 [root@localhost ~]# systemctl restart named
 ```
 
-​![测试2](assets/network-asset-测试2-20240902114234-5l671g1.png)​
+![测试2](assets/network-asset-测试2-20240902114234-5l671g1.png)
 
 ## 搭建DNS主从服务器
 
-　　从而起到备份解析记录与负载均衡的作用，因此通过部署从服务器可以减轻主服务器的负载压力，还可以提升用户的查询效率。
+从而起到备份解析记录与负载均衡的作用，因此通过部署从服务器可以减轻主服务器的负载压力，还可以提升用户的查询效率。
 
-　　**第一步：** 在主服务器的区域配置文件中允许该从服务器的更新请求，即修改allow-update {允许更新区域信息的主机地址;};参数，然后重启主服务器的DNS服务程序。
+**第一步：** 在主服务器的区域配置文件中允许该从服务器的更新请求，即修改allow-update {允许更新区域信息的主机地址;};参数，然后重启主服务器的DNS服务程序。
 
 ```bash
 [root@localhost ~]# vi /etc/named.rfc191
@@ -336,7 +336,7 @@ zone "245.168.192.in-addr.arpa" IN {
 [root@localhost ~]# systemctl restart named
 ```
 
-　　**第二步：**   在从服务器中填写主服务器的IP地址与要抓取的区域信息，然后重启服务。注意此时的服务类型应该是slave（从），而不再是master（主）。masters参数后面应该为主服务器的IP地址，而且file参数后面定义的是同步数据配置文件后要保存到的位置，稍后可以在该目录内看到同步的文件。
+**第二步：**   在从服务器中填写主服务器的IP地址与要抓取的区域信息，然后重启服务。注意此时的服务类型应该是slave（从），而不再是master（主）。masters参数后面应该为主服务器的IP地址，而且file参数后面定义的是同步数据配置文件后要保存到的位置，稍后可以在该目录内看到同步的文件。
 
 ```bash
 [root@localhost ~]# vi /etc/named.conf
@@ -367,7 +367,7 @@ setenforce: SELinux is disabled
 [root@localhost ~]# systemctl enable named
 ```
 
-　　重启以后，成功的话会在/var/named/slaves/下看见同步的文件。
+重启以后，成功的话会在/var/named/slaves/下看见同步的文件。
 
 > ```
 >> [root@localhost named]# ls /var/named/slaves/
@@ -375,7 +375,7 @@ setenforce: SELinux is disabled
 >>
 > ```
 
-　　**第三步：测试。** 可将从服务的DNS地址改为自己，进行地址解析。
+**第三步：测试。** 可将从服务的DNS地址改为自己，进行地址解析。
 
 ```bash
 [root@localhost named]# dig www.example.com
@@ -406,13 +406,13 @@ ns.example.com.         86400   IN      A       192.168.245.128
 ;; MSG SIZE  rcvd: 93
 ```
 
-　　这种情况下，证明DNS主从服务器搭建成功。一旦主DNS发生故障，将自动利用DNS从服务器进行解析，实现了某种程度上的容错。
+这种情况下，证明DNS主从服务器搭建成功。一旦主DNS发生故障，将自动利用DNS从服务器进行解析，实现了某种程度上的容错。
 
 ## 配置DNS安全的加密传输
 
-　　TSIG主要是利用了密码编码的方式来保护区域信息的传输（Zone Transfer），即TSIG加密机制保证了DNS服务器之间传输域名区域信息的安全性。
+TSIG主要是利用了密码编码的方式来保护区域信息的传输（Zone Transfer），即TSIG加密机制保证了DNS服务器之间传输域名区域信息的安全性。
 
-　　**第一步：在主服务上生产密钥**。dnssec-keygen命令用于生成安全的DNS服务密钥，其格式为“dnssec-keygen [参数]”，常用的参数以及作用如下：
+**第一步：在主服务上生产密钥**。dnssec-keygen命令用于生成安全的DNS服务密钥，其格式为“dnssec-keygen [参数]”，常用的参数以及作用如下：
 
 |参数|作用|
 | ------| -------------------------------------------------------------------------|
@@ -420,7 +420,7 @@ ns.example.com.         86400   IN      A       192.168.245.128
 |-b|密钥长度（HMAC-MD5的密钥长度在1\~512位之间）|
 |-n|密钥的类型（HOST表示与主机相关）|
 
-　　使用下述命令生成一个主机名称为master-slave的128位HMAC-MD5算法的密钥文件。在执行该命令后默认会在当前目录中生成公钥和私钥文件，在传输配置文件中会用到该秘钥。
+使用下述命令生成一个主机名称为master-slave的128位HMAC-MD5算法的密钥文件。在执行该命令后默认会在当前目录中生成公钥和私钥文件，在传输配置文件中会用到该秘钥。
 
 ```bash
 [root@localhost ~]# dnssec-keygen -a HMAC-MD5 -b 128 -n HOST master-slave 
@@ -437,9 +437,9 @@ Publish: 20181016033058
 Activate: 20181016033058
 ```
 
-　　**第二步：在主服务器中创建验证秘钥文件。**
+**第二步：在主服务器中创建验证秘钥文件。**
 
-　　进入bind服务程序用于保存配置文件的目录，把刚刚生成的密钥名称、加密算法和私钥加密字符串按照下面格式写入到tansfer.key传输配置文件中。为了安全起见，我们需要将文件的所属组修改成named，并将文件权限设置得要小一点，然后把该文件做一个硬链接到/etc目录中。
+进入bind服务程序用于保存配置文件的目录，把刚刚生成的密钥名称、加密算法和私钥加密字符串按照下面格式写入到tansfer.key传输配置文件中。为了安全起见，我们需要将文件的所属组修改成named，并将文件权限设置得要小一点，然后把该文件做一个硬链接到/etc目录中。
 
 ```bash
 [root@localhost ~]# vim /var/named/chroot/etc/transfer.key
@@ -452,11 +452,11 @@ secret "9+m1PlQOAF7xnMLClzNmXw==";
 [root@localhost ~]# ln /var/named/chroot/etc/transfer.key /etc/transfer.key
 ```
 
-　　**第三步：开启主服务器密钥验证功能：**
+**第三步：开启主服务器密钥验证功能：**
 
-　　开启并加载Bind服务的密钥验证功能。首先需要在主服务器的主配置文件中加载密钥验证文件，然后进行设置，使得只允许带有master-slave密钥认证的DNS服务器同步数据配置文件：
+开启并加载Bind服务的密钥验证功能。首先需要在主服务器的主配置文件中加载密钥验证文件，然后进行设置，使得只允许带有master-slave密钥认证的DNS服务器同步数据配置文件：
 
-​![秘钥](assets/network-asset-秘钥-20240904105552-56etpjh.png)​
+![秘钥](assets/network-asset-秘钥-20240904105552-56etpjh.png)
 
 ```bash
 include "/etc/transfer.key";             //在主服务器中添加此条
@@ -471,9 +471,9 @@ options {
         allow-transfer  { key master-slave; };
 ```
 
-　　至此，DNS主服务器的TSIG密钥加密传输功能就已经配置完成。此时清空DNS从服务器同步目录中所有的数据配置文件，然后再次重启bind服务程序，这时就已经获取不到主服务器的配置文件了。
+至此，DNS主服务器的TSIG密钥加密传输功能就已经配置完成。此时清空DNS从服务器同步目录中所有的数据配置文件，然后再次重启bind服务程序，这时就已经获取不到主服务器的配置文件了。
 
-　　**第四步：配置从服务器支持秘钥验证：**
+**第四步：配置从服务器支持秘钥验证：**
 
 ```bash
 [root@localhost ~]# scp /var/named/chroot/etc/transfer.key root@192.168.245.128:/var/named/chroot/etc/transfer.key
@@ -483,7 +483,7 @@ transfer.key                    100%   79     0.1KB/s   00:00
 [root@localhost ~]# ln /var/named/chroot/etc/transfer.key /etc/transfer.key
 ```
 
-　　**第五步：配置从服务器配置文件：**
+**第五步：配置从服务器配置文件：**
 
 ```bash
 [root@localhost ~]# vi /etc/named.conf 
@@ -538,7 +538,7 @@ include "/etc/named.rfc1912.zones";
 include "/etc/named.root.key";
 ```
 
-　　至此，主从服务器配置完成，重启服务后，可在/var/named/slaves/目录下看到同步过来的文件。
+至此，主从服务器配置完成，重启服务后，可在/var/named/slaves/目录下看到同步过来的文件。
 
 ```BASH
 [root@localhost ~]# systemctl restart named
@@ -548,7 +548,7 @@ include "/etc/named.root.key";
 
 ## 配置DNS缓存服务器
 
-　　DNS缓存服务器（Caching DNS  Server）是一种不负责域名数据维护的DNS服务器。简单来说，缓存服务器就是把用户经常使用到的域名与IP地址的解析记录保存在主机本地，从而提升下次解析的效率。DNS缓存服务器一般用于经常访问某些固定站点而且对这些网站的访问速度有较高要求的企业内网中，但实际的应用并不广泛。而且，缓存服务器是否可以成功解析还与指定的上级DNS服务器的允许策略有关。
+DNS缓存服务器（Caching DNS  Server）是一种不负责域名数据维护的DNS服务器。简单来说，缓存服务器就是把用户经常使用到的域名与IP地址的解析记录保存在主机本地，从而提升下次解析的效率。DNS缓存服务器一般用于经常访问某些固定站点而且对这些网站的访问速度有较高要求的企业内网中，但实际的应用并不广泛。而且，缓存服务器是否可以成功解析还与指定的上级DNS服务器的允许策略有关。
 
 ```bash
 [root@localhost ~]# vim /etc/named.conf

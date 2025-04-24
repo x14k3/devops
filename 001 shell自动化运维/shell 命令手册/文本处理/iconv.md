@@ -1,10 +1,10 @@
 # iconv
 
-　　转换文件的编码方式
+转换文件的编码方式
 
-　　‍
+‍
 
-　　**iconv命令** 是用来转换文件的编码方式的，比如它可以将UTF8编码的转换成GB18030的编码，反过来也行。JDK中也提供了类似的工具native2ascii。Linux下的iconv开发库包括iconv_open,iconv_close,iconv等C函数，可以用来在C/C++程序中很方便的转换字符编码，这在抓取网页的程序中很有用处，而iconv命令在调试此类程序时用得着。
+**iconv命令** 是用来转换文件的编码方式的，比如它可以将UTF8编码的转换成GB18030的编码，反过来也行。JDK中也提供了类似的工具native2ascii。Linux下的iconv开发库包括iconv_open,iconv_close,iconv等C函数，可以用来在C/C++程序中很方便的转换字符编码，这在抓取网页的程序中很有用处，而iconv命令在调试此类程序时用得着。
 
 ### 语法
 
@@ -27,19 +27,19 @@ iconv -f encoding [-t encoding] [inputfile]...
 
 ### 实例
 
-　　列出当前支持的字符编码：
+列出当前支持的字符编码：
 
 ```
 iconv -l 
 ```
 
-　　将文件file1转码，转后文件输出到fil2中：
+将文件file1转码，转后文件输出到fil2中：
 
 ```
 iconv -f EUC-JP-MS -t UTF-8 -o file_new file_old
 iconv -f GB2312    -t UTF8  -o file_new file_old
 ```
 
-　　这里，没`-o`​那么会输出到标准输出。
+这里，没`-o`​那么会输出到标准输出。
 
-　　‍
+‍

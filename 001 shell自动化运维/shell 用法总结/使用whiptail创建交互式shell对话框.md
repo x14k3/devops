@@ -1,8 +1,8 @@
 # 使用whiptail创建交互式shell对话框 
 
-　　在终端环境下安装新的软件时，经常会看到信息对话框弹出，需要你的输入。对话框的类型有密码箱，检查表，菜单，等等。他们可以引导你以一种直观的方式输入必要的信息，使用这样的用户友好的对话框的好处是显而易见的。如下图所示：
+在终端环境下安装新的软件时，经常会看到信息对话框弹出，需要你的输入。对话框的类型有密码箱，检查表，菜单，等等。他们可以引导你以一种直观的方式输入必要的信息，使用这样的用户友好的对话框的好处是显而易见的。如下图所示：
 
-​![](assets/net-img-01-example-20240312204607-r922tkg.jpg)​
+![](assets/net-img-01-example-20240312204607-r922tkg.jpg)
 
 * 当你想要写一个交互式shell脚本时，你可以使用这样的对话框来接受用户的输入。whiptail可以在shell脚本中创建基于终端的对话框，消息框的过程，类似于Zenity或xdialog GUI脚本代码。预先安装在所有的Linux发布版本中。
 * 相关链接: [https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail](https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail)
@@ -24,7 +24,7 @@
 
 * 效果
 
-  ​![](assets/net-img-02-msgbox-20240312204607-rgj7ubx.jpg)​
+  ![](assets/net-img-02-msgbox-20240312204607-rgj7ubx.jpg)
 
 ## 创建yes/no对话框
 
@@ -46,7 +46,7 @@
 
 * 效果
 
-  ​![](assets/net-img-03-yesnobox-20240312204608-qq3qgcp.jpg)​
+  ![](assets/net-img-03-yesnobox-20240312204608-qq3qgcp.jpg)
 
   或者可以是“–yes-button” , “–no-button”选项。
 
@@ -59,11 +59,11 @@
   fi
   ```
 
-  ​![](assets/net-img-03-yesnobox2-20240312204608-mnngkwo.jpg)​
+  ![](assets/net-img-03-yesnobox2-20240312204608-mnngkwo.jpg)
 
 ## 创建一个表单输入框
 
-　　如果你想用户输入任意的文本，您可以使用一个输入框。
+如果你想用户输入任意的文本，您可以使用一个输入框。
 
 * 语法
 
@@ -86,11 +86,11 @@
 
 * 效果
 
-  ​![](assets/net-img-04-inputbox-20240312204608-1cjcvez.jpg)​
+  ![](assets/net-img-04-inputbox-20240312204608-1cjcvez.jpg)
 
 ## 创建一个密码框
 
-　　当用户需要输入敏感信息时密码框是有用的。
+当用户需要输入敏感信息时密码框是有用的。
 
 * 语法
 
@@ -113,11 +113,11 @@
 
 * 效果
 
-  ​![](assets/net-img-05-passwordbox-20240312204609-r3chtbz.jpg)​
+  ![](assets/net-img-05-passwordbox-20240312204609-r3chtbz.jpg)
 
 ## 创建一个菜单栏
 
-　　当你想让用户选择一个任意数量的选择中，你可以使用菜单框。
+当你想让用户选择一个任意数量的选择中，你可以使用菜单框。
 
 * 语法
 
@@ -144,7 +144,7 @@
 
 * 效果
 
-  ​![](assets/net-img-06-menulist-20240312204610-dhslkf5.jpg)​
+  ![](assets/net-img-06-menulist-20240312204610-dhslkf5.jpg)
 
 ## 创建radiolist单选对话框
 
@@ -174,11 +174,11 @@
 
 * 效果
 
-  ​![](assets/net-img-07-radiolist-20240312204610-l88h1x2.jpg)​
+  ![](assets/net-img-07-radiolist-20240312204610-l88h1x2.jpg)
 
 ## 创建一个表对话框
 
-　　当你想让用户选择一个列表中选择多个选项的清单对话框是有用的，radiolist对话框，只允许选择一个。
+当你想让用户选择一个列表中选择多个选项的清单对话框是有用的，radiolist对话框，只允许选择一个。
 
 * 语法
 
@@ -206,11 +206,11 @@
 
 * 效果
 
-  ​![](assets/net-img-08-checklist-20240312204610-p223oha.jpg)​
+  ![](assets/net-img-08-checklist-20240312204610-p223oha.jpg)
 
 ## 创建一个进度条
 
-　　进度条是一个用户友好的对话框。whiptail从标准输入读取一个百分数（0～100），显示一个表内相应的计数。
+进度条是一个用户友好的对话框。whiptail从标准输入读取一个百分数（0～100），显示一个表内相应的计数。
 
 * 语法
 
@@ -232,4 +232,4 @@
 
 * 效果
 
-  ​![](assets/net-img-09-progessgauge-20240312204611-ecsi45i.jpg)​
+  ![](assets/net-img-09-progessgauge-20240312204611-ecsi45i.jpg)

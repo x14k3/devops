@@ -1,14 +1,14 @@
 # mysql MHA架构
 
-　　MHA（MasterHigh Availability）是一套优秀的MySQL高可用环境下故障切换和主从复制的软件。  
+MHA（MasterHigh Availability）是一套优秀的MySQL高可用环境下故障切换和主从复制的软件。  
 MHA 的出现就是解决MySQL 单点的问题。 MySQL故障切换过程中，MHA能做到0-30秒内自动完成故障切换操作。  
 MHA 能在故障切换的过程中最大程度上保证数据的一致性，以达到真正意义上的高可用。
 
-　　优点：  
+优点：  
 1:MHA除了支持日志点的复制还支持GTID的方式  
 2:同MMM相比，MHA会尝试从旧的Master中恢复旧的二进制日志，只是未必每 次都能成功。如果希望更少的数据丢失场景，建议使用MHA架构。
 
-　　缺点：  
+缺点：  
 1:MHA需要自行开发VIP转移脚本。  
 2:MHA只监控Master的状态，未监控Slave的状态  
 
@@ -21,7 +21,7 @@ MHA 能在故障切换的过程中最大程度上保证数据的一致性，以�
 
 ![](assets/image-20230216200302909-20230610173813-r4w0zss.png)
 
-　　环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考mysql 单机部署  
+环境准备：3台服务器部署mysql（一主两从，MHA Manager部署在slave上）参考[mysql 单机部署](032%20数据库/Mysql/mysql%20单机部署.md)  
 操作系统：`Linux CentOS 7.6`​
 数据库：`MySQL 8.0.26`​   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)  
 MHA：`mha4mysql-0.58`​ https://github.com/yoshinorim/mha4mysql-node https://github.com/yoshinorim/mha4mysql-manager
@@ -39,9 +39,9 @@ ssh-copy-id 192.168.0.106
 
 ### 2. 搭建基础的主从架构
 
-　　参考：[基于GTID主从复制](mysql%20主从架构.md#基于GTID主从复制)
+参考：[基于GTID主从复制](mysql%20主从架构.md#基于GTID主从复制)
 
-　　mha架构在配置上略有不同
+mha架构在配置上略有不同
 
 ```bash
 # 1.所有数据库节点都需要创建用于同步的用户和监控用户
@@ -59,7 +59,7 @@ read_only=1
 
 ### 3. 安装MHA node组件
 
-　　在所有服务器上都安装 MHA node 组件
+在所有服务器上都安装 MHA node 组件
 
 ```bash
 # 安装epel源
@@ -116,7 +116,7 @@ send_report                 # 因故障切换后发送报警的脚本
 ---------------------------------------------------------
 ```
 
-　　**修改master_ip_failover脚本,建议删除，直接用下面的配置**
+**修改master_ip_failover脚本,建议删除，直接用下面的配置**
 
 ```bash
 #!/usr/bin/env perl
@@ -217,14 +217,14 @@ sub usage {
 }
 ```
 
-　　**创建 MHA 软件目录并拷贝配置文件，这里使用app1.cnf配置文件来管理 mysql 节点服务器**
+**创建 MHA 软件目录并拷贝配置文件，这里使用app1.cnf配置文件来管理 mysql 节点服务器**
 
 ```bash
 mkdir /etc/masterha
 cp /opt/mha4mysql-manager-0.58/samples/conf/app1.cnf /etc/masterha
 ```
 
-　　`vim /etc/masterha/app1.cnf #删除原有内容，直接复制并修改节点服务器的IP地址`
+`vim /etc/masterha/app1.cnf #删除原有内容，直接复制并修改节点服务器的IP地址`
 
 ```bash
 [server default]
@@ -271,7 +271,7 @@ hostname=192.168.0.106
 port=3306
 ```
 
-　　**第一次配置需要在 Master 节点上手动开启虚拟IP**
+**第一次配置需要在 Master 节点上手动开启虚拟IP**
 
 ```bash
 /sbin/ifconfig ens33:1 192.168.0.111/24
@@ -280,7 +280,7 @@ port=3306
 
 ### 6. 在 manager 节点上测试MHA
 
-　　**在 manager 节点上测试 ssh 无密码认证，如果正常最后会输出 successfully，如下所示。**
+**在 manager 节点上测试 ssh 无密码认证，如果正常最后会输出 successfully，如下所示。**
 
 ```bash
 masterha_check_ssh -conf=/etc/masterha/app1.cnf
@@ -289,7 +289,7 @@ Thu Feb 16 09:20:35 2023 - [debug]   ok.
 Thu Feb 16 09:20:36 2023 - [info] All SSH connection tests passed successfully.
 ```
 
-　　**在 manager 节点上测试 mysql 主从连接情况，最后出现 MySQL Replication Health is OK 字样说明正常。如下所示。**
+**在 manager 节点上测试 mysql 主从连接情况，最后出现 MySQL Replication Health is OK 字样说明正常。如下所示。**
 
 ```bash
 masterha_check_repl -conf=/etc/masterha/app1.cnf
@@ -315,7 +315,7 @@ nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf -
 masterha_stop --conf=/etc/masterha/app1.cnf # 或者可以直接采用 kill 进程 ID 的方式关闭。
 ```
 
-　　**状态检查**
+**状态检查**
 
 ```bash
 # 查看 MHA 状态，可以看到当前的 master 是 Mysql1 节点
@@ -337,16 +337,16 @@ ifconfig
 
 ```
 
-　　​
+​
 **故障切换备选主库的算法：**
 
-　　1．一般判断从库的是从（position/GTID）判断优劣，数据有差异，最接近于master的slave，成为备选主。
+1．一般判断从库的是从（position/GTID）判断优劣，数据有差异，最接近于master的slave，成为备选主。
 2．数据一致的情况下，按照配置文件顺序，选择备选主库。
 3．设定有权重（candidate_master=1），按照权重强制指定备选主。
 （1）默认情况下如果一个slave落后master 100M的relay logs的话，即使有权重，也会失效。
 （2）如果check_repl_delay=0的话，即使落后很多日志，也强制选择其为备选主。
 
-　　**故障修复步骤**
+**故障修复步骤**
 
 ```bash
 #1．修复mysql
@@ -391,24 +391,24 @@ dos2unix /usr/local/bin/master_ip_failover
 
 # MHA 和 MGR 浅谈
 
-　　我们知道mha是外部的基于mysql主从半同步开发的一套高可用切换方案，它并不属于mysql内核，独立于mysql存在于外围，mha重点在切换，可以理解为一套切换工具。而mgr存在于mysql内核层面，是内核层面数据强一致方案，它的重点在高可用强一致，如果将mgr用在生产环境中，那么针对mgr，还需要开发一套监控及切换方案，而mha将这一整套切换方案vip之类的都考虑进去了。
+我们知道mha是外部的基于mysql主从半同步开发的一套高可用切换方案，它并不属于mysql内核，独立于mysql存在于外围，mha重点在切换，可以理解为一套切换工具。而mgr存在于mysql内核层面，是内核层面数据强一致方案，它的重点在高可用强一致，如果将mgr用在生产环境中，那么针对mgr，还需要开发一套监控及切换方案，而mha将这一整套切换方案vip之类的都考虑进去了。
 
-　　mha会在集群中某台机器一般是slave节点安装mha manager，当master出现故障时，可以自动将最新数据的slave提升为master同时将所有其他的slave指向新的master，整个过程是透明的，对应用无感知，切换时间一般在30s以内，非常高效。mha适用于一主一从，一主多从，一般配合半同步使用，预防数据丢失。
+mha会在集群中某台机器一般是slave节点安装mha manager，当master出现故障时，可以自动将最新数据的slave提升为master同时将所有其他的slave指向新的master，整个过程是透明的，对应用无感知，切换时间一般在30s以内，非常高效。mha适用于一主一从，一主多从，一般配合半同步使用，预防数据丢失。
 
 ![](assets/image-20230216200554290-20230610173813-poksi1u.png)
 
-　　mha大致原理是manager进程会定期（一般是1s一次）探测主库节点，当主库出现故障时，mha会找到应用了最新日志的slave的binlog位置，并且拉取主库和最新从库的差异日志并应用到该从库上。，然后将该从库提升为master，并且将其他从库指向新主库，切换过程配合vip的漂移。
+mha大致原理是manager进程会定期（一般是1s一次）探测主库节点，当主库出现故障时，mha会找到应用了最新日志的slave的binlog位置，并且拉取主库和最新从库的差异日志并应用到该从库上。，然后将该从库提升为master，并且将其他从库指向新主库，切换过程配合vip的漂移。
 
-　　mgr全称是mysql group replication，它其实是对mysql半同步的一个创新，它至少要求三个节点，三个节点间基于paxos协议做同步，paxos协议是多主节点的强一致协议。
+mgr全称是mysql group replication，它其实是对mysql半同步的一个创新，它至少要求三个节点，三个节点间基于paxos协议做同步，paxos协议是多主节点的强一致协议。
 
 ![](assets/image-20230216200600782-20230610173813-xkiuufl.png)
 
-　　mgr有两种模式，单主模式和多主模式，区别就是是否提供多个节点同时写入的能力。由于mgr采用乐观锁，在高并发的情况下很容易在提交那一刻造成冲突，所以在生产环境中一般采用单主模式居多。
+mgr有两种模式，单主模式和多主模式，区别就是是否提供多个节点同时写入的能力。由于mgr采用乐观锁，在高并发的情况下很容易在提交那一刻造成冲突，所以在生产环境中一般采用单主模式居多。
 
-　　Paxos协议能容忍少数节点宕机，因为paxos协议要求一半以上的节点收到日志主库才可以提交。在单主模式下，当主库宕机，集群会根据group_replication_member_weight设置的权重值进行备机升主，因为是强一致协议，所以不存在日志是否是最新的问题，如果权重相同，那么会根据server的uuid进行排序。
+Paxos协议能容忍少数节点宕机，因为paxos协议要求一半以上的节点收到日志主库才可以提交。在单主模式下，当主库宕机，集群会根据group_replication_member_weight设置的权重值进行备机升主，因为是强一致协议，所以不存在日志是否是最新的问题，如果权重相同，那么会根据server的uuid进行排序。
 
-　　mgr本身还有一些限制，比如写集合冲突问题，必须要求有主键，只支持innodb，不支持外键、save point等，还有集群的强一致导致对网络的要求较高，如果遇到网络波动，对集群的影响较大。
+mgr本身还有一些限制，比如写集合冲突问题，必须要求有主键，只支持innodb，不支持外键、save point等，还有集群的强一致导致对网络的要求较高，如果遇到网络波动，对集群的影响较大。
 
-　　mgr本身能够实现故障自动选举，但是生产环境需要做到对应用的透明，所以一般是基于vip的，应用连接的是vip，如果发生切换，需要将vip也漂移到新主库，这里其实还涉及到很多判断和切换逻辑，所以mgr并不是切换方案，他只是提供了一种新的强一致高可用技术，要想把它用于生产环境中其实还有很多工具和脚本要进行开发。
+mgr本身能够实现故障自动选举，但是生产环境需要做到对应用的透明，所以一般是基于vip的，应用连接的是vip，如果发生切换，需要将vip也漂移到新主库，这里其实还涉及到很多判断和切换逻辑，所以mgr并不是切换方案，他只是提供了一种新的强一致高可用技术，要想把它用于生产环境中其实还有很多工具和脚本要进行开发。
 
-　　个人觉得，mha在mysql的高可用方面还是最经典成熟和无可撼动的。至于mgr新技术大家也可以抱着研究的心态玩一玩，但是说用mgr来替换mha不管从成本还是可靠性考虑我觉得都不可取，仅代表个人观点哈。
+个人觉得，mha在mysql的高可用方面还是最经典成熟和无可撼动的。至于mgr新技术大家也可以抱着研究的心态玩一玩，但是说用mgr来替换mha不管从成本还是可靠性考虑我觉得都不可取，仅代表个人观点哈。

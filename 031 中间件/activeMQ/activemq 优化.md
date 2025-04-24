@@ -2,17 +2,17 @@
 
 # MQ内存
 
-　　*ActiveMQ运行于JVM之上，所以ActiveMQ的内存大小也取决于JVM的内存大小*
+*ActiveMQ运行于JVM之上，所以ActiveMQ的内存大小也取决于JVM的内存大小*
 
-　　设置mq可使用的jvm内存大小，
+设置mq可使用的jvm内存大小，
 
-　　`vim ~/bin/env`
+`vim ~/bin/env`
 
 ```.properties
 ACTIVEMQ_OPTS_MEMORY="-Xms2G -Xmx6G"
 ```
 
-　　ActiveMQ的内存配置在activemq.xml中，如下所示：
+ActiveMQ的内存配置在activemq.xml中，如下所示：
 
 ```xml
 <systemUsage>
@@ -43,7 +43,7 @@ ACTIVEMQ_OPTS_MEMORY="-Xms2G -Xmx6G"
 
 # 网络IO
 
-　　*ActiveMQ支持多种消息协议，包括AMQP协议、MQTT协议、Openwire协议、Stomp协议等。*​***ActiveMQ在Version 5.13.0+ 版本后，将OpenWire, STOMP, AMQP, MQTT这四种主要协议的端口监听进行了合并，并使用auto关键字进行表示***​ *。也就是说，ActiveMQ将监听这一个端口的消息状态，并自动匹配合适的协议格式。配置如下：*
+*ActiveMQ支持多种消息协议，包括AMQP协议、MQTT协议、Openwire协议、Stomp协议等。*​***ActiveMQ在Version 5.13.0+ 版本后，将OpenWire, STOMP, AMQP, MQTT这四种主要协议的端口监听进行了合并，并使用auto关键字进行表示***​ *。也就是说，ActiveMQ将监听这一个端口的消息状态，并自动匹配合适的协议格式。配置如下：*
 
 ```xml
 <transportConnectors>
@@ -53,9 +53,9 @@ ACTIVEMQ_OPTS_MEMORY="-Xms2G -Xmx6G"
 </transportConnectors>
 ```
 
-　　但是这种优化只是让ActiveMQ的连接管理变得简洁了，并没有提升单个节点的处理性能。
+但是这种优化只是让ActiveMQ的连接管理变得简洁了，并没有提升单个节点的处理性能。
 
-　　如果您不特别指定ActiveMQ的网络监听端口，那么这些端口都将使用**BIO**网络IO模型。所以为了首先提高单节点的网络吞吐性能，我们需要明确指定Active的网络IO模型为**NIO**，如下所示：
+如果您不特别指定ActiveMQ的网络监听端口，那么这些端口都将使用**BIO**网络IO模型。所以为了首先提高单节点的网络吞吐性能，我们需要明确指定Active的网络IO模型为**NIO**，如下所示：
 
 ```xml
 <transportConnectors>  
@@ -65,9 +65,9 @@ ACTIVEMQ_OPTS_MEMORY="-Xms2G -Xmx6G"
 </transportConnectors> 
 ```
 
-　　**bio  是同步阻塞IO模型，nio 是同步非阻塞IO模型。**
+**bio  是同步阻塞IO模型，nio 是同步非阻塞IO模型。**
 
-　　接下来应该还要配置这个端口支持的最大连接数量、设置每一条消息的最大传输值、设置NIO使用的线程池最大工作线程数量
+接下来应该还要配置这个端口支持的最大连接数量、设置每一条消息的最大传输值、设置NIO使用的线程池最大工作线程数量
 
 ```xml
 <transportConnector name="auto+nio" uri="auto+nio://0.0.0.0:61608?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600" />
@@ -84,7 +84,7 @@ org.apache.activemq.transport.nio.SelectorManager.maximumPoolSize=50"
 -->
 ```
 
-　　**从5.15.0开始，ActiveMQ支持调整NIO的传输线程**
+**从5.15.0开始，ActiveMQ支持调整NIO的传输线程**
 `vim ~/bin/env`
 
 ```bash
@@ -101,13 +101,13 @@ ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -Dorg.apache.activemq.transport.nio.SelectorManage
 
 # 持久化消息
 
-　　**非持久化订阅**：消费者只有在线的时候能接收到消息，一旦离线，服务器认为该消费者已离开，不会为其保留消息。等消费者下一次上线时，也只能收到从他上线以后生产者发送的消息。
+**非持久化订阅**：消费者只有在线的时候能接收到消息，一旦离线，服务器认为该消费者已离开，不会为其保留消息。等消费者下一次上线时，也只能收到从他上线以后生产者发送的消息。
 
-　　**持久化订阅**：服务器为离线的消费者保留消息，当消费者离线时，服务器会记录该消费者的离线时间，并为其保留离线期间的所有消息（保存在磁盘上），等其上线后按顺序发给这个消费者。
+**持久化订阅**：服务器为离线的消费者保留消息，当消费者离线时，服务器会记录该消费者的离线时间，并为其保留离线期间的所有消息（保存在磁盘上），等其上线后按顺序发给这个消费者。
 
 ## 1. KahaDB方式
 
-　　默认的持久化方式，KahaDB存储是一个基于文件的快速存储消息，所有的消息顺序的添加到一个日志文件中，同时有另一个索引文件记录执行这些日志到存储地址，还有一个事务日志用于消息的恢复操作。
+默认的持久化方式，KahaDB存储是一个基于文件的快速存储消息，所有的消息顺序的添加到一个日志文件中，同时有另一个索引文件记录执行这些日志到存储地址，还有一个事务日志用于消息的恢复操作。
 特点：
 
 - 日志形式存储消息；
@@ -115,7 +115,7 @@ ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -Dorg.apache.activemq.transport.nio.SelectorManage
 - 完全支持JMS事务；
 - 支持多种恢复机制，kahadb可以限制每个数据文件的大小。
 
-　　db.data:      存放B-Tree indexs;
+db.data:      存放B-Tree indexs;
 db.redo:      存放redo file，用于恢复B-Tree indexs;
 db log files: 用于存储消息，当log日志到了指定的大小，会创建一个新的，当log日志中的消息都被删除，改日志文件将会删除；
 
@@ -126,9 +126,9 @@ db log files: 用于存储消息，当log日志到了指定的大小，会创建
 - **Data Logs**：对应文件db-XX.log，以日志的形象存储生产者生产的消息。
 - **Redo log**：对应db.redo,用于在非正常关机情况下维护索引完整性。
 
-　　Metadata Store和Metadata Cache需要保证同步，同步的过程叫做**check point**。
+Metadata Store和Metadata Cache需要保证同步，同步的过程叫做**check point**。
 
-　　**KahaDB的各个可配置属性**
+**KahaDB的各个可配置属性**
 
 ```bash
 属性                            默认值                 描述
@@ -152,7 +152,7 @@ concurrentStoreAndDispatchTopics       false     # 如果为true，转发Topic�
 concurrentStoreAndDispatchQueues       true    # 如果为true，转发Queue消息的时候同时存储消息到message store中。
 ```
 
-　　一个跑了满久的activemq停止后再启动就自动退出了（原因是大量死信队列的数据一直被写进kahadb中，然后持久化在磁盘上，磁盘激增导致该问题发生。）
+一个跑了满久的activemq停止后再启动就自动退出了（原因是大量死信队列的数据一直被写进kahadb中，然后持久化在磁盘上，磁盘激增导致该问题发生。）
 
 ```xml
 
@@ -171,7 +171,7 @@ java.io.EOFException
 -->
 ```
 
-　　添加一下参数解决：
+添加一下参数解决：
 
 ```xml
 
@@ -188,10 +188,10 @@ java.io.EOFException
 
 ## 2. AMQ存储
 
-　　和KahaDB一样，AMQ 也是一个文件型数据库，消息信息最终是存储在文件中。内存中也会有缓存数据。
+和KahaDB一样，AMQ 也是一个文件型数据库，消息信息最终是存储在文件中。内存中也会有缓存数据。
 为了提升性能，创建消息的主键索引，进一步提升性能。同时由于AMQ会为每一个Destination创建一个索引，如果使用大量的Queue，索引文件将占用很多磁盘空间，同时Broker奔溃，索引重建的过程非常慢。所以，Destination的数量较少，消息吞吐量是应用程序的主要需求时可以选用此方式存储。
 
-　　配置方式 conf/activemq.xml：
+配置方式 conf/activemq.xml：
 
 ```xml
 <persistenceAdapter> 
@@ -200,20 +200,20 @@ java.io.EOFException
 </persistenceAdapter>
 ```
 
-　　虽然 AMQ 性能略高于 Kaha DB 方式，但是由于其重建索引时间过长，而且索引文件 占用磁盘空间过大，所以已经不推荐使用。
+虽然 AMQ 性能略高于 Kaha DB 方式，但是由于其重建索引时间过长，而且索引文件 占用磁盘空间过大，所以已经不推荐使用。
 
 ## 3. JDBC存储
 
-　　 
+ 
 支持通过 JDBC 将消息存储到关系数据库，性能上不如文件存储，能通过关系型数据库查询到消息的信息。
 
-　　数据库默认会创建3个表，每个表的作用：
+数据库默认会创建3个表，每个表的作用：
 
 - **activemq_msgs**：queue和topic的消息都存在这个表中
 - **activemq_acks**：用于存储订阅关系。如果是持久化Topic，订阅者和服务器的订阅关系在这个表保存
 - **activemq_lock**：跟kahadb的lock文件类似，确保数据库在某一时刻只有一个broker在访问(集群环境中才有用)
 
-　　配置文件的Beans标签中添加：
+配置文件的Beans标签中添加：
 
 ```xml
 <!--配置数据源-->
@@ -232,12 +232,12 @@ java.io.EOFException
 
 ```
 
-　　在每个ActiveMQ的lib目录下加入mysql的驱动包和数据库连接池Druid包。
+在每个ActiveMQ的lib目录下加入mysql的驱动包和数据库连接池Druid包。
 
-　　**JDBC&amp;Journal**
+**JDBC&amp;Journal**
 上面用JDBC实现了持久化，Journal呢就是一种缓存，也就是说，加上Journal，JDBC持久化速度将会更快！生产者生产消息，会存到数据库，消费者消费了这条消息，又要从数据库删除，会造成频繁地读库和写库，性能较低。有了journal，生产者生产的消息就会存到journal文件中，如果在journal还未来得及同步消息到DB的时候，消费者就已经将消息消费了，那么这条消息就不用同步到数据库了，这样就可以减轻数据库的压力。
 
-　　配置方法：将persistenceAdapter标签换成persistenceFactory并配置成如下即可：
+配置方法：将persistenceAdapter标签换成persistenceFactory并配置成如下即可：
 
 ```xml
 <persistenceFactory>  
@@ -253,9 +253,9 @@ java.io.EOFException
 
 ## 4. 内存存储（关闭持久化存储）
 
-　　基于内存的消息存储，就是消息存储在内存中。必须注意JVM使用情况以及内存限制，适用于一些能快速消费的数据量不大的小消息，当MQ关闭或者宕机，未被消费的内存消息会被清空。
+基于内存的消息存储，就是消息存储在内存中。必须注意JVM使用情况以及内存限制，适用于一些能快速消费的数据量不大的小消息，当MQ关闭或者宕机，未被消费的内存消息会被清空。
 
-　　配置方式 设置 broker属性值 persistent=“false”：表示不设置持久化存储，直接存储到内存中在broker标签处设置.
+配置方式 设置 broker属性值 persistent=“false”：表示不设置持久化存储，直接存储到内存中在broker标签处设置.
 
 ```xml
 <broker brokerName="test-broker" persistent="false" xmlns="http://activemq.apache.org/schema/core">
@@ -270,17 +270,17 @@ java.io.EOFException
 
 # 死信队列
 
-　　缺省持久消息过期，会被送到DLQ，非持久消息不会送到DLQ  (非持久化需要配置)
+缺省持久消息过期，会被送到DLQ，非持久消息不会送到DLQ  (非持久化需要配置)
 
-　　**导致死信队列的两种情况**
+**导致死信队列的两种情况**
 
-　　**1、消息处理失败**（消费重试机制处理后）
+**1、消息处理失败**（消费重试机制处理后）
 
-　　**2、消息发送过期**（超过activemq设置消息过期时间）
+**2、消息发送过期**（超过activemq设置消息过期时间）
 
 ## 1. 消费重试机制
 
-　　在**默认**情况下，当消息签收失败时ActiveMQ消息服务器会继续每隔1秒钟向消费者端发送一次这个签收失败的消息，默认会尝试6次(加上正常的1次共7次)，如果这7次消费者端全部签收失败，则会给ActiveMQ服务器发送一个“poison ack”，表示这个消息不正常(“有毒”)，这时消息服务器不会继续传送这个消息给这个消费者，而是将这个消息放入死信队列(DLQ，即Dead Letter Queue)。
+在**默认**情况下，当消息签收失败时ActiveMQ消息服务器会继续每隔1秒钟向消费者端发送一次这个签收失败的消息，默认会尝试6次(加上正常的1次共7次)，如果这7次消费者端全部签收失败，则会给ActiveMQ服务器发送一个“poison ack”，表示这个消息不正常(“有毒”)，这时消息服务器不会继续传送这个消息给这个消费者，而是将这个消息放入死信队列(DLQ，即Dead Letter Queue)。
 
 * **RedeliveryPolicy重发策略设置**
 
@@ -356,7 +356,7 @@ java.io.EOFException
 
 ## 3. 独立死信队列策略
 
-　　把DeadLetter放入到各自的死信队列中。
+把DeadLetter放入到各自的死信队列中。
 对于queue而言：死信通道的前缀默认为"ActiveMQ.DLQ.Queue";
 对于topic而言：死信通道的前缀默认为"ActiveMQ.DLQ.Topic";
 比如队列order，那么它对应的死信通道为"ActiveMQ.DLQ.Queue.Order";
@@ -379,7 +379,7 @@ java.io.EOFException
 
 ## 4. 过期消息不保存到死信队列
 
-　　如果你只想丢弃过期的消息，不想发送到死信队列，你可以在一个死信队列策略中配置`processExpired=false`。
+如果你只想丢弃过期的消息，不想发送到死信队列，你可以在一个死信队列策略中配置`processExpired=false`。
 
 ```xml
 <policyEntry queue=">">  
@@ -391,7 +391,7 @@ java.io.EOFException
 
 ## 5. 持久消息不保存到死信队列
 
-　　对于**过期的**，可以通过processExpired属性来控制，对于**消费重试机制**失败的消息，需要通过插件来实现如下：丢弃所有死信;
+对于**过期的**，可以通过processExpired属性来控制，对于**消费重试机制**失败的消息，需要通过插件来实现如下：丢弃所有死信;
 
 ```xml
 <broker>  
@@ -404,7 +404,7 @@ java.io.EOFException
 
 ## 6. 非持久化消息放入死信队列
 
-　　默认情况下，ActiveMQ不会将不能投递的非持久消息放到死信队列。如果你希望将非持久消息存储到死信队列，你可以在死信队列的策略中设置`processNonPersistent="true"`。
+默认情况下，ActiveMQ不会将不能投递的非持久消息放到死信队列。如果你希望将非持久消息存储到死信队列，你可以在死信队列的策略中设置`processNonPersistent="true"`。
 
 ```xml
 <policyEntry queue=">">  
@@ -416,7 +416,7 @@ java.io.EOFException
 
 ## 7. 定时清理死信队列
 
-　　默认情况下，ActiveMQ永远不会使发送到DLQ的消息失效。 但是，在ActiveMQ 5.12中，deadLetterStrategy支持到期属性，其值以毫秒为单位。
+默认情况下，ActiveMQ永远不会使发送到DLQ的消息失效。 但是，在ActiveMQ 5.12中，deadLetterStrategy支持到期属性，其值以毫秒为单位。
 
 ```xml
 <deadLetterStrategy>
@@ -428,7 +428,7 @@ java.io.EOFException
 
 # ActiveMQ 认证与授权
 
-　　`vim activemq/conf/activemq.xml`
+`vim activemq/conf/activemq.xml`
 
 ```xml
 <plugins>
@@ -443,9 +443,9 @@ java.io.EOFException
 
 ```
 
-　　使用credentials.properties存储明文凭证
+使用credentials.properties存储明文凭证
 
-　　`vim activemq/conf/credentials.properties`
+`vim activemq/conf/credentials.properties`
 
 ```.properties
 activemq.username=username
@@ -456,7 +456,7 @@ activemq.password=password
 
 # Web 控制台安全配置
 
-　　**修改端口**​`vim activemq/conf/jetty.xml`
+**修改端口**​`vim activemq/conf/jetty.xml`
 
 ```xml
 <bean id="jettyPort" class="org.apache.activemq.web.WebConsolePort" init-method="start">
@@ -466,7 +466,7 @@ activemq.password=password
 </bean>
 ```
 
-　　**修改登录用户名密码**​`vim activemq/conf/jetty-realm.properties`
+**修改登录用户名密码**​`vim activemq/conf/jetty-realm.properties`
 
 ```.properties
 # Defines users that can access the web (console, demo, etc.)

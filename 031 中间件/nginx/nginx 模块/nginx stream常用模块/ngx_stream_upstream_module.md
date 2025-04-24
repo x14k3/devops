@@ -1,6 +1,6 @@
 # ngx_stream_upstream_module
 
-　　​`ngx_stream_upstream_module`​ 模块（1.9.0）用于定义可以由 [proxy_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_proxy_module#proxy_pass) 指令引用的服务器组。
+​`ngx_stream_upstream_module`​ 模块（1.9.0）用于定义可以由 [proxy_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_proxy_module#proxy_pass) 指令引用的服务器组。
 
 ## 示例配置
 
@@ -22,7 +22,7 @@ server {
 }
 ```
 
-　　拥有定期运行[健康检查](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/stream/ngx_stream_upstream_hc_module.md)的动态可配置组为[商业订阅](http://nginx.com/products/?_ga=2.130645319.99786210.1588592638-1615340879.1588592638)部分：
+拥有定期运行[健康检查](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/stream/ngx_stream_upstream_hc_module.md)的动态可配置组为[商业订阅](http://nginx.com/products/?_ga=2.130645319.99786210.1588592638-1615340879.1588592638)部分：
 
 ```
 resolver 10.0.0.1;
@@ -57,9 +57,9 @@ server {
 |**默认**|——|
 |**上下文**|stream|
 
-　　定义一组服务器。服务器可以在不同的端口上监听。此外，可以将监听 TCP 和 UNIX 域套接字的服务器混合使用。
+定义一组服务器。服务器可以在不同的端口上监听。此外，可以将监听 TCP 和 UNIX 域套接字的服务器混合使用。
 
-　　示例：
+示例：
 
 ```
 upstream backend {
@@ -72,7 +72,7 @@ upstream backend {
 }
 ```
 
-　　默认使用加权轮询均衡算法在服务器间分配连接。在上面的示例中，每 7 个连接将如下分配：5 个连接转到 `backend1.example.com:12345`​，一个连接到第二个和第三个服务器。如果在与服务器通信期间发生错误，则连接将被传递到下一个服务器，依此类推，直到尝试完所有正常运行的服务器为止。如果与所有服务器的通信都失败，则连接将关闭。
+默认使用加权轮询均衡算法在服务器间分配连接。在上面的示例中，每 7 个连接将如下分配：5 个连接转到 `backend1.example.com:12345`​，一个连接到第二个和第三个服务器。如果在与服务器通信期间发生错误，则连接将被传递到下一个服务器，依此类推，直到尝试完所有正常运行的服务器为止。如果与所有服务器的通信都失败，则连接将关闭。
 
 ### server
 
@@ -82,9 +82,9 @@ upstream backend {
 |**默认**|——|
 |**上下文**|upstream|
 
-　　定义服务器的地址（`address`​）和其他参数。该地址可以指定为带有端口的域名或 IP 地址，也可以指定前缀为 `unix`​ 的 UNIX 域套接字路径。解析为多个 IP 地址的域名一次定义了多个服务器。
+定义服务器的地址（`address`​）和其他参数。该地址可以指定为带有端口的域名或 IP 地址，也可以指定前缀为 `unix`​ 的 UNIX 域套接字路径。解析为多个 IP 地址的域名一次定义了多个服务器。
 
-　　可以定义以下参数：
+可以定义以下参数：
 
 * ​`weight=number`​  
   设置服务器的权重，默认情况下为 1。
@@ -129,7 +129,7 @@ upstream backend {
   > 该参数不能与 [hash](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#hash) 和 [random](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#random) 负载均衡算法一起使用。
   >
 
-　　如果组中只有一台服务器，则将忽略 `max_fails`​、`fail_timeout`​ 和 `slow_start`​ 参数，这样的服务器将永远不会被视为不可用。
+如果组中只有一台服务器，则将忽略 `max_fails`​、`fail_timeout`​ 和 `slow_start`​ 参数，这样的服务器将永远不会被视为不可用。
 
 ### zone
 
@@ -139,9 +139,9 @@ upstream backend {
 |**默认**|——|
 |**上下文**|upstream|
 
-　　定义共享内存区域的名称（`name`​）和大小（`size`​），以存储 worker 进程之间共享的组配置和运行时状态。多个组可共享同一区域。在这种情况下，仅指定一次大小就足够了。
+定义共享内存区域的名称（`name`​）和大小（`size`​），以存储 worker 进程之间共享的组配置和运行时状态。多个组可共享同一区域。在这种情况下，仅指定一次大小就足够了。
 
-　　另外，在[商业订阅](http://nginx.com/products/?_ga=2.171473384.99786210.1588592638-1615340879.1588592638)部分中，此类组允许更改组成员身份或修改特定服务器的设置，而无需重新启动 nginx。可通过 [API](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md) 模块（1.13.3）访问该配置。
+另外，在[商业订阅](http://nginx.com/products/?_ga=2.171473384.99786210.1588592638-1615340879.1588592638)部分中，此类组允许更改组成员身份或修改特定服务器的设置，而无需重新启动 nginx。可通过 [API](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md) 模块（1.13.3）访问该配置。
 
 > 在 1.13.3 版本之前，只能访问特殊的 location 来通过 [upstream_conf](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_conf_module#upstream_conf) 处理。
 
@@ -154,16 +154,16 @@ upstream backend {
 |**上下文**|upstream|
 |**提示**|该指令在 1.9.7 版本中出现|
 
-　　指定一个文件用于保存动态可配置组的状态。
+指定一个文件用于保存动态可配置组的状态。
 
-　　示例：
+示例：
 
 ```
 state /var/lib/nginx/state/servers.conf; # path for Linux
 state /var/db/nginx/state/servers.conf;  # path for FreeBSD
 ```
 
-　　当前状态仅限于带有参数的服务器列表。解析配置时会读取该文件，并且每次更改 upstream 配置时都会[更新](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md#stream_upstreams_stream_upstream_name_servers_)该文件。应避免直接更改文件内容。该指令不能与 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#server) 指令一起使用。
+当前状态仅限于带有参数的服务器列表。解析配置时会读取该文件，并且每次更改 upstream 配置时都会[更新](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_api_module.md#stream_upstreams_stream_upstream_name_servers_)该文件。应避免直接更改文件内容。该指令不能与 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#server) 指令一起使用。
 
 > 在[配置重新加载](https://docshome.gitbook.io/nginx-docs/readme/kong-zhi-nginx#reconfiguration)或[二进制升级](https://docshome.gitbook.io/nginx-docs/readme/kong-zhi-nginx#upgrade)期间所做的更改可能会丢失。
 >
@@ -177,15 +177,15 @@ state /var/db/nginx/state/servers.conf;  # path for FreeBSD
 |**默认**|——|
 |**上下文**|upstream|
 
-　　指定服务器组的负载均衡算法，在该服务器组中，客户端——服务器的映射基于哈希键值（key/value）。key 可以包含文本、变量及其组合（1.11.2）。 用法示例：
+指定服务器组的负载均衡算法，在该服务器组中，客户端——服务器的映射基于哈希键值（key/value）。key 可以包含文本、变量及其组合（1.11.2）。 用法示例：
 
 ```
 hash $remote_addr;
 ```
 
-　　请注意，从组中添加或删除服务器可能会导致大量 key 重新映射到其他服务器。该方法与 [Cache::Memcached](https://metacpan.org/pod/Cache::Memcached) Perl 库兼容。
+请注意，从组中添加或删除服务器可能会导致大量 key 重新映射到其他服务器。该方法与 [Cache::Memcached](https://metacpan.org/pod/Cache::Memcached) Perl 库兼容。
 
-　　如果指定了 `consistent`​ 参数，则将使用 [ketama](https://www.metabrew.com/article/libketama-consistent-hashing-algo-memcached-clients) 一致性哈希算法。该方法可确保在将服务器添加到组中或从组中删除服务器时，只有很少的 key 被重新映射到不同的服务器。这有助于缓存服务器实现更高的缓存命中率。该方法与 `ketama_points`​ 参数设置为 160 的 [Cache::Memcached::Fast](https://metacpan.org/pod/Cache::Memcached::Fast) Perl 库兼容。
+如果指定了 `consistent`​ 参数，则将使用 [ketama](https://www.metabrew.com/article/libketama-consistent-hashing-algo-memcached-clients) 一致性哈希算法。该方法可确保在将服务器添加到组中或从组中删除服务器时，只有很少的 key 被重新映射到不同的服务器。这有助于缓存服务器实现更高的缓存命中率。该方法与 `ketama_points`​ 参数设置为 160 的 [Cache::Memcached::Fast](https://metacpan.org/pod/Cache::Memcached::Fast) Perl 库兼容。
 
 ### least\_conn
 
@@ -195,7 +195,7 @@ hash $remote_addr;
 |**默认**|——|
 |**上下文**|upstream|
 
-　　指定组使用的负载均衡算法，其将连接传递到活动连接数最少的服务器，同时要考虑服务器的权重。如果有多个这样的服务器，则依次使用加权轮询均衡算法进行尝试。
+指定组使用的负载均衡算法，其将连接传递到活动连接数最少的服务器，同时要考虑服务器的权重。如果有多个这样的服务器，则依次使用加权轮询均衡算法进行尝试。
 
 ### least\_time
 
@@ -205,9 +205,9 @@ hash $remote_addr;
 |**默认**|——|
 |**上下文**|upstream|
 
-　　指定组应使用的负载均衡算法，其将连接传递到平均时间最少且活动连接数最少的服务器，同时考虑服务器的权重。如果有多个这样的服务器，则依次使用加权轮询均衡算法进行尝试。
+指定组应使用的负载均衡算法，其将连接传递到平均时间最少且活动连接数最少的服务器，同时考虑服务器的权重。如果有多个这样的服务器，则依次使用加权轮询均衡算法进行尝试。
 
-　　如果指定了 `connect`​ 参数，则使用[连接](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_connect_time)到 upstream 服务器的时间。如果指定了 `first_byte`​ 变量，则使用接收数据的[首字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_first_byte_time)的时间。如果指定了 `last_byte`​，则使用接收数据[尾字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_session_time)的时间。如果指定了 `inflight`​ 参数（1.11.6），还将考虑不完整连接。
+如果指定了 `connect`​ 参数，则使用[连接](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_connect_time)到 upstream 服务器的时间。如果指定了 `first_byte`​ 变量，则使用接收数据的[首字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_first_byte_time)的时间。如果指定了 `last_byte`​，则使用接收数据[尾字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_session_time)的时间。如果指定了 `inflight`​ 参数（1.11.6），还将考虑不完整连接。
 
 > 在 1.11.6 版本之前，默认情况下会考虑不完整的连接。
 >
@@ -222,11 +222,11 @@ hash $remote_addr;
 |**上下文**|upstream|
 |**提示**|该指令在 1.15.1 版本中出现|
 
-　　指定组应使用的负载均衡算法，其将连接传递到随机选择的服务器，同时要考虑服务器的权重。
+指定组应使用的负载均衡算法，其将连接传递到随机选择的服务器，同时要考虑服务器的权重。
 
-　　可选的两个参数指示 nginx 随机选择[两个](https://homes.cs.washington.edu/~karlin/papers/balls.pdf)服务器，然后使用指定的算法（`method`​）选择一个服务器。默认方法是 `minimum_conn`​，它将连接传递到活动连接数最少的服务器。
+可选的两个参数指示 nginx 随机选择[两个](https://homes.cs.washington.edu/~karlin/papers/balls.pdf)服务器，然后使用指定的算法（`method`​）选择一个服务器。默认方法是 `minimum_conn`​，它将连接传递到活动连接数最少的服务器。
 
-　　​`minimum_time`​ 算法将连接传递到平均时间最少且活动连接数最少的服务器。如果指定了 `least_time=connect`​ 参数，则使用[连接](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_connect_time)到 upstream 服务器的时间。如果指定了 `least_time=first_byte`​ 参数，则使用接收数据的[首字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_first_byte_time)的时间。如果指定了 `least_time=last_byte`​，如果指定了 `last_byte`​，则使用接收数据[尾字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_session_time)的时间。
+​`minimum_time`​ 算法将连接传递到平均时间最少且活动连接数最少的服务器。如果指定了 `least_time=connect`​ 参数，则使用[连接](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_connect_time)到 upstream 服务器的时间。如果指定了 `least_time=first_byte`​ 参数，则使用接收数据的[首字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_first_byte_time)的时间。如果指定了 `least_time=last_byte`​，如果指定了 `last_byte`​，则使用接收数据[尾字节](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#var_upstream_session_time)的时间。
 
 > ​`least_time`​ 算法是[商业订阅](http://nginx.com/products/?_ga=2.200372710.99786210.1588592638-1615340879.1588592638)部分。
 
@@ -239,17 +239,17 @@ hash $remote_addr;
 |**上下文**|upstream|
 |**提示**|该指令在 1.17.5 版本中出现|
 
-　　配置用于将 upstream 服务器的名称解析为地址的名称服务器，例如：
+配置用于将 upstream 服务器的名称解析为地址的名称服务器，例如：
 
 ```
 resolver 127.0.0.1 [::1]:5353;
 ```
 
-　　可以将地址指定为域名或 IP 地址，配置一个可选端口。如果未指定端口，则使用 53 端口。以轮询算法查找名称服务器。
+可以将地址指定为域名或 IP 地址，配置一个可选端口。如果未指定端口，则使用 53 端口。以轮询算法查找名称服务器。
 
-　　默认情况下，nginx 在解析时将同时查找 IPv4 和 IPv6 地址。如果不需要查找 IPv6 地址，则可以指定 `ipv6=off`​ 参数。
+默认情况下，nginx 在解析时将同时查找 IPv4 和 IPv6 地址。如果不需要查找 IPv6 地址，则可以指定 `ipv6=off`​ 参数。
 
-　　默认情况下，nginx 使用响应的 TTL 值缓存回复。可选的 `valid`​ 参数覆盖默认行为：
+默认情况下，nginx 使用响应的 TTL 值缓存回复。可选的 `valid`​ 参数覆盖默认行为：
 
 ```
 resolver 127.0.0.1 [::1]:5353 valid=30s;
@@ -257,7 +257,7 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 
 > 为防止 DNS 欺骗，建议在一个受到保护的可信本地网络中配置 DNS 服务器。
 
-　　可选的 `status_zone`​ 参数启用对指定区域中请求和响应的 DNS 服务器统计信息的[收集](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/http/ngx_http_api_module.md#resolvers_)。
+可选的 `status_zone`​ 参数启用对指定区域中请求和响应的 DNS 服务器统计信息的[收集](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/http/ngx_http_api_module.md#resolvers_)。
 
 > 该指令为[商业订阅](http://nginx.com/products/?_ga=2.175591914.99786210.1588592638-1615340879.1588592638)部分。
 
@@ -270,7 +270,7 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 |**上下文**|upstream|
 |**提示**|该指令在 1.17.5 版本中出现|
 
-　　为名称解析设置一个超时时间，例如：
+为名称解析设置一个超时时间，例如：
 
 ```
 resolver_timeout 5s;
@@ -280,7 +280,7 @@ resolver_timeout 5s;
 
 ## 内部变量
 
-　　​`ngx_stream_upstream_module`​ 模块支持以下内部变量：
+​`ngx_stream_upstream_module`​ 模块支持以下内部变量：
 
 * ​`$upstream_addr`​  
   保留 IP 地址和端口或 upstream 服务器的 UNIX 域套接字（1.11.4）路径。如果在代理过程中联系了多个服务器，则它们的地址用逗号分隔，例如 `192.168.1.1:12345, 192.168.1.2:12345, unix:/tmp/sock`​。如果无法选择服务器，则该变量将保留服务器组的名称。
@@ -295,4 +295,4 @@ resolver_timeout 5s;
 * ​`$upstream_session_time`​  
   会话持续时间，以毫秒为单位，以毫秒为单位（1.11.4）。多个连接的时间用逗号分隔，参考 `$upstream_addr`​ 变量中的地址。
 
-　　‍
+‍

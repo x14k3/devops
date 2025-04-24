@@ -1,15 +1,15 @@
 # PostgreSQL 配置文件详解
 
-　　Pg的两个主要的配置文件：
+Pg的两个主要的配置文件：
 
 * postgresql.conf --该文件包含内存分配、日志文件未知、监听端口、监听地址、数据库数据目录等一些数据库通用配置.
 * pg_hba.conf
 
-　　‍
+‍
 
 # 一、[pg_settings]()
 
-　　该视图用于访问服务器用到的一些参数，是show和set 命令的代替接口，有些show命令查看不了的也可以用该视图来查看。
+该视图用于访问服务器用到的一些参数，是show和set 命令的代替接口，有些show命令查看不了的也可以用该视图来查看。
 
 |名字|类型|描述|
 | ------------| ---------| ---------------------------------------------------------------------------------------------------------------------------------|
@@ -51,15 +51,15 @@ postgres=# select name, setting,source,short_desc from pg_settings where source=
 (13 行记录)
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 # 二、数据库相关配置 postgresql.conf
 
-　　该文件包含内存分配、监听端口、监听地址、数据库数据目录、日志文件位置等一些数据库通用配置。
+该文件包含内存分配、监听端口、监听地址、数据库数据目录、日志文件位置等一些数据库通用配置。
 
-　　通过pg_setting查看参数的值:
+通过pg_setting查看参数的值:
 
 ```pgsql
 postgres=# select name, context, unit, setting, boot_val, reset_val from pg_settings where name in ('listen_address','max_connetctons','shared_buffers','effective_cache_size','work_mem','maintenance_work_mem') order by context, name;
@@ -102,9 +102,9 @@ postgres=# select name, context, unit, setting, boot_val, reset_val from pg_sett
 #                                                  d    = days(天)
 ```
 
-　　‍
+‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.1 文件位置(FILE LOCATION)</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.1 文件位置(FILE LOCATION)</span>
 
 ```bash
 # 这些变量的默认值由-D命令行选项或PGDATA环境变量驱动,这里表示为ConfigDir.
@@ -116,18 +116,18 @@ postgres=# select name, context, unit, setting, boot_val, reset_val from pg_sett
 #external_pid_file = ''				# 写一个额外的PID文件(更改需要重新启动PG数据库)
 ```
 
-　　查看参数配置
+查看参数配置
 
 ```pgsql
 show data_directory
 select name,setting from pg_setting where name='data_directory'
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.2 连接和验证（CONNECTIONS AND AUTHENTICATION）</span>
 
-　　**连接设置（Connection Settings）** 
+**连接设置（Connection Settings）** 
 
 ```bash
 #默认情况下,只允许登录了数据库的用户执行本地连接. 若想要任何远程的安装程序进行连接.则需要修改listen_addresses配置参数. 修改为='*',表示允许并接受任何地方传入的连接请求.
@@ -151,7 +151,7 @@ max_connections = 100		# 最大连接数(更改需要重新启动PG数据库)
 
 ```
 
-　　**认证（Authentication）** 
+**认证（Authentication）** 
 
 ```bash
 #authentication_timeout 	= 1min		# 1s-600s
@@ -163,7 +163,7 @@ max_connections = 100		# 最大连接数(更改需要重新启动PG数据库)
 #krb_caseins_users = off
 ```
 
-　　**SSL**
+**SSL**
 
 ```bash
 #ssl = off
@@ -179,11 +179,11 @@ max_connections = 100		# 最大连接数(更改需要重新启动PG数据库)
 #ssl_passphrase_command_supports_reload = off
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.3 资源使用（RESOURCE USAGE (except WAL)）</span>
 
-　　**内存（Memory）** 
+**内存（Memory）** 
 
 ```bash
 # 共享内存,服务器使用共享内存的主要部分是分配给缓存块的大型块.用于读取或是写入数据库.
@@ -199,19 +199,19 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 
 ```
 
-　　**磁盘（Disk）** 
+**磁盘（Disk）** 
 
 ```bash
 #temp_file_limit = -1     # 每个进程的临时文件空间限制(以KB为单位).如果没有限制,则为-1
 ```
 
-　　**内核资源（Kernel Resources）** 
+**内核资源（Kernel Resources）** 
 
 ```bash
 #max_files_per_process = 1000   # 最小25(更改需要重新启动PG数据库)
 ```
 
-　　**基于成本的真空延迟（ Cost-Based Vacuum Delay）** 
+**基于成本的真空延迟（ Cost-Based Vacuum Delay）** 
 
 ```bash
 #vacuum_cost_delay = 0        # 0-100 milliseconds
@@ -221,7 +221,7 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 #vacuum_cost_limit = 200      # 1-10000 credits
 ```
 
-　　**后台写入（Background Writer）** 
+**后台写入（Background Writer）** 
 
 ```bash
 #bgwriter_delay = 200ms        # 10-10000ms between rounds
@@ -230,7 +230,7 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 #bgwriter_flush_after = 512kB  # 以页计算,0-禁用
 ```
 
-　　**异步行为（Asynchronous Behavior）** 
+**异步行为（Asynchronous Behavior）** 
 
 ```bash
 #effective_io_concurrency = 1         # 1-1000; 0-禁用预取
@@ -244,11 +244,11 @@ dynamic_shared_memory_type = posix	#默认值是操作系统支持的第一个�
 
 ```
 
-　　‍
+‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.4 预写日志（WRITE-AHEAD LOG）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.4 预写日志（WRITE-AHEAD LOG）</span>
 
-　　**设置（Settings）** 
+**设置（Settings）** 
 
 ```bash
 wal_level = replica    # 该参数控制WAL日志信息的输出级别，有minimal， replica， logical三种模式，修改该参数需要重启。
@@ -272,7 +272,7 @@ commit_siblings = 5          # range 1-1000
 
 ```
 
-　　**检查点（Checkpoints）** 
+**检查点（Checkpoints）** 
 
 ```bash
 /*
@@ -287,9 +287,9 @@ min_wal_size = 80MB
 
 ```
 
-　　‍
+‍
 
-　　**存档（Archiving）** 
+**存档（Archiving）** 
 
 ```bash
 #archive_mode = off       # 启用存档-enables;关闭-off,打开-on 或始终-always (更改需要重新启动PG数据库生效)
@@ -299,11 +299,11 @@ min_wal_size = 80MB
 
 ```
 
-　　‍
+‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.5 复制（REPLICATION）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.5 复制（REPLICATION）</span>
 
-　　**发送服务器（Sending Servers）** 
+**发送服务器（Sending Servers）** 
 
 ```bash
 # 将它们设置在主服务器和任何将发送复制数据的备用服务器上.
@@ -314,7 +314,7 @@ min_wal_size = 80MB
 #track_commit_timestamp = off # 收集事务提交的时间戳(更改需要重新启动PG数据库生效)
 ```
 
-　　**主服务器（Master Server）** 
+**主服务器（Master Server）** 
 
 ```bash
 # 这些设置在备用服务器上被忽略.
@@ -322,7 +322,7 @@ min_wal_size = 80MB
 #vacuum_defer_cleanup_age = 0 # 延迟清理的xact数
 ```
 
-　　**备用服务器（Standby Servers）** 
+**备用服务器（Standby Servers）** 
 
 ```bash
 # 在主服务器上忽略这些设置.
@@ -335,7 +335,7 @@ min_wal_size = 80MB
 #wal_retrieve_retry_interval = 5s   # 在尝试失败后重新尝试检索WAL之前，需要等待的时间
 ```
 
-　　**订阅者（Subscribers）** 
+**订阅者（Subscribers）** 
 
 ```bash
 # 在发布服务器上这些设置将被忽略
@@ -343,11 +343,11 @@ min_wal_size = 80MB
 #max_sync_workers_per_subscription = 2  # 取自max_logical_replication_workers
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.6 查询调优（QUERY TUNING）</span>
 
-　　**计划方法配置（Planner Method Configuration）** 
+**计划方法配置（Planner Method Configuration）** 
 
 ```bash
 #enable_bitmapscan = on
@@ -368,7 +368,7 @@ min_wal_size = 80MB
 #enable_partition_pruning = on
 ```
 
-　　**计划成本常量（Planner Cost Constants）** 
+**计划成本常量（Planner Cost Constants）** 
 
 ```bash
 #seq_page_cost = 1.0            # 在任意比例上测量
@@ -386,7 +386,7 @@ min_wal_size = 80MB
 #effective_cache_size = 4GB
 ```
 
-　　**查询优化器（Genetic Query Optimizer）** 
+**查询优化器（Genetic Query Optimizer）** 
 
 ```bash
 #geqo = on
@@ -398,7 +398,7 @@ min_wal_size = 80MB
 #geqo_seed = 0.0        # range 0.0-1.0
 ```
 
-　　**其他计划选项（Other Planner Options）** 
+**其他计划选项（Other Planner Options）** 
 
 ```bash
 /* 备注：为了注释的属性简洁,这里的注释用了C/C++中的注释语法，若是postgresql.conf文件中，则应该用"#"号
@@ -418,11 +418,11 @@ min_wal_size = 80MB
 
 ```
 
-　　‍
+‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.7 报告和记录（REPORTING AND LOGGING）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.7 报告和记录（REPORTING AND LOGGING）</span>
 
-　　**记录位置（Where to Log）** 
+**记录位置（Where to Log）** 
 
 ```bash
 #log_destination = 'stderr'   # 1有效值是stderr、csvlog、syslog和eventlog的组合,具体取决于平台.
@@ -451,7 +451,7 @@ min_wal_size = 80MB
 #event_source = 'PostgreSQL'
 ```
 
-　　**何时记录（When to Log）** 
+**何时记录（When to Log）** 
 
 ```bash
 #log_min_messages = warning   # 按细节降序排列的值:
@@ -485,7 +485,7 @@ min_wal_size = 80MB
 #log_min_duration_statement = -1  # -1被禁用,0记录所有语句及其持续时间,>0只记录至少运行此毫秒数的语句
 ```
 
-　　**记录什么（What to Log）** 
+**记录什么（What to Log）** 
 
 ```bash
 #debug_print_parse = off
@@ -531,7 +531,7 @@ min_wal_size = 80MB
 log_timezone = 'PRC'
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.8 流程标题（PROCESS TITLE）</span>
 
@@ -540,11 +540,11 @@ log_timezone = 'PRC'
 #update_process_title = on
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.9 统计数据（STATISTICS）</span>
 
-　　**查询和索引统计信息收集器（Query and Index Statistics Collector）** 
+**查询和索引统计信息收集器（Query and Index Statistics Collector）** 
 
 ```bash
 #track_activities = on
@@ -555,7 +555,7 @@ log_timezone = 'PRC'
 #stats_temp_directory = 'pg_stat_tmp'
 ```
 
-　　**监控（Monitoring）** 
+**监控（Monitoring）** 
 
 ```bash
 #log_parser_stats = off
@@ -564,11 +564,11 @@ log_timezone = 'PRC'
 #log_statement_stats = off
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.10 自动清理（AUTOVACUUM）</span>
 
-　　从PostgreSQL 8.1开始,便提供了autovacuum守护进程,在后台执行日志的自动清理功能.
+从PostgreSQL 8.1开始,便提供了autovacuum守护进程,在后台执行日志的自动清理功能.
 
 ```bash
 #autovacuum = on      # 
@@ -592,11 +592,11 @@ log_timezone = 'PRC'
           # vacuum_cost_limit
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.11 客户端连接默认值（CLIENT CONNECTION DEFAULTS）</span>
 
-　　**声明行为（Statement Behavior）** 
+**声明行为（Statement Behavior）** 
 
 ```bash
 #client_min_messages = notice   # 按细节降序排列的值:
@@ -636,7 +636,7 @@ log_timezone = 'PRC'
 #gin_pending_list_limit = 4MB
 ```
 
-　　**语言环境和格式（Locale and Formatting）** 
+**语言环境和格式（Locale and Formatting）** 
 
 ```bash
 datestyle = 'iso, ymd'
@@ -664,7 +664,7 @@ lc_time = 'zh_CN.UTF-8'       # locale for time formatting
 default_text_search_config = 'pg_catalog.simple'
 ```
 
-　　**共享库预加载（Shared Library Preloading）** 
+**共享库预加载（Shared Library Preloading）** 
 
 ```bash
 #shared_preload_libraries = ''  # (change requires restart)
@@ -673,9 +673,9 @@ default_text_search_config = 'pg_catalog.simple'
 #jit_provider = 'llvmjit'   # JIT library to use
 ```
 
-　　‍
+‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.12 其他默认值（Other Defaults ）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.12 其他默认值（Other Defaults ）</span>
 
 ```bash
 #dynamic_library_path = '$libdir'
@@ -693,7 +693,7 @@ default_text_search_config = 'pg_catalog.simple'
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.14 版本和平台兼容性（VERSION AND PLATFORM COMPATIBILITY）</span>
 
-　　**以前的PostgreSQL版本（Previous PostgreSQL Versions）** 
+**以前的PostgreSQL版本（Previous PostgreSQL Versions）** 
 
 ```bash
 #array_nulls = on
@@ -707,13 +707,13 @@ default_text_search_config = 'pg_catalog.simple'
 #synchronize_seqscans = on
 ```
 
-　　**其他平台和客户（Other Platforms and Client）** 
+**其他平台和客户（Other Platforms and Client）** 
 
 ```bash
 #transform_null_equals = off
 ```
 
-　　‍
+‍
 
 ## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.15 错误处理（ERROR HANDLING）</span>
 
@@ -738,7 +738,7 @@ default_text_search_config = 'pg_catalog.simple'
 # Add settings for extensions here(在此处添加扩展设置)
 ```
 
-　　‍
+‍
 
 # 三、客户端认证配置文件 pg_hba.conf
 
@@ -760,7 +760,7 @@ host    replication     all          127.0.0.1/32         ident
 host    replication     all          ::1/128              ident
 ```
 
-　　从内容可以看出，`pg_hba.conf`​​ 是以行为单位来配置的，每一行包含了以下内容：
+从内容可以看出，`pg_hba.conf`​​ 是以行为单位来配置的，每一行包含了以下内容：
 
 * ​`TYPE`​​ 连接类型，表示允许用哪些方式连接数据库，它允许以下几个值：
 
@@ -796,7 +796,7 @@ host    replication     all          ::1/128              ident
   * ​`peer`​​ 从内核获得客户端的操作系统用户名并把它用作被允许的数据库用户名来认证，只能用于本地连接 (即 local)。
   * 其他特殊值可以在 [官方文档](https://www.postgresql.org/docs/9.6/static/auth-pg-hba-conf.html) 中查阅。 **简单来说，ident 和 peer 都要求客户端操作系统中存在对应的用户。注意: 上面列举的只有 md5 和 password 是需要密码的，其他方式都不需要输入密码认证。**
 
-　　‍
+‍
 
 ## **ident 和 peer 的区别**
 
@@ -805,7 +805,7 @@ host    replication     all          ::1/128              ident
 * peer使用unix socket会话；
 * ident使用tcp会话，psql访问时指定 -h 127.0.0.1
 
-　　安装oidentd服务
+安装oidentd服务
 
 ```bash
 # 安装且启动oidentd服务，关闭防火墙，防火墙可能会拦截数据库对113端口请求的数据包。
@@ -824,7 +824,7 @@ host    all             all          0.0.0.0/0         peer
 
 ## ident认证pg_hba.conf文件配置
 
-　　ident 认证方法通过从一个 ident 服务器获得客户端的操作系统用户名并且用它作为被允许的数据库用户名（和可选的用户名映射【参数map】）来工作。它只在 TCP/IP 连接上支持。
+ident 认证方法通过从一个 ident 服务器获得客户端的操作系统用户名并且用它作为被允许的数据库用户名（和可选的用户名映射【参数map】）来工作。它只在 TCP/IP 连接上支持。
 
 ```
 cat /data/pgsql/pgdata/pg_hba.conf
@@ -844,7 +844,7 @@ test                test             postgres   # 表示系统用户test 可以�
 test 		    test1	     postgres   # 表示系统用户test1可以以postgres数据库用户登录
 ```
 
-　　下列被支持的配置选项用于ident：
+下列被支持的配置选项用于ident：
 
 * map  
   允许系统和数据库用户名之间的映射。详见Section 20.2。“Identification Protocol（标识协议）”在 RFC 1413 中描述。实际上每个类 Unix 操作系统都带着一个默认监听 TCP 113 端口的 ident 服务器。ident 服务器的基本功能是回答类似这样的问题：“哪个用户从你的端口X发起了连接并且连到了我的端口Y？” 。因为当一个物理连接被建立后，PostgreSQL既知道X也知道Y， 所以它可以询问尝试连接的客户端主机上的 ident 服务器并且在理论上可以判断任意给定连接的操作系统用户。
@@ -855,4 +855,4 @@ test 		    test1	     postgres   # 表示系统用户test1可以以postgres数�
 
 ---
 
-　　‍
+‍

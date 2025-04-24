@@ -1,6 +1,6 @@
 # tasklist
 
-　　显示本地计算机或远程计算机上当前正在运行的进程列表。 Tasklist 替换 tlist 工具。
+显示本地计算机或远程计算机上当前正在运行的进程列表。 Tasklist 替换 tlist 工具。
 
 ## 语法
 
@@ -41,44 +41,44 @@ tasklist [/s <computer> [/u [<domain>\]<username> [/p <password>]]] [{/m <module
 
 ## 示例
 
-　　若要列出进程 ID 大于 1000 的所有任务，并将它们以 csv 格式显示，请键入：
+若要列出进程 ID 大于 1000 的所有任务，并将它们以 csv 格式显示，请键入：
 
-　　‍
+‍
 
 ```
 tasklist /v /fi "PID gt 1000" /fo csv
 ```
 
-　　若要列出当前正在运行的系统进程，请键入：
+若要列出当前正在运行的系统进程，请键入：
 
 ```
 tasklist /fi "USERNAME ne NT AUTHORITY\SYSTEM" /fi "STATUS eq running"
 ```
 
-　　若要列出当前正在运行的所有进程的详细信息，请键入：
+若要列出当前正在运行的所有进程的详细信息，请键入：
 
 ```
 tasklist /v /fi "STATUS eq running"
 ```
 
-　　若要列出远程计算机 srvmain（其 DLL 名称以 ntdll 开头）上进程的所有服务信息，请键入：
+若要列出远程计算机 srvmain（其 DLL 名称以 ntdll 开头）上进程的所有服务信息，请键入：
 
-　　‍
+‍
 
 ```
 tasklist /s srvmain /svc /fi "MODULES eq ntdll*"
 ```
 
-　　若要使用当前登录用户帐户的凭据列出远程计算机 srvmain 上的进程，请键入：
+若要使用当前登录用户帐户的凭据列出远程计算机 srvmain 上的进程，请键入：
 
 ```
 tasklist /s srvmain
 ```
 
-　　若要使用用户帐户 Hiropln 的凭据列出远程计算机 srvmain 上的进程，请键入：
+若要使用用户帐户 Hiropln 的凭据列出远程计算机 srvmain 上的进程，请键入：
 
 ```
 tasklist /s srvmain /u maindom\hiropln /p p@ssW23
 ```
 
-　　‍
+‍

@@ -2,20 +2,20 @@
 
 > MGR是一个MySQL插件，它以现有的MySQL复制架构为基础，利用二进制日志、基于行的日志记录和全局事务标识符（GTID）等功能。
 
-　　MGR全称MySQL Group Replication（Mysql组复制），是MySQL官方于2016年12月推出的一个全新的高可用与高扩展的解决方案。MGR提供了高可用、高扩展、高可靠的MySQL集群服务。在MGR出现之前，用户常见的MySQL高可用方式，无论怎么变化架构，本质就是Master-Slave架构。MySQL 5.7版本开始支持无损半同步复制（lossless semi-syncreplication），从而进一步提示数据复制的强一致性。
+MGR全称MySQL Group Replication（Mysql组复制），是MySQL官方于2016年12月推出的一个全新的高可用与高扩展的解决方案。MGR提供了高可用、高扩展、高可靠的MySQL集群服务。在MGR出现之前，用户常见的MySQL高可用方式，无论怎么变化架构，本质就是Master-Slave架构。MySQL 5.7版本开始支持无损半同步复制（lossless semi-syncreplication），从而进一步提示数据复制的强一致性。
 
-　　MySQL Group Replication（MGR）是MySQL官方在5.7.17版本引进的一个数据库高可用与高扩展的解决方案，以插件形式提供。MGR基于分布式paxos协议，实现组复制，保证数据一致性。内置故障检测和自动选主功能，只要不是集群中的大多数节点都宕机，就可以继续正常工作。提供单主模式与多主模式，多主模式支持多点写入。
+MySQL Group Replication（MGR）是MySQL官方在5.7.17版本引进的一个数据库高可用与高扩展的解决方案，以插件形式提供。MGR基于分布式paxos协议，实现组复制，保证数据一致性。内置故障检测和自动选主功能，只要不是集群中的大多数节点都宕机，就可以继续正常工作。提供单主模式与多主模式，多主模式支持多点写入。
 
-　　***MGR原理：*** 
+***MGR原理：*** 
 
-　　参考 全同步复制
+参考 [全同步复制](mysql%20同步复制.md#20231110105237-7kj772t)
 
-　　**优点：**   
+**优点：**   
 1.基本无延迟，延迟比异步的小很多  
 2.支持多写模式，但是目前还不是很成熟  
 3.数据的强一致性，可以保证数据事务不丢失
 
-　　**缺点(MGR要求):**   
+**缺点(MGR要求):**   
 1.必须适用innodb存储引擎  
 2.创建的业务表，必须要有主键  
 3.MGR必须适用IPv4网络，不支持IPv6  
@@ -25,19 +25,19 @@
 7.小写 table 格名称. 在所有组成员上将--lower-case-table-names设置为相同的值  
 8.隔离级别设置为RC
 
-　　**MGR限制：**
+**MGR限制：**
 
-　　1.MGR不支持SERIALIZABLE 隔离级别  
+1.MGR不支持SERIALIZABLE 隔离级别  
 2.MGR集群节点不能超过9  
 3.MGR不支持大事务，事务大小最好不超过143MB，当事务过大，无法在5 秒的时间内通过网络在组成员之间复制消息，则可能会怀疑成员失败了，然后将其驱逐出局。  
 4.并发 DDL 与 DML 操作. 当使用多主模式时，不支持针对同一对象但在不同服务器上执行的并发数据定义语句和数据操作语句。  
 5.对表的级联约束的外键支持不好，不建议适用。
 
-　　‍
+‍
 
 ## mysql MGR部署
 
-　　修改主机名
+修改主机名
 
 ```bash
 hostnamectl set-hostname test01
@@ -51,7 +51,7 @@ cat << EOF >> /etc/hosts
 EOF
 ```
 
-　　分别在3台主机部署单机mysql 二进制安装 [192.168.2.172、192.168.2.183、192.168.2.244\]
+分别在3台主机部署单机mysql ((20231110105237-g69az0l '二进制安装')) [192.168.2.172、192.168.2.183、192.168.2.244\]
 
 ### 1. 修改配置文件
 
@@ -141,9 +141,9 @@ transaction_write_set_extraction=XXHASH64
 
 ```
 
-　　‍
+‍
 
-　　第二个节点修改内容如下：
+第二个节点修改内容如下：
 
 ```bash
 server_id=2
@@ -151,7 +151,7 @@ relay-log=slave-relay-bin
 loose-group_replication_local_address= "node1:33061"
 ```
 
-　　第三个节点修改内容如下：
+第三个节点修改内容如下：
 
 ```bash
 server_id=3
@@ -159,13 +159,13 @@ relay-log=slave-relay-bin
 loose-group_replication_local_address= "node2:33061"
 ```
 
-　　**三个节点添加完配置信息之后，分别重启MySQL服务，以使配置生效**
+**三个节点添加完配置信息之后，分别重启MySQL服务，以使配置生效**
 
 ```bash
 /data/mysql/support-files/mysql.server restart
 ```
 
-　　‍
+‍
 
 ### 2. 创建复制账号（三个节点均需配置）
 
@@ -178,11 +178,11 @@ SET SQL_LOG_BIN=1;
 CHANGE MASTER TO MASTER_USER='mgruser', MASTER_PASSWORD='Ninestar@123' FOR CHANNEL 'group_replication_recovery';
 ```
 
-　　‍
+‍
 
 ### 3. 启动MGR单主模式
 
-　　**在主节点（当前主节点为：192.168.2.172）启动MGR，执行如下命令**
+**在主节点（当前主节点为：192.168.2.172）启动MGR，执行如下命令**
 
 ```sql
 SET GLOBAL group_replication_bootstrap_group=ON;
@@ -192,7 +192,7 @@ SET GLOBAL group_replication_bootstrap_group=OFF;
 SELECT * FROM performance_schema.replication_group_members;
 ```
 
-　　**从节点加入MGR，在从库（192.168.2.183，192.168.2.244）上执行如下命令**
+**从节点加入MGR，在从库（192.168.2.183，192.168.2.244）上执行如下命令**
 
 ```sql
 START GROUP_REPLICATION;
@@ -200,9 +200,9 @@ START GROUP_REPLICATION;
 SELECT * FROM performance_schema.replication_group_members;
 ```
 
-​![image](assets/image-20230725094624-6vpxeao.png)​
+![image](assets/image-20230725094624-6vpxeao.png)
 
-　　**报错1**
+**报错1**
 
 ```bash
 023-07-24T09:35:59.679537Z 0 [ERROR] [MY-011516] [Repl] Plugin group_replication reported: 'There is already a member with server_uuid 185c91bd-29fd-11ee-98d2-525400091009. The member will now exit the group.'
@@ -265,7 +265,7 @@ SELECT * FROM performance_schema.replication_group_members;
     ERROR 1290 (HY000): The MySQL server is running with the --super-read-only option so it cannot execute this statement
     ```
 
-　　‍
+‍
 
 2. 主、从服务器停掉，查看从服务器变化
 
@@ -289,13 +289,13 @@ SELECT * FROM performance_schema.replication_group_members;
     -- 5、主库节点master移除mgr组之后，会在从库节点test02、test03中按照配置选择对应的从库节点作为主库节点
     ```
 
-　　‍
+‍
 
 ### 5. 主节点切换
 
-　　顺便提一下，在MySQL 5.7版本中，只能通过重启以实现主节点的自动切换，不能手动切换。从这个角度来说，如果想要使用MGR，最好是选择MySQL 8.0版本，而不要使用5.7版本。
+顺便提一下，在MySQL 5.7版本中，只能通过重启以实现主节点的自动切换，不能手动切换。从这个角度来说，如果想要使用MGR，最好是选择MySQL 8.0版本，而不要使用5.7版本。
 
-　　在命令行模式下，可以调用 `group_replication_switch_to_single_primary_mode()`​ 和 `group_replication_switch_to_multi_primary_mode()`​ 来切换单主/多主模式。
+在命令行模式下，可以调用 `group_replication_switch_to_single_primary_mode()`​ 和 `group_replication_switch_to_multi_primary_mode()`​ 来切换单主/多主模式。
 
 ```sql
 mysql> SELECT * FROM performance_schema.replication_group_members;

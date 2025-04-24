@@ -1,14 +1,14 @@
 # insmod
 
-　　**insmod命令** 用于将给定的模块加载到内核中。Linux有许多功能是通过模块的方式，在需要时才载入kernel。如此可使kernel较为精简，进而提高效率，以及保有较大的弹性。这类可载入的模块，通常是设备驱动程序。
+**insmod命令** 用于将给定的模块加载到内核中。Linux有许多功能是通过模块的方式，在需要时才载入kernel。如此可使kernel较为精简，进而提高效率，以及保有较大的弹性。这类可载入的模块，通常是设备驱动程序。
 
-　　lsmod
+[lsmod](lsmod.md)
 
-　　rmmod
+((20240227111338-zrimqi8 'rmmod'))
 
-　　modprobe与insmod的区别
+[modprobe与insmod的区别](modprobe.md#20240227111147-yh7aph2)
 
-　　‍
+‍
 
 ### 语法
 
@@ -32,14 +32,14 @@ insmod(选项)(参数)
 
 ### 参数
 
-　　内核模块：指定要加载的内核模块文件。
+内核模块：指定要加载的内核模块文件。
 
 ### 实例
 
-　　加载RAID1阵列级别模块，如下所示：
+加载RAID1阵列级别模块，如下所示：
 
 ```shell
 [root@localhost boot]# insmod /lib/modules/2.6. 18-8.el5/kernel/drivers/md/raid1.ko [root@localhost boot]# lsmod | grep raid1 raid1 25153 0
 ```
 
-　　从以上显示结果可知，RAID1模块已加载成功。只是在使用insmod命令加载模块时，需要使用绝对路径方能加载，且加载时无法自动解决依赖关系。
+从以上显示结果可知，RAID1模块已加载成功。只是在使用insmod命令加载模块时，需要使用绝对路径方能加载，且加载时无法自动解决依赖关系。

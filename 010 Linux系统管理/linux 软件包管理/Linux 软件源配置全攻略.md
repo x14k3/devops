@@ -2,18 +2,18 @@
 
 ## 前言
 
-　　Linux 操作系统安装软件比较常用的一些命令 `yum`​、`dnf`​、`apt-get`​、`zypper`​ 以及 `pacman`​。这些命令分别对应不同的操作系统，大致可以分为 `RHEL`​，`DEB`​，`SUSE`​ 和 `ARCH`​ 四种。
+Linux 操作系统安装软件比较常用的一些命令 `yum`​、`dnf`​、`apt-get`​、`zypper`​ 以及 `pacman`​。这些命令分别对应不同的操作系统，大致可以分为 `RHEL`​，`DEB`​，`SUSE`​ 和 `ARCH`​ 四种。
 
-　　Linux 系统安装软件必须要配置软件源，可以分为网络和本地两种方式。
+Linux 系统安装软件必须要配置软件源，可以分为网络和本地两种方式。
 
 * 网络源：必须要连接外网，连接到软件源 REPO 进行软件的下载安装。
 * 本地源：使用安装的镜像文件（ISO）配置本地软件源，无需联网，比较适合内网使用，安全可控。
 
-　　‍
+‍
 
 ## 操作系统
 
-　　本文主要介绍以下 Linux 操作系统如何配置软件源（**点击链接可以下载 ISO 镜像**）：
+本文主要介绍以下 Linux 操作系统如何配置软件源（**点击链接可以下载 ISO 镜像**）：
 
 * [RedHat 6/7/8/9 全系](https://developers.redhat.com/products/rhel/download)
 * [OracleLinux 6/7/8/9 全系](https://yum.oracle.com/oracle-linux-isos.html)
@@ -39,37 +39,37 @@
 
 ## 配置本地软件源
 
-　　配置本地软件源的方式需要先挂载本地 ISO 安装镜像，所以先介绍下如何在操作系统快速挂载 ISO 安装镜像。
+配置本地软件源的方式需要先挂载本地 ISO 安装镜像，所以先介绍下如何在操作系统快速挂载 ISO 安装镜像。
 
 ## 挂载 ISO 镜像
 
-　　挂载分为两种方式：
+挂载分为两种方式：
 
-　　1、上传 iso 安装镜像到服务器主机指定目录下，以 `/iso`​ 为例：
+1、上传 iso 安装镜像到服务器主机指定目录下，以 `/iso`​ 为例：
 
 ```
 mount -o loop /iso/iso镜像包名称 /mnt
 ```
 
-　　2、直接虚拟机或者物理主机层面挂载 iso 安装镜像：
+2、直接虚拟机或者物理主机层面挂载 iso 安装镜像：
 
 ```
 mount /dev/sr0 /mnt
 ```
 
-　　挂载完之后，通过 `df -Th /mnt`​ 查看挂载情况：
+挂载完之后，通过 `df -Th /mnt`​ 查看挂载情况：
 
 ```
 df -Th /mnt
 ```
 
-　　以上两种方式都可以实现挂载，具体看情况使用即可。
+以上两种方式都可以实现挂载，具体看情况使用即可。
 
-　　下面命令均为一键配置本地软件源方式，默认 ISO 安装镜像挂载在 `/mnt`​ 目录下，直接复制使用即可。
+下面命令均为一键配置本地软件源方式，默认 ISO 安装镜像挂载在 `/mnt`​ 目录下，直接复制使用即可。
 
 ## RHEL 系
 
-　　RHEL 系有以下操作系统：
+RHEL 系有以下操作系统：
 
 * Centos
 * RedHat
@@ -80,7 +80,7 @@ df -Th /mnt
 * 阿里龙蜥 Anolis
 * 中标麒麟 NeoKylin V7
 
-　　RHEL 系的操作系统软件源配置目录均为：`/etc/yum.repos.d`​。
+RHEL 系的操作系统软件源配置目录均为：`/etc/yum.repos.d`​。
 
 ### 6~7 全系
 
@@ -102,7 +102,7 @@ cat /etc/yum.repos.d/local.repo
 
 ### 8~9 全系
 
-　　rhel 从 8 版本开始，安装命令从 `yum`​ 替换为 `dnf`​，但是 `yum`​ 命令还是可以使用。
+rhel 从 8 版本开始，安装命令从 `yum`​ 替换为 `dnf`​，但是 `yum`​ 命令还是可以使用。
 
 ```
 ## 备份系统初始配置文件
@@ -145,7 +145,7 @@ cat /etc/yum.repos.d/local.repo
 
 ## SUSE
 
-　　SUSE 系的操作系统软件源配置目录均为：`/etc/zypp/repos.d/`​
+SUSE 系的操作系统软件源配置目录均为：`/etc/zypp/repos.d/`​
 
 ### SUSE 12 全系
 
@@ -171,7 +171,7 @@ zypper ar -f /mnt/Module-Development-Tools sles-Tools
 
 ## 华为欧拉 openEuler
 
-　　openEuler 软件源配置全版本通用：
+openEuler 软件源配置全版本通用：
 
 ```
 ## 备份系统初始配置文件
@@ -194,19 +194,19 @@ cat /etc/yum.repos.d/local.repo
 
 ## A 系
 
-　　A 系采用的是 openAnolis 技术路线，使用命令方面：在线安装是 dnf 或 yum 命令，离线安装包是 rpm 包。
+A 系采用的是 openAnolis 技术路线，使用命令方面：在线安装是 dnf 或 yum 命令，离线安装包是 rpm 包。
 
-　　配置方式参考 RHEL 系。
+配置方式参考 RHEL 系。
 
 ## C 系
 
-　　C 系基于 CentOS 社区发行版进行二次商业化发行的 Linux 操作系统。使用命令方面：在线安装是 dnf 或 yum 命令，离线安装包是 rpm 包。
+C 系基于 CentOS 社区发行版进行二次商业化发行的 Linux 操作系统。使用命令方面：在线安装是 dnf 或 yum 命令，离线安装包是 rpm 包。
 
-　　配置方式参考 RHEL 系。
+配置方式参考 RHEL 系。
 
 ## D 系
 
-　　D 系采用的是 Debian 技术路线，使用命令方面：在线安装是 apt 命令，离线安装包是 deb 包。
+D 系采用的是 Debian 技术路线，使用命令方面：在线安装是 apt 命令，离线安装包是 deb 包。
 
 ```
 uos_codename=$(grep -oP '^VERSION_CODENAME="?(\K[^"]+|[^"]+$)' /etc/os-release)
@@ -223,7 +223,7 @@ cat /etc/apt/sources.list
 
 ## E 系
 
-　　E 系采用的是 openEuler 技术路线，使用命令方面：在线安装是 dnf 或 yum 命令，离线安装包是 rpm 包。
+E 系采用的是 openEuler 技术路线，使用命令方面：在线安装是 dnf 或 yum 命令，离线安装包是 rpm 包。
 
 ```
 ## 备份系统初始配置文件

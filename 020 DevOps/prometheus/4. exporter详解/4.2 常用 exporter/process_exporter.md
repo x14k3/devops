@@ -1,22 +1,22 @@
 # process_exporter
 
-　　‍
+‍
 
 ### 1. Process Exporter简介
 
-　　在Prometheus中，可以借助process-exporter用以检测所选进程的状态信息。
+在Prometheus中，可以借助process-exporter用以检测所选进程的状态信息。
 
-　　用法:
+用法:
 
 ```bash
 process-exporter [options] -config.path filename.yml
 ```
 
-　　若选择监控的进城并对其进行分组，可以使用命令行参数或者`yaml配置文件`​。推荐使用`-config.path`​指定配置文件路径。
+若选择监控的进城并对其进行分组，可以使用命令行参数或者`yaml配置文件`​。推荐使用`-config.path`​指定配置文件路径。
 
-　　详细.yaml配置文件格式及规则参考https://github.com/ncabatoff/process-exporter
+详细.yaml配置文件格式及规则参考https://github.com/ncabatoff/process-exporter
 
-　　​`vim /opt/process-exporter-0.7.5.linux-amd64/process-conf.yaml`​
+​`vim /opt/process-exporter-0.7.5.linux-amd64/process-conf.yaml`​
 
 ```yaml
 # 若监控主机上所有进程
@@ -37,7 +37,7 @@ process_names:
       - 'dmserver'
 ```
 
-　　可用的模板变量如下
+可用的模板变量如下
 
 ```bash
 {{.Comm}}           包含原始可执行文件的基本名称，即 /proc/<pid>/stat
@@ -53,7 +53,7 @@ process_names:
 
 ### 2. 安装Process Exporter
 
-　　[process-exporter GibHUB地址](https://github.com/ncabatoff/process-exporter)  
+[process-exporter GibHUB地址](https://github.com/ncabatoff/process-exporter)  
 [process-exporter 下载地址](https://github.com/ncabatoff/process-exporter/releases/download/v0.7.5/process-exporter-0.7.5.linux-amd64.tar.gz)
 
 ```bash
@@ -68,7 +68,7 @@ tar -zxvf process-exporter-0.7.5.linux-amd64.tar.gz -C /usr/local
 mv process-exporter-0.7.5.linux-amd64/ process_exporter
 ```
 
-　　注册到系统服务
+注册到系统服务
 
 ```bash
 cat << EOF >> /etc/systemd/system/process_exporter.service 
@@ -87,7 +87,7 @@ WantedBy=multi-user.target
 EOF
 ```
 
-　　加载并开机自启
+加载并开机自启
 
 ```bash
 systemctl daemon-reload 
@@ -95,12 +95,12 @@ systemctl enable process_exporter
 systemctl start process_exporter
 ```
 
-　　启动process exporter后查看metric信息
+启动process exporter后查看metric信息
 
-　　http://192.168.137.30:9256/metrics
+http://192.168.137.30:9256/metrics
 
-　　‍
+‍
 
 ## 3. grafana出图
 
-　　process-exporter对应的dashboard为：[https://grafana.com/grafana/dashboards/249](https://grafana.com/grafana/dashboards/249)
+process-exporter对应的dashboard为：[https://grafana.com/grafana/dashboards/249](https://grafana.com/grafana/dashboards/249)

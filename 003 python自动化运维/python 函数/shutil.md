@@ -1,6 +1,6 @@
 # shutil
 
-　　可以使用Python内置的shutil模块实现对文件/文件夹的压缩与解压操作。
+可以使用Python内置的shutil模块实现对文件/文件夹的压缩与解压操作。
 
 ## **压缩**
 
@@ -25,7 +25,7 @@ shutil.unpack_archive(filename=r'D:\tmp\web\root.zip', extract_dir=r'D:\tmp\web\
 # format：压缩文件格式
 ```
 
-　　压缩指定目录内的指定文件：
+压缩指定目录内的指定文件：
 
 ```
 import os
@@ -43,4 +43,4 @@ with ZipFile('to.zip', 'w') as myzip:
 
 ```
 
-　　‍
+‍

@@ -1,8 +1,8 @@
 # ngx_http_auth_basic_module
 
-　　​`ngx_http_auth_basic_module`​ 模块允许通过使用 **HTTP Basic Authentication** 协议验证用户名和密码来限制对资源的访问。
+​`ngx_http_auth_basic_module`​ 模块允许通过使用 **HTTP Basic Authentication** 协议验证用户名和密码来限制对资源的访问。
 
-　　也可以通过地址、子请求结果或 JWT 来限制访问。可使用 [satisfy](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_core_module.html#satisfy) 指令通过地址和密码同时限制访问。
+也可以通过地址、子请求结果或 JWT 来限制访问。可使用 [satisfy](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_core_module.html#satisfy) 指令通过地址和密码同时限制访问。
 
 ## 示例配置
 
@@ -23,7 +23,7 @@ location / {
 |**默认**|auth\_basic off;|
 |**上下文**|http、server、location、limit\_except|
 
-　　使用 **HTTP Basic Authentication** 协议，启用用户名和密码验证。指定的参数用作为一个 `realm`​。参数值可以包含变量（1.3.10、1.2.7）。特殊值 `off`​ 可以取消从先前配置级别继承的 `auth_basic`​ 指令的影响。
+使用 **HTTP Basic Authentication** 协议，启用用户名和密码验证。指定的参数用作为一个 `realm`​。参数值可以包含变量（1.3.10、1.2.7）。特殊值 `off`​ 可以取消从先前配置级别继承的 `auth_basic`​ 指令的影响。
 
 ### auth\_basic\_user\_file
 
@@ -33,7 +33,7 @@ location / {
 |**默认**|——|
 |**上下文**|http、server、location、limit\_except|
 
-　　指定一个用于保存用户名和密码的文件，格式如下：
+指定一个用于保存用户名和密码的文件，格式如下：
 
 ```
 # comment
@@ -42,9 +42,9 @@ name2:password2:comment
 name3:password3
 ```
 
-　　​`file`​ 的名称可以包含变量。
+​`file`​ 的名称可以包含变量。
 
-　　支持以下密码类型：
+支持以下密码类型：
 
 * 用 `crypt()`​ 函数加密；可以使用 Apache HTTP Server 分发的或 `openssl passwd`​ 命令中的 `htpasswd`​ 工具生成；
 * 使用基于 MD5 密码算法（apr1）的 Apache 变体进行散列计算；可以用与上述相同的工具生成；
@@ -52,4 +52,4 @@ name3:password3
 
 > 增加了对 SHA 模式的支持，仅用于帮助从其他 Web 服务器迁移。 它不应该用于新密码，因为它使用的未加盐的 SHA-1 散列容易受到[彩虹表](http://en.wikipedia.org/wiki/Rainbow_attack)的攻击。
 
-　　‍
+‍

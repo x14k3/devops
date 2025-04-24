@@ -1,6 +1,6 @@
 # jira
 
-* 📄 jira和confluence的docker部署
+* 📄 [jira和confluence的docker部署](jira/jira和confluence的docker部署.md)
 
 ## JIRA 介绍
 
@@ -15,7 +15,7 @@
 > 项目email地址功能：每个项目可以有不同的email（该项目的通知邮件从该地址发出）  
 > 无限制的工作流：可以创建多个工作流为不同的项目使用
 
-　　注意：在企业中使用Jira+Confluence较为常见，而且二者往往都是配套一起部署和使用；
+注意：在企业中使用Jira+Confluence较为常见，而且二者往往都是配套一起部署和使用；
 
 ## confluence 介绍
 

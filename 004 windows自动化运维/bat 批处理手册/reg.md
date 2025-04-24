@@ -1,12 +1,12 @@
 # reg
 
-　　对注册表项中的注册表子项信息和值执行操作。
+对注册表项中的注册表子项信息和值执行操作。
 
-　　某些操作使你能够查看或配置本地或远程计算机上的注册表项，而其他操作则允许你仅配置本地计算机。 使用 reg 配置远程计算机的注册表会限制在某些操作中可以使用的参数。 检查每个操作的语法和参数，以验证它们是否可以在远程计算机上使用。
+某些操作使你能够查看或配置本地或远程计算机上的注册表项，而其他操作则允许你仅配置本地计算机。 使用 reg 配置远程计算机的注册表会限制在某些操作中可以使用的参数。 检查每个操作的语法和参数，以验证它们是否可以在远程计算机上使用。
 
 > 除非别无选择，否则不要直接编辑注册表。 注册表编辑器会忽略标准的安全措施，从而使得这些设置可能降低性能、破坏系统，甚至要求用户重新安装  Windows。 可以使用控制面板或 Microsoft 管理控制台 (MMC) 中的程序安全地更改大多数注册表设置。  如果必须直接编辑注册表，请先进行备份。
 
-　　‍
+‍
 
 |参数|说明|
 | ------| ------------------------------------------------------------------------|
@@ -22,7 +22,7 @@
 |[reg save](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/reg-save)|将注册表的指定子项、项和值的副本保存在指定的文件中。|
 |[reg unload](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/reg-unload)|删除使用 reg load 操作加载的注册表部分。|
 
-　　‍
+‍
 
 ## reg add
 
@@ -59,33 +59,33 @@ reg add <keyname> [/v valuename | /ve] [/t datatype] [/s separator] [/d data] [/
 
 ### 示例
 
-　　要在远程计算机 ABC 上添加 HKLM\Software\MyCo 项，请键入：
+要在远程计算机 ABC 上添加 HKLM\Software\MyCo 项，请键入：
 
 ```
 reg add \\ABC\HKLM\Software\MyCo
 ```
 
-　　要将名为 DATA 的值、类型为 REG_BINARY 且数据为 fe340ead 的注册表项添加到 HKLM\Software\MyCo，请键入：
+要将名为 DATA 的值、类型为 REG_BINARY 且数据为 fe340ead 的注册表项添加到 HKLM\Software\MyCo，请键入：
 
 ```
 reg add HKLM\Software\MyCo /v Data /t REG_BINARY /d fe340ead
 ```
 
-　　要将值名称为 MRU、类型 REG_MULTI_SZ 以及数据为 fax\0mail\0 的多值注册表项添加到 HKLM\SOFTWARE\MyCo 中，请键入：
+要将值名称为 MRU、类型 REG_MULTI_SZ 以及数据为 fax\0mail\0 的多值注册表项添加到 HKLM\SOFTWARE\MyCo 中，请键入：
 
 ```
 reg add HKLM\Software\MyCo /v MRU /t REG_MULTI_SZ /d fax\0mail\0
 ```
 
-　　要将值为 Path、类型为 REG_EXPAND_SZ 且数据为 %systemroot% 的扩展注册表项添加到 HKLM\Software\MyCo ，其，请键入：
+要将值为 Path、类型为 REG_EXPAND_SZ 且数据为 %systemroot% 的扩展注册表项添加到 HKLM\Software\MyCo ，其，请键入：
 
 ```
 reg add HKLM\Software\MyCo /v Path /t REG_EXPAND_SZ /d ^%systemroot^%
 ```
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## reg compare
 
@@ -126,35 +126,35 @@ reg compare <keyname1> <keyname2> [{/v Valuename | /ve}] [{/oa | /od | /os | on}
 
 ### 示例
 
-　　若要比较密钥 MyApp 下的所有值与密钥 SaveMyApp 下的所有值，请键入：
+若要比较密钥 MyApp 下的所有值与密钥 SaveMyApp 下的所有值，请键入：
 
-　　‍
+‍
 
 ```
 reg compare HKLM\Software\MyCo\MyApp HKLM\Software\MyCo\SaveMyApp
 ```
 
-　　若要将密钥 MyCo 下的 Version 的值与密钥 MyCo1 下的 Version 值比较，请键入：
+若要将密钥 MyCo 下的 Version 的值与密钥 MyCo1 下的 Version 值比较，请键入：
 
-　　‍
+‍
 
 ```
 reg compare HKLM\Software\MyCo HKLM\Software\MyCo1 /v Version
 ```
 
-　　若要将名为 ZODIAC 的计算机上的 HKLM\Software\MyCo 下的所有子项和值与本地计算机上 HKLM\Software\MyCo 下的所有子项和值进行比较，请键入：
+若要将名为 ZODIAC 的计算机上的 HKLM\Software\MyCo 下的所有子项和值与本地计算机上 HKLM\Software\MyCo 下的所有子项和值进行比较，请键入：
 
 ```
 reg compare \\ZODIAC\HKLM\Software\MyCo \\. /s
 ```
 
-　　‍
+‍
 
 ## reg copy
 
-　　‍
+‍
 
-　　‍
+‍
 
 ## reg delete
 
@@ -183,19 +183,19 @@ reg delete <keyname> [{/v valuename | /ve | /va}] [/f]
 
 ### 示例
 
-　　若要删除注册表项 Timeout 及其所有子项和值，请键入：
+若要删除注册表项 Timeout 及其所有子项和值，请键入：
 
 ```
 reg delete HKLM\Software\MyCo\MyApp\Timeout
 ```
 
-　　若要删除名为 ZODIAC 的计算机上 HKLM\Software\MyCo 下的注册表值 MTU，请键入：
+若要删除名为 ZODIAC 的计算机上 HKLM\Software\MyCo 下的注册表值 MTU，请键入：
 
 ```
 reg delete \\ZODIAC\HKLM\Software\MyCo /v MTU
 ```
 
-　　‍
+‍
 
 ## reg export
 
@@ -222,13 +222,13 @@ reg export <keyname> <filename> [/y]
 
 ### 示例
 
-　　若要将键 MyApp 的所有子项和值的内容导出到文件 AppBkUp.reg，请键入：
+若要将键 MyApp 的所有子项和值的内容导出到文件 AppBkUp.reg，请键入：
 
 ```
 reg export HKLM\Software\MyCo\MyApp AppBkUp.reg
 ```
 
-　　‍
+‍
 
 ## reg import
 
@@ -255,13 +255,13 @@ reg import <filename>
 
 ### 示例
 
-　　若要从名为 AppBkUp.reg 的文件导入注册表条目，请键入：
+若要从名为 AppBkUp.reg 的文件导入注册表条目，请键入：
 
 ```
 reg import AppBkUp.reg
 ```
 
-　　‍
+‍
 
 ## reg load
 
@@ -287,13 +287,13 @@ reg load <keyname> <filename>
 
 ### 示例
 
-　　若要将名为 TempHive.hiv 的文件加载到项 HKLM\TempHive，请键入：
+若要将名为 TempHive.hiv 的文件加载到项 HKLM\TempHive，请键入：
 
 ```
 reg load HKLM\TempHive TempHive.hiv
 ```
 
-　　‍
+‍
 
 ## reg query
 
@@ -331,55 +331,55 @@ reg query <keyname> [{/v <valuename> | /ve}] [/s] [/se <separator>] [/f <data>] 
 
 ### 示例
 
-　　要显示 HKLM\Software\Microsoft\ResKit 中名称值 Version 的值，请键入：
+要显示 HKLM\Software\Microsoft\ResKit 中名称值 Version 的值，请键入：
 
 ```
 reg query HKLM\Software\Microsoft\ResKit /v Version
 ```
 
-　　要显示名为 ABC 的远程计算机上 HKLM\Software\Microsoft\Reskit\NT\Setup 项下的所有子项和值，请键入：
+要显示名为 ABC 的远程计算机上 HKLM\Software\Microsoft\Reskit\NT\Setup 项下的所有子项和值，请键入：
 
 ```
 reg query \\ABC\HKLM\Software\Microsoft\ResKit\Nt\Setup /s
 ```
 
-　　若要使用  **#**  作为分隔符显示 REG_MULTI_SZ 类型的所有子项和值，请键入：
+若要使用  **#**  作为分隔符显示 REG_MULTI_SZ 类型的所有子项和值，请键入：
 
 ```
 reg query HKLM\Software\Microsoft\ResKit\Nt\Setup /se #
 ```
 
-　　要显示数据类型 REG_SZ 的 HKLM 根目录下与 SYSTEM 精确匹配（区分大小写）的项、值和数据，请键入以下内容：
+要显示数据类型 REG_SZ 的 HKLM 根目录下与 SYSTEM 精确匹配（区分大小写）的项、值和数据，请键入以下内容：
 
 ```
 reg query HKLM /f SYSTEM /t REG_SZ /c /e
 ```
 
-　　要显示 HKCU 根密钥下与 0F 匹配且数据类型为 REG_BINARY 的项、值和数据，请键入：
+要显示 HKCU 根密钥下与 0F 匹配且数据类型为 REG_BINARY 的项、值和数据，请键入：
 
 ```
 reg query HKCU /f 0F /d /t REG_BINARY
 ```
 
-　　要显示 HKLM\Software\Microsoft 项以及所有子项下面与 asp.net 匹配的项、值和数据，请键入：
+要显示 HKLM\Software\Microsoft 项以及所有子项下面与 asp.net 匹配的项、值和数据，请键入：
 
 ```
 reg query HKLM\SOFTWARE\Microsoft /s /f asp.net
 ```
 
-　　要仅显示 HKLM\Software\Microsoft 项以及所有子项下面与 asp.net 匹配的项，请键入：
+要仅显示 HKLM\Software\Microsoft 项以及所有子项下面与 asp.net 匹配的项，请键入：
 
 ```
 reg query HKLM\SOFTWARE\Microsoft /s /f asp.net /k
 ```
 
-　　要显示 HKLM\SOFTWARE 下值名称为 null（默认值）的值和数据，请键入：
+要显示 HKLM\SOFTWARE 下值名称为 null（默认值）的值和数据，请键入：
 
 ```
 reg query HKLM\SOFTWARE /ve
 ```
 
-　　‍
+‍
 
 ## reg restore
 
@@ -406,13 +406,13 @@ reg restore <keyname> <filename>
 
 ### 示例
 
-　　若要将名为 NTRKBkUp.hiv 的文件还原到密钥 HKLM\Software\Microsoft\ResKit 并覆盖密钥的现有内容，请键入：
+若要将名为 NTRKBkUp.hiv 的文件还原到密钥 HKLM\Software\Microsoft\ResKit 并覆盖密钥的现有内容，请键入：
 
 ```
 reg restore HKLM\Software\Microsoft\ResKit NTRKBkUp.hiv
 ```
 
-　　‍
+‍
 
 ## reg save
 
@@ -440,7 +440,7 @@ reg save <keyname> <filename> [/y]
 
 ### 示例
 
-　　若要将配置单元 MyApp 以名为 AppBkUp.hiv 的文件保存到当前文件夹中，请键入：
+若要将配置单元 MyApp 以名为 AppBkUp.hiv 的文件保存到当前文件夹中，请键入：
 
 ```
 reg save HKLM\Software\MyCo\MyApp AppBkUp.hiv
@@ -469,12 +469,12 @@ reg unload <keyname>
 
 ### 示例
 
-　　要卸载文件 HKLM 中的配置单元 TempHive，请键入：
+要卸载文件 HKLM 中的配置单元 TempHive，请键入：
 
 ```
 reg unload HKLM\TempHive
 ```
 
-　　 注意
+ 注意
 
-　　除非别无选择，否则不要直接编辑注册表。 注册表编辑器会忽略标准的安全措施，从而使得这些设置可能降低性能、破坏系统，甚至要求用户重新安装  Windows。 可以使用控制面板或 Microsoft 管理控制台 (MMC) 中的程序安全地更改大多数注册表设置。  如果必须直接编辑注册表，请先进行备份。
+除非别无选择，否则不要直接编辑注册表。 注册表编辑器会忽略标准的安全措施，从而使得这些设置可能降低性能、破坏系统，甚至要求用户重新安装  Windows。 可以使用控制面板或 Microsoft 管理控制台 (MMC) 中的程序安全地更改大多数注册表设置。  如果必须直接编辑注册表，请先进行备份。

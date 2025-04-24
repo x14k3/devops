@@ -194,7 +194,7 @@ grant create session sysbackup to root;
 grant connect,resource,dba to sccweb;
 ```
 
-　　‍
+‍
 
 ### PDB/CDB相关
 
@@ -215,6 +215,6 @@ alter pluggable database pdboaec open;
 
 ## delete一个表和truncate一个表的差别
 
-　　1、truncate是一个DDL语句，而delete是一个DML语句。  
+1、truncate是一个DDL语句，而delete是一个DML语句。  
 2、truncate执行后立即提交数据被清空，而delete会把数据提交到回滚段中如果没有执行commit提交就会恢复数据。  
 3、truncate执行后立即释放之前表占用的存储空间，而delete是不释放的。

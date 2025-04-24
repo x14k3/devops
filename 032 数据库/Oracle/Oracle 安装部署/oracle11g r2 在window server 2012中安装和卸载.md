@@ -1,10 +1,10 @@
 # oracle11g r2 在window server 2012中安装和卸载
 
-　　无法安装.net framework 3.5
+无法安装.net framework 3.5
 
-* 离线安装.NET Framework 3.5
+* ((20230904114337-x5mdkqf '离线安装.NET Framework 3.5'))
 
-　　Oracle11完全卸载bai方法
+Oracle11完全卸载bai方法
 
 1. 在oracle11G以前du卸载oracle会存在卸载不干净，导致再次安装失败的zhi情况，在运行services.msc打开服dao务，停止Oracle的所有服务。
 

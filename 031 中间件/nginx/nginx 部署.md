@@ -1,8 +1,8 @@
 # nginx 部署
 
-　　nginx源码包下载地址：[https://nginx.org/en/download.html](https://nginx.org/en/download.html)
+nginx源码包下载地址：[https://nginx.org/en/download.html](https://nginx.org/en/download.html)
 
-　　相关依赖下载地址：  
+相关依赖下载地址：  
 ngx-dav-ext-module：[https://github.com/arut/nginx-dav-ext-module](https://github.com/arut/nginx-dav-ext-module)  
 openssl 依赖：[https://www.openssl.org/source/openssl-1.1.1q.tar.gz](https://www.openssl.org/source/openssl-1.1.1q.tar.gz)  
 zlib 依赖：[http://www.zlib.net/](http://www.zlib.net/)  
@@ -67,11 +67,11 @@ systemctl start nginx.service
 systemctl enable nginx.service
 ```
 
-　　‍
+‍
 
 ## 注意
 
-　　众所周知，80端口为系统保留端口，如果通过其他非root用户启动，会报错如下：
+众所周知，80端口为系统保留端口，如果通过其他非root用户启动，会报错如下：
 
 ```xml
 8月 18 11:08:52 OptiPlex-3000 nginx[116935]: nginx: [emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)
@@ -80,7 +80,7 @@ systemctl enable nginx.service
 8月 18 11:08:52 OptiPlex-3000 systemd[1]: Failed to start nginx.
 ```
 
-　　<span data-type="text" style="background-color: var(--b3-font-background8);">因为普通用户只能用1024以上的端口，1024以内的端口只能由root用户使用。</span>
+<span data-type="text" style="background-color: var(--b3-font-background8);">因为普通用户只能用1024以上的端口，1024以内的端口只能由root用户使用。</span>
 
 * 方法一：所有用户都可以运行（因为是755权限，文件所有者：root，组所有者：root
 
@@ -101,4 +101,4 @@ systemctl enable nginx.service
 
 * 方法三：修改nginx端口为1024以上
 
-　　‍
+‍

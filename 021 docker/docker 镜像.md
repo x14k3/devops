@@ -28,9 +28,9 @@ docker commit postgres postgres:1.0
 
 ## 2. dockerfile
 
-　　dockerfile 是一个用来构建镜像的文本文件，文本内容包含了一条条构建镜像所需的指令和说明。
+dockerfile 是一个用来构建镜像的文本文件，文本内容包含了一条条构建镜像所需的指令和说明。
 
-　　dockerfile 分为四部分：**基础镜像信息、维护者信息、镜像操作指令、容器启动执行指令**。一开始必须要指明所基于的镜像名称，接下来一般会说明维护者信息；后面则是镜像操作指令，例如 RUN 指令。每执行一条RUN 指令，镜像添加新的一层，并提交；最后是 CMD 指令，来指明运行容器时的操作命令。
+dockerfile 分为四部分：**基础镜像信息、维护者信息、镜像操作指令、容器启动执行指令**。一开始必须要指明所基于的镜像名称，接下来一般会说明维护者信息；后面则是镜像操作指令，例如 RUN 指令。每执行一条RUN 指令，镜像添加新的一层，并提交；最后是 CMD 指令，来指明运行容器时的操作命令。
 
 ### 2.1 dockerfile文件详解
 
@@ -56,7 +56,7 @@ ENTRYPOINT   # 指定运行容器启动过程执行命令，覆盖CMD参数
 
 ### 2.2 docker build
 
-　　`docker build`命令用于从Dockerfile构建映像。
+`docker build`命令用于从Dockerfile构建映像。
 
 ```bash
 # 在Dockerfile 文件所在目录执行：
@@ -72,7 +72,7 @@ docker build -t 192.168.10.31/jinzay/jdk ./
 
 ## docker run
 
-　　`docker run -d --name nginx -p 本地端口:容器端口 -v 本地目录:容器目录 --restart=always nginxImageName /bin/bash`
+`docker run -d --name nginx -p 本地端口:容器端口 -v 本地目录:容器目录 --restart=always nginxImageName /bin/bash`
 
 ```bash
 #docker run [OPTIONS] (imageName|imageId)
@@ -104,9 +104,9 @@ always       #无论退出状态是如何，都重启容器；
 docker run -dit imageID /bin/bash
 ```
 
-　　**容器启动失败**
+**容器启动失败**
 
-　　执行失败是因为docker容器默认会把容器内部第一个进程，也就是pid=1的程序作为docker容器是否正在运行的依据，如果docker容器里pid=1的进程结束了，那么docker容器便会直接退出。
+执行失败是因为docker容器默认会把容器内部第一个进程，也就是pid=1的程序作为docker容器是否正在运行的依据，如果docker容器里pid=1的进程结束了，那么docker容器便会直接退出。
 docker run的时候把command为容器内部命令，如果使用nginx，那么nginx程序将后台运行，这个时候nginx并不是pid为1的程序，而是执行bash，这个bash执行了nginx指令后就结束了，所以容器也就退出，端口没有进行映射。
 所以就需要加-g 'daemon off;'的启动参数。daemon的作用是否让nginx运行后台；默认为on，调试时可以设置为off，使得nginx运行在前台，所有信息直接输出控制台。
 
@@ -114,13 +114,13 @@ docker run的时候把command为容器内部命令，如果使用nginx，那么n
 
 ## 1. alpine-glibc 镜像
 
-　　`Alpine` 操作系统是一个面向安全的轻型 `Linux` 发行版。它不同于通常 `Linux` 发行版，`Alpine` 采用了 `musl libc` 和 `busybox` 以减小系统的体积和运行时资源消耗，但功能上比 `busybox` 又完善的多，因此得到开源社区越来越多的青睐。在保持瘦身的同时，`Alpine` 还提供了自己的包管理工具 `apk`
+`Alpine` 操作系统是一个面向安全的轻型 `Linux` 发行版。它不同于通常 `Linux` 发行版，`Alpine` 采用了 `musl libc` 和 `busybox` 以减小系统的体积和运行时资源消耗，但功能上比 `busybox` 又完善的多，因此得到开源社区越来越多的青睐。在保持瘦身的同时，`Alpine` 还提供了自己的包管理工具 `apk`
 
-　　前面我们提到了Alpine使用的不是正统的glibc，对于一些强依赖glibc的系统建议不要使用Alpine，比如使用了Oracle JDK的系统，建议在Alpine换成OpenJDK。强行安装只会违背Alpine的设计初。所以对于java程序来说使用CentOS等操作系统会更好一下。
+前面我们提到了Alpine使用的不是正统的glibc，对于一些强依赖glibc的系统建议不要使用Alpine，比如使用了Oracle JDK的系统，建议在Alpine换成OpenJDK。强行安装只会违背Alpine的设计初。所以对于java程序来说使用CentOS等操作系统会更好一下。
 
-　　那么强行安装Oracle JDK会怎样呢，下面我们来讨论一下
+那么强行安装Oracle JDK会怎样呢，下面我们来讨论一下
 
-　　https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-2.35-r0.apk
+https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-2.35-r0.apk
 https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-bin-2.35-r0.apk
 https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-i18n-2.35-r0.apk
 
@@ -205,7 +205,7 @@ docker logs -f mysql
 
 ## 4. activemq镜像
 
-　　alpine作为基础镜像，部署activemq需要glibc依赖
+alpine作为基础镜像，部署activemq需要glibc依赖
 
 ```bash
 FROM 192.168.10.31/jinzay/alpine-glibc
@@ -263,4 +263,4 @@ docker run  -p 9000:9000 --name minio \
   minio/minio server /data  --console-address ":9000" --address ":9090"
 ```
 
-　　‍
+‍

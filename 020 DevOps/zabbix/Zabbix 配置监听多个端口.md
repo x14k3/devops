@@ -2,9 +2,9 @@
 
 ## zabbix_agent端操作
 
-　　1.编写脚本
+1.编写脚本
 
-　　`vim /data/zabbix/script/ports.py `
+`vim /data/zabbix/script/ports.py `
 
 ```python
 #!/usr/bin/python
@@ -41,45 +41,45 @@ jsonStr = json.dumps(port_dict, sort_keys=True, indent=4)
 print jsonStr
 ```
 
-　　`chmod 744 /data/zabbix/script/ports.py`
+`chmod 744 /data/zabbix/script/ports.py`
 
-　　`chown zabbix:zabbix /data/zabbix/script/ports.py`
+`chown zabbix:zabbix /data/zabbix/script/ports.py`
 
-　　2.修改agent客户端配置文件
+2.修改agent客户端配置文件
 
 ```bash
 UnsafeUserParameters=1
 UserParameter=net.tcp.jinzay.ports,/data/zabbix/script/ports.py
 ```
 
-　　3.重启客户端服务
+3.重启客户端服务
 
-　　4.在服务端测试
+4.在服务端测试
 
-　　`zabbix_get -s 192.168.130.138 -p 10050 -k net.tcp.jinzay.ports `
+`zabbix_get -s 192.168.130.138 -p 10050 -k net.tcp.jinzay.ports `
 
 ## zabbix_server端操作
 
-　　1.添加模板
+1.添加模板
 
-​![](assets/image-20221127214637829-20230610173809-b99zfxu.png)​
+![](assets/image-20221127214637829-20230610173809-b99zfxu.png)​
 
-　　2.添加自动发现规则
+2.添加自动发现规则
 
-​![](assets/image-20221127214652289-20230610173809-6ck8qj0.png)​
+![](assets/image-20221127214652289-20230610173809-6ck8qj0.png)​
 
-　　3.添加监控项原型
+3.添加监控项原型
 
-​![](assets/image-20221127214658148-20230610173809-f02jgmd.png)​
+![](assets/image-20221127214658148-20230610173809-f02jgmd.png)​
 
-　　4.添加触发器原型
+4.添加触发器原型
 
-​![](assets/image-20221127214703857-20230610173809-mtrsf2l.png)​
+![](assets/image-20221127214703857-20230610173809-mtrsf2l.png)​
 
-　　5.将主机关联模板
+5.将主机关联模板
 
-​![](assets/image-20221127214709762-20230610173809-acyuuqd.png)​
+![](assets/image-20221127214709762-20230610173809-acyuuqd.png)​
 
-　　5.点击主机的最新数据
+5.点击主机的最新数据
 
-​![](assets/image-20221127214715986-20230610173809-wpksysm.png)​
+![](assets/image-20221127214715986-20230610173809-wpksysm.png)​

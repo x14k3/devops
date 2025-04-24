@@ -1,8 +1,8 @@
 # hdparm
 
-　　Linux下的hdparm（英文全称：hard disk parameters）命令，主要用来查看硬盘的相关信息或对硬盘进行测速、优化、修改硬盘相关参数设定。它提供了一个命令行的接口用于读取和设置IDE或SCSI硬盘参数。
+Linux下的hdparm（英文全称：hard disk parameters）命令，主要用来查看硬盘的相关信息或对硬盘进行测速、优化、修改硬盘相关参数设定。它提供了一个命令行的接口用于读取和设置IDE或SCSI硬盘参数。
 
-　　若没有安装hdparm ，可以通过`sudo yum install hdparm `​来安装。
+若没有安装hdparm ，可以通过`sudo yum install hdparm `​来安装。
 
 ## 1. 选项说明
 

@@ -2,9 +2,9 @@
 
 ## 一、samba介绍
 
-　　在早期的网络世界当中，不同主机的文件传输大多使用FTP来进行。不过FTP却有个小小的问题， 那就是你无法直接修改主机上面的文件内容！也就是说，你想要更改Linux主机上面的某个文件时，你必须要将该文件下载后才能修改。在日常办公环境中，操作系统除了windows以外，还有linux或者UNIX。windows和linux或UNIX之间共享文件是无法直接完成的，为了解析不同系统之间的文件和打印机等资源的共享，我们今天来介绍一下samba服务。他可以解决不同系统平台之间的共享问题。
+在早期的网络世界当中，不同主机的文件传输大多使用FTP来进行。不过FTP却有个小小的问题， 那就是你无法直接修改主机上面的文件内容！也就是说，你想要更改Linux主机上面的某个文件时，你必须要将该文件下载后才能修改。在日常办公环境中，操作系统除了windows以外，还有linux或者UNIX。windows和linux或UNIX之间共享文件是无法直接完成的，为了解析不同系统之间的文件和打印机等资源的共享，我们今天来介绍一下samba服务。他可以解决不同系统平台之间的共享问题。
 
-　　Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成，也是一个C/S软件。
+Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成，也是一个C/S软件。
 
 ```
  SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机/服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他
@@ -12,33 +12,33 @@
 
 ### 应用场景
 
-　　**文件与打印机共享：**  samba的主要功能，samba进程实现资源共享，将文件和打印机甚至是设备（如：CDROM）发布到网络中，以供用户访问
+**文件与打印机共享：**  samba的主要功能，samba进程实现资源共享，将文件和打印机甚至是设备（如：CDROM）发布到网络中，以供用户访问
 
-　　**身份验证和权限验证：**  对用户身份进行验证及权限设置，通过加密的方式保护共享文件和打印机
+**身份验证和权限验证：**  对用户身份进行验证及权限设置，通过加密的方式保护共享文件和打印机
 
-　　**名称解析：**  通过nmbd服务实现名称解析，将NetBIOS名称解析为IP地址
+**名称解析：**  通过nmbd服务实现名称解析，将NetBIOS名称解析为IP地址
 
-　　**浏览服务：**  在局域中，samba可以成为本地主浏览器，保存可用
+**浏览服务：**  在局域中，samba可以成为本地主浏览器，保存可用
 
-　　资源列表，当用户访问时，会提供浏览列表
+资源列表，当用户访问时，会提供浏览列表
 
 ### SAMBA与NetBIOS
 
-　　samba是构建在NetBIOS这个协议之上的，而NetBIOS最早是从IBM诞生的，目的是让局域网内的计算机能够进行网络连接，由于不是针对于大型网络，所以NetBIOS是无法跨路由的。而windows操作系统也支持这个协议，所以在Linux主机上使用SAMBA部署的共享服务是可以使用windows主机访问的。那么SAMBA是不是就不能跨路由提供服务了呢？并不是，我们可以通过一个叫NetBIOS over TCP/IP的技术实现跨路由的SAMBA服务，但是目前SAMBA还是在局域网用的较多
+samba是构建在NetBIOS这个协议之上的，而NetBIOS最早是从IBM诞生的，目的是让局域网内的计算机能够进行网络连接，由于不是针对于大型网络，所以NetBIOS是无法跨路由的。而windows操作系统也支持这个协议，所以在Linux主机上使用SAMBA部署的共享服务是可以使用windows主机访问的。那么SAMBA是不是就不能跨路由提供服务了呢？并不是，我们可以通过一个叫NetBIOS over TCP/IP的技术实现跨路由的SAMBA服务，但是目前SAMBA还是在局域网用的较多
 
 ### SAMBA的相关守护进程
 
-　　**nmbd**：使用UDP的137、138来提供名称解析服务（NetBIOS）
+**nmbd**：使用UDP的137、138来提供名称解析服务（NetBIOS）
 
-　　**smbd**：管理共享和数据传输，使用的端为TCP的139、445
+**smbd**：管理共享和数据传输，使用的端为TCP的139、445
 
 ### 相关软件包
 
-　　samba 主程序包，服务端需要
+samba 主程序包，服务端需要
 
-　　samba-client 客户端工具包
+samba-client 客户端工具包
 
-　　samba-common 通用工具和库文件，客户端服务器端都需要安装
+samba-common 通用工具和库文件，客户端服务器端都需要安装
 
 ### 相关文件
 
@@ -49,13 +49,13 @@
 
 ## 二、samba安装部署
 
-　　a、安装软件包
+a、安装软件包
 
 ```
 [root@node1 ~]# dnf install samba samba-client  -y
 ```
 
-　　b、设置服务开机启动
+b、设置服务开机启动
 
 ```
 [root@node1 ~]# systemctl enable nmb.service smb.service 
@@ -63,7 +63,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/nmb.service → /usr
 Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr/lib/systemd/system/smb.service.
 ```
 
-　　c、开启服务
+c、开启服务
 
 ```
 [root@node1 ~]# systemctl start nmb smb
@@ -71,9 +71,9 @@ Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr
 
 ## 三、samba配置文件详解
 
-　　主配文件路径: /etc/samba/smb.conf
+主配文件路径: /etc/samba/smb.conf
 
-　　模板文件：/etc/samba/smb.conf.example
+模板文件：/etc/samba/smb.conf.example
 
 ```
 [root@baism ~]# cat smb.conf.example 
@@ -505,37 +505,37 @@ wins服务，如果网络中配置了wins服务器可以在此设置wins相关�
 
 ## 四、samba文件共享案例
 
-　　拓扑图
+拓扑图
 
 ![image20200306155842923.png](assets/image20200306155842923-20230610173810-ob2yc8e.png)
 
-　　环境：两台安装CentOS8的主机，关闭selinux，关闭防火墙
+环境：两台安装CentOS8的主机，关闭selinux，关闭防火墙
 
-　　**案例需求:**
+**案例需求:**
 
-　　1)、新建文件夹/common
+1)、新建文件夹/common
 
-　　2)、在server上配置SMB服务
+2)、在server上配置SMB服务
 
-　　3)、您的 SMB 服务器必须是 workgroup 工作组的一个成员
+3)、您的 SMB 服务器必须是 workgroup 工作组的一个成员
 
-　　4)、共享 /common 目录 共享名必须为 common
+4)、共享 /common 目录 共享名必须为 common
 
-　　5)、只有 192.168.11.0网段内的客户端可以访问 common 共享
+5)、只有 192.168.11.0网段内的客户端可以访问 common 共享
 
-　　6）、common 必须是可以浏览的
+6）、common 必须是可以浏览的
 
-　　7）、用户hello 必须能够读取共享中的内容，如果需要的话，验证的密码是 hello
+7）、用户hello 必须能够读取共享中的内容，如果需要的话，验证的密码是 hello
 
-　　8）、用户 test 必须能够拥有写权限，如果需要的话，验证的密码是 test
+8）、用户 test 必须能够拥有写权限，如果需要的话，验证的密码是 test
 
-　　a、创建共享目录
+a、创建共享目录
 
 ```
 [root@node1 ~]# mkdir /common
 ```
 
-　　b、设置共享目录权限，因为默认权限是755除了管理员外，其他人只能读不能写，本实验中要求test能写，所以其他人加写权限。在samba中共享目录的权限除了看samba服务的设置之外，还要看系统的权限设置，系统针对于权限不一致的处理方式是取交集。所以各位在建立共享时一定要注意权限方面的问题
+b、设置共享目录权限，因为默认权限是755除了管理员外，其他人只能读不能写，本实验中要求test能写，所以其他人加写权限。在samba中共享目录的权限除了看samba服务的设置之外，还要看系统的权限设置，系统针对于权限不一致的处理方式是取交集。所以各位在建立共享时一定要注意权限方面的问题
 
 ```
 [root@node1 ~]# chmod 757 /common
@@ -583,13 +583,13 @@ wins服务，如果网络中配置了wins服务器可以在此设置wins相关�
     public = no 
 ```
 
-　　c、重启服务生效
+c、重启服务生效
 
 ```
 [root@node1 ~] systemctl restart smb nmb
 ```
 
-　　d、创建samba用户
+d、创建samba用户
 使用useradd命令创建hello和test用户并设置密码
 
 ```
@@ -601,7 +601,7 @@ New SMB password:
 Retype new SMB password:
 ```
 
-　　**共享指令拓展**
+**共享指令拓展**
 
 ```
 valid users 指定能够进入此资源的特定用户和组
@@ -625,9 +625,9 @@ delete readonly 指明能否删除共享资源里面已经被定义为只读的�
 
 ## 五、共享案例-客户端访问共享
 
-　　创建好了共享了，如果用户希望访问samba共享，windows用户通过网上邻居或者在运行中输出[\IP\共享名]的方式访问samba共享，也可以通过网络映射的方式将共享挂载的本地。linux或者UNIX用户则可以使用samba提供的客户端smbclient或者通过CIFS协议将共享挂载到本地。
+创建好了共享了，如果用户希望访问samba共享，windows用户通过网上邻居或者在运行中输出[\IP\共享名]的方式访问samba共享，也可以通过网络映射的方式将共享挂载的本地。linux或者UNIX用户则可以使用samba提供的客户端smbclient或者通过CIFS协议将共享挂载到本地。
 
-　　**smbclient 客户端命令**
+**smbclient 客户端命令**
 
 ```
 smbclient - 类似FTP操作方式的访问SMB/CIFS服务器资源的客户端
@@ -638,10 +638,10 @@ smbclient - 类似FTP操作方式的访问SMB/CIFS服务器资源的客户端
 -N     如果指定了这个选项，就会省略通常的口令提示。当访问无需口令的服务资源时它很有用。
 ```
 
-　　**任务需求**
+**任务需求**
 linux下访问samba共享
 
-　　a、客户端信息
+a、客户端信息
 
 ```
 [root@slave ~]# ifconfig ens33
@@ -655,7 +655,7 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-　　b、使用smbclient访问共享，验证第四点教学案例设置
+b、使用smbclient访问共享，验证第四点教学案例设置
 
 ```
 测试用户 hello
@@ -683,7 +683,7 @@ smb: \> exit
 samba命令类似于ftp文本界面命令，参考之前的vsftp使用。
 ```
 
-　　c、linux挂载共享
+c、linux挂载共享
 
 ```
 [root@manage01 ~]# mkdir /opt/samba_share
@@ -697,46 +697,46 @@ samba命令类似于ftp文本界面命令，参考之前的vsftp使用。
 initial-setup-ks.cfg  passwd
 ```
 
-　　d、windows访问共享
+d、windows访问共享
 
-　　打开开始菜单如下输入
+打开开始菜单如下输入
 
 ![image20200306180124957.png](assets/image20200306180124957-20230610173810-pk3u3wn.png)
 
-　　回车以后出现下图，输入账号密码
+回车以后出现下图，输入账号密码
 
 ![image20200306180151262.png](assets/image20200306180151262-20230610173810-ztw9ru4.png)
 
-　　点击确定按钮
+点击确定按钮
 
 ![image20200306180244476.png](assets/image20200306180244476-20230610173810-6hjd41f.png)
 
 ## 六、用户账号映射与访问控制
 
-　　**账号映射**
+**账号映射**
 
-　　samba的用户帐号信息是保存在smbpasswd文件中，而 且可以访问samba服务器的帐号也必须对应一个同名的系 统帐号。基于这一点，所以，对于一些hacker来说，只要 知道samba服务器samba帐号，就等于是知道了Linux系 统帐号，只要crack其samba帐号密码加以利用就可以攻 击samba服务器。所以我们要使用用户帐号映射这个功能 来解决这个问题
+samba的用户帐号信息是保存在smbpasswd文件中，而 且可以访问samba服务器的帐号也必须对应一个同名的系 统帐号。基于这一点，所以，对于一些hacker来说，只要 知道samba服务器samba帐号，就等于是知道了Linux系 统帐号，只要crack其samba帐号密码加以利用就可以攻 击samba服务器。所以我们要使用用户帐号映射这个功能 来解决这个问题
 
 - 用户帐号映射这个功能需要建立一个帐号映射关系表，里 面记录了samba帐号和虚拟帐号的对应关系，客户端访问 samba服务器时就使用虚拟来登录。
 - 编辑主配置文件/etc/samba/smb.conf在global下添加一行字段username map = /etc/samba/smbusers 开启用户帐号映射功能。
 
 ![image20200306183028366.png](assets/image20200306183028366-20230610173810-vrdbggb.png)
 
-　　编辑/etc/samba/smbusers
+编辑/etc/samba/smbusers
 
-　　smbusers文件保存帐号映射关系，其有固 定格式:
+smbusers文件保存帐号映射关系，其有固 定格式:
 
-　　samba帐号 = 虚拟帐号(映射帐号)
+samba帐号 = 虚拟帐号(映射帐号)
 
 ![image20200306183052382.png](assets/image20200306183052382-20230610173810-lp1yl11.png)
 
-　　重新启动服务
+重新启动服务
 
-　　**访问控制**
+**访问控制**
 
-　　对于samba服务器的安全性，我们已经说过可以使用valid users字段去实现用户访问控制，但是如果企业庞大，存在大量用户的话，这种方法操作起来就显得比较麻烦比如samba服务器共享出一个目录来访问，但是要禁止某个IP子网或某个域的客户端访问此资源，这样情况使用valid users字段就无法实现客户端访问控制。使用hosts allow和hosts deny两个字段来实现该功能。而用好这两个字段关键在于熟悉和清楚它们的使用方法和作用范围
+对于samba服务器的安全性，我们已经说过可以使用valid users字段去实现用户访问控制，但是如果企业庞大，存在大量用户的话，这种方法操作起来就显得比较麻烦比如samba服务器共享出一个目录来访问，但是要禁止某个IP子网或某个域的客户端访问此资源，这样情况使用valid users字段就无法实现客户端访问控制。使用hosts allow和hosts deny两个字段来实现该功能。而用好这两个字段关键在于熟悉和清楚它们的使用方法和作用范围
 
-　　1）hosts allow 和 hosts deny 字段的使用
+1）hosts allow 和 hosts deny 字段的使用
 
 ```
        hosts allow 字段定义允许访问的客户端 
@@ -744,9 +744,9 @@ initial-setup-ks.cfg  passwd
        hosts deny 字段定义禁止访问的客户端 
 ```
 
-　　2）使用IP地址进行限制
+2）使用IP地址进行限制
 
-　　比如公司内部samba服务器上共享了一个目录sales，这个目录是存放销售部的共享目录，公司规定192.168.0.0/24这个网段的IP地址禁止访问此sales共享目录，但是其中192.168.0.24这个IP地址可以访问。
+比如公司内部samba服务器上共享了一个目录sales，这个目录是存放销售部的共享目录，公司规定192.168.0.0/24这个网段的IP地址禁止访问此sales共享目录，但是其中192.168.0.24这个IP地址可以访问。
 
 ```
 hosts deny = 192.168.0. 172.16.
@@ -756,7 +756,7 @@ hosts allow = 192.168.0.24 表示允许192.168.0.24这个IP地址访问
 当host deny和hosts allow字段同时出现并定义内容相互冲突时，hosts allow优先。现在设置的意思就是禁止C类地址192.168.0.0/24网段主机访问，但是允许192.168.0.24主机访问。如果后面的内容有多个时，需要用空格隔开，也可以是域名，如：.hello.com
 ```
 
-　　如果我们规定所有人不能访问security目录，只允许192.168.0.0网段的IP地址可以访问，但是192.168.0.10及192.168.0.78的主机是要禁止访问。我们可以使用hosts deny禁止所有用户访问，再设置hosts allow允许192.168.0.0网段主机，但当hosts deny和hosts allow同时出现而且冲突的时候，hosts allow生效，如果这样，那么允许192.168.0.0网段的IP地址可以访问，但192.168.0.100及192.168.0.78的主机禁止访问就无法生效了
+如果我们规定所有人不能访问security目录，只允许192.168.0.0网段的IP地址可以访问，但是192.168.0.10及192.168.0.78的主机是要禁止访问。我们可以使用hosts deny禁止所有用户访问，再设置hosts allow允许192.168.0.0网段主机，但当hosts deny和hosts allow同时出现而且冲突的时候，hosts allow生效，如果这样，那么允许192.168.0.0网段的IP地址可以访问，但192.168.0.100及192.168.0.78的主机禁止访问就无法生效了
 
 ```
 hosts allow = 192.168.0. EXCEPT 192.168.0.100 192.168.0.78 
@@ -766,21 +766,21 @@ hosts allow = 192.168.0. EXCEPT 192.168.0.100 192.168.0.78
 
 ## 七、SAMBA的排错
 
-　　**Linux 服务一般排错方法**
+**Linux 服务一般排错方法**
 1、错误信息
 
-　　一般仔细看下显示的错误信息，根据错误提示一般就可以判断问题出在 什么地方。
+一般仔细看下显示的错误信息，根据错误提示一般就可以判断问题出在 什么地方。
 
-　　2、配置文件
+2、配置文件
 
-　　第2个我们可以查配置文件，有时可能误操作导致配置失误，服务无法正 常运行，我们可以通过检查配置文件来确认问题。现在很多服务的软件 包有自带配置文件检查工具，我们可以通过这些工具对配置文件进行检 查
+第2个我们可以查配置文件，有时可能误操作导致配置失误，服务无法正 常运行，我们可以通过检查配置文件来确认问题。现在很多服务的软件 包有自带配置文件检查工具，我们可以通过这些工具对配置文件进行检 查
 
-　　3、日志文件
+3、日志文件
 如果服务出现问题，我们还可以使用 tail -f命令来动态监控日志文件
 
-　　**Samba排错**
+**Samba排错**
 
-　　1、使用testparm命令检查，软件包有自带的配置文件检查工具，我们可以使testparm 命令检测smb.conf文件的语法，如果报错，说明smb.conf文 件设置有错误，这样我们可以根据提示信息来修改主配置文 件和独立配置文件。
+1、使用testparm命令检查，软件包有自带的配置文件检查工具，我们可以使testparm 命令检测smb.conf文件的语法，如果报错，说明smb.conf文 件设置有错误，这样我们可以根据提示信息来修改主配置文 件和独立配置文件。
 
 ```
 [root@node1 ~]# testparm /etc/samba/smb.conf
@@ -793,29 +793,29 @@ Loaded services file OK.
 Server role: ROLE_STANDALONE
 ```
 
-　　2、使用ping命令测试
+2、使用ping命令测试
 
-　　samba服务器主配置文件排除错误后重启 smb服务，如果客户端仍然 无法连 接samba服务器，我们在客户端可以使用 ping命令进行测试,这个我们微软的系统中排障一样，根据出现的不同情况可以进行分析。
+samba服务器主配置文件排除错误后重启 smb服务，如果客户端仍然 无法连 接samba服务器，我们在客户端可以使用 ping命令进行测试,这个我们微软的系统中排障一样，根据出现的不同情况可以进行分析。
 
-　　(1)如果没有收到任何提示，说明客户端 TCP/IP协议安装有问题，需要重 新安装客户端 TCP/IP 协议，然后重新测试。
+(1)如果没有收到任何提示，说明客户端 TCP/IP协议安装有问题，需要重 新安装客户端 TCP/IP 协议，然后重新测试。
 
-　　(2)如果提示“host not found ”则检查客户端DNS或者/etc/hosts文件有没正确设置，确保客户端能够使用名称访问 samba服务器。
+(2)如果提示“host not found ”则检查客户端DNS或者/etc/hosts文件有没正确设置，确保客户端能够使用名称访问 samba服务器。
 
-　　(3)无法 ping 通还可能是防火墙设置问题，需要重新设置防火墙的 规则，开启samba 与外界联系的端口。
+(3)无法 ping 通还可能是防火墙设置问题，需要重新设置防火墙的 规则，开启samba 与外界联系的端口。
 (4)当然还有一种低级的情况，那就是由于主机名输入错误导致不 能ping 通
 
-　　3、使用smbclient命令进行测试
+3、使用smbclient命令进行测试
 
-　　如果客户端与samba服务器可以ping通，说明客户端与服务器间的连接没有问题，如果还是不能访问samba共享资源，可以执行smbclient命令进一步测试服务器端的配置。 如果测试samba服务器正常，并且输入了正确的帐号和密码，那么执行smbclient命令就可以获得共享列表。
+如果客户端与samba服务器可以ping通，说明客户端与服务器间的连接没有问题，如果还是不能访问samba共享资源，可以执行smbclient命令进一步测试服务器端的配置。 如果测试samba服务器正常，并且输入了正确的帐号和密码，那么执行smbclient命令就可以获得共享列表。
 
 ```
 smbclient -L 192.168.0.188 -U joy%123 
 ```
 
-　　如果我们看到了错误信息提示“tree connect failed”则说明可以在smb.conf文件中设置了host deny字段拒绝了客户端的IP地址或域 名，我们可以修改smb.conf配置文件允许客户端访问就可以了
+如果我们看到了错误信息提示“tree connect failed”则说明可以在smb.conf文件中设置了host deny字段拒绝了客户端的IP地址或域 名，我们可以修改smb.conf配置文件允许客户端访问就可以了
 
-　　如果返回信息是“connection refused ”提示拒绝连接则说明是samba服务器smbd进程可以没有被开启，我们必须确保smbd和 nmbd进程处于开启状态，并使用netstat命令检查netbios所使用的139端口是否处于监听状态。
+如果返回信息是“connection refused ”提示拒绝连接则说明是samba服务器smbd进程可以没有被开启，我们必须确保smbd和 nmbd进程处于开启状态，并使用netstat命令检查netbios所使用的139端口是否处于监听状态。
 
-　　如果提示“session setup failed ”连接建立失败则说明服务器拒绝了连接请求，这是因为输入的用户名和密码错误引起
+如果提示“session setup failed ”连接建立失败则说明服务器拒绝了连接请求，这是因为输入的用户名和密码错误引起
 
-　　有时也会收到比如“Your server software is being unfriendly ”错误信息，提示服务器软 件存在问题，这个故障一般是因为配置 smbd时使用了错误的参数或者启用 smbd时 遇到的类似严重破坏错误，我们可以使用 testparm来检查相应的配置文件并同时检查 相关日志文件。
+有时也会收到比如“Your server software is being unfriendly ”错误信息，提示服务器软 件存在问题，这个故障一般是因为配置 smbd时使用了错误的参数或者启用 smbd时 遇到的类似严重破坏错误，我们可以使用 testparm来检查相应的配置文件并同时检查 相关日志文件。

@@ -17,9 +17,9 @@ sudo systemctl restart docker
 
 ## docker pull 使用代理
 
-　　docker已换阿里源，某些冷门或较新镜像仍然会从docker.io进行下载，需要代理。
+docker已换阿里源，某些冷门或较新镜像仍然会从docker.io进行下载，需要代理。
 
-　　对于docker这种级别的应用，环境变量需要经由systemd传入。
+对于docker这种级别的应用，环境变量需要经由systemd传入。
 
 ```bash
 mkdir /etc/systemd/system/docker.service.d

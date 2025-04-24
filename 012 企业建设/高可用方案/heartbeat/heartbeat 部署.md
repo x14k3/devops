@@ -1,6 +1,6 @@
 # heartbeat 部署
 
-　　Heartbeat 是一款开源提供高可用（Highly-Available）服务的软件，通过 heartbeat 可以将资源（IP及程序服务等资源）从一台已经故障的计算机快速转移到另一台正常运转的机器上继续提供服务，一般称之为高可用服务。在实际生产应用场景中，heartbeat 的功能和另一个高可用软件 keepalived 有很多相同之处，但在生产中，对应实际的业务应用也是有区别的，例如： **keepalived 主要是控制IP的漂移，配置、应用简单，而 heartbeat 则不但可以控制IP漂移，更擅长对资源服务的控制，配置、应用比较复杂。**
+Heartbeat 是一款开源提供高可用（Highly-Available）服务的软件，通过 heartbeat 可以将资源（IP及程序服务等资源）从一台已经故障的计算机快速转移到另一台正常运转的机器上继续提供服务，一般称之为高可用服务。在实际生产应用场景中，heartbeat 的功能和另一个高可用软件 keepalived 有很多相同之处，但在生产中，对应实际的业务应用也是有区别的，例如： **keepalived 主要是控制IP的漂移，配置、应用简单，而 heartbeat 则不但可以控制IP漂移，更擅长对资源服务的控制，配置、应用比较复杂。**
 
 # 一、实验准备
 
@@ -24,15 +24,15 @@
 
 ## 1. 下载安装包，安装依赖
 
-　　`yum install gcc gcc-c++ autoconf automake libtool glib2-devel libxml2-devel bzip2 bzip2-devel e2fsprogs-devel libxslt-devel libtool-ltdl-devel asciidoc`
+`yum install gcc gcc-c++ autoconf automake libtool glib2-devel libxml2-devel bzip2 bzip2-devel e2fsprogs-devel libxslt-devel libtool-ltdl-devel asciidoc`
 
-　　下载源码包并上传到 /opt
+下载源码包并上传到 /opt
 
-　　[Cluster Glue.tar.bz2](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/277d2ff6-a54b-43d9-904e-a19551895408/Cluster_Glue.tar.bz2 "Cluster Glue.tar.bz2")
+[Cluster Glue.tar.bz2](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/277d2ff6-a54b-43d9-904e-a19551895408/Cluster_Glue.tar.bz2 "Cluster Glue.tar.bz2")
 
-　　[heartbeat.tar.bz2](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/71fff30b-c2ca-4424-8c2b-858e86f98b37/heartbeat.tar.bz2 "heartbeat.tar.bz2")
+[heartbeat.tar.bz2](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/71fff30b-c2ca-4424-8c2b-858e86f98b37/heartbeat.tar.bz2 "heartbeat.tar.bz2")
 
-　　[resource-agents-3.9.6.tar.gz](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/161a32b1-b532-4c71-8200-c9b7ab237cf5/resource-agents-3.9.6.tar.gz "resource-agents-3.9.6.tar.gz")
+[resource-agents-3.9.6.tar.gz](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/161a32b1-b532-4c71-8200-c9b7ab237cf5/resource-agents-3.9.6.tar.gz "resource-agents-3.9.6.tar.gz")
 
 ## 2. 安装 glue
 
@@ -98,11 +98,11 @@ cp /data/heartbeat/libexec/heartbeat/* /usr/lib64/heartbeat/
 
 # 三、修改配置文件
 
-　　`cd /data/heartbeat/etc/ha.d/`
+`cd /data/heartbeat/etc/ha.d/`
 
 ## 1. 修改 authkeys
 
-　　该文件表示发送心跳时 机器用于验证的key的hash算法，节点之间必须配置成一致的密码
+该文件表示发送心跳时 机器用于验证的key的hash算法，节点之间必须配置成一致的密码
 
 ```bash
 auth 1          #表示使用id为1的验证 下边需要定义一个1的验证算法
@@ -111,7 +111,7 @@ auth 1          #表示使用id为1的验证 下边需要定义一个1的验证�
 
 ## 2. 修改 ha.cf
 
-　　该配置文件用于配置 心跳的核心配置
+该配置文件用于配置 心跳的核心配置
 
 ```bash
 logfile /var/log/ha-log
@@ -129,7 +129,7 @@ respawn hacluster /usr/lib64/heartbeat/ipfail
 
 ## 3. 修改 haresources
 
-　　该文件表示资源的管理，如果是主机，当主机启动后自动加载该文件中配置的所有启动资源，资源脚本默认在haresources同级目录下的resource.d目录下
+该文件表示资源的管理，如果是主机，当主机启动后自动加载该文件中配置的所有启动资源，资源脚本默认在haresources同级目录下的resource.d目录下
 
 ```bash
 www.nginx1.com 192.168.0.100/24/ens33:0 nginx.sh
@@ -141,7 +141,7 @@ www.nginx1.com 192.168.0.100/24/ens33:0 nginx.sh
 
 ### 资源脚本 ngixn.sh
 
-　　`vim /data/heartbeat/etc/ha.d/resource.d/nginx.sh`
+`vim /data/heartbeat/etc/ha.d/resource.d/nginx.sh`
 
 ```bash
 #!/bin/bash
@@ -155,11 +155,11 @@ else
 fi
 ```
 
-　　添加执行权限`chmod u+x nginx.sh`
+添加执行权限`chmod u+x nginx.sh`
 
 ## 4. 节点2上准备配置文件
 
-　　拷贝三个配置好的文件到节点2上，只需修改ha.cf配置文件中的单播地址为对方地址即可(ucast ens33 192.168.137.104)。
+拷贝三个配置好的文件到节点2上，只需修改ha.cf配置文件中的单播地址为对方地址即可(ucast ens33 192.168.137.104)。
 
 ```bash
 cd /data/heartbeat/etc/ha.d/`
@@ -168,7 +168,7 @@ scp authkeys ha.cf haresources root@192.168.137.105:/data/heartbeat/etc/ha.d/`
 
 ## 5. 目录权限
 
-　　`chown -R  hacluster:haclient /data/`
+`chown -R  hacluster:haclient /data/`
 
 # 四、测试
 
@@ -240,11 +240,11 @@ info: Pacemaker support: false
 
 # 六、heartbeat配置文件详解
 
-　　**heartbeat**主要的**配置**文件有3个，**authkeys, ha.cf 和 haresources** 。下面具体说一下这3个文件的具体功能以及**配置**
+**heartbeat**主要的**配置**文件有3个，**authkeys, ha.cf 和 haresources** 。下面具体说一下这3个文件的具体功能以及**配置**
 
 ## 1. authkeys
 
-　　heartbeat的认证配置文件
+heartbeat的认证配置文件
 
 ```bash
 #auth 1
@@ -257,7 +257,7 @@ info: Pacemaker support: false
 
 ## 2. ha.cf
 
-　　heartbeat的主要配置文件
+heartbeat的主要配置文件
 
 ```bash
 debugfile /var/log/ha-debug
@@ -331,7 +331,7 @@ respawn hacluster /usr/lib/heartbeat/ipfail
 
 ## 3. haresource
 
-　　该文件表示资源的管理，如果是主机，当主机启动后自动加载该文件中配置的所有启动资源，资源脚本默认在haresources同级目录下的resource.d目录下
+该文件表示资源的管理，如果是主机，当主机启动后自动加载该文件中配置的所有启动资源，资源脚本默认在haresources同级目录下的resource.d目录下
 
 ```bash
 www.nginx1.com 192.168.0.100/24/ens33:0 nginx.sh

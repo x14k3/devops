@@ -17,7 +17,7 @@ mv apache-skywalking-apm-8.6.0 /usr/local/
 
 ## 修改配置文件
 
-　　修改 /usr/local/apache-skywalking-apm-8.6.0/config/application.ym
+修改 /usr/local/apache-skywalking-apm-8.6.0/config/application.ym
 
 ```bash
 
@@ -92,7 +92,7 @@ storage:
     metadataQueryMaxSize: ${SW_STORAGE_MYSQL_QUERY_MAX_SIZE:5000}
 ```
 
-　　修改 /usr/local/apache-skywalking-apm-8.6.0/bin/oapService.sh
+修改 /usr/local/apache-skywalking-apm-8.6.0/bin/oapService.sh
 
 ```bash
 
@@ -162,7 +162,7 @@ vim /etc/sysctl.conf
 
 ## 配置日志自动清理
 
-　　编写shell脚本, /data/skywalking/log_rotate.sh
+编写shell脚本, /data/skywalking/log_rotate.sh
 
 ```bash
 #!/bin/bash
@@ -183,7 +183,7 @@ done
 exit 0
 ```
 
-　　添加脚本到 crontab 中, 每晚 00:00 自动执行, 清理 15 天之前的日志记录
+添加脚本到 crontab 中, 每晚 00:00 自动执行, 清理 15 天之前的日志记录
 
 ```bash
 # 执行
@@ -194,14 +194,14 @@ crontab -e
 
 ## 使用方法
 
-　　spring boot程序接入, 参考 [Spring Boot应用部署文档](./Spring%20Boot应用部署文档.md)
+spring boot程序接入, 参考 [Spring Boot应用部署文档](./Spring%20Boot应用部署文档.md)
 
 ```bash
 # 启动springboot程序时指定 -javaagent 即可
 nohup java -javaagent:/application/skywalking-agent/skywalking-agent.jar -Dskywalking.trace.ignore_path=/actuator/** -Dskywalking.agent.service_name=bjgyol-gateway -Dskywalking.collector.backend_service=192.159.51.13:11800 -jar -Dspring.profiles.active=prod /application/bjgyol-gateway.jar
 ```
 
-　　tomcat 程序接入
+tomcat 程序接入
 
 ```bash
 
