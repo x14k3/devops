@@ -1,3 +1,0 @@
-# kafka king
-
-‍
