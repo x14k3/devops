@@ -8,7 +8,7 @@
 
 ### 动态添加虚拟机磁盘
 
-* 创建虚拟机磁盘文件
+- 创建虚拟机磁盘文件
 
   ```bash
   #创建虚拟机磁盘(qcow2类型):
@@ -19,7 +19,7 @@
   -rw-r--r-- 1 root   root 193K Dec 27 17:12 sles12_data.qcow2
   ```
 
-* 虚拟机支持磁盘文件动态添加，不需要停止虚拟机或者重启:
+- 虚拟机支持磁盘文件动态添加，不需要停止虚拟机或者重启:
 
   ```bash
   virsh attach-disk test_02 --source /data/virthost/test_02_expand.qcow2 --config --target vdb --persistent --subdriver qcow2
@@ -30,7 +30,7 @@
   #--subdriver：这一项是必须的，如果不加的话，虚拟机不知道镜像文件的格式
   ```
 
-* 在虚拟机 中格式化并挂载XFS文件系统:
+- 在虚拟机 中格式化并挂载XFS文件系统:
 
   ```
   mkfs.xfs /dev/vdb
@@ -45,7 +45,7 @@
 
 ### 调整磁盘空间，需要关闭虚拟机
 
-* 在物理主机(host主机)上使用使用 `qemu-img resize`​ 命令调整虚拟机磁盘大小:
+- 在物理主机(host主机)上使用使用 `qemu-img resize`​ 命令调整虚拟机磁盘大小:
 
   ```
   qemu-img resize /data/test_01.qcow2 +30G
@@ -54,13 +54,13 @@
 
 ### 动态调整磁盘空间
 
-* ​`virsh blockresize`​ 命令支持在线调整虚拟镜像，实际是通过底层 [QEMU Monitor管理虚拟机](https://cloud-atlas.readthedocs.io/zh_CN/latest/kvm/qemu/qemu_monitor.html#qemu-monitor) 指令实现:
+- ​`virsh blockresize`​ 命令支持在线调整虚拟镜像，实际是通过底层 [QEMU Monitor管理虚拟机](https://cloud-atlas.readthedocs.io/zh_CN/latest/kvm/qemu/qemu_monitor.html#qemu-monitor) 指令实现:
 
   ```
   virsh blockresize test_02 vdb --size 15G
   ```
 
-* 此时在虚拟机 `test_02`​ 内部执行 `lsblk`​ 命令可以看到原先5G磁盘改成了15G:
+- 此时在虚拟机 `test_02`​ 内部执行 `lsblk`​ 命令可以看到原先5G磁盘改成了15G:
 
   ```
   NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -69,7 +69,7 @@
 
   ```
 
-* 注意，此时文件系统显示挂载的磁盘还是5G空间:
+- 注意，此时文件系统显示挂载的磁盘还是5G空间:
 
   ```
   Filesystem      Size  Used Avail Use% Mounted on
@@ -85,7 +85,7 @@ echo > /sys/class/scsi_device/0:0:0:0/device/rescan
 
 ```
 
-* XFS文件系统支持在线调整:
+- XFS文件系统支持在线调整:
 
   ```bash
   xfs_growfs /data

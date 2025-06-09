@@ -46,8 +46,8 @@ ALTER SYSTEM SET LOG_ARCHIVE_DEST_1 = 'LOCATION=USE_DB_RECOVERY_FILE_DEST';
 
 **格式为：**
 
-* 数据文件：`OMF路径/ORACLE_SID/datafile/`​
-* 日志文件：`OMF路径/ORACLE_SID/onlinelog/`​
+- 数据文件：`OMF路径/ORACLE_SID/datafile/`​
+- 日志文件：`OMF路径/ORACLE_SID/onlinelog/`​
 
 omf文件的命名规则:
 

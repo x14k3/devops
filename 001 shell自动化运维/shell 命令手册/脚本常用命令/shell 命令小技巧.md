@@ -4,11 +4,11 @@
 
 ​`RSA，DSA，ECDSA，EdDSA和Ed25519`​都用于数字签名，但只有RSA也可以用于加密。根据数学特性，这四种类型又可以分为两大类，dsa/rsa是一类，ecdsa/ed25519是一类，后者算法更先进。
 
-* **RSA（Rivest–Shamir–Adleman）：** 是最早的公钥密码系统之一，被广泛用于安全数据传输。它的安全性取决于整数分解，因此永远不需要安全的RNG（随机数生成器）。与DSA相比，RSA的签名验证速度更快，但生成速度较慢。
-* **DSA（数字签名算法）：** 是用于数字签名的联邦信息处理标准。它的安全性取决于离散的对数问题。与RSA相比，DSA的签名生成速度更快，但验证速度较慢。如果使用错误的数字生成器，可能会破坏安全性。从OpenSSH 7.0开始，默认情况下SSH不再支持DSA密钥（ssh-dss）。
-* **ECDSA（椭圆曲线数字签名算法）：** 是DSA（数字签名算法）的椭圆曲线实现。椭圆曲线密码术能够以较小的密钥提供与RSA相对相同的安全级别。它还具有DSA对不良RNG敏感的缺点。dsa因为安全问题，已不再使用了。ecdsa因为政治原因和技术原因，也不推荐使用
-* **EdDSA（爱德华兹曲线数字签名算法）：** 是一种使用基于扭曲爱德华兹曲线的Schnorr签名变体的数字签名方案。签名创建在EdDSA中是确定性的，其安全性是基于某些离散对数问题的难处理性，因此它比DSA和ECDSA更安全，后者要求每个签名都具有高质量的随机性。
-* **Ed25519：** 是EdDSA签名方案，但使用SHA-512 / 256和Curve25519；它是一条安全的椭圆形曲线，比DSA，ECDSA和EdDSA 提供更好的安全性，并且具有更好的性能（人为注意）。ed25519是目前最安全、加解密速度最快的key类型，由于其数学特性，它的key的长度比rsa小很多，优先推荐使用。它目前唯一的问题就是兼容性，即在旧版本的ssh工具集中可能无法使用。
+- **RSA（Rivest–Shamir–Adleman）：** 是最早的公钥密码系统之一，被广泛用于安全数据传输。它的安全性取决于整数分解，因此永远不需要安全的RNG（随机数生成器）。与DSA相比，RSA的签名验证速度更快，但生成速度较慢。
+- **DSA（数字签名算法）：** 是用于数字签名的联邦信息处理标准。它的安全性取决于离散的对数问题。与RSA相比，DSA的签名生成速度更快，但验证速度较慢。如果使用错误的数字生成器，可能会破坏安全性。从OpenSSH 7.0开始，默认情况下SSH不再支持DSA密钥（ssh-dss）。
+- **ECDSA（椭圆曲线数字签名算法）：** 是DSA（数字签名算法）的椭圆曲线实现。椭圆曲线密码术能够以较小的密钥提供与RSA相对相同的安全级别。它还具有DSA对不良RNG敏感的缺点。dsa因为安全问题，已不再使用了。ecdsa因为政治原因和技术原因，也不推荐使用
+- **EdDSA（爱德华兹曲线数字签名算法）：** 是一种使用基于扭曲爱德华兹曲线的Schnorr签名变体的数字签名方案。签名创建在EdDSA中是确定性的，其安全性是基于某些离散对数问题的难处理性，因此它比DSA和ECDSA更安全，后者要求每个签名都具有高质量的随机性。
+- **Ed25519：** 是EdDSA签名方案，但使用SHA-512 / 256和Curve25519；它是一条安全的椭圆形曲线，比DSA，ECDSA和EdDSA 提供更好的安全性，并且具有更好的性能（人为注意）。ed25519是目前最安全、加解密速度最快的key类型，由于其数学特性，它的key的长度比rsa小很多，优先推荐使用。它目前唯一的问题就是兼容性，即在旧版本的ssh工具集中可能无法使用。
 
   ```
   ssh-keygen -t ed25519 -C "curiouser@curiouser.com" -f ./id_ed25519
@@ -18,8 +18,8 @@
 
 参考：
 
-* [https://security.stackexchange.com/questions/90077/ssh-key-ed25519-vs-rsa](https://security.stackexchange.com/questions/90077/ssh-key-ed25519-vs-rsa)
-* [https://www.cnblogs.com/librarookie/p/15389876.html](https://www.cnblogs.com/librarookie/p/15389876.html)
+- [https://security.stackexchange.com/questions/90077/ssh-key-ed25519-vs-rsa](https://security.stackexchange.com/questions/90077/ssh-key-ed25519-vs-rsa)
+- [https://www.cnblogs.com/librarookie/p/15389876.html](https://www.cnblogs.com/librarookie/p/15389876.html)
 
 ## 2、bash不显示路径
 
@@ -80,11 +80,11 @@ cat /proc/cpuinfo| grep "processor"| wc -l
 
 cached是cpu与内存间的，buffer是内存与磁盘间的，都是为了解决速度不对等的问题。buffer是即将要被写入磁盘的，而cache是被从磁盘中读出来的
 
-* **buff**：作为buffer cache的内存，是块设备的读写缓冲区
-* **cache**：作为page cache的内存，文件系统的cache。Buffer cache是针对磁盘块的缓存，也就是在没有文件系统的情况下，直接对磁盘进行操作的数据会缓存到buffer cache中。
-* **pagecache**：页面缓存（pagecache）可以包含磁盘块的任何内存映射。这可以是缓冲I/O，内存映射文件，可执行文件的分页区域——操作系统可以从文件保存在内存中的任何内容。Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。
-* **dentries**：表示目录的数据结构
-* **inodes**：表示文件的数据结构
+- **buff**：作为buffer cache的内存，是块设备的读写缓冲区
+- **cache**：作为page cache的内存，文件系统的cache。Buffer cache是针对磁盘块的缓存，也就是在没有文件系统的情况下，直接对磁盘进行操作的数据会缓存到buffer cache中。
+- **pagecache**：页面缓存（pagecache）可以包含磁盘块的任何内存映射。这可以是缓冲I/O，内存映射文件，可执行文件的分页区域——操作系统可以从文件保存在内存中的任何内容。Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。
+- **dentries**：表示目录的数据结构
+- **inodes**：表示文件的数据结构
 
 ```
 #内核配置接口 /proc/sys/vm/drop_caches 可以允许用户手动清理cache来达到释放内存的作用，这个文件有三个值：1、2、3（默认值为0）
@@ -124,9 +124,9 @@ EOF' ;\
 
 **注意**：
 
-* 当使用“**export http_proxy**”和“**export https_proxy**”设置代理时，curl默认所有的请求都是走的代理，请求域名不通过/etc/hosts解析。
-* 所以当有需求curl命令不走代理，通过/etc/hosts解析时，代理设置要通过“**export HTTP_PROXY**”和“**export HTTPS_PROXY**”设置。（原因是url.c（版本7.39中的第4337行）处看先检查小写版本，如果找不到，则检查大写。链接：[https://stackoverflow.com/questions/9445489/performing-http-requests-with-curl-using-proxy）](https://stackoverflow.com/questions/9445489/performing-http-requests-with-curl-using-proxy%EF%BC%89)
-* **no_proxy不支持模糊匹配**。不支持`*.a.com`​，支持`.a.com`​
+- 当使用“**export http_proxy**”和“**export https_proxy**”设置代理时，curl默认所有的请求都是走的代理，请求域名不通过/etc/hosts解析。
+- 所以当有需求curl命令不走代理，通过/etc/hosts解析时，代理设置要通过“**export HTTP_PROXY**”和“**export HTTPS_PROXY**”设置。（原因是url.c（版本7.39中的第4337行）处看先检查小写版本，如果找不到，则检查大写。链接：[https://stackoverflow.com/questions/9445489/performing-http-requests-with-curl-using-proxy）](https://stackoverflow.com/questions/9445489/performing-http-requests-with-curl-using-proxy%EF%BC%89)
+- **no_proxy不支持模糊匹配**。不支持`*.a.com`​，支持`.a.com`​
 
 ## 13、时间戳与日期
 
@@ -428,7 +428,7 @@ abcd::::efg::hi
 
 1. Docker容器中
 
-    * 添加环境变量：TZ = Asia/Shanghai
+    - 添加环境变量：TZ = Asia/Shanghai
 2. Linux主机
 
     ```
@@ -450,8 +450,8 @@ abcd::::efg::hi
 
 ## 29、shell脚本的调试
 
-* 在脚本运行时添加`-x`​参数
-* 在脚本中开头添加`set -x`​
+- 在脚本运行时添加`-x`​参数
+- 在脚本中开头添加`set -x`​
 
 ‍
 
@@ -574,9 +574,9 @@ tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
 
 ## 39、ssh目录的权限问题
 
-* ​`home`​目录的权限为**700**：`chmod 700 /home/用户`​
-* ​`.ssh目录`​的权限应为**700**：`chmod 700 ~/.ssh`​
-* ​`.ssh目录下authorized_keys文件`​的权限应为**600**：`chmod 600 ~/.ssh/authorized_keys`​
+- ​`home`​目录的权限为**700**：`chmod 700 /home/用户`​
+- ​`.ssh目录`​的权限应为**700**：`chmod 700 ~/.ssh`​
+- ​`.ssh目录下authorized_keys文件`​的权限应为**600**：`chmod 600 ~/.ssh/authorized_keys`​
 
 ## 41、使用curl命令发送邮件
 
@@ -739,8 +739,8 @@ Host 主机别名
 
 ## 60、crontab下使用date和sudo命令
 
-* crontab下使用date命令需要转义`%`​，例如： `date +"\%Y\%m\%d_\%H:\%M"`​ 和 `$(date +"\%Y\%m\%d_\%H:\%M")`​
-* 直接在crontab里以sudo执行命令无效，会提示 `sudo: sorry, you must have a tty to run sudo`​ .需要修改`/etc/sudoers`​，执行visudo或者`vim /etc/sudoers`​ 将`Defaults requiretty`​这一行注释掉。因为sudo默认需要tty终端，而crontab里的命令实际是以无tty形式执行的。注释掉"Defaults requiretty"即允许以无终端方式执行sudo
+- crontab下使用date命令需要转义`%`​，例如： `date +"\%Y\%m\%d_\%H:\%M"`​ 和 `$(date +"\%Y\%m\%d_\%H:\%M")`​
+- 直接在crontab里以sudo执行命令无效，会提示 `sudo: sorry, you must have a tty to run sudo`​ .需要修改`/etc/sudoers`​，执行visudo或者`vim /etc/sudoers`​ 将`Defaults requiretty`​这一行注释掉。因为sudo默认需要tty终端，而crontab里的命令实际是以无tty形式执行的。注释掉"Defaults requiretty"即允许以无终端方式执行sudo
 
   ```
   但是，这里关于安全性方面有一点需要注意。关于该配置项，说明如下Disable "`ssh hostname sudo <cmd>`", because it will show the password in clear.You have to run "ssh -t hostname sudo <cmd>".该配置的作用是禁止执行"ssh hostname sudo <cmd>"，因为这种方式会将sudo密码以明文显示，你可以运行"ssh -t hostname sudo <cmd>"来替代。开启的情况下，"ssh hostname sudo <cmd>"无法执行成功，关闭了之后，就没有这一层的检查了。
@@ -760,15 +760,15 @@ CFLAGS=-static sh -r -T -e 03/31/2027 -f tesh.sh
 # -r 在不同操作系统执行
 ```
 
-* 生成以下文件
+- 生成以下文件
 
-  * ​`tesh.sh`​
-  * ​`tesh.sh.x`​是加密后可执行的二进制文件
-  * ​`tesh.sh.x.c`​ 是 `tesh.sh.x`​ 的源文件（注意是C语言版本的源文件）
-* shc生成的二进制文件只能通过 `./xxx`​ 命令来执行，不能通过 `/bin/bash xxx`​ 来执行。
-* shc加密的脚本在运行时`ps -ef`​可以看到shell的源码
-* 在执行加密脚本的时候，还是会在内存中解密全部的shell代码。解密的思路就是**从内存中获取解密后的代码**。
-* shc加密脚本解密可参考：[https://cloud.tencent.com/developer/article/1451796](https://cloud.tencent.com/developer/article/1451796)
+  - ​`tesh.sh`​
+  - ​`tesh.sh.x`​是加密后可执行的二进制文件
+  - ​`tesh.sh.x.c`​ 是 `tesh.sh.x`​ 的源文件（注意是C语言版本的源文件）
+- shc生成的二进制文件只能通过 `./xxx`​ 命令来执行，不能通过 `/bin/bash xxx`​ 来执行。
+- shc加密的脚本在运行时`ps -ef`​可以看到shell的源码
+- 在执行加密脚本的时候，还是会在内存中解密全部的shell代码。解密的思路就是**从内存中获取解密后的代码**。
+- shc加密脚本解密可参考：[https://cloud.tencent.com/developer/article/1451796](https://cloud.tencent.com/developer/article/1451796)
 
 参考：
 
@@ -902,14 +902,14 @@ watch -n 1 "netstat -plan | grep :443 | awk {'print \$5'} | cut -d: -f 1 | sort 
 
 ## 71、压缩包加密
 
-* **加密**
+- **加密**
 
   ```
   tar -czvf - test-files | openssl des3 -salt -k 加密密码 -out files.tar.gz
 
   zip -P 加密密码 -r 压缩文件名.zip 要压缩的文件夹
   ```
-* **解密**
+- **解密**
 
   ```
   openssl des3 -d -k password -salt -in files.tar.gz | tar xzvf -
@@ -921,14 +921,14 @@ watch -n 1 "netstat -plan | grep :443 | awk {'print \$5'} | cut -d: -f 1 | sort 
 
 tail 的`--pid`​参数，监控某一个pid，当检测到pid停止的时候，停止tail
 
-* **根据进程状态决定是否终止退出**
+- **根据进程状态决定是否终止退出**
 
   ```
   tail -f --pid=$(ps -ef | grep java | grep -v "grep" | awk '{ print $2 } ' | sort -nr | head -1) ./nohup.log
   # MacOS下tail没有--pid参数，可使用 gtail 替代
   gtail -f --pid=$(ps -ef | grep java | grep -v "grep" | awk '{ print $2 } ' | sort -nr | head -1) ./nohup.log
   ```
-* **根据输出日志关键字决定是否终止退出**
+- **根据输出日志关键字决定是否终止退出**
 
   ```bash
   ```
@@ -970,16 +970,16 @@ CLOSED：      没有任何连接状态
 
 如何查看设备的Vendor ID (制造商ID：vid) 和 Product ID (型号ID: pid)
 
-* **Windows**
+- **Windows**
 
   > 设备管理器 --> 展开磁盘驱动器选项，右键选择属性，在详细信息选项卡中找到硬件ID。
   >
-* **Linux**
+- **Linux**
 
   ```bash
   lspci -v
   ```
-* **MacOS**
+- **MacOS**
 
   ```
   ioreg -c IOBlockStorageDriver -r -w 0

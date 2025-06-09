@@ -38,15 +38,15 @@
 
 **包括以下三个类别：**
 
-* **IaaS：基础设施即服务 (Infrastructure as a Service) —把硬件设备作为一种服务**
+- **IaaS：基础设施即服务 (Infrastructure as a Service) —把硬件设备作为一种服务**
 
 把计算基础(服务器、网络技术、存储和数据中心空间)作为一项服务提供给客户。它也包括提供操作系统和虚拟化技术、来管理资源。消费者通过Internet可以从完善的计算机基础设施获得服务。
 
-* **PaaS：平台即服务(Platform as a Service）—把平台作为一种服务:CloudFoundry**
+- **PaaS：平台即服务(Platform as a Service）—把平台作为一种服务:CloudFoundry**
 
 PaaS实际上是指将软件研发的平台作为一种服务，供应商提供超过基础设施的服务，一个作为软件开发和运行环境的整套解决方案，即以SaaS的模式提交给用户。因此，PaaS也是SaaS模式的一种应用。但是，PaaS的出现可以加快SaaS的发展，尤其是加快SaaS应用的开发速度。
 
-* **SaaS：软件即服务 (Software as a Service) —把在线软件作为一种服务:office365 B/S**
+- **SaaS：软件即服务 (Software as a Service) —把在线软件作为一种服务:office365 B/S**
 
 SaaS是一种交付模式，其中应用作为一项服务托管，通过Internet提供给用户;帮助客户更好地管理它们的IT项目和服务、确保它们IT应用的质量和性能，监控它们的在线业务。
 

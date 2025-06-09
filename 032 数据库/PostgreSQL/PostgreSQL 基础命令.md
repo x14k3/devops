@@ -156,9 +156,9 @@ REVOKE  { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER 
 
 我们需要模式的原因有好多：
 
-* 允许多个用户使用一个数据库而不会干扰其它用户。
-* 把数据库对象组织成逻辑组，让它们更便于管理。
-* 第三方的应用可以放在不同的模式中，这样它们就不会和其它对象的名字冲突。
+- 允许多个用户使用一个数据库而不会干扰其它用户。
+- 把数据库对象组织成逻辑组，让它们更便于管理。
+- 第三方的应用可以放在不同的模式中，这样它们就不会和其它对象的名字冲突。
 
 模式类似于操作系统层次的目录，只不过模式不能嵌套。
 
@@ -342,9 +342,9 @@ psql -d testdb -U postgres -f /pathA/xxx.sql
 
 # JDBC 连接串常用参数
 
-* PostgreSQL JDBC 官方驱动下载地址：https://jdbc.postgresql.org/download/
-* PostgreSQL JDBC 官方参数说明文档：https://jdbc.postgresql.org/documentation/use/
-* 驱动类：`driver-class-name=org.postgresql.Driver`​
+- PostgreSQL JDBC 官方驱动下载地址：https://jdbc.postgresql.org/download/
+- PostgreSQL JDBC 官方参数说明文档：https://jdbc.postgresql.org/documentation/use/
+- 驱动类：`driver-class-name=org.postgresql.Driver`​
 
 ## 单机 PostgreSQL 连接串
 
@@ -353,9 +353,9 @@ url: jdbc:postgresql://10.20.1.231:5432/postgres?
 binaryTransfer=false&forceBinary=false&reWriteBatchedInserts=true
 ```
 
-* ​`binaryTransfer=false`​：控制是否使用二进制协议传输数据，`false`​ 表示不适用，默认为 `true`​
-* ​`forceBinary=false`​：控制是否将非 ASCII 字符串强制转换为二进制格式，`false`​ 表示不强制转换，默认为 `true`​
-* ​`reWriteBatchedInserts=true`​：控制是否将批量插入语句转换成更高效的形式，`true`​ 表示转换，默认为 `false`​
+- ​`binaryTransfer=false`​：控制是否使用二进制协议传输数据，`false`​ 表示不适用，默认为 `true`​
+- ​`forceBinary=false`​：控制是否将非 ASCII 字符串强制转换为二进制格式，`false`​ 表示不强制转换，默认为 `true`​
+- ​`reWriteBatchedInserts=true`​：控制是否将批量插入语句转换成更高效的形式，`true`​ 表示转换，默认为 `false`​
 
 ‍
 
@@ -368,11 +368,11 @@ url: jdbc:postgresql://10.20.1.231:5432/postgres?
 binaryTransfer=false&forceBinary=false&reWriteBatchedInserts=true&targetServerType=master&loadBalanceHosts=true
 ```
 
-* 单机 PostgreSQL 连接串的所有参数。
-* ​`targetServerType=master`​：只允许连接到具有所需状态的服务器，可选值有：
+- 单机 PostgreSQL 连接串的所有参数。
+- ​`targetServerType=master`​：只允许连接到具有所需状态的服务器，可选值有：
 
-  * ​`any`​：默认，表示连接到任何一个可用的数据库服务器，不区分主从数据库；
-  * ​`master`​：表示连接到主数据库，可读写；
-  * ​`slave`​：表示连接到从数据库，可读，不可写；
-  * 其他不常用值：primary, master, slave, secondary, preferSlave, preferSecondary and preferPrimary。
-* ​`loadBalanceHosts=true`​：控制是否启用主从模式下的负载均衡，`true`​ 表示启用，开启后依序选择一个 ip1:port 进行连接，默认为 `false`​。
+  - ​`any`​：默认，表示连接到任何一个可用的数据库服务器，不区分主从数据库；
+  - ​`master`​：表示连接到主数据库，可读写；
+  - ​`slave`​：表示连接到从数据库，可读，不可写；
+  - 其他不常用值：primary, master, slave, secondary, preferSlave, preferSecondary and preferPrimary。
+- ​`loadBalanceHosts=true`​：控制是否启用主从模式下的负载均衡，`true`​ 表示启用，开启后依序选择一个 ip1:port 进行连接，默认为 `false`​。

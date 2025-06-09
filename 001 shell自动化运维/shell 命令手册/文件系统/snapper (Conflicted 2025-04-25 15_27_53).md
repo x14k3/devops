@@ -24,10 +24,10 @@ Snapper 仅在 btrfs（B-tree 文件系统写入时复制）、ext4 文件系统
 
 以下是 snapper 包的依赖项。当您使用 yum 或其他包管理工具时，所有依赖项都会自动安装。
 
-* libsnapper-devel-0.1.6-2.1.x86_64.rpm
-* pam_snapper-0.1.6-2.1.x86_64.rpm
-* snapper-debuginfo-0.1.6-2.1.x86_64.rpm
-* snapper-debugsource-0.1.6-2.1.x86_64.rpm
+- libsnapper-devel-0.1.6-2.1.x86_64.rpm
+- pam_snapper-0.1.6-2.1.x86_64.rpm
+- snapper-debuginfo-0.1.6-2.1.x86_64.rpm
+- snapper-debugsource-0.1.6-2.1.x86_64.rpm
 
 ### 创建 btrfs 文件系统
 
@@ -198,9 +198,9 @@ c.... /snapmount/testfile1
 
 在输出中：
 
-* 输出中的“c”表示内容已被修改。
-* “+”表示将newl文件添加到目录中。
-* “-”表示有文件被删除。
+- 输出中的“c”表示内容已被修改。
+- “+”表示将newl文件添加到目录中。
+- “-”表示有文件被删除。
 
 ### 拍摄多个快照并比较输出
 

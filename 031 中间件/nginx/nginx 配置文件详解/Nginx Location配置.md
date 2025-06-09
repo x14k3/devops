@@ -31,8 +31,8 @@ location ^~ /static {
 
 **注意**：上例中我们使用了`alias`​别名设置了静态文件所在目录，我们还可以使用`root`​指定静态文件目录。注意：`alias`​和`root`​是有区别的。
 
-* ​`root`​对路径的处理：root路径 ＋ location路径
-* ​`alias`​对路径的处理：使用alias路径替换location路径
+- ​`root`​对路径的处理：root路径 ＋ location路径
+- ​`alias`​对路径的处理：使用alias路径替换location路径
 
 如果用`root`​设置静态文件资源路径，可以按如下代码设置。两者是等同的。
 

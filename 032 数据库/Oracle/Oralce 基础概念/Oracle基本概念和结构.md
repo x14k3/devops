@@ -31,19 +31,19 @@ total 2428380
 -rw-r----- 1 oracle oinstall    5251072 May 17 15:05 users01.dbf
 ```
 
-* 数据文件（\*.DBF） 数据文件是一个二进制文件，是用于保存用户应用程序数据和Oracle系统内部数据的文件，这些文件在操作系统中就是普通的操作系统文件。 Oracle在创建表空间的同时会创建数据文件。
+- 数据文件（\*.DBF） 数据文件是一个二进制文件，是用于保存用户应用程序数据和Oracle系统内部数据的文件，这些文件在操作系统中就是普通的操作系统文件。 Oracle在创建表空间的同时会创建数据文件。
 
   必须存在的数据文件：
 
-  * system01.dbf 系统的数据文件
-  * sysaux01.dbf 系统的辅助数据文件，数据字典，AWR信息（性能诊断和调优使用）
-  * undotbs01.dbf 还原历史数据的记录文件
-  * temp.dbf 临时数据文件，排序等
+  - system01.dbf 系统的数据文件
+  - sysaux01.dbf 系统的辅助数据文件，数据字典，AWR信息（性能诊断和调优使用）
+  - undotbs01.dbf 还原历史数据的记录文件
+  - temp.dbf 临时数据文件，排序等
 
   可选数据文件：
 
-  * 用户数据文件lmtbsq1.dbf
-* 日志文件（\*.LOG） 日志文件在Oracle数据库中分为重做日志（Redo Log File）文件和归档日志文件两种。重做日志文件是Oracle数据库正常运行不可缺少的文件。重做日志文件主要记录了数据库操作过程。用于备份和还原数据库，以达到数据库的最新状态。
+  - 用户数据文件lmtbsq1.dbf
+- 日志文件（\*.LOG） 日志文件在Oracle数据库中分为重做日志（Redo Log File）文件和归档日志文件两种。重做日志文件是Oracle数据库正常运行不可缺少的文件。重做日志文件主要记录了数据库操作过程。用于备份和还原数据库，以达到数据库的最新状态。
 
   Oracle推荐： - 使用日志组来管理日志文件 - 每组至少两个成员 - 写日志以日志组为单位 - 默认有三个日志组
 
@@ -79,12 +79,12 @@ total 2428380
       > 什么是检查点 参考：[Oracle检查点](Oracle检查点.md)
       >
 
-* 控制文件（.CTL） 控制文件是一个二进制文件，它主要记录数据库的名称、数据库的数据文件存放位置等信息。一个控制文件只能属于一个数据库。 如果控制文件丢失，这数据库就无法操作。
+- 控制文件（.CTL） 控制文件是一个二进制文件，它主要记录数据库的名称、数据库的数据文件存放位置等信息。一个控制文件只能属于一个数据库。 如果控制文件丢失，这数据库就无法操作。
 
-  * 数据文件和Log文件的位置
-  * 在启动过程中，系统会找tcl文件定位数据文件和log文件
-  * rman备份的元信息也存放在ctl文件中
-  * Oracle推荐多路复用机制—多存几份，应当放到不同的物理存储位置
+  - 数据文件和Log文件的位置
+  - 在启动过程中，系统会找tcl文件定位数据文件和log文件
+  - rman备份的元信息也存放在ctl文件中
+  - Oracle推荐多路复用机制—多存几份，应当放到不同的物理存储位置
 
   ```bash
   SQL> desc v$controlfile
@@ -123,15 +123,15 @@ NAME                                 TYPE        VALUE
 db_block_size                        integer     8192
 ```
 
-* 一个block - 8k，数据仓库 16k
-* extent 若干连续的bolck
+- 一个block - 8k，数据仓库 16k
+- extent 若干连续的bolck
 
 ## 架构-进程结构
 
 Oracle 进程是运行 Oracle 数据库代码的执行单元。在多线程体系结构中，Oracle 进程可以是操作系统进程，也可以是操作系统进程中的线程。Oracle 进程包括以下子类型：
 
-* 后台进程从数据库实例开始，执行维护任务，如执行实例恢复、清理进程、将重做缓冲区写入磁盘等。
-* 服务器进程根据客户端请求执行工作（1-3）。
+- 后台进程从数据库实例开始，执行维护任务，如执行实例恢复、清理进程、将重做缓冲区写入磁盘等。
+- 服务器进程根据客户端请求执行工作（1-3）。
 
 ![F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C.jpeg](assets/network-asset-F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C-20241022144429-cyc79w0.jpeg)​
 
@@ -309,7 +309,7 @@ pga_aggregate_target                 big integer 10282M
 
 11g以后提供2个功能。
 
-* AMM，Automatic memory management。设置一个总内存，让Oracle自动分配SGA和PGA。memory\_target = SGA + n\*PGA
+- AMM，Automatic memory management。设置一个总内存，让Oracle自动分配SGA和PGA。memory\_target = SGA + n\*PGA
 
 ```bash
 SQL> show parameter memory
@@ -331,4 +331,4 @@ optimizer_inmemory_aware             boolean     TRUE
 shared_memory_address                integer     0
 ```
 
-* ASMM（Automatic Shared Memory Management）自动分配SGA内部的各部分内存使用。
+- ASMM（Automatic Shared Memory Management）自动分配SGA内部的各部分内存使用。

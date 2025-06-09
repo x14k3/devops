@@ -48,12 +48,12 @@ interact
 
 ​`说明 :`​
 
-* 第一行是指定执行的模式，我们平时写shell 是用 #!/bin/bash 等等，这个我们执行我们用 `#!/usr/bin/expect`​
-* set timeout 20 这个是用来设置相应的时间，如果里面的脚本执行或者网络问题超过了这个时间将不执行，这个timeout模式是10
-* spawn 表示在expect下面需要执行的shell脚本
-* expect 是捕获执行shell以后系统返回的提示框内容。`""`​这个表示提示框里面是否包括这个内容
-* send 如果expect监测到内容了，那么就将send后的内容发送出去 \n表示回车
-* interact 表示结束expect回话，可以继续输入，但是不会返回终端
+- 第一行是指定执行的模式，我们平时写shell 是用 #!/bin/bash 等等，这个我们执行我们用 `#!/usr/bin/expect`​
+- set timeout 20 这个是用来设置相应的时间，如果里面的脚本执行或者网络问题超过了这个时间将不执行，这个timeout模式是10
+- spawn 表示在expect下面需要执行的shell脚本
+- expect 是捕获执行shell以后系统返回的提示框内容。`""`​这个表示提示框里面是否包括这个内容
+- send 如果expect监测到内容了，那么就将send后的内容发送出去 \n表示回车
+- interact 表示结束expect回话，可以继续输入，但是不会返回终端
 
 ```
 $ hostname
@@ -114,15 +114,15 @@ EOF
 
 ## [#](https://wiki.eryajf.net/pages/5279.html#_5%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9) 5、注意事项
 
-* 1、llength argv表示参数的个数2、argv表示参数的个数
-* 2、argv0 表示脚本的名称
-* 3、lindex $argv 0 表示第一个参数，依次类推到n，参数下标是从0开始的
-* 4、if 判断需要用{}括起来
-* 5、if 与后面的{}直接需要有空格
-* 6、expect {}，多行期望，匹配到哪条执行哪条，有时执行shell后预期结果是不固定的，有可能是询问是yes/no，有可能是去输入密码，所以可以用expect{}
-* 7、else不能单独放一行，所以else要跟在}后面
-* 8、两个花括号之间必须有空格隔开，比如if {} {}，否则会报错 expect:extra characters after close-brace
-* 9、使用{来衔接下一行，所以if的条件后需要加左花括号{
+- 1、llength argv表示参数的个数2、argv表示参数的个数
+- 2、argv0 表示脚本的名称
+- 3、lindex $argv 0 表示第一个参数，依次类推到n，参数下标是从0开始的
+- 4、if 判断需要用{}括起来
+- 5、if 与后面的{}直接需要有空格
+- 6、expect {}，多行期望，匹配到哪条执行哪条，有时执行shell后预期结果是不固定的，有可能是询问是yes/no，有可能是去输入密码，所以可以用expect{}
+- 7、else不能单独放一行，所以else要跟在}后面
+- 8、两个花括号之间必须有空格隔开，比如if {} {}，否则会报错 expect:extra characters after close-brace
+- 9、使用{来衔接下一行，所以if的条件后需要加左花括号{
 
 通过各种脚本发现expect对脚本的格式要求特别高，比如{}直接要空格、else以后需要增加{等等，如果发现不能正常运行，优先检查格式是否有问题
 

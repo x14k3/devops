@@ -6,11 +6,11 @@ DVD 可以容纳比任何 CD 更多的数据，已经成为现今视频出版业
 
 我们称作可记录 DVD 的有五种物理记录格式：
 
-* DVD-R：这是第一种可用的 DVD 可记录格式。 DVD-R 标准由 DVD Forum 定义。 这种格式是**一次可写**的。
-* DVD-RW：这是 DVD-R 标准的可覆写版本。 一张 DVD-RW **可以被覆写**大约 1000 次。
-* DVD-RAM：这也是一种被 DVD Forum 所支持的可覆写格式。 DVD-RAM 可以被看作一种可移动硬盘。 然而，这种介质和大部分 DVD-ROM 驱动器以及 DVD-Video 播放器不兼容； 只有少数 DVD 刻录机支持 DVD-RAM。
-* DVD+RW：这是一种由 DVD+RW Alliance 定义的可覆写格式。一张 DVD+RW 可**以被覆写**大约 1000 次。
-* DVD+R：这种格式是 DVD+RW 格式的**一次可写**变种。
+- DVD-R：这是第一种可用的 DVD 可记录格式。 DVD-R 标准由 DVD Forum 定义。 这种格式是**一次可写**的。
+- DVD-RW：这是 DVD-R 标准的可覆写版本。 一张 DVD-RW **可以被覆写**大约 1000 次。
+- DVD-RAM：这也是一种被 DVD Forum 所支持的可覆写格式。 DVD-RAM 可以被看作一种可移动硬盘。 然而，这种介质和大部分 DVD-ROM 驱动器以及 DVD-Video 播放器不兼容； 只有少数 DVD 刻录机支持 DVD-RAM。
+- DVD+RW：这是一种由 DVD+RW Alliance 定义的可覆写格式。一张 DVD+RW 可**以被覆写**大约 1000 次。
+- DVD+R：这种格式是 DVD+RW 格式的**一次可写**变种。
 
 一张单层的可记录 DVD 可以存储 4,700,000,000 字节，相当于 4.38 GB 或者说 4485 MB (1 千字节等于 1024 字节)。
 
@@ -70,3 +70,5 @@ sudo growisofs -M /dev/sr1=/dev/zero                        # 给DVD盘封口(�
 ```
 
 ‍
+
+![Screenshot 2025-05-09 at 13-42-46 Linux光盘刻录_growisofs-CSDN博客](assets/Screenshot%202025-05-09%20at%2013-42-46%20Linux光盘刻录_growisofs-CSDN博客-20250509134330-do7osz5.png)

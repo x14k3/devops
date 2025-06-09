@@ -87,33 +87,33 @@ upstream backend {
 
 可定义以下参数：
 
-* ​`weight=number`​  
+- ​`weight=number`​  
   设置服务器的权重，默认为 1。
-* ​`max_conns=number`​  
+- ​`max_conns=number`​  
   限制与被代理服务器的最大并发活动连接数（`number`​）（1.11.5）。默认值为零，表示没有限制。如果服务器组不驻留在[共享内存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#zone)中，则每个worker 进程的限制都有效。
 
   > 如果启用了[空闲 keepalive](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#keepalive) 连接、多个 [worker 进程](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_processes)和[共享内存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#zone)，则被代理服务器的活动和空闲连接总数可能会超过 `max_conns`​ 的值。
   >
   > 自 1.5.9 版本至 1.11.5 版本之前，此参数为[商业订阅](http://nginx.com/products/?_ga=2.268156877.259929927.1564163363-1186072494.1564163363)部分。
   >
-* ​`max_fails=number`​  
+- ​`max_fails=number`​  
   设置在 `fail_timeout`​ 参数设置的时间内发生与服务器通信的失败重试最大次数，以考虑服务器在 `fail_timeout`​ 参数设置的时间内不可用。默认情况下，失败尝试次数设置为 1。零值则禁止重试计数。失败尝试由 [proxy_next_upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_next_upstream)、[fastcgi_next_upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_next_upstream)、[uwsgi_next_upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_uwsgi_module#uwsgi_next_upstream)、[scgi_next_upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_scgi_module#scgi_next_upstream)、[memcached_next_upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_memcached_module#memcached_next_upstream) 和 [grpc_next_upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_grpc_module#grpc_next_upstream) 指令定义。
-* ​`fail_timeout=time`​  
+- ​`fail_timeout=time`​  
   设置
 
-  * 在时间范围内与服务器通信的失败尝试达到指定次数，应将服务器视为不可用
-  * 服务器被视为不可用的时长
+  - 在时间范围内与服务器通信的失败尝试达到指定次数，应将服务器视为不可用
+  - 服务器被视为不可用的时长
 
   默认情况下，参数设置为 10 秒。
-* ​`backup`​  
+- ​`backup`​  
   将服务器标记为备用服务器。当主服务器不可用时，它将接收请求。
-* ​`down`​  
+- ​`down`​  
   将服务器标记为永久不可用。  
   此外，以下参数为[商业订阅](http://nginx.com/products/?_ga=2.99512918.99786210.1588592638-1615340879.1588592638)部分：
-* ​`resolve`​  
+- ​`resolve`​  
   监控与服务器域名对应的 IP 地址的变更，并自动修改 upstream 配置，无需重新启动 nginx（1.5.12）。服务器组必须驻留在[共享内存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#zone)中。  
   要使此参数起作用，必须在 [http](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#http) 块中指定 [resolver](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#resolver) 指令：
-* ```
+- ```
     http {
         resolver 10.0.0.1;
 
@@ -124,9 +124,9 @@ upstream backend {
         }
     }
   ```
-* ​`route=string`​  
+- ​`route=string`​  
   设置服务器路由名称。
-* ​`service=name`​  
+- ​`service=name`​  
   能够解析 DNS [SRV](https://tools.ietf.org/html/rfc2782) 记录并设置服务名称（1.9.13）。要使此参数起作用，必须为服务器指定 [resolve](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#resolve) 参数并指定不带端口号的主机名。  
   如果服务名称不包含点（`.`​），则构造符合 [RFC](https://tools.ietf.org/html/rfc2782) 的名称，并将 TCP 协议添加到服务前缀。例如，要查找 `_http._tcp.backend.example.com`​ SRV 记录，必须指定该指令：
 
@@ -136,18 +136,18 @@ upstream backend {
 
 如果服务名称包含一个或多个点，则通过加入服务前缀和服务器名称来构造名称。例如，要查找 `_http._tcp.backend.example.com和server1.backend.example.com`​ SRV 记录，必须指定指令：
 
-* ```
+- ```
     server backend.example.com service=_http._tcp resolve;
     server example.com service=server1.backend resolve;
   ```
 
   最高优先级的 SRV 记录（具有相同最低优先级值的记录）被解析为主服务器，其余 SRV 记录被解析为备份服务器。如果为服务器指定了 [backup](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#backup) 参数，则高优先级 SRV 记录将解析为备份服务器，其余 SRV 记录将被忽略。
-* ​`slow_start=time`​  
+- ​`slow_start=time`​  
   当不健康的服务器变成[健康](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_hc_module#health_check)状态时，或者服务器在一段时间被认为不可用后变得可用时，设置服务器将其权重从零恢复到标称值的时间（`time`​）。默认值为零，即禁用慢启动。
 
   > 该参数不能与 [hash](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#hash) 和 [ip_hash](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#ip_hash) 负载均衡方式一起使用。
   >
-* ​`drain`​  
+- ​`drain`​  
   使服务器进入 draining 模式（1.13.6）。在此模式下，只有[绑定](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#sticky)到服务器的请求才会被代理。
 
   > 在 1.13.6 版之前，只能使用 [API](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/http/ngx_http_api_module.md) 模块更改参数。
@@ -450,7 +450,7 @@ server {
 
 启用会话关联，这会将来自同一客户端的请求传递到一组服务器中的同一服务器。有三种方法可供选择：
 
-* ​`cookie`​  
+- ​`cookie`​  
   使用 `cookie`​ 方法时，有关指定服务器的信息将在 nginx 生成的 HTTP cookie 中传递：
 
 ```
@@ -466,7 +466,7 @@ server {
 
 第一个参数设置为要审查或检查的 cookie 的名称。cookie 值是一个 IP 地址和端口的 MD5 哈希值或 UNIX 域套接字路径的十六进制表示形式。但如果指定了 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#server) 指令的 `route`​ 参数，则 cookie 值将是 `route`​ 参数的值：
 
-* ```
+- ```
     upstream backend {
         server backend1.example.com route=a;
         server backend2.example.com route=b;
@@ -478,23 +478,23 @@ server {
   在这种情况下，`srv_id`​ cookie 的值将是 `a`​ 或 `b`​。  
   其他参数如下：
 
-  * ​`expires=time`​  
+  - ​`expires=time`​  
     设置浏览器保留 cookie 的时间（`time`​）。特殊值 `max`​ 将 cookie 设置在 `31 Dec 2037 23:55:55 GMT`​ 时到期。如果未指定参数，cookie 将在浏览器会话结束时到期。
-  * ​`domain=domain`​
+  - ​`domain=domain`​
 
   定义 cookie 的域（`domain`​）。参数值可以包含变量（1.11.5）。
-* ​`httponly`​  
+- ​`httponly`​  
   将 `HttpOnly`​ 属性添加到 cookie 中（1.7.11）。
-* ​`secure`​  
+- ​`secure`​  
   将 `Secure`​ 属性添加到 cookie 中（1.7.11）。
-* ​`path=path`​  
+- ​`path=path`​  
   定义 cookie 的设置路径（`path`​）。  
   被省略参数将不会被设置在 cookie 中。
-* ​`route`​  
+- ​`route`​  
   使用 `route`​ 方法时，被代理服务器在收到第一个请求时为客户端分配路由。来自此客户端的所有后续请求将在 cookie 或 URI 中携带路由信息。此信息将与 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#server) 指令的 `route`​ 参数进行比较，以标识应将请求代理到哪个服务器。如果未指定 `route`​ 参数，则路由名称将是 IP 地址和端口的 MD5 哈希值或 UNIX 域套接字路径的十六进制表示形式。如果指定的服务器无法处理请求，则使用配置的均衡策略选择新服务器，与请求中没有路由信息的情况处理方式一样。  
   ​`route`​ 方法的参数指定可能包含路由信息的变量。第一个非空变量用于查找匹配服务器。  
   示例：
-* ```
+- ```
     map $cookie_jsessionid $route_cookie {
         ~.+\.(?P<route>\w+)$ $route;
     }
@@ -512,9 +512,9 @@ server {
   ```
 
   此处，路由取自 `JSESSIONID`​ cookie（如果请求中存在）。否则，使用来自 URI 的路由。
-* ​`learn`​  
+- ​`learn`​  
   当使用 `learn`​ 方法（1.7.1）时，nginx 会分析 upstream 服务器响应并了解经常在 HTTP cookie 中传递的服务器会话。
-* ```
+- ```
     upstream backend {
     server backend1.example.com:8080;
     server backend2.example.com:8081;
@@ -552,31 +552,31 @@ sticky cookie name [expires=time] [domain=domain] [path=path];
 
 ​`ngx_http_upstream_module`​ 模块支持以下内部变量：
 
-* ​`$upstream_addr`​  
+- ​`$upstream_addr`​  
   保存 IP 地址和端口，或 upstream 服务器的 UNIX 域套接字的路径。如果在请求处理期间接触了多个服务器，则它们的地址用逗号分隔，例如 `192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock`​。如果从一个服务器组到另一个服务器组的内部发生重定向，由 `X-Accel-Redirect`​ 或 `error_page`​ 发起，则来自不同组的服务器地址由冒号分隔，例如 `192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock : 192.168.10.1:80, 192.168.10.2:80`​。 如果无法选择服务器，则变量将保留服务器组的名称。
-* ​`$upstream_bytes_received`​  
+- ​`$upstream_bytes_received`​  
   从 upstream 服务器（1.11.4）接收的字节数。来自多个连接的值由逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_bytes_sent`​  
+- ​`$upstream_bytes_sent`​  
   发送到 upstream 服务器的字节数（1.15.8）。来自多个连接的值由逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_cache_status`​  
+- ​`$upstream_cache_status`​  
   保存访问响应缓存的状态（0.8.3）。状态可以是 `MISS`​、`BYPASS`​、`EXPIRED`​、`STALE`​、`UPDATING`​、`REVALIDATED`​ 或 `HIT`​。
-* ​`$upstream_connect_time`​  
+- ​`$upstream_connect_time`​  
   保存与 upstream 服务器建立连接所花费的时间（1.9.1），时间以秒为单位，精度为毫秒。在 SSL 的情况下，包含握手时间。多个连接的时间用逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_cookie_name`​  
+- ​`$upstream_cookie_name`​  
   upstream 服务器在 `Set-Cookie`​ 响应头字段（1.7.1）中发送的有指定名称的 cookie。仅保存最后一台服务器响应中的 cookie。
-* ​`$upstream_header_time`​  
+- ​`$upstream_header_time`​  
   保存从 upstream 服务器接收响应头所花费的时间（1.7.10），时间以秒为单位，精度为毫秒。多个响应的时间用逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_http_name`​  
+- ​`$upstream_http_name`​  
   保存服务器响应头字段。例如，`Server`​ 响应头字段可通过 `$upstream_http_server`​ 变量获得。将头字段名称转换为变量名称的规则与以 [$http_](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#var_http_) 前缀开头的变量相同。仅保存最后一个服务器响应中的头字段。
-* ​`$upstream_queue_time`​  
+- ​`$upstream_queue_time`​  
   保存请求在 upstream 队列中花费的时间（1.13.9），时间以秒为单位，精度为毫秒。多个响应的时间用逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_response_length`​  
+- ​`$upstream_response_length`​  
   保存从 upstream 服务器获得的响应长度（0.7.27），长度以字节为单位。多个响应的长度用逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_response_time`​  
+- ​`$upstream_response_time`​  
   保存从 upstream 服务器接收响应所花费的时间，时间以秒为单位，精度为毫秒。多个响应的时间用逗号和冒号分隔，参考 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。
-* ​`$upstream_status`​  
+- ​`$upstream_status`​  
   保存从 upstream 服务器获得的响应的状态代码。多个响应的状态代码用逗号和冒号分隔，如 [$upstream_addr](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_upstream_module#upstream_addr) 变量中的地址格式。如果没有服务器被选中，该变量的值将为 502 (Bad Gateway) 状态码。
-* ​`$upstream_trailer_name`​  
+- ​`$upstream_trailer_name`​  
   保存从 upstream 服务器（1.13.10）获得的响应结束时的字段。
 
 ‍

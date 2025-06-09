@@ -36,7 +36,7 @@ mkdir -p /data/mongodb/data /data/mongodb/log
 
 ## 启动mongodb服务
 
-* 命令参数启动
+- 命令参数启动
 
 ```bash
 mongod --port=27017 --dbpath=/mongodb/data --logpath=/mongodb/log/mongodb.log --bind_ip=0.0.0.0 --fork
@@ -48,7 +48,7 @@ mongod --port=27017 --dbpath=/mongodb/data --logpath=/mongodb/log/mongodb.log --
     --fork: 后台启动
 ```
 
-* 也可以将上面的参数写到配置文件中，如`/mongodb/conf/mongo.conf`​文件，必须是yaml格式
+- 也可以将上面的参数写到配置文件中，如`/mongodb/conf/mongo.conf`​文件，必须是yaml格式
 
 ```ymal
 systemLog:
@@ -67,7 +67,7 @@ processManagement:
   fork: true
 ```
 
-* 将命令行参数直接转换为yaml:`--outputConfig`​
+- 将命令行参数直接转换为yaml:`--outputConfig`​
 
 ```bash
 mongod --port=27017 --dbpath=/mongodb/data --logpath=/mongodb/log/mongodb.log --bind_ip=0.0.0.0 --fork --outputConfig
@@ -92,7 +92,7 @@ systemLog:
 
 ‍
 
-* 关于配置参数的详细信息可以查看[官方文档](https://www.mongodb.com/docs/v7.0/reference/configuration-options/)
+- 关于配置参数的详细信息可以查看[官方文档](https://www.mongodb.com/docs/v7.0/reference/configuration-options/)
 
 ```bash
 # 启动mongo服务
@@ -106,7 +106,7 @@ mongod -f /data/mongodb/mongo.conf --shutdown
 
 ### 安装mongoDB时可能遇到的问题
 
-* 启动mongodb服务时，提示`mongod: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory`​
+- 启动mongodb服务时，提示`mongod: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory`​
 
 ```bash
 wget  https://www.openssl.org/source/openssl-1.1.1w.tar.gz
@@ -127,9 +127,9 @@ ln -s /usr/local/lib64/libssl.so.1.1 /usr/lib64/libssl.so.1.1
 
 rpm 安装
 
-* 从mongodb6开始不再支持mongo命令，而是需要使用mongosh命令，关于mongosh命令的使用可以查看[官方文档](https://www.mongodb.com/docs/mongodb-shell/)
-* mongosh命令的使用方式与mongo命令基本一致
-* 下载地址：[mongosh下载地址](https://www.mongodb.com/try/download/shell)
+- 从mongodb6开始不再支持mongo命令，而是需要使用mongosh命令，关于mongosh命令的使用可以查看[官方文档](https://www.mongodb.com/docs/mongodb-shell/)
+- mongosh命令的使用方式与mongo命令基本一致
+- 下载地址：[mongosh下载地址](https://www.mongodb.com/try/download/shell)
 
 二进制安装
 

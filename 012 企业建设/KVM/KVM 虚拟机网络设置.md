@@ -32,9 +32,9 @@ $ sudo virsh net-list --all
  default   active   yes         yes
 ```
 
-其中的default是宿主机安装虚拟机支持模块的时候自动安装的。default的配置文件在/etc/libvirt/qemu/networks/default.xml中，
+其中的default是宿主机安装虚拟机支持模块的时候自动安装的。default的配置文件在`/etc/libvirt/qemu/networks/default.xml`​中，
 
-如果想要修改默认的virbr0网址，可以修改/etc/libvirt/qemu/networks/目录下的default.xml或者autostart/default.xml文件，其他内容不用动，virbr0网址可修改“ip address”一行，并可指定子网掩码，另外要设置新的地址池范围。修改完毕重启libvirtd服务，如果没有显示新的IP，需要重启服务器生效。
+如果想要修改默认的virbr0网址，可以修改`/etc/libvirt/qemu/networks/`​目录下的default.xml或者autostart/default.xml文件，其他内容不用动，virbr0网址可修改“ip address”一行，并可指定子网掩码，另外要设置新的地址池范围。修改完毕重启libvirtd服务，如果没有显示新的IP，需要重启服务器生效。
 
 ```xml
 <network>
@@ -166,79 +166,84 @@ Bridge方式即虚拟网桥的网络连接方式，是客户机和子网里面�
 
 首先在宿主机中配置网桥虚拟网卡
 
-* 方式一：
+#### 方式一
 
-  ```bash
-  ################# Centos #######################
-  # 1. 编辑网桥设备，在/etc/sysconfig/network-scripts/目录下创建ifcgg-br0文件，并写入以下内容
-  vi /etc/sysconfig/network-scripts/ifcfg-br0  
-  -------------------------------------------
-  DEVICE="br0"  
-  ONBOOT="yes"  
-  TYPE="Bridge"  
-  BOOTPROTO=static  
-  IPADDR=192.168.0.101
-  NETMASK=255.255.255.0  
-  GATEWAY=192.168.0.1
-  DEFROUTE=yes
-  -------------------------------------------
+```bash
+################# Centos #######################
+# 1. 编辑网桥设备，在/etc/sysconfig/network-scripts/目录下创建ifcgg-br0文件，并写入以下内容
+vi /etc/sysconfig/network-scripts/ifcfg-br0  
+-------------------------------------------
+DEVICE="br0"  
+ONBOOT="yes"  
+TYPE="Bridge"  
+BOOTPROTO=static  
+IPADDR=192.168.0.101
+NETMASK=255.255.255.0  
+GATEWAY=192.168.0.1
+DEFROUTE=yes
+-------------------------------------------
 
-  ################# debian #######################
-  vim /etc/network/interfaces
-  -------------------------------------------
-  # 添加如下内容
-  auto br0
-  iface br0 inet static
-  	address 192.168.0.110
-  	netmask 255.255.255.0
-  	broadcast 192.168.0.255
-  	gateway 192.168.0.1
-  	bridge_ports enp2s0
-  	bridge_stp off
-  	bridge_fd 0
-  -------------------------------------------
+################# debian #######################
+vim /etc/network/interfaces
+-------------------------------------------
+# 添加如下内容
+# 创建桥接设备 br0
+auto br0
+iface br0 inet static
+    address 192.168.1.10
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    bridge_ports enp3s0         # 加入的物理接口
+    bridge_stp off              # 不启用 STP
+    bridge_fd 3                 # 转发延迟设为 3 秒
+    bridge_maxwait 10           # 等待端口加入的最长时间
+-------------------------------------------
 
-  #对于已经使用netplan来管理网络的ubuntu服务器需要修改netplan而非/etc/network/interfaces
-  vim /etc/netplan/01-network-manager-all.yaml
-  ----------------------------------------------------------
-  # Let NetworkManager manage all devices on this system
-  network:
-    ethernets:
-      enp2s0:
-        dhcp4: false
-    bridges:
-      kvmbr0:
-        interfaces: [enp2s0]
-        dhcp4: no
-        addresses: [192.168.2.222/24]
-        gateway4: 192.168.2.1
-        nameservers:
-          addresses: [192.168.2.1,8.8.8.8,114.114.114.114]
-    version: 2
-  # systemctl restart NetworkManager
-  ```
-
-* 方式二
-
-  [创建网桥](010%20Linux系统管理/linux%20网络管理/linux%20NetworkManager.md#20231110105237-f3dfvh1)
+#对于已经使用netplan来管理网络的ubuntu服务器需要修改netplan而非/etc/network/interfaces
+vim /etc/netplan/01-network-manager-all.yaml
+----------------------------------------------------------
+# Let NetworkManager manage all devices on this system
+network:
+  ethernets:
+    enp2s0:
+      dhcp4: false
+  bridges:
+    kvmbr0:
+      interfaces: [enp2s0]
+      dhcp4: no
+      addresses: [192.168.2.222/24]
+      gateway4: 192.168.2.1
+      nameservers:
+        addresses: [192.168.2.1,8.8.8.8,114.114.114.114]
+  version: 2
+# systemctl restart NetworkManager
+```
 
 ‍
 
-重启网络服务
+#### 方式二
 
-`systemctl restart network`
+[创建网桥](010%20Linux系统管理/linux%20网络管理/linux%20NetworkManager.md#20231110105237-f3dfvh1)
 
 校验桥接接口
 
-`brctl show`
+​`brctl show`​
 
-使用方式-新建虚拟机的时候使用方式
+‍
+
+‍
+
+### 使用方式
+
+新建虚拟机的时候使用方式
 
 ```bash
 virt-install ---network bridge=br0
 ```
 
-使用方式-已有虚拟机可以通过修改配置文件方式
+‍
+
+已有虚拟机可以通过修改配置文件方式  
 编辑修改虚拟机配置文件 /etc/libvirt/qemu/v1.xml，增加如下内容
 
 ```xml
@@ -249,6 +254,8 @@ virt-install ---network bridge=br0
 <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>  
 </interface>  
 ```
+
+‍
 
 ### 问题发现
 

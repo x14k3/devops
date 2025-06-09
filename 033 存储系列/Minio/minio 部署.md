@@ -298,9 +298,9 @@ kms      kms管理操作
 
 打开 [http://127.0.0.1:9090](http://127.0.0.1:9090) ，输入 root 用户命和密码 (均为 `minioadmin`​) 可以看到 MinIO Console 菜单向分为了三类：
 
-* User: 对象浏览、Access Token。
-* Administrator: bucket 管理、用户和权限管理等。
-* Subscription: 付费订阅的企业级能力，本文不做介绍。
+- User: 对象浏览、Access Token。
+- Administrator: bucket 管理、用户和权限管理等。
+- Subscription: 付费订阅的企业级能力，本文不做介绍。
 
 #### bucket 管理
 
@@ -324,10 +324,10 @@ kms      kms管理操作
 
 MinIO 采用 PBAC （Policy-Based Access Control , 基于策略的访问控制），有如下概念：
 
-* 策略，定义对那些资源拥有哪些行为。
-* 用户，鉴权主体，默认使用用户名密码认证，可以关联多个策略。
-* 组，一组策略的集合，用户可以选择加入多个组，组下的用户继承该组关联所有策略。
-* 服务账号 (Service Accounts, Access  Keys)，用户可以创建多服务账号，服务账号默认会继承该用户的所有策略（也可以配置用户策略的一个子集），这个服务账号包含 Access Key 和 Secret Key，服务账号用于给开发者编写的程序与对象存储系统进行认证鉴权的方式。
+- 策略，定义对那些资源拥有哪些行为。
+- 用户，鉴权主体，默认使用用户名密码认证，可以关联多个策略。
+- 组，一组策略的集合，用户可以选择加入多个组，组下的用户继承该组关联所有策略。
+- 服务账号 (Service Accounts, Access  Keys)，用户可以创建多服务账号，服务账号默认会继承该用户的所有策略（也可以配置用户策略的一个子集），这个服务账号包含 Access Key 和 Secret Key，服务账号用于给开发者编写的程序与对象存储系统进行认证鉴权的方式。
 
 上一步我们创建一个名为 `bucket-test`​ 的 bucket。这里基于如上机制，创建一个用户和服务账号，且约束其只能操作 `bucket-test`​这个 bucket，步骤如下：
 
@@ -350,13 +350,13 @@ MinIO 采用 PBAC （Policy-Based Access Control , 基于策略的访问控制�
     }
     ```
 
-    * Version 为版本号。
-    * Statement 为策略表达式数组，其中值包含一个对象。
+    - Version 为版本号。
+    - Statement 为策略表达式数组，其中值包含一个对象。
 
-      * ​`"Effect": "Allow"`​ 表示允许对 `Resource`​ 做 `Action`​。
-      * ​`Action`​ 表示允许执行的动作，`"s3:*"`​ 表示所有 AWS S3 API 可以执行所有操作都允许执行。
-      * ​`Resource`​ 表示允许操作的资源， `"arn:aws:s3:::bucket-test/*"`​ 表示只允许操作 bucket 名为 `bucket-test`​ 的 bucket
-    * 更多关于策略 JSON 的编写，参见：[官方文档](https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/policy-based-access-control.html#policy-document-structure)。
+      - ​`"Effect": "Allow"`​ 表示允许对 `Resource`​ 做 `Action`​。
+      - ​`Action`​ 表示允许执行的动作，`"s3:*"`​ 表示所有 AWS S3 API 可以执行所有操作都允许执行。
+      - ​`Resource`​ 表示允许操作的资源， `"arn:aws:s3:::bucket-test/*"`​ 表示只允许操作 bucket 名为 `bucket-test`​ 的 bucket
+    - 更多关于策略 JSON 的编写，参见：[官方文档](https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/policy-based-access-control.html#policy-document-structure)。
 2. 打开 [Identity - Users 页面](http://127.0.0.1:9090/identity/users)，点击创建用户，填写用户名 `bucket-test-user`​ 密码 `12345678`​ （仅测试）， Assign Policies 选择 `bucket-test-rw`​，点击保存。
 3. 退出登录 root 用户，使用上述创建账号登录，这个用户能看到 Administrator 菜单项只有 Buckets，只能管理 `bucket-test`​ 这个 bucket 了。
 4. 打开 [Access Keys](http://127.0.0.1:9090/access-keys)，点击 Create Access Key 即可创建一个服务账号，可以获取到 Access Key 和 Secret Key （如 Access Key: `1qJ4sGlF6HzTWIHsakYK`​，Secret Key: `UwkpCLEMX2ODx5Cg9FfsxGGokIWXRofFwO8Chiq0`​）。需要注意的是，创建服务的 Secret Key 只有首次创建的时候才能获取，后续将服务从后台拿到，需谨慎保管。
@@ -369,16 +369,16 @@ MinIO 采用 PBAC （Policy-Based Access Control , 基于策略的访问控制�
 
 和常规的分布式存储相比， MinIO 是去中心化的，也就是说:
 
-* MinIO 没有 Master 节点。
-* 所有 MinIO 节点都是对等的。
-* 所有 MinIO 节点配置都相同。
-* 所有 MinIO 节点都有集群的完整全貌。
-* 任意一个 MinIO 节点都可以对外提供 HTTP 服务。
+- MinIO 没有 Master 节点。
+- 所有 MinIO 节点都是对等的。
+- 所有 MinIO 节点配置都相同。
+- 所有 MinIO 节点都有集群的完整全貌。
+- 任意一个 MinIO 节点都可以对外提供 HTTP 服务。
 
 因此：
 
-* 在部署之前需要规划好每个节点的磁盘数和配置，一旦确定后期将无法在线更改。
-* MinIO 集群需要外部负载均衡器（如 Nginx）将流量均衡的打到 MinIO 节点。
+- 在部署之前需要规划好每个节点的磁盘数和配置，一旦确定后期将无法在线更改。
+- MinIO 集群需要外部负载均衡器（如 Nginx）将流量均衡的打到 MinIO 节点。
 
 值得特别说明的是：由于 MinIO server 是 Go 编写的，因此安装配置 MinIO 非常容易，只需要下载一个二进制文件，通过启动参数或环境变量给出整个集群的全貌配置以及磁盘配置即可。如：
 

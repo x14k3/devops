@@ -1,6 +1,6 @@
 # jira
 
-* 📄 [jira和confluence的docker部署](jira/jira和confluence的docker部署.md)
+- 📄 [jira和confluence的docker部署](jira/jira和confluence的docker部署.md)
 
 ## JIRA 介绍
 

@@ -4,18 +4,18 @@ Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安�
 
 **特点：**
 
-* 多线程
-* 可以通过许多协议进行传输UDP，TCP，SSL，TLS，RELP；
-* 直接将日志写入到数据库;
-* 支持加密协议：ssl，tls，relp
-* 强大的过滤器，实现过滤日志信息中任何部分的内容
-* 自定义输出格式；
+- 多线程
+- 可以通过许多协议进行传输UDP，TCP，SSL，TLS，RELP；
+- 直接将日志写入到数据库;
+- 支持加密协议：ssl，tls，relp
+- 强大的过滤器，实现过滤日志信息中任何部分的内容
+- 自定义输出格式；
 
 ## **配置文件详解**
 
 配置文件/etc/rsyslog.conf主要有3个部分
 
-* MODULES ：模块
+- MODULES ：模块
 
   ```
   #### MODULES ####
@@ -34,7 +34,7 @@ Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安�
   #$ModLoad imtcp
   #$InputTCPServerRun 514
   ```
-* GLOBAL DRICTIVES :全局设置
+- GLOBAL DRICTIVES :全局设置
 
   ```
   #### GLOBAL DIRECTIVES ####
@@ -60,7 +60,7 @@ Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安�
   $IMJournalStateFile imjournal.state
 
   ```
-* RULES：规则
+- RULES：规则
 
   ```
   #### RULES ####

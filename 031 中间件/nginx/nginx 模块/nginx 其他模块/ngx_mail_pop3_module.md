@@ -12,13 +12,13 @@
 
 为 POP3 客户端设置允许的认证方法。支持的方法有：
 
-* ​`plain`​  
+- ​`plain`​  
   [USER/PASS](https://tools.ietf.org/html/rfc1939)、[AUTH PLAIN](https://tools.ietf.org/html/rfc4616)、[AUTH LOGIN](https://tools.ietf.org/html/draft-murchison-sasl-login-00)。不可能禁用这些方法。
-* ​`apop`​  
+- ​`apop`​  
   [APOP](https://tools.ietf.org/html/rfc1939)。为了使此方法正常工作，密码不能加密存储。
-* ​`cram-md5`​  
+- ​`cram-md5`​  
   [AUTH CRAM-MD5](https://tools.ietf.org/html/rfc2195)。为了使此方法正常工作，密码不能加密存储。
-* ​`external`​  
+- ​`external`​  
   [AUTH EXTERNAL](https://tools.ietf.org/html/rfc4422)（1.11.6）。
 
 ### pop3\_capabilities

@@ -116,9 +116,9 @@ echo -n 'linksecret' | openssl md5 -hex
 
 ## 内嵌变量
 
-* ​`$secure_link`​  
+- ​`$secure_link`​  
   链接检查的状态。具体值取决于所选的操作模式。
-* ​`$secure_link_expires`​  
+- ​`$secure_link_expires`​  
   请求中传递的链接的过期时间，仅用于 `secure_link_md5`​ 指令。
 
 ‍

@@ -106,15 +106,15 @@ INFO   PLATFORM,RFKILL,ETHER,WIFI,BT,MB,DHCP4,DHCP6,PPP,IP4,IP6,AUTOIP4,DNS,VPN,
 命令描述：查询网络管理器网络状态，开启和关闭网络
 选项：
 
-* **on**: 禁用所有接口
-* **off**: 开启所有接口
-* **connectivity**: 获取网络状态，可选参数`checl`​告诉网络管理器重新检查连接性，否则显示最近已知的状态。而无需重新检查。（可能的状态如下所示）
+- **on**: 禁用所有接口
+- **off**: 开启所有接口
+- **connectivity**: 获取网络状态，可选参数`checl`​告诉网络管理器重新检查连接性，否则显示最近已知的状态。而无需重新检查。（可能的状态如下所示）
 
-  * **none**: 主机为连接到任何网络
-  * **portal**: 无法到达完整的互联网
-  * **limited**: 主机已连接到网络，但无法访问互联网
-  * **full**: 主机连接到网络，并具有完全访问
-  * **unknown**: 无法找到连接状态
+  - **none**: 主机为连接到任何网络
+  - **portal**: 无法到达完整的互联网
+  - **limited**: 主机已连接到网络，但无法访问互联网
+  - **full**: 主机连接到网络，并具有完全访问
+  - **unknown**: 无法找到连接状态
 
 ```bash
 [root@www ~]# nmcli networking connectivity
@@ -445,17 +445,17 @@ Connection successfully reapplied to device 'eth0'.
 
 mcli 如果成功退出状态值为0，如果发生错误则返回大于0的值。
 
-* **0**: 成功-指示操作已成功
-* **1**: 位置或指定的错误
-* **2**: 无效的用户输入，错误的nmcli调用
-* **3**: 超时了（请参阅 --wait 选项）
-* **4**: 连接激活失败
-* **5**: 连接停用失败
-* **6**: 断开设备失败
-* **7**: 连接删除失败
-* **8**: 网络管理器没有运行
-* **10**: 连接、设备或接入点不存在
-* **65**: 当使用 --complete-args 选项，文件名应遵循。
+- **0**: 成功-指示操作已成功
+- **1**: 位置或指定的错误
+- **2**: 无效的用户输入，错误的nmcli调用
+- **3**: 超时了（请参阅 --wait 选项）
+- **4**: 连接激活失败
+- **5**: 连接停用失败
+- **6**: 断开设备失败
+- **7**: 连接删除失败
+- **8**: 网络管理器没有运行
+- **10**: 连接、设备或接入点不存在
+- **65**: 当使用 --complete-args 选项，文件名应遵循。
 
 ---
 
@@ -723,14 +723,14 @@ bonding-bond0       755f0c93-6638-41c1-a7de-5e932eba6d1f  bond      bond0
 
 第二步，需要创建一个`ovs-bridge`​，但是呢，这里有个坑，在`man nm-openvswitch`​里也有一些说明：
 
-> * NetworkManager only ever talks to a single OVSDB instance via an UNIX domain socket.
-> * The configuration is made up of Bridges, Ports and Interfaces. Interfaces are always enslaved to Ports, and Ports are
+> - NetworkManager only ever talks to a single OVSDB instance via an UNIX domain socket.
+> - The configuration is made up of Bridges, Ports and Interfaces. Interfaces are always enslaved to Ports, and Ports are
 >   always enslaved to Bridges.
-> * NetworkManager only creates Bridges, Ports and Interfaces you ask it to. Unlike ovs-vsctl, it doesn’t create the local
+> - NetworkManager only creates Bridges, Ports and Interfaces you ask it to. Unlike ovs-vsctl, it doesn’t create the local
 >   interface nor its port automatically.
-> * You can’t enslave Interface directly to a Bridge. You always need a Port, even if it has just one interface.
-> * There are no VLANs. The VLAN tagging is enabled by setting a ovs-port.tag property on a Port.
-> * There are no bonds either. The bonding is enabled by enslaving multiple Interfaces to a Port and configured by setting
+> - You can’t enslave Interface directly to a Bridge. You always need a Port, even if it has just one interface.
+> - There are no VLANs. The VLAN tagging is enabled by setting a ovs-port.tag property on a Port.
+> - There are no bonds either. The bonding is enabled by enslaving multiple Interfaces to a Port and configured by setting
 >   properties on a port.
 
 > Bridges

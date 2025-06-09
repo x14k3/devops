@@ -35,19 +35,19 @@ GNU coreutils 在线帮助：<https://www.gnu.org/software/coreutils/>
 
 ### [#](https://wiki.eryajf.net/pages/5279.html#_1-%E7%BC%96%E7%A0%81) 1，编码
 
-* 直接执行
+- 直接执行
 
   ```
   $ echo 'hello' | base64
   aGVsbG8K
   ```
-* 基于文件
+- 基于文件
 
   ```
   $ echo 'hello' > test.txt && base64 test.txt
   aGVsbG8K
   ```
-* 记得用-w参数
+- 记得用-w参数
 
   有时候内容可能比较长，那么默认的换行结果会多一个换行符，可以用如下方式：
 
@@ -58,13 +58,13 @@ GNU coreutils 在线帮助：<https://www.gnu.org/software/coreutils/>
 
 ### [#](https://wiki.eryajf.net/pages/5279.html#_2-%E8%A7%A3%E7%A0%81) 2，解码
 
-* 直接执行
+- 直接执行
 
   ```
   $ echo 'aGVsbG8K' | base64 -d
   hello
   ```
-* 基于文件
+- 基于文件
 
   ```
   $ echo 'aGVsbG8K' > test.txt && base64 -d test.txt

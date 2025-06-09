@@ -19,10 +19,10 @@ configure arguments: --prefix=/opt/nginx-1.24.0 --with-openssl=/usr/local/src/op
 
 为了减少处理器负载，建议
 
-* 将 [work 进程](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_processes)数设置为与处理器核心数相同
-* 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_cache_shared)会话缓存
-* 禁用[内置](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_cache_builtin)的会话缓存
-* 可以延长会话[生命周期](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_timeout)（默认为 5 分钟）
+- 将 [work 进程](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_processes)数设置为与处理器核心数相同
+- 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_cache_shared)会话缓存
+- 禁用[内置](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_cache_builtin)的会话缓存
+- 可以延长会话[生命周期](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_ssl_module#ssl_session_timeout)（默认为 5 分钟）
 
 ```
 worker_processes auto;
@@ -254,13 +254,13 @@ stream {
 
 设置存储会话参数的缓存的类型和大小。缓存可以是以下任何一种：
 
-* ​`off`​  
+- ​`off`​  
   严格禁止使用会话缓存：nginx 明确告知客户端不得重复使用会话
-* ​`none`​  
+- ​`none`​  
   禁止使用会话缓存：nginx 告诉客户端会话可以被重用，但实际上并没有在缓存中存储会话参数
-* ​`builtin`​  
+- ​`builtin`​  
   内置 OpenSSL 的缓存；仅由一个 worker 进程使用。缓存大小在会话中指定。如果未提供大小，则等于 20480 个会话。使用内置缓存可能导致内存碎片。
-* ​`shared`​  
+- ​`shared`​  
   所有 worker 进程之间共享的缓存。缓存大小以字节为单位，一兆字节可以存储大约 4000 个会话。每个共享缓存都有一个名称。有相同名称的缓存可以在多个服务器中使用。  
   可以同时使用两种缓存类型，例如：
 
@@ -358,39 +358,39 @@ openssl rand 80> ticket.key
 
 自 1.11.2 版本起，`ngx_stream_ssl_module`​ 模块支持以下变量：
 
-* ​`$ssl_cipher`​  
+- ​`$ssl_cipher`​  
   返回用于已建立的 SSL 连接使用的密码算法的名称
-* ​`$ssl_ciphers`​  
+- ​`$ssl_ciphers`​  
   返回客户端支持的密码算法列表（1.11.7）。已知密码算法按名称列出，未知密码算法以十六进制显示，例如：
-* ```
+- ```
   AES128-SHA:AES256-SHA:0x00ff
   ```
 
   > 仅当使用 OpenSSL 1.0.2 或更高版本时，才完全支持该变量。对于较旧的版本，该变量仅适用于新会话，并且仅列出已知密码算法。
   >
-* ​`$ssl_client_cert`​  
+- ​`$ssl_client_cert`​  
   以 PEM 格式返回建立已建立的 SSL 连接的客户端证书，除第一行外，每行均以制表符开头（1.11.8）
-* ​`$ssl_client_fingerprint`​  
+- ​`$ssl_client_fingerprint`​  
   返回已建立的 SSL 连接的客户端证书的 SHA1 指纹（1.11.8）
-* ​`$ssl_client_i_dn`​  
+- ​`$ssl_client_i_dn`​  
   为建立的 SSL 连接返回客户端证书的 [RFC 2253](https://tools.ietf.org/html/rfc2253) **issuer DN** 字符串（1.11.8）
-* ​`$ssl_client_raw_cert`​  
+- ​`$ssl_client_raw_cert`​  
   以 PEM 格式返回已建立的 SSL 连接的客户端证书（1.11.8）
-* ​`$ssl_client_s_dn`​  
+- ​`$ssl_client_s_dn`​  
   返回已建立的 SSL 连接的客户端证书的 [RFC 2253](https://tools.ietf.org/html/rfc2253) **subject DN** 字符串（1.11.8）
-* ​`$ssl_client_serial`​  
+- ​`$ssl_client_serial`​  
   返回已建立的 SSL 连接的客户端证书的序列号（1.11.8）
-* ​`$ssl_client_v_end`​  
+- ​`$ssl_client_v_end`​  
   返回客户证书的截止日期（1.11.8）
-* ​`$ssl_client_v_remain`​  
+- ​`$ssl_client_v_remain`​  
   返回客户端证书距离过期剩余的有效天数（1.11.8）
-* ​`$ssl_client_v_start`​  
+- ​`$ssl_client_v_start`​  
   返回客户端证书的开始日期（1.11.8）
-* ​`$ssl_client_verify`​  
+- ​`$ssl_client_verify`​  
   如果没有证书，则返回客户端证书验证的结果（1.11.8）：`SUCCESS`​、`FAILED:reason`​ 和 `NONE`​
-* ​`$ssl_curves`​  
+- ​`$ssl_curves`​  
   返回客户端支持的椭圆曲线列表（1.11.7）。已知椭圆曲线按名称列出，未知曲线以十六进制显示，例如：
-* ```
+- ```
   0x001d:prime256v1:secp521r1:secp384r1
   ```
 
@@ -399,13 +399,13 @@ openssl rand 80> ticket.key
 
   > 该变量仅适用于新会话。
   >
-* ​`$ssl_protocol`​  
+- ​`$ssl_protocol`​  
   返回已建立的 SSL 连接的协议
-* ​`$ssl_server_name`​  
+- ​`$ssl_server_name`​  
   返回通过 [SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) 请求的服务器名称
-* ​`$ssl_session_id`​  
+- ​`$ssl_session_id`​  
   返回已建立的 SSL 连接的会话标识符
-* ​`$ssl_session_reused`​  
+- ​`$ssl_session_reused`​  
   如果 SSL 会话被复用，则返回 `r`​，否则返回 `.`​
 
 ‍

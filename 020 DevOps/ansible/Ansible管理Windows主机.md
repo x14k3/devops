@@ -6,9 +6,9 @@ Ansible能管理Linux类系统，它是Agentless的，只要在Linux端安装好
 
 但Ansible还能管理Windows系统。可使用三种方式进行管理：
 
-* (1).Windows 10或Windows Server 2016上安装WSL(Windows Subsystem for Linux)，如果是早于该版本的Windows系统，可安装Cygwin模拟Linux环境。然后启动sshd服务，便可让Ansible进行管理
-* (2).Windows上开启WinRM(Windows Remote Management)连接方式，出于安全考虑，Windows默认禁用了WinRM。只要开启了WinRM，Ansible指定WinRM连接方式便可以管理Windows
-* (3).Ansible 2.8中增加了基于Win32-Openssh的ssh连接方式，目前还处于测试阶段
+- (1).Windows 10或Windows Server 2016上安装WSL(Windows Subsystem for Linux)，如果是早于该版本的Windows系统，可安装Cygwin模拟Linux环境。然后启动sshd服务，便可让Ansible进行管理
+- (2).Windows上开启WinRM(Windows Remote Management)连接方式，出于安全考虑，Windows默认禁用了WinRM。只要开启了WinRM，Ansible指定WinRM连接方式便可以管理Windows
+- (3).Ansible 2.8中增加了基于Win32-Openssh的ssh连接方式，目前还处于测试阶段
 
 让Ansible通过WSL基于ssh连接的方式管理Windows系统是非常受限的，Windows不像Linux，Linux通过配置文件完成配置，而Windows通过注册表的方式配置程序，所以通过WSL上只能做一些基本操作，比如文件类操作。这样失去了很多Windows自身的能力，比如域、活动目录类的管理。
 
@@ -26,13 +26,13 @@ pip3 install "pywinrm>=0.3.0"
 
 对于Windows端来说，要让Ansible管理Windows，要求Windows端：
 
-* (1).PowerShell 3.0+
-* (2). .NET 4.0+
+- (1).PowerShell 3.0+
+- (2). .NET 4.0+
 
 所以，默认支持的Windows系统包括：
 
-* (1).Windows 7 SP1, 8, 10
-* (2).Windows Server 2008 SP2, 2008 R2 SP1, 2012, 2012 R2, 2016, 2019
+- (1).Windows 7 SP1, 8, 10
+- (2).Windows Server 2008 SP2, 2008 R2 SP1, 2012, 2012 R2, 2016, 2019
 
 如果是更古老的系统，要求额外安装PowerShell 3.0+以及.NET 4.0+。
 
@@ -95,9 +95,9 @@ ansible_winrm_server_cert_validation=ignore
 
 关于上述Inventory配置，需要注意几点：
 
-* (1).对于自签CA，`ansible_winrm_server_cert_validation`​必须设置为ignore
-* (2).密码不应直接写在inventory中，而是采用Vault加密的方式或者使用`-k, --ask-pass`​选项由用户手动输入
-* (3).如果是域用户，那么`ansible_user`​的格式为：`USERNAME@domain_name`​
+- (1).对于自签CA，`ansible_winrm_server_cert_validation`​必须设置为ignore
+- (2).密码不应直接写在inventory中，而是采用Vault加密的方式或者使用`-k, --ask-pass`​选项由用户手动输入
+- (3).如果是域用户，那么`ansible_user`​的格式为：`USERNAME@domain_name`​
 
 然后找个ping模块测试是否能成功执行。
 

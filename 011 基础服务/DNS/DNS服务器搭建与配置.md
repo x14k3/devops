@@ -18,30 +18,30 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/named.service t
 
 ## DNS配置的主要文件组
 
-*  **/etc/hosts**　　主机的一个文件列表 　　添加记录如:111.13.100.92   [www.baidu.com](http://www.baidu.com)  
+-  **/etc/hosts**　　主机的一个文件列表 　　添加记录如:111.13.100.92   [www.baidu.com](http://www.baidu.com)  
   对于简单的主机名解析（点分表示法），默认在请求DNS或NIS网络域名服务器前，/etc/named.conf 通常会告诉程序先查看此文件。
-*  **/etc/resolv.conf**　　转换程序配置文件  
+-  **/etc/resolv.conf**　　转换程序配置文件  
   在配置程序请求BIND域名查询服务查询主机名时，必须告诉程序使用哪个域名服务器和IP地址来完成这个任务
-*  **/etc/named.conf**　　BIND主文件  
+-  **/etc/named.conf**　　BIND主文件  
   设置一般的name参数，指向该服务器使用的域数据库的信息源
-*  **/var/named/named.ca**　　根域名配置服务器指向文件  
+-  **/var/named/named.ca**　　根域名配置服务器指向文件  
   指向根域名配置服务器，用于告诉缓存服务器初始化
-*  **/var/named/localhost.zone**　   localhost区正向域名解析文件  
+-  **/var/named/localhost.zone**　   localhost区正向域名解析文件  
   用于将本地IP地址（127.0.0.1）转换为本地回送IP地址（127.0.0.1）
-*  **/var/named/name.local**　　localhost区反向域名解析文件  
+-  **/var/named/name.local**　　localhost区反向域名解析文件  
   用于将localhost名字转换为本地回送IP地址（127.0.0.1）
-*  **/etc/named.rfc1912.zones**　　区块设置文件
+-  **/etc/named.rfc1912.zones**　　区块设置文件
 
 **name.conf文件的主要配置信息：**
 
-* **acl**　         　定义ip地址的访问控制清单
-* **control**　　定义rndc使用的控制通道
-* **include**　　把其他的文件包含到配置文件中
-* **key**　　        定义授权的安全密钥
-* **logging**　　定义日志内容和位置
-* **options**　　定义全局配置选项和默认值
-* **server**　 　 定义远程服务的特征
-* **zone**　　     定义一个区
+- **acl**　         　定义ip地址的访问控制清单
+- **control**　　定义rndc使用的控制通道
+- **include**　　把其他的文件包含到配置文件中
+- **key**　　        定义授权的安全密钥
+- **logging**　　定义日志内容和位置
+- **options**　　定义全局配置选项和默认值
+- **server**　 　 定义远程服务的特征
+- **zone**　　     定义一个区
 
 ## DNS的资源记录（Resource Record, RR）格式：
 
@@ -160,9 +160,9 @@ value字段：
 
 在配置Bind服务时，主要用到以下三个配置文件：
 
-* **主配置文件（/etc/named.conf）** ：用来定义bind服务程序的运行。
-* **区域配置文件（/etc/named.rfc1912.zones）** ：用来保存域名和IP地址对应关系的所在位置。类似于图书的目录，对应着每个域和相应IP地址所在的具体位置，当需要查看或修改时，可根据这个位置找到相关文件。
-* **数据配置文件目录（/var/named）** ：该目录用来保存域名和IP地址真实对应关系的数据配置文件。
+- **主配置文件（/etc/named.conf）** ：用来定义bind服务程序的运行。
+- **区域配置文件（/etc/named.rfc1912.zones）** ：用来保存域名和IP地址对应关系的所在位置。类似于图书的目录，对应着每个域和相应IP地址所在的具体位置，当需要查看或修改时，可根据这个位置找到相关文件。
+- **数据配置文件目录（/var/named）** ：该目录用来保存域名和IP地址真实对应关系的数据配置文件。
 
 **第一步：修改主配置文件/etc/named.conf**。将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。
 

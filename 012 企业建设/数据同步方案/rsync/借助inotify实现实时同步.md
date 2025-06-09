@@ -86,7 +86,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
 
 > **值的注意的是，inotify-tools 工具至今还在持续有人维护，可以方式使用。**
 
-*  **[1] 调整 inotify 内核参数**
+-  **[1] 调整 inotify 内核参数**
 
   ```bash
   # 文件末尾添加以下参数
@@ -110,7 +110,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
   -rw-r--r-- 1 root root 0 Dec 17 15:05 max_user_watches
   ```
 
-*  **[2] 安装 inotify-tools 工具**
+-  **[2] 安装 inotify-tools 工具**
 
   ```bash
   # 安装编译器
@@ -126,7 +126,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
   $ ./configure && make && make install
   ```
 
-*  **[3] 使用 inotifywait 命令进行监控测试**
+-  **[3] 使用 inotifywait 命令进行监控测试**
 
   ```
   # 实时监控修改、创建、移动、删除操作
@@ -139,7 +139,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
   /var/www/html  DELETE  abc.txt
   ```
 
-*  **[4] 编写触发式上行同步脚本**
+-  **[4] 编写触发式上行同步脚本**
 
   ```
   # [版本一]
@@ -220,7 +220,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
   done
   ```
 
-*  **[5] 定时进行全量同步**
+-  **[5] 定时进行全量同步**
 
   ```
   # 因为inotify只在启动时会监控目录，没有启动期间的文件发生更改
@@ -262,14 +262,14 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
 
 > 在同步主服务器上开启 `sersync`​ 服务，`sersync`​ 负责监控配置路径中的文件系统事件变化，然后调用 `rsync`​ 命令把更新的文件同步到目标服务器。
 >
-> * [Sersync 项目简介与框架设计](https://www.kancloud.cn/curder/linux/78148)
-> * **已经没有人维护了，请谨慎使用哈！**
+> - [Sersync 项目简介与框架设计](https://www.kancloud.cn/curder/linux/78148)
+> - **已经没有人维护了，请谨慎使用哈！**
 
-*  **[1] 备份服务器开启 rsync 守护进程**
+-  **[1] 备份服务器开启 rsync 守护进程**
 
-*  **[2] 同步服务器安装 rsync**
+-  **[2] 同步服务器安装 rsync**
 
-*  **[3] 同步服务下载 sersync 工具**
+-  **[3] 同步服务下载 sersync 工具**
 
   ```
   # 下载sersync的可执行文件版本
@@ -286,7 +286,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
   $ sudo cp -r GNU-Linux-x86/confxml.xml /usr/local/sersync/conf
   ```
 
-*  **[4] 设置 sersync 的配置文件**
+-  **[4] 设置 sersync 的配置文件**
 
   ```xml
   <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -379,7 +379,7 @@ inotifywatch [-hvzrqf] [-e ] [-t ] [-a ] [-d ] [ … ]
   </head>
   ```
 
-*  **[5] 开启 sersync 守护进程同步数据**
+-  **[5] 开启 sersync 守护进程同步数据**
 
   ```
   # 配置sersync环境变量

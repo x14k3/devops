@@ -6,14 +6,14 @@ iscsi 结构基于客户/服务器模型，其主要功能是在TCP/IP网络上�
 
 ISCSI 这个架构主要将存储装置与使用的主机分别为两部分，分别是：
 
-* ISCSI  target ：就是存储设备端，存放磁盘或RAID的设备，目前也能够将Linux主机仿真成ISCSI  target了，目的在提供其他主机使用的磁盘。
-* ISCSI  inITiator： 就是能够使用target的客户端，通常是服务器，只有装有iscsi initiator的相关功能后才能使用ISCSI  target 提供的磁盘。
+- ISCSI  target ：就是存储设备端，存放磁盘或RAID的设备，目前也能够将Linux主机仿真成ISCSI  target了，目的在提供其他主机使用的磁盘。
+- ISCSI  inITiator： 就是能够使用target的客户端，通常是服务器，只有装有iscsi initiator的相关功能后才能使用ISCSI  target 提供的磁盘。
 
 **服务器取得磁盘或者文件系统的方式**
 
 1. 直接存取：在本机上的磁盘，就是直接存取设备
-2. 透过存储局域网络（SAN），来自区网内的其他设备提供的磁盘。
-3. 网络文件系统NAS（：来自NAS提供的文件系统）只能立即使用，不能进行格式化。
+2. 存储局域网络（SAN）：来自区网内的其他设备提供的磁盘。
+3. 网络文件系统（NAS）：来自NAS提供的文件系统,只能立即使用，不能进行格式化。
 
 ‍
 

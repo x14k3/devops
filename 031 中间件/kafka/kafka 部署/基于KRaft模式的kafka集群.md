@@ -6,10 +6,10 @@
 
 好处有以下几个：
 
-* Kafka 不再依赖外部框架，而是能够独立运行
-* controller 管理集群时，不再需要从 zookeeper 中先读取数据，集群性能上升
-* 由于不依赖 zookeeper，集群扩展时不再受到 zookeeper 读写能力限制
-* controller 不再动态选举，而是由配置文件规定。可以有针对性的加强controller 节点的配置，而不是像以前一样对随机 controller 节点的高负载束手无策。
+- Kafka 不再依赖外部框架，而是能够独立运行
+- controller 管理集群时，不再需要从 zookeeper 中先读取数据，集群性能上升
+- 由于不依赖 zookeeper，集群扩展时不再受到 zookeeper 读写能力限制
+- controller 不再动态选举，而是由配置文件规定。可以有针对性的加强controller 节点的配置，而不是像以前一样对随机 controller 节点的高负载束手无策。
 
 ‍
 

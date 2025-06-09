@@ -4,14 +4,14 @@
 
 第一次使用 Jenkins，您需要：
 
-* 机器要求：
+- 机器要求：
 
-  * 256 MB 内存，建议大于 512 MB
-  * 10 GB 的硬盘空间（用于 Jenkins 和 Docker 镜像）
-* 需要安装以下软件：
+  - 256 MB 内存，建议大于 512 MB
+  - 10 GB 的硬盘空间（用于 Jenkins 和 Docker 镜像）
+- 需要安装以下软件：
 
-  * Java 8 ( JRE 或者 JDK 都可以) [安装jdk](031%20中间件/tuxedo/tuxedo部署.md#20240507152745-d9lfsct)
-  * [Docker](https://www.docker.com/) （导航到网站顶部的Get Docker链接以访问适合您平台的Docker下载）[docker 部署](021%20docker/docker%20部署.md)
+  - Java 8 ( JRE 或者 JDK 都可以) [安装jdk](031%20中间件/tuxedo/tuxedo部署.md#20240507152745-d9lfsct)
+  - [Docker](https://www.docker.com/) （导航到网站顶部的Get Docker链接以访问适合您平台的Docker下载）[docker 部署](021%20docker/docker%20部署.md)
 
 ### 下载并运行 Jenkins
 

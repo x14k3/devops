@@ -210,7 +210,7 @@ chmod 644 /var/log/stunnel/
 ### 添加systemd service文件
 
 ```bash
-cat << OEF >>/etc/systemd/system/stunnel.service 
+cat << EOF >>/etc/systemd/system/stunnel.service 
 [Unit]
 Description=TLS Tunnel
 After=network.target

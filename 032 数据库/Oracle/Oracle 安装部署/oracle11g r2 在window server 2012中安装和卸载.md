@@ -2,7 +2,7 @@
 
 无法安装.net framework 3.5
 
-* ((20230904114337-x5mdkqf '离线安装.NET Framework 3.5'))
+- ((20230904114337-x5mdkqf '离线安装.NET Framework 3.5'))
 
 Oracle11完全卸载bai方法
 

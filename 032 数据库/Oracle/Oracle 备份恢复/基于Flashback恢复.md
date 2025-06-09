@@ -6,10 +6,10 @@ rman 粒度最细只到表空间级别，单纯恢复表级别数据可以用闪
 
 闪回分为：
 
-* flashback database
-* flashback drop
-* flashback query
-* flashback table
+- flashback database
+- flashback drop
+- flashback query
+- flashback table
 
 Flashback Query和Flashback Table都是利用undo实现回退功能，当需要闪回到过去某一时刻时，先利用Flashback Query查询，确认闪回的SCN或Timestamp，然后再利用Flashback Table真正实现闪回.
 
@@ -86,9 +86,9 @@ flashback table xxx to timestamp to_timestamp('2017-01-20 09:00:00','YYYY-MM-DD 
 
 闪回恢复区主要通过3个初始化参数来设置和管理:
 
-* db\_recovery\_file\_dest：指定闪回恢复区的位置
-* db\_recovery\_file\_dest\_size：指定闪回恢复区的可用空间大小
-* db\_flashback\_retention\_target：指定数据库可以回退的时间，单位为分钟，默认1440分钟，也就是一天。当然，实际上可回退的时间还决定于闪回恢复区的大小，因为里面保存了回退所需要的flash log。所以这个参数要和db\_recovery\_file\_dest\_size配合修改。flash recovery area 的大小至少是数据库所占容量的20%。
+- db\_recovery\_file\_dest：指定闪回恢复区的位置
+- db\_recovery\_file\_dest\_size：指定闪回恢复区的可用空间大小
+- db\_flashback\_retention\_target：指定数据库可以回退的时间，单位为分钟，默认1440分钟，也就是一天。当然，实际上可回退的时间还决定于闪回恢复区的大小，因为里面保存了回退所需要的flash log。所以这个参数要和db\_recovery\_file\_dest\_size配合修改。flash recovery area 的大小至少是数据库所占容量的20%。
 
 ‍
 

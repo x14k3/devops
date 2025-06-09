@@ -22,19 +22,19 @@ systemctl enable php-fpm
 
 ## 源码包安装
 
-* 下载
+- 下载
 
   [https://www.php.net/downloads.php](https://www.php.net/downloads.php "https://www.php.net/downloads.php")
-* 上传解压
+- 上传解压
 
   `tar -zxvf php-7.4.29.tar.gz`
-* 创建普通用户
+- 创建普通用户
 
   ```纯文本
   groupadd --system www
   useradd --system -g www -s /sbin/nologin www
   ```
-* 安装依赖(适用zabbix)
+- 安装依赖(适用zabbix)
 
   ```bash
   yum install -y epel-release
@@ -43,13 +43,13 @@ systemctl enable php-fpm
   cp -frp /usr/lib64/libldap* /usr/lib/
 
   ```
-* 编译安装(适用zabbix)
+- 编译安装(适用zabbix)
 
   ```bash
   ./configure --prefix=/data/php --with-jpeg --with-freetype --enable-fpm --enable-gd --with-gettext --with-kerberos --with-libdir=lib64 --with-mysqli --with-openssl --with-pdo-mysql --with-pdo-sqlite --with-pear --with-xsl --with-zlib --with-bz2 --with-mhash --enable-bcmath --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml 
   make && make install
   ```
-* 修改配置文件
+- 修改配置文件
 
   ```bash
   cd /data/php/etc
@@ -58,7 +58,7 @@ systemctl enable php-fpm
   cp www.conf.default  www.conf
 
   ```
-* 添加到system service
+- 添加到system service
 
   ```bash
   cat <<EOF > /lib/systemd/system/php-fpm.service

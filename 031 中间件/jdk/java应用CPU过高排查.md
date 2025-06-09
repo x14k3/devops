@@ -12,7 +12,7 @@ top
 
 ![top进程图](assets/network-asset-AoSoF4-20250430105356-u1ligx8.png)
 
-* 图中可知，CPU高的Java进程 PID \= 26132
+- 图中可知，CPU高的Java进程 PID \= 26132
 
 ## 二、获取Java进程中占cpu高的若干线程id [#](https://journal.kazmodan.com/docs/%E7%BC%96%E7%A8%8B%E7%94%9F%E6%80%81/Java/JVM/Java%E5%BA%94%E7%94%A8CPU%E4%BD%BF%E7%94%A8%E7%8E%87%E9%AB%98%E4%B8%80%E8%88%AC%E6%8E%92%E6%9F%A5%E6%80%9D%E8%B7%AFcentos/#%e4%ba%8c%e8%8e%b7%e5%8f%96java%e8%bf%9b%e7%a8%8b%e4%b8%ad%e5%8d%a0cpu%e9%ab%98%e7%9a%84%e8%8b%a5%e5%b9%b2%e7%ba%bf%e7%a8%8bid)
 
@@ -66,9 +66,9 @@ jstack 26132 > threaddump.txt
 
 按照经验，问题线程可以分成以下三种：
 
-* 1、JVM线程
-* 2、包含业务代码堆栈的线程
-* 3、框架代码的线程(不包含业务代码堆栈的线程)
+- 1、JVM线程
+- 2、包含业务代码堆栈的线程
+- 3、框架代码的线程(不包含业务代码堆栈的线程)
 
 ### 1、JVM线程 [#](https://journal.kazmodan.com/docs/%E7%BC%96%E7%A8%8B%E7%94%9F%E6%80%81/Java/JVM/Java%E5%BA%94%E7%94%A8CPU%E4%BD%BF%E7%94%A8%E7%8E%87%E9%AB%98%E4%B8%80%E8%88%AC%E6%8E%92%E6%9F%A5%E6%80%9D%E8%B7%AFcentos/#1jvm%e7%ba%bf%e7%a8%8b)
 

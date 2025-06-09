@@ -209,12 +209,12 @@ mysql> SHOW GLOBAL STATUS LIKE "Threads_connected";
 
 下面列举了与MySQL连接相关的监控指标：
 
-* mysql_global_variables_max_connections： 允许的最大连接数；
-* mysql_global_status_threads_connected： 当前开放的连接；
-* mysql_global_status_threads_running：当前开放的连接；
-* mysql_global_status_aborted_connects：当前开放的连接；
-* mysql_global_status_connection_errors_total{error="max_connections"}：由于超出最大连接数导致的错误；
-* mysql_global_status_connection_errors_total{error="internal"}：由于系统内部导致的错误；
+- mysql_global_variables_max_connections： 允许的最大连接数；
+- mysql_global_status_threads_connected： 当前开放的连接；
+- mysql_global_status_threads_running：当前开放的连接；
+- mysql_global_status_aborted_connects：当前开放的连接；
+- mysql_global_status_connection_errors_total{error="max_connections"}：由于超出最大连接数导致的错误；
+- mysql_global_status_connection_errors_total{error="internal"}：由于系统内部导致的错误；
 
 通过PromQL查询当前剩余的可用连接数：
 

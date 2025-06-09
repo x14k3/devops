@@ -86,44 +86,44 @@ upstream backend {
 
 可以定义以下参数：
 
-* ​`weight=number`​  
+- ​`weight=number`​  
   设置服务器的权重，默认情况下为 1。
-* ​`max_conns=number`​  
+- ​`max_conns=number`​  
   限制到被代理服务器的最大同时连接数（1.11.5）。默认值为零，表示没有限制。如果服务器组未驻留在[共享内存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#zone)中，则此限制在每个 worker 进程中均有效。
 
   > 在 1.11.5 版本之前，此参数作为[商业订阅](http://nginx.com/products/?_ga=2.208745946.99786210.1588592638-1615340879.1588592638)部分。
   >
-* ​`max_fails=number`​  
+- ​`max_fails=number`​  
   设置在 `fail_timeout`​ 参数设置的时间内与服务器通信的失败尝试次数，以便认定服务器在 `fail_timeout`​ 参数设置的时间内不可用。默认情况下，失败尝试的次数设置为 1。零值将禁用尝试记录。在这里，当与服务器正在建立连接中，失败尝试将是一个错误或超时。
-* ​`fail_timeout=time`​  
+- ​`fail_timeout=time`​  
   设置
 
-  * 在时间范围内与服务器通信的失败尝试达到指定次数，应将服务器视为不可用
-  * 服务器被视为不可用的时长
+  - 在时间范围内与服务器通信的失败尝试达到指定次数，应将服务器视为不可用
+  - 服务器被视为不可用的时长
 
   默认情况下，该参数设置为 10 秒。
-* ​`backup`​  
+- ​`backup`​  
   将服务器标记为备用服务器。当主服务器不可用时，连接将传递到备用服务器。
 
   > 该参数不能与 [hash](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#hash) 和 [random](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#random) 负载均衡算法一起使用。
   >
-* ​`down`​  
+- ​`down`​  
   将服务器标记为永久不可用。  
   此外，以下参数作为[商业订阅](http://nginx.com/products/?_ga=2.134173126.99786210.1588592638-1615340879.1588592638)部分提供：
-* ​`resolve`​  
+- ​`resolve`​  
   监视与服务器域名相对应的 IP 地址的更改，并自动修改 upstream 配置，而无需重新启动 nginx。服务器组必须驻留在[共享内存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#zone)中。  
   为了使此参数生效，必须在 [stream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_core_module#resolver) 块或相应的 [upstream](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#resolver) 块中指定 `resolver`​ 指令。
-* ​`service=name`​  
+- ​`service=name`​  
   启用 DNS [SRV](https://tools.ietf.org/html/rfc2782) 记录的解析并设置服务名称（1.9.13）。为了使此参数生效，必须为服务器指定 [resolve](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#resolve) 参数，并指定不带端口号的主机名。  
   如果服务名称不包含点（`.`​），则构造符合 [RFC](https://tools.ietf.org/html/rfc2782) 的名称，并将 TCP 协议添加到服务前缀。例如，要查找 `_http._tcp.backend.example.com`​ SRV 记录，必须指定指令：  
   如果服务名称包含一个或多个点（`.`​），则通过将服务前缀和服务器名称结合在一起来构造名称。例如，要查找 `_http._tcp.backend.example.com`​ 和 `server1.backend.example.com`​ SRV 记录，必须指定指令：
-* ```
+- ```
     server backend.example.com service=_http._tcp resolve;
     server example.com service=server1.backend resolve;
   ```
 
   最高优先级的 SRV 记录（具有相同的最低优先级值的记录）被解析为主服务器，其余的 SRV 记录被解析为备用服务器。如果为服务器指定了 [backup](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#backup) 参数，则将高优先级 SRV 记录解析为备用服务器，其余的 SRV 记录将被忽略。
-* ​`slow_start=time`​  
+- ​`slow_start=time`​  
   设置当服务器从非健康状态转为健康状态或一段时间[不可用](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#fail_timeout)后转为可用状态，服务器将其权重从 0 恢复到原值的时间（`time`​）。默认值为零，即禁用此功能。
 
   > 该参数不能与 [hash](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#hash) 和 [random](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_upstream_module#random) 负载均衡算法一起使用。
@@ -282,17 +282,17 @@ resolver_timeout 5s;
 
 ​`ngx_stream_upstream_module`​ 模块支持以下内部变量：
 
-* ​`$upstream_addr`​  
+- ​`$upstream_addr`​  
   保留 IP 地址和端口或 upstream 服务器的 UNIX 域套接字（1.11.4）路径。如果在代理过程中联系了多个服务器，则它们的地址用逗号分隔，例如 `192.168.1.1:12345, 192.168.1.2:12345, unix:/tmp/sock`​。如果无法选择服务器，则该变量将保留服务器组的名称。
-* ​`$upstream_bytes_received`​  
+- ​`$upstream_bytes_received`​  
   从 upstream 服务器收到的字节数（1.11.4）。来自多个连接的值使用逗号分隔，参考 `$upstream_addr`​ 变量中的地址。
-* ​`$upstream_bytes_sent`​  
+- ​`$upstream_bytes_sent`​  
   发送到 upstream 服务器的字节数（1.11.4）。来自多个连接的值使用逗号分隔，参考 `$upstream_addr`​ 变量中的地址。
-* ​`$upstream_connect_time`​  
+- ​`$upstream_connect_time`​  
   连接 upstream 服务器的时间（1.11.4），时间以毫秒为单位，以秒为单位。多个连接的时间用逗号分隔，参考 `$upstream_addr`​ 变量中的地址。
-* ​`$upstream_first_byte_time`​  
+- ​`$upstream_first_byte_time`​  
   接收数据的第一个字节的时间（1.11.4），时间以毫秒为单位，以秒为单位。多个连接的时间用逗号分隔，参考 `$upstream_addr`​ 变量中的地址。
-* ​`$upstream_session_time`​  
+- ​`$upstream_session_time`​  
   会话持续时间，以毫秒为单位，以毫秒为单位（1.11.4）。多个连接的时间用逗号分隔，参考 `$upstream_addr`​ 变量中的地址。
 
 ‍

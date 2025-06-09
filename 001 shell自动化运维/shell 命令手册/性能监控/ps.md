@@ -108,20 +108,20 @@ ps -l
 #  501   592   577     4006   0  31  0  4297048     52 -      S                   0 ttys001    0:00.63 -zsh
 ```
 
-* F 代表这个程序的旗标 (flag)， 4 代表使用者为 super user
-* S 代表这个程序的状态 (STAT)，关于各 STAT 的意义将在内文介绍
-* UID 程序被该 UID 所拥有
-* PID 就是这个程序的 ID ！
-* PPID 则是其上级父程序的ID
-* C CPU 使用的资源百分比
-* PRI 这个是 Priority (优先执行序) 的缩写，详细后面介绍
-* NI 这个是 Nice 值，在下一小节我们会持续介绍
-* ADDR 这个是 kernel function，指出该程序在内存的那个部分。如果是个 running的程序，一般就是 "-"
-* SZ 使用掉的内存大小
-* WCHAN 目前这个程序是否正在运作当中，若为 - 表示正在运作
-* TTY 登入者的终端机位置
-* TIME 使用掉的 CPU 时间。
-* CMD 所下达的指令为何
+- F 代表这个程序的旗标 (flag)， 4 代表使用者为 super user
+- S 代表这个程序的状态 (STAT)，关于各 STAT 的意义将在内文介绍
+- UID 程序被该 UID 所拥有
+- PID 就是这个程序的 ID ！
+- PPID 则是其上级父程序的ID
+- C CPU 使用的资源百分比
+- PRI 这个是 Priority (优先执行序) 的缩写，详细后面介绍
+- NI 这个是 Nice 值，在下一小节我们会持续介绍
+- ADDR 这个是 kernel function，指出该程序在内存的那个部分。如果是个 running的程序，一般就是 "-"
+- SZ 使用掉的内存大小
+- WCHAN 目前这个程序是否正在运作当中，若为 - 表示正在运作
+- TTY 登入者的终端机位置
+- TIME 使用掉的 CPU 时间。
+- CMD 所下达的指令为何
 
 > 在预设的情况下， `ps`​ 仅会列出与目前所在的 `bash shell`​ 有关的 `PID`​ 而已，所以， 当我使用 `ps -l`​ 的时候，只有三个 PID。
 
@@ -139,21 +139,21 @@ ps aux
 
 ```
 
-* USER：该 process 属于那个使用者账号的
-* PID ：该 process 的号码
-* %CPU：该 process 使用掉的 CPU 资源百分比
-* %MEM：该 process 所占用的物理内存百分比
-* VSZ ：该 process 使用掉的虚拟内存量 (Kbytes)
-* RSS ：该 process 占用的固定的内存量 (Kbytes)
-* TTY ：该 process 是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。
-* STAT：该程序目前的状态，主要的状态有
-* R ：该程序目前正在运作，或者是可被运作
-* S ：该程序目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。
-* T ：该程序目前正在侦测或者是停止了
-* Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态
-* START：该 process 被触发启动的时间
-* TIME ：该 process 实际使用 CPU 运作的时间
-* COMMAND：该程序的实际指令
+- USER：该 process 属于那个使用者账号的
+- PID ：该 process 的号码
+- %CPU：该 process 使用掉的 CPU 资源百分比
+- %MEM：该 process 所占用的物理内存百分比
+- VSZ ：该 process 使用掉的虚拟内存量 (Kbytes)
+- RSS ：该 process 占用的固定的内存量 (Kbytes)
+- TTY ：该 process 是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。
+- STAT：该程序目前的状态，主要的状态有
+- R ：该程序目前正在运作，或者是可被运作
+- S ：该程序目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。
+- T ：该程序目前正在侦测或者是停止了
+- Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态
+- START：该 process 被触发启动的时间
+- TIME ：该 process 实际使用 CPU 运作的时间
+- COMMAND：该程序的实际指令
 
 列出类似程序树的程序显示
 

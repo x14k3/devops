@@ -279,13 +279,13 @@ sv1.ggsrv.de                4   3     7   +633.265  15331.828  -1639us  1955us
 
 ### 时区
 
-* UTC  
+- UTC  
   整个地球分为二十四时区，每个时区都有自己的本地时间。在国际无线电通信场合，为了统一起见，使用一个统一的时间，称为通用协调时(UTC, Universal Time Coordinated)。
-* GMT  
+- GMT  
   格林威治标准时间 (Greenwich Mean Time)指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，因为本初子午线被定义在通过那里的经线。(UTC与GMT时间基本相同)
-* CST  
+- CST  
   中国标准时间 (China Standard Time)
-* DST  
+- DST  
   夏令时(Daylight Saving Time) 指在夏天太阳升起的比较早时，将时间拨快一小时，以提早日光的使用。（中国不使用）
-* RTC  
+- RTC  
   (Real-Time Clock)或CMOS时间，硬件时间,一般在主板上靠电池供电，服务器断电后也会继续运行。仅保存日期时间数值，无法保存时区和夏令时设置。

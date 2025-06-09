@@ -2,10 +2,10 @@
 
 Nacos定义为一个IDC内部应用组件，并非面向公网环境的产品，建议在内部隔离网络环境中部署，强烈不建议部署在公共网络环境。
 
-* [官网：https://nacos.io/](https://links.jianshu.com/go?to=https://nacos.io/ "官网：https://nacos.io/")
-* [下载地址：https://github.com/alibaba/nacos/releases](https://links.jianshu.com/go?to=https://github.com/alibaba/nacos/releases "下载地址：https://github.com/alibaba/nacos/releases")
-* 解压
-* 启动
+- [官网：https://nacos.io/](https://links.jianshu.com/go?to=https://nacos.io/ "官网：https://nacos.io/")
+- [下载地址：https://github.com/alibaba/nacos/releases](https://links.jianshu.com/go?to=https://github.com/alibaba/nacos/releases "下载地址：https://github.com/alibaba/nacos/releases")
+- 解压
+- 启动
 
   ```bash
   cd ~/nacos/bin
@@ -60,7 +60,7 @@ server.tomcat.basedir=file：.
 
 ## nacos 获取配置时启用权限认证
 
-* 启用 Nacos 的权限认证
+- 启用 Nacos 的权限认证
 
   `vim nacos/conf/application.properties`
 
@@ -68,7 +68,7 @@ server.tomcat.basedir=file：.
   ### 
   nacos.core.auth.enabled=true
   ```
-* 添加 Nacos 用户
+- 添加 Nacos 用户
 
   默认的用户 *nacos* 绑定的角色是 *ROLE*​*ADMIN* , 权限比较大, 最好是新增一个只读的用户用来读取对应命名空间(*namespace*)的配置.
 
@@ -77,14 +77,14 @@ server.tomcat.basedir=file：.
   3. 权限控制 -> 权限管理 中新增角色对应的权限  可以设置角色对应的命名空间(页面上名称为资源), 在动作下拉框中指定读写权限(只读\只写\读写).  一个角色可以配置多个权限.
 
   合理的使用 *namespace* 和 *group* 来隔离配置文件, 再辅以用户的角色、权限控制, 组合的权限策略还是比较灵活的, 应该能满足大多数项目的安全需求.
-* &#x20;*curl* 命令验证一下效果
+- &#x20;*curl* 命令验证一下效果
 
   ```bash
   curl -XGET 'http://localhost:8101/nacos/v1/cs/configs?dataId=client&group=DEFAULT_GROUP&tenant=jy2v&username=nstc&password=Ninestar123'
   curl -XGET 'http://localhost:8101/nacos/v1/cs/configs?dataId=client&group=DEFAULT_GROUP&tenant=jy2v&username=nacos&password=nacos'
 
   ```
-* 修改 Spring Boot 配置文件
+- 修改 Spring Boot 配置文件
 
   在 *bootstrap.yml* 中添加 *spring.cloud.nacos.config.username* 和 *spring.cloud.nacos.config.password* 配置项;
 

@@ -8,9 +8,9 @@
 
 例如：
 
-* ​`copy con syw.bat`​ 创建一个名字为syw的bat批处理文件。
-* 创建完成之后，输入`@echo on`​ 回车之后，我们就可以输入我们的批处理命令。
-* 输入完成，点击`ctrl+z`​然后回车，即可结束输入状态。
+- ​`copy con syw.bat`​ 创建一个名字为syw的bat批处理文件。
+- 创建完成之后，输入`@echo on`​ 回车之后，我们就可以输入我们的批处理命令。
+- 输入完成，点击`ctrl+z`​然后回车，即可结束输入状态。
 
 ---
 
@@ -30,7 +30,7 @@ REM first order
 
 例如：
 
-* 直接使用pause命令:
+- 直接使用pause命令:
 
   ```batchfile
   @echo off
@@ -39,7 +39,7 @@ REM first order
   ```
 
   执行时，会提示我们`请按任意键继续...`​。
-* 如果想不显示，我们可以这样：
+- 如果想不显示，我们可以这样：
 
   ​`echo first order & pause > nul`​
 
@@ -94,8 +94,8 @@ mode con cols=113 lines=15 & color 08
 
 ## 使用`goto`​ 和 `：`​命令转向
 
-* ​`:`​ 后面，如果是一个数字或者字母，就会被当做标识被 `goto`​ 识别。
-* 如果 `：`​后面是其他特殊符号，则会被认为是注释符号 和 `rem`​ 等同。
+- ​`:`​ 后面，如果是一个数字或者字母，就会被当做标识被 `goto`​ 识别。
+- 如果 `：`​后面是其他特殊符号，则会被认为是注释符号 和 `rem`​ 等同。
 
 例如：
 
@@ -120,15 +120,15 @@ pause
 
 ​`find`​ 命令参数：_\[可选参数\]_
 
-* ​`[/V]`​ 显示所有未包含指定字符串的行。
-* ​`[/C]`​仅显示包含指定字符串的函数。
-* ​`[/N]`​显示行号。
-* ​`[/I]`​搜索字符串时忽略大小写。
-* ​`/OFF[LINE]`​不要跳过具有脱机属性集的文件。
-* ​`"string"`​要搜索的目标字符串。
-* ​`[drive:]`​驱动器号，就是哪个磁盘。
-* ​`[path]`​ 路径。
-* ​`filename`​ 文件名
+- ​`[/V]`​ 显示所有未包含指定字符串的行。
+- ​`[/C]`​仅显示包含指定字符串的函数。
+- ​`[/N]`​显示行号。
+- ​`[/I]`​搜索字符串时忽略大小写。
+- ​`/OFF[LINE]`​不要跳过具有脱机属性集的文件。
+- ​`"string"`​要搜索的目标字符串。
+- ​`[drive:]`​驱动器号，就是哪个磁盘。
+- ​`[path]`​ 路径。
+- ​`filename`​ 文件名
 
 整体命令格式：`find [/V] [/C] [/N] [/I] /OFF[LINE] "string" [drive:][path]filename`​
 
@@ -155,9 +155,9 @@ del test.txt
 
 ​`type`​命令参数：
 
-* ​`[dirve:]`​驱动器盘符
-* ​`[path]`​路径
-* ​`filename`​文件名
+- ​`[dirve:]`​驱动器盘符
+- ​`[path]`​路径
+- ​`filename`​文件名
 
 命令格式： `type [dirve:][path]filename`​
 
@@ -290,10 +290,10 @@ popd
 
 call命令参数：
 
-* ​`[dirve:]`​ 磁盘
-* ​`[path]`​ 路径
-* ​`filename`​ 文件名,必须是 .bat 或 .cmd 格式文件
-* ​`[batch-parmaerers]`​ 参数
+- ​`[dirve:]`​ 磁盘
+- ​`[path]`​ 路径
+- ​`filename`​ 文件名,必须是 .bat 或 .cmd 格式文件
+- ​`[batch-parmaerers]`​ 参数
 
 命令格式：`call [drive:][path]filename [batch-parameters]`​
 
@@ -362,9 +362,9 @@ pause
 
 > for 循环中：
 >
-> * ​`/l`​表示以增量的方式循环
-> * ​`(1,1,5)`​开头的 1 和末尾的 5 表示循环的范围，中间的 1 表示 步长
-> * ​`%%i`​ 是每次循环之后的值，第一次循环是1，第二次是 2 ...
+> - ​`/l`​表示以增量的方式循环
+> - ​`(1,1,5)`​开头的 1 和末尾的 5 表示循环的范围，中间的 1 表示 步长
+> - ​`%%i`​ 是每次循环之后的值，第一次循环是1，第二次是 2 ...
 
 启用变量延迟之后，for 循环输出 a 的结果为：1 2 3 4 5
 
@@ -388,7 +388,7 @@ pause
 
 ​`%0`​代表批处理本身，包括完整的路径和扩展名。
 
-* 例如：
+- 例如：
 
   ```batchfile
   @echo off
@@ -404,7 +404,7 @@ pause
 
 也叫输出重定向符。所起的作用是，将所取得的结果传递到后面的范围。
 
-* 例如：
+- 例如：
 
   把 `hello`​ 放到 `1.txt`​ 中，如果 `1.txt`​ 不存在，则会去创建，如果存在则进行覆盖。
 
@@ -412,7 +412,7 @@ pause
 
 当然 > 的输出范围不只包括 文件，也包括一些系统控制台。
 
-* 例如：更改系统时间
+- 例如：更改系统时间
 
   ```batchfile
   @echo off
@@ -427,7 +427,7 @@ pause
 
 和 单个 `>`​ 类似，不过 `>>`​ 是把内容在输出范围的末尾追加。
 
-* 例如：
+- 例如：
 
   ```batchfile
   echo hello > 1.txt
@@ -442,8 +442,8 @@ pause
 
 格式：`第一条命令 | 第二条命令 | 第三条命令 [| 第N条命令]`​
 
-* 例如：查找 C盘 下所有 txt 字符串
-* 例如：格式化磁盘 $\textcolor{red}{危险}$
+- 例如：查找 C盘 下所有 txt 字符串
+- 例如：格式化磁盘 $\textcolor{red}{危险}$
 
   ```
   echo y|format a:/s/q/v:system
@@ -457,10 +457,10 @@ pause
 
 转义字符，是`> < &`​这三个字符的特殊的前导字符，在命令中，如果把三个字符前加上`^`​字符，则表示只是使用这个字符，而不会使用其功能。
 
-* 例如：
+- 例如：
 
   将会输出：`test > 1.txt`​ 因为 > 符号被转义，不会创建 `1.txt`​
-* ^ 也可作为续行符号
+- ^ 也可作为续行符号
 
   将会输出：孙永威
 
@@ -474,7 +474,7 @@ pause
 
 语法：`第一条命令 & 第二条命令 [& 第n条命令]`​
 
-* 例如：
+- 例如：
 
   ```batchfile
   @echo off
@@ -489,7 +489,7 @@ pause
 
 语法：`第一条命令 && 第二条命令 [&& 第n条命令]`​
 
-* 例如：
+- 例如：
 
   ```batchfile
   @echo off
@@ -504,7 +504,7 @@ pause
 
 语法：`第一条命令 || 第二条命令 [|| 第n条命令]`​
 
-* 例如：
+- 例如：
 
   ```batchfile
   @echo off
@@ -515,7 +515,7 @@ pause
 
 为一个字符串制定边界，多用于字符串之间存在空格的情况。
 
-* 例如：要在字符串之间添加空格
+- 例如：要在字符串之间添加空格
 
   ```batchfile
   cd c:\"program files"
@@ -530,7 +530,7 @@ pause
 
 逗号相当于空格，很多时候会把逗号当做空格来使用
 
-* 例如：展示C盘目录
+- 例如：展示C盘目录
 
 ### ；分号
 
@@ -538,13 +538,13 @@ pause
 2. 但是执行的效果是不会变的
 3. 如果执行过程中发生了错误，程序就会停止。
 
-* 例如：
+- 例如：
 
 ### （）括号
 
 括号在批处理中必须成对使用，会把括号内的命令当做一条命令
 
-* 例如：
+- 例如：
 
   ```batchfile
   echo 1 & echo 2 & echo 3
@@ -560,7 +560,7 @@ pause
 
 感叹号在变量延迟中来使用，用来表示变量。
 
-* 例如：
+- 例如：
 
   ```batchfile
   @echo off
@@ -588,25 +588,25 @@ for %%i in ("www.youwillsun.com") do echo %%i
 
 ### For语句简单示例：
 
-* 查看当前硬盘分区有哪些：
+- 查看当前硬盘分区有哪些：
 
   ```batchfile
   @echo off
   for %%i in (c,d,e,f,g) do if exist %%i: echo %%i
   ```
-* 输出当前文件夹下的所有文件
+- 输出当前文件夹下的所有文件
 
   ```batchfile
   @echo off
   for %%i in (*.*) do echo "%%i"
   ```
-* 输出当前文件夹下，所有以 txt 结尾的文件
+- 输出当前文件夹下，所有以 txt 结尾的文件
 
   ```batchfile
   @echo off
   for %%i in (*.txt) do echo "%%i"
   ```
-* 输出名称是4个字符的 txt 文件
+- 输出名称是4个字符的 txt 文件
 
   ```batchfile
   @echo off
@@ -619,10 +619,10 @@ for %%i in ("www.youwillsun.com") do echo %%i
 
 #### `/f`​解析文本
 
-* 例如：读取文本文件
+- 例如：读取文本文件
 
-  * for.txt
-  * for.bat
+  - for.txt
+  - for.bat
 
     ```batchfile
     @echo off
@@ -634,7 +634,7 @@ for %%i in ("www.youwillsun.com") do echo %%i
 
   for 循环读取文本文件时，会自动按照默认规则来截取：
 
-  * 默认按照 空格 和 制表符（tab键） 来截取
+  - 默认按照 空格 和 制表符（tab键） 来截取
 
   如果想指定截取规则，则需使用delims
 
@@ -642,10 +642,10 @@ for %%i in ("www.youwillsun.com") do echo %%i
 
 delims 后面跟一个 字符 ，就可以按照这个字符来进行分割字符串。
 
-* 例如：根据文本中的 `,`​ 切分字符串
+- 例如：根据文本中的 `,`​ 切分字符串
 
-  * for.txt
-  * for.bat
+  - for.txt
+  - for.bat
 
     ```batchfile
     @echo off
@@ -663,15 +663,15 @@ delims 后面跟一个 字符 ，就可以按照这个字符来进行分割字�
 
 delims 后面所跟字符串，可以有多个：
 
-* 例如：
+- 例如：
 
-  * for.txt
+  - for.txt
 
     ```
     我叫孙永威,哈哈哈
     网址：www.youwillsun.com
     ```
-  * for.bat
+  - for.bat
 
     ```batchfile
     @echo off
@@ -690,10 +690,10 @@ delims 后面所跟字符串，可以有多个：
 
 tokens 可以指定读取文件中第几段内容，一般和delims配合使用。
 
-* 例如：
+- 例如：
 
-  * for.txt
-  * for.bat
+  - for.txt
+  - for.bat
 
     ```batchfile
     @echo off
@@ -707,10 +707,10 @@ tokens 也可以指定读取多节。
 
 **注意：当 tokens 指定读取多节时，那么需要有相对应的输出变量做接收。输出变量的定义是按照26个英文字母依次排列。**
 
-* 例如：
+- 例如：
 
-  * for.txt
-  * for.bat
+  - for.txt
+  - for.bat
 
     ```batchfile
     @echo off
@@ -733,7 +733,7 @@ tokens 也可以指定读取多节。
 >
 > 如果我们想利用tokens读取全部的内容，那么有一个简化写法：
 >
-> * 例如，一个文本可以 delims 分成 5 段
+> - 例如，一个文本可以 delims 分成 5 段
 >
 >   ​`for /f "delims=, tokens=1,2,3,4,5" %%i in (for.txt) do echo %%i %%j %%k %%l %%m`​
 >
@@ -761,8 +761,8 @@ tokens 也可以指定读取多节。
 
 skip 后面的数值表示忽略几行。
 
-* for.txt
-* for.bat
+- for.txt
+- for.bat
 
   ```batchfile
   @echo off
@@ -776,8 +776,8 @@ skip 后面的数值表示忽略几行。
 
 例如：忽略以 逗号 开头的行。
 
-* for.txt
-* for.bat
+- for.txt
+- for.bat
 
   ```batchfile
   @echo off
@@ -789,22 +789,22 @@ skip 后面的数值表示忽略几行。
 
 > 注意：
 >
-> * for循环会默认忽略以 `;`​开头的行。
+> - for循环会默认忽略以 `;`​开头的行。
 >
 >   但是如果指定了 eol 开关，那么不会自动忽略`;`​开头的行。
-> * eol 后面所跟的字符不能有多个。
+> - eol 后面所跟的字符不能有多个。
 
 #### `usebackq`​ 增强参数
 
-* 例如：
+- 例如：
 
-  * for 1.txt
+  - for 1.txt
 
     ```
     天高地囧，觉宇宙之无穷，兴尽悲来，识盈余之有数。
     望长安于日下，目吴会于云间。
     ```
-  * for.bat
+  - for.bat
 
     ```batchfile
     @echo off
@@ -838,7 +838,7 @@ for /f "usebackq" %%i in ('字符串') do echo %%i
 for /f "usebackq" %%i in ("文件名") do echo %%i
 ```
 
-* 这里的文件名就可以包括 空格 这种特殊字符。【主要针对中文文件名】
+- 这里的文件名就可以包括 空格 这种特殊字符。【主要针对中文文件名】
 
 #### `/r`​ 遍历文件夹
 
@@ -846,7 +846,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 命令格式：`for /r 目录 %%i in (元素集合) do 命令语句集合`​
 
-* 例如：
+- 例如：
 
   ```batchfile
   @echo off
@@ -858,19 +858,19 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
   > 解释一下 in :
   >
-  > * in 后面是要告诉命令浏览文件夹下的什么东西.
+  > - in 后面是要告诉命令浏览文件夹下的什么东西.
   >
   >   在命令中写了一个 `.`​ 所以会在遍历出来的文件目录后面都跟一个`.`​
-  > * 如果 in (a b c) 则会在每个文件下都跟上 a b c 三个字母
+  > - 如果 in (a b c) 则会在每个文件下都跟上 a b c 三个字母
   >
-  >   * 就像这样：
+  >   - 就像这样：
   >
   >     ​`E:\BAT\a`​
   >
   >     ​`E:\BAT\b`​
   >
   >     ​`E:\BAT\c`​
-  > * 再例如找某文件夹下所有bat文件—— `in(*.bat)`​
+  > - 再例如找某文件夹下所有bat文件—— `in(*.bat)`​
   >
   >   ​`E:\BAT\test.bat`​ 即 目录 + 文件名
   >
@@ -878,13 +878,13 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
   >
   > 所以 in(a b c) 和 in (\*.bat) 的区别：
   >
-  > * in(a b c) 是把 a b c 当做了文件夹名。
-  > * in(\*.bat) 是把 \*.bat 当做了文件名。
+  > - in(a b c) 是把 a b c 当做了文件夹名。
+  > - in(\*.bat) 是把 \*.bat 当做了文件名。
   >
   > for 语句中默认以 空格和tab键 进行元素分割。
   >
 
-  * 如果是用`/f`​来写例子：
+  - 如果是用`/f`​来写例子：
 
     ```batchfile
     @echo off
@@ -894,7 +894,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
   **二者区别：**
 
-  * /r 读取文件目录流程：
+  - /r 读取文件目录流程：
 
     ```
     st=&gt;start: Start
@@ -907,7 +907,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
     ```
 
     一边读取，一边赋值输出。
-  * /f 读取文件目录流程：
+  - /f 读取文件目录流程：
 
     ```
     s=&gt;start: start
@@ -925,8 +925,8 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
   什么时候用 /r 什么时候用 /f 呢？
 
-  * 如果只是为了获取某个文件夹下所有子文件夹的目录，建议用 /f
-  * 如果需要过滤带有隐藏属性的文件夹的话，建议用 /r
+  - 如果只是为了获取某个文件夹下所有子文件夹的目录，建议用 /f
+  - 如果需要过滤带有隐藏属性的文件夹的话，建议用 /r
 
 #### `/d`​ 处理文件夹
 
@@ -936,7 +936,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 > /d 和 /r 类似，但是 /r 是匹配当前目录下的所有文件夹，/d 则是匹配当前目录下第一级文件夹或指定位置的文件夹
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -951,7 +951,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 ​`/l`​ 是loop的缩写。
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -966,9 +966,9 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### ~i：删除引号("")，扩展%i
 
-* 例如：
+- 例如：
 
-  * temp.txt
+  - temp.txt
 
     ```
     "1111"
@@ -977,7 +977,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
     "4444"44
     "55"55"55
     ```
-  * text.bat
+  - text.bat
 
     ```batchfile
     @echo off
@@ -1003,7 +1003,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~fi：文件路径名
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1015,7 +1015,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~di：文件所在驱动器号
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1027,7 +1027,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~pi：文件相对路径
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1039,7 +1039,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~ni：文件名
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1051,7 +1051,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~xi：文件的扩展名
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1063,7 +1063,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~si：文件路径只含有短名
 
-* 例子：
+- 例子：
 
   ```batchfile
   REM 若有一文件名称为：test1325asdfasdfasdfasdf4565641.txt
@@ -1078,7 +1078,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~ti：文件的日期时间
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1090,7 +1090,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 #### %~zi：显示文件大小
 
-* 例子
+- 例子
 
   ```batchfile
   @echo off
@@ -1104,7 +1104,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 > 查找列在路径环境变量的目录，并将 %i 扩展到找到的第一个完全合格的名称，如果环境变量名未定义，或者没有找到文件，此组会扩展到空字符串。
 
-* 例子：
+- 例子：
 
   ```
   @echo off
@@ -1139,7 +1139,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
 语句格式：`Set [variable=[string]]`​
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1195,7 +1195,7 @@ for /f "usebackq" %%i in ("文件名") do echo %%i
 
   REM 输出
   ```
-* 查看 set 命令帮助
+- 查看 set 命令帮助
 
 ### set进行字符串处理
 
@@ -1207,7 +1207,7 @@ str1：被替换的字符串
 
 str2：要替换的字符串
 
-* 例子：
+- 例子：
 
   ```batchfile
   set a=www.youwillsun.com .net .cn
@@ -1218,7 +1218,7 @@ str2：要替换的字符串
 
   REM 会把原始字符串中的空格，全部替换成没有空格。
   ```
-* 例子2：
+- 例子2：
 
   ```batchfile
   set a=www.youwillsun.com.net.cn
@@ -1238,7 +1238,7 @@ m：截取起始位置，若为 负值，则从后向前数 m 位，m默认为0
 
 n：截取的长度，若为空，则默认截取剩余所有字符，若为 负值，则表示从后向前截取 n 位。
 
-* 例子：
+- 例子：
 
   ```batchfile
   set a=www.youwillsun.com
@@ -1249,7 +1249,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
   REM 会输出，第 1 - 4 位字符串，即ww.y
   ```
-* 例子2：
+- 例子2：
 
   ```batchfile
   set a=www.youwillsun.com
@@ -1260,7 +1260,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
   REM 从后向前数10位，然后截取剩下的所有字符，即：illsun.com
   ```
-* 例子3：
+- 例子3：
 
   ```batchfile
   set a=www.youwillsun.com
@@ -1280,7 +1280,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
 语句1格式：`IF [NOT] ERRORLEVEL number command`​
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1292,7 +1292,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
   REM 会输出当前计算的用户
   ```
-* 例子2：
+- 例子2：
 
   ```batchfile
   @echo off
@@ -1309,9 +1309,9 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
   原因：
 
-  * 第一条写法，明确的说，只有当 errorlevel == 0时，才判断通过。
-  * 第二条写法，则会理解为，当 errorlevel >= 0时，都会判断通过。
-* 例子3：
+  - 第一条写法，明确的说，只有当 errorlevel == 0时，才判断通过。
+  - 第二条写法，则会理解为，当 errorlevel >= 0时，都会判断通过。
+- 例子3：
 
   ```batchfile
   @echo off
@@ -1330,7 +1330,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
   pause
   ```
 
-  * 简化写法：
+  - 简化写法：
 
   ```batchfile
   set /p var=请输入一个命令：
@@ -1349,7 +1349,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
 语句2格式：`IF [NOT] string1==string2 command`​
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1368,7 +1368,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
   上例中，两个字符比较时会忽略空格.
 
   如果需要连同空格一起比较，这需要把比较对象加上引号：
-* 例子2：`not`​
+- 例子2：`not`​
 
   ```batchfile
   @echo off
@@ -1390,7 +1390,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
 语句3格式：`IF [NOT] EXIST filename command`​
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off
@@ -1411,7 +1411,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 
 ### 参数`/i`​：忽略大小写
 
-* 例子：
+- 例子：
 
   ```batchfile
   if a == A (
@@ -1439,7 +1439,7 @@ n：截取的长度，若为空，则默认截取剩余所有字符，若为 负
 5. ​`GTR`​ 大于
 6. ​`GEQ`​ 大于或等于
 
-* 例子：
+- 例子：
 
   ```batchfile
   @echo off

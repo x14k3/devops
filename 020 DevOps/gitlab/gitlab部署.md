@@ -6,7 +6,7 @@ gitlab下载地址[https://packages.gitlab.com/gitlab/gitlab-ce](https://package
 
 ### 1. 硬件要求
 
-* cpu
+- cpu
 
   1个核心最多支持100个用户，但由于所有工作和后台作业都在同一个核心上运行，因此应用程序可能会慢一点  
   2核是建议的核心数，最多支持500个用户  
@@ -15,7 +15,7 @@ gitlab下载地址[https://packages.gitlab.com/gitlab/gitlab-ce](https://package
   16个内核最多可支持10,000个用户  
   32个核心最多可支持20,000个用户  
   64个内核最多可支持40,000个用户
-* 内存
+- 内存
 
   至少8GB可寻址内存来安装gitlab，在运行gitlab之前，至少需要4GB可用空间，建议至少有2BG交换，建议将内核的swappiness 设置为较低水平足以。
 
@@ -24,7 +24,7 @@ gitlab下载地址[https://packages.gitlab.com/gitlab/gitlab-ce](https://package
   vm.swappiness = 10
   ```
 
-* 数据库  
+- 数据库  
   运行数据库服务器至少要有5-10GB的可存储空间，但具体要求取决于gitlab安装的大小。强烈支持使用postgresql，Mysql/mariadb（不支持所有的gitlab功能)  
   Postgresql 要求：  
   从GitLab 10.0开始，需要PostgreSQL 9.6或更高版本，并且不支持早期版本。我们强烈建议用户使用PostgreSQL 9.6，因为这是用于开发和测试的PostgreSQL版本。  
@@ -33,9 +33,9 @@ gitlab下载地址[https://packages.gitlab.com/gitlab/gitlab-ce](https://package
   在某些系统上，您可能需要安装额外的软件包（例如 postgresql-contrib）以使此扩展可用。
 
   参考[PostgreSQL 安装部署](032%20数据库/PostgreSQL/PostgreSQL%20安装部署.md)
-* redis和 sidekiq  
+- redis和 sidekiq  
   Redis  存储所有用户会话和后台任务队列，redis的存储要求很低，每个用户大约25KB，sidekiq使用多线程进程处理后台作业，此过程从整个redis堆栈（200M+)开始，但由于内存泄露，他可能会随着时间的推移而增长，在非常活跃的服务器上，sidekiq进程可以使用1GB+内存
-* Prometheus 及相关，使用默认设置，这些进程将消耗大概200M内存
+- Prometheus 及相关，使用默认设置，这些进程将消耗大概200M内存
 
 ### 2. 部署gitlab
 
@@ -74,20 +74,20 @@ yum install -y gitlab-ce   # 默认安装到/opt目录
 
 查看服务状态：`gitlab-ctl status`​ 可以看到gitlab的依赖组件
 
-* Alertmanager：用于监控系统和应用程序，并在发生故障时发送通知。
-* Gitaly：一个Git服务器，处理与Git存储库相关的所有请求。它提高了GitLab性能和稳定性。
-* GitLab Exporter：将GitLab度量指标导出到Prometheus中，以便进行监控和警报。
-* GitLab Kubernetes Agent Server (KAS)：使用Kubernetes管理集群，并支持CI/CD操作。
-* GitLab Workhorse：处理所有传入HTTP请求并管理响应。它提高了速度和可靠性。
-* Logrotate：日志文件轮换工具，可以避免磁盘空间耗尽。
-* Nginx：Web服务器，用于反向代理和负载均衡。
-* Postgres Exporter：将PostgreSQL数据库度量指标导出到Prometheus中，以便进行监控和警报。
-* PostgreSQL：数据库引擎，用于存储数据。
-* Prometheus：开源监控系统，收集时间序列数据并提供可视化、告警等功能。
-* Puma：Ruby Web服务器，用于处理Rails应用程序请求。
-* Redis：内存缓存数据库，用于加快应用程序的读写速度。
-* Redis Exporter: 将Redis度量指标导出到Prometheus中，以便进行监控和警报。
-* Sidekiq：用于处理后台任务的任务队列。它是一个非常快速和可靠的工作线程。
+- Alertmanager：用于监控系统和应用程序，并在发生故障时发送通知。
+- Gitaly：一个Git服务器，处理与Git存储库相关的所有请求。它提高了GitLab性能和稳定性。
+- GitLab Exporter：将GitLab度量指标导出到Prometheus中，以便进行监控和警报。
+- GitLab Kubernetes Agent Server (KAS)：使用Kubernetes管理集群，并支持CI/CD操作。
+- GitLab Workhorse：处理所有传入HTTP请求并管理响应。它提高了速度和可靠性。
+- Logrotate：日志文件轮换工具，可以避免磁盘空间耗尽。
+- Nginx：Web服务器，用于反向代理和负载均衡。
+- Postgres Exporter：将PostgreSQL数据库度量指标导出到Prometheus中，以便进行监控和警报。
+- PostgreSQL：数据库引擎，用于存储数据。
+- Prometheus：开源监控系统，收集时间序列数据并提供可视化、告警等功能。
+- Puma：Ruby Web服务器，用于处理Rails应用程序请求。
+- Redis：内存缓存数据库，用于加快应用程序的读写速度。
+- Redis Exporter: 将Redis度量指标导出到Prometheus中，以便进行监控和警报。
+- Sidekiq：用于处理后台任务的任务队列。它是一个非常快速和可靠的工作线程。
 
 #### 2.2 gitlab常用的默认安装目录
 

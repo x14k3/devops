@@ -305,13 +305,13 @@ directio 4m;
 
 确定打开文件时应如何处理符号链接：
 
-* ​`off`​  
+- ​`off`​  
   允许路径名中的符号链接的，不执行检查。这是默认行为。
-* ​`on`​  
+- ​`on`​  
   如果路径名存在是符号链接的组件，则拒绝对文件的访问。
-* ​`if_not_owner`​  
+- ​`if_not_owner`​  
   如果路径名存在是符号链接的组件，并且链接指向的链接和对象为不同所有者，则拒绝访问文件。
-* ​`from=part`​  
+- ​`from=part`​  
   当检查符号链接（参数 `on`​ 和 `if_not_owner`​）时，通常会检查路径名的所有组件。可以通过另外指定 `from=part`​ 参数来避免检查路径名的初始部分中的符号链接。在这种情况下，只能从指定的初始部分后面的路径名组件检查符号链接。如果该值不是检查的路径名的初始部分，则会检查整个路径名，相当于没有指定此参数。如果该值与整个文件名匹配，则不会检查符号链接。参数值可以包含变量。  
   例如：
 
@@ -419,11 +419,11 @@ error_page 404 =301 http://example.com/notfound.html;
 
 指定如何将响应的修改时间与 **If-Modified-Since** 请求头字段中的时间进行比较：
 
-* ​`off`​  
+- ​`off`​  
   忽略 **If-Modified-Since** 请求头字段（0.7.34）
-* ​`exact`​  
+- ​`exact`​  
   完全匹配
-* ​`before`​  
+- ​`before`​  
   响应的修改时间小于或等于 **If-Modified-Since** 请求头字段中的时间
 
 ### ignore\_invalid\_headers
@@ -448,10 +448,10 @@ error_page 404 =301 http://example.com/notfound.html;
 
 指定给定的 location 只能用于内部请求。对于外部请求，返回客户端错误 404（未找到）。内部请求如下：
 
-* 请求由 [error_page](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#error_page)、[index](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#index)、[random_index](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#random_index) 和 [try_files](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#try_files) 指令重定向
-* 来 upstream server 的 **X-Accel-Redirect** 响应头字段重定向的请求
-* 由 [ngx_http_ssi_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssi_module) 模块的 `include virtual`​ 命令、[ngx_http_addition_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_addition_module) 模块指令和 [auth_request](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_auth_request_module#auth_request) 和 [mirror](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_mirror_module#mirror) 指令组成的子请求
-* 由 [rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 指令更改的请求  
+- 请求由 [error_page](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#error_page)、[index](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#index)、[random_index](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#random_index) 和 [try_files](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#try_files) 指令重定向
+- 来 upstream server 的 **X-Accel-Redirect** 响应头字段重定向的请求
+- 由 [ngx_http_ssi_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssi_module) 模块的 `include virtual`​ 命令、[ngx_http_addition_module](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_addition_module) 模块指令和 [auth_request](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_auth_request_module#auth_request) 和 [mirror](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_mirror_module#mirror) 指令组成的子请求
+- 由 [rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 指令更改的请求  
   示例：
 
 ```
@@ -624,38 +624,38 @@ listen unix:/var/run/nginx.sock;
 
 > 在 0.8.21 之前的版本中，它们只能在 `listen`​ 指令中与默认参数一起指定。
 
-* ​`setfib=number`​  
+- ​`setfib=number`​  
   此参数（0.8.44）设置相关联的路由表，监听套接字的 FIB（`SO_SETFIB`​ 选项）。目前只适用于 FreeBSD。
-* ​`fastopen=number`​  
+- ​`fastopen=number`​  
   为侦听套接字启用 **[TCP Fast Open](http://en.wikipedia.org/wiki/TCP_Fast_Open)** （1.5.8），并限制尚未完成三次握手的连接队列的最大长度。
 
   > 不要启用此功能，除非服务器可以一次处理接收多个[相同的 SYN 包的数据](https://tools.ietf.org/html/rfc7413#section-6.1)。
   >
-* ​`backlog=number`​  
+- ​`backlog=number`​  
   在 `listen()`​ 调用中设置限制挂起连接队列的最大长度的`backlog`​ 参数。默认情况下，FreeBSD、DragonFly BSD 和 macOS 上的 `backlog`​ 设置为 -1，在其他平台上设置为 511。
-* ​`rcvbuf=size`​  
+- ​`rcvbuf=size`​  
   设置侦听套接字的接收缓冲区大小（`SO_RCVBUF`​ 选项）。
-* ​`sndbuf=size`​  
+- ​`sndbuf=size`​  
   设置侦听套接字的发送缓冲区大小（`SO_SNDBUF`​ 选项）。
-* ​`accept_filter=filter`​  
+- ​`accept_filter=filter`​  
   为侦听套接字设置接受过滤器（`SO_ACCEPTFILTER`​ 选项）的名称，该套接字将传入的连接在传递给 `accept()`​ 之前进行过滤。这只适用于 FreeBSD 和 NetBSD 5.0+。可设置值[dataready](http://man.freebsd.org/accf_data) 或 [httpready](http://man.freebsd.org/accf_http)。
-* ​`deferred`​  
+- ​`deferred`​  
   指示在 Linux 上使用延迟 `accept()`​（`TCP_DEFER_ACCEPT`​ 套接字选项）。
-* ​`bind`​  
+- ​`bind`​  
   指示为给定的 `address:port`​ 对单独进行 `bind()`​ 调用。这是有用的，因为如果有多个有相同端口但不同地址的 `listen`​ 指令，并且其中一个 `listen`​ 指令监听给定端口（`*:port`​）的所有地址，则 nginx 将 `bind()`​ 应用到`*:port`​。应该注意的是，在这种情况下将会进行 `getsockname()`​ 系统调用，以确定接受该连接的地址。如果使用 `setfib`​、`backlog`​、`rcvbuf`​、`sndbuf`​、`accept_filter`​、`deferred`​、`ipv6only`​ 或 `so_keepalive`​ 参数，那么对于给定的 `address:port`​ 对将始终进行单独的 `bind()`​ 调用。
-* ​`ipv6only=ON|OFF`​  
+- ​`ipv6only=ON|OFF`​  
   此参数（0.7.42）确定（通过 `IPV6_V6ONLY`​ 套接字选项）一个监听通配符地址 `[::]`​ 的 IPv6 套接字是否仅接受 IPv6 连接或 IPv6 和 IPv4 连接。此参数默认为开启。它只能在启动时设置一次。
 
   > 在 1.3.4 版本之前，如果省略该参数，则操作系统的设置将对于套接字产生影响。
   >
-* ​`reuseport`​  
+- ​`reuseport`​  
   此参数（1.9.1）指示为每个工作进程创建一个单独的监听套接字（使用 `SO_REUSEPORT`​ 套接字选项），允许内核在工作进程之间分配传入的连接。目前只适用于 Linux 3.9+ 和 DragonFly BSD。
 
   > 不当地使用此选项可能会带来安全[隐患](http://man7.org/linux/man-pages/man7/socket.7.html)。
   >
-* ​`SO_KEEPALIVE=ON|OFF|[keepidle]:[keepintvl]:[keepcnt]`​  
+- ​`SO_KEEPALIVE=ON|OFF|[keepidle]:[keepintvl]:[keepcnt]`​  
   此参数（1.1.11）配置监听套接字的 **TCP keepalive** 行为。如果省略此参数，则操作系统的设置将对套接字产生影响。如果设置为 `on`​，则套接字将打开 `SO_KEEPALIVE`​ 选项。如果设置为 `off`​，则 `SO_KEEPALIVE`​ 选项将被关闭。一些操作系统支持在每个套接字上使用 `TCP_KEEPIDLE`​、`TCP_KEEPINTVL`​ 和 `TCP_KEEPCNT`​ 套接字选项来设置 TCP keepalive 参数。在这样的系统上（目前为 Linux 2.4+、NetBSD 5+ 和 FreeBSD 9.0-STABLE），可以使用 `keepidle`​、`keepintvl`​和 `keepcnt`​ 参数进行配置。可以省略一个或两个参数，在这种情况下，相应套接字选项的系统默认设置将生效。例如，
-* ```
+- ```
   SO_KEEPALIVE=30m::10
   ```
 
@@ -817,19 +817,19 @@ location /scripts/ {
 
 配置一个缓存，可以存储：
 
-* 打开文件描述符、大小和修改时间
-* 有关目录是否存在信息
-* 文件查找错误，如**找不到文件**、**没有读取权限**等
+- 打开文件描述符、大小和修改时间
+- 有关目录是否存在信息
+- 文件查找错误，如**找不到文件**、**没有读取权限**等
 
 > 应该通过 [open_file_cache_errors](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#open_file_cache_errors) 指令分别启用缓存错误。
 
 该指令有以下参数：
 
-* ​`max`​  
+- ​`max`​  
   设置缓存中元素的最大数量。在缓存溢出时，最近最少使用的（LRU）元素将被移除
-* ​`inactive`​  
+- ​`inactive`​  
   定义一个时间，在这个时间之后，元素在缓存中将被删除，默认是 60 秒
-* ​`off`​  
+- ​`off`​  
   禁用缓存  
   示例：
 
@@ -1244,8 +1244,8 @@ server {
 
 启用或禁用在 FreeBSD 上使用 `TCP_NOPUSH`​ 套接字选项或在 Linux 上使用 `TCP_CORK`​ 套接字选项。这些选项只有在使用 [sendfile](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#sendfile) 时才能使用。启用该选项将允许：
 
-* 在 Linux 和 FreeBSD 4 上，在同一包中可发送响应头和文件开头。
-* 以完整包的方式发送一个文件
+- 在 Linux 和 FreeBSD 4 上，在同一包中可发送响应头和文件开头。
+- 以完整包的方式发送一个文件
 
 ### try\_files
 
@@ -1465,112 +1465,112 @@ location /download/ {
 
 ​`ngx_http_core_module`​ 模块支持嵌入式变量名称与 Apache 服务器变量匹配。首先，这些是出现在客户端请求头字段的变量，例如 `$http_user_agent`​、`$http_cookie`​ 等等。还有其他变量：
 
-* ​`$arg_name`​  
+- ​`$arg_name`​  
   请求行中的 `name`​ 参数
-* ​`$args`​  
+- ​`$args`​  
   请求行中的参数
-* ​`$binary_remote_addr`​  
+- ​`$binary_remote_addr`​  
   客户端地址以二进制形式表示，值的长度对于 IPv4 地址总是 4 个字节，对于 IPv6 地址总是 16 个字节
-* ​`$body_bytes_sent`​  
+- ​`$body_bytes_sent`​  
   发送到客户端的字节数，不包括响应头。此变量与 `mod_log_config`​ Apache 模块的 `％B`​ 参数兼容
-* ​`$bytes_sent`​  
+- ​`$bytes_sent`​  
   发送到客户端的字节数（1.3.8、1.2.5）
-* \$connection  
+- \$connection  
   连接序列号（1.3.8、1.2.5）
-* ​`$connection_requests`​  
+- ​`$connection_requests`​  
   当前通过连接请求的请求数（1.3.8、1.2.5）
-* ​`$connect_length`​  
+- ​`$connect_length`​  
   ​`Content-Length`​ 请求头字段
-* ​`$content_type`​  
+- ​`$content_type`​  
   ​`Content-Type`​ 请求头字段
-* ​`$cookie_name`​  
+- ​`$cookie_name`​  
   名称为 `name`​ 的 cookie
-* ​`$document_root`​  
+- ​`$document_root`​  
   根目录或别名指令的当前请求的值
-* ​`$document_uri`​  
+- ​`$document_uri`​  
   与 `$uri`​ 相同
-* ​`$host`​  
+- ​`$host`​  
   按照以下优先顺序：来自请求行的主机名，来自 `Host`​ 请求头字段的主机名，或与请求匹配的服务器名
-* ​`$hostname`​  
+- ​`$hostname`​  
   主机名
-* ​`$http_name`​  
+- ​`$http_name`​  
   任意请求头字段,变量名称的最后一部分是将字段名称转换为小写，并用破折号替换为下划线
-* ​`$https`​  
+- ​`$https`​  
   如果连接以 SSL 模式运行，则为 `on`​，否则为空字符串
-* ​`$is_args`​  
+- ​`$is_args`​  
   如果请求行有参数则为 `?`​，否则为空字符串
-* ​`$limit_rate`​  
+- ​`$limit_rate`​  
   设置这个变量可以实现响应速率限制，见 [limit_rate](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#limit_rate)
-* ​`$msec`​  
+- ​`$msec`​  
   当前时间以毫秒为单位（1.3.9、1.2.6）
-* ​`$nginx_version`​  
+- ​`$nginx_version`​  
   nginx 版本
-* ​`$pid`​  
+- ​`$pid`​  
   工作进程的 PID
-* ​`$pipe`​  
+- ​`$pipe`​  
   如果请求是管道模式则为 `p`​，否则为 `.`​（1.3.12、1.2.7）
-* ​`$proxy_protocol_addr`​  
+- ​`$proxy_protocol_addr`​  
   来自 PROXY 协议头的客户端地址，否则为空字符串（1.5.12）  
   要在 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#listen) 指令中设置 `proxy_protocol`​ 参数，必须先启用 PROXY 协议。
-* ​`$proxy_protocol_port`​  
+- ​`$proxy_protocol_port`​  
   PROXY 协议头中的客户端口，否则为空字符串（1.11.0）  
   要在 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#listen) 指令中设置 `proxy_protocol`​ 参数，必须先启用 PROXY 协议。
-* ​`$query_string`​  
+- ​`$query_string`​  
   与 `$args`​ 相同
-* ​`$realpath_root`​  
+- ​`$realpath_root`​  
   与当前请求的 [root](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#root) 或 [alias](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#alias) 指令值相对应的绝对路径名，所有符号链接都将解析为实际路径
-* ​`$remote_addr`​  
+- ​`$remote_addr`​  
   客户端地址
-* ​`$remote_port`​  
+- ​`$remote_port`​  
   客户端端口
-* ​`$remote_user`​  
+- ​`$remote_user`​  
   基本身份验证提供的用户名
-* ​`$request`​  
+- ​`$request`​  
   完整的原始请求行
-* ​`$request_body`​  
+- ​`$request_body`​  
   请求正文  
   当请求正文被读取到[内存缓冲区](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#client_body_buffer_size)时，变量的值在由[proxy_pass](https://github.com/DocsHome/nginx-docs/blob/master/模块参考/http/gx_http_proxy_module.md#proxy_pass)、[fastcgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_pass)、[uwsgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_uwsgi_module#uwsgi_pass) 和 [scgi_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_scgi_module#scgi_pass) 指令处理的 location 中可用。
-* ​`$request_body_file`​  
+- ​`$request_body_file`​  
   带有请求正文的临时文件的名称  
   在处理结束时，文件需要被删除。想始终将请求主体写入文件中，需要启用 [client_body_in_file_only](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#client_body_in_file_only)。当临时文件的名称在代理请求中或在向 FastCGI/uwsgi/SCGI 服务器的请求中传递时，应该分别通过 [proxy_pass_request_body off](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_pass_request_body)、[fastcgi_pass_request_body off](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_pass_request_body)、[uwsgi_pass_request_body off](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_uwsgi_module#uwsgi_pass_request_body) 或 [scgi_pass_request_body off](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_scgi_module#scgi_pass_request_body) 指令禁用传递请求正文。
-* ​`$request_completion`​  
+- ​`$request_completion`​  
   如果请求已经完成，则返回 `OK`​，否则返回空字符串
-* ​`$request_filename`​  
+- ​`$request_filename`​  
   当前请求的文件路径，基于 [root](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#root) 或 [alias](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#alias) 指令以及请求 URI
-* ​`$request_id`​  
+- ​`$request_id`​  
   由 16 个随机字节生成的唯一请求标识符，以十六进制表示（1.11.0）
-* ​`$request_length`​  
+- ​`$request_length`​  
   请求长度（包括请求行、头部和请求体）（1.3.12、1.2.7）
-* ​`$request_method`​  
+- ​`$request_method`​  
   请求方法，通常为 `GET`​ 或 `POST`​
-* ​`$request_time`​  
+- ​`$request_time`​  
   请求处理时间以毫秒为单位（1.3.9、1.2.6）。自客户端读取第一个字节的时间起
-* ​`$request_uri`​  
+- ​`$request_uri`​  
   完整的原始请求 URI（带参数）
-* ​`$scheme`​  
+- ​`$scheme`​  
   请求模式，`http`​ 或 `https`​
-* ​`$sent_http_name`​  
+- ​`$sent_http_name`​  
   任意响应头字段。变量名称的最后一部分是将字段名称转换为小写，并用破折号替换为下划线
-* ​`$sent_trailer_name`​  
+- ​`$sent_trailer_name`​  
   响应结束时发送的任意字段（1.13.2）。变量名称的最后一部分是将字段名称转换为小写，并用破折号替换为下划线
-* ​`$server_addr`​  
+- ​`$server_addr`​  
   接受请求的服务器地址  
   通常需要一个系统调用来计算这个变量的值。为了避免系统调用，[listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#listen) 指令必须指定地址并使用 `bind`​ 参数。
-* ​`$server_name`​  
+- ​`$server_name`​  
   接受请求的服务器名称
-* ​`$server_port`​  
+- ​`$server_port`​  
   接受请求的服务器端口
-* ​`$server_protocol`​  
+- ​`$server_protocol`​  
   请求协议，通常为 `HTTP/1.0`​、`HTTP/1.1`​ 或 [HTTP/2.0](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_v2_module)
-* ​`$status`​  
+- ​`$status`​  
   响应状态（1.3.2、1.2.2）
-* ​`$tcpinfo_rtt`​、`$tcpinfo_rttvar`​、`$tcpinfo_snd_cwnd`​、`$tcpinfo_rcv_space`​  
+- ​`$tcpinfo_rtt`​、`$tcpinfo_rttvar`​、`$tcpinfo_snd_cwnd`​、`$tcpinfo_rcv_space`​  
   有关客户端 TCP 连接的信息。在支持 `TCP_INFO`​ 套接字选项的系统上可用
-* ​`$time_iso8601`​  
+- ​`$time_iso8601`​  
   本地时间采用 ISO 8601 标准格式（1.3.12、1.2.7）
-* ​`$time_local`​  
+- ​`$time_local`​  
   通用日志格式（Common Log Format）中的本地时间（1.3.12、1.2.7）
-* ​`$uri`​  
+- ​`$uri`​  
   [规范化](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location)过的当前请求 URI  
   ​`$uri`​ 的值可能在请求期间会改变
 

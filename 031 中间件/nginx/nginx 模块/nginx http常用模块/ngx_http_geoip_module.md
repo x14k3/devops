@@ -32,11 +32,11 @@ http {
 
 指定一个用于根据客户端 IP 地址确定国家的数据库。使用此数据库时，以下变量可用：
 
-* ​`$geoip_country_code`​  
+- ​`$geoip_country_code`​  
   双字母国家代码，例如 `RU`​、`US`​
-* ​`$geoip_country_code3`​  
+- ​`$geoip_country_code3`​  
   三个字母的国家代码，例如 `RUS`​、`USA`​
-* ​`$geoip_country_name`​  
+- ​`$geoip_country_name`​  
   国家名称，例如 `Russian Federation`​、`United States`​
 
 ### geoip\_city
@@ -49,32 +49,32 @@ http {
 
 指定一个用于根据客户端 IP 地址确定国家、地区和城市的数据库。使用此数据库时，以下变量可用：
 
-* ​`$geoip_area_code`​  
+- ​`$geoip_area_code`​  
   电话区号（仅限美国）
 
   > 由于相应的数据库字段已弃用，因此此变量可能包含过时的信息
   >
-* ​`$geoip_city_continent_code`​  
+- ​`$geoip_city_continent_code`​  
   双字母的大陆码，例如 `EU`​、`NA`​
-* ​`$geoip_city_country_code`​  
+- ​`$geoip_city_country_code`​  
   双字母国家代码，例如 `RU`​、`US`​
-* ​`$geoip_city_country_code3`​  
+- ​`$geoip_city_country_code3`​  
   三个字母的国家代码，例如 `RUS`​、`USA`​
-* ​`$geoip_city_country_name`​  
+- ​`$geoip_city_country_name`​  
   国家名称，例如 `Russian Federation`​、`United States`​
-* ​`$geoip_dma_code`​  
+- ​`$geoip_dma_code`​  
   美国的 DMA 地区代码（也称为**城市代码**），根据 Google AdWords API 中的[地理位置定位](https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions)
-* ​`$geoip_latitude`​  
+- ​`$geoip_latitude`​  
   纬度
-* ​`$geoip_longitude`​  
+- ​`$geoip_longitude`​  
   经度
-* ​`$geoip_region`​  
+- ​`$geoip_region`​  
   双符号国家地区代码（地区、领土、州、省、联邦土地等），例如 `48`​、`DC`​
-* ​`$geoip_region_name`​  
+- ​`$geoip_region_name`​  
   国家地区名称（地区，领土，州，省，联邦土地等），例如 `Moscow City`​、`District of Columbia`​
-* ​`$geoip_city`​  
+- ​`$geoip_city`​  
   城市名称，例如 `Moscow`​、`Washington`​
-* ​`$geoip_postal_code`​  
+- ​`$geoip_postal_code`​  
   邮政编码
 
 ### geoip\_org
@@ -88,7 +88,7 @@ http {
 
 指定用于根据客户端 IP 地址确定组织的数据库。使用此数据库时，以下变量可用：
 
-* ​`$geoip_org`​  
+- ​`$geoip_org`​  
   组织名称，例如 `The University of Melbourne`​
 
 ### geoip\_proxy

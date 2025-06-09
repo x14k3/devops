@@ -66,8 +66,8 @@ expires @15h30m;
 
 ​`epoch`​ 参数对应于绝对时间 **Thu, 01 Jan 1970 00:00:01 GMT**。`Cache-Control`​ 字段的内容取决于指定时间的符号：
 
-* 时间为负值 — `Cache-Control:no-cache`​
-* 时间为正值或为零 — `Cache-Control:max-age=t`​，其中 `t`​ 是指令中指定的时间，单位为秒  
+- 时间为负值 — `Cache-Control:no-cache`​
+- 时间为正值或为零 — `Cache-Control:max-age=t`​，其中 `t`​ 是指令中指定的时间，单位为秒  
   ​`max`​ 参数将 `Expires`​ 的值设为 `Thu, 2037 Dec 23:55:55 GMT`​，`Cache-Control`​ 设置为 10 年。
 
 ​`off`​ 参数禁止添加或修改 `Expires`​ 和 `Cache-Control`​ 响应头字段。

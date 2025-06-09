@@ -10,9 +10,9 @@ jenkins有2中流水线分为声明式流水线与脚本化流水线,脚本化�
 
 **参数说明**：
 
-* agent any：在任何可用的代理上执行流水线或它的任何阶段，也就是执行流水线过程的位置，也可以指定到具体的节点
-* stage：定义流水线的执行过程（相当于一个阶段），比如下文所示的 Build、Test、Deploy， 但是这个名字是根据实际情况进行定义的，并非固定的名字
-* steps：执行某阶段具体的步骤。
+- agent any：在任何可用的代理上执行流水线或它的任何阶段，也就是执行流水线过程的位置，也可以指定到具体的节点
+- stage：定义流水线的执行过程（相当于一个阶段），比如下文所示的 Build、Test、Deploy， 但是这个名字是根据实际情况进行定义的，并非固定的名字
+- steps：执行某阶段具体的步骤。
 
 ```json
 //Jenkinsfile (Declarative Pipeline)
@@ -44,8 +44,8 @@ pipeline {
 
 **参数说明**:
 
-* node：在任何可用的代理上执行流水线或它的任何阶段，也可以指定到具体的节点
-* stage：和声明式的含义一致，定义流水线的阶段。Stage 块在脚本化流水线语法中是可选的，然而在脚本化流水线中实现 stage 块，可以清楚地在Jenkins UI界面中显示每个stage的任务子集。
+- node：在任何可用的代理上执行流水线或它的任何阶段，也可以指定到具体的节点
+- stage：和声明式的含义一致，定义流水线的阶段。Stage 块在脚本化流水线语法中是可选的，然而在脚本化流水线中实现 stage 块，可以清楚地在Jenkins UI界面中显示每个stage的任务子集。
 
 ```json
 //Jenkinsfile (Scripted Pipeline)
@@ -74,10 +74,10 @@ pipeline {
 
 在声明式流水线中有效的基本语句和表达式遵循与 Groovy 的语法同样的规则，但有以下例外
 
-* 流水线顶层必须是一个 block，即 `pipeline{}`​
-* 分隔符可以不需要分号，但是每条语句都必须在自己的行上
-* 块只能由 Sections、Directives、Steps 或 assignment statements 组成
-* 属性引用语句被当做是无参数的方法调用，比如 input 会被当做 input()。
+- 流水线顶层必须是一个 block，即 `pipeline{}`​
+- 分隔符可以不需要分号，但是每条语句都必须在自己的行上
+- 块只能由 Sections、Directives、Steps 或 assignment statements 组成
+- 属性引用语句被当做是无参数的方法调用，比如 input 会被当做 input()。
 
 ## 2.1 Sections
 
@@ -188,36 +188,36 @@ agent{
 
 Jenkins 也支持使用 Kubernetes 创建 Slave，也就是常说的动态 Slave。配置示例如下
 
-* cloud: Configure Clouds的名称，指定到其中一个k8s
-* slaveConnectTimeout: 连接超时时间
-* yaml: pod定义文件，jnlp容器的配置必须有配置无需改变，其余containerd根据自己情况指定
-* workspaceVolume：持久化jenkins的工作目录。
+- cloud: Configure Clouds的名称，指定到其中一个k8s
+- slaveConnectTimeout: 连接超时时间
+- yaml: pod定义文件，jnlp容器的配置必须有配置无需改变，其余containerd根据自己情况指定
+- workspaceVolume：持久化jenkins的工作目录。
 
-  * persistentVolumeClaimWorkspaceVolume：挂载已有pvc。
+  - persistentVolumeClaimWorkspaceVolume：挂载已有pvc。
 
   ```bash
   workspaceVolume persistentVolumeClaimWorkspaceVolume(claimName: "jenkins-agent", mountPath: "/", readOnly: "false")
   ```
 
-  * nfsWorkspaceVolume：挂载nfs服务器目录
+  - nfsWorkspaceVolume：挂载nfs服务器目录
 
   ```bash
   workspaceVolume nfsWorkspaceVolume(serverAddress: "192.168.10.254", serverPath: "/nfs", readOnly: "false")
   ```
 
-  * dynamicPVC：动态申请pvc，任务执行结束后删除
+  - dynamicPVC：动态申请pvc，任务执行结束后删除
 
   ```bash
   workspaceVolume dynamicPVC(storageClassName: "nfs-client", requestsSize: "1Gi", accessModes: "ReadWriteMany")
   ```
 
-  * emptyDirWorkspaceVolume：临时目录，任务执行结束后会随着pod删除被删除，主要功能多个任务container共享jenkins工作目录。
+  - emptyDirWorkspaceVolume：临时目录，任务执行结束后会随着pod删除被删除，主要功能多个任务container共享jenkins工作目录。
 
   ```bash
   workspaceVolume emptyDirWorkspaceVolume()
   ```
 
-  * hostPathWorkspaceVolume：挂载node节点本机目录，注意挂载本机目录注意权限问题，可以先创建设置777权限，否则默认kubelet创建的目录权限为755默认其他用户没有写权限，执行流水线会报错。
+  - hostPathWorkspaceVolume：挂载node节点本机目录，注意挂载本机目录注意权限问题，可以先创建设置777权限，否则默认kubelet创建的目录权限为755默认其他用户没有写权限，执行流水线会报错。
 
   ```bash
   workspaceVolume hostPathWorkspaceVolume(hostPath: "/opt/workspace", readOnly: false)
@@ -509,9 +509,9 @@ pipeline {
 
 这里使用HARBOR变量进行演示，默认情况下账号密码型的凭证会自动创建3个变量
 
-* HARBOR\_USR:会把凭证中username值赋值给这个变量
-* HARBOR\_PSW:会把凭证中password值赋值给这个变量
-* HARBOR:默认情况下赋值的值为`usernamme:password`​
+- HARBOR\_USR:会把凭证中username值赋值给这个变量
+- HARBOR\_PSW:会把凭证中password值赋值给这个变量
+- HARBOR:默认情况下赋值的值为`usernamme:password`​
 
 ```json
 //这里使用k8s的kubeconfig文件示例
@@ -534,14 +534,14 @@ pipeline {
 
 Jenkins流水线支持很多内置指令，比如retry可以对失败的步骤进行重复执行n次，可以根据不同的指令实现不同的效果。比较常用的指令如下:
 
-* buildDiscarder ： 保留多少个流水线的构建记录
-* disableConcurrentBuilds：禁止流水线并行执行，防止并行流水线同时访问共享资源导致流水线失败。
-* disableResume ：如果控制器重启，禁止流水线自动恢复。
-* newContainerPerStage：agent 为 docker 或 dockerfile 时，每个阶段将在同一个节点的新容器中运行，而不是所有的阶段都在同一个容器中运行。
-* quietPeriod：流水线静默期，也就是触发流水线后等待一会在执行。
-* retry：流水线失败后重试次数。
-* timeout：设置流水线的超时时间，超过流水线时间，job 会自动终止。如果不加unit参数默认为1分。
-* timestamps：为控制台输出时间戳。
+- buildDiscarder ： 保留多少个流水线的构建记录
+- disableConcurrentBuilds：禁止流水线并行执行，防止并行流水线同时访问共享资源导致流水线失败。
+- disableResume ：如果控制器重启，禁止流水线自动恢复。
+- newContainerPerStage：agent 为 docker 或 dockerfile 时，每个阶段将在同一个节点的新容器中运行，而不是所有的阶段都在同一个容器中运行。
+- quietPeriod：流水线静默期，也就是触发流水线后等待一会在执行。
+- retry：流水线失败后重试次数。
+- timeout：设置流水线的超时时间，超过流水线时间，job 会自动终止。如果不加unit参数默认为1分。
+- timestamps：为控制台输出时间戳。
 
 #### 定义在pipeline中
 
@@ -604,16 +604,16 @@ Parameters提供了一个用户在触发流水线时应该提供的参数列表�
 
 **目前支持的参数类型如下**
 
-* string：字符串类型的参数。
-* text：文本型参数，一般用于定义多行文本内容的变量。
-* booleanParam：布尔型参数。
-* choice：选择型参数，一般用于给定几个可选的值，然后选择其中一个进行赋值。
-* password：密码型变量，一般用于定义敏感型变量，在 Jenkins 控制台会输出为\*。
+- string：字符串类型的参数。
+- text：文本型参数，一般用于定义多行文本内容的变量。
+- booleanParam：布尔型参数。
+- choice：选择型参数，一般用于给定几个可选的值，然后选择其中一个进行赋值。
+- password：密码型变量，一般用于定义敏感型变量，在 Jenkins 控制台会输出为\*。
 
 **插件Parameters**
 
-* imageTag：镜像tag，需要安装Image Tag Parameter插件后使用
-* gitParameter：获取git仓库分支，需要Git Parameter插件后使用
+- imageTag：镜像tag，需要安装Image Tag Parameter插件后使用
+- gitParameter：获取git仓库分支，需要Git Parameter插件后使用
 
 **示例**
 
@@ -700,11 +700,11 @@ Input 字段可以实现在流水线中进行交互式操作，比如选择要�
 
 **配置Input支持以下选项**
 
-* message：必选，需要用户进行 input 的提示信息，比如：“是否发布到生产环境？”；
-* id：可选，input 的标识符，默认为 stage 的名称；
-* ok：可选，确认按钮的显示信息，比如：“确定”、“允许”；
-* submitter：可选，允许提交 input 操作的用户或组的名称，如果为空，任何登录用户均可提交input；
-* parameters：提供一个参数列表供 input 使用。
+- message：必选，需要用户进行 input 的提示信息，比如：“是否发布到生产环境？”；
+- id：可选，input 的标识符，默认为 stage 的名称；
+- ok：可选，确认按钮的显示信息，比如：“确定”、“允许”；
+- submitter：可选，允许提交 input 操作的用户或组的名称，如果为空，任何登录用户均可提交input；
+- parameters：提供一个参数列表供 input 使用。
 
 假如需要配置一个提示消息为“还继续么”、确认按钮为“继续”、提供一个 PERSON 的变量的参数，并且只能由登录用户为 alice 和 bob 提交的 input 流水线
 
@@ -737,15 +737,15 @@ When 也可以结合 not、allOf、anyOf 语法达到更灵活的条件匹配。
 
 **目前比较常用的内置条件如下**
 
-* branch：当正在构建的分支与给定的分支匹配时，执行这个stage。注意，branch只适用于多分支流水线
-* changelog：匹配提交的changeLog决定是否构建，例如:`when { changelog '.*^\\[DEPENDENCY\\] .+$' }`​
-* environment：当指定的环境变量和给定的变量匹配时，执行这个 stage，例如：when { environment name: 'DEPLOY\_TO', value: 'production' }
-* equals：当期望值和实际值相同时，执行这个 stage，例如：when { equals expected: 2, actual: currentBuild.number }；
-* expression：当指定的 Groovy 表达式评估为 True，执行这个 stage，例如：when { expression { return params.DEBUG\_BUILD } }；
-* tag：如果 TAG\_NAME 的值和给定的条件匹配，执行这个 stage，例如：when { tag "release-" }；
-* not：当嵌套条件出现错误时，执行这个 stage，必须包含一个条件，例如：when { not { branch 'master' } }；
-* allOf：当所有的嵌套条件都正确时，执行这个 stage，必须包含至少一个条件，例如： when { allOf { branch 'master'; environment name: 'DEPLOY\_TO', value: 'production' } }；
-* anyOf：当至少有一个嵌套条件为 True 时，执行这个 stage，例如：when { anyOf { branch 'master'; branch 'staging' } }。
+- branch：当正在构建的分支与给定的分支匹配时，执行这个stage。注意，branch只适用于多分支流水线
+- changelog：匹配提交的changeLog决定是否构建，例如:`when { changelog '.*^\\[DEPENDENCY\\] .+$' }`​
+- environment：当指定的环境变量和给定的变量匹配时，执行这个 stage，例如：when { environment name: 'DEPLOY\_TO', value: 'production' }
+- equals：当期望值和实际值相同时，执行这个 stage，例如：when { equals expected: 2, actual: currentBuild.number }；
+- expression：当指定的 Groovy 表达式评估为 True，执行这个 stage，例如：when { expression { return params.DEBUG\_BUILD } }；
+- tag：如果 TAG\_NAME 的值和给定的条件匹配，执行这个 stage，例如：when { tag "release-" }；
+- not：当嵌套条件出现错误时，执行这个 stage，必须包含一个条件，例如：when { not { branch 'master' } }；
+- allOf：当所有的嵌套条件都正确时，执行这个 stage，必须包含至少一个条件，例如： when { allOf { branch 'master'; environment name: 'DEPLOY\_TO', value: 'production' } }；
+- anyOf：当至少有一个嵌套条件为 True 时，执行这个 stage，例如：when { anyOf { branch 'master'; branch 'staging' } }。
 
 **示例：当分支为main时执行Example Deploy步骤**
 
@@ -840,9 +840,9 @@ pipeline {
 
 **目前支持的前置条件如下**
 
-* beforeAgent：如果 beforeAgent为true，则会先评估when条件。在when条件为true时，才会进入该stage
-* beforeInput：如果beforeInput为true，则会先评估when条件。在when条件为true时，才会进入到input阶段；
-* beforeOptions：如果beforeInput为true，则会先评估when条件。在when条件为true时，才会进入到options阶段；
+- beforeAgent：如果 beforeAgent为true，则会先评估when条件。在when条件为true时，才会进入该stage
+- beforeInput：如果beforeInput为true，则会先评估when条件。在when条件为true时，才会进入到input阶段；
+- beforeOptions：如果beforeInput为true，则会先评估when条件。在when条件为true时，才会进入到options阶段；
 
 **beforeOptions优先级大于beforeInput大于beforeAgent**
 
@@ -922,9 +922,9 @@ pipeline {
 
 创建一个 Jenkinsfile 并将其放置于代码仓库中，有以下好处
 
-* 方便对流水线上的代码进行复查/迭代
-* 对管道进行审计跟踪
-* 流水线真正的源代码能够被项目的多个成员查看和编辑
+- 方便对流水线上的代码进行复查/迭代
+- 对管道进行审计跟踪
+- 流水线真正的源代码能够被项目的多个成员查看和编辑
 
 ## 3.1 环境变量
 
@@ -932,14 +932,14 @@ pipeline {
 
 Jenkins有许多内置变量可以直接在Jenkinsfile中使用，可以通过JENKINS\_URL/pipeline/syntax/globals#env 获取完整列表。目前比较常用的环境变量如下
 
-* BUILD\_ID：当前构建的ID，与Jenkins版本 1.597+中的BUILD\_NUMBER完全相同
-* BUILD\_NUMBER：当前构建的 ID，和BUILD\_ID一致
-* BUILD\_TAG：用来标识构建的版本号，格式为：jenkins-${JOB\_NAME}-${BUILD\_NUMBER}， 可以对产物进行命名，比如生产的jar包名字、镜像的TAG等；
-* BUILD\_URL：本次构建的完整 URL，比如：[http://buildserver/jenkins/job/MyJobName/17/；](http://buildserver/jenkins/job/MyJobName/17/%EF%BC%9B)
-* JOB\_NAME：本次构建的项目名称
-* NODE\_NAME：当前构建节点的名称；
-* JENKINS\_URL：Jenkins 完整的 URL，需要在SystemConfiguration设置；
-* WORKSPACE：执行构建的工作目录。
+- BUILD\_ID：当前构建的ID，与Jenkins版本 1.597+中的BUILD\_NUMBER完全相同
+- BUILD\_NUMBER：当前构建的 ID，和BUILD\_ID一致
+- BUILD\_TAG：用来标识构建的版本号，格式为：jenkins-${JOB\_NAME}-${BUILD\_NUMBER}， 可以对产物进行命名，比如生产的jar包名字、镜像的TAG等；
+- BUILD\_URL：本次构建的完整 URL，比如：[http://buildserver/jenkins/job/MyJobName/17/；](http://buildserver/jenkins/job/MyJobName/17/%EF%BC%9B)
+- JOB\_NAME：本次构建的项目名称
+- NODE\_NAME：当前构建节点的名称；
+- JENKINS\_URL：Jenkins 完整的 URL，需要在SystemConfiguration设置；
+- WORKSPACE：执行构建的工作目录。
 
 示例如果一个流水线名称为`print_env`​，第2次构建，各个变量的值。
 
@@ -987,8 +987,8 @@ pipeline {
 
 动态变量是根据某个指令的结果进行动态赋值，变量的值根据指令的执行结果而不同。如下所示
 
-* returnStdout：将命令的执行结果赋值给变量，比如下述的命令返回的是clang，此时 CC 的值为“clang”。
-* returnStatus：将命令的执行状态赋值给变量，比如下述命令的执行状态为 1，此时 EXIT\_STATUS 的值为 1。
+- returnStdout：将命令的执行结果赋值给变量，比如下述的命令返回的是clang，此时 CC 的值为“clang”。
+- returnStatus：将命令的执行状态赋值给变量，比如下述命令的执行状态为 1，此时 EXIT\_STATUS 的值为 1。
 
 ```json
 //Jenkinsfile (Declarative Pipeline)
@@ -1072,9 +1072,9 @@ pipeline {
 
 **上述的配置会自动生成3个环境变量**
 
-* BITBUCKET\_COMMON\_CREDS：包含一个以冒号分隔的用户名和密码，格式为 username:password
-* BITBUCKET\_COMMON\_CREDS\_USR：仅包含用户名的附加变量
-* BITBUCKET\_COMMON\_CREDS\_PSW：仅包含密码的附加变量。
+- BITBUCKET\_COMMON\_CREDS：包含一个以冒号分隔的用户名和密码，格式为 username:password
+- BITBUCKET\_COMMON\_CREDS\_USR：仅包含用户名的附加变量
+- BITBUCKET\_COMMON\_CREDS\_PSW：仅包含密码的附加变量。
 
 ### 3.加密文件
 

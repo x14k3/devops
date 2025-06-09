@@ -4,37 +4,37 @@
 
 ![](assets/net-img-01-example-20240312204607-r922tkg.jpg)
 
-* 当你想要写一个交互式shell脚本时，你可以使用这样的对话框来接受用户的输入。whiptail可以在shell脚本中创建基于终端的对话框，消息框的过程，类似于Zenity或xdialog GUI脚本代码。预先安装在所有的Linux发布版本中。
-* 相关链接: [https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail](https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail)
+- 当你想要写一个交互式shell脚本时，你可以使用这样的对话框来接受用户的输入。whiptail可以在shell脚本中创建基于终端的对话框，消息框的过程，类似于Zenity或xdialog GUI脚本代码。预先安装在所有的Linux发布版本中。
+- 相关链接: [https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail](https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail)
 
 ## 创建消息框
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<message box title>" --msgbox "<text to show>" <height> <width>
   ```
 
-* 示例
+- 示例
 
   ```bash
   #!/bin/bash
   whiptail --title "Test Message Box" --msgbox "Create a message box with whiptail. Choose Ok to continue." 10 60
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-02-msgbox-20240312204607-rgj7ubx.jpg)
 
 ## 创建yes/no对话框
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<dialog box title>" --yesno "<text to show>" <height> <width>
   ```
 
-* 示例
+- 示例
 
   ```bash
   if (whiptail --title "Test Yes/No Box" --yesno "Choose between Yes and No." 10 60) then
@@ -44,7 +44,7 @@
   fi
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-03-yesnobox-20240312204608-qq3qgcp.jpg)
 
@@ -65,13 +65,13 @@
 
 如果你想用户输入任意的文本，您可以使用一个输入框。
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<input box title>" --inputbox "<text to show>" <height> <width> <default-text>
   ```
 
-* 示例
+- 示例
 
   ```bash
   #!/bin/bash
@@ -84,7 +84,7 @@
   fi
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-04-inputbox-20240312204608-1cjcvez.jpg)
 
@@ -92,13 +92,13 @@
 
 当用户需要输入敏感信息时密码框是有用的。
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<password box title>" --passwordbox "<text to show>" <height> <width>
   ```
 
-* 实例
+- 实例
 
   ```bash
   #!/bin/bash
@@ -111,7 +111,7 @@
   fi
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-05-passwordbox-20240312204609-r3chtbz.jpg)
 
@@ -119,13 +119,13 @@
 
 当你想让用户选择一个任意数量的选择中，你可以使用菜单框。
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<menu title>" --menu "<text to show>" <height> <width> <menu height> [ <tag> <item> ] . . .
   ```
 
-* 实例
+- 实例
 
   ```bash
   #!/bin/bash
@@ -142,19 +142,19 @@
   fi
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-06-menulist-20240312204610-dhslkf5.jpg)
 
 ## 创建radiolist单选对话框
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<radiolist title>" --radiolist "<text to show>" <height> <width> <list height> [ <tag> <item> <status> ] . . .
   ```
 
-* 实例
+- 实例
 
   ```bash
   #!/bin/bash
@@ -172,7 +172,7 @@
   fi
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-07-radiolist-20240312204610-l88h1x2.jpg)
 
@@ -180,13 +180,13 @@
 
 当你想让用户选择一个列表中选择多个选项的清单对话框是有用的，radiolist对话框，只允许选择一个。
 
-* 语法
+- 语法
 
   ```bash
   whiptail --title "<checklist title>" --checklist "<text to show>" <height> <width> <list height> [ <tag> <item> <status> ] . . .
   ```
 
-* 实例
+- 实例
 
   ```bash
   #!/bin/bash
@@ -204,7 +204,7 @@
   fi
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-08-checklist-20240312204610-p223oha.jpg)
 
@@ -212,13 +212,13 @@
 
 进度条是一个用户友好的对话框。whiptail从标准输入读取一个百分数（0～100），显示一个表内相应的计数。
 
-* 语法
+- 语法
 
   ```bash
   whiptail --gauge "<test to show>" <height> <width> <inital percent>
   ```
 
-* 示例
+- 示例
 
   ```bash
   #!/bin/bash
@@ -230,6 +230,6 @@
   } | whiptail --gauge "Please wait while installing" 6 60 0
   ```
 
-* 效果
+- 效果
 
   ![](assets/net-img-09-progessgauge-20240312204611-ecsi45i.jpg)

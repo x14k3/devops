@@ -8,8 +8,8 @@
 
 本质上，所谓浏览器同源策略，即：不允许浏览器访问跨域的Cookie，ajax请求跨域接口等。也就是说，凡是访问与自己不在相同域的数据或接口时，浏览器都是不允许的。最常见的例子：对于前后端完全分离的Web项目，前端页面通过rest接口访问数据时，会出现如下问题：
 
-* 不允许发送POST请求：在发送POST请求之前会发送OPTIONS请求，HTTP响应状态码为403（Forbidden）。
-* 允许发送GET请求：HTTP响应状态码为200，但是不能读取服务器返回的数据。
+- 不允许发送POST请求：在发送POST请求之前会发送OPTIONS请求，HTTP响应状态码为403（Forbidden）。
+- 允许发送GET请求：HTTP响应状态码为200，但是不能读取服务器返回的数据。
 
 同时，在浏览器（firefox调试）控制台可以看到如下提示：`已拦截跨源请求：同源策略禁止读取位于 http://host:port/path 的远程资源。（原因：CORS 头缺少 'Access-Control-Allow-Origin'）`​。
 
@@ -58,21 +58,21 @@ location / {
 } 
 ```
 
-* 1. **Access-Control-Allow-Origin**
+- 1. **Access-Control-Allow-Origin**
 
   服务器默认是不被允许跨域的。给Nginx服务器配置`Access-Control-Allow-Origin *`​后，表示服务器可以接受所有的请求源（Origin）,即接受所有跨域的请求。
 
-* 2. **Access-Control-Allow-Headers** 是为了防止出现以下错误：
+- 2. **Access-Control-Allow-Headers** 是为了防止出现以下错误：
 
   ​`Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.`​
 
   这个错误表示当前请求Content-Type的值不被支持。其实是我们发起了"application/json"的类型请求导致的。这里涉及到一个概念：`预检请求（preflight request）`​,请看下面"预检请求"的介绍。
 
-* 3. **Access-Control-Allow-Methods** 是为了防止出现以下错误：
+- 3. **Access-Control-Allow-Methods** 是为了防止出现以下错误：
 
   ​`Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.`​
 
-* 4.给`OPTIONS`​ 添加 `204`​的返回，是为了处理在发送POST请求时Nginx依然拒绝访问的错误
+- 4.给`OPTIONS`​ 添加 `204`​的返回，是为了处理在发送POST请求时Nginx依然拒绝访问的错误
 
   发送"预检请求"时，需要用到方法 `OPTIONS`​ ,所以服务器需要允许该方法。
 

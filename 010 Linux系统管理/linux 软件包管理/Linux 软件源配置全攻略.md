@@ -1,41 +1,43 @@
 # Linux 软件源配置全攻略
 
+‍
+
 ## 前言
 
 Linux 操作系统安装软件比较常用的一些命令 `yum`​、`dnf`​、`apt-get`​、`zypper`​ 以及 `pacman`​。这些命令分别对应不同的操作系统，大致可以分为 `RHEL`​，`DEB`​，`SUSE`​ 和 `ARCH`​ 四种。
 
 Linux 系统安装软件必须要配置软件源，可以分为网络和本地两种方式。
 
-* 网络源：必须要连接外网，连接到软件源 REPO 进行软件的下载安装。
-* 本地源：使用安装的镜像文件（ISO）配置本地软件源，无需联网，比较适合内网使用，安全可控。
+- 网络源：必须要连接外网，连接到软件源 REPO 进行软件的下载安装。
+- 本地源：使用安装的镜像文件（ISO）配置本地软件源，无需联网，比较适合内网使用，安全可控。
 
 ‍
 
 ## 操作系统
 
-本文主要介绍以下 Linux 操作系统如何配置软件源（**点击链接可以下载 ISO 镜像**）：
+本文主要介绍以下 Linux 操作系统如何配置软件源（点击链接可以下载 ISO 镜像）：
 
-* [RedHat 6/7/8/9 全系](https://developers.redhat.com/products/rhel/download)
-* [OracleLinux 6/7/8/9 全系](https://yum.oracle.com/oracle-linux-isos.html)
-* [Centos 6/7/8 全系](https://mirrors.tuna.tsinghua.edu.cn/centos/)
-* [Rocky Linux 8/9 全系](https://rockylinux.org/download)
-* [AlmaLinux 8/9 全系](https://almalinux.org/get-almalinux)
-* [SUSE 12/15 全系](https://www.suse.com/download/sles/)
-* [华为欧拉 openEuler 20~24 全系](https://mirrors.tuna.tsinghua.edu.cn/openeuler/)
-* [华为欧拉 EulerOS V2 全系](https://tools.mindspore.cn/productrepo/iso/euleros/x86_64/)
-* [阿里龙蜥 openAnolis 7/8 全系](https://openanolis.cn/download)
-* [银河麒麟 Kylin V10 全系](https://sx.ygwid.cn:4431/)
-* [中标麒麟 NeoKylin V7 全系](https://sx.ygwid.cn:4431/)
-* [统信 UOS V20 全系](https://cdimage-download.chinauos.com/)
-* [NingOS](https://www.h3c.com/cn/Service/Document_Software/Software_Download/Server/Catalog/system/system/NingOS/)
-* [OpenCloudOS 7/8/9 全系](https://www.opencloudos.tech/ospages/downloadISO)
-* [Debian 全系](https://mirrors.tuna.tsinghua.edu.cn/debian-cd/)
-* [Deepin 全系](https://mirrors.tuna.tsinghua.edu.cn/deepin-cd/)
-* [Ubuntu 全系](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/)
-* [ArchLinux](https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/)
-* [Fedora 13~39 全系](https://fedoraproject.org/zh-Hans/server/download/)
-* [红旗 asianux](https://bbs.chinaredflag.cn/?download2.htm)
-* [中科方德](https://www.nfschina.com/index.php?catid=24)
+- [RedHat 6/7/8/9 全系](https://developers.redhat.com/products/rhel/download)
+- [OracleLinux 6/7/8/9 全系](https://yum.oracle.com/oracle-linux-isos.html)
+- [Centos 6/7/8 全系](https://mirrors.tuna.tsinghua.edu.cn/centos/)
+- [Rocky Linux 8/9 全系](https://rockylinux.org/download)
+- [AlmaLinux 8/9 全系](https://almalinux.org/get-almalinux)
+- [SUSE 12/15 全系](https://www.suse.com/download/sles/)
+- [华为欧拉 openEuler 20~24 全系](https://mirrors.tuna.tsinghua.edu.cn/openeuler/)
+- [华为欧拉 EulerOS V2 全系](https://tools.mindspore.cn/productrepo/iso/euleros/x86_64/)
+- [阿里龙蜥 openAnolis 7/8 全系](https://openanolis.cn/download)
+- [银河麒麟 Kylin V10 全系](https://sx.ygwid.cn:4431/)
+- [中标麒麟 NeoKylin V7 全系](https://sx.ygwid.cn:4431/)
+- [统信 UOS V20 全系](https://cdimage-download.chinauos.com/)
+- [NingOS](https://www.h3c.com/cn/Service/Document_Software/Software_Download/Server/Catalog/system/system/NingOS/)
+- [OpenCloudOS 7/8/9 全系](https://www.opencloudos.tech/ospages/downloadISO)
+- [Debian 全系](https://mirrors.tuna.tsinghua.edu.cn/debian-cd/)
+- [Deepin 全系](https://mirrors.tuna.tsinghua.edu.cn/deepin-cd/)
+- [Ubuntu 全系](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/)
+- [ArchLinux](https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/)
+- [Fedora 13~39 全系](https://fedoraproject.org/zh-Hans/server/download/)
+- [红旗 asianux](https://bbs.chinaredflag.cn/?download2.htm)
+- [中科方德](https://www.nfschina.com/index.php?catid=24)
 
 ## 配置本地软件源
 
@@ -71,14 +73,14 @@ df -Th /mnt
 
 RHEL 系有以下操作系统：
 
-* Centos
-* RedHat
-* OracleLinux
-* RockyLinux
-* AlmaLinux
-* OpenCloudOS
-* 阿里龙蜥 Anolis
-* 中标麒麟 NeoKylin V7
+- Centos
+- RedHat
+- OracleLinux
+- RockyLinux
+- AlmaLinux
+- OpenCloudOS
+- 阿里龙蜥 Anolis
+- 中标麒麟 NeoKylin V7
 
 RHEL 系的操作系统软件源配置目录均为：`/etc/yum.repos.d`​。
 

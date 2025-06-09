@@ -8,18 +8,18 @@ MBR，全称 Master Boot Record，可译为硬盘主引导记录，占据硬盘 
 
 在分区表（Partition table）中，主要存储的值息包括分区号（Partition id）、分区的起始磁柱和分区的磁柱数量。所以 Linux 操作系统在初始化时就可以根据分区表中以上 3 种信息来识别硬盘设备。其中，常见的分区号如下：
 
-* 0x5（或 0xf）：可扩展分区（Extended partition）。
-* 0x82：Linux 交换区（Swap partition）。
-* 0x83：普通 Linux 分区（Linux partition）。
-* 0x8e：Linux 逻辑卷管理分区（Linux LVM partition）。
-* 0xfd：Linux 的 RAID 分区（Linux RAID auto partition）。
+- 0x5（或 0xf）：可扩展分区（Extended partition）。
+- 0x82：Linux 交换区（Swap partition）。
+- 0x83：普通 Linux 分区（Linux partition）。
+- 0x8e：Linux 逻辑卷管理分区（Linux LVM partition）。
+- 0xfd：Linux 的 RAID 分区（Linux RAID auto partition）。
 
 由于 MBR 留给分区表的磁盘空间只有 64 个字节，而每个分区表的大小为 16 个字节，所以在一个硬盘上最多可以划分出 4 个主分区。如果想要在一个硬盘上划分出 4 个以上的分区时，可以通过在硬盘上先划分出一个可扩展分区的方法来增加额外的分区。
 
 不过，在 Linux 的 Kernel 中所支持的分区数量有如下限制：
 
-* 一个 IDE 的硬盘最多可以使用 63 个分区；
-* 一个 SCSI 的硬盘最多可以使用 15 个分区。
+- 一个 IDE 的硬盘最多可以使用 63 个分区；
+- 一个 SCSI 的硬盘最多可以使用 15 个分区。
 
 接下来的问题，就是为什么要将一个硬盘划分成多个分区，而不是直接使用整个硬盘呢？其主要有如下原因：
 

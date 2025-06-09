@@ -207,17 +207,17 @@ Web服务器，直接面向用户，往往要承载大量并发请求，单台�
 
 ![](assets/image-20221127215458444-20230610173812-jt904la.png)​
 
-* Nginx要实现负载均衡需要用到proxy\_pass代理模块配置（上一个实验）
-* Nginx负载均衡与Nginx代理不同地方在于
-* Nginx代理仅代理一台服务器，而Nginx负载均衡则是将客户端请求代理转发至一组upstream虚拟服务池
-* Nginx可以配置代理多台服务器，当一台服务器宕机之后，仍能保持系统可用。
+- Nginx要实现负载均衡需要用到proxy\_pass代理模块配置（上一个实验）
+- Nginx负载均衡与Nginx代理不同地方在于
+- Nginx代理仅代理一台服务器，而Nginx负载均衡则是将客户端请求代理转发至一组upstream虚拟服务池
+- Nginx可以配置代理多台服务器，当一台服务器宕机之后，仍能保持系统可用。
 
 **负载均衡4中模式**
 
-* 轮询策略（默认负载均衡策略）
-* 最少连接数负载均衡策略
-* ip-hash 负载均衡策略
-* 权重负载均衡策略
+- 轮询策略（默认负载均衡策略）
+- 最少连接数负载均衡策略
+- ip-hash 负载均衡策略
+- 权重负载均衡策略
 
 **1. 轮询策略**
 
@@ -290,7 +290,7 @@ upstream myapp1 {
 
 # 13.连接&请求频率限制
 
-## [Nginx 的限制模块](031%20中间件/nginx/nginx%20模块/nginx%20http常用模块/Nginx%20的限制模块.md)
+## [Nginx限制请求并发连接数与下载速度](031%20中间件/nginx/nginx%20模块/Nginx限制请求并发连接数与下载速度.md)
 
 使用连接频率限制同一IP同时只能有3个连接
 
@@ -318,18 +318,18 @@ server {
 
 说明：
 
-* http 区域，我这里使用的是 1.15 版本的，默认已经安装了对应的模块`ngx_http_limit_conn_module`​。
+- http 区域，我这里使用的是 1.15 版本的，默认已经安装了对应的模块`ngx_http_limit_conn_module`​。
 
-  * ​`limit_conn_zone`​：是一个固定的名称，下边调用的时候与之对应。
-  * ​`$binary_remote_addr`​：表示通过 remote_addr 这个标识来做限制，“binary_” 的目的是缩写内存占用量，是限制同一客户端 ip 地址。
-  * ​`zone=addr:10m`​：示生成一个大小为 10M，名字为 addr 的内存区域，用来存储访问的频次信息。
-* server 区域，可以直接写在 server 区域内，表示限制所有，也可以写到对应的 location 当中，以表示单独区域限制。
+  - ​`limit_conn_zone`​：是一个固定的名称，下边调用的时候与之对应。
+  - ​`$binary_remote_addr`​：表示通过 remote_addr 这个标识来做限制，“binary_” 的目的是缩写内存占用量，是限制同一客户端 ip 地址。
+  - ​`zone=addr:10m`​：示生成一个大小为 10M，名字为 addr 的内存区域，用来存储访问的频次信息。
+- server 区域，可以直接写在 server 区域内，表示限制所有，也可以写到对应的 location 当中，以表示单独区域限制。
 
-  * ​`limit_conn`​：表示单个 IP 限制最大连接数为 6。
-  * ​`limit_rate_after`​：表示请求前 10m 大小时不限速。
-  * ​`limit_rate`​：表示单个连接最大连接带宽限制为 1200k。
-  * ​`limit_conn_status`​：设置拒绝请求的返回值。值只能设置 400 到 599 之间（默认是 503）。
-  * ​`limit_conn_log_level`​：定义日志级别，默认 error。
+  - ​`limit_conn`​：表示单个 IP 限制最大连接数为 6。
+  - ​`limit_rate_after`​：表示请求前 10m 大小时不限速。
+  - ​`limit_rate`​：表示单个连接最大连接带宽限制为 1200k。
+  - ​`limit_conn_status`​：设置拒绝请求的返回值。值只能设置 400 到 599 之间（默认是 503）。
+  - ​`limit_conn_log_level`​：定义日志级别，默认 error。
 
 ## ((20240801104057-b4u0wil 'ngx_http_limit_req_module'))
 

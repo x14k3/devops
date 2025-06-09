@@ -6,9 +6,9 @@
 
 hostname有三种类型：static、transient和pretty。
 
-* static：静态主机名，可由用户自行设置，并保存在/etc/hostname 文件中。
-* transient：动态主机名，由内核维护，初始是 static 主机名，默认值为“localhost”。可由DHCP或mDNS在运行时更改。
-* pretty：灵活主机名，允许使用自由形式（包括特殊/空白字符）进行设置。静态/动态主机名遵从域名的通用限制。
+- static：静态主机名，可由用户自行设置，并保存在/etc/hostname 文件中。
+- transient：动态主机名，由内核维护，初始是 static 主机名，默认值为“localhost”。可由DHCP或mDNS在运行时更改。
+- pretty：灵活主机名，允许使用自由形式（包括特殊/空白字符）进行设置。静态/动态主机名遵从域名的通用限制。
 
 > ![](assets/net-img-icon-note-20230906153802-nmivsd8.gif) **说明：** 
 > static和transient主机名只能包含a-z、A-Z、0-9、“-”、“_”和“.”，不能在开头或结尾处使用句点，不允许使用两个相连的句点，大小限制为 64 个字符。
@@ -350,12 +350,12 @@ DNS2=ip-address
 
 ### 使用nmcli
 
-* 创建名为mybond0的绑定，使用示例如下：
+- 创建名为mybond0的绑定，使用示例如下：
 
   ```
   $ nmcli con add type bond con-name mybond0 ifname mybond0 mode active-backup
   ```
-* 添加从属接口，使用示例如下：
+- 添加从属接口，使用示例如下：
 
   ```
   $ nmcli con add type bond-slave ifname enp3s0 master mybond0
@@ -367,7 +367,7 @@ DNS2=ip-address
   $ nmcli con add type bond-slave ifname enp4s0 master mybond0
   Connection 'bond-slave-enp4s0' (05e56afc-b953-41a9-b3f9-0791eb49f7d3) successfully added.
   ```
-* 要启动绑定，则必须首先启动从属接口，使用示例如下：
+- 要启动绑定，则必须首先启动从属接口，使用示例如下：
 
   ```
   $ nmcli con up bond-slave-enp3s0
@@ -494,9 +494,9 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 
 系统会为每个绑定创建一个频道绑定接口，包括 BONDING_OPTS 指令。使用这个配置方法可让多个绑定设备使用不同的配置。请按照以下操作创建多个频道绑定接口：
 
-* 创建多个 ifcfg-bondN 文件，文件中包含 BONDING_OPTS 指令，让网络脚本根据需要创建绑定接口。
-* 创建或编辑要绑定的现有接口配置文件，添加 SLAVE 指令。
-* 使用 MASTER 指令工具在频道绑定接口中分配要绑定的接口，即从属接口。
+- 创建多个 ifcfg-bondN 文件，文件中包含 BONDING_OPTS 指令，让网络脚本根据需要创建绑定接口。
+- 创建或编辑要绑定的现有接口配置文件，添加 SLAVE 指令。
+- 使用 MASTER 指令工具在频道绑定接口中分配要绑定的接口，即从属接口。
 
 以下是频道绑定接口配置文件示例：
 

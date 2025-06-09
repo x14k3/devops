@@ -83,7 +83,7 @@ worker如何进行工作的：
 
 ## 一个master和多个woker的好处
 
-* 可以使用nginx -s reload热部署
+- 可以使用nginx -s reload热部署
 
 首先，对于每个worker进程来说，独立的进程，不需要加锁，所以省掉了锁带来的开销，同时在编程以及问题查找时，也会方便很多。其次，采用独立的进程，可以让互相之间不会影响，一个进程退出后，其它进程还在工作，服务不会中断，master进程则很快启动新的worker进程。当然，worker进程的异常退出，肯定是程序有bug了，异常退出，会导致当前worker上的所有请求失败，不过不会影响到所有请求，所以降低了风险。
 
@@ -261,10 +261,10 @@ events {
 
 包括http全局块、server块
 
-* http全局块：配置的指令包括文件引入、MIME-TYPE定义、日志自定义、连接超时时间、单链接请求数上限等
-* server块：和虚拟主机有密切关系，虚拟主机从用户角度看和一台独立的硬件主机完全一样的，该技术的产生是为了节省互联网服务硬件成本。
+- http全局块：配置的指令包括文件引入、MIME-TYPE定义、日志自定义、连接超时时间、单链接请求数上限等
+- server块：和虚拟主机有密切关系，虚拟主机从用户角度看和一台独立的硬件主机完全一样的，该技术的产生是为了节省互联网服务硬件成本。
 
-  * 全局server：
+  - 全局server：
 
 ```
 listen  8080;
@@ -323,8 +323,8 @@ location / {
 
 实现效果：
 
-* 请求http://127.0.0.1:8000/edu/hello.html 访问到tomcat下的edu/hello.html
-* 请求http://127.0.0.1:8000/vod/hello.html 访问到tomcat下的vod/hello.html
+- 请求http://127.0.0.1:8000/edu/hello.html 访问到tomcat下的edu/hello.html
+- 请求http://127.0.0.1:8000/vod/hello.html 访问到tomcat下的vod/hello.html
 
 步骤一：启动Tomcat
 
@@ -378,8 +378,8 @@ http://127.0.0.1:8000/vod/hello.html
 
 分配策略：
 
-* 轮询（默认）：每个请求按时间顺序逐一分配到不 同的后端服务器，如果后端服务器down掉，能自动剔除
-* weight：代表权重默认为1,权重越高被分配的客户端越多。指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
+- 轮询（默认）：每个请求按时间顺序逐一分配到不 同的后端服务器，如果后端服务器down掉，能自动剔除
+- weight：代表权重默认为1,权重越高被分配的客户端越多。指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
 
 ```
 upstream server pool{
@@ -388,7 +388,7 @@ upstream server pool{
 }
 ```
 
-* ip_hash：每个请求按访问ip的hash结果分配, 这样每个访客固定访问一个后端服务器,可以解诀session的问题。
+- ip_hash：每个请求按访问ip的hash结果分配, 这样每个访客固定访问一个后端服务器,可以解诀session的问题。
 
 ```
 upstream server pool{
@@ -398,7 +398,7 @@ upstream server pool{
 }
 ```
 
-* fair (第三方)：按后端服务器的响应时间来分配请求，响应时间短的优先分配
+- fair (第三方)：按后端服务器的响应时间来分配请求，响应时间短的优先分配
 
 ```
 upstream server_pool 
@@ -410,15 +410,15 @@ fair;
 
 实现效果：启动两个本地Tomcat
 
-* http://localhost:8080/
-* http://localhost:8081/
+- http://localhost:8080/
+- http://localhost:8081/
 
 ![](assets/net-img-321a5d3828552e8a359cc1fad3ab13ef-20230818112847-qwiatya.png)
 
 请求http://127.0.0.1:80/edu/hello.html 分别代理到tomcat下的edu/hello.html页面。
 
-* http:127.0.0.1:8080/edu/hello.html
-* http:127.0.0.1:8081/edu/hello.html
+- http:127.0.0.1:8080/edu/hello.html
+- http:127.0.0.1:8081/edu/hello.html
 
 ```
 Hello Nginx-8080-edu
@@ -471,8 +471,8 @@ Hello Nginx-8081-edu
 
 通过location指定不同的后缀名实现不同的请求转发。通过expires参数设置，可以使浏览器缓存过期时间，减少与服务器之前的请求和流量。具体Expires定义: 是给一个资源设定一个过期时间，也就是说无需去服务端验证，直接通过浏览器自身确认是否过期即可，所以不会产生额外的流量。此种方法非常适合不经常变动的资源。(如果经常更新的文件，不建议使用Expires来缓存)，如果设置3d, 表示在这3天之内访问这个URL, 发送一个请求，比对服务器该文件最后更新时间没有变化，则不会从服务器抓取，返回状态码304,如果有修改，则直接从服务器重新下载，返回状态码200。
 
-* 静态资源： 当用户多次访问这个资源，资源的源代码永远不会改变的资源。
-* 动态资源：当用户多次访问这个资源，资源的源代码可能会发送改变。
+- 静态资源： 当用户多次访问这个资源，资源的源代码永远不会改变的资源。
+- 动态资源：当用户多次访问这个资源，资源的源代码可能会发送改变。
 
 ![](assets/net-img-02b2d21cf8bdfd50760664c6f700878a-20230818112847-beovxk8.jpg)
 
@@ -533,7 +533,7 @@ rpm -q -a keepalived    #查看是否已经安装上
 
 步骤二：高可用配置(主从机器配置)
 
-* 修改keepalived的配置文件keepalived.conf
+- 修改keepalived的配置文件keepalived.conf
 
 ```
 global_defs { # 全局定义
@@ -570,7 +570,7 @@ virtual_ipaddress { # 虛拟ip
 }
 ```
 
-* 在路径/usr/local/src/ 下新建检测脚本 nginx_check.sh
+- 在路径/usr/local/src/ 下新建检测脚本 nginx_check.sh
 
 ```
 #! /bin/bash
@@ -584,7 +584,7 @@ fi
 fi
 ```
 
-* 把两台服务器上nginx和keepalived启动
+- 把两台服务器上nginx和keepalived启动
 
 ```
 $ systemctl start keepalived.service#keepalived启动

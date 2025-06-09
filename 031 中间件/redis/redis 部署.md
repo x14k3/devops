@@ -8,10 +8,10 @@
 
 ‍
 
-* 📄 [Redis 6.0 新特性 ACL 介绍 ](redis%20部署/Redis%206.0%20新特性%20ACL%20介绍%20.md)
-* 📄 [redis cluster](redis%20部署/redis%20cluster.md)
-* 📄 [redis 主从](redis%20部署/redis%20主从.md)
-* 📄 [redis 单例部署](redis%20部署/redis%20单例部署.md)
-* 📄 [redis 哨兵](redis%20部署/redis%20哨兵.md)
+- 📄 [Redis 6.0 新特性 ACL 介绍 ](redis%20部署/Redis%206.0%20新特性%20ACL%20介绍%20.md)
+- 📄 [redis cluster](redis%20部署/redis%20cluster.md)
+- 📄 [redis 主从](redis%20部署/redis%20主从.md)
+- 📄 [redis 单例部署](redis%20部署/redis%20单例部署.md)
+- 📄 [redis 哨兵](redis%20部署/redis%20哨兵.md)
 
 ‍

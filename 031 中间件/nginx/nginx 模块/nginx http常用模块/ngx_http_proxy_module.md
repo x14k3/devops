@@ -249,13 +249,13 @@ proxy_cache_path /data/nginx/cache levels=1:2 keys_zone=one:10m;
 
 此外，以下参数作为我们[商业订阅](http://nginx.com/products/?_ga=2.38653990.485685795.1545557717-1363596925.1544107800)的一部分提供：
 
-* ​`purger=on|off`​  
+- ​`purger=on|off`​  
   指示缓存清除程序（cache purger）是否将从磁盘中删除与[通配符 key](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/proxy_cache_purge/README.md) 匹配的缓存条目（1.7.12）。将参数设置为 `on`​（默认为 `off`​）将激活 **cache purger** 进程，该进程将永久迭代所有缓存条目并删除与通配符 key 匹配的条目。
-* ​`purger_files=number`​  
+- ​`purger_files=number`​  
   设置在一次迭代期间将扫描的条目数（1.7.12）。默认情况下，`purger_files`​ 设置为 10。
-* ​`purger_threshold=number`​  
+- ​`purger_threshold=number`​  
   设置一次迭代的持续时间（1.7.12）。 默认情况下，`purger_threshold`​ 设置为 50 毫秒。
-* ​`purger_sleep=number`​  
+- ​`purger_sleep=number`​  
   设置迭代之间的暂停间隔（1.7.12）。 默认情况下，`purger_sleep`​ 设置为 50 毫秒。
 
   > 在 1.7.3、1.7.7 和 1.11.10 版本中，缓存头格式已发生更改，升级到较新的 nginx 版本之后，缓存的响应将被视为无效。
@@ -324,8 +324,8 @@ server {
 
 也可以直接在响应头中指定响应失效多少秒数后直接启用过时的缓存响应（1.11.10）。这比使用指令参数的优先级低。
 
-* **Cache-Control** 头字段的 [stale-while-revalidate](https://tools.ietf.org/html/rfc5861#section-3) 扩展允许使用过时的缓存响应（如果当前正在更新）。
-* **Cache-Control** 头字段的 [stale-if-error](https://tools.ietf.org/html/rfc5861#section-4) 扩展允许在出现错误时使用过时的缓存响应。  
+- **Cache-Control** 头字段的 [stale-while-revalidate](https://tools.ietf.org/html/rfc5861#section-3) 扩展允许使用过时的缓存响应（如果当前正在更新）。
+- **Cache-Control** 头字段的 [stale-if-error](https://tools.ietf.org/html/rfc5861#section-4) 扩展允许在出现错误时使用过时的缓存响应。  
   要在填充新缓存元素时最大化减少对代理服务器的访问次数，可以使用 [proxy_cache_lock](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_cache_lock) 指令。
 
 ### proxy\_cache\_valid
@@ -363,10 +363,10 @@ proxy_cache_valid any      1m;
 
 也可以直接在响应头中设置缓存的参数。这比使用该指令设置缓存时间具有更高的优先级。
 
-* **X-Accel-Expires** 头字段设置以秒为单位的响应缓存时间。零值将禁用响应缓存。如果值以 `@`​ 前缀开头，则设置自 Epoch 以来的绝对时间（以秒为单位）内的响应可以被缓存。
-* 如果头不包括 **X-Accel-Expires** 字段，则可以在头字段 **Expires** 或 **Cache-Control** 中设置缓存的参数。
-* 如果头包含了 **Set-Cookie** 字段，则不会缓存此类响应。
-* 如果头包含有特殊值 `*`​ 的 **Vary** 字段，则不会缓存此类响应（1.7.7）。如果头包含有另一个值的 **Vary** 字段，这样的响应则将考虑缓存相应的请求头字段（1.7.7）。  
+- **X-Accel-Expires** 头字段设置以秒为单位的响应缓存时间。零值将禁用响应缓存。如果值以 `@`​ 前缀开头，则设置自 Epoch 以来的绝对时间（以秒为单位）内的响应可以被缓存。
+- 如果头不包括 **X-Accel-Expires** 字段，则可以在头字段 **Expires** 或 **Cache-Control** 中设置缓存的参数。
+- 如果头包含了 **Set-Cookie** 字段，则不会缓存此类响应。
+- 如果头包含有特殊值 `*`​ 的 **Vary** 字段，则不会缓存此类响应（1.7.7）。如果头包含有另一个值的 **Vary** 字段，这样的响应则将考虑缓存相应的请求头字段（1.7.7）。  
   可以使用 [proxy_ignore_headers](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_ignore_headers) 指令禁用这些响应头字段的一个或多个的处理。
 
 ### proxy\_connect\_timeout
@@ -497,11 +497,11 @@ proxy_cookie_path ~*^/user/([^/]+) /u/$1;
 
 如果未禁用，处理这些头字段将会产生以下影响：
 
-* **X-Accel-Expires**、**Expires**、**Cache-Control**、**Set-Cookie** 和 **Vary** 设置响应[缓存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_cache_valid)的参数
-* **X-Accel-Redirect** 执行[内部重定](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#internal)向到指定的 URI
-* **X-Accel-Limit-Rate** 设置向客户端传输响应的[速率限制](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#limit_rate)
-* **X-Accel-Buffering** 启用或禁用响应[缓冲](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_buffering)
-* **X-Accel-Charset** 设置了所需的响应[字符集](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_charset_module#charset)
+- **X-Accel-Expires**、**Expires**、**Cache-Control**、**Set-Cookie** 和 **Vary** 设置响应[缓存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_cache_valid)的参数
+- **X-Accel-Redirect** 执行[内部重定](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#internal)向到指定的 URI
+- **X-Accel-Limit-Rate** 设置向客户端传输响应的[速率限制](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#limit_rate)
+- **X-Accel-Buffering** 启用或禁用响应[缓冲](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_buffering)
+- **X-Accel-Charset** 设置了所需的响应[字符集](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_charset_module#charset)
 
 ### proxy\_intercept\_errors
 
@@ -558,29 +558,29 @@ proxy_cookie_path ~*^/user/([^/]+) /u/$1;
 
 指定应将请求传递到下一个服务器的条件：
 
-* ​`error`​  
+- ​`error`​  
   与服务器建立连接，向其传递请求或读取响应头时发生错误
-* ​`timeout`​  
+- ​`timeout`​  
   在与服务器建立连接，向其传递请求或读取响应头时发生超时
-* ​`invalid_header`​  
+- ​`invalid_header`​  
   服务器返回空或无效响应
-* ​`http_500`​  
+- ​`http_500`​  
   服务器返回代码为 500 的响应
-* ​`http_502`​  
+- ​`http_502`​  
   服务器返回代码为 502 的响应
-* ​`http_503`​  
+- ​`http_503`​  
   服务器返回代码为 503 的响应
-* ​`http_504`​  
+- ​`http_504`​  
   服务器返回代码 504 的响应
-* ​`http_403`​  
+- ​`http_403`​  
   服务器返回代码为 403 的响应
-* ​`http_404`​  
+- ​`http_404`​  
   服务器返回代码为 404 的响应
-* ​`http_429`​  
+- ​`http_429`​  
   服务器返回代码为 429 的响应（1.11.13）
-* ​`non_idempotent`​  
+- ​`non_idempotent`​  
   通常，如果请求已发送到上游服务器，则使用[非幂等](https://tools.ietf.org/html/rfc7231#section-4.2.2)方法（`POST`​、`LOCK`​、`PATCH`​）的请求不会传递给下一个服务器（1.9.13），启用此选项显式允许重试此类请求
-* ​`off`​  
+- ​`off`​  
   禁止将请求传递给下一个服务器  
   应该记住，只有在尚未向客户端发送任何内容的情况下，才能将请求传递给下一个服务器。也就是说，如果在传输响应的过程中发生错误或超时，则无法修复此问题。
 
@@ -653,7 +653,7 @@ proxy_pass http://unix:/tmp/backend.socket:/uri/;
 
 请求 URI 按如下方式传递给服务器：
 
-* 如果指定了带有 URI 的 `proxy_pass`​，那么当请求传递给服务器时，与该位置（location）匹配的[规范化](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location)请求 URI 的部分将被指令中指定的 URI 替换：
+- 如果指定了带有 URI 的 `proxy_pass`​，那么当请求传递给服务器时，与该位置（location）匹配的[规范化](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location)请求 URI 的部分将被指令中指定的 URI 替换：
 
 ```
     location /name/ {
@@ -661,8 +661,8 @@ proxy_pass http://unix:/tmp/backend.socket:/uri/;
     }
 ```
 
-* 如果指定了没有 URI 的 `proxy_pass`​，则请求 URI 将以与处理原始请求时客户端发送的格式相同的形式传递给服务器，或者在处理更改的 URI 时传递完整的规范化请求 URI：
-* ```
+- 如果指定了没有 URI 的 `proxy_pass`​，则请求 URI 将以与处理原始请求时客户端发送的格式相同的形式传递给服务器，或者在处理更改的 URI 时传递完整的规范化请求 URI：
+- ```
     location /some/path/ {
         proxy_pass http://127.0.0.1;
     }
@@ -673,9 +673,9 @@ proxy_pass http://unix:/tmp/backend.socket:/uri/;
 
 在某些情况下，无法确定请求 URI 要替换的部分：
 
-* 使用正则表达式指定 location （位置）时，以及在命名位置内指定位置。 在这些情况下，应指定 `proxy_pass`​ 而不使用 URI。
-* 使用 [rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 指令在代理位置内更改 URI 时，将使用相同的配置来处理请求（`break`​）：
-* ```
+- 使用正则表达式指定 location （位置）时，以及在命名位置内指定位置。 在这些情况下，应指定 `proxy_pass`​ 而不使用 URI。
+- 使用 [rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 指令在代理位置内更改 URI 时，将使用相同的配置来处理请求（`break`​）：
+- ```
     location /name/ {
         rewrite    /name/([^/]+) /users?name=$1 break;
         proxy_pass http://127.0.0.1;
@@ -683,8 +683,8 @@ proxy_pass http://unix:/tmp/backend.socket:/uri/;
   ```
 
   在这种情况下，将忽略指令中指定的 URI，并将完整更改的请求 URI 传递给服务器。
-* 在 proxy\_pass 中使用变量时：
-* ```
+- 在 proxy\_pass 中使用变量时：
+- ```
     location /name/ {
         proxy_pass http://127.0.0.1$request_uri;
     }
@@ -1182,11 +1182,11 @@ proxy_temp_path /spool/nginx/proxy_temp 1 2;
 
 ​`ngx_http_proxy_module`​ 模块支持内嵌变量，可使用 [proxy_set_header](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_set_header) 指令来聚合 header：
 
-* ​`$proxy_host`​  
+- ​`$proxy_host`​  
   [proxy_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_pass) 指令中指定的代理服务器的名称和端口
-* ​`$proxy_port`​  
+- ​`$proxy_port`​  
   [proxy_pass](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_pass) 指令中指定的代理服务器的端口或协议的默认端口
-* ​`$proxy_add_x_forwarded_for`​  
+- ​`$proxy_add_x_forwarded_for`​  
   **X-Forwarded-For** 客户端请求头字段，其中附加了 `$remote_addr`​ 变量，以逗号分割。如果客户端请求头中不存在 **X-Forwarded-For”**  字段，则 `$proxy_add_x_forwarded_for`​ 变量等于 `$remote_addr`​ 变量。  
   **待续……**
 

@@ -10,11 +10,11 @@
 
 为减少 CPU 的负载，建议
 
-* 设置 worker 进程数等于 CPU 核心数
-* 启用 [keep-alive](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#keepalive_timeout) 连接
-* 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_session_cache_shared)会话缓存
-* 禁用[内置](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_session_cache_builtin)会话缓存
-* 可增长会话[生命周期](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_session_timeout)（默认为 5 分钟）
+- 设置 worker 进程数等于 CPU 核心数
+- 启用 [keep-alive](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#keepalive_timeout) 连接
+- 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_session_cache_shared)会话缓存
+- 禁用[内置](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_session_cache_builtin)会话缓存
+- 可增长会话[生命周期](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_session_timeout)（默认为 5 分钟）
 
 ```
 worker_processes auto;
@@ -288,13 +288,13 @@ http {
 
 设置存储会话参数的缓存的类型和大小。缓存可以是以下任何类型：
 
-* ​`off`​  
+- ​`off`​  
   完全禁止使用会话缓存：nginx 明确告诉客户端会话可能不会被重用。
-* ​`none`​  
+- ​`none`​  
   轻度禁止使用会话缓存：nginx 告诉客户端会话可以重用，但实际上并不会将会话参数存储在缓存中。
-* ​`builtin`​  
+- ​`builtin`​  
   一个用 OpenSSL 构建的缓存，仅由一个 worker 进程使用。缓存大小在会话中指定。如果未指定大小，则默认为 20480 个会话。使用内置缓存可能会导致内存碎片。
-* ​`shared`​  
+- ​`shared`​  
   所有 worker 进程之间共享的缓存。缓存大小以字节为单位指定，一兆字节可以存储大约 4000 个会话。每个共享缓存都应有一个任意的名称。可以在多个虚拟服务器中使用有相同名称的缓存。  
   两种缓存类型可以同时使用，例如：
 
@@ -455,11 +455,11 @@ ssl_stapling_responder http://ocsp.example.com/;
 
 ngx\_http\_ssl\_module 模块支持几个非标准错误代码，可以使用 [error_page](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#error_page) 指令来重定向：
 
-* ​`495`​  
+- ​`495`​  
   客户端证书验证期间发生错误
-* ​`496`​  
+- ​`496`​  
   客户未提交所需证书
-* ​`497`​  
+- ​`497`​  
   已将常规请求发送到 HTTPS 端口  
   在完全解析请求并且变量（例如 `$request_uri`​、`$uri`​、`$args`​ 和其他变量）可用之后，就会发生重定向。
 
@@ -467,68 +467,68 @@ ngx\_http\_ssl\_module 模块支持几个非标准错误代码，可以使用 [e
 
 ​`ngx_http_ssl_module`​ 模块支持以下嵌入变量：
 
-* ​`$ssl_cipher`​  
+- ​`$ssl_cipher`​  
   返回用于一个已建立的 SSL 连接的密码字符串
-* ​`$ssl_ciphers`​  
+- ​`$ssl_ciphers`​  
   返回客户端支持的密码列表（1.11.7）。已知密码按名称列出，未知则以十六进制显示，例如：
-* ```
+- ```
     AES128-SHA:AES256-SHA:0x00ff
   ```
   仅在使用 OpenSSL 1.0.2 或更高版本时才完全支持该变量。对于旧版本，该变量仅适用于新会话，仅列出已知密码。
-* ​`$ssl_client_escaped_cert`​  
+- ​`$ssl_client_escaped_cert`​  
   以 PEM 格式（urlencoded）返回已建立 SSL 连接的客户端证书（1.13.5）
-* ​`$ssl_client_cert`​  
+- ​`$ssl_client_cert`​  
   为已建立的 SSL 连接返回 PEM 格式的客户端证书。除了第一行，前面的每一行都带有制表符。这适用于 [proxy_set_header](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_proxy_module#proxy_set_header) 指令。
 
   > 不推荐使用该变量，应该使用 `$ssl_client_escaped_cert`​ 变量。
   >
-* ​`$ssl_client_fingerprint`​  
+- ​`$ssl_client_fingerprint`​  
   返回已建立 SSL 连接的客户端证书的 SHA1 指纹（1.7.1）
-* ​`$ssl_client_i_dn`​  
+- ​`$ssl_client_i_dn`​  
   根据 RFC 2253（1.11.6），为已建立的 SSL 连接返回客户端证书的 `issuer DN`​ 字符串;
-* ​`$ssl_client_i_dn_legacy`​  
+- ​`$ssl_client_i_dn_legacy`​  
   返回已建立的 SSL 连接的客户端证书的 `issuer DN`​ 字符串。
 
   > 在 1.11.6 版之前，变量名称为 `$ssl_client_i_dn`​。
   >
-* ​`$ssl_client_raw_cert`​  
+- ​`$ssl_client_raw_cert`​  
   返回已建立 SSL 连接的 PEM 格式的客户端证书
-* ​`$ssl_client_s_dn`​  
+- ​`$ssl_client_s_dn`​  
   根据 RFC 2253（1.11.6），为已建立的 SSL 连接返回客户端证书的 `subject DN`​ 字符串
-* ​`$ssl_client_s_dn_legacy`​  
+- ​`$ssl_client_s_dn_legacy`​  
   返回已建立 SSL 连接的客户端证书的 `subject DN`​字符串
 
   > 在 1.11.6 版之前，变量名称为 `$ssl_client_s_dn`​。
   >
-* ​`$ssl_client_serial`​  
+- ​`$ssl_client_serial`​  
   返回已建立的 SSL 连接的客户端证书的序列号
-* ​`$ssl_client_v_end`​  
+- ​`$ssl_client_v_end`​  
   返回客户端证书的结束日期（1.11.7）
-* ​`$ssl_client_v_remain`​  
+- ​`$ssl_client_v_remain`​  
   返回客户端证书到期前的天数（1.11.7）
-* ​`$ssl_client_v_start`​  
+- ​`$ssl_client_v_start`​  
   返回客户端证书的开始日期（1.11.7）
-* ​`$ssl_client_verify`​  
+- ​`$ssl_client_verify`​  
   返回客户端证书验证的结果：`SUCCESS`​、`FAILED:reason`​，如果证书不存在则返回 `NONE`​。
 
   > 在 1.11.7 版之前，`FAILED`​ 结果不包含原因字符串
   >
-* ​`$ssl_curves`​  
+- ​`$ssl_curves`​  
   返回客户端支持的 curve 列表（1.11.7）。已知 curve 按名称列出，未知以十六进制显示，例如：
-* ```
+- ```
     0x001d:prime256v1:secp521r1:secp384r1
   ```
   > 仅在使用 OpenSSL 1.0.2 或更高版本时才支持该变量。对于旧版本，变量值将为空字符串。
   >
   > 该变量仅适用于新会话。
   >
-* ​`$ssl_early_data`​  
+- ​`$ssl_early_data`​  
   如果使用 TLS 1.3 [Early data](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_ssl_module#ssl_early_data) 并且握手未完成则返回 `"1"`​，否则返回 `""`​（1.15.3）。
-* ​`$ssl_protocol`​  
+- ​`$ssl_protocol`​  
   返回已建立的 SSL 连接的协议
-* ​`$ssl_server_name`​  
+- ​`$ssl_server_name`​  
   返回通过 SNI（1.7.0）请求的服务器名称
-* ​`$ssl_session_id`​  
+- ​`$ssl_session_id`​  
   返回已建立的 SSL 连接的会话标识
-* ​`$ssl_session_reused`​  
+- ​`$ssl_session_reused`​  
   如果重用 SSL 会话则返回 `"r"`​，否则返回 `"."`​（1.5.11）。

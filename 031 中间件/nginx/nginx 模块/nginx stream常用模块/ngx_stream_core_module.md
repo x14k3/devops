@@ -89,24 +89,24 @@ listen unix:/var/run/nginx.sock;
 
 ​`listen`​ 指令有几个专门与套接字相关的系统调用的附加参数。
 
-* ​`backlog=number`​  
+- ​`backlog=number`​  
   在 `listen()`​ 调用中设置 `backlog`​ 参数，该参数限制挂起连接队列的最大长度（1.9.2）。默认情况下，`backlog`​ 在 FreeBSD、DragonFly BSD 和 macOS 上设置为 -1，在其他平台上设置为 511。
-* ​`rcvbuf=size`​  
+- ​`rcvbuf=size`​  
   设置监听套接字的接收缓冲区大小（`SO_RCVBUF`​ 选项）（1.11.13）。
-* ​`sndbuf=size`​  
+- ​`sndbuf=size`​  
   设置监听套接字的发送缓冲区大小（`SO_SNDBUF`​ 选项）（1.11.13）。
-* ​`bind`​  
+- ​`bind`​  
   此参数对给定的 `address:port`​ 对进行单独的 `bind()`​ 调用。事实上，如果存在几个具有相同端口但地址不同的 `listen`​ 指令，并且其中一个 `listen`​ 指令监听给定的端口（`*:port`​）的所有地址，则 nginx 将 `bind()`​ 仅限于 `*:port`​ 范围。要注意的是，在这种情况下将调用 `getsockname()`​ 系统调用以确定接受连接的地址。如果使用了 `ipv6only`​ 或 `so_keepalive`​ 参数，那么对于指定的`address:port`​ 对将始终对 `bind()`​ 单独调用。
-* ​`ipv6only=on|off`​  
+- ​`ipv6only=on|off`​  
   此参数确定（通过 `IPV6_V6ONLY`​ 套接字选项）监听通配符地址 `[::]`​ 的 IPv6 套接字是接受 IPv6 和 IPv4 连接还是仅接受 IPv6 连接。默认情况下，此参数处于启用状态。它只能在启动时设置一次。
-* ​`reuseport`​  
+- ​`reuseport`​  
   此参数（1.9.1）表示为每个 worker 进程创建一个单独的监听套接字（在 Linux 3.9+ 和 DragonFly BSD 上使用 `SO_REUSEPORT`​ 套接字选项，在 FreeBSD 12+ 上使用 `SO_REUSEPORT_LB`​），允许内核在 worker 进程之间分配传入连接。目前仅适用于 Linux 3.9+、DragonFly BSD 和 FreeBSD 12+（1.15.1）。
 
   > 不恰当地使用此选项可能会产生安全[隐患](http://man7.org/linux/man-pages/man7/socket.7.html)。
   >
-* ​`so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]`​  
+- ​`so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]`​  
   此参数配置监听套接字的 **TCP keepalive** 行为。如果省略此参数，将启用操作系统的套接字设置。如果将其设置为值 `on`​，则为套接字打开 `SO_KEEPALIVE`​ 选项。如果将其值设置为 `off`​，则为套接字关闭 `SO_KEEPALIVE`​ 选项。某些操作系统支持使用 `TCP_KEEPIDLE`​、`TCP_KEEPINTVL`​ 和 `TCP_KEEPCNT`​ 套接字选项在每个套接字的基础上设置 TCP keepalive 参数。在此类系统上（目前有 Linux 2.4+、NetBSD 5+ 和 FreeBSD 9.0-STABLE），可以使用 `keepidle`​、`keepintvl`​ 和`keepcnt`​ 参数配置。可省略一两个参数，在该情况下，相应套接字选项的系统默认设置将生效。例如，
-* ```
+- ```
     so_keepalive=30m::10
   ```
 
@@ -219,60 +219,60 @@ resolver 127.0.0.1 [::1]:5353 valid=30s;
 
 ​`ngx_stream_core_module`​ 模块自 1.11.2 版本起支持变量。
 
-* ​`$binary_remote_addr`​  
+- ​`$binary_remote_addr`​  
   客户端地址采用二进制形式，值的长度始终为 IPv4 地址的 4 个字节或 IPv6 地址的 16 个字节
-* ​`$bytes_received`​  
+- ​`$bytes_received`​  
   从客户端收到的字节数（1.11.4）
-* ​`$bytes_sent`​  
+- ​`$bytes_sent`​  
   发送到客户端的字节数
-* ​`$connection`​  
+- ​`$connection`​  
   连接序列号
-* ​`$hostname`​  
+- ​`$hostname`​  
   主机名
-* ​`$msec`​  
+- ​`$msec`​  
   以秒为单位的当前时间（精度为毫秒）
-* ​`$nginx_version`​  
+- ​`$nginx_version`​  
   nginx 版本
-* ​`$pid`​  
+- ​`$pid`​  
   worker 进程 PID
-* ​`$protocol`​  
+- ​`$protocol`​  
   用于与客户端通信的协议：`TCP`​ 或 `UDP`​（1.11.4）
-* ​`$proxy_protocol_addr`​  
+- ​`$proxy_protocol_addr`​  
   来自 PROXY 协议头的客户端地址，否则为空字符串（1.11.4）  
   必须先在 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_core_module#listen) 指令中设置 `proxy_protocol`​ 参数来启用 PROXY 协议。
-* ​`$proxy_protocol_port`​  
+- ​`$proxy_protocol_port`​  
   来自 PROXY 协议头的客户端端口，否则为空字符串（1.11.4）  
   必须先在 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_core_module#listen) 指令中设置 `proxy_protocol`​ 参数来启用 PROXY 协议。
-* ​`$remote_addr`​  
+- ​`$remote_addr`​  
   客户地址
-* ​`$remote_port`​  
+- ​`$remote_port`​  
   客户端端口
-* ​`$server_addr`​  
+- ​`$server_addr`​  
   接受连接的服务器地址  
   计算此变量的值通常需要一次系统调用。为避免系统调用，[listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/stream/ngx_stream_core_module#listen) 指令必须指定地址并使用 `bind`​ 参数。
-* ​`$server_port`​  
+- ​`$server_port`​  
   接受连接的服务器端口
-* ​`$session_time`​  
+- ​`$session_time`​  
   会话持续时间（以秒为单位），精度为毫秒（1.11.4）
-* ​`$status`​  
+- ​`$status`​  
   会话状态（1.11.4），可以是以下之一：
 
-  * ​`200`​  
+  - ​`200`​  
     会话成功完成
-  * ​`400`​
+  - ​`400`​
 
   无法解析客户端数据，例如 PROXY 协议头
-* ​`403`​  
+- ​`403`​  
   禁止访问。例如，当某些客户端地址访问受限时
-* ​`500`​  
+- ​`500`​  
   内部服务器错误
-* ​`502`​  
+- ​`502`​  
   错误网关，例如，如果无法选择或到达上游服务器。
-* ​`503`​  
+- ​`503`​  
   服务不可用，例如，当访问受连接数受限时
-* ​`$time_iso8601`​  
+- ​`$time_iso8601`​  
   本地时间采用 ISO 8601 标准格式
-* ​`$time_local`​  
+- ​`$time_local`​  
   通用日志（Common Log）格式的本地时间
 
 ‍

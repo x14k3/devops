@@ -30,33 +30,33 @@
 
 在物理级别，CDB与非CDB一样有一个数据库实例和多个数据库文件。
 
-* **SYSTEM/SYSAUX**：  
+- **SYSTEM/SYSAUX**：  
   在CDB的数据库环境中，SYSTEM/SYSAUX表空间并不是公用，CDB$ROOT以及每个PDB都拥有自己的SYSTEM和SYSAUX表空间。每个容器都将自己的数据字典存储在相应的SYSTEM表空间（其中包含自己的元数据）中，还有一个SYSAUX表空间。
-* **重做日志文件**：  
+- **重做日志文件**：  
   是整个CDB共有的，其中包含的信息注释有发生更改的PDB的标识。Oracle GoldenGate已进行了增强，以识别CDB的重做日志的格式。在CDB环境中所有的PDB共用CDB$ROOT中的REDO文件，REDO中的条目标识REDO来自那个PDB。在PDB中无法执行ALTER SYSTEM SWITCH LOGFILE命令，只有公用用户在ROOT容器中才可以执行该命令。另外ALTER SYSTEM CHECKPOINT命令是可以在PDB中执行的。
-* **归档**：  
+- **归档**：  
   CDB中的所有PDB都共享CDB的ARCHIVELOG模式，以及归档文件，不可以单独为PDB设置自己的归档模式，只有特权用户连接根容器之后才可以启动归档模式。**所以，如果想开启或关闭数据库的归档模式，那么只能在CDB级别进行操作。在12.1中，只支持在CDB级别闪回数据库，而在12.2中支持在PDB级别闪回数据库，但是开启和关闭数据库的闪回功能，则只能在CDB级别操作。**
-* **控制文件**  
+- **控制文件**  
   是整个CDB共有的。CDB环境中只有一组控制文件，所有的PDB共用这组公共的控制文件，从任何PDB中添加数据文件都会记录到公共控制文件当中，公用用户连接根容器时，可对控制文件进行管理。
-* **Undo Mode**：  
+- **Undo Mode**：  
   在12.2之前，每个CDB实例仅有一个UNDO表空间，所有的PDB共用CDB$ROOT中的UNDO文件。在12.1中，所有的在一个实例中的PDB只能共享同一个UNDO表空间。在12.2中它们都有各自的undo表空间了。这种新的管理机制就叫做**本地undo模式**。在12.2之后的版本中UNDO的使用模式有两种：SHARED UNDO MODE和LOCAL UNDO MODE，顾名思义，LOCAL UNDO MODE就是每个PDB使用自己的UNDO表空间，但当PDB中没有自己的UNDO表空间时，会使用CDB$ROOT中的公共UNDO表空间。本地undo模式为新建数据库的默认模式。
-* **临时文件：**   
+- **临时文件：**   
   每个PDB都有自己的临时表空间，如果PDB没有自己的临时表空间文件，那么，PDB可以使用CDB$ROOT中的临时表空间。根或PDB只能有一个默认临时表空间或表空间组。每个PDB可以具有供该PDB中本地用户或公用用户使用的临时表空间。
-* **参数文件：**   
+- **参数文件：**   
   参数文件中只记录了根容器的参数信息，没有记录PDB级别的参数信息，在根容器中修改初始化参数，会被继承到所有的PDB中，在PDB中修改参数后，PDB的参数会覆盖CDB级别的参数，PDB级别的参数记录在根容器的pdb_spfile$视图中，但并不是所有的参数都可以在PDB中修改，可以通过v$system_parameter视图的ispdb_modifiable列查看PDB中可修改的参数。
 
 ```sql
 SELECT name FROM v$system_parameter WHERE ispdb_modifiable = 'TRUE' ORDER BY name;
 ```
 
-* **告警日志以及跟踪文件：**   
+- **告警日志以及跟踪文件：**   
   在CDB中所有的PDB共用一个告警日志和一组跟踪文件，所有的PDB告警信息都会写入同一个告警日志中。
-* **时区：**   
+- **时区：**   
   在CDB环境中可以为CDB以及所有的PDB设置相同的时区，也可以为每个PDB设置单独的时区。
 
 ```sql
 select dbtimezone from dual;
 ```
 
-* **字符集：**   
+- **字符集：**   
   在CDB中定义字符集也可以应用于它所含有的PDB中，每个PDB也可以有自己的字符集设置。在12.1中，CDB和PDB的字符集必须一样，但是在12.2中，CDB和PDB的字符集可以不一样。

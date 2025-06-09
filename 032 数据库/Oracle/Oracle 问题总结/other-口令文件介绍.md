@@ -49,9 +49,9 @@ ORACLE使用操作系统集成的身份验证或使用密码验证，这个类�
 
 1:ORACLE提供的一个参数remote_login_passwordfile，remote_login_passwordfile有none，shared，exclusive3个值：
 
-* none表示不使用口令文件；
-* exclusive表示实例独占使用口令文件，也就是各自实例使用单独的口令文件，
-* shared表示多个实例共享一个口令文件
+- none表示不使用口令文件；
+- exclusive表示实例独占使用口令文件，也就是各自实例使用单独的口令文件，
+- shared表示多个实例共享一个口令文件
 
 ‍
 
@@ -59,9 +59,9 @@ ORACLE使用操作系统集成的身份验证或使用密码验证，这个类�
 
 SQLNET.AUTHENTICATION_SERVICES = none | all | ntf(windows)
 
-* none : 表示关闭操作系统认证，只能密码认证
-* all : 用于linux或unix平台，关闭本机密码文件认证，采用操作系统认证，但远程<异机>可以使用密码文件认证
-* nts : 用于windows平台
+- none : 表示关闭操作系统认证，只能密码认证
+- all : 用于linux或unix平台，关闭本机密码文件认证，采用操作系统认证，但远程<异机>可以使用密码文件认证
+- nts : 用于windows平台
 
 ‍
 

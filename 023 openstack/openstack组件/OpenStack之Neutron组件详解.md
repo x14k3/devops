@@ -11,44 +11,44 @@
 
 ## 基本概念
 
-* **Network**：是一个隔离的二层广播域。Neutron 支持多种类型的 Network，包括 Local, Flat, VLAN, VxLAN 和 GRE。
+- **Network**：是一个隔离的二层广播域。Neutron 支持多种类型的 Network，包括 Local, Flat, VLAN, VxLAN 和 GRE。
 
-  * &#x20;Local网络与其他网络和节点隔离。Local 网络中的 instance 只能与位于同一节点上同一网络的 Instance 通信，主要用于单机测试。
-  * Flat 网络是无 vlan tagging 的网络。Flat 网络中的 instance 能与位于同一网络的 instance 通信，并且可以跨多个节点。
-  * &#x20;VLAN 网络是具有 802.1q tagging 的网络，是一个二层的广播域，同一 Vlan 中的 instance 可以通信，不同 vlan 只能通过 router 通信。vlan 网络可跨节点，是应用最广泛的网络类型。
-  * Vxlan 是基于隧道技术的 overlay 网络。Vxlan 网络通过唯一的 segmentation ID（也叫 VNI）与其他 Vxlan 网络区分。vxlan 中数据包会通过 VNI 封装成 UDP 包进行传输。因为二层的包通过封装在三层传输，能够克服 VLAN 和物理网络基础设施的限制。
-  * GRE 是与 Vxlan 类似的一种 overlay 网络。主要区别在于使用 IP 包而非 UDP 进行封装。
-* **Subnet**：是一个 IPv4 或者 IPv6 地址段。Instance 的 IP 从 Subnet 中分配。每个 Subnet 需要定义 IP 地址的范围和掩码。
+  - &#x20;Local网络与其他网络和节点隔离。Local 网络中的 instance 只能与位于同一节点上同一网络的 Instance 通信，主要用于单机测试。
+  - Flat 网络是无 vlan tagging 的网络。Flat 网络中的 instance 能与位于同一网络的 instance 通信，并且可以跨多个节点。
+  - &#x20;VLAN 网络是具有 802.1q tagging 的网络，是一个二层的广播域，同一 Vlan 中的 instance 可以通信，不同 vlan 只能通过 router 通信。vlan 网络可跨节点，是应用最广泛的网络类型。
+  - Vxlan 是基于隧道技术的 overlay 网络。Vxlan 网络通过唯一的 segmentation ID（也叫 VNI）与其他 Vxlan 网络区分。vxlan 中数据包会通过 VNI 封装成 UDP 包进行传输。因为二层的包通过封装在三层传输，能够克服 VLAN 和物理网络基础设施的限制。
+  - GRE 是与 Vxlan 类似的一种 overlay 网络。主要区别在于使用 IP 包而非 UDP 进行封装。
+- **Subnet**：是一个 IPv4 或者 IPv6 地址段。Instance 的 IP 从 Subnet 中分配。每个 Subnet 需要定义 IP 地址的范围和掩码。
 
-  * Network 与 Subnet 是 1对多 关系。同一个Network 的 Subnet 可以是不同的 IP 段，但CIDR不能重叠
+  - Network 与 Subnet 是 1对多 关系。同一个Network 的 Subnet 可以是不同的 IP 段，但CIDR不能重叠
 
   ![](assets/image-20221127212714343-20230610173810-gtqar32.png)
 
-  * Network Namespace：是一种网络的隔离机制，通过网络命名空间的每个 router 都有自己独立的路由表
-* **Port**：是虚拟交换机上的一个端口。Port 上定义了 MAC 地址和 IP 地址，当 instance 的虚拟网卡 VIF（Virtual Interface） 绑定到 Port 时，Port 会将 MAC 和 IP 分配给 VIF。
+  - Network Namespace：是一种网络的隔离机制，通过网络命名空间的每个 router 都有自己独立的路由表
+- **Port**：是虚拟交换机上的一个端口。Port 上定义了 MAC 地址和 IP 地址，当 instance 的虚拟网卡 VIF（Virtual Interface） 绑定到 Port 时，Port 会将 MAC 和 IP 分配给 VIF。
 
-  * Project、Network、Subnet、Port之间的关系：Project 1 : m Network 1 : m Subnet 1 : m Port 1 : 1 VIF m : 1 Instance。
+  - Project、Network、Subnet、Port之间的关系：Project 1 : m Network 1 : m Subnet 1 : m Port 1 : 1 VIF m : 1 Instance。
 
 ## 功能
 
 > Neutron 为整个 OpenStack 环境提供网络支持，包括**二层交换，三层路由，负载均衡，防火墙和 VPN 等**。Neutron 提供了一个灵活的框架，通过配置，无论是开源还是商业软件都可以被用来实现这些功能。&#x20;
 
-* 二层交换 Switching
+- 二层交换 Switching
 
-  * Nova 的 Instance 是通过虚拟交换机连接到虚拟二层网络的。Neutron 支持多种虚拟交换机，包括 Linux 原生的 Linux Bridge 和 Open vSwitch。 Open vSwitch（OVS）是一个开源的虚拟交换机，它支持标准的管理接口和协议。
-  * 利用 Linux Bridge 和 OVS，Neutron 除了可以创建传统的 VLAN 网络，还可以创建基于隧道技术的 Overlay 网络，比如 VxLAN 和 GRE（Linux Bridge 目前只支持 VxLAN
-* 三层路由 Routing
+  - Nova 的 Instance 是通过虚拟交换机连接到虚拟二层网络的。Neutron 支持多种虚拟交换机，包括 Linux 原生的 Linux Bridge 和 Open vSwitch。 Open vSwitch（OVS）是一个开源的虚拟交换机，它支持标准的管理接口和协议。
+  - 利用 Linux Bridge 和 OVS，Neutron 除了可以创建传统的 VLAN 网络，还可以创建基于隧道技术的 Overlay 网络，比如 VxLAN 和 GRE（Linux Bridge 目前只支持 VxLAN
+- 三层路由 Routing
 
-  * &#x20;Instance 可以配置不同网段的 IP，Neutron 的 router（虚拟路由器）实现 Instance 跨网段通信。router 通过 IP forwarding，iptables 等技术来实现路由和 NAT。
-  * Neutron 路由器是一个三层的（L3）的抽象，其模拟物理路由器，为用广提供路由、NAT等服务，在 Openstack网络中，不用子网之间的通信需要路由器，网络与外部网络之间的通信更需要路由器。
-  * Neutron 提供虚拟路由器，也支持物理路由器。例如，两个隔离的ⅥLAN网络之间需要实现通信，可以通过物理路由器实现，由物理路由器提供相应的 IP 路由表，确保两个IP子网之间的通信，将两个VLAN网络中的虚拟机默认网关分别设置为路由路由器的接口A和B的IP地址。VLAN中的虚拟机要与 VLANB中的虚拟机通信时，数据包将通过LANA中的物理网卡到达路由器，有物理路由器转发到 VLAN B中的物理网卡，在到目的的虚拟机。
+  - &#x20;Instance 可以配置不同网段的 IP，Neutron 的 router（虚拟路由器）实现 Instance 跨网段通信。router 通过 IP forwarding，iptables 等技术来实现路由和 NAT。
+  - Neutron 路由器是一个三层的（L3）的抽象，其模拟物理路由器，为用广提供路由、NAT等服务，在 Openstack网络中，不用子网之间的通信需要路由器，网络与外部网络之间的通信更需要路由器。
+  - Neutron 提供虚拟路由器，也支持物理路由器。例如，两个隔离的ⅥLAN网络之间需要实现通信，可以通过物理路由器实现，由物理路由器提供相应的 IP 路由表，确保两个IP子网之间的通信，将两个VLAN网络中的虚拟机默认网关分别设置为路由路由器的接口A和B的IP地址。VLAN中的虚拟机要与 VLANB中的虚拟机通信时，数据包将通过LANA中的物理网卡到达路由器，有物理路由器转发到 VLAN B中的物理网卡，在到目的的虚拟机。
 
   ![](assets/image-20221127212723245-20230610173810-jth9u4p.png)
-* 负载均衡 Load Balancing
+- 负载均衡 Load Balancing
 
   1. Openstack 在 Grizzly 版本第一次引入了 Load-Balancing-as-a-Service（LBaaS），提供了将负载分发到多个 instance 的能力。
   2. LBaaS 支持多种负载均衡产品和方案，不同的实现以 Plugin 的形式集成到 Neutron，目前默认的 Plugin 是 HAProxy。
-* 防火墙 Firewalling
+- 防火墙 Firewalling
 
   1. Neutron 通过 Security Group 和 Firewall-as-a-Service 两种方式来保障 instance 和网络的安全性。
   2. Security Group 通过 iptables 限制进出的 instance 的网络包。
@@ -88,15 +88,15 @@
 
 1.  Neutron 可以通过开发不同的 plugin 和 agent 支持不同的网络技术，但是随着支持的 network provider 数量的增加，开发人员面临两个突出的问题：
 
-* 只能在 OpenStack 中使用一种 core plugin，多种 network provider 无法共存。只使用一个 core plugin 本身没有问题。但问题在于传统的 core plugin 与 core plugin agent 是一一对应的。也就是说，如果选择了 linux bridge plugin，那么 linux bridge agent 将是唯一选择，就必须在 OpenStack 的所有节点上使用 linux bridge 作为虚拟交换机（即 network provider）。
-* 不同 plugin 之间存在大量重复代码，开发新的 plugin 工作量大。所有传统的 core plugin 都需要编写大量重复和类似的数据库访问的代码，大大增加了 plugin 开发和维护的工作量。
+- 只能在 OpenStack 中使用一种 core plugin，多种 network provider 无法共存。只使用一个 core plugin 本身没有问题。但问题在于传统的 core plugin 与 core plugin agent 是一一对应的。也就是说，如果选择了 linux bridge plugin，那么 linux bridge agent 将是唯一选择，就必须在 OpenStack 的所有节点上使用 linux bridge 作为虚拟交换机（即 network provider）。
+- 不同 plugin 之间存在大量重复代码，开发新的 plugin 工作量大。所有传统的 core plugin 都需要编写大量重复和类似的数据库访问的代码，大大增加了 plugin 开发和维护的工作量。
 
 2\. Moduler Layer 2（ML2）：是 Neutron 在 Havana 版本实现的一个新的 core plugin，用于替代原有的 linux bridge plugin 和 open vswitch plugin。 作为新一代的 core plugin，提供了一个框架，允许在 OpenStack 网络中同时使用多种 Layer 2 网络技术，不同的节点可以使用不同的网络实现机制。
 
 3\. ML2 对二层网络进行抽象和建模，引入了 type driver 和 mechansim driver。这两类 driver 解耦了 Neutron 所支持的网络类型（type）与访问这些网络类型的机制（mechanism），其结果就是使得 ML2 具有非常好的弹性，易于扩展，能够灵活支持多种 type 和 mechanism。
 
-* Type Driver：Neutron 支持的每一种网络类型都有一个对应的 ML2 type driver。type driver 负责维护网络类型的状态，执行验证，创建网络等。 ML2 支持的网络类型包括 local, flat, vlan, vxlan 和 gre。&#x20;
-* Mechansim Driver：Neutron 支持的每一种网络机制都有一个对应的 ML2 mechansim driver。mechanism driver 负责获取由 type driver 维护的网络状态，并确保在相应的网络设备（物理或虚拟）上正确实现这些状态。
+- Type Driver：Neutron 支持的每一种网络类型都有一个对应的 ML2 type driver。type driver 负责维护网络类型的状态，执行验证，创建网络等。 ML2 支持的网络类型包括 local, flat, vlan, vxlan 和 gre。&#x20;
+- Mechansim Driver：Neutron 支持的每一种网络机制都有一个对应的 ML2 mechansim driver。mechanism driver 负责获取由 type driver 维护的网络状态，并确保在相应的网络设备（物理或虚拟）上正确实现这些状态。
 
   1. Agent-based类型：包括 linux bridge, open vswitch 等
   2. Controller-based类型：包括 OpenDaylight, VMWare NSX 等

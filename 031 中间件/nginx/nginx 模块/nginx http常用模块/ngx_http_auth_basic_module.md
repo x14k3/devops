@@ -46,9 +46,9 @@ name3:password3
 
 支持以下密码类型：
 
-* 用 `crypt()`​ 函数加密；可以使用 Apache HTTP Server 分发的或 `openssl passwd`​ 命令中的 `htpasswd`​ 工具生成；
-* 使用基于 MD5 密码算法（apr1）的 Apache 变体进行散列计算；可以用与上述相同的工具生成；
-* [RFC 2307](https://tools.ietf.org/html/rfc2307#section-5.3) 中指定的 `{scheme}data`​ 语法（1.0.3+）；目前的实现方案包括 `PLAIN`​（一个不应该使用的示例）、`SHA`​（1.3.13）（简单 SHA-1 散列，不应该使用）和 `SSHA`​（一些软件包使用了加盐的 SHA-1 散列，特别是 OpenLDAP 和 Dovecot）。
+- 用 `crypt()`​ 函数加密；可以使用 Apache HTTP Server 分发的或 `openssl passwd`​ 命令中的 `htpasswd`​ 工具生成；
+- 使用基于 MD5 密码算法（apr1）的 Apache 变体进行散列计算；可以用与上述相同的工具生成；
+- [RFC 2307](https://tools.ietf.org/html/rfc2307#section-5.3) 中指定的 `{scheme}data`​ 语法（1.0.3+）；目前的实现方案包括 `PLAIN`​（一个不应该使用的示例）、`SHA`​（1.3.13）（简单 SHA-1 散列，不应该使用）和 `SSHA`​（一些软件包使用了加盐的 SHA-1 散列，特别是 OpenLDAP 和 Dovecot）。
 
 > 增加了对 SHA 模式的支持，仅用于帮助从其他 Web 服务器迁移。 它不应该用于新密码，因为它使用的未加盐的 SHA-1 散列容易受到[彩虹表](http://en.wikipedia.org/wiki/Rainbow_attack)的攻击。
 

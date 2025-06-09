@@ -6,8 +6,8 @@
 
 fail2ban 是一款利用 Python 开发的工具，通过扫描 `/var/log/auth.log`​ 等日志文件并自动封禁进行过多次失败登录尝试的 IP 地址，它通过更新系统防火墙来实现这一点。fail2ban 可以读取许多标准日志文件，例如 SSH 和 Apache 的日志文件，并且可以根据需要配置读取任何你指定的日志文件。
 
-* 项目地址：[https://github.com/fail2ban/fail2ban](https://github.com/fail2ban/fail2ban)
-* 安装文档：[https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages](https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages)
+- 项目地址：[https://github.com/fail2ban/fail2ban](https://github.com/fail2ban/fail2ban)
+- 安装文档：[https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages](https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages)
 
 ## 安装并配置 fail2ban
 

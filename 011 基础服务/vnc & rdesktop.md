@@ -53,27 +53,27 @@ Killing Xtigervnc process ID 6677... success!
 
 > 用于linux 连接windows RDP远程桌面
 
-* Centos/RedHat可以通过yum命令在线安装：
+- Centos/RedHat可以通过yum命令在线安装：
 
   ```javascript
   yum -y install rdesktop
   ```
 
-* Windows配置允许此windows远程访问。
-* rdesktop连接windows远程桌面
+- Windows配置允许此windows远程访问。
+- rdesktop连接windows远程桌面
 
   ```bash
   sudo rdesktop -f -u username -p password  IP
   ```
 
-* rdesktop连接windows服务器并传输文件
+- rdesktop连接windows服务器并传输文件
 
   ```bash
   sudo rdesktop -f -u Administrator -p Ninestar123 10.10.0.167 -r disk:share=/data/archiveFile 
   sudo rdesktop -f -u Administrator -p Ninestar123 10.10.0.167 -r clipboard:PRIMARYCLIPBOARD
   ```
 
-* 其他参数
+- 其他参数
 
   ```bash
   #用法：rdesktop [选项] 服务器[:端口]

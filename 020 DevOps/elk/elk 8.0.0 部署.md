@@ -337,9 +337,9 @@ nohup /data/filebeat/filebeat -e -c /data/filebeat/filebeat.yml >> /data/filebea
 
 **已知问题：**
 
-* 如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
+- 如果你在 Linux ARM 或 macOS M1 等 arch64 平台上从归档中安装 Elasticsearch，那么在首次启动节点时，不会自动生成 `elastic` 用户密码和 Kibana 注册令牌。节点启动后，需要用 `bin/elasticsearch-reset-password` 工具生成 `elastic` 密码：
 
   `bin/elasticsearch-reset-password -u elastic
-* 然后，用 bin/elasticsearch-create-enrollment-token 工具为 Kibana 创建一个注册令牌： 
+- 然后，用 bin/elasticsearch-create-enrollment-token 工具为 Kibana 创建一个注册令牌： 
 
   `bin/elasticsearch-create-enrollment-token -s kibana

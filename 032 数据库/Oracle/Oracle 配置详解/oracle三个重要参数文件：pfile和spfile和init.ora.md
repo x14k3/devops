@@ -4,9 +4,9 @@
 
 **spflie比pfile有很多优点：**
 
-* 可以用RMAN来备份spfile,但是不能备份pfile
-* 减少了人为的错误。spfile由服务器来管理，任何参数改变被接受前都会经过严格的检查
-* 消除了配置问题，如果远程启动oracle服务器，不再需要一个本地的pfile
+- 可以用RMAN来备份spfile,但是不能备份pfile
+- 减少了人为的错误。spfile由服务器来管理，任何参数改变被接受前都会经过严格的检查
+- 消除了配置问题，如果远程启动oracle服务器，不再需要一个本地的pfile
 
 **spfile与pfile的不用点**
 
@@ -31,18 +31,18 @@ SQL\>show parameters spfile
 
 可以使用以下方法查看参数设置,无论参数是通过pfile或者spfile来设置的
 
-* 从sqlplus里面使用”SHOW PARAMETERS”命令,比如SQL\>show parameter sga\_target;
-* 通过V\$PARAMETER视图查看当前实际的参数值
-* 通过V\$PARAMETER2视图查看当前实际的参数值,”List Values”多行显示
-* 通过V\$SPPARAMETER视图，查看server parameter file的当前值
+- 从sqlplus里面使用”SHOW PARAMETERS”命令,比如SQL\>show parameter sga\_target;
+- 通过V\$PARAMETER视图查看当前实际的参数值
+- 通过V\$PARAMETER2视图查看当前实际的参数值,”List Values”多行显示
+- 通过V\$SPPARAMETER视图，查看server parameter file的当前值
 
 **使用spfile或pfile启动数据库**
 
 oracle按以下顺序搜索合适的初始化参数文件：
 
-* 尝试使用\$ORACLE\_HOME/dbs (Unix) or ORACLE\_HOME/database (Windows)路径下的spfile\${ORACLE\_SID}.ora文件
-* 尝试使用\$ORACLE\_HOME/dbs (Unix) or ORACLE\_HOME/database (Windows)路径下的spfile.ora文件
-* 尝试使用\$ORACLE\_HOME/dbs (Unix) or ORACLE\_HOME/database (Windows)路径下的init\${ORACLE\_SID}.ora文件
+- 尝试使用\$ORACLE\_HOME/dbs (Unix) or ORACLE\_HOME/database (Windows)路径下的spfile\${ORACLE\_SID}.ora文件
+- 尝试使用\$ORACLE\_HOME/dbs (Unix) or ORACLE\_HOME/database (Windows)路径下的spfile.ora文件
+- 尝试使用\$ORACLE\_HOME/dbs (Unix) or ORACLE\_HOME/database (Windows)路径下的init\${ORACLE\_SID}.ora文件
 
 前两个是spfile，最后一个是pfile,\${ORACLE\_SID}部分一定要大写。
 

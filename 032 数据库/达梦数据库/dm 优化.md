@@ -41,39 +41,39 @@
 
 启用 DM 快照需要调用 DBMS_WORKLOAD_REPOSITORY 包。
 
-* 使用 DBA 账户登录数据库  
+- 使用 DBA 账户登录数据库  
   ​`disql SYSDBA/password`​
-* 创建 DBMS_WORKLOAD_REPOSITORY 系统包，开启 AWR 快照功能。  
+- 创建 DBMS_WORKLOAD_REPOSITORY 系统包，开启 AWR 快照功能。  
   ​`SP_INIT_AWR_SYS(1);`​
-* 启用状态检测。  
+- 启用状态检测。  
   ​`SELECT SF_CHECK_AWR_SYS;`​
-* 设置 AWR 快照间隔时间（30 分钟）  
+- 设置 AWR 快照间隔时间（30 分钟）  
   ​`CALL DBMS_WORKLOAD_REPOSITORY.AWR_SET_INTERVAL(30);`​
-* 手动创建快照：  
+- 手动创建快照：  
   ​`DBMS_WORKLOAD_REPOSITORY.CREATE_SNAPSHOT();`​  
   这里我们可以间隔几分钟多执行几遍创建几个不同的快照。  
   查看创建的快照信息，包括快照 id：  
   ​`SELECT * FROM SYS.WRM$_SNAPSHOT;`​  
   ​![hk3rdizhqdhtk_75fb33a4b4bd4990a05b9d40477b65e0](assets/hk3rdizhqdhtk_75fb33a4b4bd4990a05b9d40477b65e0-20240313211158-sfe4sam.png)
 
-* 查看 AWR 报告内容  
+- 查看 AWR 报告内容  
   ​`SELECT * FROM TABLE (DBMS_WORKLOAD_REPOSITORY.AWR_REPORT_HTML(1,2));`​  
   查看 snapshot 的 id 在 1~2 范围内的 AWR 分析报告的带 html 格式的内容。  
   ​![hk3rdizhqdhtk_522b4bae539f40c29fac7c26765c1f7e](assets/hk3rdizhqdhtk_522b4bae539f40c29fac7c26765c1f7e-20240313211228-tnemefz.png)
 
-* 这个内容格式基本没办法看，我们需要将其转化成 html 页面查看。
-* 生成 HTML 文件(需要先对 awr 文件夹授权)
+- 这个内容格式基本没办法看，我们需要将其转化成 html 页面查看。
+- 生成 HTML 文件(需要先对 awr 文件夹授权)
 
   ```bash
   chmod 777 /awr
   SYS.AWR_REPORT_HTML(1,2,'/awr','awr1.html');
   ```
 
-* 通过 AWR 报告找出慢 SQL
+- 通过 AWR 报告找出慢 SQL
 
   ![hk3rdizhqdhtk_693d20124e9b44498dc9c76ad6698090](assets/hk3rdizhqdhtk_693d20124e9b44498dc9c76ad6698090-20240313211314-3v2qwxv.png)
 
-* 在拿到慢查询语句后我们需要联系开发人员修改查询语句，这次优化过程中我通过给相关字段添加索引，改写一部分 SQL 完成。  
+- 在拿到慢查询语句后我们需要联系开发人员修改查询语句，这次优化过程中我通过给相关字段添加索引，改写一部分 SQL 完成。  
   但是**数据表本身设计不合理**这个没有优化，由于设计不合理导致查询没办法走索引；而有些查询则需要从业务角度进行优化，比如是否有必要对大表进行全表查询然后再排序？等等等等。。。（至于数据库 SQL 优化的具体策略我们下期再聊）
 
 在完成优化后重启应用，再次通过`sar 10 3`​观察 CPU 性能，较优化前还是有不少的提升的，又可以抽空去抽根烟了。

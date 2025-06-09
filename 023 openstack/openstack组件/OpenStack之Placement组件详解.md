@@ -24,12 +24,12 @@ Placement服务是从 S 版本，从nova服务中拆分出来的组件，作用�
 
 **Data Models**：
 
-* `ResourceProvider`：资源提供者
-* `Inventory`：资源提供者的资源清单
-* `ResourceClass`：资源种类
-* `ResourceProviderAggregate`：资源聚合，实际上是资源提供者和主机聚合的映射关系
-* `Trait`：资源特征描述类型
-* `ResourceProviderTrait`：资源提供者和特征描述的对应关系
-* `Allocation`：分配给消费者的资源状况
-* `Consumer`：消费者，本质是一串 UUID
-* `User`：Keystone User
+- `ResourceProvider`：资源提供者
+- `Inventory`：资源提供者的资源清单
+- `ResourceClass`：资源种类
+- `ResourceProviderAggregate`：资源聚合，实际上是资源提供者和主机聚合的映射关系
+- `Trait`：资源特征描述类型
+- `ResourceProviderTrait`：资源提供者和特征描述的对应关系
+- `Allocation`：分配给消费者的资源状况
+- `Consumer`：消费者，本质是一串 UUID
+- `User`：Keystone User

@@ -1,7 +1,7 @@
 # err-control_files丢失或损坏
 
-* ORA-00205: 标识控制文件出错，有关详情，请检查警告日志​
-* `sqlplus`​登录报错 ERROR: ORA-01033: ORACLE 正在初始化或关闭 Process
+- ORA-00205: 标识控制文件出错，有关详情，请检查警告日志​
+- `sqlplus`​登录报错 ERROR: ORA-01033: ORACLE 正在初始化或关闭 Process
 
 数据库实例无法startup，一般为控制文件丢失或损坏
 

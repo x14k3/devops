@@ -23,14 +23,14 @@ docker info
 
 目前对于 Docker 最新版本而言，你有以下几种存储驱动可供选择：
 
-* [overlay2](docker%20存储驱动/overlay2原理.md)
-* ​`fuse-overlayfs`​
-* ​`btrfs`​
-* ​`zfs`​
-* ​`aufs`​
-* ​`overlay`​
-* ​`devicemapper`​
-* ​`vfs`​
+- [overlay2](docker%20存储驱动/overlay2原理.md)
+- ​`fuse-overlayfs`​
+- ​`btrfs`​
+- ​`zfs`​
+- ​`aufs`​
+- ​`overlay`​
+- ​`devicemapper`​
+- ​`vfs`​
 
 ‍
 

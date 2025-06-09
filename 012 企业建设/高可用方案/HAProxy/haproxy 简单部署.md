@@ -6,8 +6,8 @@ Nginx： 是WEB服务器，缓存服务器，又是反向代理服务器，可�
 
 HAProxy相比较nginx的优点
 
-* 支持Session的保持，Cookie的引导。nginx需要基于ip_hash来实现；
-* HAProxy跟LVS类似，本身就只是一款负载均衡软件；
+- 支持Session的保持，Cookie的引导。nginx需要基于ip_hash来实现；
+- HAProxy跟LVS类似，本身就只是一款负载均衡软件；
 
 ## haproxy 部署
 
@@ -19,11 +19,11 @@ yum -y install haproxy
 
 ### 2. 修改配置文件
 
-* global:  全局配置主要用于设定义全局参数，属于进程级的配置，通常和操作系统配置有关。
-* default : 在此部分中设置的参数值，默认会自动引用到下面的frontend、backend、listen部分中，因此某些参数属于公用的配置，只需要在defaults部分添加一次即可。而如果frontend、backend、listen部分也配置了与defaults部分一样的参数，Defaults部分参数对应的值自动被覆盖。
-* frontend：接收请求的前端虚拟节点，Frontend可以更加规则直接指定具体使用后端的backend；forntend可以根据ACL规则直接指定要使用的后端backend。
-* backend : 后端服务集群的配置，真实服务器，一个Backend对应一个或者多个实体服务器。
-* Listen : Fronted和backend的组合体；比如haproxy实例状态监控部分配置。
+- global:  全局配置主要用于设定义全局参数，属于进程级的配置，通常和操作系统配置有关。
+- default : 在此部分中设置的参数值，默认会自动引用到下面的frontend、backend、listen部分中，因此某些参数属于公用的配置，只需要在defaults部分添加一次即可。而如果frontend、backend、listen部分也配置了与defaults部分一样的参数，Defaults部分参数对应的值自动被覆盖。
+- frontend：接收请求的前端虚拟节点，Frontend可以更加规则直接指定具体使用后端的backend；forntend可以根据ACL规则直接指定要使用的后端backend。
+- backend : 后端服务集群的配置，真实服务器，一个Backend对应一个或者多个实体服务器。
+- Listen : Fronted和backend的组合体；比如haproxy实例状态监控部分配置。
 
 ​`vim /etc/haproxy/haproxy.cfg`​
 

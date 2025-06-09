@@ -1,10 +1,10 @@
 # ftp
 
-* 📄 [ftp-windows](ftp/ftp-windows.md)
-* 📄 [ftp常用命令](ftp/ftp常用命令.md)
-* 📄 [sftp-linux](ftp/sftp-linux.md)
-* 📄 [sftp-windwos](ftp/sftp-windwos.md)
-* 📄 [vsftp-linux](ftp/vsftp-linux.md)
+- 📄 [ftp-windows](ftp/ftp-windows.md)
+- 📄 [ftp常用命令](ftp/ftp常用命令.md)
+- 📄 [sftp-linux](ftp/sftp-linux.md)
+- 📄 [sftp-windwos](ftp/sftp-windwos.md)
+- 📄 [vsftp-linux](ftp/vsftp-linux.md)
 
 ‍
 
@@ -12,8 +12,8 @@
 
 sftp和ftp的区别在安全通道，使用的协议，链接方式，安全性等方面都有不同。
 
-* ftp（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。使用20，21两个端口，**20是数据链路的端口，21是控制链路的端口**。
-* sftp（Secure File Transfer Protocol ，安全文件传送协议）sftp 是ssh服务的一部分，**和ssh一样，使用22端口**。能够为传输文件提供一种安全的加密方法，但是这种安全是以牺牲效率为代价的。
+- ftp（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。使用20，21两个端口，**20是数据链路的端口，21是控制链路的端口**。
+- sftp（Secure File Transfer Protocol ，安全文件传送协议）sftp 是ssh服务的一部分，**和ssh一样，使用22端口**。能够为传输文件提供一种安全的加密方法，但是这种安全是以牺牲效率为代价的。
 
 # 主动模式与被动模式
 

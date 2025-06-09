@@ -4,8 +4,8 @@
 
 环境要求
 
-* MariaDB Server >= 10.6
-* Redis Server >= 6.0
+- MariaDB Server >= 10.6
+- Redis Server >= 6.0
 
 ```bash
 curl -sSL https://get.docker.com/ | sh

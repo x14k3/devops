@@ -223,10 +223,10 @@ ipmitool -I lanplus -H $host -U $username -P $pwd chassis status
 
 远程登录带外并执行命令
 
-* -I : 接口类型
-* -H : 带外IP地址
-* -U : 带外登录用户名
-* -P : 带外登录密码
+- -I : 接口类型
+- -H : 带外IP地址
+- -U : 带外登录用户名
+- -P : 带外登录密码
 
 ## 1.11. 带外网络管理
 

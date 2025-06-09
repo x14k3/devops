@@ -116,8 +116,8 @@ crontab -e
 
 ### **5. 日志与错误处理**
 
-* **查看日志**：`tail -f /var/log/rsync_backup.log`​
-* **检查cron执行记录**：`grep CRON /var/log/syslog`​（Ubuntu/Debian）或 `journalctl -u cron`​（Systemd系统）
+- **查看日志**：`tail -f /var/log/rsync_backup.log`​
+- **检查cron执行记录**：`grep CRON /var/log/syslog`​（Ubuntu/Debian）或 `journalctl -u cron`​（Systemd系统）
 
 ---
 
@@ -137,12 +137,12 @@ crontab -e
 
 ### **注意事项**
 
-* 源路径结尾的 `/`​ 会影响行为：
+- 源路径结尾的 `/`​ 会影响行为：
 
-  * ​`/source/`​ 同步目录内容到目标。
-  * ​`/source`​ 同步目录本身到目标。
-* 使用 `--delete`​ 前建议先 `--dry-run`​ 确认操作。
-* 远程同步需确保 SSH 免密登录或密码正确。
+  - ​`/source/`​ 同步目录内容到目标。
+  - ​`/source`​ 同步目录本身到目标。
+- 使用 `--delete`​ 前建议先 `--dry-run`​ 确认操作。
+- 远程同步需确保 SSH 免密登录或密码正确。
 
 通过灵活组合参数，`rsync`​ 可以适应多种文件同步场景，是备份和部署的利器！
 
@@ -150,9 +150,9 @@ crontab -e
 
 ### **高级选项**
 
-* **增量备份**：使用`--link-dest`​参数创建硬链接备份（需结合时间戳目录）。
-* **带宽限制**：添加`--bwlimit=1000`​（单位KB/s）限制传输速度。
-* **日志轮转**：使用`logrotate`​管理日志文件大小。
+- **增量备份**：使用`--link-dest`​参数创建硬链接备份（需结合时间戳目录）。
+- **带宽限制**：添加`--bwlimit=1000`​（单位KB/s）限制传输速度。
+- **日志轮转**：使用`logrotate`​管理日志文件大小。
 
 通过以上步骤，您已实现了一个安全、自动化的跨机器文件备份方案。
 
@@ -162,98 +162,98 @@ crontab -e
 
 #### **1. 基础操作**
 
-* ​`-v, --verbose`​  
+- ​`-v, --verbose`​  
   显示详细输出，可叠加使用（如 `-vv`​ 更详细）。
-* ​`-q, --quiet`​  
+- ​`-q, --quiet`​  
   静默模式，抑制非错误信息。
-* ​`-P`​  
+- ​`-P`​  
   等价于 `--partial --progress`​：
 
-  * ​`--partial`​：保留部分传输的文件（便于断点续传）。
-  * ​`--progress`​：显示传输进度。
-* ​`-n, --dry-run`​  
+  - ​`--partial`​：保留部分传输的文件（便于断点续传）。
+  - ​`--progress`​：显示传输进度。
+- ​`-n, --dry-run`​  
   模拟运行，显示哪些文件会被同步但不实际执行。
-* ​`--delete`​  
+- ​`--delete`​  
   删除目标端源端不存在的文件（保持严格同步）。
-* ​`--ignore-existing`​  
+- ​`--ignore-existing`​  
   跳过目标端已存在的文件（不覆盖）。
 
 ---
 
 #### **2. 文件属性与权限**
 
-* ​`-a, --archive`​  
+- ​`-a, --archive`​  
   归档模式，保留文件属性（权限、时间戳等），等价于 `-rlptgoD`​：
 
-  * ​`-r`​：递归目录。
-  * ​`-l`​：保留符号链接。
-  * ​`-p`​：保留权限。
-  * ​`-t`​：保留修改时间。
-  * ​`-g`​：保留属组。
-  * ​`-o`​：保留属主。
-  * ​`-D`​：保留设备文件和特殊文件。
-* ​`-z, --compress`​  
+  - ​`-r`​：递归目录。
+  - ​`-l`​：保留符号链接。
+  - ​`-p`​：保留权限。
+  - ​`-t`​：保留修改时间。
+  - ​`-g`​：保留属组。
+  - ​`-o`​：保留属主。
+  - ​`-D`​：保留设备文件和特殊文件。
+- ​`-z, --compress`​  
   传输时压缩数据（节省带宽，但消耗CPU）。
-* ​`--chmod=CHMOD`​  
+- ​`--chmod=CHMOD`​  
   修改目标文件权限（如 `--chmod=755`​）。
-* ​`--exclude=PATTERN`​  
+- ​`--exclude=PATTERN`​  
   排除匹配的文件/目录（支持通配符 `*`​）。
 
-  * 示例：`--exclude="*.tmp"`​ 排除所有 `.tmp`​ 文件。
-* ​`--exclude-from=FILE`​  
+  - 示例：`--exclude="*.tmp"`​ 排除所有 `.tmp`​ 文件。
+- ​`--exclude-from=FILE`​  
   从指定文件读取排除规则（每行一个模式）。
 
 ---
 
 #### **3. 目录控制**
 
-* ​`-R, --relative`​  
+- ​`-R, --relative`​  
   使用相对路径（保持源目录结构）。  
   示例：同步 `/foo/bar`​ 到 `/backup/`​ 会生成 `/backup/foo/bar`​。
-* ​`-b, --backup`​  
+- ​`-b, --backup`​  
   对目标端已存在的文件创建备份（默认后缀 `~`​）。
 
-  * ​`--backup-dir=DIR`​：指定备份文件存放目录。
-* ​`--remove-source-files`​  
+  - ​`--backup-dir=DIR`​：指定备份文件存放目录。
+- ​`--remove-source-files`​  
   同步后删除源端文件（非目录）。
 
 ---
 
 #### **4. 远程同步**
 
-* ​`-e, --rsh=COMMAND`​  
+- ​`-e, --rsh=COMMAND`​  
   指定远程 Shell（如 SSH）：  
   bash
 
   ```
   rsync -avz -e "ssh -p 2222" /local/path user@remote:/remote/path
   ```
-* ​`--rsync-path=PROGRAM`​  
+- ​`--rsync-path=PROGRAM`​  
   指定远程端的 `rsync`​ 路径（用于非默认安装位置）。
 
 ---
 
 #### **5. 性能优化**
 
-* ​`--bwlimit=KBPS`​  
+- ​`--bwlimit=KBPS`​  
   限制带宽使用（单位：KB/s）。  
   示例：`--bwlimit=1000`​ 限制为 1MB/s。
-* ​`--max-size=SIZE`​  
+- ​`--max-size=SIZE`​  
   限制同步文件的最大大小（如 `--max-size=10M`​）。
-* ​`--min-size=SIZE`​  
+- ​`--min-size=SIZE`​  
   限制同步文件的最小大小。
-* ​`-W, --whole-file`​  
+- ​`-W, --whole-file`​  
   禁用增量传输（适用于本地同步或高速网络）。
 
 ---
 
 #### **6. 高级选项**
 
-* ​`--link-dest=DIR`​  
+- ​`--link-dest=DIR`​  
   硬链接未更改的文件到指定目录（用于增量备份）。
-* ​`--checksum`​  
+- ​`--checksum`​  
   基于文件校验和（而非时间和大小）决定是否同步。
-* ​`--timeout=SECONDS`​  
+- ​`--timeout=SECONDS`​  
   设置 I/O 超时时间（默认无限制）。
 
 ---

@@ -4,17 +4,17 @@
 
 **集群介绍**
 
-* **LB 集群**
+- **LB 集群**
 
-  * 轻量级：`nginx`​
-  * 重量级：`lvs`​
-* **HA 集群**
+  - 轻量级：`nginx`​
+  - 重量级：`lvs`​
+- **HA 集群**
 
-  * 轻量级：`keepalived`​
-  * 重量级：`heartbeat`​、`corosync`​、`cman`​
-* **HP 集群**
+  - 轻量级：`keepalived`​
+  - 重量级：`heartbeat`​、`corosync`​、`cman`​
+- **HP 集群**
 
-  * 超算集群企业很少使用
+  - 超算集群企业很少使用
 
 # vrrp协议
 
@@ -122,7 +122,7 @@ fi
 
 ```
 
-* 启动或者重启keepalived服务
+- 启动或者重启keepalived服务
 
   `systemctl restart keepalived`
 

@@ -10,10 +10,10 @@
 
 为了减轻处理器负载，建议：
 
-* 将 [worker 进程](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_processes)数设置为与处理器数量相等
-* 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#ssl_session_cache_shared)会话缓存
-* 禁用[内置](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#ssl_session_cache_builtin)的会话缓存
-* 可以延长会话的[生命周期](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#ssl_session_timeout)（默认为 5 分钟）
+- 将 [worker 进程](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_processes)数设置为与处理器数量相等
+- 启用[共享](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#ssl_session_cache_shared)会话缓存
+- 禁用[内置](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#ssl_session_cache_builtin)的会话缓存
+- 可以延长会话的[生命周期](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_ssl_module#ssl_session_timeout)（默认为 5 分钟）
 
 ```
 worker_processes auto;
@@ -237,13 +237,13 @@ mail {
 
 设置存储会话参数的缓存的类型和大小。缓存可以是以下任何类型：
 
-* ​`off`​  
+- ​`off`​  
   严格禁止使用会话缓存：nginx 明确告知客户端禁止重复使用会话。
-* ​`none`​  
+- ​`none`​  
   禁止使用会话缓存：nginx 告诉客户端会话可以重用，但实际上并没有在缓存中存储会话参数。
-* ​`builtin`​  
+- ​`builtin`​  
   内置的 OpenSSL 缓存，仅由一个 worker 进程使用。缓存大小在会话中指定。如果未指定大小，则默认为 20480 个会话。使用内置缓存可能导致内存碎片。
-* ​`shared`​  
+- ​`shared`​  
   所有 worker 进程之间共享的缓存。缓存大小以字节为单位，一兆字节可以存储大约 4000 个会话。每个共享缓存都有一个任意的名称。相同名称的缓存可以在多个服务器中使用。  
   两种缓存类型可以同时使用，例如：
 
@@ -347,11 +347,11 @@ openssl rand 80> ticket.key
 |**默认**|starttls off;|
 |**上下文**|mail、server|
 
-* ​`on`​  
+- ​`on`​  
   允许对 POP3 使用 `STLS`​ 命令，对 IMAP 和 SMTP 使用 `STARTTLS`​ 命令
-* ​`off`​  
+- ​`off`​  
   拒绝使用 `STLS`​ 和 `STARTTLS`​ 命令
-* ​`only`​  
+- ​`only`​  
   要求初步的 TLS 转换
 
 ‍

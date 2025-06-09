@@ -11,8 +11,8 @@
 
 1. 操作系统获得存储空间的方式一般有两种：
 
-   * 通过某种协议（SAS,SCSI,SAN,iSCSI 等）挂接裸硬盘，然后分区、格式化、创建文件系统；或者直接使用裸硬盘存储数据（数据库）。
-   * 通过 NFS、CIFS 等 协议，mount 远程的文件系统。
+   - 通过某种协议（SAS,SCSI,SAN,iSCSI 等）挂接裸硬盘，然后分区、格式化、创建文件系统；或者直接使用裸硬盘存储数据（数据库）。
+   - 通过 NFS、CIFS 等 协议，mount 远程的文件系统。
 2. 第一种裸硬盘的方式叫做 Block Storage（块存储），每个裸硬盘通常也称作 Volume（卷） 第二种叫做文件系统存储。NAS 和 NFS 服务器，以及各种分布式文件系统提供的都是这种存储。
 
 ## 3.Block Storage Service
@@ -37,27 +37,27 @@
 
 ## 2.核心组件
 
-* **cinder-api**：接收 API 请求，调用 cinder-volume 执行操作。cinder-api 对接收到的 HTTP API 请求会做如下处理：
+- **cinder-api**：接收 API 请求，调用 cinder-volume 执行操作。cinder-api 对接收到的 HTTP API 请求会做如下处理：
 
   1. 检查客户端传人的参数是否合法有效
   2. 调用 cinder 其他子服务的处理客户端请求
   3. 将 cinder 其他子服务返回的结果序列号并返回给客户端
 
   ![](assets/image-20221127212453162-20230610173810-5trdf4b.png)
-* **cinder-scheduler**：Cinder 可以有多个存储节点，当需要创建 volume 时，cinder-scheduler 会根据存储节点的属性和资源使用情况选择一个最合适的节点来创建 volume。
+- **cinder-scheduler**：Cinder 可以有多个存储节点，当需要创建 volume 时，cinder-scheduler 会根据存储节点的属性和资源使用情况选择一个最合适的节点来创建 volume。
 
   ![](assets/image-20221127212500302-20230610173810-fck4ebt.png)
-* **cinder-volume**：cinder-volume 在存储节点上运行，OpenStack 对 Volume 的操作，最后都是交给 cinder-volume 来完成的。cinder-volume 自身并不管理真正的存储设备，存储设备是由 volume provider 管理的。cinder-volume 与 volume provider 一起实现 volume 生命周期的管理。
+- **cinder-volume**：cinder-volume 在存储节点上运行，OpenStack 对 Volume 的操作，最后都是交给 cinder-volume 来完成的。cinder-volume 自身并不管理真正的存储设备，存储设备是由 volume provider 管理的。cinder-volume 与 volume provider 一起实现 volume 生命周期的管理。
 
   1. 通过 Driver 架构支持多种 Volume Provider
   2. 定期向 OpenStack 报告计算节点的状态。cinder-volume 会定期向 Cinder 报告存储节点的空闲容量来做筛选启动volume
   3. 实现 volume 生命周期管理。Cinder 对 volume 的生命周期的管理最终都是通过 cinder-volume 完成的，包括 volume 的 create、extend、attach、snapshot、delete 等。
 
   ![](assets/image-20221127212508867-20230610173810-c4tpagh.png)
-* **volume provider**：数据的存储设备，为 volume 提供物理存储空间。 cinder-volume 支持多种 volume provider，每种 volume provider 通过自己的 driver 与cinder-volume 协调工作。
+- **volume provider**：数据的存储设备，为 volume 提供物理存储空间。 cinder-volume 支持多种 volume provider，每种 volume provider 通过自己的 driver 与cinder-volume 协调工作。
 
   ![](assets/image-20221127212516616-20230610173810-ylh95y0.png)
-* **Message Queue**：Cinder 各个子服务通过消息队列实现进程间通信和相互协作。因为有了消息队列，子服务之间实现了解耦，这种松散的结构也是分布式系统的重要特征。
+- **Message Queue**：Cinder 各个子服务通过消息队列实现进程间通信和相互协作。因为有了消息队列，子服务之间实现了解耦，这种松散的结构也是分布式系统的重要特征。
 
   ![](assets/image-20221127212524062-20230610173810-tprjg37.png)
 

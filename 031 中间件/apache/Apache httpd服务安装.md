@@ -35,7 +35,7 @@ cd httpd-2.0.50
 
 > 为了方便源代码安装，可以使用`Apache Toolbox`​工具图形化安装`httpd`​服务。
 
-*  **(1) 下载**
+-  **(1) 下载**
 
 ```bash
 # 下载安装包并进行校验
@@ -48,7 +48,7 @@ tar -xjvpf httpd-2.4.29.tar.bz2 -C /usr/src
 cd /usr/src/httpd-2.4.29
 ```
 
-*  **(2) 编译需求**
+-  **(2) 编译需求**
 
 ```bash
 # 编译要求
@@ -61,7 +61,7 @@ ntpdate stdtime.gor.hk
 hwclock -w
 ```
 
-*  **(3) configure 脚本**
+-  **(3) configure 脚本**
 
 ```bash
 # 常用配置
@@ -79,7 +79,7 @@ CC="gcc" \
 > ./configure --enable-modules="mod_proxy mod_so mod_authn_dbd"
 ```
 
-*  **(4) 编译安装**
+-  **(4) 编译安装**
 
 ```bash
 # 加速安装，一个CPU可以使用-j3，之后每增加一个+2
@@ -87,7 +87,7 @@ make -j9
 make install
 ```
 
-*  **(5) 清除调试符号**
+-  **(5) 清除调试符号**
 
 ```bash
 strip /usr/local/apache2/bin/httpd

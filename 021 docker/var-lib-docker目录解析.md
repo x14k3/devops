@@ -6,7 +6,7 @@
 
 ## /var/lib/docker/containers/
 
-* /var/lib/docker/containers 目录是 Docker 存储容器相关数据的默认位置。存储运行中的容器的数据，每个容器对应一个目录，包含容器的元数据、文件系统等信息。
+- /var/lib/docker/containers 目录是 Docker 存储容器相关数据的默认位置。存储运行中的容器的数据，每个容器对应一个目录，包含容器的元数据、文件系统等信息。
 
   具体而言，/var/lib/docker/containers 目录下的每个子目录都对应一个 Docker 容器，子目录的名称通常是由容器的 ID 组成的一串字符，例如：
 
@@ -20,28 +20,28 @@
 
 这些子目录中包含了与相应容器相关的文件和目录，其中一些重要的文件和目录包括：
 
-* config.v2.json：包含容器的配置信息，如容器的名称、镜像、挂载卷、环境变量等。
-* hostname：包含容器的主机名。
-* resolv.conf：包含容器的 DNS 配置信息。
-* checkpoints：用于存储容器的检查点（Checkpoint）文件。
-* logs：用于存储容器的日志文件。
-* mounts：包含容器的挂载卷信息。
-* state：包含容器的状态信息，如容器的运行状态、进程信息等。
+- config.v2.json：包含容器的配置信息，如容器的名称、镜像、挂载卷、环境变量等。
+- hostname：包含容器的主机名。
+- resolv.conf：包含容器的 DNS 配置信息。
+- checkpoints：用于存储容器的检查点（Checkpoint）文件。
+- logs：用于存储容器的日志文件。
+- mounts：包含容器的挂载卷信息。
+- state：包含容器的状态信息，如容器的运行状态、进程信息等。
 
 ## /var/lib/docker/image/
 
-* 存储容器镜像的数据，每个容器镜像对应一个目录，包含容器镜像的元数据、图层等信息。
+- 存储容器镜像的数据，每个容器镜像对应一个目录，包含容器镜像的元数据、图层等信息。
   /var/lib/docker/image/ 目录是 Docker 存储镜像相关数据的默认位置。在 Docker 中，镜像是用于创建容器的模板，包含了一个完整的应用程序和其所有依赖的文件系统快照。镜像的相关数据，例如镜像文件、元数据、缓存等，都会存储在 /var/lib/docker/image/ 目录下的对应目录中。
 
 具体而言，/var/lib/docker/image/ 目录下包含了以下几个子目录：
 
-* aufs：如果使用 AUFS 存储驱动（在旧版本的 Docker 中），则镜像的文件系统层会以 AUFS 格式存储在这个目录下的子目录中。每个子目录的名称都是由一个唯一的 ID 组成，对应着一个镜像的文件系统层。
-* overlay2：如果使用 Overlay2 存储驱动（在较新版本的 Docker 中），则镜像的文件系统层会以 Overlay2 格式存储在这个目录下的子目录中。每个子目录的名称都是由一个唯一的 ID 组成，对应着一个镜像的文件系统层。
-* overlay：如果使用 Overlay 存储驱动（在一些较旧的 Docker 版本中），则镜像的文件系统层会以 Overlay 格式存储在这个目录下的子目录中。每个子目录的名称都是由一个唯一的 ID 组成，对应着一个镜像的文件系统层。
-* image.db：这是一个 SQLite 数据库文件，用于存储 Docker 镜像的元数据信息，例如镜像的名称、标签、大小、创建时间等。
-* image/：这是一个软链接（symlink），指向存储镜像文件的实际目录（如 aufs、overlay2、overlay 中的其中一个）。这个软链接的目的是为了向后兼容，以支持不同的存储驱动。
+- aufs：如果使用 AUFS 存储驱动（在旧版本的 Docker 中），则镜像的文件系统层会以 AUFS 格式存储在这个目录下的子目录中。每个子目录的名称都是由一个唯一的 ID 组成，对应着一个镜像的文件系统层。
+- overlay2：如果使用 Overlay2 存储驱动（在较新版本的 Docker 中），则镜像的文件系统层会以 Overlay2 格式存储在这个目录下的子目录中。每个子目录的名称都是由一个唯一的 ID 组成，对应着一个镜像的文件系统层。
+- overlay：如果使用 Overlay 存储驱动（在一些较旧的 Docker 版本中），则镜像的文件系统层会以 Overlay 格式存储在这个目录下的子目录中。每个子目录的名称都是由一个唯一的 ID 组成，对应着一个镜像的文件系统层。
+- image.db：这是一个 SQLite 数据库文件，用于存储 Docker 镜像的元数据信息，例如镜像的名称、标签、大小、创建时间等。
+- image/：这是一个软链接（symlink），指向存储镜像文件的实际目录（如 aufs、overlay2、overlay 中的其中一个）。这个软链接的目的是为了向后兼容，以支持不同的存储驱动。
   需要注意的是，/var/lib/docker/image/ 目录下的数据都是 Docker 引擎自动管理和维护的，对这些数据进行手动修改可能会导致镜像无法正常使用或数据丢失。因此，不推荐直接对 /var/lib/docker/image/ 目录下的文件和目录进行修改，除非你对 Docker 引擎和镜像的运行原理非常了解，并且有充分的备份和恢复措施。
-* /var/lib/docker/volumes/：存储容器卷的数据，每个容器卷对应一个目录，包含容器卷的数据。
+- /var/lib/docker/volumes/：存储容器卷的数据，每个容器卷对应一个目录，包含容器卷的数据。
   /var/lib/docker/volumes/ 目录是 Docker 用于存储容器卷数据的默认位置。在 Docker 中，容器卷是一种用于持久化存储容器数据的机制，可以在容器之间共享和重用数据。/var/lib/docker/volumes/ 目录下包含了 Docker 卷相关的数据和元数据。
 
 具体而言，/var/lib/docker/volumes/ 目录下可能包含以下一些文件和目录：
@@ -57,9 +57,9 @@ vfs/：如果你在 Docker 中使用了 VFS 存储驱动（如在旧版 Docker �
 
 具体而言，/var/lib/docker/network/ 目录下可能包含以下一些文件和目录：
 
-* bridge/：如果使用 Docker 的默认网络驱动 "bridge"，则在这个目录下会存在与 "bridge" 网络相关的配置文件和状态信息。例如，每个通过 Docker 创建的 "bridge" 网络都会在这个目录下创建一个子目录，子目录的名称是由一个唯一的 ID 组成，对应着一个 "bridge" 网络。这个子目录下可能包含 config.v2.json 文件，用于存储 "bridge" 网络的配置信息，以及 networkSettings.json 文件，用于存储 "bridge" 网络的状态信息。
-* overlay/：如果使用 Overlay 网络驱动，那么在这个目录下会存在与 Overlay 网络相关的配置文件和状态信息。类似于 "bridge" 网络，每个通过 Docker 创建的 Overlay 网络都会在这个目录下创建一个子目录，子目录的名称也是由一个唯一的 ID 组成，对应着一个 Overlay 网络。这个子目录下可能包含 config.v2.json 文件，用于存储 Overlay 网络的配置信息，以及 networkSettings.json 文件，用于存储 Overlay 网络的状态信息。
-* plugins/：如果使用第三方的网络驱动插件，那么这个目录下可能会包含与这些插件相关的配置文件和状态信息。每个网络驱动插件都可能有自己的目录，用于存储其配置信息和状态信息。
+- bridge/：如果使用 Docker 的默认网络驱动 "bridge"，则在这个目录下会存在与 "bridge" 网络相关的配置文件和状态信息。例如，每个通过 Docker 创建的 "bridge" 网络都会在这个目录下创建一个子目录，子目录的名称是由一个唯一的 ID 组成，对应着一个 "bridge" 网络。这个子目录下可能包含 config.v2.json 文件，用于存储 "bridge" 网络的配置信息，以及 networkSettings.json 文件，用于存储 "bridge" 网络的状态信息。
+- overlay/：如果使用 Overlay 网络驱动，那么在这个目录下会存在与 Overlay 网络相关的配置文件和状态信息。类似于 "bridge" 网络，每个通过 Docker 创建的 Overlay 网络都会在这个目录下创建一个子目录，子目录的名称也是由一个唯一的 ID 组成，对应着一个 Overlay 网络。这个子目录下可能包含 config.v2.json 文件，用于存储 Overlay 网络的配置信息，以及 networkSettings.json 文件，用于存储 Overlay 网络的状态信息。
+- plugins/：如果使用第三方的网络驱动插件，那么这个目录下可能会包含与这些插件相关的配置文件和状态信息。每个网络驱动插件都可能有自己的目录，用于存储其配置信息和状态信息。
   需要注意的是，/var/lib/docker/network/ 目录下的数据都是 Docker 引擎自动管理和维护的，对这些数据进行手动修改可能会导致网络无法正常使用或数据丢失。因此，不推荐直接对 /var/lib/docker/network/ 目录下的文件和目录进行修改，除非你对 Docker 引擎和网络驱动插件的运行原理非常了解，并且有充分的备份和恢复措施。
 
 ## /var/lib/docker/overlay2
@@ -76,8 +76,8 @@ vfs/：如果你在 Docker 中使用了 VFS 存储驱动（如在旧版 Docker �
 在这个目录中，Overlay2 存储了容器的所有文件系统层。当容器启动时，Docker 会将这些层级结构组合在一起，形成容器的完整文件系统，使其看起来像是一个完整的文件系统，而实际上是由多个层级结构组合而成的。
 此外，该目录下还包含了一些元数据，用于管理这些层和容器。例如，该目录下的 diff 子目录存储了容器文件系统的写入层，而 merged 子目录是通过将不同层级的文件系统层级结构合并而成的，work 子目录用于 Overlay2 内部操作。
 
-* /var/lib/docker/tmp/：存储 Docker 引擎的临时数据，如构建镜像时的临时文件等。
-* /var/lib/docker/swarm/：存储 Docker Swarm 模式下的数据，包括 Swarm 集群的配置和状态信息。
-* /var/lib/docker/trust/：存储 Docker 引擎的签名和证书数据，用于 Docker 镜像的安全性验证。
+- /var/lib/docker/tmp/：存储 Docker 引擎的临时数据，如构建镜像时的临时文件等。
+- /var/lib/docker/swarm/：存储 Docker Swarm 模式下的数据，包括 Swarm 集群的配置和状态信息。
+- /var/lib/docker/trust/：存储 Docker 引擎的签名和证书数据，用于 Docker 镜像的安全性验证。
 
 这只是 /var/lib/docker/ 目录中的一些常见子目录，实际上还可能包含其他目录和文件，具体的目录结构和文件内容可能因 Docker 版本、配置和使用方式而有所不同。在进行 Docker 相关操作时，需要小心处理这些目录和文件，以确保 Docker 数据的完整性和安全性。

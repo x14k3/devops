@@ -81,10 +81,10 @@
 
 ### /etc/security/limits.d/目录
 
-* ​`/etc/security/limits.d/`​ 目录
+- ​`/etc/security/limits.d/`​ 目录
   该目录下默认有 `*-nproc.conf`​ 文件，该文件是用于限制用户的线程限制。我们也可以在该目录创建配置文件在 `/etc/security/limits.d/`​ 下，以 .conf 结尾。
 
-  * centos 7
+  - centos 7
 
     在CentOS 7版本中为`/etc/security/limits.d/20-nproc.conf`​，
 
@@ -96,7 +96,7 @@
     *          soft    nproc     4096 # 所有的用户默认可以打开最大的进程数为 4096
     root       soft    nproc     unlimited # root 用户默认可以打开最大的进程数 无限制的。
     ```
-  * CentOS 6
+  - CentOS 6
 
     在CentOS 6版本中为`/etc/security/limits.d/90-nproc.conf`​
 

@@ -82,7 +82,7 @@ systemctl enable nginx.service
 
 <span data-type="text" style="background-color: var(--b3-font-background8);">因为普通用户只能用1024以上的端口，1024以内的端口只能由root用户使用。</span>
 
-* 方法一：所有用户都可以运行（因为是755权限，文件所有者：root，组所有者：root
+- 方法一：所有用户都可以运行（因为是755权限，文件所有者：root，组所有者：root
 
   ```bash
   chown root:root nginx
@@ -91,7 +91,7 @@ systemctl enable nginx.service
   #chmod u+s 就是给某个程序的所有者以suid权限，可以像root用户一样操作。
   ```
 
-* 方法二：仅 root 用户和 nginx用户可以运行（因为是750权限，文件所有者：root，组所有者：nginx）
+- 方法二：仅 root 用户和 nginx用户可以运行（因为是750权限，文件所有者：root，组所有者：nginx）
 
   ```bash
   chown root:test nginx
@@ -99,6 +99,6 @@ systemctl enable nginx.service
   chmod u+s nginx
   ```
 
-* 方法三：修改nginx端口为1024以上
+- 方法三：修改nginx端口为1024以上
 
 ‍

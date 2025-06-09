@@ -1,10 +1,10 @@
 # linux 软件包管理
 
-* 📄 [Linux 软件源配置全攻略](linux%20软件包管理/Linux%20软件源配置全攻略.md)
+- 📄 [Linux 软件源配置全攻略](linux%20软件包管理/Linux%20软件源配置全攻略.md)
 
-* rpm软件
-* yum软件仓库
-* 源码软件
+- rpm软件
+- yum软件仓库
+- 源码软件
 
 [yum](001%20shell自动化运维/shell%20命令手册/软件安装/yum.md)  [dnf](001%20shell自动化运维/shell%20命令手册/软件安装/dnf.md)  [apt-get](001%20shell自动化运维/shell%20命令手册/软件安装/apt.md)  [zypper](001%20shell自动化运维/shell%20命令手册/软件安装/zypper.md)​[  dpkg](001%20shell自动化运维/shell%20命令手册/软件安装/dpkg.md)
 

@@ -59,9 +59,9 @@ cat /etc/sysconfig/iptables
 
 > iptables -L [-t 表名][链名]
 
-* 四个表名 `raw`​，`nat`​，`filter`​，`mangle`​
-* 五个规则链名 `INPUT`​、`OUTPUT`​、`FORWARD`​、`PREROUTING`​、`POSTROUTING`​
-* filter 表包含`INPUT`​、`OUTPUT`​、`FORWARD`​三个规则链
+- 四个表名 `raw`​，`nat`​，`filter`​，`mangle`​
+- 五个规则链名 `INPUT`​、`OUTPUT`​、`FORWARD`​、`PREROUTING`​、`POSTROUTING`​
+- filter 表包含`INPUT`​、`OUTPUT`​、`FORWARD`​三个规则链
 
 ```bash
 iptables -L -t nat                  # 列出 nat 上面的所有规则

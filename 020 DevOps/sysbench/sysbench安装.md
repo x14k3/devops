@@ -52,12 +52,12 @@ sysbench [options]... [testname] [command]
 
 ​**​`testname`​**​**是测试项名称**。sysbench 支持的测试项包括：
 
-* \*.lua          数据库性能基准测试。
-* fileio          磁盘 IO 基准测试。
-* cpu            CPU 性能基准测试。
-* memory     内存访问基准测试。
-* threads      基于线程的调度程序基准测试。
-* mutex         POSIX 互斥量基准测试。
+- \*.lua          数据库性能基准测试。
+- fileio          磁盘 IO 基准测试。
+- cpu            CPU 性能基准测试。
+- memory     内存访问基准测试。
+- threads      基于线程的调度程序基准测试。
+- mutex         POSIX 互斥量基准测试。
 
 ​**​`command`​**​**是 sysbench 要执行的命令**，支持的选项有：`prepare`​，`prewarm`​，`run`​，`cleanup`​，`help`​。注意，不是所有的测试项都支持这些选项。
 

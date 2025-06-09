@@ -4,16 +4,16 @@
 
 WalMiner是从PostgreSQL的WAL(write ahead logs)日志的解析工具，旨在挖掘wal日志所有的有用信息，从而提供PG的数据恢复支持。目前主要有如下功能：
 
-* 从waL日志中解析出SQL，包括DML和少量DDL
+- 从waL日志中解析出SQL，包括DML和少量DDL
 
   解析出执行的SQL语句的工具，并能生成对应的undo SQL语句。与传统的logical decode插件相比，walminer不要求logical日志级别且解析方式较为灵活。
-* 数据页挽回
+- 数据页挽回
 
   当数据库被执行了TRUNCATE等不被wal记录的数据清除操作，或者发生磁盘页损坏，可以使用此功能从wal日志中搜索数据，以期尽量挽回数据。
 
 ## PG版本支持
 
-* walminer3.0支持PostgreSQL 10及其以上版本。（此版本放弃对9.x的支持）
+- walminer3.0支持PostgreSQL 10及其以上版本。（此版本放弃对9.x的支持）
 
 ## 编译安装
 

@@ -12,15 +12,15 @@
 
 为 SMTP 客户端设置 [SASL 认证](https://tools.ietf.org/html/rfc2554) 的允许方法。支持的方法有：
 
-* ​`login`​  
+- ​`login`​  
   [AUTH LOGIN](https://tools.ietf.org/html/draft-murchison-sasl-login-00)
-* ​`plain`​  
+- ​`plain`​  
   [AUTH PLAIN](https://tools.ietf.org/html/rfc4616)
-* ​`cram-md5`​  
+- ​`cram-md5`​  
   [AUTH CRAM-MD5](https://tools.ietf.org/html/rfc2195)。为了使此方法正常工作，密码不加密存储。
-* ​`external`​  
+- ​`external`​  
   [AUTH EXTERNAL](https://tools.ietf.org/html/rfc4422)（1.11.6）。
-* ​`none`​  
+- ​`none`​  
   不需要验证
 
 ### smtp\_capabilities

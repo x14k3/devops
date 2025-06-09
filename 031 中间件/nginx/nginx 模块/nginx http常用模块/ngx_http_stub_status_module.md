@@ -39,30 +39,30 @@ Reading: 6 Writing: 179 Waiting: 106
 
 提供以下状态信息：
 
-* ​`Active connections`​  
+- ​`Active connections`​  
   当前活动客户端连接数，包括等待连接。
-* ​`accepts`​  
+- ​`accepts`​  
   已接受的客户端连接总数。
-* ​`handled`​  
+- ​`handled`​  
   已处理连接的总数。通常，参数值与 `accept`​ 相同，除非已达到某些资源限制阈值（例如，[worker_connections](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng#worker_connections) 限制）。
-* ​`requests`​  
+- ​`requests`​  
   客户端请求的总数。
-* ​`Reading`​  
+- ​`Reading`​  
   nginx 正在读取请求头的当前连接数。
-* ​`Writing`​  
+- ​`Writing`​  
   nginx 将响应写回客户端的当前连接数。
-* ​`Waiting`​  
+- ​`Waiting`​  
   当前等待请求的空闲客户端连接数。
 
 ## 内嵌变量
 
 ​`ngx_http_stub_status_module`​ 模块支持以下内嵌变量（1.3.14）：
 
-* ​`$connections_active`​  
+- ​`$connections_active`​  
   与 `Active connections`​ 的值相同
-* ​`$connections_reading`​  
+- ​`$connections_reading`​  
   与 `Reading`​ 的值相同
-* ​`$connections_writing`​  
+- ​`$connections_writing`​  
   与 `Writing`​ 的值相同
-* ​`$connections_waiting`​  
+- ​`$connections_waiting`​  
   与 `Waiting`​ 的值相同

@@ -16,8 +16,8 @@
 
 ‍
 
-* 图A是客户端主动发送分ClientHello2进行重协商.
-* 图B是服务器通过发送Hello Request消息, 请求客户端发起重协商. 如果客户端同意重协商, 则才会发起ClientHello2.
+- 图A是客户端主动发送分ClientHello2进行重协商.
+- 图B是服务器通过发送Hello Request消息, 请求客户端发起重协商. 如果客户端同意重协商, 则才会发起ClientHello2.
 
 　　不管是哪一方发起重协商, 如果接收方不同意的话, 都会通过SSL Alert响应以拒绝重协商.
 

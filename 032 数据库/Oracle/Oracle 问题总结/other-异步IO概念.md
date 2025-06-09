@@ -27,8 +27,8 @@ A: The implementation of Asynchronous I/O on Red Hat Advanced Server  allows Ora
 
 This involves making use of I/O capabilities such as:
 
-* Asynchronous I/O: Asynchronous I/O does not reduce traffic but allows processes to  do other things while waiting for IO to complete.
-* Direct I/O (bypassing the Operating System's File Caches) : Direct IO does not reduce traffic but may use a shorter code path / fewer CPU cycles to  perform the IO.
+- Asynchronous I/O: Asynchronous I/O does not reduce traffic but allows processes to  do other things while waiting for IO to complete.
+- Direct I/O (bypassing the Operating System's File Caches) : Direct IO does not reduce traffic but may use a shorter code path / fewer CPU cycles to  perform the IO.
 
 ‍
 

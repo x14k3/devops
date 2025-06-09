@@ -1,18 +1,19 @@
 # apt
 
+‍
+
 Ubuntu/Debian apt 提供了丰富的命令，完成包的管理任务。
 
-* ​`apt-get`​​ 命令本身并不具有管理软件包功能，只是提供了一个软件包管理的命令行平台。
-* ​`apt`​​ 命令不适合在脚本中运行，它会有颜色的显示、进度条显示等一些友好的交互界面，在脚本中不稳定，可能报错：`WARNING: apt does not have a stable CLI interface. Use with caution in scripts.`​​，此时，使用 `apt-get`​​ 替代
-* 默认的缓存目录是 `/var/cache/apt/archives/`​​
-* 一般的deb包都在 `/usr/share`​​。自己下载的压缩包或者编译的包，一般放在 `/usr/local/`​​ 或 `/opt`​​ 目录下
+- ​`apt-get`​​ 命令本身并不具有管理软件包功能，只是提供了一个软件包管理的命令行平台。
+- ​`apt`​​ 命令不适合在脚本中运行，它会有颜色的显示、进度条显示等一些友好的交互界面，在脚本中不稳定，可能报错：`WARNING: apt does not have a stable CLI interface. Use with caution in scripts.`​​，此时，使用 `apt-get`​​ 替代
+- 默认的缓存目录是 `/var/cache/apt/archives/`​​
+- 一般的deb包都在 `/usr/share`​​。自己下载的压缩包或者编译的包，一般放在 `/usr/local/`​​ 或 `/opt`​​ 目录下
 
 ## 配置阿里源
 
-```
-vim /etc/apt/sources.list
-------------------------------------------------------
+​`vim /etc/apt/sources.list`​
 
+```
 deb https://mirrors.aliyun.com/debian/ bookworm main non-free non-free-firmware contrib
 deb-src https://mirrors.aliyun.com/debian/ bookworm main non-free non-free-firmware contrib
 deb https://mirrors.aliyun.com/debian-security/ bookworm-security main
@@ -21,9 +22,6 @@ deb https://mirrors.aliyun.com/debian/ bookworm-updates main non-free non-free-f
 deb-src https://mirrors.aliyun.com/debian/ bookworm-updates main non-free non-free-firmware contrib
 deb https://mirrors.aliyun.com/debian/ bookworm-backports main non-free non-free-firmware contrib
 deb-src https://mirrors.aliyun.com/debian/ bookworm-backports main non-free non-free-firmware contrib
-------------------------------------------------------
-
-apt update
 ```
 
 ‍
@@ -85,8 +83,8 @@ apt-cache rdepends pkg          # 查看pkg被那些软件包所依赖
 
 其中：
 
-* 普通用户需要可以添加 sudo 申请管理权限
-* 在MAN命令中需要退出命令帮助请按 q 键
+- 普通用户需要可以添加 sudo 申请管理权限
+- 在MAN命令中需要退出命令帮助请按 q 键
 
 ## 遇到的问题
 

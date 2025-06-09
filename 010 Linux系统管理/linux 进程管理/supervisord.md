@@ -4,18 +4,18 @@ Supervisor是用Python开发的一套通用的进程管理程序，能将一个�
 
 **Supervisord VS Systemd**
 
-* Systemd
+- Systemd
 
-  * 稳定可靠
-  * 支持 Before/After 依赖机制
-  * 支持 Notify 机制
-  * 支持基于 cgroup 的资源限制
-* Supervisord
+  - 稳定可靠
+  - 支持 Before/After 依赖机制
+  - 支持 Notify 机制
+  - 支持基于 cgroup 的资源限制
+- Supervisord
 
-  * 支持通过 priority 配置进程启动顺序
-  * 日志友好方便查阅
-  * 跨平台使用
-  * 扩展开发友好
+  - 支持通过 priority 配置进程启动顺序
+  - 日志友好方便查阅
+  - 跨平台使用
+  - 扩展开发友好
 
 ## 安装 Supervisord
 

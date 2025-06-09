@@ -16,13 +16,13 @@ Linux 2.6 kernel提出了一种新的实现机制，即initramfs。顾名思义�
 
 下面是一些使用initramfs的简单帮助
 
-* 查看initramfs的内容
+- 查看initramfs的内容
 
   ```bash
   mkdir initrdtmp && cd initrdtmp \
   && zcat /boot/initrd.img-2.6.24-16 initrd.img-2.6.24-16.gz|cpio -i --make-directories
   ```
-* 创建initramfs
+- 创建initramfs
 
   命令：mkinitramfs, update-initramfs
 
@@ -63,7 +63,7 @@ mkinitrd /boot/initrd.img $(uname -r)
 
 initrd有两种格式，initrd-image和initrd-cpio。
 
-* 办法一:通过ramdisk来制作的方法比较简单(以ext2文件系统为例)：
+- 办法一:通过ramdisk来制作的方法比较简单(以ext2文件系统为例)：
 
   ```bash
   mkfs.ext2 /dev/ram0
@@ -75,7 +75,7 @@ initrd有两种格式，initrd-image和initrd-cpio。
 
   这个过程也最能够解释initrd的本质，对于Linux来说，Ramdisk的一个块设备，而initrd是这个块设备上所有内容的“克隆”(由命令dd来完成)而生成的文件。核心中加载initrd相关的代码则用于完成将相反的过程，即将这一个文件恢复到Ramdisk中去。
 
-* 办法二:通过loop设备来制作initrd的过程(losetup,mkfs.ext2)：
+- 办法二:通过loop设备来制作initrd的过程(losetup,mkfs.ext2)：
 
   ```bash
   dd if=/dev/zero of=/tmp/initrd bs=1024 count=4096 # 制作一个4M的空白文件
@@ -87,7 +87,7 @@ initrd有两种格式，initrd-image和initrd-cpio。
   losetup -d /dev/loop0
   gzip -9 /tmp/initrd
   ```
-* 办法三:mount -o loop
+- 办法三:mount -o loop
 
   ```bash
   dd if=/dev/zero of=../initrd.img bs=512k count=5
@@ -97,13 +97,13 @@ initrd有两种格式，initrd-image和initrd-cpio。
   umount /mnt
   gzip -9 ../initrd.img
   ```
-* 办法四（新式INITRD:cpio-initrd的制作)
+- 办法四（新式INITRD:cpio-initrd的制作)
 
   ```bash
   find . | cpio -c -o > ../initrd.img
   gzip ../initrd.img
   ```
-* cpio-initrd
+- cpio-initrd
 
   ```bash
   # 假设当前目录位于准备好的initrd文件系统的根目录下

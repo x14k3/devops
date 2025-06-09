@@ -7,8 +7,8 @@ ORA-27101: shared memory realm does not exist
 
 可能原因：
 
-* 联机在线日志文件损坏或丢失
-* ​`listener.ora `​文件中的SID要注意大小写
+- 联机在线日志文件损坏或丢失
+- ​`listener.ora `​文件中的SID要注意大小写
 
 ‍
 

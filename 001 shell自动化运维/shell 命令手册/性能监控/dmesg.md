@@ -96,14 +96,14 @@ $ dmesg --follow
 
 你可以将 `dmesg`​ 输出限制为给定的设施和等级。`dmesg`​ 支持以下类型：
 
-* kern-内核消息
-* user-用户级消息
-* mail-邮件系统
-* daemon-系统守护程序
-* auth-安全/授权消息
-* syslog-内部 syslogd 消息
-* lpr-行式打印机子系统
-* news-网络新闻子系统
+- kern-内核消息
+- user-用户级消息
+- mail-邮件系统
+- daemon-系统守护程序
+- auth-安全/授权消息
+- syslog-内部 syslogd 消息
+- lpr-行式打印机子系统
+- news-网络新闻子系统
 
 ​`-f（--facility <list>）`​ 选项允许你将输出限制为特定的设备，该选项接受一个或多个逗号分隔的功能。
 
@@ -115,14 +115,14 @@ $ dmesg -f kern,daemon
 
 每条日志消息都与一个显示消息重要性的日志级别相关联，`dmesg`​ 支持以下日志级别：
 
-* emerg-系统无法使用
-* alert-必须立即采取措施
-* crit-紧急情况
-* err-错误条件
-* warn-警告条件
-* notice-正常但重要的条件
-* info-信息性
-* debug-调试级消息
+- emerg-系统无法使用
+- alert-必须立即采取措施
+- crit-紧急情况
+- err-错误条件
+- warn-警告条件
+- notice-正常但重要的条件
+- info-信息性
+- debug-调试级消息
 
 ​`-l（--level <list>）`​选项允许你将输出限制为定义的级别，该选项接受一个或多个逗号分隔的级别。以下命令仅显示错误和严重消息：
 

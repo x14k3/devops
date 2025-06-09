@@ -71,31 +71,31 @@ management:
 
  在 `kafka`​ 中配置相关的 kafka 集群，每一个 `clusters`​ 为一个集群，需要配置：
 
-* name
+- name
 
    设置一个集群名
 
-* bootstrapServers
+- bootstrapServers
 
    brokers 连接，针对 kraft 架构，就很方便，不用再配置 zookeeper 相关配置。
 
-* metrics
+- metrics
 
    配置该集群的 JMX 相关配置，如果没有可省略。（在启动 kafka 时，启动命令行前面添加 `JMX_PORT=9094`​ ）
 
 #### 登陆配置
 
-* auth.type
+- auth.type
 
    使用 `LOGIN_FORM`​ 开启；或者 `DISABLED`​ 关闭认证。如果开启了，需要 `spring.security.user`​ 中配置用户名与密码。
 
-* spring.security.user
+- spring.security.user
 
    配置的登陆账号密码。
 
 #### kafka-ui http 端口
 
-* server.port
+- server.port
 
    kafka-ui http 端口。
 

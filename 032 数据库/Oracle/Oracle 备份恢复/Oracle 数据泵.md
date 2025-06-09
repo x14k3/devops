@@ -2,11 +2,11 @@
 
 ## exp/imp与expdp/impdp的区别
 
-* ​exp和imp是客户端工具程序，它们既可以在客户端使用，也可以在服务端使用。
-* EXPDP和IMPDP是服务端的工具程序,他们只能在ORACLE服务端使用,不能在客户端使用。
-* IMP只适用于EXP导出文件,不适用于EXPDP导出文件;IMPDP只适用于EXPDP导出文件,而不适用于EXP导出文件。
-* EXPDP/IMPDP 在备份和恢复时间上要比EXP/IMP有着优势.并且EXPDP/IMPDP 管理灵活。
-* 对于10g以上的服务器，使用exp通常不能导出0行数据的空表，而此时必须使用expdp导出。
+- ​exp和imp是客户端工具程序，它们既可以在客户端使用，也可以在服务端使用。
+- EXPDP和IMPDP是服务端的工具程序,他们只能在ORACLE服务端使用,不能在客户端使用。
+- IMP只适用于EXP导出文件,不适用于EXPDP导出文件;IMPDP只适用于EXPDP导出文件,而不适用于EXP导出文件。
+- EXPDP/IMPDP 在备份和恢复时间上要比EXP/IMP有着优势.并且EXPDP/IMPDP 管理灵活。
+- 对于10g以上的服务器，使用exp通常不能导出0行数据的空表，而此时必须使用expdp导出。
 
 ‍
 

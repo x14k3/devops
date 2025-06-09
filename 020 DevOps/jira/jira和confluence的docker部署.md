@@ -226,9 +226,9 @@ docker exec confluence java -jar /opt/atlassian/confluence/atlassian-agent.jar \
 
 #### 测试同步用户并调整优先级
 
-* 当创建用户之后, 只有用户登录了, 才会同步到 `Confluence`​ 服务器
-* 但是你创建的组, 必须要手动同步
-* 更新用户权限后, 必须要手动同步
+- 当创建用户之后, 只有用户登录了, 才会同步到 `Confluence`​ 服务器
+- 但是你创建的组, 必须要手动同步
+- 更新用户权限后, 必须要手动同步
 
 ![image](https://blog.ijunj.com/images/test-sync-user-adjust-priorities.png)
 
@@ -280,8 +280,8 @@ CATALINA_OPTS="-Dsynchrony.enable.xhr.fallback=true ${CATALINA_OPTS}"
 
 管理员会话提示主要包括两种场景
 
-* 管理员登录后台之后，如果有几分钟不到后台进行操作，会提示再次填写账户密码登录后台
-* 管理员从后台退出访问前台界面时总是提示“您可以临时访问管理功能，如果不再需求请取消访问”这样的信息提示。
+- 管理员登录后台之后，如果有几分钟不到后台进行操作，会提示再次填写账户密码登录后台
+- 管理员从后台退出访问前台界面时总是提示“您可以临时访问管理功能，如果不再需求请取消访问”这样的信息提示。
 
 以上两种提示主要是为了系统的安全，避免被其它人恶意访问操作，影响系统的不稳定性。
 
@@ -317,8 +317,8 @@ CATALINA_OPTS="-Dsynchrony.enable.xhr.fallback=true ${CATALINA_OPTS}"
 WARN：Establishing SSL connection without server’s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn’t set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to ‘false’. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
 ```
 
-* 原因：MySQL5.7.6 以上版本要默认要求使用SSL连接，如果不使用需要通过设置 useSSL=false 来声明。
-* 解决方案：在mysql连接字符串url中加入useSSL=true或者false即可，如下：
+- 原因：MySQL5.7.6 以上版本要默认要求使用SSL连接，如果不使用需要通过设置 useSSL=false 来声明。
+- 解决方案：在mysql连接字符串url中加入useSSL=true或者false即可，如下：
 
 ```bash
 # Jira找到配置文件/var/atlassian/jira/dbconfig.xml修改mysql连接字符串如下：

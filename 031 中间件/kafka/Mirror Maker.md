@@ -30,10 +30,10 @@ $ bin/kafka-mirror-maker.sh --consumer.config ./config/consumer.properties --pro
 
 现在我来解释一下这条命令中各个参数的含义。
 
-* consumer.config参数。它指定了MirrorMaker中消费者的配置文件地址，最主要的配置项是**bootstrap.servers**，也就是该MirrorMaker从哪个Kafka集群读取消息。因为MirrorMaker有可能在内部创建多个消费者实例并使用消费者组机制，因此你还需要设置group.id参数。另外，我建议你额外配置auto.offset.reset=earliest，否则的话，MirrorMaker只会拷贝那些在它启动之后到达源集群的消息。
-* producer.config参数。它指定了MirrorMaker内部生产者组件的配置文件地址。通常来说，Kafka Java Producer很友好，你不需要配置太多参数。唯一的例外依然是**bootstrap.servers**，你必须显式地指定这个参数，配置拷贝的消息要发送到的目标集群。
-* num.streams参数。我个人觉得，这个参数的名字很容易给人造成误解。第一次看到这个参数名的时候，我一度以为MirrorMaker是用Kafka Streams组件实现的呢。其实并不是。这个参数就是告诉MirrorMaker要创建多少个KafkaConsumer实例。当然，它使用的是多线程的方案，即在后台创建并启动多个线程，每个线程维护专属的消费者实例。在实际使用时，你可以根据你的机器性能酌情设置多个线程。
-* whitelist参数。如命令所示，这个参数接收一个正则表达式。所有匹配该正则表达式的主题都会被自动地执行镜像。在这个命令中，我指定了“.\*”，这表明我要同步源集群上的所有主题。
+- consumer.config参数。它指定了MirrorMaker中消费者的配置文件地址，最主要的配置项是**bootstrap.servers**，也就是该MirrorMaker从哪个Kafka集群读取消息。因为MirrorMaker有可能在内部创建多个消费者实例并使用消费者组机制，因此你还需要设置group.id参数。另外，我建议你额外配置auto.offset.reset=earliest，否则的话，MirrorMaker只会拷贝那些在它启动之后到达源集群的消息。
+- producer.config参数。它指定了MirrorMaker内部生产者组件的配置文件地址。通常来说，Kafka Java Producer很友好，你不需要配置太多参数。唯一的例外依然是**bootstrap.servers**，你必须显式地指定这个参数，配置拷贝的消息要发送到的目标集群。
+- num.streams参数。我个人觉得，这个参数的名字很容易给人造成误解。第一次看到这个参数名的时候，我一度以为MirrorMaker是用Kafka Streams组件实现的呢。其实并不是。这个参数就是告诉MirrorMaker要创建多少个KafkaConsumer实例。当然，它使用的是多线程的方案，即在后台创建并启动多个线程，每个线程维护专属的消费者实例。在实际使用时，你可以根据你的机器性能酌情设置多个线程。
+- whitelist参数。如命令所示，这个参数接收一个正则表达式。所有匹配该正则表达式的主题都会被自动地执行镜像。在这个命令中，我指定了“.\*”，这表明我要同步源集群上的所有主题。
 
 ## MirrorMaker配置实例
 

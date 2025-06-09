@@ -10,6 +10,6 @@ cpu是公平的，大多数进程以相同的优先级启动，并且Linux内核
 
 ## [cpulimit](001%20shell自动化运维/shell%20命令手册/性能监控/cpulimit.md)
 
-## [cgroups](010%20Linux系统管理/linux%20内核/cgroups.md)
+## [cgroups](010%20Linux系统管理/linux%20内核配置/cgroups.md)
 
 ‍

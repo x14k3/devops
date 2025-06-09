@@ -21,7 +21,7 @@ tar zxvf  apache-tomcat-7.0.12.tar.gz
 
 ### 1.tomcat日志切割
 
-* **下载cronolog**
+- **下载cronolog**
   [https://developer.aliyun.com/packageSearch?word=cronolog](https://developer.aliyun.com/packageSearch?word=cronolog)
 
 ```bash
@@ -39,7 +39,7 @@ make &7 make install
 which cronolog
 ```
 
-* **修改catalina.sh**
+- **修改catalina.sh**
 
   `vim ~/bin/catalina.sh`
 
@@ -78,9 +78,9 @@ which cronolog
 
 对于root用户的umask=022这个来说，777权限二进制码就是（111）（111）（111），022权限二进制码为（000）（010）（010）。
 
-* 所有权限二进制的1:代表有这个权限
-* umask二进制1：**代表要去掉这个权限**，不管你原来有没有权限，你最终一定没有这个权限。
-* umask二进制的0：代表我不关心对应位的权限，你原来有权限就有权限，没有就没有， 我不影响你。
+- 所有权限二进制的1:代表有这个权限
+- umask二进制1：**代表要去掉这个权限**，不管你原来有没有权限，你最终一定没有这个权限。
+- umask二进制的0：代表我不关心对应位的权限，你原来有权限就有权限，没有就没有， 我不影响你。
 
 tomcat 设置umask
 

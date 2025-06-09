@@ -12,9 +12,9 @@
 
 这里准备了三个环境：
 
-* ora12c 本地cdb
-* noncdb 远端non-cdb
-* cdb1 远端cdb
+- ora12c 本地cdb
+- noncdb 远端non-cdb
+- cdb1 远端cdb
 
 ```sqlplus
 # 本地cdb

@@ -282,7 +282,7 @@ java.io.EOFException
 
 在**默认**情况下，当消息签收失败时ActiveMQ消息服务器会继续每隔1秒钟向消费者端发送一次这个签收失败的消息，默认会尝试6次(加上正常的1次共7次)，如果这7次消费者端全部签收失败，则会给ActiveMQ服务器发送一个“poison ack”，表示这个消息不正常(“有毒”)，这时消息服务器不会继续传送这个消息给这个消费者，而是将这个消息放入死信队列(DLQ，即Dead Letter Queue)。
 
-* **RedeliveryPolicy重发策略设置**
+- **RedeliveryPolicy重发策略设置**
 
   ```xml
   <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
@@ -308,7 +308,7 @@ java.io.EOFException
   ```
 
   ![](assets/image-20221127213221423-20230610173811-avxf812.png)
-* **Broker消息重发插件**
+- **Broker消息重发插件**
 
   默认情况下，在消息重新投递次数达到配置的最大投递次数（或默认的6次），broker会将消息放入DLQ。我们可以使用broker消息重发插件来改变这一行为。即在一定延迟后，将消息重新投递给原始Destination，如果达到最大重试次数，则放入DLQ。
 

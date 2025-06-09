@@ -2,8 +2,8 @@
 
 Pg的两个主要的配置文件：
 
-* postgresql.conf --该文件包含内存分配、日志文件未知、监听端口、监听地址、数据库数据目录等一些数据库通用配置.
-* pg_hba.conf
+- postgresql.conf --该文件包含内存分配、日志文件未知、监听端口、监听地址、数据库数据目录等一些数据库通用配置.
+- pg_hba.conf
 
 ‍
 
@@ -181,7 +181,7 @@ max_connections = 100		# 最大连接数(更改需要重新启动PG数据库)
 
 ‍
 
-## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.3 资源使用（RESOURCE USAGE (except WAL)）</span>
+## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.3 资源使用（RESOURCE USAGE (except WAL)）</span>
 
 **内存（Memory）** 
 
@@ -301,7 +301,7 @@ min_wal_size = 80MB
 
 ‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.5 复制（REPLICATION）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.5 复制（REPLICATION）</span>
 
 **发送服务器（Sending Servers）** 
 
@@ -420,7 +420,7 @@ min_wal_size = 80MB
 
 ‍
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.7 报告和记录（REPORTING AND LOGGING）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.7 报告和记录（REPORTING AND LOGGING）</span>
 
 **记录位置（Where to Log）** 
 
@@ -723,7 +723,7 @@ default_text_search_config = 'pg_catalog.simple'
 #data_sync_retry = off      # fsync数据失败时重试或死机？(更改需要重新启动PG数据库生效)
 ```
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.16 配置文件包括（CONFIG FILE INCLUDES）</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.16 配置文件包括（CONFIG FILE INCLUDES）</span>
 
 ```bash
 # 这些选项允许从默认postgresql.conf以外的文件加载设置.
@@ -732,7 +732,7 @@ default_text_search_config = 'pg_catalog.simple'
 #include = ''       # 包含文件
 ```
 
-## <span data-type="text" style="color: var(--b3-font-color7);" parent-style="color: var(--b3-font-color3);">2.17 自定义选项</span>
+## <span data-type="text" parent-style="color: var(--b3-font-color3);" style="color: var(--b3-font-color7);">2.17 自定义选项</span>
 
 ```bash
 # Add settings for extensions here(在此处添加扩展设置)
@@ -762,48 +762,48 @@ host    replication     all          ::1/128              ident
 
 从内容可以看出，`pg_hba.conf`​​ 是以行为单位来配置的，每一行包含了以下内容：
 
-* ​`TYPE`​​ 连接类型，表示允许用哪些方式连接数据库，它允许以下几个值：
+- ​`TYPE`​​ 连接类型，表示允许用哪些方式连接数据库，它允许以下几个值：
 
-  * ​`local`​​ 通过 Unix socket 的方式连接。
-  * ​`host`​​ 通过 TCP/IP 的方式连接，它能匹配 SSL 和 non-SSL 连接。
-  * ​`hostssl`​​ 只允许 SSL 连接。
-  * ​`hostnossl`​​ 只允许 non-SSL 连接。
-* ​`DATABASE`​​ 可连接的数据库，它有以下几个特殊值：
+  - ​`local`​​ 通过 Unix socket 的方式连接。
+  - ​`host`​​ 通过 TCP/IP 的方式连接，它能匹配 SSL 和 non-SSL 连接。
+  - ​`hostssl`​​ 只允许 SSL 连接。
+  - ​`hostnossl`​​ 只允许 non-SSL 连接。
+- ​`DATABASE`​​ 可连接的数据库，它有以下几个特殊值：
 
-  * ​`all`​​ 匹配所有数据库。
-  * ​`sameuser`​​ 可连接和用户名相同的数据库。
-  * ​`samerole`​​ 可连接和角色名相同的数据库。
-  * ​`replication`​​ 允许复制连接，用于集群环境下的数据库同步。 除了上面这些特殊值之外，我们可以写特定的数据库，可以用逗号 (,) 来分割多个数据库。
-* ​`USER`​​ 可连接数据库的用户，值有三种写法：
+  - ​`all`​​ 匹配所有数据库。
+  - ​`sameuser`​​ 可连接和用户名相同的数据库。
+  - ​`samerole`​​ 可连接和角色名相同的数据库。
+  - ​`replication`​​ 允许复制连接，用于集群环境下的数据库同步。 除了上面这些特殊值之外，我们可以写特定的数据库，可以用逗号 (,) 来分割多个数据库。
+- ​`USER`​​ 可连接数据库的用户，值有三种写法：
 
-  * ​`all`​​ 匹配所有用户。
-  * 特定数据库用户名。
-  * 特定数据库用户组，需要在前面加上 `+`​​ (如：`+admin`​​)。
-* ​`ADDRESS`​​ 可连接数据库的地址，有以下几种形式：
+  - ​`all`​​ 匹配所有用户。
+  - 特定数据库用户名。
+  - 特定数据库用户组，需要在前面加上 `+`​​ (如：`+admin`​​)。
+- ​`ADDRESS`​​ 可连接数据库的地址，有以下几种形式：
 
-  * ​`all`​​ 匹配所有 IP 地址。
-  * ​`samehost`​​ 匹配该服务器的 IP 地址。
-  * ​`samenet`​​ 匹配该服务器子网下的 IP 地址。
-  * ipaddress/netmask (如：172.20.143.89/32)，支持 IPv4 与 IPv6。
-  * 如果上面几种形式都匹配不上，就会被当成是 hostname。 **注意: 只有 host, hostssl, hostnossl 会应用个字段。**
-* ​`METHOD`​​ 连接数据库时的认证方式，常见的有几个特殊值：
+  - ​`all`​​ 匹配所有 IP 地址。
+  - ​`samehost`​​ 匹配该服务器的 IP 地址。
+  - ​`samenet`​​ 匹配该服务器子网下的 IP 地址。
+  - ipaddress/netmask (如：172.20.143.89/32)，支持 IPv4 与 IPv6。
+  - 如果上面几种形式都匹配不上，就会被当成是 hostname。 **注意: 只有 host, hostssl, hostnossl 会应用个字段。**
+- ​`METHOD`​​ 连接数据库时的认证方式，常见的有几个特殊值：
 
-  * ​`trust`​​ 无条件通过认证。
-  * ​`reject`​​ 无条件拒绝认证。
-  * ​`md5`​​ 用 md5 加密密码进行认证。
-  * ​`password`​​ 用明文密码进行认证，不建议在不信任的网络中使用。
-  * ​`ident`​​ 从一个 ident 服务器 (RFC1413) 获得客户端的操作系统用户名并且用它作为被允许的数据库用户名来认证，只能用在 TCP/IP 的类型中 (即 host, hostssl, hostnossl)。
-  * ​`peer`​​ 从内核获得客户端的操作系统用户名并把它用作被允许的数据库用户名来认证，只能用于本地连接 (即 local)。
-  * 其他特殊值可以在 [官方文档](https://www.postgresql.org/docs/9.6/static/auth-pg-hba-conf.html) 中查阅。 **简单来说，ident 和 peer 都要求客户端操作系统中存在对应的用户。注意: 上面列举的只有 md5 和 password 是需要密码的，其他方式都不需要输入密码认证。**
+  - ​`trust`​​ 无条件通过认证。
+  - ​`reject`​​ 无条件拒绝认证。
+  - ​`md5`​​ 用 md5 加密密码进行认证。
+  - ​`password`​​ 用明文密码进行认证，不建议在不信任的网络中使用。
+  - ​`ident`​​ 从一个 ident 服务器 (RFC1413) 获得客户端的操作系统用户名并且用它作为被允许的数据库用户名来认证，只能用在 TCP/IP 的类型中 (即 host, hostssl, hostnossl)。
+  - ​`peer`​​ 从内核获得客户端的操作系统用户名并把它用作被允许的数据库用户名来认证，只能用于本地连接 (即 local)。
+  - 其他特殊值可以在 [官方文档](https://www.postgresql.org/docs/9.6/static/auth-pg-hba-conf.html) 中查阅。 **简单来说，ident 和 peer 都要求客户端操作系统中存在对应的用户。注意: 上面列举的只有 md5 和 password 是需要密码的，其他方式都不需要输入密码认证。**
 
 ‍
 
 ## **ident 和 peer 的区别**
 
-* 都是基于操作系统用户认证，通过操作系统用户映射数据库用户进行认证，
-* peer方式数据库访问客户端与数据库服务器必须在同一台操作系统上，ident方式则不是；
-* peer使用unix socket会话；
-* ident使用tcp会话，psql访问时指定 -h 127.0.0.1
+- 都是基于操作系统用户认证，通过操作系统用户映射数据库用户进行认证，
+- peer方式数据库访问客户端与数据库服务器必须在同一台操作系统上，ident方式则不是；
+- peer使用unix socket会话；
+- ident使用tcp会话，psql访问时指定 -h 127.0.0.1
 
 安装oidentd服务
 
@@ -846,7 +846,7 @@ test 		    test1	     postgres   # 表示系统用户test1可以以postgres数�
 
 下列被支持的配置选项用于ident：
 
-* map  
+- map  
   允许系统和数据库用户名之间的映射。详见Section 20.2。“Identification Protocol（标识协议）”在 RFC 1413 中描述。实际上每个类 Unix 操作系统都带着一个默认监听 TCP 113 端口的 ident 服务器。ident 服务器的基本功能是回答类似这样的问题：“哪个用户从你的端口X发起了连接并且连到了我的端口Y？” 。因为当一个物理连接被建立后，PostgreSQL既知道X也知道Y， 所以它可以询问尝试连接的客户端主机上的 ident 服务器并且在理论上可以判断任意给定连接的操作系统用户。
 
   这个过程的缺点是它依赖于客户端的完整性：如果客户端机器不可信或者被攻破，攻击者可能在 113 端口上运行任何程序并且返回他们选择的任何用户。因此这种认证方法只		适用于封闭的网络， 这样的网络中的每台客户端机器都处于严密的控制下并且数据库和操作系统管理员操作时可以方便地联系。换句话说，你必须信任运行 ident 服务器的机器。注意这样的警告：

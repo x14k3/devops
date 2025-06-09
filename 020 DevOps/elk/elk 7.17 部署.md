@@ -16,20 +16,20 @@ Redis ：5.0.10
 
 ```
 
-* 关闭防火墙和selinux
+- 关闭防火墙和selinux
 
   ```bash
   systemctl stop firewalld;setenforce 0
   sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
   ```
-* 下载并安装软件包
+- 下载并安装软件包
 
   [https://www.elastic.co/cn/downloads/](https://www.elastic.co/cn/downloads/ "https://www.elastic.co/cn/downloads/") &#x20;
-* 新建普通用户elk：elasticsearch只能用普通用户启动
+- 新建普通用户elk：elasticsearch只能用普通用户启动
 
   `useradd elk;echo Ninestar123|passwd --stdin elk`
-* elk用户拥有的可创建文件描述符数量
+- elk用户拥有的可创建文件描述符数量
 
   `vim /etc/security/limits.conf` &#x20;
 
@@ -37,7 +37,7 @@ Redis ：5.0.10
   elk hard nofile 65536
   elk soft nofile 65536
   ```
-* 限制一个进程可以拥有的VMA(虚拟内存区域)的数量
+- 限制一个进程可以拥有的VMA(虚拟内存区域)的数量
 
   `vim /etc/sysctl.conf    # 在最后面追加下面内容`
 
@@ -46,7 +46,7 @@ Redis ：5.0.10
   ```
 
   `执行: sysctl -p`
-* 解压到/data目录,授权给elk用户
+- 解压到/data目录,授权给elk用户
 
   ```bash
   mkdir -p /data/{logs,script}

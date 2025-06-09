@@ -1,5 +1,5 @@
 # skywalking
 
-* 📄 [skywalking 部署](skywalking/Skywalking+ELK.md)
+- 📄 [skywalking 部署](skywalking/Skywalking+ELK.md)
 
 ‍

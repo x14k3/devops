@@ -84,19 +84,19 @@ listen unix:/var/run/nginx.sock;
 
 ​`listen`​ 指令可以指定几个额外的参数给套接字相关的系统调用。
 
-* ​`backlog=number`​  
+- ​`backlog=number`​  
   在 `listen()`​ 调用中设置 `backlog`​ 参数，该参数限制挂起的连接队列的最大长度（1.9.2）。默认情况下，在 FreeBSD、DragonFly BSD 和 mac OS上，`backlog`​ 设置为 -1，而在其他平台上则设置为 511。
-* ​`rcvbuf=size`​  
+- ​`rcvbuf=size`​  
   设置侦听套接字的接收缓冲区大小（`SO_RCVBUF`​ 选项）（1.11.13）。
-* ​`sndbuf=size`​  
+- ​`sndbuf=size`​  
   设置侦听套接字的发送缓冲区大小（`SO_SNDBUF`​ 选项）（1.11.13）。
-* ​`bind`​  
+- ​`bind`​  
   此参数指示对给定的 `address:port`​ 对进行单独的 `bind()`​ 调用。事实上，如果有多个有相同端口但地址不同的 `listen`​ 指令，并且其中一个 `listen`​ 指令在给定端口（`*:port`​）的所有地址上监听，nginx 只会将绑定（`bind()`​）到 `*:port`​。要注意的是，这种情况下将进行 `getsockname()`​ 系统调用，以确定接受连接的地址。如果使用 `ipv6only`​ 或 `so_keepalive`​ 参数，则对于给定的 `address:port`​ 对，将始终进行单独的 `bind()`​ 调用。
-* ​`ipv6only=on|off`​  
+- ​`ipv6only=on|off`​  
   此参数确定（通过 `IPV6_V6ONLY`​ 套接字选项）监听通配符地址 `[::]`​ 的 IPv6 套接字是否仅接受 IPv6 连接，还是接受 IPv6 和 IPv4 连接。默认情况下，此参数是打开的。启动时只能设置一次。
-* ​`so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]`​  
+- ​`so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]`​  
   此参数为监听套接字配置「TCP keepalive」行为。如果省略此参数，则套接字的操作系统设置将生效。如果将其设置为值 `on`​，则会为套接字打开 `SO_KEEPALIVE`​ 选项。如果将其设置为值 `off`​，则将关闭套接字 `SO_KEEPALIVE`​ 选项。某些操作系统支持使用 `TCP_KEEPIDLE`​、`TCP_KEEPINTVL`​ 和 `TCP_KEEPCNT`​ 套接字选项在每个套接字的基础上设置 TCP Keepalive 参数。在此类系统（当前为 Linux 2.4+、NetBSD 5+ 和 FreeBSD 9.0-STABLE）上，可以使用 `keepidle`​、`keepintvl`​ 和 `keepcnt`​ 参数进行配置。可以省略一个或两个参数，在这种情况下，相应套接字选项的系统默认设置将生效。例如，
-* ```
+- ```
     so_keepalive=30m::10
   ```
 
@@ -124,9 +124,9 @@ listen unix:/var/run/nginx.sock;
 
 如果未设置该指令，则可以基于 [listen](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_core_module#listen) 指令中指定的为人熟知的默认端口来自动检测协议：
 
-* ​`imap`​：143、993
-* ​`pop3`​：110、995
-* ​`smtp`​：25、587、465  
+- ​`imap`​：143、993
+- ​`pop3`​：110、995
+- ​`smtp`​：25、587、465  
   可以使用[配置](https://docshome.gitbook.io/nginx-docs/readme/cong-yuan-ma-gou-jian-nginx)参数 `--without-mail_imap_module`​、`--without-mail_pop3_module`​ 和 `--without-mail_smtp_module`​ 禁用不必要的协议。
 
 ### resolver
@@ -199,9 +199,9 @@ resolver_timeout 5s;
 
 设置服务器名称，在以下场景中使用的：
 
-* 最开始的 POP3/SMTP 服务器问候语中
-* SASL CRAM-MD5 身份验证中的盐值中
-* 如果启用了 [XCLIENT](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_proxy_module#xclient) 命令的传递，则在连接到 SMTP 后端时，在 `EHLO`​ 命令中  
+- 最开始的 POP3/SMTP 服务器问候语中
+- SASL CRAM-MD5 身份验证中的盐值中
+- 如果启用了 [XCLIENT](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/mail/ngx_mail_proxy_module#xclient) 命令的传递，则在连接到 SMTP 后端时，在 `EHLO`​ 命令中  
   如果未指定指令，则使用计算机的主机名。
 
 ### timeout

@@ -147,14 +147,14 @@ netsh interface ip set address name="本地连接" addr=10.10.1.10 mask=255.255.
 
 而windows server2008/Vista 及其之后的版本（包括windows server2008、windows server2012、windows server2016、windows 7等），会遵循以下方式：
 
-* Rule 1： Prefer same address (applies)
-* Rule 2： Prefer appropriate scope (applies)
-* Rule 3： Avoid deprecated addresses (applies)
-* Rule 4： Prefer home addresses - does not apply to IP v4
-* Rule 5： Prefer outgoing Interfaces (applies)
-* Rule 6： Prefer matching label - does not apply to IP v4
-* Rule 7： Prefer public addresses - does not apply to IP v4
-* Rule 8: **Use longest matching prefix with the next hop IP address.**
+- Rule 1： Prefer same address (applies)
+- Rule 2： Prefer appropriate scope (applies)
+- Rule 3： Avoid deprecated addresses (applies)
+- Rule 4： Prefer home addresses - does not apply to IP v4
+- Rule 5： Prefer outgoing Interfaces (applies)
+- Rule 6： Prefer matching label - does not apply to IP v4
+- Rule 7： Prefer public addresses - does not apply to IP v4
+- Rule 8: **Use longest matching prefix with the next hop IP address.**
 
 **根据规则8，如果主IP与下一跳IP的 matching prefix（前缀匹配） 短于辅助IP与下一跳的 matching prefix ，那辅助IP的优先级会高于主IP，packet 就会由辅助IP发送。**
 
@@ -226,8 +226,8 @@ netsh winhttp set proxy [proxy-server=]<server name> [bypass-list=]<hosts list>
 
 参数:
 
-* proxy-server ：http 和/或 https 协议使用的代理服务器
-* bypass-list ：绕过代理服务器访问的站点列表(使用 "<local>" 绕过所有短名称主机)
+- proxy-server ：http 和/或 https 协议使用的代理服务器
+- bypass-list ：绕过代理服务器访问的站点列表(使用 "<local>" 绕过所有短名称主机)
 
 ## sock代理
 
@@ -239,19 +239,19 @@ netsh winsock reset    # 重置sock代理
 
 ## 端口转发
 
-* 查看：显示所有 portproxy 信息(默认：无)
+- 查看：显示所有 portproxy 信息(默认：无)
 
 ```
 netsh interface portproxy show all
 ```
 
-* 添加：监听任意IP来源(\*),且是连接到本机65531端口的数据,将其所有TCP协议的数据流量转发到192.168.1.53的22端口
+- 添加：监听任意IP来源(\*),且是连接到本机65531端口的数据,将其所有TCP协议的数据流量转发到192.168.1.53的22端口
 
 ```
 netsh interface portproxy add v4tov4 listenport=65531 connectaddress=192.168.1.53 connectport=22 listenaddress=* protocol=tcp
 ```
 
-* 删除
+- 删除
 
 ```
 netsh interface portproxy delete v4tov4 listenport=65531 listenaddress=* protocol=tcp

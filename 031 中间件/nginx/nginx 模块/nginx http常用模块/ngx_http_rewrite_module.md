@@ -4,12 +4,12 @@
 
 [break](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#break)、[if](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#if)、[return](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#return)、[rewrite](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite) 和 [set](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#set) 指令将按以下顺序处理：
 
-* 在 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#server) 级别下，该模块的指令按顺序执行
-* 重复执行：
+- 在 [server](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#server) 级别下，该模块的指令按顺序执行
+- 重复执行：
 
-  * 基于请求 URI 搜索 [location](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location)
-  * 在 location 内找的该模块的指令按顺序执行
-* 如果请求 URI 被[重写](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite)，则重复循环，但不超过 [10 次](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#internal)。
+  - 基于请求 URI 搜索 [location](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#location)
+  - 在 location 内找的该模块的指令按顺序执行
+- 如果请求 URI 被[重写](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#rewrite)，则重复循环，但不超过 [10 次](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#internal)。
 
 ## 指令
 
@@ -46,14 +46,14 @@ if ($slow) {
 
 ​`condition`​ 可以是以下任何一种：
 
-* 变量名，如果变量的值为空字符串或 `0`​，则为 `false`​  
+- 变量名，如果变量的值为空字符串或 `0`​，则为 `false`​  
   在 1.0.1版本 之前，任何以 `0`​ 开头的字符串都被视为错误值。
-* 使用 `=`​ 和 `!=`​ 运算符比较变量和字符串
-* 使用 `~`​（区分大小写的匹配）和 `~*`​（不区分大小写的匹配）运算符，变量将与正则表达式进行匹配。正则表达式可以包含可供以后在 `$1..$9`​ 变量中重用的捕获。反操作符 `!~`​ 和 `!~*`​ 也可用。如果正则表达式包含 `}`​ 或 `;`​ 字符，则整个表达式应使用单引号或双引号包围起来。
-* 使用 `-f`​ 和 `!-f`​ 运算符检查文件是否存在
-* 使用 `-d`​ 和 `!-d`​ 运算符检查目录是否存在
-* 使用 `-e`​ 和 `!-e`​ 运算符检查文件、目录或符号链接是否存在
-* 使用 `-x`​ 和 `!-x`​ 运算符检查是否为可执行文件  
+- 使用 `=`​ 和 `!=`​ 运算符比较变量和字符串
+- 使用 `~`​（区分大小写的匹配）和 `~*`​（不区分大小写的匹配）运算符，变量将与正则表达式进行匹配。正则表达式可以包含可供以后在 `$1..$9`​ 变量中重用的捕获。反操作符 `!~`​ 和 `!~*`​ 也可用。如果正则表达式包含 `}`​ 或 `;`​ 字符，则整个表达式应使用单引号或双引号包围起来。
+- 使用 `-f`​ 和 `!-f`​ 运算符检查文件是否存在
+- 使用 `-d`​ 和 `!-d`​ 运算符检查目录是否存在
+- 使用 `-e`​ 和 `!-e`​ 运算符检查文件、目录或符号链接是否存在
+- 使用 `-x`​ 和 `!-x`​ 运算符检查是否为可执行文件  
   示例：
 
 ```
@@ -114,13 +114,13 @@ if ($invalid_referer) {
 
 可选的 `flag`​ 参数可以是以下之一：
 
-* ​`last`​  
+- ​`last`​  
   停止处理当前的 `ngx_http_rewrite_module`​ 指令集并开始搜索新的 location 来匹配变更的 URI
-* ​`break`​  
+- ​`break`​  
   与 [break](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_rewrite_module#break) 指令一样，停止处理当前的 `ngx_http_rewrite_module`​ 指令集;
-* ​`redirect`​  
+- ​`redirect`​  
   返回带有 302 代码的临时重定向，如果替换字符串不以 `http://`​、`https://`​ 或 `$scheme`​ 开头，则生效
-* ​`permanent`​  
+- ​`permanent`​  
   返回 301 代码的永久重定向  
   完整重定向 URL 根据请求模式（`$scheme`​）以及 [server_name_in_redirect](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/http/ngx_http_core_module.hmdtml#server_name_in_redirect) 和 [port_in_redirect](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_core_module#port_in_redirect) 指令形成。
 

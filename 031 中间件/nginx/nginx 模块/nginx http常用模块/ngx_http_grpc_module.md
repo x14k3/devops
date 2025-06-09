@@ -76,8 +76,8 @@ grpc_bind $remote_addr transparent;
 
 如果未禁用，处理这些头字段将产生以下作用：
 
-* ​`X-Accel-Redirect`​ 执行[内部重定](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/核心模块.md#internal)向到指定的 URI
-* ​`X-Accel-Charset`​ 设置所需的响应[字符集](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_charset_module#charset)
+- ​`X-Accel-Redirect`​ 执行[内部重定](https://github.com/DocsHome/nginx-docs/tree/f6135c42a499e9fab0adb433738fcf8cd4041627/模块参考/核心模块.md#internal)向到指定的 URI
+- ​`X-Accel-Charset`​ 设置所需的响应[字符集](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_charset_module#charset)
 
 ### grpc\_intercept\_errors
 
@@ -99,29 +99,29 @@ grpc_bind $remote_addr transparent;
 
 指定在哪些情况下请求应传递给下一个服务器：
 
-* ​`error`​  
+- ​`error`​  
   在与服务器建立连接、传递请求或读取响应头时发生错误
-* ​`timeout`​  
+- ​`timeout`​  
   在与服务器建立连接、传递请求或读取响应头时发生超时
-* ​`invalid_header`​  
+- ​`invalid_header`​  
   服务器返回了空的或无效的响应
-* ​`http_500`​  
+- ​`http_500`​  
   服务器返回状态码为 500 的响应
-* ​`http_502`​  
+- ​`http_502`​  
   服务器返回状态码为 502 的响应
-* ​`http_503`​  
+- ​`http_503`​  
   服务器返回状态码为 503 的响应
-* ​`http_504`​  
+- ​`http_504`​  
   服务器返回状态码为 504 的响应
-* ​`http_403`​  
+- ​`http_403`​  
   服务器返回状态码为 403 的响应
-* ​`http_404`​  
+- ​`http_404`​  
   服务器返回状态码为 404 的响应
-* ​`http_429`​  
+- ​`http_429`​  
   服务器返回状态码为 429 的响应
-* ​`non_idempotent`​  
+- ​`non_idempotent`​  
   通常，如果请求已发送到上游服务器，请求方法为非幂等（POST、LOCK、PATCH）的请求是不会传送到下一个服务器，使这个选项将明确允许重试这样的请求
-* ​`off`​  
+- ​`off`​  
   禁止将请求传递给下一个服务器  
   我们应该记住，只有在没有任何内容发送给客户端的情况下，才能将请求传递给下一个服务器。也就是说，如果在响应传输过程中发生错误或超时，修复这样的错误是不可能的。
 

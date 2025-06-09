@@ -36,12 +36,12 @@ Creating files for the test...
 
 针对不同的`IO`​类型有不同的测试选项：
 
-* ​`seqwr`​ 顺序写入
-* ​`seqrewr`​ 顺序重写
-* ​`seqrd`​ 顺序读取
-* ​`rndrd`​ 随机读取
-* ​`rndwr`​ 随机写入
-* ​`rndrw`​ 混合随机读/写
+- ​`seqwr`​ 顺序写入
+- ​`seqrewr`​ 顺序重写
+- ​`seqrd`​ 顺序读取
+- ​`rndrd`​ 随机读取
+- ​`rndwr`​ 随机写入
+- ​`rndrw`​ 混合随机读/写
 
 例如，混合随机读/写测试：
 
@@ -88,9 +88,9 @@ Threads fairness:
 
 输出结果中包含了大量的信息，这些数据对于评估磁盘性能十分有用：
 
-* 每秒请求数 `453.63 Requests/sec`​
-* 吞吐量 `7.0879Mb/sec`​
-* 时间分布 `95 percentile: 6.46ms`​
+- 每秒请求数 `453.63 Requests/sec`​
+- 吞吐量 `7.0879Mb/sec`​
+- 时间分布 `95 percentile: 6.46ms`​
 
 测试完成以后，运行清除操作删除第一步生成的测试文件：
 

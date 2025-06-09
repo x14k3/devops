@@ -15,8 +15,8 @@ Git分支模型(master/bugfix/hotfix/develop/feature/release)
 ![](assets/net-img-2021-06-10_154857-20230727091212-ijk7r24.png)
 在核心，开发模型受到现有模型的极大启发。中央仓库拥有两个主要分支，具有无限的生命周期：
 
-* master
-* develop
+- master
+- develop
 
 该master分支在origin应该存在于每一个用户的Git。另一个与master并行的分支是develop。
 
@@ -34,9 +34,9 @@ Git分支模型(master/bugfix/hotfix/develop/feature/release)
 
 我们使用的不同类型的分支分别是：
 
-* 功能分支 命名方式：feature-*
-* 发布分支 命名方式：release-*
-* 修补bug分支 命名方式：hotfix-*
+- 功能分支 命名方式：feature-*
+- 发布分支 命名方式：release-*
+- 修补bug分支 命名方式：hotfix-*
 
 这些分支中每一个都有特定的目的，并且有着严格的规则：从哪些分支中fork出来，又合并到那些分支中。
 

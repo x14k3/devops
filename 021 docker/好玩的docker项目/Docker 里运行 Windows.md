@@ -54,10 +54,10 @@ docker build -t dockurr/windows .
 
 这个镜像主要依赖了几项技术：
 
-* [qemus/qemu-docker](https://github.com/qemus/qemu-docker)，在容器中使用 QEMU，能够提供接近本机速度的虚拟机的网络、IO 速度等。
-* [christgau/wsdd](https://github.com/christgau/wsdd)，让容器中的 Windows 能够出现在局域网中的其他设备的共享设备中。（Windows 10 的 1511 版本后，默认开始禁用 SMBv1，NetBIOS 设备发现功能失效，导致其他设备不能对其进行服务发现）。
-* [qemus/virtiso](https://github.com/qemus/virtiso)，精简到 27MB 的 KVM/QEMU Virtio 驱动程序，能够让 Windows 在 Docker 环境中正常使用。
-* [krallin/tini](https://github.com/krallin/tini)，正确启动 Docker 中 QEMU，以及确保进程异常能够被正确处理，或正确的终止容器进程。
+- [qemus/qemu-docker](https://github.com/qemus/qemu-docker)，在容器中使用 QEMU，能够提供接近本机速度的虚拟机的网络、IO 速度等。
+- [christgau/wsdd](https://github.com/christgau/wsdd)，让容器中的 Windows 能够出现在局域网中的其他设备的共享设备中。（Windows 10 的 1511 版本后，默认开始禁用 SMBv1，NetBIOS 设备发现功能失效，导致其他设备不能对其进行服务发现）。
+- [qemus/virtiso](https://github.com/qemus/virtiso)，精简到 27MB 的 KVM/QEMU Virtio 驱动程序，能够让 Windows 在 Docker 环境中正常使用。
+- [krallin/tini](https://github.com/krallin/tini)，正确启动 Docker 中 QEMU，以及确保进程异常能够被正确处理，或正确的终止容器进程。
 
 好了，准备工作就绪后，我们就可以开始使用这个有趣的技术方案啦。
 

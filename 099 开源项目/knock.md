@@ -18,14 +18,14 @@ make && make install
 
 knocked 选项：
 
-* -i,–interface     监听的网口
-* -d,–daemon    守护模式运行
-* -c,–config        指定一个配置文件
-* -D,–debug       输出debug信息
-* -l,–lookup        dns解析
-* -p,–pidfile       指定pidfile
-* -g,–logfile       指定logfile
-* -v,–vebose      输出详细信息
+- -i,–interface     监听的网口
+- -d,–daemon    守护模式运行
+- -c,–config        指定一个配置文件
+- -D,–debug       输出debug信息
+- -l,–lookup        dns解析
+- -p,–pidfile       指定pidfile
+- -g,–logfile       指定logfile
+- -v,–vebose      输出详细信息
 
 ## 2 配置knockd服务
 

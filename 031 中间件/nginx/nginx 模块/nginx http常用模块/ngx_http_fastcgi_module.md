@@ -238,10 +238,10 @@ fastcgi_cache_path /data/nginx/cache levels=1:2 keys_zone=one:10m;
 
 此外，以下参数作为我们[商业订阅](http://nginx.com/products/?_ga=2.57597673.2132667164.1520648382-1859001452.1520648382)的一部分：
 
-* ​`purger=on|off`​ 指明缓存清除程序（1.7.12）是否将与[通配符键](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_cache_purge)匹配的缓存条目从磁盘中删除。将该参数设置为 `on`​（默认为 `off`​）将激活“缓存清除器”（cache purger）进程，该进程不断遍历所有缓存条目并删除与通配符匹配的条目。
-* ​`purger_files=number`​ 设置在一次迭代期间将要扫描的条目数量（1.7.12）。默认情况下，`purger_files`​ 设置为 10。
-* ​`purger_threshold=number`​ 设置一次迭代的持续时间（1.7.12）。默认情况下，`purger_threshold`​ 设置为 50 毫秒。
-* ​`purger_sleep=number`​ 在迭代之间设置暂停时间（1.7.12）。默认情况下，`purger_sleep`​ 设置为 50 毫秒。
+- ​`purger=on|off`​ 指明缓存清除程序（1.7.12）是否将与[通配符键](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_cache_purge)匹配的缓存条目从磁盘中删除。将该参数设置为 `on`​（默认为 `off`​）将激活“缓存清除器”（cache purger）进程，该进程不断遍历所有缓存条目并删除与通配符匹配的条目。
+- ​`purger_files=number`​ 设置在一次迭代期间将要扫描的条目数量（1.7.12）。默认情况下，`purger_files`​ 设置为 10。
+- ​`purger_threshold=number`​ 设置一次迭代的持续时间（1.7.12）。默认情况下，`purger_threshold`​ 设置为 50 毫秒。
+- ​`purger_sleep=number`​ 在迭代之间设置暂停时间（1.7.12）。默认情况下，`purger_sleep`​ 设置为 50 毫秒。
 
 > 在 1.7.3、1.7.7 和 1.11.10 版本中，缓存头格式发生了更改。升级到更新的 nginx 版本后，以前缓存的响应将视为无效。
 
@@ -308,8 +308,8 @@ server {
 
 也可以在响应头中直接启用在响应变为陈旧的指定秒数后使用陈旧的缓存响应（1.11.10）。这比使用指令参数的优先级低。
 
-* ​`Cache-Control`​ 头字段的 [`stale-while-revalidate`](https://tools.ietf.org/html/rfc5861#section-3)​ 扩展允许使用陈旧的缓存响应当它正在更新。
-* ​`Cache-Control`​ 头字段的 [`stale-if-error`](https://tools.ietf.org/html/rfc5861#section-4)​ 扩展允许在发生错误时使用陈旧的缓存响应。  
+- ​`Cache-Control`​ 头字段的 [`stale-while-revalidate`](https://tools.ietf.org/html/rfc5861#section-3)​ 扩展允许使用陈旧的缓存响应当它正在更新。
+- ​`Cache-Control`​ 头字段的 [`stale-if-error`](https://tools.ietf.org/html/rfc5861#section-4)​ 扩展允许在发生错误时使用陈旧的缓存响应。  
   为了最大限度地减少填充新缓存元素时对 FastCGI 服务器的访问次数，可以使用 [fastcgi_cache_lock](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_cache_lock) 指令。
 
 ### fastcgi\_cache\_valid
@@ -347,10 +347,10 @@ fastcgi_cache_valid any      1m;
 
 缓存参数也可以直接在响应头中设置。这比使用指令设置缓存时间具有更高的优先级。
 
-* ​`X-Accel-Expires`​ 头字段以秒为单位设置响应的缓存时间。零值会禁用响应缓存。如果该值以 `@`​ 前缀开头，则它会设置自 Epoch 以来的绝对时间（以秒为单位），最多可以缓存该时间段内的响应。
-* 如果头中不包含 `X-Accel-Expires`​ 字段，则可以在头字段 `Expires`​ 或 `Cache-Control`​ 中设置缓存参数。
-* 如果头中包含 `Set-Cookie`​ 字段，则不会缓存此类响应。
-* 如果头中包含具有特殊值 `*`​ 的 `Vary`​ 字段，则这种响应不会被缓存（1.7.7）。如果头中包含带有另一个值的 `Vary`​ 字段，考虑到相应的请求头字段（1.7.7），这样的响应将被缓存。  
+- ​`X-Accel-Expires`​ 头字段以秒为单位设置响应的缓存时间。零值会禁用响应缓存。如果该值以 `@`​ 前缀开头，则它会设置自 Epoch 以来的绝对时间（以秒为单位），最多可以缓存该时间段内的响应。
+- 如果头中不包含 `X-Accel-Expires`​ 字段，则可以在头字段 `Expires`​ 或 `Cache-Control`​ 中设置缓存参数。
+- 如果头中包含 `Set-Cookie`​ 字段，则不会缓存此类响应。
+- 如果头中包含具有特殊值 `*`​ 的 `Vary`​ 字段，则这种响应不会被缓存（1.7.7）。如果头中包含带有另一个值的 `Vary`​ 字段，考虑到相应的请求头字段（1.7.7），这样的响应将被缓存。  
   使用 [fastcgi_ignore_headers](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_ignore_headers) 指令可以禁用一个或多个响应头字段的处理。
 
 ### fastcgi\_catch\_stderr
@@ -425,11 +425,11 @@ location /php {
 
 如果未禁用，则处理这些头字段产生以下效果：
 
-* ​`X-Accel-Expires`​、`Expires`​、`Cache-Control`​、`Set-Cookie`​ 和 `Vary`​ 设置响应[缓存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_cache_valid)的参数
-* ​`X-Accel-Redirect`​ 执行[内部重定向](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#internal)到指定的 URI
-* ​`X-Accel-Limit-Rate`​ 设置响应的传送[速率限制](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#limit_rate)回客户端
-* ​`X-Accel-Buffering`​ 启用或禁用[缓冲](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_buffering)响应
-* ​`X-Accel-Charset`​ 设置所需的响应[字符集](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_charset_module#charset)
+- ​`X-Accel-Expires`​、`Expires`​、`Cache-Control`​、`Set-Cookie`​ 和 `Vary`​ 设置响应[缓存](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_cache_valid)的参数
+- ​`X-Accel-Redirect`​ 执行[内部重定向](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#internal)到指定的 URI
+- ​`X-Accel-Limit-Rate`​ 设置响应的传送[速率限制](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#limit_rate)回客户端
+- ​`X-Accel-Buffering`​ 启用或禁用[缓冲](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_buffering)响应
+- ​`X-Accel-Charset`​ 设置所需的响应[字符集](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_charset_module#charset)
 
 ### fastcgi\_index
 
@@ -504,25 +504,25 @@ fastcgi_param SCRIPT_FILENAME /home/www/scripts/php$fastcgi_script_name;
 
 指定在哪些情况下请求应传递给下一台服务器：
 
-* ​`erorr`​  
+- ​`erorr`​  
   在与服务器建立连接、传递请求或读取响应头时发生错误
-* ​`timeout`​  
+- ​`timeout`​  
   在与服务器建立连接、传递请求或读取响应头时发生超时
-* ​`invalid_header`​  
+- ​`invalid_header`​  
   服务器返回了空的或无效的响应
-* ​`http_500`​  
+- ​`http_500`​  
   服务器返回 500 响应码
-* ​`http_503`​  
+- ​`http_503`​  
   服务器返回 503 响应码
-* ​`http_403`​  
+- ​`http_403`​  
   服务器返回 403 响应码
-* ​`http_404`​  
+- ​`http_404`​  
   服务器返回 404 响应码
-* ​`http_429`​  
+- ​`http_429`​  
   服务器返回 429 响应码（1.11.13）
-* ​`non_idempotent`​  
+- ​`non_idempotent`​  
   通常，如果请求已发送到上游服务器（1.9.13），则具有[非幂等](https://tools.ietf.org/html/rfc7231#section-4.2.2)方法（POST、LOCK、PATCH）的请求不会传递到下一个服务器，使这个选项明确允许重试这样的请求
-* ​`off`​  
+- ​`off`​  
   禁用将请求传递给下一个服务器  
   我们应该记住，只有在没有任何内容发送给客户端的情况下，才能将请求传递给下一台服务器。也就是说，如果在响应传输过程中发生错误或超时，要修复是不可能的。
 
@@ -826,16 +826,16 @@ HTTP 请求头字段作为参数传递给 FastCGI 服务器。在作为 FastCGI 
 
 ​`ngx_http_fastcgi_module`​ 模块支持在 [fastcgi_param](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_param) 指令设置参数时使用内嵌变量：
 
-* ​`$fastcgi_script_name`​  
+- ​`$fastcgi_script_name`​  
   请求 URI，或者如果 URI 以斜杠结尾，则请求 URI 的索引文件名称由 [fastcgi_index](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_index) 指令配置。该变量可用于设置 `SCRIPT_FILENAME`​ 和 `PATH_TRANSLATED`​ 参数，以确定 PHP 中的脚本名称。例如，对 `/info/`​ 请求的指令设置
-* ```
+- ```
     fastcgi_index index.php;
     fastcgi_param SCRIPT_FILENAME /home/www/scripts/php$fastcgi_script_name;
   ```
 
   ​`SCRIPT_FILENAME`​ 参数等于 `/home/www/scripts/php/info/index.php`​。  
   使用 [fastcgi_split_path_info](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_split_path_info) 指令时，`$fastcgi_script_name`​ 变量等于指令设置的第一个捕获值。
-* ​`$fastcgi_path_info`​  
+- ​`$fastcgi_path_info`​  
   由 [fastcgi_split_path_info](https://docshome.gitbook.io/nginx-docs/he-xin-gong-neng/http/ngx_http_fastcgi_module#fastcgi_split_path_info) 指令设置的第二个捕获值。这个变量可以用来设置 `PATH_INFO`​ 参数。
 
 ‍

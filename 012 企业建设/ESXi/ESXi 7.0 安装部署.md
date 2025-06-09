@@ -22,12 +22,12 @@
 
 ## 1. 准备工作
 
-* 获取VMware vSphere 7.0（ESXi 7.0）的光盘镜像需要在VMware的官网上注册会员，注册时的邮箱保持真实就ok了 其他随便写
+- 获取VMware vSphere 7.0（ESXi 7.0）的光盘镜像需要在VMware的官网上注册会员，注册时的邮箱保持真实就ok了 其他随便写
 
   1. 登录  [https://customerconnect.vmware.com/cn/evalcenter?p=free-esxi7](https://customerconnect.vmware.com/cn/evalcenter?p=free-esxi7)  点击免费产品下载，选择vSphere Hypervisor 进入下载页面；
   2. 记录许可信息栏的“密钥”然后点击手动下载就能获取ESXi 7.0的安装光盘文件。（同一个密钥允许安装100台服务器）；
-* 使用 [rufus ](https://rufus.ie/zh/)制作启动盘
-* 开启BIOS CPU虚拟化
+- 使用 [rufus ](https://rufus.ie/zh/)制作启动盘
+- 开启BIOS CPU虚拟化
 
   ```bash
   BIOS：Advanced（高级菜单）内的CPU Configuration（处理器设置），其中就有一项：Intel Virtualization Technology（Intel虚拟化技术），把它改为Enabled（启用）就可以了，保存后即可。

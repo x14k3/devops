@@ -8,24 +8,24 @@
 
 该 `Nginx`​ 的第三方扩展工具，可以防御 `CC`​ 攻击(超出限制后自动拉黑对应 `IP`​ 一段时间或者使用验证码做人机识别)，可以支持多种黑白名单(`IP`​/`POST`​/`URL`​/`UA`​等等)，还可以提供防护 `SQL`​ 注入和 `XSS`​ 工具。
 
-* 使用简单
+- 使用简单
 
-  * 配置文件和规则文件书写简单，可读性强
-* 基础防护
+  - 配置文件和规则文件书写简单，可读性强
+- 基础防护
 
-  * 如 `IP`​ 或 `IP`​ 网段的黑白名单、`URI`​ 黑白名单和请求体黑名单等
-* 高性能
+  - 如 `IP`​ 或 `IP`​ 网段的黑白名单、`URI`​ 黑白名单和请求体黑名单等
+- 高性能
 
-  * 使用高效的 `IP`​ 检查算法和缓存机制，支持 `IPV4`​ 和 `IPV6`​
-* 高级防护
+  - 使用高效的 `IP`​ 检查算法和缓存机制，支持 `IPV4`​ 和 `IPV6`​
+- 高级防护
 
-  * 兼容 [`ModSecurity`](https://github.com/SpiderLabs/ModSecurity)​ 的规则，你可以使用 `OWASP`​ 的核心规则库
-* 友好爬虫验证
+  - 兼容 [`ModSecurity`](https://github.com/SpiderLabs/ModSecurity)​ 的规则，你可以使用 `OWASP`​ 的核心规则库
+- 友好爬虫验证
 
-  * 支持验证 `Google`​、`Bing`​、`Baidu`​ 和 `Yandex`​ 的爬虫并自动放行，避免错误拦截，主要是基于 `User-Agent`​ 和 `IP`​ 的识别规则
-* 验证码
+  - 支持验证 `Google`​、`Bing`​、`Baidu`​ 和 `Yandex`​ 的爬虫并自动放行，避免错误拦截，主要是基于 `User-Agent`​ 和 `IP`​ 的识别规则
+- 验证码
 
-  * 支持三种验证码：`hCaptcha`​、`reCAPTCHAv2`​ 和 `reCAPTCHAv3`​
+  - 支持三种验证码：`hCaptcha`​、`reCAPTCHAv2`​ 和 `reCAPTCHAv3`​
 
 ## 模块安装
 
@@ -42,7 +42,7 @@ $ sh assets/guide.sh
 # It is recommended that you use static modules.
 ```
 
-*  **[1]**  **静态模块**
+-  **[1]**  **静态模块**
 
 编译安装一个新的模块需要知道当前的 `Nginx`​ 的 `configure`​ 脚本的参数，您可以通过运行 `nginx -V`​ 来获取，务必记住 `configure arguments:`​ 后面的内容。安装静态模块需要重新编译整个 `Nginx`​，花费的时间相对于安装动态模块比较长。如果不想在替换二进制文件时，关闭 `Nginx`​ 服务的话，可以参考[官方文档的热部署方案](https://nginx.org/en/docs/control.html)。
 
@@ -72,7 +72,7 @@ $ make -j$(nproc)
 $ cp objs/nginx /usr/local/nginx/sbin/nginx
 ```
 
-*  **[2]**  **动态模块 - 下载预构建的模块**
+-  **[2]**  **动态模块 - 下载预构建的模块**
 
 通过执行脚本 `assets/download.sh`​ 来下载动态模块。
 
@@ -98,7 +98,7 @@ Download complete!
 load_module "/path/to/ngx_http_waf_module.so";
 ```
 
-*  **[3]**  **动态模块 - 编译动态模块**
+-  **[3]**  **动态模块 - 编译动态模块**
 
 编译安装动态模块并不需要重新编译整个 `Nginx`​，只需要重新编译所有的模块，所以速度相对静态模块快一些，这也是本文档推荐的方式。
 
@@ -139,7 +139,7 @@ load_module "/usr/local/nginx/modules/ngx_http_waf_module.so";
 
 现在就可以在 `nginx.conf`​ 内的一个 `server`​ 块中添加配置来开启 `ngx_waf`​ 模块来配置服务的防火墙了，下面是一个例子。
 
-*  **[1]**  **LTS 版本**
+-  **[1]**  **LTS 版本**
 
   ```nginx
   http {
@@ -170,7 +170,7 @@ load_module "/usr/local/nginx/modules/ngx_http_waf_module.so";
 
 ‍
 
-*  **[2]**  **Current 版本**
+-  **[2]**  **Current 版本**
 
   ```nginx
   http {
@@ -245,9 +245,9 @@ http {
 
 ### \[2\] 开启验证码
 
-* [hCaptcha](https://www.hcaptcha.com/)
-* [reCAPTCHAv2](https://developers.google.com/recaptcha)
-* [reCAPTCHAv3](https://developers.google.com/recaptcha)
+- [hCaptcha](https://www.hcaptcha.com/)
+- [reCAPTCHAv2](https://developers.google.com/recaptcha)
+- [reCAPTCHAv3](https://developers.google.com/recaptcha)
 
 当你的站点受到 `CC`​ 攻击时开启验证码是不错的选择，因为验证码可以帮助你进行人机识别。本模块目前支持三种验证码，你应该选择一个并从其网站上申请到 `Sitekey`​ 和 `Secret`​。配置完成之后，重启 `nginx`​ 服务。
 
@@ -373,18 +373,18 @@ http {
 }
 ```
 
-* \[1\] 简易测试
+- \[1\] 简易测试
 
-  * 运行下列命令，如果输出 `403`​ 则表示模块正常工作
+  - 运行下列命令，如果输出 `403`​ 则表示模块正常工作
 
     ```nginx
     $ curl -I -o /dev/null --user-agent bench \
         -s -w "%{http_code}\\n" https://example.com
     ```
 
-* \[2\] 自动测试
+- \[2\] 自动测试
 
-  * 项目附带了许多测试用例，你可以通过下面的指令来运行全部的用例
+  - 项目附带了许多测试用例，你可以通过下面的指令来运行全部的用例
 
     ```nginx
     # 这行命令的执行时间比较长
@@ -412,9 +412,9 @@ http {
 
 本模块只保证对 `nginx-1.18.0`​ 或更新的版本的兼容性，且不保证与 `Linux`​ 以外的操作系统的兼容性。这里需要注意的是，模块与 [ngx_http_rewrite_module](https://nginx.org/en/docs/http/ngx_http_rewrite_module.html) 存在兼容性问题。
 
-* 当 `return`​ 指令生效时，该模块不会生效
-* 当 `rewrite`​ 指令造成了返回(如 `302`​ 重定向)时，该模块不会生效
-* 所以可以使用 [`try\_files`](https://nginx.org/en/docs/http/ngx_http_core_module.html#try_files)​ 代替 [`rewrite`](https://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)​ 指令，避免上述问题的出现
+- 当 `return`​ 指令生效时，该模块不会生效
+- 当 `rewrite`​ 指令造成了返回(如 `302`​ 重定向)时，该模块不会生效
+- 所以可以使用 [`try\_files`](https://nginx.org/en/docs/http/ngx_http_core_module.html#try_files)​ 代替 [`rewrite`](https://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)​ 指令，避免上述问题的出现
 
 ```nginx
 # rewrite
@@ -428,8 +428,8 @@ try_files $uri $uri/ /index.php;
 
 ## 参考链接
 
-* [Github 代码仓库](https://github.com/ADD-SP/ngx_waf)
-* [黑白名单规则说明](https://docs.addesp.com/ngx_waf/zh-cn/advance/rule.html)
-* [检测项目规则优先级](https://docs.addesp.com/ngx_waf/zh-cn/advance/priority.html)
-* [模块的内置变量](https://docs.addesp.com/ngx_waf/zh-cn/advance/variable.html)
-* [日志相关的配置说明](https://docs.addesp.com/ngx_waf/zh-cn/advance/log.html)
+- [Github 代码仓库](https://github.com/ADD-SP/ngx_waf)
+- [黑白名单规则说明](https://docs.addesp.com/ngx_waf/zh-cn/advance/rule.html)
+- [检测项目规则优先级](https://docs.addesp.com/ngx_waf/zh-cn/advance/priority.html)
+- [模块的内置变量](https://docs.addesp.com/ngx_waf/zh-cn/advance/variable.html)
+- [日志相关的配置说明](https://docs.addesp.com/ngx_waf/zh-cn/advance/log.html)

@@ -4,10 +4,10 @@ postgres fdw是一种外部访问接口，它可以被用来访问存储在外�
   
  使用postgres_fdw产要有以下步骤：
 
-* 创建扩展
-* 创建服务
-* 创建用户映射
-* 创建与访问表对应的外表
+- 创建扩展
+- 创建服务
+- 创建用户映射
+- 创建与访问表对应的外表
 
 到此就可以使用SELECT从外部表中访问存储在其底层远程表中的数据。同时可以 UPDATE,INSERT,DELETE远程表数据库，前提是在用户映射中指定的远程用户必须具有执行这些操作的权限。
 
@@ -303,9 +303,9 @@ db01=# EXPLAIN(ANALYZE on,VERBOSE on) select id,count(*) from table1  where id <
 1.批入导入性能提升  
  INSERT SELECT 语句将 100 万行从另一个表插入到该表所用的时间如下。postgres_fdw OPTIONS的  batch_size 参数设置为 100。这意味着一次最多向外部服务器发送 100 行：
 
-* 没有 FDW 的本地表：6.1 秒
-* 带 FDW 的远程表（改进前）：125.3 秒
-* 带 FDW 的远程表（改进后）：11.1 秒
+- 没有 FDW 的本地表：6.1 秒
+- 带 FDW 的远程表（改进前）：125.3 秒
+- 带 FDW 的远程表（改进后）：11.1 秒
 
 2.FDW 外部表接口支持 truncate [only|cascade] ，可能通过truncatable 参数选项控制默认为true  
  3.远程更新参数控制 ，默认情况下，所有使用的外部表postgres_fdw都假定是可更新的 。可能通过updatable参数选项控制默认为true  
@@ -313,12 +313,12 @@ db01=# EXPLAIN(ANALYZE on,VERBOSE on) select id,count(*) from table1  where id <
  5.LIMIT TO 子分区,如果指定IMPORT FOREIGN SCHEMA … LIMIT  TO，则允许postgres_fdw导入表分区。默认情况下postgres_fdw不允许导入表分区，因为可以使用根分区访问数据。如果用户想要导入分区表分区，PostgreSQL  14添加了一个新的选项LIMIT TO指定子分区导入。  
  6.保持连接，添加了一个新选项keep_connections，以保持连接处于活动状态，以便后续查询可以重用它们。默认情况下，此选项处于on状态，但如果off，则在事务结束时将丢弃连接。
 
-* 如果在关闭这个选项，可以使用  ALTER SERVER youserrvername  OPTIONS (keep_connections ‘off’);
-* 打开使用ALTER SERVER youserrvername   options (set keep_connections ‘on’);
+- 如果在关闭这个选项，可以使用  ALTER SERVER youserrvername  OPTIONS (keep_connections ‘off’);
+- 打开使用ALTER SERVER youserrvername   options (set keep_connections ‘on’);
 
 7.活动和有效的连接列表，添加postgres_fdw_get_connections函数以报告打开的外部服务连接。该函数将打开的连接名本地会话返回到postgres_fdw的外部服务。它还输出连接的有效性。
 
-* 查询从本地会话到外部服务器建立的所有打开连接的外部服务器名称: SELECT * FROM postgres_fdw_get_connections() ORDER BY 1;
-* 丢弃从本地会话到外部服务器建立的所有打开连接： select postgres_fdw_disconnect_all();
+- 查询从本地会话到外部服务器建立的所有打开连接的外部服务器名称: SELECT * FROM postgres_fdw_get_connections() ORDER BY 1;
+- 丢弃从本地会话到外部服务器建立的所有打开连接： select postgres_fdw_disconnect_all();
 
 ‍

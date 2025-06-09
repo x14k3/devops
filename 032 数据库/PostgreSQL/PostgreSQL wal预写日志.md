@@ -46,12 +46,12 @@ checkpoint_segments和wal_keep_segments,checkpoint_completion_target
 
 如果配置了archive_mode=on，但是没有配置archive_command，那么xlog文件会一直堆积（xlog写完后，会写.ready，但是由于没有配置archive_command，也就是说不会触发归档命令，所以一直都不会写  .done），所以xlog会一直不清理。
 
-* 读取控制文件，找到能清理的xlog范围
+- 读取控制文件，找到能清理的xlog范围
 
   ![modb_20210804_d7bc1b22-f4ba-11eb-943c-38f9d3cd240d](assets/modb_20210804_d7bc1b22-f4ba-11eb-943c-38f9d3cd240d-20240515161711-ag9yf1u.png)
 
   表示000000010000000000000009之前的文件可以删除
-* 通过pg_archivecleanup清理
+- 通过pg_archivecleanup清理
 
   ```sql
   [postgres@t1ysl bin]$ pg_archivecleanup -d $PGDATA/pg_wal 000000010000000000000009

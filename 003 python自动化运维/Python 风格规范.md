@@ -969,7 +969,7 @@ ComplexMap = Mapping[Text, List[Tuple[int, int]]]
 
 当一个内部变量难以推断其类型时,可以有以下方法来指示其类型:
 
-* **类型注释**
+- **类型注释**
 
   使用行尾注释 `# type:`​:
 
@@ -977,7 +977,7 @@ ComplexMap = Mapping[Text, List[Tuple[int, int]]]
   a = SomeUndecoratedFunction()  # type: Foo
   ```
 
-* **带类型注解的复制** 如函数形参一样,在变量名和等号间加入冒号和类型:
+- **带类型注解的复制** 如函数形参一样,在变量名和等号间加入冒号和类型:
 
   ```python
   a: Foo = SomeUndecoratedFunction()

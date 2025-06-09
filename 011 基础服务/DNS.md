@@ -1,7 +1,7 @@
 # DNS
 
-* 📄 [DNS服务器搭建与配置 ](DNS/DNS服务器搭建与配置%20.md)
-* 📄 [DNS概念和原理](DNS/DNS概念和原理.md)
+- 📄 [DNS服务器搭建与配置 ](DNS/DNS服务器搭建与配置%20.md)
+- 📄 [DNS概念和原理](DNS/DNS概念和原理.md)
 
 ‍
 

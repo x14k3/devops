@@ -55,7 +55,7 @@ real_ip_recursive on;
 
 ## 内嵌变量
 
-* ​`$realip_remote_addr`​  
+- ​`$realip_remote_addr`​  
   原始客户端地址
-* ​`$realip_remote_port`​  
+- ​`$realip_remote_port`​  
   原始客户端端口

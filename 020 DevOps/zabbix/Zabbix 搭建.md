@@ -10,18 +10,18 @@ nginx:1.12.1
 centos:7.8
 ```
 
-* 关闭防火墙和selinxu
+- 关闭防火墙和selinxu
 
   ```bash
   systemctl stop firewalld ;systemctl disable firewalld
   sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
   ```
-* 下载zabbix安装包解压
+- 下载zabbix安装包解压
 
   [https://www.zabbix.com/cn/download](https://www.zabbix.com/cn/download_sources "https://www.zabbix.com/cn/download_sources")​[sources](https://www.zabbix.com/cn/download_sources "https://www.zabbix.com/cn/download_sources")
 
   `tar -zxf zabbix-6.0.0.tar.gz`
-* 创建普通用户
+- 创建普通用户
 
   ```bash
   groupadd --system zabbix
@@ -33,7 +33,7 @@ centos:7.8
 
 数据库版本建议大于 8.0.0 [mysql 单机部署](../../数据库/mysql%20数据库/mysql%20单机部署.md)
 
-* 创建数据库
+- 创建数据库
 
   ```sql
   mysql -uroot -pNinestar@2022
@@ -55,12 +55,12 @@ centos:7.8
 
 # 安装zabbix服务端
 
-* 1.安装依赖
+- 1.安装依赖
 
   ```bash
   yum install -y gcc-c++ gcc make pcre-* libxml2 libxml2-devel unixODBC unixODBC-devel net-snmp-utils net-snmp net-snmp-devel libevent libevent-devel curl curl-devel
   ```
-* 2.安装配置
+- 2.安装配置
 
   ```bash
   cd zabbix-6.0.0
@@ -76,10 +76,10 @@ centos:7.8
   # --with-mysql        使用 MySQL 数据库
 
   ```
-* 3.编译安装
+- 3.编译安装
 
   `make install `
-* 4.编辑zabbix-server配置文件
+- 4.编辑zabbix-server配置文件
 
   `vim /data/zabbix/etc/zabbix_server.conf`
 
@@ -106,7 +106,7 @@ centos:7.8
   SSLCALocation     # SSL认证,CA路径，如果为空，将会使用系统默认的CA
 
   ```
-* 5.编辑zabbix-agent配置文件
+- 5.编辑zabbix-agent配置文件
 
   `vim /data/zabbix/etc/zabbix_agentd.conf`
 
@@ -132,7 +132,7 @@ centos:7.8
   UserParameter=net.tcp.jinzay.ports,/data/zabbix/script/ports.py
 
   ```
-* 6.启动zabbix和zabbix-agent
+- 6.启动zabbix和zabbix-agent
 
   ```bash
   /data/zabbix/sbin/zabbix_server
@@ -144,11 +144,11 @@ centos:7.8
 
 > Zabbix前端是PHP编写的，所以运行它需要PHP支持的网络服务器。安装只需简单的从 UI 目录复制PHP文件到网络服务器 HTML文档目录。
 
-* 安装PHP  **(使用7.x版本)** 
+- 安装PHP  **(使用7.x版本)** 
   [php](../../中间件/php.md)
-* 安装nginx
+- 安装nginx
   [nginx 部署](../../中间件/nginx/nginx%20部署.md)
-* nginx整合php-fpm
+- nginx整合php-fpm
 
   ```bash
   server {
@@ -173,12 +173,12 @@ centos:7.8
   # 启动nginx
   /data/nginx/sbin/nginx -c /data/nginx/conf/nginx.conf
   ```
-* 复制PHP文件到nginx 前端资源目录
+- 复制PHP文件到nginx 前端资源目录
 
   ```bash
   cp -a /opt/zabbix-6.0.0/ui/* /data/nginx/html/
   ```
-* 访问首页，根据提示修改php参数
+- 访问首页，根据提示修改php参数
 
   ```bash
   cat <<EOF >>/data/php/etc/php-fpm.d/www.conf
@@ -190,4 +190,4 @@ centos:7.8
   systemctl restart php-fpm
 
   ```
-* 输入用户名和密码Admin/zabbix
+- 输入用户名和密码Admin/zabbix
