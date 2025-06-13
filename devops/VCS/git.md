@@ -2,7 +2,7 @@
 
 ## <span data-type="text" style="color: var(--b3-font-color11);">git 服务端部署</span>
 
-或者参考[gitlab部署](gitlab部署.md)
+或者参考[gitlab部署](../gitlab/gitlab部署.md)
 
 ```bash
 yum install git-core

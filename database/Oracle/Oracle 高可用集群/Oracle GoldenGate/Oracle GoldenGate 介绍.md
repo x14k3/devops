@@ -8,7 +8,7 @@ GoldenGate软件是一种基于日志的结构化数据复制软件。GoldenGate
 
 通过解析源数据库redo log 或者archive log获得数据的增量变化，然后通过TCP/IP投递到目标数据库，最后将这些变化解析还原应用到目标数据库，从而实现两边同步。DSG复制工具也是基于相似原理。
 
-![13885a6b152e4cbaa6f308d542c50618~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](13885a6b152e4cbaa6f308d542c50618tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315212745-ejqau90.webp)
+![13885a6b152e4cbaa6f308d542c50618~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/13885a6b152e4cbaa6f308d542c50618tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315212745-ejqau90.webp)
 
 **执行步骤**
 

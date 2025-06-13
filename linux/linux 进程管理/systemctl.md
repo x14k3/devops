@@ -20,7 +20,7 @@ Systemd 是一大坨软件，包括服务管理（PID  1）、日志管理（sys
 
 在 systemd 中，运行一个完整系统所需的每个部件都作为“单元”（unit）管理。一个 unit 可以是服务（`.service`​）、挂载点（`.mount`​）、设备（`.device`​）、定时器（`.timer`​）以至于目标（`.target`​）等，完整的列表可以在 [`systemd.unit(5)`](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html)​ 中找到。
 
-![微信图片_20241217165258](微信图片_20241217165258-20241217165553-8v2bi9m.jpg)
+![微信图片_20241217165258](assets/微信图片_20241217165258-20241217165553-8v2bi9m.jpg)
 
 Systemd unit 的配置文件**主要**从以下目录按顺序载入，其中同名的文件只取找到的第一个：
 

@@ -225,7 +225,7 @@ esxcfg-volume -M UUID
 
 ## 三、ESXI网络抓包工具
 
-![](net-img-tcpdump-uw-vs-pktcap-uw-20240401203158-q1biwsg.png)
+![](assets/net-img-tcpdump-uw-vs-pktcap-uw-20240401203158-q1biwsg.png)
 
 [https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/](https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/)
 

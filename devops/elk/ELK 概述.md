@@ -27,7 +27,7 @@ ELK 是三个开源软件的缩写，分别表示：Elasticsearch , Logstash, Ki
 
 **Kibana** 也是一个开源和免费的工具，Kibana是一个与Elasticsearch协同工作的开源分析和可视化平台，Kibana 可以让你更方便地对 Elasticsearch 中数据进行操作，包括高级的数据分析以及在图表中可视化您的数据。
 
-![](image-20221127213954507-20230610173808-um9qtkc.png)
+![](assets/image-20221127213954507-20230610173808-um9qtkc.png)
 
 ### logstash与filebeat
 

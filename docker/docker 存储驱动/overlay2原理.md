@@ -9,7 +9,7 @@
 
 Namespace（命名空间）是Linux内核的一项功能，该功能对内核资源进行分区，使一组进程看到一组资源，而另一组进程看到另一组资源。Namespace有很多种，包括下表中列出的7种。
 
-![](net-img-v2-5c1f3f22a222391dafe762300e34361c_720w-20231010141230-zst6lq3.jpg "linux namespace的名称以及对应的隔离资源")​
+![](assets/net-img-v2-5c1f3f22a222391dafe762300e34361c_720w-20231010141230-zst6lq3.jpg "linux namespace的名称以及对应的隔离资源")​
 
 其中比较重要的有network，mount和PID namespace。
 
@@ -106,6 +106,6 @@ root@test:/tmp/test/merged#
 
 可以看到之前的目录A、B、C被合并到了一起，并且相同文件名的文件会进行“覆盖”，这里覆盖并不是真正的覆盖，而是当合并时候目录中两个文件名称都相同时，merged层目录会显示离它最近层的文件。如下图所示，层级关系中upperdir比lowerdir更靠近merged层，而多个lowerdir的情况下，写的越靠前的目录离merged层目录越近。（这里merged层的file为虚线外框，表示文件实际上并不在merged目录下）
 
-![v2-96c3001ff30bc079939e67d4194300da_r](v2-96c3001ff30bc079939e67d4194300da_r-20231010181939-tfsfrla.jpg "overlayFS文件层级关系")​
+![v2-96c3001ff30bc079939e67d4194300da_r](assets/v2-96c3001ff30bc079939e67d4194300da_r-20231010181939-tfsfrla.jpg "overlayFS文件层级关系")​
 
 ‍

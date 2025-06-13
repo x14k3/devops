@@ -8,19 +8,19 @@ RAID 的初衷是为大型服务器提供高端的存储功能和冗余的数据
 
 `RAID0`​<span data-type="text" style="color: var(--b3-font-color11);"> 具有低成本、高读写性能、 100% 的高存储空间利用率等优点，但是它不提供数据冗余保护，一旦数据损坏，将无法恢复。</span>
 
-​​​![f8274d1379754ded97c7609b3d65e85d~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](存储系列/assets/f8274d1379754ded97c7609b3d65e85dtplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109153914-xwa2ir5.webp)
+​​​![f8274d1379754ded97c7609b3d65e85d~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/f8274d1379754ded97c7609b3d65e85dtplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109153914-xwa2ir5.webp)
 
 ​`RAID1`​​<span data-type="text" style="color: var(--b3-font-color12);"> 称为镜像，它将数据完全一致地分别写到工作磁盘和镜像磁盘，它的磁盘空间利用率为 50% 。</span>
 
-​​​![ce99960c430944e4a7c3a1d480d75898~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](存储系列/assets/ce99960c430944e4a7c3a1d480d75898tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109153920-kbijtdy.webp)
+​​​![ce99960c430944e4a7c3a1d480d75898~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/ce99960c430944e4a7c3a1d480d75898tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109153920-kbijtdy.webp)
 
 `RAID5 `​<span data-type="text" style="color: var(--b3-font-color2);">应该是目前最常见的 RAID 等级 ,RAID5 兼顾存储性能、数据安全和存储成本等各方面因素，它可以理解为 RAID0 和 RAID1 的折中方案，是目前综合性能最佳的数据保护解决方案。 RAID5 基本上可以满足大部分的存储应用需求，数据中心大多采用它作为应用数据的保护方案。</span>
 
-![f244711c5e104fcd82c0397185e7e957~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](存储系列/assets/f244711c5e104fcd82c0397185e7e957tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109153936-xom8haq.webp)
+![f244711c5e104fcd82c0397185e7e957~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/f244711c5e104fcd82c0397185e7e957tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109153936-xom8haq.webp)
 
 `RAID6 `​<span data-type="text" style="color: var(--b3-font-color4);">等级是在 RAID5 的基础上为了进一步增强数据保护而设计的一种 RAID 方式，它可以看作是一种扩展的 RAID5 等级。RAID6 具有快速的读取性能、更高的容错能力。但是，它的成本要高于 RAID5 许多，写性能也较差，并有设计和实施非常复杂。因此， RAID6 很少得到实际应用，主要用于对数据安全等级要求非常高的场合。它一般是替代 RAID10 方案的经济性选择。</span>
 
-![dea4ecdf05de4b13b63b33c9b2fc9c88~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](存储系列/assets/dea4ecdf05de4b13b63b33c9b2fc9c88tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109154010-6wlc7u5.webp)
+![dea4ecdf05de4b13b63b33c9b2fc9c88~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/dea4ecdf05de4b13b63b33c9b2fc9c88tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20231109154010-6wlc7u5.webp)
 
 ## 软 RAID
 

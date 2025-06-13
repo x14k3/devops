@@ -9,7 +9,7 @@
 
 **白盒监控**：主要关注的是原因，也就是系统内部暴露的一些指标，例如redis的info中显示redis slave down，这个就是redis info显示的一个内部的指标，重点在于原因，可能是在黑盒监控中看到redis down，而查看内部信息的时候，显示redis port is refused connection。
 
-![6yfzcyd0y9](6yfzcyd0y9-20230802150738-js6j4vc.png)
+![6yfzcyd0y9](assets/6yfzcyd0y9-20230802150738-js6j4vc.png)
 
 ## 使用Blackbox Exporter
 
@@ -158,7 +158,7 @@ scrape_configs:
 
 通过以上3个relabel步骤，即可大大简化Prometheus任务配置的复杂度:
 
-![relabel_blackbox_targets](relabel_blackbox_targets-20230802150704-v0jxv47.png)
+![relabel_blackbox_targets](assets/relabel_blackbox_targets-20230802150704-v0jxv47.png)
 
 接下来，我们将详细介绍Blackbox中常用的HTTP探针使用方式
 

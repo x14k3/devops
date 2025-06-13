@@ -143,4 +143,4 @@ DNS 根域下面是顶级域,也由Internet 域名注册授权机构管理.共�
 
 第五步：本地DNS服务器将结果返回给请求的主机
 
-![DNS查询流程图](network-asset-DNS查询流程图-20240904105545-j0ct4gp.jpg)
+![DNS查询流程图](assets/network-asset-DNS查询流程图-20240904105545-j0ct4gp.jpg)

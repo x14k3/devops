@@ -8,7 +8,7 @@
 
 3.解压 `tar -zxvf apache-skywalking-apm-8.8.1.tar.gz`
 
-4.安装elasticsearch存储，参考 [elk 7.17 部署](elk%207.17%20部署.md)
+4.安装elasticsearch存储，参考 [elk 7.17 部署](../elk/elk%207.17%20部署.md)
 
 5.配置skywalking
 

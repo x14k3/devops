@@ -37,7 +37,7 @@ docker run \
 
 通过访问[http://localhost:8080](http://localhost:8080/)可以查看，当前主机上容器的运行状态，如下所示：
 
-​​![cadvisor-total-usage](cadvisor-total-usage-20230802150404-1rxc2q9.png)​​
+​​![cadvisor-total-usage](assets/cadvisor-total-usage-20230802150404-1rxc2q9.png)​​
 
 CAdvisor是一个简单易用的工具，相比于使用Docker命令行工具，用户不用再登录到服务器中即可以可视化图表的形式查看主机上所有容器的运行状态。
 
@@ -94,7 +94,7 @@ prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/dat
 
 启动完成后，可以在Prometheus UI中查看到当前所有的Target状态：
 
-​​![prometheus_targetes_with_cadvisor](prometheus_targetes_with_cadvisor-20230802150414-lfunchr.png)​​
+​​![prometheus_targetes_with_cadvisor](assets/prometheus_targetes_with_cadvisor-20230802150414-lfunchr.png)​​
 
 当能够正常采集到cAdvisor的样本数据后，可以通过以下表达式计算容器的CPU使用率：
 
@@ -102,7 +102,7 @@ prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/dat
 sum(irate(container_cpu_usage_seconds_total{image!=""}[1m])) without (cpu)
 ```
 
-​​![promql_container_cpu_usage](promql_container_cpu_usage-20230802150422-vdq2ko1.png)​​
+​​![promql_container_cpu_usage](assets/promql_container_cpu_usage-20230802150422-vdq2ko1.png)​​
 
 查询容器内存使用量（单位：字节）:
 
@@ -116,7 +116,7 @@ container_memory_usage_bytes{image!=""}
 sum(rate(container_network_receive_bytes_total{image!=""}[1m])) without (interface)
 ```
 
-​​![container_network_receive_bytes_total](container_network_receive_bytes_total-20230802150433-8j1srl6.png)​​
+​​![container_network_receive_bytes_total](assets/container_network_receive_bytes_total-20230802150433-8j1srl6.png)​​
 
 查询容器网络传输量速率（单位：字节/秒）：
 
@@ -124,7 +124,7 @@ sum(rate(container_network_receive_bytes_total{image!=""}[1m])) without (interfa
 sum(rate(container_network_transmit_bytes_total{image!=""}[1m])) without (interface)
 ```
 
-​​![container_network_transmit_bytes_total](container_network_transmit_bytes_total-20230802150444-6uvs11t.png)​​
+​​![container_network_transmit_bytes_total](assets/container_network_transmit_bytes_total-20230802150444-6uvs11t.png)​​
 
 查询容器文件系统读取速率（单位：字节/秒）：
 
@@ -132,7 +132,7 @@ sum(rate(container_network_transmit_bytes_total{image!=""}[1m])) without (interf
 sum(rate(container_fs_reads_bytes_total{image!=""}[1m])) without (device)
 ```
 
-​​![container_fs_reads_bytes_total](container_fs_reads_bytes_total-20230802150453-ghyxpnl.png)​​
+​​![container_fs_reads_bytes_total](assets/container_fs_reads_bytes_total-20230802150453-ghyxpnl.png)​​
 
 查询容器文件系统写入速率（单位：字节/秒）：
 
@@ -140,6 +140,6 @@ sum(rate(container_fs_reads_bytes_total{image!=""}[1m])) without (device)
 sum(rate(container_fs_writes_bytes_total{image!=""}[1m])) without (device)
 ```
 
-​​![container_fs_writes_bytes_total](container_fs_writes_bytes_total-20230802150503-y5lexo7.png)​​
+​​![container_fs_writes_bytes_total](assets/container_fs_writes_bytes_total-20230802150503-y5lexo7.png)​​
 
 ‍

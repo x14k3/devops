@@ -2,7 +2,7 @@
 
 ## 1. 数据库细节
 
-![Alt text](network-asset-1-20241211175759-dy9c2wa.png)
+![Alt text](assets/network-asset-1-20241211175759-dy9c2wa.png)
 
 这部分可以看到
 
@@ -15,7 +15,7 @@
 
 ## 2. 主机配置信息
 
-![Alt text](network-asset-2-20241211175759-hjligc1.png)
+![Alt text](assets/network-asset-2-20241211175759-hjligc1.png)
 
 这部分可以看到
 
@@ -27,7 +27,7 @@
 
 ## 3. SnapShot信息
 
-![Alt text](network-asset-3-20241211175759-dbqf32c.png)
+![Alt text](assets/network-asset-3-20241211175759-dbqf32c.png)
 
 这部分可以看到
 
@@ -45,7 +45,7 @@ DB Time\= CPU Time + Non IDLE wait time.
 
 该视图显示的是Shared pool的状态
 
-![Alt text](network-asset-4-20241211175759-ao3zsub.png)
+![Alt text](assets/network-asset-4-20241211175759-ao3zsub.png)
 
 % SQL with executions\>1指的是执行次数大于1的SQL比例，越大越好，如过小则可能是为使用绑定变量导致
 
@@ -53,7 +53,7 @@ DB Time\= CPU Time + Non IDLE wait time.
 
 这里我们可以了解系统负载的情况
 
-![Alt text](network-asset-5-20241211175759-p0smhyw.png)
+![Alt text](assets/network-asset-5-20241211175759-p0smhyw.png)
 
 首先是 **DB CPU(s) per second**，它说明的是每秒钟同时工作的CPU数量
 
@@ -73,7 +73,7 @@ DB Time\= CPU Time + Non IDLE wait time.
 
 ## 6. Instance Efficiency Percentages
 
-![Alt text](network-asset-6-20241211175759-fwrf3c4.png)
+![Alt text](assets/network-asset-6-20241211175759-fwrf3c4.png)
 
 上面的百分比越高越好，后面会针对每个做介绍
 
@@ -94,7 +94,7 @@ Instance Efficiency Percentages 是一些命中率指标。Buffer Hit、Library 
 
 这里是排名前十的前台等待事件
 
-![Alt text](network-asset-7-20241211175759-8uquby7.png)
+![Alt text](assets/network-asset-7-20241211175759-8uquby7.png)
 
 1. 首先看wait class栏位，如果是 User I/O , System I/O, Others这种的可以不用太担心，如发现Concurrency这类等待需要特别关心
 2. 其次看等待时间，wait avg\=total wait time(总等待时间)/waits(等待次数),最主要看平均等待时间是否正常
@@ -105,7 +105,7 @@ Instance Efficiency Percentages 是一些命中率指标。Buffer Hit、Library 
 
 该视图说明的是各过程所占的资源比例
 
-![Alt text](network-asset-8-20241211175759-sqem5z8.png)
+![Alt text](assets/network-asset-8-20241211175759-sqem5z8.png)
 
 我们注意到所有 % of DB Time总和大于100%，因为这是一个累计的比例，下面DB CPU相关的过程包含在DB CPU中
 
@@ -115,13 +115,13 @@ Instance Efficiency Percentages 是一些命中率指标。Buffer Hit、Library 
 
 该视图是操作系统层面的性能指标
 
-![Alt text](network-asset-9-20241211175759-t4xmxrq.png)
+![Alt text](assets/network-asset-9-20241211175759-t4xmxrq.png)
 
 这里需要注意%iowait，他代表CPU在等待io操作完成，这个可能是io过慢或者io操作过多导致。
 
 ## 10. SQL Statistics
 
-![Alt text](network-asset-10-20241211175759-xtk2ho0.png)
+![Alt text](assets/network-asset-10-20241211175759-xtk2ho0.png)
 
 SQL Statistics 从 `11`​ 个维度对SQL进行排序并给出了Top SQL的详细内容，可以点击查看具体的SQL内容，进一步分析调优方案。* SQL ordered by Elapsed Time。记录了执行总和时间的 TOP SQL(请注意是监控范围内该SQL的执行时间总和，而不是单次SQL执行时间 Elapsed Time \= CPU Time + Wait Time)。
 
@@ -138,7 +138,7 @@ SQL Statistics 从 `11`​ 个维度对SQL进行排序并给出了Top SQL的详�
 
 **SQL ordered by Elapsed Time**
 
-![Alt text](network-asset-11-20241211175759-6k26qlg.png)
+![Alt text](assets/network-asset-11-20241211175759-6k26qlg.png)
 
 上图为根据持续时间排序的SQL语句
 

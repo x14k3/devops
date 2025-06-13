@@ -6,7 +6,7 @@
 - yum软件仓库
 - 源码软件
 
-[yum](yum.md)  [dnf](dnf.md)  [apt-get](apt.md)  [zypper](zypper.md)​[dpkg](dpkg.md)
+[yum](../../../shell/shell%20命令手册/软件安装/yum.md)  [dnf](../../../shell/shell%20命令手册/软件安装/dnf.md)  [apt-get](../../../shell/shell%20命令手册/软件安装/apt.md)  [zypper](../../../shell/shell%20命令手册/软件安装/zypper.md)​[dpkg](../../../shell/shell%20命令手册/软件安装/dpkg.md)
 
 ‍
 
@@ -256,6 +256,6 @@ conf  html  logs  sbin
 
 打开虚拟机浏览器输入:http://localhost回车
 
-![nginx访问.png](net-img-1602404129693-20230906112134-8k4cvo0.png)​
+![nginx访问.png](../assets/net-img-1602404129693-20230906112134-8k4cvo0.png)​
 
 ‍

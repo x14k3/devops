@@ -43,7 +43,7 @@ fsck <options> <filesystem>
 df -h
 ```
 
-![df-tool](net-img-df-tool-20231027153819-ben8gnp.png)
+![df-tool](assets/net-img-df-tool-20231027153819-ben8gnp.png)
 
 该工具可以打印系统上文件系统的使用情况。记下要使用**fsck**命令检查的磁盘。
 
@@ -57,14 +57,14 @@ sudo parted /dev/sda 'print'
 
 在我们的示例中，由于该虚拟机上只有一个分区，因此得到了一个结果。如果有更多的分区，我们将获得更多的结果。
 
-![列出Linux分区时的终端输出](net-img-parted-get-partitions-20231027153819-brtr3k7.png)
+![列出Linux分区时的终端输出](assets/net-img-parted-get-partitions-20231027153819-brtr3k7.png)
 
 此处的磁盘名称为 **/dev/sda** ，然后在“_Number”_列中显示分区的_编号_。在我们的例子中是：**sda1。**
 
 ### 卸载磁盘
 
 必须先卸载磁盘或分区，然后才能使用**fsck**进行磁盘检查。如果尝试在已安装的磁盘或分区上运行**fsck**，则会收到警告：
-![尝试卸载已安装的磁盘或分区时的警告](net-img-fsck-clean-20231027153819-8fus8ni.png)
+![尝试卸载已安装的磁盘或分区时的警告](assets/net-img-fsck-clean-20231027153819-8fus8ni.png)
 
 确保运行**unmount**命令：
 
@@ -88,13 +88,13 @@ sudo umount /dev/sdb
 sudo fsck /dev/sdb
 ```
 
-![运行fsck命令以检查第二个磁盘后的输出](net-img-fsck-exit-codes-20231027153819-66asilf.png)
+![运行fsck命令以检查第二个磁盘后的输出](assets/net-img-fsck-exit-codes-20231027153819-66asilf.png)
 
 上面的示例显示了正常磁盘的输出。如果磁盘上有多个问题，则每个错误都会出现一个提示，需要手动确认操作。
 
 fsck实用工具返回的退出代码如下：
 
-![fsck命令可能的退出代码。](net-img-fsck-warning-20231027153819-eihhazw.png)
+![fsck命令可能的退出代码。](assets/net-img-fsck-warning-20231027153819-eihhazw.png)
 
 ### 挂载磁盘
 
@@ -132,7 +132,7 @@ v
 sudo fsck -n /dev/sdb
 ```
 
-![使用-n选项可打印错误而不进行修复](net-img-fsck-n-option-warning-20231027153819-imctvh7.png)
+![使用-n选项可打印错误而不进行修复](assets/net-img-fsck-n-option-warning-20231027153819-imctvh7.png)
 
 ### 强制fsck执行文件系统检查")强制fsck执行文件系统检查
 
@@ -142,7 +142,7 @@ sudo fsck -n /dev/sdb
 sudo fsck -f /dev/sdb
 ```
 
-![强制fsck工具执行文件系统检查](net-img-ubuntu-recovery-mode-20231027153819-ejwwy6r.png)
+![强制fsck工具执行文件系统检查](assets/net-img-ubuntu-recovery-mode-20231027153819-ejwwy6r.png)
 
 即使认为没有问题，也会执行扫描以搜索损坏。
 
@@ -178,7 +178,7 @@ sudo fsck -AR -t noext3 -y
 sudo fsck -M /dev/sdb
 ```
 
-![fsck工具的输出可跳过任何已挂载的文件系统](net-img-fsck-force-check-20231027153820-2d2xuuw.png)
+![fsck工具的输出可跳过任何已挂载的文件系统](assets/net-img-fsck-force-check-20231027153820-2d2xuuw.png)
 
 当**sdb**被挂载时，该工具退出而不运行检查。然后，我们卸载**sdb**并再次运行相同的命令。这次，**fsck**检查磁盘并将其报告为正常磁盘或有错误。
 
@@ -202,21 +202,21 @@ sudo reboot
 
 3.选择**Ubuntu的高级选项**。
 
-![Linux恢复模式](net-img-skip-mounted-fsck-20231027153820-waem6rl.png)
+![Linux恢复模式](assets/net-img-skip-mounted-fsck-20231027153820-waem6rl.png)
 
 4.然后，选择末尾带有_（恢复模式）_的条目。让系统加载到“恢复菜单”中。
 
 5.从菜单中选择**fsck**。
 
-![Linux恢复菜单中选择fsck工具](net-img-recovery-confirm-yes-fsck-20231027153820-tlo4hyo.png)
+![Linux恢复菜单中选择fsck工具](assets/net-img-recovery-confirm-yes-fsck-20231027153820-tlo4hyo.png)
 
 6.通过在提示符下选择 **&lt;是&gt;** 进行确认。
 
-![选择fsck时的恢复模式确认消息](net-img-recovery-resume-boot-20231027153820-p225sy2.png)
+![选择fsck时的恢复模式确认消息](assets/net-img-recovery-resume-boot-20231027153820-p225sy2.png)
 
 7.完成后，在恢复菜单中选择“**恢复**”以启动计算机。
 
-![完成检查后](net-img-fsck-recovery-mode-20231027153820-04d4atr.png)
+![完成检查后](assets/net-img-fsck-recovery-mode-20231027153820-04d4atr.png)
 
 ## 如果fsck被中断怎么办")如果fsck被中断怎么办
 

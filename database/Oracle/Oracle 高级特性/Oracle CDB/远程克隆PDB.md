@@ -8,7 +8,7 @@
 
 下面这张图展示了如何从远端pdb克隆到本地
 
-![remote-pdb](net-img-remote-pdb-20240726181040-6doy5us.png)[*](https://www.xbdba.com/img/remote-pdb.png)
+![remote-pdb](assets/net-img-remote-pdb-20240726181040-6doy5us.png)[*](https://www.xbdba.com/img/remote-pdb.png)
 
 这里准备了三个环境：
 
@@ -165,7 +165,7 @@ PDB3NEW
 
 ## 远程克隆non-CDB
 
-![remote-noncdb](net-img-remote-noncdb-20240726181040-3ofwvux.png)
+![remote-noncdb](assets/net-img-remote-noncdb-20240726181040-3ofwvux.png)
 
 过程基本类似，创建用户和数据链
 

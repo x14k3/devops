@@ -6,19 +6,19 @@
 
 ## 包含的工具
 
-- [iostat](iostat.md)
+- [iostat](sysstat/iostat.md)
 
   > 输出CPU的统计信息和所有I/O设备的输入输出（I/O）统计信息
   >
-- [mpstat](mpstat.md)
+- [mpstat](sysstat/mpstat.md)
 
   > 关于CPU的详细信息（单独输出或者分组输出）
   >
-- [pidstat](pidstat.md)
+- [pidstat](sysstat/pidstat.md)
 
   > 关于运行中的进程/任务、CPU、内存等的统计信息
   >
-- [sar](sar.md)
+- [sar](sysstat/sar.md)
 
   > 保存并输出不同系统资源（CPU、内存、IO、网络、内核等）的详细信息
   >

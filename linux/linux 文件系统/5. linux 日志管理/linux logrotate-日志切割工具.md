@@ -2,7 +2,7 @@
 
 logrorare一定程度上可以简化对会生成大量日志文件的系统的管理。logrotate可以实现自动轮替、删除、压缩和mail日志的功能。
 
-Linux系统自带的日志滚动工具logrotate由两部分组成：一是命令行工具logrotate，二是后台服务[rsyslog](rsyslog.md)。
+Linux系统自带的日志滚动工具logrotate由两部分组成：一是命令行工具logrotate，二是后台服务[rsyslog](../../../企业建设/rsyslog.md)。
 
 **配置文件详解/etc/logrotate.conf**
 

@@ -90,6 +90,6 @@ docker-compose up -d
 
 ## 客户端使用
 
-​​![image](image-20231025134710-d50gwji.png)​​
+​​![image](assets/image-20231025134710-d50gwji.png)​​
 
 ‍

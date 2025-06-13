@@ -1,7 +1,7 @@
 
 ## 一、Zookeeper集群搭建
 
-参考：[zookeeper 部署](zookeeper%20部署.md)
+参考：[zookeeper 部署](../../zookeeper/zookeeper%20部署.md)
 
 zookeeper 是一个分布式的协调组件，早期版本的kafka用zk做meta信息存储，consumer的消费状态，group  的管理以及 offset 的值。考虑到 zookeeper 本身的一些因素以及整个架构较大概率存在单点问题，新版本中逐渐弱化了  zookeeper 的作用。新的 consumer 使用了 kafka 内部的 group coordination 协议，也减少了对  zookeeper 的依赖，
 

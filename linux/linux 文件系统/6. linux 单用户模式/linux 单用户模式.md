@@ -27,13 +27,13 @@
 
 重启你的系统，在 GRUB2 启动界面，按下 `e`​ 键来编辑选中的内核。你需要选中第一行，第一个是最新的内核，然而如果你想用旧的内核启动系统你也可以选择其他的行。
 
-![](net-img-230638ivavlhhetah9oaaz-20240310152532-sdqw7uk.png)
+![](../assets/net-img-230638ivavlhhetah9oaaz-20240310152532-sdqw7uk.png)
 
 根据你的 RHEL/CentOS 版本，找到 `linux16`​ 或 `linux`​ 语句，按下键盘上的 `End`​ 键，跳到行末，像下面截图中展示的那样添加关键词 `rd.break`​，按下 `Ctrl+x`​ 或 `F10`​ 来进入单用户模式。
 
 如果你的系统是 RHEL/CentOS 7，你需要找 `linux16`​，如果你的系统是 RHEL/CentOS 8，那么你需要找 `linux`​。
 
-![](net-img-230657vp7ai7naoxpe79ax-20240310152533-3w42ksh.png)
+![](../assets/net-img-230657vp7ai7naoxpe79ax-20240310152533-3w42ksh.png)
 
 这个修改会让你的 root 文件系统以 “只读（`ro`​）” 模式挂载。你可以用下面的命令来验证下。下面的输出也明确地告诉你当前是在 “紧急模式Emergency Mode”。
 
@@ -41,7 +41,7 @@
 # mount | grep root
 ```
 
-![](net-img-230714ofp2cc2p4w43ptc8-20240310152533-hyisxoh.png)
+![](../assets/net-img-230714ofp2cc2p4w43ptc8-20240310152533-hyisxoh.png)
 
 为了修改 `sysroot`​ 文件系统，你需要用读写模式（`rw`​）重新挂载它。
 
@@ -55,7 +55,7 @@ mount -o remount,rw /sysroot
 chroot /sysroot
 ```
 
-![](net-img-230731ddze7uhp7wu7pztz-20240310152534-ah3gh8s.png)
+![](../assets/net-img-230731ddze7uhp7wu7pztz-20240310152534-ah3gh8s.png)
 
 现在，单用户模式已经完全准备好了。当你修复了你的问题要退出单用户模式时，执行下面的步骤。
 
@@ -77,17 +77,17 @@ reboot -f
 
 重启你的系统，在 GRUB2 启动界面，按下 `e`​ 键来编辑选中的内核。
 
-![](net-img-230749m6qeqi7e2utk9qte-20240310152534-ktqsslm.png)
+![](../assets/net-img-230749m6qeqi7e2utk9qte-20240310152534-ktqsslm.png)
 
 找到语句 `rhgb quiet`​，用 `init=/bin/bash`​ 或 `init=/bin/sh`​ 替换它，然后按下 `Ctrl+x`​ 或 `F10`​ 来进入单用户模式。
 
 ​`init=/bin/bash`​ 的截图。
 
-![](net-img-230807e24n22k41j1zesj8-20240310152534-fpahqy8.png)
+![](../assets/net-img-230807e24n22k41j1zesj8-20240310152534-fpahqy8.png)
 
 ​`init=/bin/sh`​ 的截图。
 
-![](net-img-230825eup47566sxyl2y4v-20240310152535-l664vl6.png)
+![](../assets/net-img-230825eup47566sxyl2y4v-20240310152535-l664vl6.png)
 
 默认情况下，上面的操作会以只读（`ro`​）模式挂载你的 `/`​ 分区，因此你需要以读写（`rw`​）模式重新挂载 `/`​ 文件系统，这样才能修改它。
 
@@ -95,7 +95,7 @@ reboot -f
 mount -o remount,rw /
 ```
 
-![](net-img-230841wrqi4urzwqq9wcq9-20240310152536-o6k7m15.png)
+![](../assets/net-img-230841wrqi4urzwqq9wcq9-20240310152536-o6k7m15.png)
 
 现在你可以执行你的任务了。当结束时，执行下面的命令来开启重启时的 SELinux 重新标记。
 

@@ -14,7 +14,7 @@ PostgreSQL在数据目录下的pg_xlog子目录中维护了一个WAL日志文件
 
 ## 环境准备
 
-首先根据 [PostgreSQL 安装部署](PostgreSQL%20安装部署.md) 在两台机器上部署pg, 备库不需要初始化数据库数据目录
+首先根据 [PostgreSQL 安装部署](../PostgreSQL%20安装部署.md) 在两台机器上部署pg, 备库不需要初始化数据库数据目录
 
 primary  192.168.133.11  Centos7.9  psql (PostgreSQL) 12.15
 

@@ -99,7 +99,7 @@ Linux从2.6 kernel开始，已经取消了对IO size的限制,Oracle建议将aio
 
 命令`echo 1048576> /proc/sys/fs/aio-max-nr`​修改参数，只对当前环境有效，如果系统重启过后，则会使用默认值，所以最好修改参数文件`/etc/sysctl.conf`​。编辑`/etc/sysctl.conf`​添加或修改参数`fs.aio-max-nr = 1048576`​，保存后。运行`sysctl -p`​使之生效。
 
-![clip_image001](network-asset-73542-20151025214012927-1272798466-20241211171643-fgsr1oa.png "clip_image001")
+![clip_image001](assets/network-asset-73542-20151025214012927-1272798466-20241211171643-fgsr1oa.png "clip_image001")
 
 ```bash
 [root@DB-Serveruat ~]# cat /proc/sys/fs/aio-max-nr
@@ -127,7 +127,7 @@ Linux从2.6 kernel开始，已经取消了对IO size的限制,Oracle建议将aio
 
 将参数disk_asynch_io设置为true，其实ORACLE 10g R2中参数disk_asynch_io默认是为true的。
 
-![clip_image002](network-asset-73542-20151025214021161-679632010-20241211171857-eygf8r4.png "clip_image002")
+![clip_image002](assets/network-asset-73542-20151025214021161-679632010-20241211171857-eygf8r4.png "clip_image002")
 
 ```bash
 SQL> alter system set filesystemio_options = setall scope=spfile; 

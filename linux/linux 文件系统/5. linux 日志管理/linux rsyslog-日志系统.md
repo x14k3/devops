@@ -153,6 +153,6 @@ Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安�
 
 ## rsyslog集中式日志服务器部署
 
-参考：[rsyslog](rsyslog.md)
+参考：[rsyslog](../../../企业建设/rsyslog.md)
 
 ‍

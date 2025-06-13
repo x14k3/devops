@@ -97,7 +97,7 @@ volume create: models: success: please start the volume to access data
 gluster volume create test-volume server1:/exp1 server2:/exp2
 ```
 
-![img](net-img-487774-20160824150913058-603139078-20240724153646-qz8r5ee.png)
+![img](assets/net-img-487774-20160824150913058-603139078-20240724153646-qz8r5ee.png)
 
 二、 **复制模式**，既AFR, 创建volume 时带 replica x 数量: 将文件复制到 replica x 个节点中。
 
@@ -105,7 +105,7 @@ gluster volume create test-volume server1:/exp1 server2:/exp2
 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2
 ```
 
-![img](net-img-487774-20160824150919026-1102278746-20240724153646-rbiubf0.png)
+![img](assets/net-img-487774-20160824150919026-1102278746-20240724153646-rbiubf0.png)
 
 三、 **条带模式**，既Striped, 创建volume 时带 stripe x 数量： 将文件切割成数据块，分别存储到 stripe x 个节点中 ( 类似raid 0 )。
 
@@ -113,7 +113,7 @@ gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:
 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2
 ```
 
-![img](net-img-487774-20160824150925136-1728170659-20240724153647-qkuizz6.png)
+![img](assets/net-img-487774-20160824150925136-1728170659-20240724153647-qkuizz6.png)
 
 四、 **分布式条带模式（组合型）** ，最少需要4台服务器才能创建。 创建volume 时 stripe 2 server \= 4 个节点： 是DHT 与 Striped 的组合型。
 
@@ -121,7 +121,7 @@ gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/
 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4
 ```
 
-![img](net-img-487774-20160824150931995-642839940-20240724153648-2512c2l.png)
+![img](assets/net-img-487774-20160824150931995-642839940-20240724153648-2512c2l.png)
 
 五、 **分布式复制模式（组合型）** , 最少需要4台服务器才能创建。 创建volume 时 replica 2 server \= 4 个节点：是DHT 与 AFR 的组合型。
 
@@ -129,7 +129,7 @@ gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/
 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2　server3:/exp3 server4:/exp4
 ```
 
-![img](net-img-487774-20160824150939886-840830039-20240724153649-i248rih.png)
+![img](assets/net-img-487774-20160824150939886-840830039-20240724153649-i248rih.png)
 
 六、 **条带复制卷模式（组合型）** , 最少需要4台服务器才能创建。 创建volume 时 stripe 2 replica 2 server \= 4 个节点： 是 Striped 与 AFR 的组合型。
 
@@ -137,7 +137,7 @@ gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:
 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4
 ```
 
-![img](net-img-487774-20160824150948276-1699673130-20240724153650-533owyc.png)
+![img](assets/net-img-487774-20160824150948276-1699673130-20240724153650-533owyc.png)
 
 七、 三种模式混合, 至少需要8台 服务器才能创建。 stripe 2 replica 2 , 每4个节点 组成一个 组。
 
@@ -145,7 +145,7 @@ gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1
 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 server5:/exp5 server6:/exp6 server7:/exp7 server8:/exp8
 ```
 
-![img](net-img-487774-20160824150956230-1177006347-20240724153651-530vv47.png)
+![img](assets/net-img-487774-20160824150956230-1177006347-20240724153651-530vv47.png)
 
 ### 查看 volume 状态
 

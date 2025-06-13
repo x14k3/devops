@@ -23,7 +23,7 @@ udev_log="err"
 
 ## udev的工作流程图
 
-![v2-9bc0bc0f12a7b543164d5d430df59b2e_720w](v2-9bc0bc0f12a7b543164d5d430df59b2e_720w-20240205175712-rjshozs.webp)
+![v2-9bc0bc0f12a7b543164d5d430df59b2e_720w](assets/v2-9bc0bc0f12a7b543164d5d430df59b2e_720w-20240205175712-rjshozs.webp)
 
 ## udev的匹配规则
 

@@ -22,7 +22,7 @@
 
   - Network 与 Subnet 是 1对多 关系。同一个Network 的 Subnet 可以是不同的 IP 段，但CIDR不能重叠
 
-  ![](image-20221127212714343-20230610173810-gtqar32.png)
+  ![](assets/image-20221127212714343-20230610173810-gtqar32.png)
 
   - Network Namespace：是一种网络的隔离机制，通过网络命名空间的每个 router 都有自己独立的路由表
 - **Port**：是虚拟交换机上的一个端口。Port 上定义了 MAC 地址和 IP 地址，当 instance 的虚拟网卡 VIF（Virtual Interface） 绑定到 Port 时，Port 会将 MAC 和 IP 分配给 VIF。
@@ -43,7 +43,7 @@
   - Neutron 路由器是一个三层的（L3）的抽象，其模拟物理路由器，为用广提供路由、NAT等服务，在 Openstack网络中，不用子网之间的通信需要路由器，网络与外部网络之间的通信更需要路由器。
   - Neutron 提供虚拟路由器，也支持物理路由器。例如，两个隔离的ⅥLAN网络之间需要实现通信，可以通过物理路由器实现，由物理路由器提供相应的 IP 路由表，确保两个IP子网之间的通信，将两个VLAN网络中的虚拟机默认网关分别设置为路由路由器的接口A和B的IP地址。VLAN中的虚拟机要与 VLANB中的虚拟机通信时，数据包将通过LANA中的物理网卡到达路由器，有物理路由器转发到 VLAN B中的物理网卡，在到目的的虚拟机。
 
-  ![](image-20221127212723245-20230610173810-jth9u4p.png)
+  ![](assets/image-20221127212723245-20230610173810-jth9u4p.png)
 - 负载均衡 Load Balancing
 
   1. Openstack 在 Grizzly 版本第一次引入了 Load-Balancing-as-a-Service（LBaaS），提供了将负载分发到多个 instance 的能力。
@@ -58,7 +58,7 @@
 
 ## 核心架构
 
-![](image-20221127212730837-20230610173810-4c5ddha.png)
+![](assets/image-20221127212730837-20230610173810-4c5ddha.png)
 
 1. Neutron Server：对外提供 OpenStack 网络 API，接收请求，并调用 Plugin 处理请求。
 2. Plugin：处理 Neutron Server 发来的请求，维护 OpenStack 逻辑网络状态， 并调用 Agent 处理请求。
@@ -71,9 +71,9 @@
 
 ### 1.Neutron Server 详解
 
-![](image-20221127212738462-20230610173810-hjh75qr.png)
+![](assets/image-20221127212738462-20230610173810-hjh75qr.png)
 
-![](image-20221127212745808-20230610173810-z8wq1k6.png)
+![](assets/image-20221127212745808-20230610173810-z8wq1k6.png)
 
 1. Core API：对外提供管理 network, subnet 和 port 的 RESTful API。
 2. Extension API：对外提供管理 router, load balance, firewall 等资源 的 RESTful API。
@@ -102,7 +102,7 @@
   2. Controller-based类型：包括 OpenDaylight, VMWare NSX 等
   3. 基于物理交换机：包括 Cisco Nexus, Arista, Mellanox 等。
 
-  ![](image-20221127212756919-20230610173810-k737lrn.png)
+  ![](assets/image-20221127212756919-20230610173810-k737lrn.png)
 
 ### 3.Service Plugin / Agent 详解
 
@@ -116,16 +116,16 @@
    2. Security Group 安全策略位于 instance，保护的是单个 instance。
 6. Load Balance：Neutron 默认通过 HAProxy 为 project 中的多个 instance 提供 load balance 服务。
 
-![](image-20221127212813682-20230610173810-wcvqo2v.png)
+![](assets/image-20221127212813682-20230610173810-wcvqo2v.png)
 
 ## 部署方式
 
 1. 计算节点和控制节点
 
-   ![](image-20221127212820624-20230610173810-jehjhv6.png)
+   ![](assets/image-20221127212820624-20230610173810-jehjhv6.png)
 2. 多个节点，适合大规模的OpenStack平台
 
-   ![](image-20221127212827304-20230610173810-qs4ac1v.png)
+   ![](assets/image-20221127212827304-20230610173810-qs4ac1v.png)
 
 # 三、Open vSwitch
 
@@ -140,7 +140,7 @@
 
 ## 组成
 
-![](image-20221127212838589-20230610173810-c4mouzf.png)
+![](assets/image-20221127212838589-20230610173810-c4mouzf.png)
 
 1. ovs-vswitchd：守护程序，实现交换功能，和Linux内核兼容模块一起，实现基于流的交换flow-based switching。
 2. ovsdb-server：轻量级的数据库服务，主要保存了整个OVS的配置信息，包括接口啊，交换内容，VLAN啊等等。ovs-vswitchd会根据数据库中的配置信息工作。
@@ -153,9 +153,9 @@
 
 ## 工作流程
 
-![](image-20221127212846949-20230610173810-7045pbp.png)
+![](assets/image-20221127212846949-20230610173810-7045pbp.png)
 
-![](image-20221127212854412-20230610173810-stmd2ie.png)
+![](assets/image-20221127212854412-20230610173810-stmd2ie.png)
 
 1. VM实例 instance 产生一个数据包并发送至实例内的虚拟网络接口VNIC，图中就是instance中的eth0.
 2. 这个数据包会传送到物理节点上的VNIC接口，如图就是vnet接口vnet1。
@@ -167,16 +167,16 @@
 
 ## 网络、子网、路由、端口管理
 
-![](image-20221127212901833-20230610173810-m1mcmmp.png)
+![](assets/image-20221127212901833-20230610173810-m1mcmmp.png)
 
 ## 防火墙管理
 
-![](image-20221127212907922-20230610173810-d1i9o5u.png)
+![](assets/image-20221127212907922-20230610173810-d1i9o5u.png)
 
 ## 负载均衡管理
 
-![](image-20221127212914483-20230610173810-oiegj25.png)
+![](assets/image-20221127212914483-20230610173810-oiegj25.png)
 
 ## Open vSwitch 管理
 
-![](image-20221127212921023-20230610173810-vi89brf.png)
+![](assets/image-20221127212921023-20230610173810-vi89brf.png)

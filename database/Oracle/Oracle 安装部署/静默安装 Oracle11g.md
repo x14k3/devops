@@ -240,7 +240,7 @@ dbca -silent -responseFile /data/u01/app/oracle/product/11.2.0/db_1/assistants/d
 
 ### 1. 修改 listener.ora
 
-配置详解 见 [listener.ora 详解](Oracle%20配置详解.md#20231110105237-1aq8824)
+配置详解 见 [listener.ora 详解](../Oracle%20配置详解/Oracle%20配置详解.md#20231110105237-1aq8824)
 
 ```bash
 #- listener.ora是oracle监听程序，里面有oracle服务器端的socket监听地址和端口,使局域网中的其他人能够访问oracle
@@ -272,7 +272,7 @@ ADR_BASE_LISTENER = /data/u01/app/oracle
 
 ### 2. 修改 tnsnames.ora
 
-配置详解 见[ tnsnames.ora 详解](Oracle%20配置详解.md#20231110105237-x105gp1)
+配置详解 见[ tnsnames.ora 详解](../Oracle%20配置详解/Oracle%20配置详解.md#20231110105237-x105gp1)
 
 ```bash
 ## 编辑 tnsnames.ora文件

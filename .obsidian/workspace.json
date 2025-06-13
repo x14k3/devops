@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "588ed0737794616e",
+        "id": "a9fed33488894177",
         "type": "tabs",
         "children": [
           {
-            "id": "e34254cc95730892",
+            "id": "d653941d58c9b38f",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -158,18 +158,40 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "e34254cc95730892",
+  "active": "a41355350eff645e",
   "lastOpenFiles": [
+    "openstack/openstack 使用.md",
+    "openstack/openstack部署/4.Glance部署.md",
+    "openstack/openstack部署/3.Keystone部署.md",
+    "openstack/openstack部署/2.依赖中间件部署.md",
+    "openstack/openstack部署/1.基础环境部署.md",
+    "shell/shell 用法总结/使用dialog创建交互式shell对话框.md",
+    "shell/shell 用法总结/使用whiptail创建交互式shell对话框.md",
+    "shell/shell 用法总结/Bash的基本特性之 Here Documents 与 Here Strings.md",
+    "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
+    "shell/shell 用法总结/Bash重定向.md",
+    "shell/shell 用法总结/shell 函数.md",
+    "shell/shell 用法总结/shell 循环.md",
+    "shell/shell 用法总结/shell的语法调试.md",
+    "shell/正则表达式.md",
+    "shell/vim 编辑快捷键.md",
+    "devops/zabbix/Zabbix 告警通知.md",
+    "111111test",
+    "devops/zabbix/assets/Pasted image 20250613162942.png",
+    "devops/zabbix/assets/Pasted image 20250613162916.png",
+    "devops/zabbix/Zabbix 搭建.md",
+    "devops/zabbix/Zabbix 配置自定义监控项.md",
+    "devops/zabbix/Zabbix 配置监听多个端口.md",
+    "devops/JumpServer.md",
+    "devops/zabbix/Zabbix 自动发现与自动注册.md",
+    "devops/zabbix/Zabbix分布式监控系统.md",
+    "devops/Coolmonitor.md",
     "golang/go 前置配置/使用VSCode编写第一个Go项目.md",
     "golang/go 前置配置/Go 语言环境安装/Windows下配置VSCode的Go开发环境.md",
-    "golang/go 前置配置/go 不同版本对各个系统的支持.md",
-    "golang/go 前置配置/go 跨平台交叉编译.md",
-    "golang/go 前置配置/Go 语言环境安装/Linux下配置VSCode的Go开发环境.md",
-    "golang/go 入门指南/go 入门指南.md",
-    "golang/go 入门指南/Go 语言 tag 标签.md",
-    "golang/go 入门指南/Go 语言中的 init 函数_ 特点、用途和注意事项.md"
+    "golang/go 前置配置/go 不同版本对各个系统的支持.md"
   ]
 }

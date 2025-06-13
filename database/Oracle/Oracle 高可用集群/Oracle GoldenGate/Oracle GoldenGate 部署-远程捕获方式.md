@@ -8,7 +8,7 @@ Oracle GoldenGate 是一个全面的软件包，用于在异构数据环境中�
 
 Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳抽取
 
-参考文档：[OGG 19C 远程部署（单独部署）安装配置详细过程.pdf](OGG%2019C%20远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf)
+参考文档：[OGG 19C 远程部署（单独部署）安装配置详细过程.pdf](assets/OGG%2019C%20远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf)
 
 ### 1.2 安装环境
 
@@ -21,7 +21,7 @@ Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳�
 
 ‍
 
-源端数据库和目标数据库参照：[Oracle19c](静默安装%20Oracle19c.md) 进行单机安装
+源端数据库和目标数据库参照：[Oracle19c](../../Oracle%20安装部署/静默安装%20Oracle19c.md) 进行单机安装
 
 下载Oracle GoldenGate ：[https://edelivery.oracle.com/](https://edelivery.oracle.com/)
 

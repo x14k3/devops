@@ -7,19 +7,19 @@ NAT  Network Address Translation，网络地址转换
 
 静态NAT：LVS的官方文档中也称为(N-to-N mapping)  ，前面的 N 指的是局域网中需要联网的设备数量，后面的 N 指的是该 NAT 服务器所拥有的公网IP的数量。既然数量相等，那么就可以实现静态转换，即一个设备对应一个公网IP，这时候的NAT服务器只需要维护一张静态的NAT映射转换表。
 
-![](024f78f0f736afc3e7c750dfb319ebc4b6451244.jpg-20230610173813-zq1qh1f.gif)
+![](assets/024f78f0f736afc3e7c750dfb319ebc4b6451244.jpg-20230610173813-zq1qh1f.gif)
 
 - 动态 NAT
 
 动态NAT：LVS的官方文档中也称为(M-to-N mapping)  ，注意这时候的 M>N，也就是说局域网中需要联网的设备数量多于 NAT 服务器拥有的公网IP数量，这时候就需要由NAT服务器来实现动态的转换，这样每个内网设备访问公网的时候使用的公网IP就不一定是同一个IP。
 
-![](e1fba3e4935d2aa72dae80b017cf068190c9e049.png@942w_404h_progressive-20230610173813-ps46z4s.webp)
+![](assets/e1fba3e4935d2aa72dae80b017cf068190c9e049.png@942w_404h_progressive-20230610173813-ps46z4s.webp)
 
 - NAPT 重载
 
 NAT虽然名为网络地址转换，但是常见的工作模式实际上是NAPT(网络地址端口转换)。这种方式支持端口的映射，并允许多台主机共享一个公网IP地址。 支持端口转换的NAT又可以分为两类：源地址转换和目的地址转换。前一种情形下发起连接的计算机的IP地址将会被重写，使得内网主机发出的数据包能够到达外网主机。后一种情况下被连接计算机的IP地址将被重写，使得外网主机发出的数据包能够到达内网主机。实际上，以上两种方式通常会一起被使用以支持双向通信。NAPT维护一个带有IP以及端口号的NAT表
 
-![](image-20221127211717092-20230610173813-t7a80e2.png)
+![](assets/image-20221127211717092-20230610173813-t7a80e2.png)
 
 ## 不同类型的NAT
 
@@ -27,7 +27,7 @@ NAT虽然名为网络地址转换，但是常见的工作模式实际上是NAPT(
 
 Full cone NAT(即一对一NAT): 一旦一个内部地址(iAddr:iPort)映射到外部地址(eAddr:ePort)，所有发自(iAddr:iPort)的包都经由(eAddr:ePort)向外发送。任意外部主机都能通过给(eAddr:ePort)发包到达(iAddr:iPort)。
 
-![](Pasted%20image%2020221224122712-20230610173813-cl9pm4o.png)
+![](assets/Pasted%20image%2020221224122712-20230610173813-cl9pm4o.png)
 
 总结：同一个内部地址(iAddr:iPort)只会映射相同的外部地址(eAddr:ePort)，映射完成后，目标IP端口都无限制。
 
@@ -35,7 +35,7 @@ Full cone NAT(即一对一NAT): 一旦一个内部地址(iAddr:iPort)映射到�
 
 Address-Restricted cone NAT：内部客户端必须首先发送数据包到对方(IP=X.X.X.X)，然后才能接收来自(IP=X.X.X.X)的数据包。在限制方面，唯一的要求是数据包是来自(IP=X.X.X.X)。内部地址(iAddr:iPort)映射到外部地址(eAddr:ePort)，所有发自(iAddr:iPort)的包都经由(eAddr:ePort)向外发送。外部主机(hostAddr:any)能通过给(eAddr:ePort)发包到达(iAddr:iPort)。注：any指外部主机源端口不受限制，只有发给NAT转换地址(eAddr:ePort)的数据包才被放行
 
-![](Pasted%20image%2020221224122723-20230610173813-xl01pt4.png)
+![](assets/Pasted%20image%2020221224122723-20230610173813-xl01pt4.png)
 
 总结：同一个内部地址(iAddr:iPort)只会映射相同的外部地址(eAddr:ePort)，映射完成后，必须先发一个包给目标，然后才能收到目标回发的包，目标端口无限制。
 
@@ -43,7 +43,7 @@ Address-Restricted cone NAT：内部客户端必须首先发送数据包到对�
 
 Port-Restricted cone NAT：类似受限制锥形NAT(Restricted cone NAT)，但是还有端口限制。一旦一个内部地址(iAddr:iPort)映射到外部地址(eAddr:ePort)，所有发自(iAddr:iPort)的包都经由(eAddr:ePort)向外发送。在受限圆锥型NAT基础上增加了外部主机源端口必须是固定的。
 
-![](Pasted%20image%2020221224122729-20230610173813-p4763su.png)
+![](assets/Pasted%20image%2020221224122729-20230610173813-p4763su.png)
 
 总结：同一个内部地址(iAddr:iPort)只会映射相同的外部地址(eAddr:ePort)，映射完成后，必须先发一个包给目标(tAddr:tPort)，然后才能收到目标(tAddr:tPort)回发的包，有目标端口限制。
 
@@ -77,7 +77,7 @@ NAT穿透，简单地讲就是要让处于不同NAT网络下的两个节点(Peer
 5. 两个不同的节点Client1和Client2通过第三方服务器交换公网地址(eAddr1:ePort1)(eAddr2:ePort2)
 6. 自由地进行通讯
 
-![](Pasted%20image%2020221224122820-20230610173813-v1vs1lq.png)
+![](assets/Pasted%20image%2020221224122820-20230610173813-v1vs1lq.png)
 
 ### 受限圆锥形 NAT
 
@@ -91,7 +91,7 @@ NAT穿透，简单地讲就是要让处于不同NAT网络下的两个节点(Peer
 6. 连接双方Client1和Client2先向对方地址发送一个数据包
 7. 自由地进行通讯
 
-![](Pasted%20image%2020221224122827-20230610173813-ebf7o3p.png)
+![](assets/Pasted%20image%2020221224122827-20230610173813-ebf7o3p.png)
 
 ### 端口受限圆锥形 NAT
 
@@ -111,7 +111,7 @@ NAT穿透，简单地讲就是要让处于不同NAT网络下的两个节点(Peer
 8. 连接双方Client1和Client2先向对方的代理地址(pAddr1:pPort1)(pAddr2:pPort2)发送一个数据包
 9. 双方通过代理地址(pAddr1:pPort1)(pAddr2:pPort2)进行通讯
 
-![](Pasted%20image%2020221224122839-20230610173813-wuzf7jz.png)
+![](assets/Pasted%20image%2020221224122839-20230610173813-wuzf7jz.png)
 
 理解了各个NAT类型下的解决简单方案之后，再来看STUN，TURN和ICE，你就会发现这三个协议负责的内容和上述的简单方案非常相似。
 

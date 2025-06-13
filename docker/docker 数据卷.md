@@ -15,7 +15,7 @@ docker的理念：将应用和环境打包成一个镜像如果数据都在容�
 
 `bind mounts`、`Volumes`、和`tepfs mounts`三种方式，还有就是共享其他容器的数据卷，其中`tmpfs`是一种基于内存的临时文件系统。`tmpfs mounts`数据不会存储在磁盘上。
 
-![](image-20221127212013265-20230610173810-zgeo48m.png)
+![](assets/image-20221127212013265-20230610173810-zgeo48m.png)
 
 - Volumes 存储在 Docker Host 文件系统的一个路径下，这个路径是由 Docker 来进行管理，路径默认是  /var/lib/docker/volumes/，非 Docker 的进程不能去修改这个路径下面的文件，所以说Volumes  是持久存储数据最好的一种方式。
 - Bind mounts 可以存储在 Docker Host 文件系统的任何位置，它们甚至可能是重要的系统文件或目录，非 Docker 的进程或者 Docker 容器可能随时对其进行修改，存在潜在的安全风险。

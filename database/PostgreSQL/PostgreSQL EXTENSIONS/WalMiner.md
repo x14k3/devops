@@ -1,6 +1,6 @@
 
 
-[XLogMiner-walminer_3.0_stable.zip](XLogMiner-walminer_3.0_stable-20240909141019-pb0empg.zip)
+[XLogMiner-walminer_3.0_stable.zip](assets/XLogMiner-walminer_3.0_stable-20240909141019-pb0empg.zip)
 
 WalMiner是从PostgreSQL的WAL(write ahead logs)日志的解析工具，旨在挖掘wal日志所有的有用信息，从而提供PG的数据恢复支持。目前主要有如下功能：
 

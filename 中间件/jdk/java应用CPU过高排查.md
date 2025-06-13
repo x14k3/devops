@@ -10,7 +10,7 @@ top
 
 可以看到类似图示的结果
 
-![top进程图](network-asset-AoSoF4-20250430105356-u1ligx8.png)
+![top进程图](assets/network-asset-AoSoF4-20250430105356-u1ligx8.png)
 
 - 图中可知，CPU高的Java进程 PID \= 26132
 
@@ -24,7 +24,7 @@ top -H -p 26132
 
 可以看到图示的结果
 
-![top线程图](network-asset-5Xqtqr-20250430105356-prx985c.png)
+![top线程图](assets/network-asset-5Xqtqr-20250430105356-prx985c.png)
 
 图中有1个线程CPU使用率最高78.7%，有8个线程cpu使用率次之，都为9%
 
@@ -48,13 +48,13 @@ jstack 26132 > threaddump.txt
 
 然后在文件 `threaddump.txt`​ 中搜索【662e】(上面查到的占CPU高的线程)，可以查到如下结果
 
-![jstack线程堆栈](network-asset-VTTfg7-20250430105357-ahoymcn.png)
+![jstack线程堆栈](assets/network-asset-VTTfg7-20250430105357-ahoymcn.png)
 
 可以看到，占CPU最高的线程为 “VM Thread”，VM Thread是JVM层面的一个线程，主要是负责对其他线程的创建，分配和对象的清理等工作的
 
 从步骤二的图中，我们还可以看到，有其他8个线程，分别占了9%的使用率，取其中一个线程号进行相同操作
 
-![jstack线程堆栈2](network-asset-upE7N7-20250430105357-4hcxz4e.png)
+![jstack线程堆栈2](assets/network-asset-upE7N7-20250430105357-4hcxz4e.png)
 
 可以看到是名为 “Gang worker#0 (Parallel GC Threads)” 的线程，这个线程是JVM用于年轻代垃圾回收(minor gc)的线程
 
@@ -86,7 +86,7 @@ GC线程CPU高的情况有单独的排查思路，移步 [GC分析优化](https:
 
 如果问题线程堆栈中包含了业务代码(假设该线程是我们排查出来的CPU使用率高的线程)，比如：
 
-![包含业务代码堆栈的线程](network-asset-4CRahm-20250430105357-4n3no1k.png)
+![包含业务代码堆栈的线程](assets/network-asset-4CRahm-20250430105357-4n3no1k.png)
 
 上述堆栈中包含了
 

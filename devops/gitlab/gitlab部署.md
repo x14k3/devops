@@ -32,7 +32,7 @@ gitlab下载地址[https://packages.gitlab.com/gitlab/gitlab-ce](https://package
   CREATE EXTENSION pg_trgm;  
   在某些系统上，您可能需要安装额外的软件包（例如 postgresql-contrib）以使此扩展可用。
 
-  参考[PostgreSQL 安装部署](PostgreSQL%20安装部署.md)
+  参考[PostgreSQL 安装部署](../../database/PostgreSQL/PostgreSQL%20安装部署.md)
 - redis和 sidekiq  
   Redis  存储所有用户会话和后台任务队列，redis的存储要求很低，每个用户大约25KB，sidekiq使用多线程进程处理后台作业，此过程从整个redis堆栈（200M+)开始，但由于内存泄露，他可能会随着时间的推移而增长，在非常活跃的服务器上，sidekiq进程可以使用1GB+内存
 - Prometheus 及相关，使用默认设置，这些进程将消耗大概200M内存

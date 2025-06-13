@@ -9,7 +9,7 @@ PAM(Pluggable Authentication Modules)即可插拔式认证模块，它是一种�
 
 ## PAM工作原理
 
-![](image-20230130111021544-20230610173810-qqbalnz.png)
+![](assets/image-20230130111021544-20230610173810-qqbalnz.png)
 
 认证过程讲解
 

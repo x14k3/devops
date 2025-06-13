@@ -218,11 +218,11 @@ docker exec confluence java -jar /opt/atlassian/confluence/atlassian-agent.jar \
 
 #### 创建 `Jira`​ 用户服务器
 
-![image](net-img-create-jira-user-server-20240510102618-8bqggvk.png)
+![image](assets/net-img-create-jira-user-server-20240510102618-8bqggvk.png)
 
 #### `Confluence`​ 配置 `Jria`​ 用户应用服务器
 
-![image](net-img-configure-jira-user-app-server-20240510105014-3a6zuy9.png)
+![image](assets/net-img-configure-jira-user-app-server-20240510105014-3a6zuy9.png)
 
 #### 测试同步用户并调整优先级
 
@@ -299,7 +299,7 @@ CATALINA_OPTS="-Dsynchrony.enable.xhr.fallback=true ${CATALINA_OPTS}"
 
 作为管理员，每一次登录后台再转到前台，总会有一个提示，如下：
 
-![image2019-5-15_11-2-48](net-img-image2019-5-15_11-2-48-20240510105117-ntxtey0.png)
+![image2019-5-15_11-2-48](assets/net-img-image2019-5-15_11-2-48-20240510105117-ntxtey0.png)
 
 关掉的具体步骤如下
 

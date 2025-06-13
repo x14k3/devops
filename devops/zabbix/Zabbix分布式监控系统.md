@@ -6,7 +6,7 @@
 
 **架构图**
 
-![image20200219101305467.png](image20200219101305467-20230610173809-1gfcmky.png)--
+![image20200219101305467.png](assets/image20200219101305467-20230610173809-1gfcmky.png)--
 
 所以在这个分布式监控的架构中的流程是
 
@@ -24,7 +24,7 @@
 
 ### 实验拓扑图
 
-![zabbix_proxy.png](zabbix_proxy-20230610173809-fnlgg6p.png)​
+![zabbix_proxy.png](assets/zabbix_proxy-20230610173809-fnlgg6p.png)​
 
 在这个架构中我们至少需要三台机器，他们的角色为
 
@@ -188,11 +188,11 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 管理—agent代理程序
 
-![zabbixproxy1.png](zabbixproxy1-20230610173809-1eeqyh3.png)​
+![zabbixproxy1.png](assets/zabbixproxy1-20230610173809-1eeqyh3.png)​
 
 选择 创建代理 进入代理设置模式
 
-![zabbixproxy2.png](zabbixproxy2-20230610173809-5u0bkws.png)​
+![zabbixproxy2.png](assets/zabbixproxy2-20230610173809-5u0bkws.png)​
 
 设置代理名称:一定要和proxy配置文件中的Hostname一致
 
@@ -246,7 +246,7 @@ tcp6       0      0 :::10050                :::*                    LISTEN      
 
 配置—主机
 
-![image20200215140100181.png](image20200215140100181-20230610173809-wgpvqvw.png)​
+![image20200215140100181.png](assets/image20200215140100181-20230610173809-wgpvqvw.png)​
 
 看到了，node2后面有一个zabbix_proxy 说明该主机走的是代理模式。
 

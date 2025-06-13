@@ -10,7 +10,7 @@
 
 ### 1.2 什么是重做日志（redo log）
 
-![44bee3978f964c6490e5bc14457bff0a~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](44bee3978f964c6490e5bc14457bff0atplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210356-e4zku13.webp)
+![44bee3978f964c6490e5bc14457bff0a~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/44bee3978f964c6490e5bc14457bff0atplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210356-e4zku13.webp)
 
 当用户执行DML操作，数据块发生改变时，产生的变更向量则会写入到重做日志文件中。有了这些记录，当系统由于断电等因素突然宕掉，数据库缓冲区内的大量脏数据还没来得及写入到数据文件中时，也可以通过redo log恢复。
 
@@ -28,7 +28,7 @@
 
 [Oracle之redo log 归档](Oracle之redo%20log%20归档.md)
 
-![510a0c2dae5342168117053f57d5a253~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](510a0c2dae5342168117053f57d5a253tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210502-utpj0cn.webp)
+![510a0c2dae5342168117053f57d5a253~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/510a0c2dae5342168117053f57d5a253tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210502-utpj0cn.webp)
 
 所谓归档，就是将重做日志文件（redo log）永久保存到归档日志文件（archive redo log）中。archive redo log和redo log作用是一样的，只不过redo log会不断被重写，而archive redo log则不会，它保留了关于数据更改的完整的历史记录。 由ARCn进程负责将redo log备份到archive redo log。
 
@@ -51,7 +51,7 @@
 一个数据库的重做日志由两个或多个重做日志文件组成。数据库至少需要两个文件，以确保在归档另一个文件时(如果数据库处于ARCHIVELOG模式)，其中一个文件始终可写。
 
 LGWR以循环方式写入重做日志文件。当当前重做日志文件填满时，LGWR开始向下一个可用的重做日志文件中写入。当最后一个可用的重做日志文件被填满时，LGWR返回到第一个重做日志文件并写入，再次开始循环。循环写入重做日志文件的过程如下图所示（源自Oracle官网）。每一行旁边的数字表示LGWR写入每个重做日志文件的顺序。
-![1424165-20210104133653989-791493772](1424165-20210104133653989-791493772-20240314093341-bnh1oio.gif)
+![1424165-20210104133653989-791493772](assets/1424165-20210104133653989-791493772-20240314093341-bnh1oio.gif)
 
 根据是否启用归档，LGWR可以重用被填满的重做日志文件分以下两种情况：
 
@@ -115,7 +115,7 @@ alter system switch logfile;
 多路复用是通过创建重做日志文件组来实现的。组由一个重做日志文件及其多路复用副本组成。每一个相同的副本都被认为是组的一个成员。每个重做日志组由一个数字定义，例如组1、组2等等。
 
 
-![20221213-9af6db7c-02d4-4c38-8ae5-dc1356feb0de](20221213-9af6db7c-02d4-4c38-8ae5-dc1356feb0de-20240314093400-v89kjy3.png)
+![20221213-9af6db7c-02d4-4c38-8ae5-dc1356feb0de](assets/20221213-9af6db7c-02d4-4c38-8ae5-dc1356feb0de-20240314093400-v89kjy3.png)
 
 在上图中，A\_LOG1和B\_LOG1都是第一组的成员，A\_LOG2和B\_LOG2都是第二组的成员，依此类推。一个组的每个成员大小必须相同。
 
@@ -152,7 +152,7 @@ alter system switch logfile;
 
 数据文件也应该与重做日志文件放在不同的磁盘上，以减少写数据块和重做记录时的争用。
 
-**redo文件的多路复用：** 通常应该通过指定db_create_online_log_dest_n 参考[Oracle OMF](Oracle%20OMF.md)
+**redo文件的多路复用：** 通常应该通过指定db_create_online_log_dest_n 参考[Oracle OMF](../Oracle%20高级特性/Oracle%20OMF.md)
 
 ### 2.3 规划重做日志文件大小
 

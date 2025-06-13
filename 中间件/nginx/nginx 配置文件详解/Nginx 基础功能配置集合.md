@@ -119,7 +119,7 @@ location /mkdir/ {
 
 # <span id="20231110105237-f4kolk8" style="display: none;"></span>8.目录保护
 
-参考：[ngx_http_auth_basic_module](ngx_http_auth_basic_module.md)
+参考：[ngx_http_auth_basic_module](../nginx%20模块/nginx%20http常用模块/ngx_http_auth_basic_module.md)
 
 > 为了保护隐私或者私密文件我们需要对一些网站进行密码保护，比如比如要对网站目录下的test文件夹进行加密认证，那要如何设置nginx目录密码保护呢？
 
@@ -205,7 +205,7 @@ server {
 Web服务器，直接面向用户，往往要承载大量并发请求，单台服务器难以负荷，我使用多台WEB服务器组成集群，前端使用Nginx负载均衡，将请求分散的打到我们的后端服务器集群中，
 实现负载的分发。那么会大大提升系统的吞吐率、请求性能、高容灾
 
-![](image-20221127215458444-20230610173812-jt904la.png)​
+![](assets/image-20221127215458444-20230610173812-jt904la.png)​
 
 - Nginx要实现负载均衡需要用到proxy\_pass代理模块配置（上一个实验）
 - Nginx负载均衡与Nginx代理不同地方在于
@@ -290,7 +290,7 @@ upstream myapp1 {
 
 # 13.连接&请求频率限制
 
-## [Nginx限制请求并发连接数与下载速度](Nginx限制请求并发连接数与下载速度.md)
+## [Nginx限制请求并发连接数与下载速度](../nginx%20模块/Nginx限制请求并发连接数与下载速度.md)
 
 使用连接频率限制同一IP同时只能有3个连接
 
@@ -380,7 +380,7 @@ server {
 
 # 16.配置WebDav
 
-参考：[ngx_http_dav_module](ngx_http_dav_module.md)
+参考：[ngx_http_dav_module](../nginx%20模块/nginx%20http常用模块/ngx_http_dav_module.md)
 
 DAV的意思是“Distributed Authoring and Versioning”。RFC 2518为HTTP 1.1定义了一组概念和附加扩展方法来把web变成一个更加普遍的读/写媒体，基本思想是一个WebDAV兼容的web服务器可以像普通的文件服务器一样工作；客户端可以通过HTTP装配类似于NFS或SMB的WebDAV共享文件夹。
 

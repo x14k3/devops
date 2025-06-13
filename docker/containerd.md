@@ -660,7 +660,7 @@ Docker 公司当然不甘示弱，搬出了 Swarm 和 Kubernetes 进行 PK，最
 
 很明显，这个小聪明又大大加速了自己的灭亡。
 
-![](net-img-20201215014746-20230815141748-uzw2m81.jpeg)
+![](assets/net-img-20201215014746-20230815141748-uzw2m81.jpeg)
 
 巨佬们心想，想当初想和你合作搞个中立的核心运行时，你死要面子活受罪，就是不同意，好家伙，现在自己搞了一个，还捐出来了，这是什么操作？也罢，这倒省事了，我就直接拿 `Containerd` 来做文章吧。
 
@@ -681,7 +681,7 @@ Docker 可以轻松地构建容器镜像，从 Docker Hub 中拉取镜像，创�
 ## containerd
 
 当我们要创建一个容器的时候，现在 Docker Daemon 并不能直接帮我们创建了，而是请求 `containerd`​ 来创建一个容器，containerd 收到请求后，也并不会直接去操作容器，而是创建一个叫做 `containerd-shim`​ 的进程，让这个进程去操作容器，我们指定容器进程是需要一个父进程来做状态收集、维持 stdin 等 fd 打开等工作的，假如这个父进程就是 containerd，那如果 containerd 挂掉的话，整个宿主机上所有的容器都得退出了，而引入 `containerd-shim`​ 这个垫片就可以来规避这个问题了。  
-​![](image-20230220095314932-20230610173810-nsm1mhk.png)​
+​![](assets/image-20230220095314932-20230610173810-nsm1mhk.png)​
 
 ## OCI（runc）
 
@@ -693,6 +693,6 @@ Docker 可以轻松地构建容器镜像，从 Docker Hub 中拉取镜像，创�
 
 ​`CRI`​（Container Runtime Interface 容器运行时接口）是 Kubernetes 用来控制创建和管理容器的不同运行时的 API，它使 Kubernetes 更容易使用不同的容器运行时。它一个插件接口，这意味着任何符合该标准实现的容器运行时都可以被 Kubernetes 所使用。  
 不过 Kubernetes 推出 CRI 这套标准的时候还没有现在的统治地位，所以有一些容器运行时可能不会自身就去实现 CRI 接口，于是就有了 `shim（垫片）`​， 一个 shim 的职责就是作为适配器将各种容器运行时本身的接口适配到 Kubernetes 的 CRI 接口上，其中 `dockershim`​ 就是 Kubernetes 对接 Docker 到 CRI 接口上的一个垫片实现。  
-​![](image-20230220095927068-20230610173810-fzply2p.png)​
+​![](assets/image-20230220095927068-20230610173810-fzply2p.png)​
 
 而k8s原生就支持containerd，不需要shim作为对接CRI的垫片了。

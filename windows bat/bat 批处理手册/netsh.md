@@ -160,7 +160,7 @@ netsh interface ip set address name="本地连接" addr=10.10.1.10 mask=255.255.
 
 本示例案例中，辅助IP（10.10.20.30）与下一条（即网关10.10.20.1）的 matching prefix 更长，因此流量不再走主IP。
 
-![prefix+code](prefix+code-20240412145510-orque79.png)
+![prefix+code](assets/prefix+code-20240412145510-orque79.png)
 
 **设置方法**
 

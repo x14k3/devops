@@ -65,7 +65,7 @@
 
 1. 下载[cwrsync](https://www.itefix.net/cwrsync)
 
-    ![Untitled](network-asset-47753b50d4b28a9845bc4381bd844a56-20241214140404-qob7777.png)​
+    ![Untitled](assets/network-asset-47753b50d4b28a9845bc4381bd844a56-20241214140404-qob7777.png)​
 2. 添加密码文件(rsync.passwd)
 
     文件内容和服务器的保持一致，我放在cwrsync的bin目录

@@ -32,7 +32,7 @@ RMAN> backup tablespace jy2web format '/data/oraback/fmsdb/jy2web_%d_%T_%t.bak';
 
 **说明**：通俗些 其0级备份是对数据空间的完整备份（包括数据库逻辑日志），其备份量较大，在此基础上的1级备份，是增量备份，备份量较小,只备份0级备份之后的数据。0级备份是全备 1级备份是增量备份
 
-![](image-20221127211303605-20230610173813-ek330vc.png)
+![](assets/image-20221127211303605-20230610173813-ek330vc.png)
 
 ```sql
 -- 0级增量备份=全备，可以做级增量备份的基础
@@ -45,7 +45,7 @@ RMAN> backup incremental level 1 database format '/data/oraback/fmsdb/inc1_%d_%T
 
 自上一次上0级备份完成以来数据库所有的改变信息。
 
-![](image-20221127211310933-20230610173813-llhcgb8.png)
+![](assets/image-20221127211310933-20230610173813-llhcgb8.png)
 
 ```sql
 -- 1级累积增量备份
@@ -373,7 +373,7 @@ crontab : `10 01 * * * /data/script/rmanbackup.sh >> /tmp/rmanback.log 2>&1`
 
 # 附：RMAN备份脚本（OMF）
 
-参考：[Oracle OMF](Oracle%20OMF.md)
+参考：[Oracle OMF](../Oracle%20高级特性/Oracle%20OMF.md)
 
 ```bash
 # 首先登录rman配置备份策略 

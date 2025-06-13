@@ -191,11 +191,11 @@ cat /proc/sys/kernel/random/uuid
 
 如果服务端的配置为 [vmess 协议](#vmess%20协议)
 
-![](image-20221127210933123-20230610173813-wthc3c7.png)
+![](assets/image-20221127210933123-20230610173813-wthc3c7.png)
 
 如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
 
-![](image-20221127210912432-20230610173813-dx832bp.png)
+![](assets/image-20221127210912432-20230610173813-dx832bp.png)
 
 ## linux
 

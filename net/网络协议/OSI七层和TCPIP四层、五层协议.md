@@ -8,7 +8,7 @@ TCP/IP 四层协议是围绕 TCP/IP 展开的一系列通信协议，是参考 O
 TCP/IP 五层协议是为了方便学习计算机网络原理而采用的，综合了OSI七层模型和TCP/IP的四层模型而得到的五层模型  
 OSI七层协议和 TCP/IP 四层、五层协议结构对应关系如下图所示：
 
-![dev-network-protocol-1](dev-network-protocol-1-20241220155442-gr35jwu.png)​
+![dev-network-protocol-1](assets/dev-network-protocol-1-20241220155442-gr35jwu.png)​
 
 - 应用层
 

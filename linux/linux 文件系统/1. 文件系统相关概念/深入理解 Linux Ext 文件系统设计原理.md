@@ -36,7 +36,7 @@
 
 下图所示，为文件系统逻辑区块与硬盘物理区块之间的映射关系。对于 CHS 硬盘，一个逻辑区块所对应的物理区块可能由多个扇区组成。对于 LBA硬盘，一个逻辑区块则对应一片集成电路存储单元。在通信时，首先由文件系统的 I/O管理器将逻辑区块转换成物理区块地址，然后由硬盘控制器根据物理区块（扇区）地址，进行数据读写。
 
-![Image](network-asset-filesystem-map-20250612150714-mlvo8mh.png)
+![Image](assets/network-asset-filesystem-map-20250612150714-mlvo8mh.png)
 
 # 文件系统类型
 
@@ -53,7 +53,7 @@
 
 以 Linux 经典的 Ext2 文件系统进行分析，其整体结构如下图所示。
 
-![Image](network-asset-filesystem-arch-01-20250612150714-gqodys5.png)
+![Image](assets/network-asset-filesystem-arch-01-20250612150714-gqodys5.png)
 
 从宏观角度来看，文件系统将硬盘分为两部分：
 
@@ -68,7 +68,7 @@
 
 文件系统的另一主要组成是区块组，ext2文件系统包含多个区块组，那么为什么要划分那么多区块组呢？事实上，如果直接管理逻辑区块，逻辑区块的数量是非常庞大的，难以管理，因此为了简化，划分出了区块组，从而进行分级管理。
 
-![Image](network-asset-filesystem-arch-02-20250612150714-lt2qyn1.png)
+![Image](assets/network-asset-filesystem-arch-02-20250612150714-lt2qyn1.png)
 
 上图所示，区块组内部又可以分成多个部分，分别是：
 
@@ -228,7 +228,7 @@ Inode Table 包含了区块组中所有的 Inode。Inode的数量在高级格式
 
 如果 Block 的大小为 4K 且 inode 的大小为 256 byte，那么一个 Block可以存储 4 x 1024 / 256 = 16 个 inode。区块组中的 Inode Table通过占用了多个连续的 Block，在逻辑上形成一张表记录了所有inode，如下图所示。
 
-![Image](network-asset-filesystem-arch-03-20250612150714-h9uwohn.png)
+![Image](assets/network-asset-filesystem-arch-03-20250612150714-h9uwohn.png)
 
 根据上述原理，当给定一个 inode id 时，我们只需要结合 inode数据结构的大小，在这个 Inode Table 中查找到对应项即可找到对应的inode。这也就解释了为什么 inode 没有 inode id 也能找到 inode的原因。
 
@@ -259,7 +259,7 @@ struct ext2_group_desc {
 
 区块组使用连续的 Block记录了文件系统中所有区块组的组描述符，从而在逻辑上形成一张表，即 Group Descriptor Table（简称 GDT），如下图所示。
 
-![Image](network-asset-filesystem-arch-04-20250612150714-em0y8eg.png)
+![Image](assets/network-asset-filesystem-arch-04-20250612150714-em0y8eg.png)
 
 这里会有一个疑问，为什么区块组中存储了一个描述整个文件系统区块组的信息？很多区块组都存储了内容重复的GDT，这样是否会造成存储空间的浪费？其实这么做的原因是为了进行 **备份** ，如果只在某片区域存储这部分信息，一旦这片存储区域出现了损坏，那么将导致整个文件系统无法使用并且无法恢复。
 
@@ -367,12 +367,12 @@ struct ext2_super_block {
 对于小文件存储，其基本原理是：根据 inode 的`i_block[]`​数组中保存的 Block 指针（Block 序号），找到对应所有的 Block  
 即可，如下所示。
 
-![Image](network-asset-filesystem-arch-05-20250612150715-tg1699x.png)
+![Image](assets/network-asset-filesystem-arch-05-20250612150715-tg1699x.png)
 
 对于大文件存储，由于一个 inode 可引用的 Block 数量的上限是`EXT2_N_BLOCKS`​，因此可以使用 Data Block 存储间接的  
 inode，从而扩大最终可引用的 Block 数量，如下所示。
 
-![Image](network-asset-filesystem-arch-06-20250612150715-72p22mf.png)
+![Image](assets/network-asset-filesystem-arch-06-20250612150715-72p22mf.png)
 
 ## 目录文件存储
 
@@ -421,7 +421,7 @@ drwxr-xr-x  2 baochuquan staff       4096 Apr 24 12:12 sources
 
 ​`test`​目录文件在文件系统中的 **内容数据** 的存储如下所示。
 
-![Image](network-asset-filesystem-arch-07-20250612150715-gxdd6se.png)
+![Image](assets/network-asset-filesystem-arch-07-20250612150715-gxdd6se.png)
 
 这里需要重点注意是`rec_len`​，`rec_len`​表示 **从当前目录项的**​**​`rec_len`​**​**末尾开始，到下一个目录项的**​**​`rec_len`​**​**末尾结束的偏移量字节数** 。当文件系统从目录文件中删除某一个子目录时，比如`deldir`​目录，这时候并不会删除对应的目录项，仅仅是修改删除项之前目录项的`rec_len`​值，从而使得文件系统在扫描目录内容时，跳过`deldir`​目录项。这也是为什么图中`deldir`​之前的目录项的`rec_len`​为 32。
 
@@ -439,7 +439,7 @@ drwxr-xr-x  2 baochuquan staff       4096 Apr 24 12:12 sources
 通过上文，我们知道目录项存储了 inode序号、文件名等信息。假如，有两个目录项存储了不同的文件名，但它们的 inode  
 序号却相同，这会是一种什么样的情况呢？事实上，这就是硬链接，即 inode相同的文件。
 
-![Image](network-asset-filesystem-arch-08-20250612150715-1sde6ut.png)
+![Image](assets/network-asset-filesystem-arch-08-20250612150715-1sde6ut.png)
 
 与编程语言中的引用计数类似，inode 也是用一个字段`i_links_count`​来记录其被引用的数量。
 
@@ -468,7 +468,7 @@ drwxr-xr-x  2 baochuquan staff       4096 Apr 24 12:12 sources
 - step 5：遍历父级目录的 Data Block中的目录项，找到与目标文件名匹配的目录项
 - step 6：根据目录项中的 Inode 序号，找到目标文件的 Data Block
 
-![Image](network-asset-filesystem-arch-09-20250612150715-mm5biak.png)
+![Image](assets/network-asset-filesystem-arch-09-20250612150715-mm5biak.png)
 
 下面，我们以`cat /var/log/message`​命令为例，来介绍一下其具体过程。
 
@@ -584,7 +584,7 @@ drwxr-xr-x  2 baochuquan staff       4096 Apr 24 12:12 sources
 
 如下所示，为文件系统挂载操作的示意图。 **文件系统挂载完成后，挂载点的元数据和内容数据分别存储在不同的文件系统中** 。
 
-![Image](network-asset-filesystem-arch-10-20250612150716-4shiczd.png)
+![Image](assets/network-asset-filesystem-arch-10-20250612150716-4shiczd.png)
 
 ## 文件系统卸载
 

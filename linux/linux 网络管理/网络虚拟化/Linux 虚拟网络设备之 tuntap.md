@@ -13,7 +13,7 @@
 
 tap/tun 设备文件就像一个管道，一端连接着用户空间，一端连接着内核空间。当用户程序向文件 `/dev/net/tun`​ 或 `/dev/tap0`​ 写数据时，内核就可以从对应的 `tunX`​ 或 `tapX`​ 接口读到数据，反之，内核可以通过相反的方式向用户程序发送数据。
 
-![tapwriteread.png](net-img-tapwriteread-20240404122703-mdkik0l.png)
+![tapwriteread.png](assets/net-img-tapwriteread-20240404122703-mdkik0l.png)
 
 ‍
 
@@ -23,7 +23,7 @@ tap/tun 通过实现相应的网卡驱动程序来和网络协议栈通信。一
 
 如下图的示意图，我们有两个应用程序 A、B，物理网卡 `eth0`​ 和虚拟网卡 `tun0`​ 分别配置 IP：`10.1.1.11`​ 和 `192.168.1.11`​，程序 A 希望构造数据包发往 `192.168.1.0/24`​ 网段的主机 `192.168.1.1`​。
 
-![taptun](net-img-taptun-20240404122704-blqi4vc.png)
+![taptun](assets/net-img-taptun-20240404122704-blqi4vc.png)
 
 基于上图，我们看看数据包的流程：
 

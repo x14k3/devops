@@ -70,7 +70,7 @@ nginx 判定证书的时候，是根据证书中的两个字段：Issuer 和 Sub
 
 流程：自签 CA，由自签 CA 签发二级 CA，最后由二级 CA 签发网站证书。
 
-[openssl](shell/shell%20命令手册/tools/openssl.md) 参数参考：
+[openssl](../../../shell/shell%20命令手册/tools/openssl.md) 参数参考：
 
 ```bash
 -extensions v3_req 指定 X.509 v3版本

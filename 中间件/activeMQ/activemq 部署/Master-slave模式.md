@@ -3,7 +3,7 @@
 Master-Slave集群由至少3个节点组成，一个Master节点，其他为Slave节点。只有Master节点对外提供服务，Slave节点处于等待状态。当主节点宕机后，从节点会推举出一个节点出来成为新的Master节点，继续提供服务。  
 **优点是可以解决多服务热备的高可用问题，缺点是无法解决负载均衡和分布式的问题。**
 
-![](image-20221127213133868-20230610173811-0m0mcwu.png)
+![](assets/image-20221127213133868-20230610173811-0m0mcwu.png)
 
 Master-Slave模式常用持久化方式：
 
@@ -70,7 +70,7 @@ ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
 
 这种主备方式是ActiveMQ5.9以后才新增的特性，使用ZooKeeper协调选择一个node作为master。被选择的master broker node开启并接受客户端连接，类似于redis的哨兵模式。
 
-![](image-20221129175501864-20230610173811-z79c28o.png)
+![](assets/image-20221129175501864-20230610173811-z79c28o.png)
 
 ==原理说明：==  
 1）使用Zookeeper集群注册所有的ActiveMQ Broker，但只有其中一个Broker可以提供服务，它将被视为Master,其他的Broker处于待机状态被视为Slave。如果Master因故障而不能提供服务，Zookeeper会从Slave中选举出一个Broker充当Master。  

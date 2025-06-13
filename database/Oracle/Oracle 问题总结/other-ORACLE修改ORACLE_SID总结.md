@@ -132,7 +132,7 @@ ORACLE_HOME=/opt/oracle19c/product
 
 如果数据库实例从PFILE启动，那么可以直接修改参数文件init< sid>.ora的sid名字，如果数据库实例从SPFILE启动，可以直接修改参数文件spfile< sid>.ora名字，但是建议先生成PFILE然后从PFILE启动。因为如果时直接修改spfile< sid>.ora中< sid>的名字，启动数据库后，你生成SPFILE对应的PFILE就会发现，里面有许多原来ORACLE\_SID的内容，如果是pfile就可以手工清理，如果是spfile，需要先生成pfile，手工清理旧ORACLE\_SID的值，然后反向生成spfile，当然这些值不清理也没有关系，数据库实例启动时，根据$ORACLE\_SID来读取。
 
-![](network-asset-181b1043-c1ea-4ae6-8d6b-53b3a8f4e988-20241211163523-7q0m0nw.png)
+![](assets/network-asset-181b1043-c1ea-4ae6-8d6b-53b3a8f4e988-20241211163523-7q0m0nw.png)
 
 ```
 $ cd $ORACLE_HOME/dbs

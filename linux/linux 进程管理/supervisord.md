@@ -234,7 +234,7 @@ port=0.0.0.0:9001        ; ip_address:port specifier, *:port for all iface
 ;password=thepassword    ; default is no password (open server)
 ```
 
-![image](image-20230801221948-deuzqc5.png)​
+![image](assets/image-20230801221948-deuzqc5.png)​
 
 ## supervisorctl 操作
 

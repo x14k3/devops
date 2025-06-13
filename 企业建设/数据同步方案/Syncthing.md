@@ -117,16 +117,16 @@
 
   而同步的操作，需要通过交换 **设备 **​**​`ID`​**​ 来实现的。该设备 `ID`​ 是一个唯一的加密安全标识符，并在你首次启动 `Syncthing`​ 时作为密钥生成的一部分生成。当然，也可以通过在 `GUI`​ 中查看到。只有当两台设备都配置了彼此的设备 `ID`​ 时，它们才会相互连接和通信，其本质上是公钥的一部分。
 
-  ![use-syncthing-tool-02](use-syncthing-tool-02-20231228145845-kjmnpky.png "Syncthing文件同步工具")
+  ![use-syncthing-tool-02](assets/use-syncthing-tool-02-20231228145845-kjmnpky.png "Syncthing文件同步工具")
 
   单击两台设备右下角的 `Add Remote Device`​，然后输入另一侧的设备 `ID`​。设备名称是可选的，改成我们好记忆的就可以了。单击 `Save`​ 后，新设备将出现在 `GUI`​ 的右侧，即使已断开连接的设备。
 
-  ![use-syncthing-tool-03](use-syncthing-tool-03-20231228151050-n8z3gbc.png)
+  ![use-syncthing-tool-03](assets/use-syncthing-tool-03-20231228151050-n8z3gbc.png)
 
 - 3.**设置需要共享的文件夹**  
   此时，默认情况下，两个设备共享一个 `Default Folder`​ 空目录。如果要同步其他文件夹的话，需要事先添加。之后，将文件添加到任一设备上的共享目录都会将这些文件同步到另一端。
-  ![use-syncthing-tool-04](use-syncthing-tool-04-20231228151204-yr08na6.png)
-  ![use-syncthing-tool-05](use-syncthing-tool-05-20231228151219-zrycq0g.png)
+  ![use-syncthing-tool-04](assets/use-syncthing-tool-04-20231228151204-yr08na6.png)
+  ![use-syncthing-tool-05](assets/use-syncthing-tool-05-20231228151219-zrycq0g.png)
 
   如果在连接设备时遇到问题，请先查看防火墙设置，然后查看 `GUI`​ 或控制台上的错误消息。不要忘记配置更改不会立即反映出来，尤其是在重新启动后。
 

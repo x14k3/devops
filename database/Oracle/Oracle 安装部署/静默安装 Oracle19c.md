@@ -166,7 +166,7 @@ unzip -d /u01/app/oracle/product/19.3.0/db_1/  /opt/Silence_193000_Linux-x86-64.
 
 ### 2. 静默安装数据库
 
-参数详解 见 [db_install.rsp参数](Oracle%20配置详解.md#20231110105237-edzdbuk)
+参数详解 见 [db_install.rsp参数](../Oracle%20配置详解/Oracle%20配置详解.md#20231110105237-edzdbuk)
 
 ```bash
 chown -R oracle:oinstall /data/u01/   #修改目录拥有者
@@ -197,7 +197,7 @@ exit;  #切换回root用户
 
 ### <span id="20231110105237-sn4z038" style="display: none;"></span>3. 静默创建数据库实例
 
-参数详解 见 [dbca.rsp参数](Oracle%20配置详解.md#20231110105237-1aczygr)
+参数详解 见 [dbca.rsp参数](../Oracle%20配置详解/Oracle%20配置详解.md#20231110105237-1aczygr)
 
 - 创建FS存储方式非CDB数据库：
   当指定FS时，数据库文件由操作系统的文件系统管理。
@@ -330,7 +330,7 @@ dbca -silent -ignorePreReqs  -ignorePrereqFailure  -createDatabase \
 
 ### 1. 修改 listener.ora
 
-配置详解 见 [listener.ora 详解](Oracle%20配置详解.md#20231110105237-1aq8824)
+配置详解 见 [listener.ora 详解](../Oracle%20配置详解/Oracle%20配置详解.md#20231110105237-1aq8824)
 
 ```bash
 #- listener.ora是oracle监听程序，里面有oracle服务器端的socket监听地址和端口,使局域网中的其他人能够访问oracle
@@ -368,7 +368,7 @@ ADR_BASE_LISTENER = /u01/app/oracle
 
 ### 2. 修改 tnsnames.ora
 
-配置详解 见[ tnsnames.ora 详解](Oracle%20配置详解.md#20231110105237-x105gp1)
+配置详解 见[ tnsnames.ora 详解](../Oracle%20配置详解/Oracle%20配置详解.md#20231110105237-x105gp1)
 
 ```bash
 ## 编辑 tnsnames.ora文件
@@ -408,16 +408,16 @@ lsnrctl start   # 启动监听
 
 ## 四、自动化安装脚本
 
-[01_env_prepararion.sh](01_env_prepararion-20240514172448-37icftl.sh)
+[01_env_prepararion.sh](assets/01_env_prepararion-20240514172448-37icftl.sh)
 
-[02_Install_oracle_soft.sh](02_Install_oracle_soft-20240514172455-hx9h2ua.sh)
+[02_Install_oracle_soft.sh](assets/02_Install_oracle_soft-20240514172455-hx9h2ua.sh)
 
-[03_oracle_dbca.sh](03_oracle_dbca-20240514172459-vmvon5g.sh)
+[03_oracle_dbca.sh](assets/03_oracle_dbca-20240514172459-vmvon5g.sh)
 
-[04_oracle_create_tablespace_user.sh](04_oracle_create_tablespace_user-20240514172504-ytq4i31.sh)
+[04_oracle_create_tablespace_user.sh](assets/04_oracle_create_tablespace_user-20240514172504-ytq4i31.sh)
 
-[05_oracle_rman.sh](05_oracle_rman-20240514172508-vkin4h0.sh)
+[05_oracle_rman.sh](assets/05_oracle_rman-20240514172508-vkin4h0.sh)
 
-[readme.txt](readme-20240514172511-f2emfty.txt)
+[readme.txt](assets/readme-20240514172511-f2emfty.txt)
 
 ‍

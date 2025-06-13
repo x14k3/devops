@@ -166,7 +166,7 @@ value字段：
 
 **第一步：修改主配置文件/etc/named.conf**。将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。
 
-![主配置文件](network-asset-主配置文件-20240902114233-4le5uh4.png)
+![主配置文件](assets/network-asset-主配置文件-20240902114233-4le5uh4.png)
 
 图：主配置文件要修改的地方
 
@@ -239,7 +239,7 @@ bbs     CNAME   www           #别名记录
 #“*”代表所有，即便主机www写错，DNS也能正确解析出来。这就是泛域名解析
 ```
 
-![正向解析](network-asset-正向解析-20240902114234-j9lqhbt.png)
+![正向解析](assets/network-asset-正向解析-20240902114234-j9lqhbt.png)
 
 图：正向解析文件配置
 
@@ -263,11 +263,11 @@ zone eample.com/IN: loaded serial 20181001
 
 测试：
 
-![测试1](network-asset-测试1-20240902114234-stbxg8e.png)
+![测试1](assets/network-asset-测试1-20240902114234-stbxg8e.png)
 
 ‍
 
-![正向解析测试](network-asset-正向解析测试-20240902114234-flxfis0.png)
+![正向解析测试](assets/network-asset-正向解析测试-20240902114234-flxfis0.png)
 
 ‍
 
@@ -299,7 +299,7 @@ zone "245.168.192.in-addr.arpa" IN {
 #PTR为指针记录，仅用于反向解析中。
 ```
 
-![反向配置文件](network-asset-反向配置文件-20240902114234-jr4zjtd.png)
+![反向配置文件](assets/network-asset-反向配置文件-20240902114234-jr4zjtd.png)
 
 图：反向配置文件
 
@@ -313,7 +313,7 @@ OK
 [root@localhost ~]# systemctl restart named
 ```
 
-![测试2](network-asset-测试2-20240902114234-5l671g1.png)
+![测试2](assets/network-asset-测试2-20240902114234-5l671g1.png)
 
 ## 搭建DNS主从服务器
 
@@ -456,7 +456,7 @@ secret "9+m1PlQOAF7xnMLClzNmXw==";
 
 开启并加载Bind服务的密钥验证功能。首先需要在主服务器的主配置文件中加载密钥验证文件，然后进行设置，使得只允许带有master-slave密钥认证的DNS服务器同步数据配置文件：
 
-![秘钥](network-asset-秘钥-20240904105552-56etpjh.png)
+![秘钥](assets/network-asset-秘钥-20240904105552-56etpjh.png)
 
 ```bash
 include "/etc/transfer.key";             //在主服务器中添加此条

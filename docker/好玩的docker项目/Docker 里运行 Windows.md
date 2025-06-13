@@ -131,7 +131,7 @@ windows  |
 
 ## 加速使用 Windows 容器
 
-![默认情况，每次启动都需要见到它](network-asset-prepare-20241118215730-u7oo6l1.jpg)
+![默认情况，每次启动都需要见到它](assets/network-asset-prepare-20241118215730-u7oo6l1.jpg)
 
 默认情况，每次启动都需要见到它
 

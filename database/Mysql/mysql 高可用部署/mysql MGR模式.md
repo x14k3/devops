@@ -200,7 +200,7 @@ START GROUP_REPLICATION;
 SELECT * FROM performance_schema.replication_group_members;
 ```
 
-![image](image-20230725094624-6vpxeao.png)
+![image](assets/image-20230725094624-6vpxeao.png)
 
 **报错1**
 

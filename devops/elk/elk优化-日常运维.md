@@ -38,7 +38,7 @@ output.redis:
 
 `curl http://localhost:9200/_cluster/health?pretty`
 
-![](image-20221127214214459-20230610173808-7uke923.png)
+![](assets/image-20221127214214459-20230610173808-7uke923.png)
 
 因为单点部署Elasticsearch, 默认的分片副本数目配置为1，而相同的分片不能在一个节点上，所以就存在副本分片指定不明确的问题，所以显示为yellow，可以通过在Elasticsearch集群上添加一个节点来解决问题，如果不想这么做，可以删除那些指定不明确的副本分片（当然这不是一个好办法）。
 

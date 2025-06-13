@@ -745,7 +745,7 @@ LEASE            # 允许修改文件锁的FL_LEASE标志
 
 1.编写redis配置文件
 
-参考[三、集群模式](redis%20部署.md#三、集群模式)
+参考[三、集群模式](../中间件/redis/redis%20部署/redis%20部署.md#三、集群模式)
 
 ```bash
 # 在server上创建一个目录用于存放redis集群部署文件。这里我放的路径为/root/redis-cluster

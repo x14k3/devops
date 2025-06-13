@@ -119,7 +119,7 @@ db.data:      存放B-Tree indexs;
 db.redo:      存放redo file，用于恢复B-Tree indexs;
 db log files: 用于存储消息，当log日志到了指定的大小，会创建一个新的，当log日志中的消息都被删除，改日志文件将会删除；
 
-![](image-20221127213208436-20230610173811-eovjl1i.png)
+![](assets/image-20221127213208436-20230610173811-eovjl1i.png)
 
 - **Cache**：用于临时存储，消息会被发送给消费者，同时将安排存储。如果消息被很快确认，就不需要写入磁盘。
 - **BTree Indexes**：保存在磁盘上，称为Metadata Store，对应的是db.data文件。它是对Data Logs以B树的形式索引。消息服务器可以通过此文件快速的重启恢复，因为它是消息的索引，可以恢复出每条消息的location。
@@ -307,7 +307,7 @@ java.io.EOFException
 
   ```
 
-  ![](image-20221127213221423-20230610173811-avxf812.png)
+  ![](assets/image-20221127213221423-20230610173811-avxf812.png)
 - **Broker消息重发插件**
 
   默认情况下，在消息重新投递次数达到配置的最大投递次数（或默认的6次），broker会将消息放入DLQ。我们可以使用broker消息重发插件来改变这一行为。即在一定延迟后，将消息重新投递给原始Destination，如果达到最大重试次数，则放入DLQ。

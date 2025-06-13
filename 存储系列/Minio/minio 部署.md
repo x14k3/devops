@@ -310,7 +310,7 @@ kms      kms管理操作
 
 桶是用来存储文件的，创建桶要填写桶的名称、是否开启（同名多版本、锁定对象不允许删除、控制用户使用容量、删除后文件保存周期）
 
-![11b60ef9615b3a0788b82aab306412c652307b2b.png@1256w_642h_!web-article-pic](11b60ef9615b3a0788b82aab306412c652307b2b.png@1256w_642h_web-article-pic-20240717181910-bwkeijo.avif)
+![11b60ef9615b3a0788b82aab306412c652307b2b.png@1256w_642h_!web-article-pic](assets/11b60ef9615b3a0788b82aab306412c652307b2b.png@1256w_642h_web-article-pic-20240717181910-bwkeijo.avif)
 
 ##### 管理桶
 
@@ -318,7 +318,7 @@ kms      kms管理操作
 
 管理桶，可以看到桶的概要信息、桶产生的事件信息；以及可以对桶配置复制规则、生命周期管理、访问规则管理、访问审计管理。
 
-![eb037164fa3dcd95155a0118e9d9bd763ff45a7d.png@1256w_646h_!web-article-pic](eb037164fa3dcd95155a0118e9d9bd763ff45a7d.png@1256w_646h_web-article-pic-20240717181927-sjha2bl.avif)
+![eb037164fa3dcd95155a0118e9d9bd763ff45a7d.png@1256w_646h_!web-article-pic](assets/eb037164fa3dcd95155a0118e9d9bd763ff45a7d.png@1256w_646h_web-article-pic-20240717181927-sjha2bl.avif)
 
 #### 用户和权限管理
 

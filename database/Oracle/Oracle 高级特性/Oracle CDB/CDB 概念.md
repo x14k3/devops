@@ -14,7 +14,7 @@
 
 ## **CDB 的组成**
 
-![](image-20221127211228967-20230610173813-oj2b00c.png)​
+![](assets/image-20221127211228967-20230610173813-oj2b00c.png)​
 
 - ROOT组件
   ROOT又叫CDB$ROOT,存储着ORACLE提供的元数据和Common User,元数据的一个例子是ORACLE提供的PL/SQL包的源代码，Common User 是指在每个容器中都存在的用户。

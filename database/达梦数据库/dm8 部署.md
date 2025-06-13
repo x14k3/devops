@@ -248,7 +248,7 @@ chown dmdba.dinstall dm.key
 
 # 目录文件及各配置文件、参数说明
 
-![20210119171221476](20210119171221476-20240303184511-x5gigkg.png)
+![20210119171221476](assets/20210119171221476-20240303184511-x5gigkg.png)
 
 ```bash
 bin      数据库核心文件目录。（常用命令./dminit ./dmserver ./dmsql ./dimp ./dexp都在该目录下）

@@ -312,6 +312,6 @@ WARD       BLAKE
 
 ## 五、连接图示
 
-![这里写图片描述](network-asset-5846185fb0b7e1ab1bbafc28dd5d33f2-20250102135641-zayrvp0.png)
+![这里写图片描述](assets/network-asset-5846185fb0b7e1ab1bbafc28dd5d33f2-20250102135641-zayrvp0.png)
 
 ‍

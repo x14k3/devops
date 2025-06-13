@@ -48,7 +48,7 @@ checkpoint_segments和wal_keep_segments,checkpoint_completion_target
 
 - 读取控制文件，找到能清理的xlog范围
 
-  ![modb_20210804_d7bc1b22-f4ba-11eb-943c-38f9d3cd240d](modb_20210804_d7bc1b22-f4ba-11eb-943c-38f9d3cd240d-20240515161711-ag9yf1u.png)
+  ![modb_20210804_d7bc1b22-f4ba-11eb-943c-38f9d3cd240d](assets/modb_20210804_d7bc1b22-f4ba-11eb-943c-38f9d3cd240d-20240515161711-ag9yf1u.png)
 
   表示000000010000000000000009之前的文件可以删除
 - 通过pg_archivecleanup清理

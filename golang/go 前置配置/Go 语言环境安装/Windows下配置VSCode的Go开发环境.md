@@ -177,7 +177,7 @@ go env -w GO111MODULE=on
 go install golang.org/x/tools/gopls@latest
 ```
 
-![image](image-20250529153933-5llne6q.png)​
+![image](assets/image-20250529153933-5llne6q.png)​
 
 保留系统默认的 Go 1.20.12 用于项目开发，单独安装一个 Go 1.21+ 版本专门用于 VS Code 工具管理（如 gopls、staticcheck 等）。
 

@@ -100,7 +100,7 @@ RAMN> recover database until cancel;
 RAMN> alter database open resetlogs;
 ```
 
-具体参考：[基于RMAN的不完全恢复](基于RMAN的不完全恢复.md) [二、基于日志序列号的恢复举例](基于RMAN的不完全恢复.md#20240506144841-89i2vua)
+具体参考：[基于RMAN的不完全恢复](../Oracle%20备份恢复/基于RMAN的不完全恢复.md) [二、基于日志序列号的恢复举例](../Oracle%20备份恢复/基于RMAN的不完全恢复.md#20240506144841-89i2vua)
 
 ‍
 

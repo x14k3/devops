@@ -10,7 +10,7 @@
 
 这篇文章，我肝了好几天，借助于Linux 的 man 帮助命令，我把 tcpdump 的用法全部研究了个遍，才形成了本文，不夸张的说，应该可以算是中文里把 tcpdump 讲得最清楚明白，并且还最全的文章了（至少我从百度、谷歌的情况来看），所以本文值得你收藏分享，就怕你错过了，就再也找不到像这样把 tcpdump 讲得直白而且特全的文章了。
 
-![](network-asset-20200630095709-20241119123548-q6s69fg.png)
+![](assets/network-asset-20200630095709-20241119123548-q6s69fg.png)
 
 在讲解之前，有两点需要声明：
 
@@ -60,7 +60,7 @@ $ tcpdump tcp src host 192.168.10.100
 
 为此，我画了一张图，方便你直观的理解 tcpdump 的各种参数：
 
-![](network-asset-20200628111325-20241119123549-r1p1j8f.png)
+![](assets/network-asset-20200628111325-20241119123549-r1p1j8f.png)
 
 1. option 可选参数：将在后边一一解释。
 2. proto 类过滤器：根据协议进行过滤，可识别的关键词有： tcp, udp, icmp, ip, ip6, arp, rarp,ether,wlan, fddi, tr, decnet
@@ -408,7 +408,7 @@ $ tcpdump "( if=en0 and proc =nc ) || (if != en0 and dir=in)"
 
 通过[上一篇文章](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247488180&idx=1&sn=09526224732ebfcccb52847f27298c70&chksm=e8867256dff1fb40c9f47bafd0e87a9237c5a9ebf33c8a3d0a598276b496d29cdaa3fbff8d26&token=1970357830&lang=zh_CN#rd)，我们知道了 tcp 的首部有一个标志位。
 
-![TCP 报文首部](network-asset-20200606095627-20241119123549-qjo5axs.png)
+![TCP 报文首部](assets/network-asset-20200606095627-20241119123549-qjo5axs.png)
 
 tcpdump 支持我们根据数据包的标志位进行过滤
 
@@ -424,13 +424,13 @@ proto [ expr:size ]
 
 **1、**tcpflags 可以理解为是一个别名常量，相当于 13，它代表着与指定的协议头开头相关的字节偏移量，也就是标志位，所以 tcp\[tcpflags\] 等价于 tcp\[13\] ，对应下图中的报文位置。
 
-![](network-asset-20200628222034-20241119123549-9yvrjfr.png)
+![](assets/network-asset-20200628222034-20241119123549-9yvrjfr.png)
 
 **2、**tcp-fin, tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg 这些同样可以理解为别名常量，分别代表 1，2，4，8，16，32，64。这些数字是如何计算出来的呢？
 
 以 tcp-syn 为例，你可以参照下面这张图，计算出来的值 是就是 2
 
-![](network-asset-20200628222010-20241119123549-pc1baxf.png)
+![](assets/network-asset-20200628222010-20241119123549-pc1baxf.png)
 
 由于数字不好记忆，所以一般使用这样的“别名常量”表示。
 
@@ -567,7 +567,7 @@ $ tcpdump -s 0 -A -vv 'tcp[((tcp[12:1] & 0xf0) >> 2):4]'
 - ​`tcp[n]`​：表示 tcp 报文里 第 n 个字节
 - ​`tcp[n:c]`​：表示 tcp 报文里从第n个字节开始取 c 个字节，tcp\[12:1\] 表示从报文的第12个字节（因为有第0个字节，所以这里的12其实表示的是13）开始算起取一个字节，也就是 8 个bit。查看 [tcp 的报文首部结构](https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure)，可以得知这 8 个bit 其实就是下图中的红框圈起来的位置，而在这里我们只要前面 4个bit，也就是实际数据在整个报文首部中的偏移量。
 
-  ![](network-asset-20200629085659-20241119123550-sukiui1.png)
+  ![](assets/network-asset-20200629085659-20241119123550-sukiui1.png)
 - ​`&`​：是[位运算](https://en.wikipedia.org/wiki/Bitwise_operation)里的 and 操作符，比如 `0011 & 0010 = 0010`​
 - ​`>>`​：是位运算里的右移操作，比如 `0111 >> 2 = 0001`​
 - ​`0xf0`​：是 10 进制的 240 的 16 进制表示，但对于位操作来说，10进制和16进制都将毫无意义，我们需要的是二进制，将其转换成二进制后是：11110000，这个数有什么特点呢？前面个 4bit 全部是 1，后面4个bit全部是0，往后看你就知道这个特点有什么用了。
@@ -595,7 +595,7 @@ $ tcpdump -s 0 -A -vv 'tcp[((tcp[12:1] & 0xf0) >> 2):4]'
 0x20   -->   32    -->  空格
 ```
 
-![](network-asset-20200629130407-20241119123552-ifpfh1p.png)
+![](assets/network-asset-20200629130407-20241119123552-ifpfh1p.png)
 
 如果相等，则该表达式为True，tcpdump 认为这就是我们所需要抓的数据包，将其输出到我们的终端屏幕上。
 
@@ -711,7 +711,7 @@ $ ssh root@remotesystem 'tcpdump -s0 -c 1000 -nn -w - port 53' | /Applications/W
 
 抓取到的数据：
 
-![](network-asset-20200210170101-20241119123555-3oprtuv.png)
+![](assets/network-asset-20200210170101-20241119123555-3oprtuv.png)
 
 ​`-c`​ 选项用来限制抓取数据的大小。如果不限制大小，就只能通过 `ctrl-c`​ 来停止抓取，这样一来不仅关闭了 tcpdump，也关闭了 wireshark。
 

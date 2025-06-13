@@ -3,11 +3,11 @@
 2. 什么是数据库? 数据库是存储介质上的文件—>物理存储结构
 3. 什么是实例instance？ 内存中运行的数据库进程，包括读入内容的数据库文件； 数据库和实例可用是1:1，也可用是1:N的关系
 
-![DE22FBD4-EA19-46CC-B0B2-A8D082C887E5.jpeg](network-asset-DE22FBD4-EA19-46CC-B0B2-A8D082C887E5-20241022144428-5grir68.jpeg)​
+![DE22FBD4-EA19-46CC-B0B2-A8D082C887E5.jpeg](assets/network-asset-DE22FBD4-EA19-46CC-B0B2-A8D082C887E5-20241022144428-5grir68.jpeg)​
 
 ## 架构-存储结构
 
-![Untitled](network-asset-Untitled-20241022144429-sia6x1p.png)
+![Untitled](assets/network-asset-Untitled-20241022144429-sia6x1p.png)
 
 ### 物理存储结构
 
@@ -107,7 +107,7 @@ total 2428380
 
 通过逻辑存储结构管理物理存储结构
 
-![Untitled](network-asset-Untitled%202-20241022144429-lrjbf9g.png)
+![Untitled](assets/network-asset-Untitled%202-20241022144429-lrjbf9g.png)
 
 1. 数据库
 2. 表空间，重点关注[表空间](https://www.notion.so/ae1c306764744032b0f7d8b4679605fb)
@@ -132,7 +132,7 @@ Oracle 进程是运行 Oracle 数据库代码的执行单元。在多线程体�
 - 后台进程从数据库实例开始，执行维护任务，如执行实例恢复、清理进程、将重做缓冲区写入磁盘等。
 - 服务器进程根据客户端请求执行工作（1-3）。
 
-![F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C.jpeg](network-asset-F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C-20241022144429-cyc79w0.jpeg)​
+![F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C.jpeg](assets/network-asset-F69F4F92-D39B-4AE9-BA2E-AA8255D4F16C-20241022144429-cyc79w0.jpeg)​
 
 ```bash
 [oracle@oracle-12 prod]$ ps -ef |grep ora_ |grep -v grep
@@ -219,11 +219,11 @@ sga\_target big integer 41216M，这是在数据库配置的时候设定的值�
 
 默认情况，sga\_target 为 0，表示sga的值有系统自动指定
 
-![75218C39-F4D4-421A-B8BC-BD2D25B54E47.jpeg](network-asset-75218C39-F4D4-421A-B8BC-BD2D25B54E47-20241022144429-wlpw3qq.jpeg)
+![75218C39-F4D4-421A-B8BC-BD2D25B54E47.jpeg](assets/network-asset-75218C39-F4D4-421A-B8BC-BD2D25B54E47-20241022144429-wlpw3qq.jpeg)
 
 #### SGA-BufferCache
 
-![3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E.jpeg](network-asset-3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E-20241022144429-sb2dhly.jpeg)
+![3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E.jpeg](assets/network-asset-3A5BFF0F-5DBB-4D58-B5E6-978C8020A91E-20241022144429-sb2dhly.jpeg)
 
 1. 客户端在buffercache中查询数据
 2. BufferCache如果有数据，称为一次命中

@@ -17,7 +17,7 @@
 
 从NO-CDB插入到CDB示意图
 
-![plug-in-a-non-cdb-to-cdb](plug-in-a-non-cdb-to-cdb-20240227181535-vihelhu.png)
+![plug-in-a-non-cdb-to-cdb](assets/plug-in-a-non-cdb-to-cdb-20240227181535-vihelhu.png)
 
 ## 确认源库信息
 

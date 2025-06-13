@@ -106,7 +106,7 @@ ORA-01031: insufficient privileges
 Enter user-name: 
 ```
 
-![clip_image002](network-asset-73542-20160806220652231-1730693653-20241211170214-a9u6fb1.png "clip_image002")
+![clip_image002](assets/network-asset-73542-20160806220652231-1730693653-20241211170214-a9u6fb1.png "clip_image002")
 
 ### 3.改变OS认证为口令认证
 

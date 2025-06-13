@@ -101,7 +101,7 @@ prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/dat
 
 通过Prometheus的状态页，可以查看当前Target的状态：
 
-​​![mysqld_exporter_target_stats](mysqld_exporter_target_stats-20230802150553-5uv5v7u.png)​​
+​​![mysqld_exporter_target_stats](assets/mysqld_exporter_target_stats-20230802150553-5uv5v7u.png)​​
 
 为了确保数据库的稳定运行，通常会关注一下四个与性能和资源利用率相关的指标：查询吞吐量、连接情况、缓冲池使用情况以及查询执行性能等。
 

@@ -218,7 +218,7 @@ iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT
 网络防火墙： 往往处于网络入口或边缘，针对于网络入口进行防护，服务于防火墙背后的本地局域网。  
 在前面的举例中，iptables都是作为主机防火墙的角色出现的。
 
-![](Pasted%20image%2020221205221216-20230610173810-zyvds06.png)
+![](assets/Pasted%20image%2020221205221216-20230610173810-zyvds06.png)
 
 ```bash
 # 配置网关，将内网C主机的网关指向防火墙B主机上的网卡1

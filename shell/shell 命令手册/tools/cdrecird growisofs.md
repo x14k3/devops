@@ -71,4 +71,4 @@ sudo growisofs -M /dev/sr1=/dev/zero                        # 给DVD盘封口(�
 
 ‍
 
-![Screenshot 2025-05-09 at 13-42-46 Linux光盘刻录_growisofs-CSDN博客](Screenshot%202025-05-09%20at%2013-42-46%20Linux光盘刻录_growisofs-CSDN博客-20250509134330-do7osz5.png)
+![Screenshot 2025-05-09 at 13-42-46 Linux光盘刻录_growisofs-CSDN博客](assets/Screenshot%202025-05-09%20at%2013-42-46%20Linux光盘刻录_growisofs-CSDN博客-20250509134330-do7osz5.png)

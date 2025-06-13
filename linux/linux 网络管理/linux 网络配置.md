@@ -9,7 +9,7 @@ hostname有三种类型：static、transient和pretty。
 - transient：动态主机名，由内核维护，初始是 static 主机名，默认值为“localhost”。可由DHCP或mDNS在运行时更改。
 - pretty：灵活主机名，允许使用自由形式（包括特殊/空白字符）进行设置。静态/动态主机名遵从域名的通用限制。
 
-> ![](net-img-icon-note-20230906153802-nmivsd8.gif) **说明：** 
+> ![](assets/net-img-icon-note-20230906153802-nmivsd8.gif) **说明：** 
 > static和transient主机名只能包含a-z、A-Z、0-9、“-”、“_”和“.”，不能在开头或结尾处使用句点，不允许使用两个相连的句点，大小限制为 64 个字符。
 
 ### 使用hostnamectl配置主机名
@@ -22,7 +22,7 @@ hostname有三种类型：static、transient和pretty。
 $ hostnamectl status
 ```
 
-> ![](net-img-icon-note-20230906153802-9j2dfdm.gif) **说明：** 
+> ![](assets/net-img-icon-note-20230906153802-9j2dfdm.gif) **说明：** 
 > 如果命令未指定任何选项，则默认使用status选项。
 
 #### 设定所有主机名
@@ -113,7 +113,7 @@ enp3s0  c88d7b69-f529-35ca-81ab-aa729ac542fd  ethernet  enp3s0
 virbr0  ba552da6-f014-49e3-91fa-ec9c388864fa  bridge    virbr0
 ```
 
-> ![](net-img-icon-note-20230906153802-4oa4n1z.gif) **说明：** 
+> ![](assets/net-img-icon-note-20230906153802-4oa4n1z.gif) **说明：** 
 > 输出结果中的NAME字段代表连接ID（名称）。
 
 添加一个网络连接会生成相应的配置文件，并与相应的设备关联。检查可用的设备，方法如下：
@@ -187,7 +187,7 @@ connection.autoconnect yes
 
 ### 使用ip命令
 
-[linux ip 命令](linux%20ip%20命令.md)
+[linux ip 命令](linux%20ip%20命令/linux%20ip%20命令.md)
 
 ##### 配置静态地址
 
@@ -249,7 +249,7 @@ ip route flush  #不建议尝试
 
 ### 通过ifcfg文件配置网络
 
-> ![](net-img-icon-note-20230906153802-cq4kxy7.gif) **说明：** 
+> ![](assets/net-img-icon-note-20230906153802-cq4kxy7.gif) **说明：** 
 > 通过ifcfg文件配置的网络配置不会立即生效，修改文件后（以ifcfg-enp3s0为例），需要在root权限下执行**nmcli con reload;nmcli con up enp3s0**命令以重新加载配置文件并激活连接才生效。
 
 #### 配置静态网络
@@ -461,7 +461,7 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/8)
 ```
 
-> ![](net-img-icon-note-20230906153802-6ub2vdj.gif) **说明：** 
+> ![](assets/net-img-icon-note-20230906153802-6ub2vdj.gif) **说明：** 
 > 对于已经处于“up”状态的接口，请首先使用“ifdown *enp3s0* ”命令修改状态为down，其中 *enp3s0* 为实际网卡名称。
 
 完成后，启动所有从属接口以便启动绑定（不将其设定为 “down”）。

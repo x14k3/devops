@@ -2,9 +2,9 @@
 
 ## 1. 准备工作
 
-[Linux下配置VSCode的Go开发环境](Linux下配置VSCode的Go开发环境.md)
+[Linux下配置VSCode的Go开发环境](Go%20语言环境安装/Linux下配置VSCode的Go开发环境.md)
 
-[Windows下配置VSCode的Go开发环境](Windows下配置VSCode的Go开发环境.md)
+[Windows下配置VSCode的Go开发环境](Go%20语言环境安装/Windows下配置VSCode的Go开发环境.md)
 
 确保你已经完成：
 

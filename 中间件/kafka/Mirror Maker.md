@@ -12,13 +12,13 @@
 
 从本质上说，MirrorMaker就是一个消费者+生产者的程序。消费者负责从源集群（Source Cluster）消费数据，生产者负责向目标集群（Target Cluster）发送消息。整个镜像流程如下图所示：
 
-![](network-asset-a771601d702eb35187a0a8894307eee2-20241124210750-lmmeaul.jpg)​
+![](assets/network-asset-a771601d702eb35187a0a8894307eee2-20241124210750-lmmeaul.jpg)​
 
 MirrorMaker连接的源集群和目标集群，会实时同步消息。当然，你不要认为你只能使用一套MirrorMaker来连接上下游集群。事实上，很多用户会部署多套集群，用于实现不同的目的。
 
 我们来看看下面这张图。图中部署了三套集群：左边的源集群负责主要的业务处理；右上角的目标集群可以用于执行数据分析；而右下角的目标集群则充当源集群的热备份。
 
-![](network-asset-036955f42db6fe759849fb24a0d16070-20241124210750-vcqcjbd.jpg)​
+![](assets/network-asset-036955f42db6fe759849fb24a0d16070-20241124210750-vcqcjbd.jpg)​
 
 ## 运行MirrorMaker
 
