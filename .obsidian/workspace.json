@@ -11,10 +11,14 @@
             "id": "cb231353e82afaec",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "golang/go 前置配置/使用VSCode编写第一个Go项目.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "使用VSCode编写第一个Go项目"
             }
           }
         ]
@@ -162,5 +166,14 @@
     }
   },
   "active": "cb231353e82afaec",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "golang/go 前置配置/Go 语言环境安装/Windows下配置VSCode的Go开发环境.md",
+    "golang/go 前置配置/使用VSCode编写第一个Go项目.md",
+    "golang/go 前置配置/go 不同版本对各个系统的支持.md",
+    "golang/go 前置配置/go 跨平台交叉编译.md",
+    "golang/go 前置配置/Go 语言环境安装/Linux下配置VSCode的Go开发环境.md",
+    "golang/go 入门指南/go 入门指南.md",
+    "golang/go 入门指南/Go 语言 tag 标签.md",
+    "golang/go 入门指南/Go 语言中的 init 函数_ 特点、用途和注意事项.md"
+  ]
 }
