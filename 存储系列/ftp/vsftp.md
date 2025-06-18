@@ -1,6 +1,4 @@
 
-## 开始部署
-
 1.安装
 
 ​`yum install -y vsftpd`​

@@ -1,4 +1,5 @@
 [
   "oz-clear-unused-images",
-  "mousewheel-image-zoom"
+  "mousewheel-image-zoom",
+  "remotely-save"
 ]

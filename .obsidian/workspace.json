@@ -4,17 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "a9fed33488894177",
+        "id": "64992015f09529da",
         "type": "tabs",
         "children": [
           {
-            "id": "d653941d58c9b38f",
+            "id": "d16e1e11663965bd",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "存储系列/iSCSI.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "iSCSI"
+            }
+          },
+          {
+            "id": "48f8aaf69c9a46df",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "shell/vim 编辑快捷键.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "vim 编辑快捷键"
             }
           }
         ]
@@ -90,6 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "存储系列/RAID.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +120,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "反向链接"
+              "title": "RAID 的反向链接列表"
             }
           },
           {
@@ -136,23 +157,25 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "存储系列/iSCSI.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "iSCSI 的大纲"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
+      "remotely-save:Remotely Save": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
@@ -162,36 +185,37 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "d16e1e11663965bd",
   "lastOpenFiles": [
-    "openstack/openstack 使用.md",
-    "openstack/openstack部署/4.Glance部署.md",
-    "openstack/openstack部署/3.Keystone部署.md",
-    "openstack/openstack部署/2.依赖中间件部署.md",
-    "openstack/openstack部署/1.基础环境部署.md",
-    "shell/shell 用法总结/使用dialog创建交互式shell对话框.md",
-    "shell/shell 用法总结/使用whiptail创建交互式shell对话框.md",
-    "shell/shell 用法总结/Bash的基本特性之 Here Documents 与 Here Strings.md",
-    "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
-    "shell/shell 用法总结/Bash重定向.md",
-    "shell/shell 用法总结/shell 函数.md",
-    "shell/shell 用法总结/shell 循环.md",
-    "shell/shell 用法总结/shell的语法调试.md",
-    "shell/正则表达式.md",
     "shell/vim 编辑快捷键.md",
-    "devops/zabbix/Zabbix 告警通知.md",
+    "存储系列/iSCSI.md",
+    "devops/JumpServer.md",
+    "企业建设/openVPN/4. openVPN配置文件详解.md",
+    "企业建设/openVPN/5. Stunnel隐藏OpenVPN流量 (Duplicated 2024-12-16 16_07_59).md",
+    "企业建设/openVPN/1. OpenVPN Server搭建.md",
+    "企业建设/openVPN/通过openvpn访问client所在子网.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 双向认证.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 配置HTTPS.md",
+    "中间件/nginx/nginx 配置文件详解/配置案例.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 反向代理-http.md",
+    "中间件/nginx/nginx 部署.md",
+    "golang/go 入门指南/golang从命令行传参方法.md",
+    "golang/go 入门指南/Go 语言中的 init 函数_ 特点、用途和注意事项.md",
+    "golang/go 入门指南/Go 语言 tag 标签.md",
+    "golang/go 前置配置/使用VSCode编写第一个Go项目.md",
+    "golang/go 入门指南/go 入门指南.md",
+    "golang/go 入门指南/未命名",
+    "golang/go 项目案例/garp 广播.md",
+    "golang/go 项目案例/获取 http状态码.md",
+    "golang/go 项目案例/获取操作系统架构.md",
+    "golang/go 项目案例/端口状态检查.md",
+    "golang/go 项目案例/数据库状态检查.md",
+    "golang/go 项目案例/节点信息采集（pid、cpu、mem、process）.md",
+    "golang/go 项目案例/节点信息采集（进程、服务、端口等监控）.md",
+    "中间件/redis/redis 部署/redis cluster.md",
+    "中间件/redis/redis 分布式锁.md",
     "111111test",
     "devops/zabbix/assets/Pasted image 20250613162942.png",
-    "devops/zabbix/assets/Pasted image 20250613162916.png",
-    "devops/zabbix/Zabbix 搭建.md",
-    "devops/zabbix/Zabbix 配置自定义监控项.md",
-    "devops/zabbix/Zabbix 配置监听多个端口.md",
-    "devops/JumpServer.md",
-    "devops/zabbix/Zabbix 自动发现与自动注册.md",
-    "devops/zabbix/Zabbix分布式监控系统.md",
-    "devops/Coolmonitor.md",
-    "golang/go 前置配置/使用VSCode编写第一个Go项目.md",
-    "golang/go 前置配置/Go 语言环境安装/Windows下配置VSCode的Go开发环境.md",
-    "golang/go 前置配置/go 不同版本对各个系统的支持.md"
+    "devops/zabbix/assets/Pasted image 20250613162916.png"
   ]
 }

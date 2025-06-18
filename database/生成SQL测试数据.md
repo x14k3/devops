@@ -34,6 +34,48 @@ insert into test
 
 ```
 
+
+```sql
+-- 创建学生表
+CREATE TABLE student (
+    id NUMBER PRIMARY KEY,          -- 学生ID（主键）
+    name VARCHAR2(50) NOT NULL,     -- 姓名
+    age NUMBER(3) CHECK (age BETWEEN 15 AND 30),  -- 年龄（15-30岁）
+    gender VARCHAR2(10) CHECK (gender IN ('Male', 'Female')),  -- 性别
+    enrollment_date DATE DEFAULT SYSDATE  -- 入学日期（默认当天）
+);
+
+-- 创建序列用于ID自增
+CREATE SEQUENCE student_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+
+-- 创建触发器实现ID自动插入
+CREATE OR REPLACE TRIGGER student_bir
+BEFORE INSERT ON student
+FOR EACH ROW
+BEGIN
+    SELECT student_seq.NEXTVAL INTO :new.id FROM dual;
+END;
+/
+
+BEGIN
+  FOR i IN 1..1000 LOOP
+    INSERT INTO student (name, age, gender, enrollment_date)
+    VALUES (
+      'Student_' || TO_CHAR(i, 'FM0000'),  -- 生成唯一姓名
+      TRUNC(DBMS_RANDOM.VALUE(15, 30)),    -- 随机年龄（15-29）
+      CASE MOD(i, 2)                       -- 交替性别
+          WHEN 0 THEN 'Female'
+          ELSE 'Male'
+       END,
+      SYSDATE - DBMS_RANDOM.VALUE(0, 365*3) -- 随机入学日期（近3年内）
+    );
+  END LOOP;
+  COMMIT;
+END;
+/
+```
+
+
 ## Mysql
 
 ```sql

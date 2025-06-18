@@ -8,12 +8,15 @@ lsnrctl stop
 lsnrctl start 
 --登录数据库dba
 sqlplus / as sysdba  
+SQL> SELECT instance_name, status, version, log_mode FROM v$instance;
 SQL> shutdown [ normal  transactional  immediate  abort ]
 --NORMAL         不允许新的连接、等待会话结束、等待事务结束、做一个检查点并关闭数据文件。启动时不需要实例恢复。 
 --TRANSACTIONAL  不允许新的连接、不等待会话结束、等待事务结束、做一个检查点并关闭数据文件。启动时不需要实例恢复。 
 --IMMEDIATE      不允许新的连接、不等待会话结束、不等待事务结束、做一个检查点并关闭数据文件。没有结束的事务是自动rollback的。启动时不需要实例恢复。 
 --ABORT          不允许新的连接、不等待会话结束、不等待事务结束、不做检查点且没有关闭数据文件。启动时自动进行实例恢复。
-SQL> startup
+SQL> startup mount 
+SQL> 
+SQL> alter database open;
 
 ```
 

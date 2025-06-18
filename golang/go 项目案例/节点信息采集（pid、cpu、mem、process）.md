@@ -343,3 +343,9 @@ func reportMetrics(apiUrl string, metrics Metrics) error {
 "apiUrl": "http://192.168.133.102:49101/monitor/drm/reportClusterStatus"
 }
 ```
+
+
+更新 20250618
+```golang
+
+```
