@@ -127,7 +127,7 @@ partprobe
 
 **设置唯一 Initiator 名称**
 ```bash
-echo "InitiatorName=iqn.2023-08.com.oracle:node2" > /etc/iscsi/initiatorname.iscsi
+echo "InitiatorName=iqn.2025-06.com.oracle:node2" > /etc/iscsi/initiatorname.iscsi
 ```
 
 
