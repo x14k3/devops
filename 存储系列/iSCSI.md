@@ -3,39 +3,33 @@ oracle使用iscsi 在redhat环境下搭建共享存储步骤
 
 **安装必要软件包**
 ```bash
-sudo yum install -y targetcli iscsi-initiator-utils
+yum install -y targetcli iscsi-initiator-utils device-mapper-multipath
 ```
 
 **启动服务并设置开机自启**
 ```bash
-sudo systemctl start target
-sudo systemctl enable target
+systemctl start target
+systemctl enable target
 ```
 
-**配置防火墙（开放iSCSI端口）**
-  ```bash
-sudo firewall-cmd --permanent --add-port=3260/tcp
-sudo firewall-cmd --reload
-```
 
 **创建后端存储**
 
 - **选项1：使用本地文件（示例创建1GB文件）**
 ```bash
-sudo dd if=/dev/zero of=/var/lib/iscsi_disks/disk1.img bs=1M count=1024
+dd if=/dev/zero of=/var/lib/iscsi_disks/disk1.img bs=1M count=1024
 ```
 
 - **选项2：使用LVM卷（推荐生产环境）**
 ```bash
-sudo pvcreate /dev/sdb           # 初始化物理卷
-sudo vgcreate vg_iscsi /dev/sdb  # 创建卷组
-sudo lvcreate -L 100G -n lv_shared vg_iscsi  # 创建逻辑卷
+pvcreate /dev/sdb           # 初始化物理卷
+vgcreate vg_iscsi /dev/sdb  # 创建卷组
+lvcreate -L 100G -n lv_shared vg_iscsi  # 创建逻辑卷
 ```
 
 **配置iSCSI Target**
 ```bash
-sudo targetcli
-console
+targetcli
 
 # 创建后端存储
 /> backstores/block create ocr1 /dev/sdb
@@ -81,13 +75,14 @@ exit
 
 **设置 Initiator 名称**
 ```bash
+yum install -y iscsi-initiator-utils device-mapper-multipath
+
 echo "InitiatorName=iqn.2025-06.com.oracle:node1" > /etc/iscsi/initiatorname.iscsi
 ```
 
 
 **配置多路径 (安装并配置 device-mapper-multipath)**
 ```bash
-yum install -y device-mapper-multipath 
 mpathconf --enable --with_multipathd y
 
 cat > /etc/multipath.conf <<EOF
@@ -111,15 +106,78 @@ iscsiadm -m discovery -t st -p 192.168.10.135
 iscsiadm -m node -T iqn.2025-06.com.oracle:rac.storage -p 192.168.10.135 -l
 ```
 
-**配置 UDEV 规则**
-```bash
-cat > /etc/udev/rules.d/99-oracle-asm.rules <<EOF
-KERNEL=="dm-*", ENV{DM_UUID}=="mpath-*", OWNER="grid", GROUP="asmadmin", MODE="0660"
-EOF
+**配置持久化设备命名 (每台主机)**
 
-udevadm control --reload-rules
-partprobe
+- **目的：** 确保即使磁盘设备名 (`/dev/sdX`) 在重启后发生变化，操作系统也能通过唯一标识符（如 WWID）找到同一个物理磁盘。多路径友好名 (`/dev/mapper/mpathX`) 通常是持久的，但为了给 ASM 使用，最好再创建一层基于 WWID 的 udev 规则或使用 ASMLib。
+    
+- **推荐方法 1: 使用 `udev` 规则**
+
+编辑/etc/scsi_id.config文件，2个节点都要编辑
+
+```bash
+echo "options=--whitelisted --replace-whitespace"  >> /etc/scsi_id.config
 ```
+
+将磁盘wwid信息写入99-oracle-asmdevices.rules文件，2个节点都要编辑
+
+```bash
+# 根据lsblk修改盘符
+[root@rac-02 ~]# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0   10G  0 disk 
+sdb      8:16   0   10G  0 disk 
+sdc      8:32   0   10G  0 disk 
+sdd      8:48   0   20G  0 disk 
+sde      8:64   0   20G  0 disk 
+sdf      8:80   0   20G  0 disk 
+sr0     11:0    1 1024M  0 rom  
+vda    253:0    0   50G  0 disk 
+├─vda1 253:1    0    1G  0 part /boot
+├─vda2 253:2    0    5G  0 part [SWAP]
+└─vda3 253:3    0   44G  0 part /
+[root@rac-02 ~]# 
+
+### 以下脚本适用于Centos7.0 根据/sdX 修改for循环中的a b c d ...
+for i in  b c d e ;
+do 
+echo "KERNEL==\"sd*\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd$i`\",SYMLINK+=\"asm-sd$i\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
+done
+```
+
+查看99-oracle-asmdevices.rules文件，2个节点都要查看
+
+```bash
+cat /etc/udev/rules.d/99-oracle-asmdevices.rules 
+
+---------------------------------------------
+KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405449ab3f0199d4ebeb62d8cea6",SYMLINK+="asm-sda",OWNER="grid",GROUP="asmadmin",MODE="0660"
+KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405bc7186d81669471b81b80ce8c",SYMLINK+="asm-sdb",OWNER="grid",GROUP="asmadmin",MODE="0660"
+KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405c912cb43fe3e435a85518c98e",SYMLINK+="asm-sdc",OWNER="grid",GROUP="asmadmin",MODE="0660"
+KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="3600140527afccdfe1d54094a80a8a34b",SYMLINK+="asm-sdd",OWNER="grid",GROUP="asmadmin",MODE="0660"
+KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405405c32a717134c92a67b555d9",SYMLINK+="asm-sde",OWNER="grid",GROUP="asmadmin",MODE="0660"
+KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="3600140516a8c99d91004e60883b4626b",SYMLINK+="asm-sdf",OWNER="grid",GROUP="asmadmin",MODE="0660"
+```
+
+启动设备，2个节点都要执行
+
+```bash
+udevadm control --reload  
+udevadm trigger
+```
+
+确认磁盘已经添加成功
+
+```bash
+[root@rac-01 ~]# ll /dev | grep asm-
+lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sda -> sda   # ocr1
+lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdb -> sdb   # ocr2
+lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdc -> sdc   # ocr3
+lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdd -> sdd   # data1
+lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sde -> sde   # data2
+lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdf -> sdf   # arch1
+```
+
+‍
 
 
 
@@ -131,79 +189,12 @@ echo "InitiatorName=iqn.2025-06.com.oracle:node2" > /etc/iscsi/initiatorname.isc
 ```
 
 
-**重复节点1的配置步骤（多路径、连接存储、UDEV规则）**
-
----
-
-### **三、双节点共享磁盘验证**
-
-**在两个节点上检查磁盘**
-```bash
-multipath -ll
-ls -l /dev/mapper/
-```
-
-**确认两个节点看到相同的磁盘标识**
-```bash
-# 在所有节点上执行：
-for disk in $(multipath -l -v1); do 
-  echo -n "$disk: "
-  scsi_id -g -u /dev/mapper/$disk 
-done
-```
-
-**输出应显示相同的WWID**
-
----
-
-### **四、Oracle RAC 特定配置**
-
-**安装 ASMLib 或使用 ASMFD**
-```bash
-# 安装 ASMLib
-yum install -y kmod-oracleasm oracleasm-support
-
-# 配置 ASMLib
-oracleasm configure -i
-oracleasm init
-
-# 创建 ASM 磁盘
-oracleasm createdisk OCR1 /dev/mapper/mpatha
-oracleasm createdisk OCR2 /dev/mapper/mpathb
-oracleasm createdisk OCR3 /dev/mapper/mpathc
-oracleasm createdisk DATA /dev/mapper/mpathd
-```
-
-
-**在另一个节点扫描磁盘**
-```bash
-oracleasm scandisks
-oracleasm listdisks
-```
-
-
-
----
-
-### **五、配置 Oracle Grid Infrastructure**
-
-1.***在安装过程中选择 ASM 存储**
-
-- OCR 位置: 选择三个 OCR 磁盘
-- DATA 位置: 选择数据磁盘
-
-2.**验证集群配置**
-```bash
-crsctl check cluster -all
-```
-
-
-
+**重复节点1的配置步骤（多路径、连接存储）**
 
 ---
 
 
-### 六、常用的 `iscsiadm` 命令
+### 三、常用的 `iscsiadm` 命令
 ```bash
 #发现iSCSI 目标
 iscsiadm -m discovery -t st -p <IP地址>

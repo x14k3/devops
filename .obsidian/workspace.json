@@ -4,19 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "64992015f09529da",
+        "id": "4d60fddcb91b7ae4",
         "type": "tabs",
         "children": [
           {
-            "id": "48f8aaf69c9a46df",
+            "id": "0cd1bd641bf11724",
             "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "存储系列/iSCSI.md",
+                "mode": "preview",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "iSCSI"
+            }
+          },
+          {
+            "id": "0cccc94fe114c1eb",
+            "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
                 "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle19c RAC-ASM部署.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "3. Oracle19c RAC-ASM部署"
             }
@@ -141,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle19c RAC-ASM部署.md",
+                "file": "存储系列/iSCSI.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "3. Oracle19c RAC-ASM部署 的大纲"
+              "title": "iSCSI 的大纲"
             }
           }
         ],
@@ -169,12 +187,25 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "48f8aaf69c9a46df",
+  "active": "0cd1bd641bf11724",
   "lastOpenFiles": [
-    "linux/linux 内核配置/内核模块/udev.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle19c RAC-ASM部署.md",
-    "企业建设/openVPN/1. OpenVPN Server搭建.md",
+    "存储系列/iSCSI.md",
     "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
+    "database/Oracle/Oracle 常用语句/3.表的管理.md",
+    "database/Oracle/Oracle 常用语句/6.表连接.md",
+    "database/Oracle/Oracle 常用语句/2.用户管理.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle RAC srvctl 常用命令.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. Oracle RAC 开启 archivelog.md",
+    "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
+    "database/Oracle/Oracle 安装部署/静默安装 Oracle19c.md",
+    "database/Oracle/Oracle 日志归档和闪回区/Oracle之redo log 归档.md",
+    "database/Oracle/Oracle 日志归档和闪回区/Oracle之redo log 管理.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle rac集群中的IP类型简介.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/1. Oracle RAC 介绍.md",
+    "database/Oracle/Oracle 日志归档和闪回区/Oracle之闪回区.md",
+    "linux/linux 内核配置/内核模块/udev.md",
+    "企业建设/openVPN/1. OpenVPN Server搭建.md",
     "database/Oracle/Oracle 常用语句/0.DBA日常维护SQL整理.md",
     "中间件/redis/redis 部署/redis cluster.md",
     "中间件/redis/redis 部署/redis 单例部署.md",
@@ -184,22 +215,9 @@
     "shell/vim 编辑快捷键.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/Oracle 19c RAC.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip",
-    "存储系列/iSCSI.md",
     "devops/JumpServer.md",
     "企业建设/openVPN/4. openVPN配置文件详解.md",
-    "企业建设/openVPN/5. Stunnel隐藏OpenVPN流量 (Duplicated 2024-12-16 16_07_59).md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 双向认证.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 配置HTTPS.md",
-    "中间件/nginx/nginx 配置文件详解/配置案例.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 反向代理-http.md",
-    "中间件/nginx/nginx 部署.md",
-    "golang/go 入门指南/golang从命令行传参方法.md",
-    "golang/go 入门指南/Go 语言中的 init 函数_ 特点、用途和注意事项.md",
-    "golang/go 入门指南/Go 语言 tag 标签.md",
-    "golang/go 前置配置/使用VSCode编写第一个Go项目.md",
-    "golang/go 入门指南/go 入门指南.md",
     "golang/go 入门指南/未命名",
-    "golang/go 项目案例/garp 广播.md",
     "111111test",
     "devops/zabbix/assets/Pasted image 20250613162942.png",
     "devops/zabbix/assets/Pasted image 20250613162916.png"
