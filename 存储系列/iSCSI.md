@@ -75,7 +75,7 @@ exit
 
 **设置 Initiator 名称**
 ```bash
-yum install -y iscsi-initiator-utils device-mapper-multipath
+yum install -y targetcli iscsi-initiator-utils device-mapper-multipath
 
 echo "InitiatorName=iqn.2025-06.com.oracle:node1" > /etc/iscsi/initiatorname.iscsi
 ```
@@ -85,7 +85,7 @@ echo "InitiatorName=iqn.2025-06.com.oracle:node1" > /etc/iscsi/initiatorname.isc
 ```bash
 mpathconf --enable --with_multipathd y
 
-cat > /etc/multipath.conf <<EOF
+echo '
 defaults {
     user_friendly_names yes
     path_grouping_policy multibus
@@ -94,8 +94,7 @@ defaults {
 }
 blacklist {
     devnode "^sd[a-z]$"
-}
-EOF
+} '> /etc/multipath.conf
 
 systemctl start multipathd
 ```
@@ -140,7 +139,7 @@ vda    253:0    0   50G  0 disk
 ### 以下脚本适用于Centos7.0 根据/sdX 修改for循环中的a b c d ...
 for i in  b c d e ;
 do 
-echo "KERNEL==\"sd*\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd$i`\",SYMLINK+=\"asm-sd$i\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
+echo "KERNEL==\"sd${i}\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd${i}`\",SYMLINK+=\"asm-sd$i\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
 done
 ```
 
@@ -148,14 +147,6 @@ done
 
 ```bash
 cat /etc/udev/rules.d/99-oracle-asmdevices.rules 
-
----------------------------------------------
-KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405449ab3f0199d4ebeb62d8cea6",SYMLINK+="asm-sda",OWNER="grid",GROUP="asmadmin",MODE="0660"
-KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405bc7186d81669471b81b80ce8c",SYMLINK+="asm-sdb",OWNER="grid",GROUP="asmadmin",MODE="0660"
-KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405c912cb43fe3e435a85518c98e",SYMLINK+="asm-sdc",OWNER="grid",GROUP="asmadmin",MODE="0660"
-KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="3600140527afccdfe1d54094a80a8a34b",SYMLINK+="asm-sdd",OWNER="grid",GROUP="asmadmin",MODE="0660"
-KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="36001405405c32a717134c92a67b555d9",SYMLINK+="asm-sde",OWNER="grid",GROUP="asmadmin",MODE="0660"
-KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name",RESULT=="3600140516a8c99d91004e60883b4626b",SYMLINK+="asm-sdf",OWNER="grid",GROUP="asmadmin",MODE="0660"
 ```
 
 启动设备，2个节点都要执行
@@ -164,21 +155,6 @@ KERNEL=="sd*",SUBSYSTEM=="block",PROGRAM=="/lib/udev/scsi_id -g -u -d /dev/$name
 udevadm control --reload  
 udevadm trigger
 ```
-
-确认磁盘已经添加成功
-
-```bash
-[root@rac-01 ~]# ll /dev | grep asm-
-lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sda -> sda   # ocr1
-lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdb -> sdb   # ocr2
-lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdc -> sdc   # ocr3
-lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdd -> sdd   # data1
-lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sde -> sde   # data2
-lrwxrwxrwx 1 root root            3 2月  20 16:04 asm-sdf -> sdf   # arch1
-```
-
-‍
-
 
 
 #### 节点 2 配置 (192.168.100.102)
