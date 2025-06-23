@@ -1,4 +1,4 @@
-
+#oracle
 
 ![44bee3978f964c6490e5bc14457bff0a~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/44bee3978f964c6490e5bc14457bff0atplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210356-e4zku13.webp)
 

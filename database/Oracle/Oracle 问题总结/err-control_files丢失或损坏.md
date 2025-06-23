@@ -1,4 +1,4 @@
-
+#oracle
 
 - ORA-00205: 标识控制文件出错，有关详情，请检查警告日志​
 - `sqlplus`​登录报错 ERROR: ORA-01033: ORACLE 正在初始化或关闭 Process

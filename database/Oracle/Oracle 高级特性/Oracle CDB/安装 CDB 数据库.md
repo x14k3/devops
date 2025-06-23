@@ -1,4 +1,4 @@
-
+#oracle
 
 [Oracle19c](../../Oracle%20安装部署/静默安装%20Oracle19c.md)
 

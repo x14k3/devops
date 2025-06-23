@@ -187,25 +187,25 @@ gluster volume quota models enable
 gluster volume quota models limit-usage / 80GB
 ```
 
-#设置 cache 4GB
+设置 cache 4GB
 
 ```
 gluster volume set models performance.cache-size 4GB
 ```
 
-#开启 异步 ， 后台操作
+开启 异步 ， 后台操作
 
 ```
 gluster volume set models performance.flush-behind on
 ```
 
-#设置 io 线程 32
+设置 io 线程 32
 
 ```
 gluster volume set models performance.io-thread-count 32
 ```
 
-#设置 回写 (写数据时间，先写入缓存内，再写入硬盘)
+设置 回写 (写数据时间，先写入缓存内，再写入硬盘)
 
 ```
 gluster volume set models performance.write-behind on

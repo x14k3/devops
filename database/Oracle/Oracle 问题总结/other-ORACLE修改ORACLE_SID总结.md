@@ -1,6 +1,6 @@
+#oracle
 
-
-在某些特殊情况下，需要修改当前Oracle数据库实例中的ORACLE\_SID。下面简单的总结一下如何修改$ORACLE\_SID的步骤。默认情况下，INSTANCE\_NAME参数和ORACLE\_SID的值是相同的，但是它们也可以不同。另外，如果参数文件（pfile或spfile）中没有指定instance\_name的值，那么它的值跟ORACLE\_SID的值一致。我们这里只修改ORACLE\_SID的值。另外，关于DB\_NAME与ORACLE\_SID的关系，我们这里暂且不表，本文只讨论如何修改ORACLE\_SID的值。
+在某些特殊情况下，需要修改当前Oracle数据库实例中的`ORACLE_SID`。下面简单的总结一下如何修改`$ORACLE_SID`的步骤。默认情况下，`INSTANCE_NAME`参数和`ORACLE_SID`的值是相同的，但是它们也可以不同。另外，如果参数文件（pfile或spfile）中没有指定`instance_name`的值，那么它的值跟`ORACLE_SID`的值一致。我们这里只修改`ORACLE_SID`的值。另外，关于`DB_NAME`与`ORACLE_SID`的关系，我们这里暂且不表，本文只讨论如何修改`ORACLE_SID`的值。
 
 ### 1查看数据库的信息
 
@@ -18,7 +18,7 @@ select instance_name, status from v$instance;
 select instance from v$thread;
 ```
 
-#注意，系统视图v$instance中的instance\_name的值为ORACLE\_SID的值，不是参数文件中instance\_name的值。
+注意，系统视图`v$instance`中的`instance_name`的值为`ORACLE_SID`的值，不是参数文件中`instance_name`的值。
 
 ```
 SQL> select instance_name, status from v$instance;
@@ -38,7 +38,7 @@ gsp
 1 row selected.
 ```
 
-#查看参数文件中参数instance\_name
+查看参数文件中参数 `instance_name`
 
 ```
 SQL> show parameter instance_name
@@ -49,7 +49,7 @@ instance_name               string      gsp
 SQL>
 ```
 
-检查判断数据库实例从pfile还是spfile启动。
+检查判断数据库实例从` pfile`还是 `spfile`启动。
 
 ```
 SQL> show parameter spfile;
@@ -62,7 +62,7 @@ SQL> show parameter pfile;
 $ps -ef | grep lsnr | grep -v grep
 ```
 
-#根据上面脚本获取具体的监听名称（默认可能为LISTENER），关闭监听
+根据上面脚本获取具体的监听名称（默认可能为`LISTENER`），关闭监听
 
 ```
 $lsnrctl stop xxx 

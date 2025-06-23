@@ -1,4 +1,4 @@
-
+#oracle
 
 当一个oracle实例启动的时候,这个实例的特性是通过初始化参数文件(initialization parameter file)中指定的参数获得的。初始化参数存储在文本格式的pfile或者二进制格式的spfile中，oracle 9i或更高的版本使用spfile,而之前的版本使用pfile。
 

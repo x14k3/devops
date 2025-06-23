@@ -1,4 +1,4 @@
-
+#oracle
 
 无法安装.net framework 3.5
 

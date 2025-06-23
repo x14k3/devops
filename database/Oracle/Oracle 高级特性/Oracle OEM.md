@@ -1,4 +1,4 @@
-
+#oracle
 
 Oracle OEM（Oracle Enterprise  Manager）是Oracle公司提供的一款用于管理和维护Oracle数据库的工具，它可以帮助用户轻松地掌控服务器实例，本文将详细介绍如何使用Oracle OEM管理命令来监控和管理Oracle数据库。
 
@@ -22,9 +22,10 @@ SELECTdbms_xdb_config.gethttpsport FROM DUAL;
 
 访问地址：
 
+```bash
 https://10.10.133.1:5500/em/     #输入Username和Password，不用输入Container Name
+```
 
-‍
 
 从Oracle Database 19c开始，Oracle不再推荐Flash-base的Enterprise Manager Express(EM Express)，缺省采用Java JET技术。也可通过如下命令切换：
 

@@ -1,4 +1,4 @@
-
+#oracle
 
 Oracle OFA (Optimal Flexible Architecture) [最佳灵活体系结构（OFA）](https://www.modb.pro/db/608084)是==一种Oracle推荐的数据库架构标准，用于提高数据库的效率和可维护性，并简化数据库的安装、管理和升级==。其主要原则包括将相似用途的段集中存储，遵循标准设计，为异常预留空间，减少表空间冲突等。﻿
 

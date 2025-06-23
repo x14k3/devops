@@ -1,4 +1,4 @@
-
+#oracle
 
 ORA-00845: MEMORY\_TARGET not supported on this system
 

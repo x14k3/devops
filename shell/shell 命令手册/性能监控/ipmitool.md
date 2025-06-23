@@ -138,7 +138,7 @@ Chassis Commands:  status, power, identify, policy, restart_cause, poh, bootdev,
 
 ## 1.7. MC芯片管理(mc/bmc)
 
-### 1.7.1. #ipmitool bmc help
+### 1.7.1. ipmitool bmc help
 
 ```
 #ipmitool bmc help

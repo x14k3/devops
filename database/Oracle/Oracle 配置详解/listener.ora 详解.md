@@ -1,4 +1,4 @@
-
+#oracle
 
 文件位置：`$ORACLE_HOME/network/admin`​
 

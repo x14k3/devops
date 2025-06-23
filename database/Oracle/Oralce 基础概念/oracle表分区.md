@@ -1,4 +1,4 @@
-
+#oracle
 
 Oracle作为一款成熟的数据库软件产品，就提供了多种数据表存储结构。我们最常见的就是三种，**分别为堆表（Heap Table）、索引组织表（Index Organization Table，简称为IOT）和聚簇表（Cluster Table）** 。其他类型的表：分区表、临时表、压缩表等
 

@@ -1,4 +1,4 @@
-
+#oracle
 
 ```sql
 -- 1.手动删除archivelog日志
