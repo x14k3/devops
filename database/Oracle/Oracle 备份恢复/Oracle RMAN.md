@@ -122,23 +122,23 @@ RMAN> create pfile='/tmp/pfile.ora' from spfile='/tmp/spfile.bak';
 RMAN> restore database;           --还原数据库
 RMAN> restore tablespace users;   --还原表空间
 RMAN> restore datafile n;         --还原数据文件
-RMAN> restore archivelog sequence between 10 and 20; --还原归档日志
-RMAN> restore controlfile from autobackup;   --还原控制文件
+RMAN> restore archivelog sequence between 10 and 20;       --还原归档日志
+RMAN> restore controlfile from autobackup;                 --还原控制文件
 RMAN> restore controlfile from '/data/oraback/fmsdb/ctl_SCCDB_3568_20221107_lv0.bak';
 RMAN> restore spfile to '/tmp/spfile.ora' from autobackup; --还原参数文件
 RMAN> restore spfile to '/tmp/spfile.ora' from '/data/oraback/fmsdb/ctl_SCCDB_3568_20221107_lv0.bak';
 
 RMAN> restore validate database;     --验证数据库可恢复性
 RMAN> restore validate controlfile;  --验证控制文件可恢复性
-RMAN> restore validate spfile;      --验证参数文件可恢复性
+RMAN> restore validate spfile;       --验证参数文件可恢复性
 ```
 
 # 三、RMAN RECOVER
 
 ```sql
-RMAN> recover database;        --恢复数据库
-RMAN> recover tablespace users;   --恢复表空间
-RMAN> recover datafile n;       --恢复数据文件
+RMAN> recover database;            --恢复数据库
+RMAN> recover tablespace users;    --恢复表空间
+RMAN> recover datafile n;          --恢复数据文件
 ```
 
 # 四、 RMAN LIST
@@ -146,14 +146,14 @@ RMAN> recover datafile n;       --恢复数据文件
 查看备份集信息
 
 ```sql
-RMAN> list backup;                      --列出数据库中所有的备份集
-RMAN> list backup of database;          --查看数据库备份集
-RMAN> list backup of tablespace users;  --查看表空间备份集
-RMAN> list backup of datafile n;        --查看备份的数据文件
-RMAN> list backup of controlfile;       --查看控制文件备份集
-RMAN> list backup of archivelog all;    --查看归档日志备份集
-RMAN> list archivelog all;              --查看当前所有归档日志
-RMAN> list expired backup;              --列出所有无效备份
+RMAN> list backup;                        --列出数据库中所有的备份集
+RMAN> list backup of database;            --查看数据库备份集
+RMAN> list backup of tablespace users;    --查看表空间备份集
+RMAN> list backup of datafile n;          --查看备份的数据文件
+RMAN> list backup of controlfile;         --查看控制文件备份集
+RMAN> list backup of archivelog all;      --查看归档日志备份集
+RMAN> list archivelog all;                --查看当前所有归档日志
+RMAN> list expired backup;                --列出所有无效备份
 ```
 
 # 五、RMAN CROSSCHECK
@@ -168,9 +168,9 @@ RMAN备份校验是的几种状态：
 ```sql
 -- 检查所有备份集
 RMAN> crosscheck backupset;
-RMAN> crosscheck backup of database;  -- 查看数据文件备份
-RMAN> crosscheck backup of controlfile; -- 查看控制文件备份
-RMAN> crosscheck backup of archivelog all; -- 查看归档日志备份
+RMAN> crosscheck backup of database;        -- 查看数据文件备份
+RMAN> crosscheck backup of controlfile;     -- 查看控制文件备份
+RMAN> crosscheck backup of archivelog all;  -- 查看归档日志备份
 RMAN> crosscheck archivelog all;
 ```
 
@@ -179,25 +179,25 @@ RMAN> crosscheck archivelog all;
 如果手动删除了物理备份文件，则先需要通过 RMAN CROSSCHECK 效验完成后才可以使用 rman delete 删除过期信息。
 
 ```sql
-RMAN> delete backup;                  -- 删除备份集
-RMAN> delete [noprompt ] obsolete ;   -- 删除旧于备份保留策略定义的备份数据同时也更新RMAN资料库以及控制文件。
-RMAN> delete expired backup;          -- 删除无效备份
-RMAN> delete obsolete redundancy 2;   -- 删除备份2次以上的数据，也就是只保留最新两次的备份数据。
+RMAN> delete backup;                             -- 删除备份集
+RMAN> delete [noprompt ] obsolete ;              -- 删除旧于备份保留策略定义的备份数据同时也更新RMAN资料库以及控制文件。
+RMAN> delete expired backup;                     -- 删除无效备份
+RMAN> delete obsolete redundancy 2;              -- 删除备份2次以上的数据，也就是只保留最新两次的备份数据。
 RMAN> delete obsolete recovery window of 7 days; -- 删除rman7天前的备份
 
-RMAN> delete archivelog all;          -- 删除所有归档
-RMAN> delete expired archivelog all;  -- 删除过期的归档
-RMAN> delete archivelog until time 'sysdate-7'; -- 指定日期删除归档日志删除截止到前7天的所有archivelog
+RMAN> delete archivelog all;                     -- 删除所有归档
+RMAN> delete expired archivelog all;             -- 删除过期的归档
+RMAN> delete archivelog until time 'sysdate-7';  -- 指定日期删除归档日志删除截止到前7天的所有archivelog
 
 
-RMAN> change backupset 3 unavailable; -- 更改备份集3为无效
-RMAN> change backupset 3 available;   -- 更改备份集3为有效
-RMAN> change backup of controlfile unavailable; -- 更改控制文件为无效
-RMAN> change backup of controlfile available;   -- 更改控制文件为有效
-RMAN> report schema;                 -- 查看数据库备份结构
-RMAN> report need backup;            -- 查看所以需要备份的文件
-RMAN> report need backup tablespace system;  -- 查看指定表空间是否需要备份
-RMAN> report obsolete;    -- 查看过期备份
+RMAN> change backupset 3 unavailable;            -- 更改备份集3为无效
+RMAN> change backupset 3 available;              -- 更改备份集3为有效
+RMAN> change backup of controlfile unavailable;  -- 更改控制文件为无效
+RMAN> change backup of controlfile available;    -- 更改控制文件为有效
+RMAN> report schema;                             -- 查看数据库备份结构
+RMAN> report need backup;                        -- 查看所以需要备份的文件
+RMAN> report need backup tablespace system;      -- 查看指定表空间是否需要备份
+RMAN> report obsolete;                           -- 查看过期备份
 ```
 
 # 七、RMAN CONFIGURE
@@ -216,21 +216,22 @@ connected to target database: FMSDB (DBID=1440741466)
 RMAN> show all;
 using target database control file instead of recovery catalog
 RMAN configuration parameters for database with db_unique_name FMSDB are:
-CONFIGURE RETENTION POLICY TO REDUNDANCY 1; # default
-CONFIGURE BACKUP OPTIMIZATION OFF; # default
-CONFIGURE DEFAULT DEVICE TYPE TO DISK; # default
-CONFIGURE CONTROLFILE AUTOBACKUP ON; # default
-CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO '%F'; # default
-CONFIGURE DEVICE TYPE DISK PARALLELISM 1 BACKUP TYPE TO BACKUPSET; # default 
-CONFIGURE DATAFILE BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default --备份副本数
-CONFIGURE ARCHIVELOG BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default --备份副本数
-CONFIGURE MAXSETSIZE TO UNLIMITED; # default
-CONFIGURE ENCRYPTION FOR DATABASE OFF; # default
-CONFIGURE ENCRYPTION ALGORITHM 'AES128'; # default
-CONFIGURE COMPRESSION ALGORITHM 'BASIC' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD TRUE ; # default
-CONFIGURE RMAN OUTPUT TO KEEP FOR 7 DAYS; # default -- RMAN输出结果的保留天数。
-CONFIGURE ARCHIVELOG DELETION POLICY TO NONE; # default
-CONFIGURE SNAPSHOT CONTROLFILE NAME TO '/data/u01/app/oracle/product/19.3.0/db_1/dbs/snapcf_fmsdb.f'; # default
+--CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 7 DAYS; 表示保留最近7天的备份
+CONFIGURE RETENTION POLICY TO REDUNDANCY 1; -- default,基于冗余的保留策略确保数据库有指定数量的有效备份副本
+CONFIGURE BACKUP OPTIMIZATION OFF; -- default ,备份优化
+CONFIGURE DEFAULT DEVICE TYPE TO DISK; -- default
+CONFIGURE CONTROLFILE AUTOBACKUP ON; -- default，自动备份控制文件
+CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO '%F'; -- default
+CONFIGURE DEVICE TYPE DISK PARALLELISM 1 BACKUP TYPE TO BACKUPSET; --default 
+CONFIGURE DATAFILE BACKUP COPIES FOR DEVICE TYPE DISK TO 1; -- default，备份副本数
+CONFIGURE ARCHIVELOG BACKUP COPIES FOR DEVICE TYPE DISK TO 1; -- default，备份副本数
+CONFIGURE MAXSETSIZE TO UNLIMITED; -- default
+CONFIGURE ENCRYPTION FOR DATABASE OFF; -- default
+CONFIGURE ENCRYPTION ALGORITHM 'AES128'; -- default
+CONFIGURE COMPRESSION ALGORITHM 'BASIC' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD TRUE ; -- default
+CONFIGURE RMAN OUTPUT TO KEEP FOR 7 DAYS; -- default，RMAN输出结果的保留天数。
+CONFIGURE ARCHIVELOG DELETION POLICY TO NONE; -- default
+CONFIGURE SNAPSHOT CONTROLFILE NAME TO '/data/u01/app/oracle/product/19.3.0/db_1/dbs/snapcf_fmsdb.f'; -- default
 RMAN> 
 ```
 
@@ -349,7 +350,7 @@ CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET;
 #2.备份自动压缩
 #3.自动备份控制文件和spfile 以及指定备份的目录
 rman target /
-CONFIGURE RETENTION POLICY TO REDUNDANCY 3;
+CONFIGURE RETENTION POLICY TO REDUNDANCY 7;
 CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET;
 CONFIGURE CONTROLFILE AUTOBACKUP ON;
 CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO  '/data/oraback/fmsdb/ctl_%F_spfile.bak';

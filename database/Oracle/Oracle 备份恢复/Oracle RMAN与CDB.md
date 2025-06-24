@@ -10,7 +10,7 @@
 
 注：执行backup database root不给数据文件保存位置时，备份文件默认存放在快速恢复区中。
 
-```
+```sql
 [oracle@jydb1 ~]$ rman target /
 
 恢复管理器: Release 12.2.0.1.0 - Production on 星期五 11月 9 14:52:04 2018

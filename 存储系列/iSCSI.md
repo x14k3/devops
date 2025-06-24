@@ -3,7 +3,7 @@ oracle使用iscsi 在redhat环境下搭建共享存储步骤
 
 **安装必要软件包**
 ```bash
-yum install -y targetcli iscsi-initiator-utils device-mapper-multipath
+yum install -y targetcli iscsi-initiator-utils
 ```
 
 **启动服务并设置开机自启**
@@ -75,7 +75,7 @@ exit
 
 **设置 Initiator 名称**
 ```bash
-yum install -y targetcli iscsi-initiator-utils device-mapper-multipath
+yum install -y iscsi-initiator-utils device-mapper-multipath
 
 echo "InitiatorName=iqn.2025-06.com.oracle:node1" > /etc/iscsi/initiatorname.iscsi
 ```
@@ -137,9 +137,13 @@ vda    253:0    0   50G  0 disk
 [root@rac-02 ~]# 
 
 ### 以下脚本适用于Centos7.0 根据/sdX 修改for循环中的a b c d ...
+
+### !!!!!!!!!!!!! 一定要先创建用户 !!!!!!!!!!! ##################
+### !!!!!!!!!!!!! 一定要先创建用户 !!!!!!!!!!! ##################
+### !!!!!!!!!!!!! 一定要先创建用户 !!!!!!!!!!! ##################
 for i in  b c d e ;
 do 
-echo "KERNEL==\"sd${i}\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd${i}`\",SYMLINK+=\"asm-sd$i\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
+echo "KERNEL==\"sd*\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd${i}`\",SYMLINK+=\"asm-sd$i\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
 done
 ```
 
@@ -182,4 +186,42 @@ iscsiadm -m node -T <目标名称> -p <IP地址> -l
 iscsiadm -m node -T <目标名称> -p <IP地址> -u
 #删除发现记录
 iscsiadm -m node -o delete -T <目标名称> -p <IP地址>
+```
+
+
+完全重置 iSCSI 配置：
+```bash
+[root@localhost ~]# systemctl stop iscsid
+
+Warning: Stopping iscsid.service, but it can still be activated by:
+
+  iscsid.socket
+
+[root@localhost ~]# 
+
+[root@localhost ~]# # 清除所有配置
+
+[root@localhost ~]# rm -rf /var/lib/iscsi/nodes/*
+
+[root@localhost ~]# rm -rf /var/lib/iscsi/send_targets/*
+
+[root@localhost ~]# 
+
+[root@localhost ~]# vim /etc/iscsi/initiatorname.iscsi 
+
+[root@localhost ~]# echo "InitiatorName=iqn.$(date +%Y-%m).com.example:$(hostname)" > /etc/iscsi/initiatorname.iscsi
+
+[root@localhost ~]# vim /etc/iscsi/initiatorname.iscsi 
+
+[root@localhost ~]# iscsiadm -m discovery -t st -p 192.168.10.135
+
+192.168.10.135:3260,1 iqn.2025-06.com.oracle:rac.cluster01
+
+[root@localhost ~]# iscsiadm -m node -T iqn.2025-06.com.oracle:rac.cluster01 -p 192.168.10.135 -l
+
+Logging in to [iface: default, target: iqn.2025-06.com.oracle:rac.cluster01, portal: 192.168.10.135,3260] (multiple)
+
+Login to [iface: default, target: iqn.2025-06.com.oracle:rac.cluster01, portal: 192.168.10.135,3260] successful.
+
+[root@localhost ~]#
 ```

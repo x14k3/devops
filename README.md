@@ -1,5 +1,5 @@
-      运维不能直接的创造价值，而是可以变相的节约成本
-      你节约的成本x你的意识x你的觉悟=你的价值
+
+笔耕不辍，开源星火。
 
 [linux](https://github.com/x14k3/devops/tree/master/linux)  
 [shell](https://github.com/x14k3/devops/tree/master/shell)  

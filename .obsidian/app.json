@@ -1,7 +1,8 @@
 {
   "useMarkdownLinks": false,
-  "readableLineLength": true,
+  "readableLineLength": false,
   "attachmentFolderPath": "./assets",
   "newLinkFormat": "relative",
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "defaultViewMode": "preview"
 }

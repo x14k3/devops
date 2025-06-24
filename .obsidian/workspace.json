@@ -4,57 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "4d60fddcb91b7ae4",
+        "id": "9c0c056a1bdfca76",
         "type": "tabs",
         "children": [
           {
-            "id": "0cd1bd641bf11724",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "存储系列/iSCSI.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "iSCSI"
-            }
-          },
-          {
-            "id": "0cccc94fe114c1eb",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle19c RAC-ASM部署.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "3. Oracle19c RAC-ASM部署"
-            }
-          },
-          {
-            "id": "403840a653df6508",
+            "id": "6be6e380f11731b7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle RAC srvctl 常用命令.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "4. Oracle RAC srvctl 常用命令"
+              "title": "新标签页"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -111,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 317.5
+    "width": 353.5
   },
   "right": {
     "id": "4f3c84d39789a0e3",
@@ -174,13 +137,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle RAC srvctl 常用命令.md",
+                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "4. Oracle RAC srvctl 常用命令 的大纲"
+              "title": "2. Oracle19c RAC-ASM部署 的大纲"
             }
           }
         ],
@@ -188,7 +151,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 224.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -202,34 +165,34 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "403840a653df6508",
+  "active": "a41355350eff645e",
   "lastOpenFiles": [
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle19c RAC-ASM部署.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. Oracle RAC 开启 archivelog.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/1. Oracle RAC 介绍.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. rac 开启 archivelog.md",
+    "database/Oracle/Oracle 配置详解/dbca.rsp.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. rac 集群的IP 规划.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/3. rac 管理命令.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. rac 新增节点.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/1. rac 介绍.md",
+    "shell/shell 开箱即用/自动化 SSH 密钥生成和分发的脚本.md",
+    "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
+    "database/Oracle/Oracle 日志归档和闪回区/Oracle之redo log 归档.md",
+    "database/Oracle/Oracle 日志归档和闪回区/Oracle之redo log 管理.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/2. pdb 数据库管理.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/1. pdb 数据库安装.md",
+    "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
+    "database/Oracle/Oracle 配置详解/listener.ora 详解.md",
+    "database/Oracle/Oracle 配置详解/tnsnames.ora 详解.md",
+    "database/Oracle/Oracle 配置详解/sqlnet.ora 详解.md",
+    "database/Oracle/Oracle 配置详解/pfile和spfile和init.ora.md",
+    "database/Oracle/Oracle 配置详解/Oracle 配置详解.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/0. CDB 概念.md",
+    "存储系列/iSCSI.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle RAC srvctl 常用命令.md",
-    "database/生成SQL测试数据.md",
-    "database/Oracle/Oracle 内存管理.md",
-    "database/Oracle/Oralce 基础概念/ORACLE数据字典.md",
-    "database/Oracle/Oralce 基础概念/Oracle视图.md",
-    "database/Oracle/Oralce 基础概念/Oracle检查点.md",
-    "database/Oracle/Oralce 基础概念/Oracle基本概念和结构.md",
-    "database/Oracle/Oralce 基础概念/ORACLE存储过程.md",
-    "database/Oracle/Oralce 基础概念/ORACLE表连接.md",
-    "database/Oracle/Oralce 基础概念/oracle表分区.md",
-    "database/Oracle/Oralce 基础概念/3.Oracle数据库nomount、mount、open三种状态知识点.md",
-    "database/Oracle/Oralce 基础概念/1.Oracle 体系结构.md",
-    "database/Oracle/Oracle 问题总结/warn-undo表空间文件过大，占用磁盘空间.md",
-    "database/Oracle/Oracle 问题总结/warn-Linux标准大页设置不合理案例.md",
-    "database/Oracle/Oracle 问题总结/warn-archivelog日志占用空间大.md",
-    "database/Oracle/Oracle 问题总结/other-ORACLE修改ORACLE_SID总结.md",
-    "database/Oracle/Oracle 问题总结/other-ORACLE数据库中ORACLE_SID与INSTANCE_NAME的差异.md",
-    "database/Oracle/Oracle 问题总结/other-Oracle表空间使用情况脚本.md",
-    "database/Oracle/Oracle 问题总结/other-异步IO概念.md",
-    "database/Oracle/Oracle 问题总结/other-裸设备知识介绍.md",
-    "database/Oracle/Oracle 问题总结/other-口令文件介绍.md",
-    "database/Oracle/Oracle 问题总结/other-解析awr报告.md",
-    "database/Oracle/Oracle 问题总结/err-temp表空间不足.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/远程克隆PDB.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/将11g数据库插入到12c成为pdb.md",
+    "database/Oracle/Oracle 常用语句/3.表的管理.md",
+    "database/Oracle/Oracle 常用语句/6.表连接.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip",
     "golang/go 入门指南/未命名",
