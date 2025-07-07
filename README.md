@@ -1,6 +1,4 @@
 
-笔耕不辍，开源星火。
-
 [linux](https://github.com/x14k3/devops/tree/master/linux)  
 [shell](https://github.com/x14k3/devops/tree/master/shell)  
 [docker](https://github.com/x14k3/devops/tree/master/docker)  

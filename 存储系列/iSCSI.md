@@ -53,19 +53,15 @@ targetcli
 # 设置监听IP (建议绑定到专用存储网络)
 /> portals/ create 192.168.100.10
 
+# 当新的Initiator（客户端）添加到 SCST 时，自动为其分配所有已映射的 LUN（逻辑单元）,启用此参数可大幅简化配置，减少重复操作。
+/> set global auto_add_mapped_luns=true
+/> set global auto_add_default_portal=false
+
 # 保存配置并退出
 /> saveconfig
 /> exit
 ```
 
-启用多路径访问
-```bash
-targetcli
-set global auto_add_mapped_luns=true
-set global auto_add_default_portal=false
-saveconfig
-exit
-```
 
 ---
 

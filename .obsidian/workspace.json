@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "9c0c056a1bdfca76",
+        "id": "9fc7daa26560de25",
         "type": "tabs",
         "children": [
           {
-            "id": "6be6e380f11731b7",
+            "id": "53a1a0c1fe2e99d2",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "2. Oracle19c RAC-ASM部署"
             }
           }
         ]
@@ -165,34 +169,34 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "53a1a0c1fe2e99d2",
   "lastOpenFiles": [
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. rac 开启 archivelog.md",
-    "database/Oracle/Oracle 配置详解/dbca.rsp.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. rac 集群的IP 规划.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/3. rac 管理命令.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle rac 管理命令.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/1. Oracle rac 介绍.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. Oracle rac 新增节点.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. Oracle rac 集群的IP 规划.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle rac 开启 archivelog.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/5. rac 新增节点.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/1. rac 介绍.md",
-    "shell/shell 开箱即用/自动化 SSH 密钥生成和分发的脚本.md",
+    "存储系列/iSCSI.md",
+    "存储系列/存储多路径.md",
+    "linux/linux 文件系统/9. linux Multipath.md",
+    "企业建设/openVPN/openvpn证书管理.md",
+    "企业建设/openVPN/1. OpenVPN Server搭建.md",
+    "企业建设/openVPN/通过openvpn访问client所在子网.md",
+    "企业建设/openVPN/5. Stunnel隐藏OpenVPN流量 (Duplicated 2024-12-16 16_07_59).md",
+    "企业建设/openVPN/4. openVPN配置文件详解.md",
+    "企业建设/openVPN/3. openvpn的几种基本模式.md",
+    "企业建设/openVPN/2. 基于用户密码方式认证.md",
     "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
+    "database/Oracle/Oracle 备份恢复/基于RMAN实现异机恢复.md",
+    "database/Oracle/Oracle 备份恢复/不完全恢复.md",
+    "database/Oracle/Oracle 备份恢复/完全恢复.md",
+    "database/Oracle/Oracle 备份恢复/Oracle RMAN与CDB.md",
+    "database/Oracle/Oracle 配置详解/dbca.rsp.md",
+    "shell/shell 开箱即用/自动化 SSH 密钥生成和分发的脚本.md",
     "database/Oracle/Oracle 日志归档和闪回区/Oracle之redo log 归档.md",
     "database/Oracle/Oracle 日志归档和闪回区/Oracle之redo log 管理.md",
     "database/Oracle/Oracle 高级特性/Oracle CDB/2. pdb 数据库管理.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/1. pdb 数据库安装.md",
-    "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
-    "database/Oracle/Oracle 配置详解/listener.ora 详解.md",
-    "database/Oracle/Oracle 配置详解/tnsnames.ora 详解.md",
-    "database/Oracle/Oracle 配置详解/sqlnet.ora 详解.md",
-    "database/Oracle/Oracle 配置详解/pfile和spfile和init.ora.md",
-    "database/Oracle/Oracle 配置详解/Oracle 配置详解.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/0. CDB 概念.md",
-    "存储系列/iSCSI.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle RAC srvctl 常用命令.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/远程克隆PDB.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/将11g数据库插入到12c成为pdb.md",
-    "database/Oracle/Oracle 常用语句/3.表的管理.md",
-    "database/Oracle/Oracle 常用语句/6.表连接.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip",
     "golang/go 入门指南/未命名",
