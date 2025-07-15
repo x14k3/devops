@@ -22,44 +22,104 @@ dd if=/dev/zero of=/var/lib/iscsi_disks/disk1.img bs=1M count=1024
 
 - **选项2：使用LVM卷（推荐生产环境）**
 ```bash
-pvcreate /dev/sdb           # 初始化物理卷
-vgcreate vg_iscsi /dev/sdb  # 创建卷组
+pvcreate /dev/vdb                       # 初始化物理卷
+vgcreate vg_iscsi /dev/vdb              # 创建卷组
 lvcreate -L 100G -n lv_shared vg_iscsi  # 创建逻辑卷
 ```
 
 **配置iSCSI Target**
 ```bash
-targetcli
+[root@rac-data ~]# 
+[root@rac-data ~]# 
+[root@rac-data ~]# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0     11:0    1 1024M  0 rom  
+vda    253:0    0   60G  0 disk 
+├─vda1 253:1    0    1G  0 part /boot
+├─vda2 253:2    0  3.9G  0 part [SWAP]
+├─vda3 253:3    0   37G  0 part /
+├─vda4 253:4    0    1K  0 part 
+└─vda5 253:5    0 18.1G  0 part /home
+vdb    253:16   0   50G  0 disk 
+vdc    253:32   0   20G  0 disk 
+vdd    253:48   0   10G  0 disk 
+vde    253:64   0   10G  0 disk 
+vdf    253:80   0   10G  0 disk 
+[root@rac-data ~]# 
 
+[root@rac-data ~]# 
+[root@rac-data ~]# targetcli
+targetcli shell version 2.1.53
+Copyright 2011-2013 by Datera, Inc and others.
+For help on commands, type 'help'.
+  
 # 创建后端存储
-/> backstores/block create ocr1 /dev/sdb
-/> backstores/block create ocr2 /dev/sdc
-/> backstores/block create ocr3 /dev/sdd
-/> backstores/block create data /dev/sdf
+/> backstores/block create data /dev/vdb
+Created block storage object data using /dev/vdb.
+/> backstores/block create arch /dev/vdc
+Created block storage object arch using /dev/vdc.
+/> backstores/block create ocr1 /dev/vdd
+Created block storage object ocr1 using /dev/vdd.
+/> backstores/block create ocr2 /dev/vde
+Created block storage object ocr2 using /dev/vde.
+/> backstores/block create ocr3 /dev/vdf
+Created block storage object ocr3 using /dev/vdf.
+/> 
 
 # 创建Target IQN（唯一标识）
-/> iscsi/ create iqn.2025-06.com.oracle:rac.storage
+/> iscsi/ create iqn.2025-07.com.oracle:rac.storage
+Created target iqn.2025-07.com.oracle:rac.storage.
+Created TPG 1.
+Global pref auto_add_default_portal=true
+Created default portal listening on all IPs (0.0.0.0), port 3260.
+/> 
 
 # 绑定存储到LUN
-/> iscsi/iqn.2025-06.com.oracle:rac.storage/tpg1/luns create /backstores/block/ocr1
-/> iscsi/iqn.2025-06.com.oracle:rac.storage/tpg1/luns create /backstores/block/ocr2
-/> iscsi/iqn.2025-06.com.oracle:rac.storage/tpg1/luns create /backstores/block/ocr3
-/> iscsi/iqn.2025-06.com.oracle:rac.storage/tpg1/luns create /backstores/block/data
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/luns create /backstores/block/data 
+Created LUN 0.
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/luns create /backstores/block/arch 
+Created LUN 1.
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/luns create /backstores/block/ocr1
+Created LUN 2.
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/luns create /backstores/block/ocr2
+Created LUN 3.
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/luns create /backstores/block/ocr3
+Created LUN 4.
+/> 
 
 # 允许两个节点访问
-/> iscsi/iqn.2025-06.com.oracle:rac.storage/tpg1/acls create iqn.2025-06.com.oracle:node1
-/> iscsi/iqn.2025-06.com.oracle:rac.storage/tpg1/acls create iqn.2025-06.com.oracle:node2
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/acls create iqn.2025-07.com.oracle:rac01
+Created Node ACL for iqn.2025-07.com.oracle:rac01
+Created mapped LUN 4.
+Created mapped LUN 3.
+Created mapped LUN 2.
+Created mapped LUN 1.
+Created mapped LUN 0.
+/> 
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/acls create iqn.2025-07.com.oracle:rac02
+Created Node ACL for iqn.2025-07.com.oracle:rac02
+Created mapped LUN 4.
+Created mapped LUN 3.
+Created mapped LUN 2.
+Created mapped LUN 1.
+Created mapped LUN 0.
+/> 
+/> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/portals create 192.168.10.135 3260
 
-# 设置监听IP (建议绑定到专用存储网络)
-/> portals/ create 192.168.100.10
-
-# 当新的Initiator（客户端）添加到 SCST 时，自动为其分配所有已映射的 LUN（逻辑单元）,启用此参数可大幅简化配置，减少重复操作。
 /> set global auto_add_mapped_luns=true
+Parameter auto_add_mapped_luns is now 'true'.
 /> set global auto_add_default_portal=false
+Parameter auto_add_default_portal is now 'false'.
 
-# 保存配置并退出
-/> saveconfig
+/> saveconfig 
+Last 10 configs saved in /etc/target/backup/.
+Configuration saved to /etc/target/saveconfig.json
+
 /> exit
+Global pref auto_save_on_exit=true
+Last 10 configs saved in /etc/target/backup/.
+Configuration saved to /etc/target/saveconfig.json
+[root@rac-data ~]#
 ```
 
 
@@ -67,13 +127,13 @@ targetcli
 
 ### **二、Initiator 客户端配置（连接存储）**
 
-#### 节点 1 配置 (192.168.100.101)
+#### 节点 1 配置 (192.168.133.201)
 
 **设置 Initiator 名称**
 ```bash
 yum install -y iscsi-initiator-utils device-mapper-multipath
 
-echo "InitiatorName=iqn.2025-06.com.oracle:node1" > /etc/iscsi/initiatorname.iscsi
+echo "InitiatorName=iqn.2025-07.com.oracle:rac01" > /etc/iscsi/initiatorname.iscsi
 ```
 
 
@@ -89,23 +149,25 @@ defaults {
     no_path_retry fail
 }
 blacklist {
-    devnode "^sd[a-z]$"
+    devnode "^sd[a-z]$"  
 } '> /etc/multipath.conf
 
 systemctl start multipathd
+
+# user_friendly_names    使用友好名称（如mpatha, mpathb）而不是WWID来命名设备
+# path_grouping_policy   将所有路径合并到一个路径组（负载均衡）
+# failback               当出现更好的路径时，立即切换回该路径
+# no_path_retry          当所有路径都失效时，立即报告I/O错误（不重试）
+# devnode                黑名单：排除所有形如sda, sdb, ..., sdz的本地磁盘
 ```
 
 **连接存储**
 ```bash
-iscsiadm -m discovery -t st -p 192.168.10.135
-iscsiadm -m node -T iqn.2025-06.com.oracle:rac.storage -p 192.168.10.135 -l
+iscsiadm -m discovery -t st -p 192.168.133.203
+iscsiadm -m node -T iqn.2025-07.com.oracle:rac.storage -p 192.168.133.203 -l
 ```
 
-**配置持久化设备命名 (每台主机)**
-
-- **目的：** 确保即使磁盘设备名 (`/dev/sdX`) 在重启后发生变化，操作系统也能通过唯一标识符（如 WWID）找到同一个物理磁盘。多路径友好名 (`/dev/mapper/mpathX`) 通常是持久的，但为了给 ASM 使用，最好再创建一层基于 WWID 的 udev 规则或使用 ASMLib。
-    
-- **推荐方法 1: 使用 `udev` 规则**
+**使用 `udev` 规则配置持久化设备命名 (每台主机)**
 
 编辑/etc/scsi_id.config文件，2个节点都要编辑
 
@@ -116,30 +178,10 @@ echo "options=--whitelisted --replace-whitespace"  >> /etc/scsi_id.config
 将磁盘wwid信息写入99-oracle-asmdevices.rules文件，2个节点都要编辑
 
 ```bash
-# 根据lsblk修改盘符
-[root@rac-02 ~]# lsblk
-NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-sda      8:0    0   10G  0 disk 
-sdb      8:16   0   10G  0 disk 
-sdc      8:32   0   10G  0 disk 
-sdd      8:48   0   20G  0 disk 
-sde      8:64   0   20G  0 disk 
-sdf      8:80   0   20G  0 disk 
-sr0     11:0    1 1024M  0 rom  
-vda    253:0    0   50G  0 disk 
-├─vda1 253:1    0    1G  0 part /boot
-├─vda2 253:2    0    5G  0 part [SWAP]
-└─vda3 253:3    0   44G  0 part /
-[root@rac-02 ~]# 
-
-### 以下脚本适用于Centos7.0 根据/sdX 修改for循环中的a b c d ...
-
 ### !!!!!!!!!!!!! 一定要先创建用户 !!!!!!!!!!! ##################
-### !!!!!!!!!!!!! 一定要先创建用户 !!!!!!!!!!! ##################
-### !!!!!!!!!!!!! 一定要先创建用户 !!!!!!!!!!! ##################
-for i in  b c d e ;
+for i in a b c d e ;
 do 
-echo "KERNEL==\"sd*\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd${i}`\",SYMLINK+=\"asm-sd$i\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
+echo "KERNEL==\"sd*\",SUBSYSTEM==\"block\",PROGRAM==\"/lib/udev/scsi_id -g -u -d /dev/\$name\",RESULT==\"`/lib/udev/scsi_id -g -u -d /dev/sd${i}`\",SYMLINK+=\"asm-sd${i}\",OWNER=\"grid\",GROUP=\"asmadmin\",MODE=\"0660\"" >> /etc/udev/rules.d/99-oracle-asmdevices.rules
 done
 ```
 
@@ -161,7 +203,7 @@ udevadm trigger
 
 **设置唯一 Initiator 名称**
 ```bash
-echo "InitiatorName=iqn.2025-06.com.oracle:node2" > /etc/iscsi/initiatorname.iscsi
+echo "InitiatorName=iqn.2025-07.com.oracle:rac02" > /etc/iscsi/initiatorname.iscsi
 ```
 
 

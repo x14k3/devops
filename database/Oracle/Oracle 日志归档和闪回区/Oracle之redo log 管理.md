@@ -66,36 +66,25 @@ Oracle数据库一次只使用一个重做日志文件来存储从重做日志�
 
 如果您启用了归档(数据库处于ARCHIVELOG模式)，那么在归档程序后台进程(ARCn)将其内容归档之前，数据库不能重用或覆盖活动在线日志文件。如果禁用了归档（数据库处于 NOARCHIVELOG 模式），则当最后一个重做日志文件已满时，LGWR 将继续在序列中的下一个日志文件变为非活动状态时覆盖该文件。
 
-```bash
+```sql
 select  v.group#, v.status,g.member from v$log v , v$logfile g where v.GROUP#=g.GROUP#;
 
-# CURRENT
-# redo日志为当前活跃的日志，就是LGWR进程写的日志文件，处于该状态下的日志为数据库当前正在写入的日志组。活跃中的日志组无法进行删除。删除前需要将日志组切换到 INACTIVE状态。
-
-# ACTIVE
-# 是指活动的非当前日志，在进行实例恢复时会被用到。Active状态意味着Checkpoint尚未完成，脏数据未写入到硬盘，因此该日志文件不能被覆盖。
-
-# INACTIVE
-# 是非活动日志，在实例恢复时不再需要，但在介质恢复时可能需要。
-
-# UNUSED
-# 通常指从未被使用的日志组，即新添加的日志组。
+-- CURRENT.   redo日志为当前活跃的日志，就是LGWR进程写的日志文件，处于该状态下的日志为数据库当前正在写入的日志组。活跃中的日志组无法进行删除。删除前需要将日志组切换到 INACTIVE状态。
+-- ACTIVE.    是指活动的非当前日志，在进行实例恢复时会被用到。Active状态意味着Checkpoint尚未完成，脏数据未写入到硬盘，因此该日志文件不能被覆盖。
+-- INACTIVE.  是非活动日志，在实例恢复时不再需要，但在介质恢复时可能需要。
+-- UNUSED.    通常指从未被使用的日志组，即新添加的日志组。
 ```
 
 ##### （2）日志切换和日志系列号
 
 日志切换是指数据库停止写入一个重做日志文件并开始写入另一个重做日志文件的点。正常情况下，当当前重做日志文件被完全填满且必须继续写入下一个重做日志文件时，就会发生日志切换。
-
 但是，您可以配置日志切换，使其定期发生，而不管当前重做日志文件是否已被完全填满。您也可以手动强制日志切换。
-
 每次发生日志切换，LGWR开始写入时，Oracle数据库为每个重做日志文件分配一个新的日志序列号。当数据库归档重做日志文件时，归档的日志保留其日志序列号。一个被循环返回使用的重做日志文件被给出下一个可用的日志序列号。
-
 每个联机或归档重做日志文件由其日志序列号唯一标识。在崩溃、实例或介质恢复期间，数据库使用必要的归档文件和重做日志文件按日志序列号的升序正确地应用重做日志文件。
 
-```bash
+```sql
 # 手动强制日志切换
 alter system switch logfile;
-
 
 # 配置日志切换，定期发生
 
@@ -172,7 +161,7 @@ alter system switch logfile;
 
 然而，当块大小为4K时，重做浪费会增加。事实上，与512B块相比，4K块的重做浪费是显著的。你可以通过查看VSESSTAT和VSYSSTAT视图中存储的统计数据来确定重做浪费的数量。
 
-```
+```sql
 SYS@orcl&gt; select name,value from v$sysstat where name = 'redo wastage';
 
 NAME      VALUE
@@ -186,7 +175,7 @@ redo wastage     773492
 
 下面的语句添加了一个块大小为512B的重做日志文件组。BLOCKSIZE 512子句有效，但对于512B扇区大小的硬盘不是必需的。对于4K扇区大小的仿真模式磁盘，BLOCKSIZE 512子句将覆盖默认的4K大小。
 
-```
+```sql
 ALTER DATABASE orcl ADD LOGFILE
   GROUP 4 ('/u01/logs/orcl/redo04a.log','/u01/logs/orcl/redo04b.log')
   SIZE 100M BLOCKSIZE 512 REUSE;
@@ -230,7 +219,7 @@ SYS@orcl&gt; select blocksize from v$log where group# = 4;
 
 ARCHIVE\_LAG\_TARGET初始化参数为数据库当前日志提供了可以持续的最长时间(以秒为单位)的上限。因为还考虑了估计的存档时间，所以这不是确切的日志切换时间。
 
-```
+```sql
 # 将日志切换间隔设置为30分钟(典型值)。
 ARCHIVE_LAG_TARGET = 1800
 
@@ -533,7 +522,7 @@ DB\_BLOCK\_CHECKSUM参数的值可以使用ALTER SYSTEM语句动态更改。
 
 - 运行ALTER DATABASE CLEAR LOGFILE SQL语句。
 
-```
+```sql
 # 清除重做日志组4中的日志文件
 SYS@orcl&gt; alter database clear logfile group 4;
 

@@ -8,7 +8,7 @@
 [openstack](https://github.com/x14k3/devops/tree/master/openstack)  
 [windows bat](https://github.com/x14k3/devops/tree/master/windows%20bat)  
 
-[计算机网络](https://github.com/x14k3/devops/tree/master/net)  
+[网络与安全](https://github.com/x14k3/devops/tree/master/网络与安全)  
 [数据库](https://github.com/x14k3/devops/tree/master/database)  
 [存储服务](https://github.com/x14k3/devops/tree/master/存储服务)  
 [计算机操作系统](https://github.com/x14k3/devops/tree/master/计算机操作系统)  
