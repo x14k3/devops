@@ -1,4 +1,4 @@
-# KVM 虚拟机克隆和快照
+#kvm 
 
 ## 虚拟机克隆
 
@@ -19,32 +19,25 @@ virt-clone --auto-clone -o template -n test_02
 
 ### 手动克隆
 
-1. 复制一个磁盘镜像文件
+```bash
+# 1. 复制一个磁盘镜像文件
+cp /var/lib/libvirt/images/rhel8.qcow2   /var/lib/libvirt/images/rhel8_clone1.qcow2
 
-    ```
-    cp /var/lib/libvirt/images/rhel8.qcow2   /var/lib/libvirt/images/rhel8_clone1.qcow2
-    ```
+# 2. 复制一个虚拟机的xml文件
+virsh dumpxml --domain rhel8 > /etc/libvirt/qemu/rhel8_clone1.xml
 
-2. 复制一个虚拟机的xml文件
-
-    ```
-    [root@zutuanxue ~]# virsh dumpxml --domain rhel8 > /etc/libvirt/qemu/rhel8_clone1.xml
-    ```
-
-3. 修改xml文件 将原始机器的唯一性配置删除
-
+# 3. 修改xml文件 将原始机器的唯一性配置删除
     - 修改虚拟机名字
     - 删除UUID
     - 删除mac地址
     - 修改磁盘路径
 
-4. 导入虚拟机
+# 4. 导入虚拟机
+virsh define --file /etc/libvirt/qemu/rhel8_clone1.xml 
 
-    ```
-    根据xml文件导入机器
-    [root@zutuanxue ~]# virsh define --file /etc/libvirt/qemu/rhel8_clone1.xml 
-    定义域 rhel8_clone1（从 /etc/libvirt/qemu/rhel8_clone1.xml）
-    ```
+```
+
+
 
 ### 链接克隆
 

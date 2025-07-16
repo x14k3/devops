@@ -31,9 +31,9 @@ listen-address=127.0.0.1,192.168.1.101,192.168.1.102 
 #address=/rac-scan/192.168.1.201
 #address=/rac-scan/192.168.1.202 
 
-host-record=rac-scan,192.168.133.221
-host-record=rac-scan,192.168.133.222
-host-record=rac-scan,192.168.133.223
+host-record=rac01.scan.com,192.168.133.221
+host-record=rac01.scan.com,192.168.133.222
+host-record=rac01.scan.com,192.168.133.223
 
 # 设置上游DNS（可选）
 server=8.8.8.8
@@ -51,7 +51,7 @@ sudo systemctl start dnsmasq
 sudo systemctl enable dnsmasq
 
 # 测试SCAN名称解析：
-nslookup rac-scan
+nslookup rac01.scan.com
 
 # 测试节点间解析：
 nslookup rac1  # 应解析到192.168.1.101

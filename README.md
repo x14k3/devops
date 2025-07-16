@@ -14,5 +14,4 @@
 [计算机操作系统](https://github.com/x14k3/devops/tree/master/计算机操作系统)  
 [中间件](https://github.com/x14k3/devops/tree/master/中间件)  
 [企业级建设](https://github.com/x14k3/devops/tree/master/企业建设)  
-[信息安全](https://github.com/x14k3/devops/tree/master/信息安全)  
 [开源项目](https://github.com/x14k3/devops/tree/master/Open%20Source)  

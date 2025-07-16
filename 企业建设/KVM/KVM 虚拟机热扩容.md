@@ -1,101 +1,55 @@
-# KVM 虚拟机热扩容
+#kvm
 
 ## 一、磁盘热扩容
 
-通过组合合适的VM文件系统功能（例如支持在线resize的XFS文件系统）和QEMU底层 `virsh qemu-monitor-command`​ 指令可以实现在线动态调整虚拟机磁盘容量，无需停机，对维护在线应用非常方便。不过，这里虚拟机磁盘扩容（resize）部分步骤需要在VM内部使用操作系统命令，所以适合自建自用的测试环境。
-
-生产环境reize虚拟机磁盘系统，可采用 [libguestfs](http://libguestfs.org/) 来修改虚拟机磁盘镜像。 `libguestfs`​ 可以查看和编辑guest内部文件，脚本化修改VM，监控磁盘使用和空闲状态，以及创建虚拟机，P2V,V2V，以及备份，clone虚拟机，构建虚拟机，格式化磁盘，resize磁盘等等。
-
 ### 动态添加虚拟机磁盘
 
-- 创建虚拟机磁盘文件
-
   ```bash
-  #创建虚拟机磁盘(qcow2类型):
-  cd /var/lib/libvirt/images
-  qemu-img create -f qcow2 test_02_expand.qcow2 5G
+# 在宿主机创建磁盘镜像文件
+qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/new_disk.qcow2 10G 
 
-  #可以看到qcow2格式化磁盘是zlib压缩，并且一闪而过完成。此时使用 `ls -lh` 检查可以看到磁盘仅仅占用数百K:
-  -rw-r--r-- 1 root   root 193K Dec 27 17:12 sles12_data.qcow2
-  ```
+# 动态附加磁盘到运行中的虚拟机
 
-- 虚拟机支持磁盘文件动态添加，不需要停止虚拟机或者重启:
+# 方法1:使用attach-disk命令
+virsh attach-disk <虚拟机名称> /var/lib/libvirt/images/new_disk.qcow2 vdb --cache none --persistent
+#--config     设置的同时更改虚拟机xml文件，这样就可以保证虚拟机重启后仍然生效
+#--persistent 表示将更改写入虚拟机配置，这样重启后仍然有效。相当于–config --live
+#--subdriver  声明镜像文件类型<qcow2|raw>
+#--cache none 设置缓存模式，none表示不缓存（也可以根据需求设置其他模式）。
 
-  ```bash
-  virsh attach-disk test_02 --source /data/virthost/test_02_expand.qcow2 --config --target vdb --persistent --subdriver qcow2
-  #--config: 设置的同时更改虚拟机xml文件，这样就可以保证虚拟机重启后仍然生效
-  #--persistent: 重启生效，相当于–config --live
-  #--source：代表磁盘的源，可以是一个磁盘文件或一个物理设备；
-  #--target：代表磁盘在虚拟机中的目标设备名称，例如vda、vdb等。
-  #--subdriver：这一项是必须的，如果不加的话，虚拟机不知道镜像文件的格式
-  ```
 
-- 在虚拟机 中格式化并挂载XFS文件系统:
+# 方法2：使用XML配置文件（推荐）
+## 创建磁盘XML文件 `new_disk.xml`：
+<disk type='file' device='disk'>
+  <driver name='qemu' type='qcow2' cache='none'/>
+  <source file='/var/lib/libvirt/images/new_disk.qcow2'/>
+  <target dev='vdb' bus='virtio'/>
+</disk>
 
-  ```
-  mkfs.xfs /dev/vdb
-  mkdir /data
-  echo "/dev/vdb /data xfs defaults 0 0" >> /etc/fstab
-  mount /data
-  ```
+## 附加磁盘：
+virsh attach-device <虚拟机名称> new_disk.xml --persistent
 
-‍
+# 分离磁盘
+virsh detach-disk <虚拟机名称> vdb --persistent
+```
 
-此时，刚才5G空间的 `/dev/vdb`​ 已挂载到目录 `/data`​ 。所以，我们下一步开始在线扩容。
-
-### 调整磁盘空间，需要关闭虚拟机
-
-- 在物理主机(host主机)上使用使用 `qemu-img resize`​ 命令调整虚拟机磁盘大小:
-
-  ```
-  qemu-img resize /data/test_01.qcow2 +30G
-
-  ```
 
 ### 动态调整磁盘空间
 
-- ​`virsh blockresize`​ 命令支持在线调整虚拟镜像，实际是通过底层 [QEMU Monitor管理虚拟机](https://cloud-atlas.readthedocs.io/zh_CN/latest/kvm/qemu/qemu_monitor.html#qemu-monitor) 指令实现:
-
-  ```
-  virsh blockresize test_02 vdb --size 15G
-  ```
-
-- 此时在虚拟机 `test_02`​ 内部执行 `lsblk`​ 命令可以看到原先5G磁盘改成了15G:
-
-  ```
-  NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-  ...
-  vdb    253:16   0   15G  0 disk /data
-
-  ```
-
-- 注意，此时文件系统显示挂载的磁盘还是5G空间:
-
-  ```
-  Filesystem      Size  Used Avail Use% Mounted on
-  ...
-  /dev/vdb        5.0G  3.7G  1.4G  73% /data
-
-  ```
-
-备注：对于最新的Guest内核， `virtio-blk`​ 设备大小是自动更新的，所以会马上看到容量改变。对于旧内核需要重启guest系统。对于SCSI设备，需要在guest操作系统中触发一次扫描:
-
-```
-echo > /sys/class/scsi_device/0:0:0:0/device/rescan
+```bash
 
 ```
 
-- XFS文件系统支持在线调整:
+### 调整磁盘空间，需要关闭虚拟机
 
-  ```bash
-  xfs_growfs /data
-  ```
+```bash
+#在物理主机(host主机)上使用使用 `qemu-img resize`​ 命令调整虚拟机磁盘大小:
+qemu-img resize /data/test_01.qcow2 +30G
+```
 
-‍
+
 
 ### 在线添加光盘
-
-在线添加光盘命令比较简单，直接使用下面命令即可，注意`vdd`​应当没有被使用
 
 ```
 virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
