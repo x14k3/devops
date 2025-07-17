@@ -2,13 +2,29 @@
 
 恢复操作最关键的结构是重做日志，它由两个或多个预先分配的文件组成，在数据库发生更改时这些文件存储所有更改。Oracle数据库的每个实例都有一个相关的重做日志，以在实例故障情况下保护数据库。
 
-## 一、基本概念
+```sql
+SELECT 
+    l.GROUP# AS "日志组号",
+    l.THREAD# AS "所属线程（RAC）",
+    f.MEMBER AS "文件路径",
+    ROUND(l.BYTES/1024/1024, 2) AS "大小(MB)",
+    l.STATUS AS "组状态",
+    f.STATUS AS "文件状态",
+    l.ARCHIVED AS "是否归档",
+    l.MEMBERS AS "成员数"
+FROM V$LOG l
+JOIN V$LOGFILE f ON l.GROUP# = f.GROUP#
+ORDER BY l.GROUP#, f.MEMBER;
+```
 
-### 1.1 数据写入流程​​
+## 基本概念
 
-见：[Oracle之事务流程分析](Oracle之事务流程分析.md)
+### **数据写入流程​​**
 
-### 1.2 什么是重做日志（redo log）
+见：[Oracle 事务流程分析](Oracle%20事务流程分析.md)
+
+
+### **什么是重做日志（redo log）**
 
 ![44bee3978f964c6490e5bc14457bff0a~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/44bee3978f964c6490e5bc14457bff0atplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210356-e4zku13.webp)
 
@@ -22,11 +38,11 @@
 
 当用户执行DML并且commit后，不一定会触发DBWn写入，但一定会触发LGWR写入。因此就算执行DML并且commit后，数据只写入了数据库缓冲区，而此时数据库缓冲区中的数据丢失了，也可以通过redo log恢复。
 
-‍
 
-### 1.3 什么是归档日志（archive redo log）
 
-[Oracle之redo log 归档](Oracle之redo%20log%20归档.md)
+### **什么是归档日志（archive redo log）**
+
+[Oracle redo log 归档](Oracle%20redo%20log%20归档.md)
 
 ![510a0c2dae5342168117053f57d5a253~tplv-k3u1fbpfcp-zoom-in-crop-mark 1512 0 0 0](assets/510a0c2dae5342168117053f57d5a253tplv-k3u1fbpfcp-zoom-in-crop-mark%201512%200%200%200-20240315210502-utpj0cn.webp)
 
@@ -34,9 +50,9 @@
 
 以上就是数据写入的大体流程，数据库同步主要就是依赖重做日志（redo log）和归档日志（archive redo log）完成的。
 
-‍
 
-### 1.4 重做日志内容
+
+### **重做日志内容**
 
 重做记录，也称为重做条目，由一组更改向量组成，每一个更改向量都是对数据库中单个块所做更改的描述。例如，如果您更改了雇员表中的工资值，您将生成一个重做记录，其中包含更改向量，用于描述对表的数据段块、撤消段数据块和撤消段的事务表的更改。
 
@@ -46,7 +62,8 @@
 
 在提交相应的事务之前，重做记录也可以写入重做日志文件。如果重做日志缓冲区被填满，或者另一个事务提交，LGWR会将重做日志缓冲区中的所有重做日志条目刷新到重做日志文件中，即使有些重做记录可能没有被提交。如果需要，数据库可以回滚这些更改。
 
-### 1.5 Oracle数据库如何写入重做日志
+
+### **Oracle数据库如何写入重做日志**
 
 一个数据库的重做日志由两个或多个重做日志文件组成。数据库至少需要两个文件，以确保在归档另一个文件时(如果数据库处于ARCHIVELOG模式)，其中一个文件始终可写。
 
@@ -58,7 +75,7 @@ LGWR以循环方式写入重做日志文件。当当前重做日志文件填满�
 - 如果归档被禁用(数据库处于NOARCHIVELOG模式)，则在将记录在其中的更改写入数据文件后，这个被填满的重做日志文件是可用的。
 - 如果启用了归档(数据库处于ARCHIVELOG模式)，则在将记录的更改写入数据文件并归档后，LGWR就可以使用这个被填满的重做日志文件。
 
-##### （1）active(current)和inactive重做日志文件
+#### 重做日志文件状态
 
 Oracle数据库一次只使用一个重做日志文件来存储从重做日志缓冲区写入的重做记录。LGWR正在主动写入的重做日志文件称为当前(current)重做日志文件。
 
@@ -69,13 +86,14 @@ Oracle数据库一次只使用一个重做日志文件来存储从重做日志�
 ```sql
 select  v.group#, v.status,g.member from v$log v , v$logfile g where v.GROUP#=g.GROUP#;
 
--- CURRENT.   redo日志为当前活跃的日志，就是LGWR进程写的日志文件，处于该状态下的日志为数据库当前正在写入的日志组。活跃中的日志组无法进行删除。删除前需要将日志组切换到 INACTIVE状态。
--- ACTIVE.    是指活动的非当前日志，在进行实例恢复时会被用到。Active状态意味着Checkpoint尚未完成，脏数据未写入到硬盘，因此该日志文件不能被覆盖。
--- INACTIVE.  是非活动日志，在实例恢复时不再需要，但在介质恢复时可能需要。
--- UNUSED.    通常指从未被使用的日志组，即新添加的日志组。
+--CURRENT    redo日志为当前活跃的日志，就是LGWR进程写的日志文件，处于该状态下的日志为数据库当前正在写入的日志组。活跃中的日志组无法进行删除。删除前需要将日志组切换到 INACTIVE状态。
+--ACTIVE     是指活动的非当前日志，在进行实例恢复时会被用到。Active状态意味着Checkpoint尚未完成，脏数据未写入到硬盘，因此该日志文件不能被覆盖。
+--INACTIVE   是非活动日志，在实例恢复时不再需要，但在介质恢复时可能需要。
+--UNUSED     通常指从未被使用的日志组，即新添加的日志组。
 ```
 
-##### （2）日志切换和日志系列号
+
+#### 日志切换和日志系列号
 
 日志切换是指数据库停止写入一个重做日志文件并开始写入另一个重做日志文件的点。正常情况下，当当前重做日志文件被完全填满且必须继续写入下一个重做日志文件时，就会发生日志切换。
 但是，您可以配置日志切换，使其定期发生，而不管当前重做日志文件是否已被完全填满。您也可以手动强制日志切换。
@@ -88,14 +106,13 @@ alter system switch logfile;
 
 # 配置日志切换，定期发生
 
-
 ```
 
 ‍
 
-## 二、规划重做日志
+## 规划重做日志
 
-### 2.1 多路复用重做日志文件
+### **多路复用重做日志文件**
 
 为了防止涉及重做日志本身的故障，Oracle数据库允许多路复用重做日志，这意味着两个或多个相同的重做日志副本可以自动维护在不同的位置。
 
@@ -106,17 +123,17 @@ alter system switch logfile;
 
 ![20221213-9af6db7c-02d4-4c38-8ae5-dc1356feb0de](assets/20221213-9af6db7c-02d4-4c38-8ae5-dc1356feb0de-20240314093400-v89kjy3.png)
 
-在上图中，A\_LOG1和B\_LOG1都是第一组的成员，A\_LOG2和B\_LOG2都是第二组的成员，依此类推。一个组的每个成员大小必须相同。
+在上图中，`A_LOG1 和 B_LOG1` 都是第一组的成员，`A_LOG2 和 B_LOG2` 都是第二组的成员，依此类推。一个组的每个成员大小必须相同。
 
-日志文件组的每个成员都是同时处于活动状态，即由LGWR同时写入，这由LGWR分配的相同的日志序列号指示。在上图中，第一个LGWR同时写A\_LOG1和B\_LOG1。然后同时写A\_LOG2和B\_LOG2，依此类推。LGWR从不同时向不同组的成员写入(例如，写入A\_LOG1和B\_LOG2)。
+日志文件组的每个成员都是同时处于活动状态，即由 `LGWR`同时写入，这由 `LGWR`分配的相同的日志序列号指示。在上图中，第一个 LGWR同时写 `A_LOG1和 B_LOG1`。然后同时写 `A_LOG2和 B_LOG2`，依此类推。LGWR从不同时向不同组的成员写入(例如，写入 `A_LOG1和 B_LOG2`)。
 
 **注意**：Oracle建议您复用重做日志文件。如果需要恢复，那么日志文件数据的丢失可能是灾难性的。注意，当你复用重做日志时，数据库必须增加它执行的I/O量。这可能会影响数据库的整体性能，具体取决于您的配置。
 
-##### （1）重做日志故障的响应
+#### 重做日志故障的响应
 
-当LGWR无法写入组中的某个成员时，数据库将该成员标记为INVALID，并向LGWR跟踪文件和数据库警报日志写入错误消息，指出无法访问的文件存在的问题。
+当 `LGWR`无法写入组中的某个成员时，数据库将该成员标记为`INVALID`，并向 `LGWR`跟踪文件和数据库警报日志写入错误消息，指出无法访问的文件存在的问题。
 
-当重做日志成员不可用时，LGWR的具体反应取决于可用性缺失的原因，如下表所示。
+当重做日志成员不可用时，`LGWR`的具体反应取决于可用性缺失的原因，如下表所示。
 
 |条件|LGWR的行为|
 | ----------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -125,7 +142,7 @@ alter system switch logfile;
 |由于介质故障，在日志切换时下一个组的所有成员都不能被LGWR访问|Oracle 数据库返回错误，数据库实例关闭。在这种情况下，您可能需要使用丢失的重做日志对数据库执行介质恢复。如果数据库检查点已经移动到丢失的重做日志之外，则不需要进行介质恢复，因为数据库已经将重做日志中记录的数据保存到数据文件中。您只需要删除不可访问的重做日志组。如果数据库没有归档坏日志，在删除日志之前使用ALTER database CLEAR LOGFILE UNARCHIVED禁用归档。|
 |当LGWR向一个组的所有成员写入时，该组的所有成员突然变得无法访问|Oracle数据库返回错误，数据库实例立即关闭。在这种情况下，您可能需要执行介质恢复。如果包含日志的介质实际上并没有丢失——例如，如果日志的驱动器被无意中关闭了——则可能不需要进行介质恢复。在这种情况下，您只需要打开驱动器并让数据库执行自动实例恢复。|
 
-##### （2）合法与不合法的配置
+#### 合法与不合法的配置
 
 在大多数情况下，多路复用重做日志应该是对称的:所有重做日志组的成员数量应该相同。然而，数据库并不要求多路复用重做日志是对称的。
 
@@ -133,17 +150,18 @@ alter system switch logfile;
 
 一个实例重做日志的唯一要求是它至少有两个组。合法和非法的多路复用重做日志配置如下图所示。第二个配置是非法的，因为它只有一个组。
 
-### 2.2 在不同的磁盘上放置重做日志成员
 
-在建立多路复用重做日志时，将一个组的成员放在不同的物理磁盘上。如果单个磁盘故障，则组中只有一个成员对LGWR不可用，而其他成员对LGWR仍可访问，因此实例可以继续工作。
+### **在不同的磁盘上放置重做日志成员**
 
-如果你归档重做日志，将重做日志成员分散到不同的磁盘上，以消除LGWR和ARCn后台进程之间的争用。例如，如果你有两组多路复用重做日志成员(一个双工重做日志)，将每个成员放在不同的磁盘上，并将存档目标设置为第五个磁盘。这样做将避免LGWR(写入成员)和ARCn(读取成员)之间的争用。
+在建立多路复用重做日志时，将一个组的成员放在不同的物理磁盘上。如果单个磁盘故障，则组中只有一个成员对 `LGWR`不可用，而其他成员对 `LGWR`仍可访问，因此实例可以继续工作。
+
+如果你归档重做日志，将重做日志成员分散到不同的磁盘上，以消除 `LGWR和ARCn`后台进程之间的争用。例如，如果你有两组多路复用重做日志成员(一个双工重做日志)，将每个成员放在不同的磁盘上，并将存档目标设置为第五个磁盘。这样做将避免 `LGWR(写入成员)和ARCn(读取成员)`之间的争用。
 
 数据文件也应该与重做日志文件放在不同的磁盘上，以减少写数据块和重做记录时的争用。
 
-**redo文件的多路复用：** 通常应该通过指定db_create_online_log_dest_n 参考[Oracle OMF](../Oracle%20高级特性/Oracle%20OMF.md)
+**redo文件的多路复用：** 通常应该通过指定 `db_create_online_log_dest_n` 参考[Oracle OMF](../Oracle%20高级特性/Oracle%20OMF.md)
 
-### 2.3 规划重做日志文件大小
+### 规划重做日志文件大小
 
 在设置重做日志文件的大小时，要考虑是否要归档重做日志。应该调整重做日志文件的大小，以便将一个填满的组归档到离线存储媒介的单个单元中(如磁带或磁盘)，使媒介上未使用的空间最少。
 
@@ -152,36 +170,40 @@ alter system switch logfile;
 同一个多路复用重做日志组的所有成员大小必须相同。不同组的成员可以有不同的大小。然而，在不同组之间使用不同的文件大小并没有什么好处。如果未将检查点设置为在日志切换之间发生，请将所有组的大小设置为相同，以确保定期发生检查点。
 
 重做日志文件允许的最小大小是4 MB。
+查看重做日志大小
+```sql
+SELECT group#, bytes/1024/1024 AS size_mb, members, status, archived FROM v$log;
+```
 
-### 2.4 规划重做日志文件块大小
+### 规划重做日志文件块大小
 
 与数据库块大小(可以在2K到32K之间)不同，重做日志文件总是默认块大小等于磁盘的物理扇区大小。从历史上看，这通常是512字节(512B)。
 
 一些较新的大容量磁盘驱动器提供4K字节(4K)扇区大小，以提高ECC能力和提高格式化效率。大多数Oracle数据库平台都能够检测到这种较大的扇区大小。然后，数据库自动在这些磁盘上创建具有4K块大小的重做日志文件。
 
-然而，当块大小为4K时，重做浪费会增加。事实上，与512B块相比，4K块的重做浪费是显著的。你可以通过查看VSESSTAT和VSYSSTAT视图中存储的统计数据来确定重做浪费的数量。
+然而，当块大小为4K时，重做浪费会增加。事实上，与512B块相比，4K块的重做浪费是显著的。你可以通过查看 `VSESSTAT和VSYSSTAT`视图中存储的统计数据来确定重做浪费的数量。
 
 ```sql
-SYS@orcl&gt; select name,value from v$sysstat where name = 'redo wastage';
+select name,value from v$sysstat where name = 'redo wastage';
 
 NAME      VALUE
 ---------------------------------------------------------------- ----------
 redo wastage     773492
 ```
 
-为了避免额外的重做浪费，如果您正在使用仿真模式磁盘- 4K扇区大小的磁盘驱动器，在磁盘接口上模拟512B扇区大小，您可以通过指定512B块大小或在某些平台上指定1K块大小来覆盖重做日志的默认4K块大小。但是，当重做日志写与4K物理扇区的开始没有对齐时，将导致显著的性能下降。因为4K物理扇区中8个512B槽中的7个没有对齐，所以通常会发生性能下降。因此，在4K扇区大小的仿真模式磁盘上规划重做日志块大小时，必须在性能和磁盘浪费之间的评估权衡。
+为了避免额外的重做浪费，如果您正在使用仿真模式磁盘- 4K扇区大小的磁盘驱动器，在磁盘接口上模拟 512B扇区大小，您可以通过指定 512B块大小或在某些平台上指定1K块大小来覆盖重做日志的默认 4K块大小。但是，当重做日志写与4K物理扇区的开始没有对齐时，将导致显著的性能下降。因为4K物理扇区中 8个 512B槽中的 7个没有对齐，所以通常会发生性能下降。因此，在 4K扇区大小的仿真模式磁盘上规划重做日志块大小时，必须在性能和磁盘浪费之间的评估权衡。
 
-可以在CREATE DATABASE、ALTER DATABASE和CREATE CONTROLFILE语句中使用BLOCKSIZE关键字指定联机重做日志文件的块大小。在某些平台上，允许的块大小是512和4096。在其他平台上，允许的块大小为1024和4096。
+可以在`CREATE DATABASE、ALTER DATABASE和CREATE CONTROLFILE`语句中使用 `BLOCKSIZE`关键字指定联机重做日志文件的块大小。在某些平台上，允许的块大小是 512和 4096。在其他平台上，允许的块大小为 1024和4096。
 
-下面的语句添加了一个块大小为512B的重做日志文件组。BLOCKSIZE 512子句有效，但对于512B扇区大小的硬盘不是必需的。对于4K扇区大小的仿真模式磁盘，BLOCKSIZE 512子句将覆盖默认的4K大小。
+下面的语句添加了一个块大小为 512B的重做日志文件组。`BLOCKSIZE 512`子句有效，但对于 512B扇区大小的硬盘不是必需的。对于 4K扇区大小的仿真模式磁盘，`BLOCKSIZE 512`子句将覆盖默认的4K大小。
 
 ```sql
 ALTER DATABASE orcl ADD LOGFILE
   GROUP 4 ('/u01/logs/orcl/redo04a.log','/u01/logs/orcl/redo04b.log')
   SIZE 100M BLOCKSIZE 512 REUSE;
 
-# 查看重做日志文件的块大小
-SYS@orcl&gt; select blocksize from v$log where group# = 4;
+--查看重做日志文件的块大小
+select blocksize from v$log where group# = 4;
 
  BLOCKSIZE
 ----------
@@ -189,7 +211,7 @@ SYS@orcl&gt; select blocksize from v$log where group# = 4;
   
 ```
 
-### 2.5 选择重做日志文件的数量
+### 选择重做日志文件的数量
 
 为数据库实例确定适当的重做日志文件数量的最佳方法是测试不同的配置。在不妨碍LGWR写入重做日志信息的情况下，最优配置的组尽可能少。
 
@@ -200,13 +222,13 @@ SYS@orcl&gt; select blocksize from v$log where group# = 4;
 - MAXLOGFILES：CREATE DATABASE语句中使用的MAXLOGFILES参数确定每个数据库的最大重做日志文件组数。组值范围为1到MAXLOGFILES。您可以超过MAXLOGFILES限制，控制文件将根据需要进行扩展。如果没有为CREATE DATABASE语句指定MAXLOGFILES，则数据库使用特定于操作系统的默认值。
 - MAXLOGMEMBERS：CREATE DATABASE语句中使用的MAXLOGMEMBERS参数确定每个组的最大成员数。与MAXLOGFILES一样，覆盖此上限的惟一方法是重新创建数据库或控制文件。因此，在创建数据库之前考虑这个限制是很重要的。如果没有为CREATE DATABASE语句指定MAXLOGMEMBERS参数，则数据库使用操作系统默认值。
 
-### 2.6 控制归档滞后
+### 控制归档滞后
 
 您可以强制所有已启用的重做日志线程按一定的时间间隔切换当前日志。
 
-在主/备数据库配置中，通过在主站点归档重做日志，然后将其传输到备数据库，备用数据库可以使用更改。备用数据库正在应用的更改可能滞后于主数据库上发生的更改，因为备用数据库必须等待主数据库重做日志中的更改被归档（到归档的重做日志中），然后再传送给它。要限制这种延迟，可以设置ARCHIVE\_LAG\_TARGET初始化参数。设置此参数可使您以秒为单位指定延迟时间。
+在 主/备 数据库配置中，通过在主站点归档重做日志，然后将其传输到备数据库，备用数据库可以使用更改。备用数据库正在应用的更改可能滞后于主数据库上发生的更改，因为备用数据库必须等待主数据库重做日志中的更改被归档（到归档的重做日志中），然后再传送给它。要限制这种延迟，可以设置ARCHIVE\_LAG\_TARGET初始化参数。设置此参数可使您以秒为单位指定延迟时间。
 
-##### （1）设置ARCHIVE\_LAG\_TARGET初始化参数
+##### 设置ARCHIVE\_LAG\_TARGET初始化参数
 
 当你设置ARCHIVE\_LAG\_TARGET初始化参数时，会导致数据库定期检查实例的当前重做日志，并决定何时切换日志。
 
@@ -220,12 +242,11 @@ SYS@orcl&gt; select blocksize from v$log where group# = 4;
 ARCHIVE\_LAG\_TARGET初始化参数为数据库当前日志提供了可以持续的最长时间(以秒为单位)的上限。因为还考虑了估计的存档时间，所以这不是确切的日志切换时间。
 
 ```sql
-# 将日志切换间隔设置为30分钟(典型值)。
-ARCHIVE_LAG_TARGET = 1800
+--将日志切换间隔设置为30分钟(典型值)。
+--ARCHIVE_LAG_TARGET是一个动态参数，可以通过ALTER SYSTEM set语句设置：
 
-# ARCHIVE_LAG_TARGET是一个动态参数，可以通过ALTER SYSTEM set语句设置：
-## 例如设置其值为30s，设置之前查看日志组的状态
-SYS@orcl&gt; select group#,sequence#,status from v$log;
+--例如设置其值为30s，设置之前查看日志组的状态
+select group#,sequence#,status from v$log;
 
     GROUP#  SEQUENCE# STATUS
 ---------- ---------- ----------------
@@ -233,12 +254,13 @@ SYS@orcl&gt; select group#,sequence#,status from v$log;
  2   83 CURRENT
  3   81 INACTIVE
  4    0 UNUSED
-## 设置archive_lag_target
-SYS@orcl&gt; alter system set archive_lag_target = 30;
-System altered.
+ 
+--设置archive_lag_target
+alter system set archive_lag_target = 30;
 
-## 30s后再次查看日志组的信息
-SYS@orcl&gt; select group#,sequence#,status from v$log;
+
+--30s后再次查看日志组的信息
+select group#,sequence#,status from v$log;
     GROUP#  SEQUENCE# STATUS
 ---------- ---------- ----------------
  1   82 INACTIVE
@@ -246,35 +268,35 @@ SYS@orcl&gt; select group#,sequence#,status from v$log;
  3   81 INACTIVE
  4   84 CURRENT
 
-## 查看完之后，可以将该参数设置为0，禁用基于时间的日志切换功能
+--查看完之后，可以将该参数设置为0，禁用基于时间的日志切换功能
 ```
 
 值为0将禁用此基于时间的日志切换功能。这是默认设置。
 
-即使没有备用数据库，也可以设置ARCHIVE\_LAG\_TARGET初始化参数。例如，可以专门设置ARCHIVE\_LAG\_TARGET参数，以强制切换和归档日志。
+即使没有备用数据库，也可以设置`ARCHIVE_LAG_TARGET`初始化参数。例如，可以专门设置`ARCHIVE_LAG_TARGET`参数，以强制切换和归档日志。
 
-**注意**：在Oracle Real Application Clusters环境的所有实例中，ARCHIVE\_LAG\_TARGET参数必须设置为相同的值。如果不这样做，就会导致不可预测的行为。
+**注意**：在Oracle Real Application Clusters环境的所有实例中，`ARCHIVE_LAG_TARGET`参数必须设置为相同的值。如果不这样做，就会导致不可预测的行为。
 
-##### （2）ARCHIVE\_LAG\_TARGET设置的影响因素
+##### ARCHIVE\_LAG\_TARGET设置的影响因素
 
-在设置ARCHIVE\_LAG\_TARGET初始化参数时，有几个因素需要考虑。
-在确定是否要设置ARCHIVE\_LAG\_TARGET初始化参数以及确定该参数的值时，需要考虑以下因素。
+在设置`ARCHIVE_LAG_TARGET`初始化参数时，有几个因素需要考虑。
+在确定是否要设置`ARCHIVE_LAG_TARGET`初始化参数以及确定该参数的值时，需要考虑以下因素。
 
 - 切换(以及归档)日志的开销
 - 由于日志满的情况，发生正常日志切换的频率有多高
 - 在备用数据库中可以容忍丢失多少重做
 
-如果自然日志切换的频率比指定的间隔要高，那么设置ARCHIVE\_LAG\_TARGET可能没什么用。然而，在重做生成速度不正常的情况下，间隔确实为每个当前日志覆盖的时间范围提供了上限。
+如果自然日志切换的频率比指定的间隔要高，那么设置`ARCHIVE_LAG_TARGET`可能没什么用。然而，在重做生成速度不正常的情况下，间隔确实为每个当前日志覆盖的时间范围提供了上限。
 
-如果ARCHIVE\_LAG\_TARGET初始化参数设置为非常低的值，可能会对性能产生负面影响。这可能会迫使频繁切换日志。将该参数设置为合理的值，以免降低主数据库的性能。
+如果`ARCHIVE_LAG_TARGET`初始化参数设置为非常低的值，可能会对性能产生负面影响。这可能会迫使频繁切换日志。将该参数设置为合理的值，以免降低主数据库的性能。
 
-## 三、创建重做日志组和成员
+## 创建重做日志组和成员
 
 为数据库规划重做日志，并在数据库创建过程中创建所有所需的重做日志文件组和成员。但是，在有些情况下，您可能需要创建额外的组或成员。例如，向重做日志添加组可以纠正重做日志组可用性问题。
 
-要创建新的重做日志组和成员，您必须拥有ALTER DATABASE系统权限。数据库最多可以有MAXLOGFILES个组。
+要创建新的重做日志组和成员，您必须拥有`ALTER DATABASE`系统权限。数据库最多可以有`MAXLOGFILES`个组。
 
-### 3.1 创建重做日志组
+### 创建重做日志组
 
 要创建一组新的重做日志文件，使用SQL语句 `ALTER DATABASE 和 ADD LOGFILE`​子句。
 
@@ -315,7 +337,7 @@ select group#,member from v$logfile where member like '%redo07%';
 使用组号可以使重做日志组的管理更容易。但是，组号必须在1到MAXLOGFILES之间。不要跳过重做日志文件组编号(即不要将您的组编号为10、20、30等)，否则将消耗数据库控制文件中不必要的空间。BLOCKSIZE子句是可选的。
 **注意**：提供新日志成员的完整路径名，以指定它们的位置。否则，将在数据库服务器的默认目录或当前目录中创建文件，具体取决于您的操作系统。
 
-### 3.2 创建重做日志成员
+### 创建重做日志成员
 
 在某些情况下，可能没有必要创建一组完整的重做日志文件。一个组可能已经存在，但不完整，因为该组的一个或多个成员被删除(例如，因为磁盘故障)。在这种情况下，您可以向现有的组中添加新成员。为现有的组创建新的重做日志成员。
 
@@ -351,7 +373,61 @@ select group#,member,status from v$logfile where member like '%redo07%';
 
 **注意**：完全指定新日志成员的文件名，以指示应该在哪里创建操作系统文件。否则，将在数据库服务器的默认目录或当前目录中创建文件，具体取决于您的操作系统。您可能还会注意到，新日志成员的状态显示为INVALID。这是正常的，当它第一次使用时，它将更改为活动(空白)。
 
-## 四、重定位和重命名重做日志成员
+### Oracle RAC 环境
+
+**在 Oracle RAC 环境中，每个实例有自己专属的重做日志线程（Thread），因此添加重做日志组时需要**明确指定所属线程。以下是详细操作步骤：
+
+**步骤 1：确认当前日志组和线程信息**
+
+```sql
+-- 查询所有重做日志组（注意 THREAD# 列）
+SELECT 
+    l.GROUP# AS "日志组号",
+    l.THREAD# AS "所属线程（RAC）",
+    f.MEMBER AS "文件路径",
+    ROUND(l.BYTES/1024/1024, 2) AS "大小(MB)",
+    l.STATUS AS "组状态",
+    f.STATUS AS "文件状态",
+    l.ARCHIVED AS "是否归档",
+    l.MEMBERS AS "成员数"
+FROM V$LOG l
+JOIN V$LOGFILE f ON l.GROUP# = f.GROUP#
+ORDER BY l.GROUP#, f.MEMBER;
+
+-- 查询实例与线程的对应关系
+SELECT INSTANCE_NAME, THREAD# FROM GV$INSTANCE;
+```
+
+**步骤 2：为每个实例的线程添加新的重做日志组**
+
+语法示例（使用 ASM 存储）**：
+```sql
+-- 为线程 1（通常对应实例 1）添加两组
+ALTER DATABASE ADD LOGFILE THREAD 1 
+  GROUP 5 ('+DATA') SIZE 100M blocksize 512,
+  GROUP 6 ('+DATA') SIZE 100M blocksize 512;
+
+-- 为线程 2（通常对应实例 2）添加两组
+ALTER DATABASE ADD LOGFILE THREAD 2 
+  GROUP 7 ('+DATA') SIZE 100M blocksize 512,
+  GROUP 8 ('+DATA') SIZE 100M blocksize 512;
+```
+
+
+**步骤 3：验证添加结果**
+
+```sql
+-- 检查新日志组状态（应显示 INACTIVE/UNUSED）
+SELECT GROUP#, THREAD#, STATUS, MEMBERS, BYTES/1024/1024 "SIZE_MB" 
+FROM V$LOG 
+WHERE GROUP# >= 5;  -- 替换为添加的起始组号
+
+-- 确认所有实例可见
+SELECT INST_ID, GROUP#, STATUS FROM GV$LOG;
+```
+
+
+## 重定位和重命名重做日志成员
 
 您可以使用操作系统命令重新定位重做日志，然后使用ALTER DATABASE语句使数据库知道它们的新名称(位置)。
 
@@ -365,7 +441,7 @@ select group#,member,status from v$logfile where member like '%redo07%';
 
 ```sql
 -- 1.关闭数据库
-SYS@orcl&gt; shutdown;
+shutdown;
 
 -- 2.将重做日志迁移到新的位置（以日志组5为例）
 [oracle@oracle4 ~]$ mkdir /u01/logs/orcl_new
@@ -377,25 +453,25 @@ total 204808
 -rw-r----- 1 oracle dba 104858112 Dec  7 08:58 redo05B.log
 
 -- 3.启动数据库到挂载状态
-SYS@orcl&gt; startup mount;
+startup mount;
 
 -- 4.重命名重做日志成员
 -- 使用带有RENAME FILE子句的ALTER DATABASE语句重命名数据库重做日志文件。
-SYS@orcl&gt; alter database rename file '/u01/logs/orcl/redo05a.log','/u01/logs/orcl/redo05b.log'
+alter database rename file '/u01/logs/orcl/redo05a.log','/u01/logs/orcl/redo05b.log'
       to '/u01/logs/orcl_new/redo05A.log','/u01/logs/orcl_new/redo05B.log';
 Database altered.
 
 -- 5.打开数据库
 -- 重做日志更改在数据库打开时生效。
-SYS@orcl&gt; alter database open;
+alter database open;
 Database altered.
 
 -- 查看验证
-SYS@orcl&gt; select group#,sequence#,status from v$log where group# = 5;
+select group#,sequence#,status from v$log where group# = 5;
     GROUP#  SEQUENCE# STATUS
 ---------- ---------- ----------------
  5   86 INACTIVE
-SYS@orcl&gt; select group#,member from v$logfile where group# = 5;
+select group#,member from v$logfile where group# = 5;
 
     GROUP# MEMBER
 ---------- ----------------------------------------
@@ -403,13 +479,13 @@ SYS@orcl&gt; select group#,member from v$logfile where group# = 5;
  5 /u01/logs/orcl_new/redo05B.log
 ```
 
-## 五、删除重做日志组和成员
+## 删除重做日志组和成员
 
 在某些情况下，您可能希望删除整个重做日志成员组。
 
 例如，您希望减少实例重做日志中的组数。在另一种情况下，您可能希望删除一个或多个特定的重做日志成员。例如，如果磁盘发生故障，您可能需要删除故障磁盘上的所有重做日志文件，以便数据库不会尝试写入不可访问的文件。在其他情况下，特定的重做日志文件不再需要。例如，文件可能存储在不合适的位置。
 
-### 5.1 删除日志组
+### 删除日志组
 
 要删除重做日志组，必须具有ALTER DATABASE系统权限。在删除重做日志组之前，需要考虑以下限制和注意事项:
 
@@ -418,7 +494,7 @@ SYS@orcl&gt; select group#,member from v$logfile where group# = 5;
 - 在删除重做日志组之前，请确保重做日志组已存档(如果启用了存档)。要查看是否发生了这种情况，请使用V$LOG视图。
 
 ```sql
-SYS@orcl&gt; select group#,sequence#,archived,status from v$log;
+select group#,sequence#,archived,status from v$log;
 
     GROUP#  SEQUENCE# ARC STATUS
 ---------- ---------- --- ----------------
@@ -434,7 +510,7 @@ SYS@orcl&gt; select group#,sequence#,archived,status from v$log;
 
 ```sql
 -- 1.删除重做日志组7
-SYS@orcl&gt; alter database drop logfile group 7;
+alter database drop logfile group 7;
 
 -- 2.如果没有使用Oracle Managed Files，请在操作系统层面删除响应的日志文件
 [oracle@oracle4 ~]$ ll /u01/logs/orcl/redo07*
@@ -448,7 +524,7 @@ SYS@orcl&gt; alter database drop logfile group 7;
 
 当使用Oracle Managed Files时，操作系统文件的清理会自动完成。
 
-### 5.2 删除重做日志成员
+### 删除重做日志成员
 
 要删除重做日志成员，必须具有ALTER DATABASE系统权限。在删除单个重做日志成员之前，请考虑以下限制和注意事项:
 
@@ -486,7 +562,7 @@ Database altered.
 
 若要删除活动组的成员，必须首先强制进行日志切换。
 
-## 六、强制日志切换
+## 强制日志切换
 
 日志切换发生在LGWR停止写入一个重做日志组并开始写入另一个重做日志组时。默认情况下，当当前重做日志文件组被填满时，会自动发生日志切换。
 
@@ -495,38 +571,19 @@ Database altered.
 要强制日志切换，必须具有ALTER SYSTEM权限。
 
 ```sql
--- 运行带有SWITCH LOGFILE子句的ALTER SYSTEM语句。
-SYS@orcl&gt; alter system switch logfile;
-System altered.
+alter system switch logfile;
 ```
 
-## 七、验证重做日志文件中的块
 
-您可以配置数据库使用校验和来验证重做日志文件中的块。
 
-如果你将初始化参数DB\_BLOCK\_CHECKSUM设置为TYPICAL(默认值)，那么数据库在将每个数据库块写入磁盘时计算一个校验和，包括将每个重做日志块写入当前日志时。
-
-Oracle数据库使用校验和来检测重做日志块中的损坏。当恢复过程中从归档日志中读取重做日志块，以及将该块写入归档日志文件时，数据库将验证重做日志块。如果检测到损坏，将引发一个错误并将其写入警报日志。
-
-如果在尝试归档重做日志块时检测到损坏，系统会尝试从组中的其他成员读取该重做日志块。如果该块在重做日志组的所有成员中都已损坏，则无法进行归档。
-
-DB\_BLOCK\_CHECKSUM参数的值可以使用ALTER SYSTEM语句动态更改。
-
-**注意**：启用DB\_BLOCK\_CHECKSUM会有轻微的开销，并降低数据库性能。监视数据库性能，以确定使用数据块校验和检测损坏的好处是否大于对性能影响。
-
-## 八、清除重做日志文件
+## 清除重做日志文件
 
 重做日志文件可能在数据库打开时损坏，并最终停止数据库活动，因为无法继续存档。
 
 在这种情况下，在不关闭数据库的情况下重新初始化文件:
 
-- 运行ALTER DATABASE CLEAR LOGFILE SQL语句。
-
 ```sql
-# 清除重做日志组4中的日志文件
-SYS@orcl&gt; alter database clear logfile group 4;
-
-Database altered.
+alter database clear logfile group 4;
 ```
 
 **这个语句克服了两种不可能删除重做日志的情况**:
@@ -536,7 +593,7 @@ Database altered.
 
 如果损坏的重做日志文件尚未存档，则在语句中使用UNARCHIVED关键字。
 
-```
+```sql
 alter database clear unarchived logfile group 4;
 ```
 
@@ -550,26 +607,3 @@ alter database clear unarchived logfile group 4;
 
 如果清除使脱机表空间联机所需的重做日志，则将无法使表空间再次联机。您将不得不删除表空间或执行不完全恢复。注意，正常脱机的表空间不需要恢复。
 
-## 九、设置FORCE LOGGING的优先级
-
-您可以在不同级别上设置FORCE LOGGING和NOLOGGING，例如针对数据库、可插拔数据库(PDB)、表空间或数据库对象。当FORCE LOGGING设置为一个或多个级别时，FORCE LOGGING设置的优先级决定重做日志中记录的内容。
-
-您可以将多租户容器数据库 （CDB） 和非 CDB 置于FORCE LOGGING模式。在这种模式下，数据库将记录数据库中除了临时表空间和临时段的更改之外的所有更改。此设置优先于您为单个表空间指定的任何 NOLOGGING 或 FORCE LOGGING 设置以及您为单个数据库对象指定的任何 NOLOGGING 设置，并且独立于这些设置。
-
-您还可以将表空间设置为FORCE LOGGING模式。数据库记录对表空间中所有对象的所有更改(临时段除外)，会覆盖单个对象的任何NOLOGGING设置。
-
-此外，您还可以通过logging\_clause子句为各种类型的数据库对象指定日志属性，以确定某些DML操作是否将被记录在重做日志文件中((logging：记录，NOLOGGING：不记录)。
-**您可以为以下类型的数据库对象指定日志属性**:
-
-- 表
-- 索引
-- 物化视图
-
-**日志组的状态**：
-
-- UNUSED：从未写入过联机重做日志。这是刚刚添加的重做日志的状态，或者刚好在重置（resetlogs）日志之后（当它不是当前重做日志时）。
-- CURRENT：当前重做日志。这意味着重做日志是活动的。重做日志可以打开或关闭。
-- ACTIVE：日志处于活动状态，但不是当前日志。它是崩溃恢复所必需的。它可能用于块恢复。它可能被存档，也可能不会被存档。
-- CLEARING ：在执行ALTER DATABASE CLEAR LOGFILE语句后，将日志重新创建为空日志。日志清除后，状态变为“UNUSED”。
-- CLEARING\_CURRENT：正在清除当前日志中的关闭线程。如果切换发生故障，例如I/O错误写入新的日志头，日志可以保持在这种状态。
-- INACTIVE ：实例恢复不再需要的日志。它可能用于介质恢复。它可以存档，也可以不存档

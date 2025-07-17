@@ -21,7 +21,7 @@ Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳�
 
 ‍
 
-源端数据库和目标数据库参照：[Oracle19c](../../Oracle%20安装部署/静默安装%20Oracle19c.md) 进行单机安装
+源端数据库和目标数据库参照：[Oracle19c](../../Oracle%20安装部署/2.静默安装%20Oracle19c.md) 进行单机安装
 
 下载Oracle GoldenGate ：[https://edelivery.oracle.com/](https://edelivery.oracle.com/)
 

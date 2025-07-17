@@ -4,69 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "9df868e790f8a3d9",
+        "id": "0e30d2eb60878bdc",
         "type": "tabs",
         "children": [
           {
-            "id": "51df8a4dc60471f7",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "2. Oracle19c RAC-ASM部署"
-            }
-          },
-          {
-            "id": "2e7e15b31f19be9a",
+            "id": "3bd918e9f19aed5b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle rac 开启 archivelog.md",
+                "file": "database/Oracle/Oracle 常用语句/sqlplus 参数设置.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4. Oracle rac 开启 archivelog"
+              "title": "sqlplus 参数设置"
             }
           },
           {
-            "id": "46ee32f9347d342a",
+            "id": "2f6cce4592d88340",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
-                "mode": "preview",
+                "file": "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Oracle RMAN"
+              "title": "Oracle redo log 归档"
             }
           },
           {
-            "id": "d94fd86bcff64dae",
+            "id": "904547b9c2b8191d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "基础服务/DNS/dnsmasq.md",
+                "file": "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "dnsmasq"
+              "title": "Oracle redo log 归档"
             }
           },
           {
-            "id": "e08d4a3e0448efb9",
+            "id": "adee6a4aeeadc8d2",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,22 +62,9 @@
               "icon": "lucide-file",
               "title": "iSCSI"
             }
-          },
-          {
-            "id": "e590654ba8bba2a6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docker/docker 优化项.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "docker 优化项"
-            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -213,13 +184,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
+                "file": "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2. Oracle19c RAC-ASM部署 的大纲"
+              "title": "Oracle redo log 归档 的大纲"
             }
           }
         ],
@@ -227,7 +198,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 401.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -241,34 +212,34 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "51df8a4dc60471f7",
+  "active": "904547b9c2b8191d",
   "lastOpenFiles": [
-    "docker/docker 优化项.md",
-    "docker/docker 网络.md",
+    "database/Oracle/Oracle 联机日志和归档/Oracle redo log 管理.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/远程克隆PDB.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/将11g数据库插入到12c成为pdb.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/2. pdb 数据库管理.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/1. pdb 数据库安装.md",
+    "database/Oracle/Oracle 高级特性/Oracle CDB/0. CDB 概念.md",
+    "database/Oracle/Oracle 内存管理.md",
+    "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
+    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle rac 开启 archivelog.md",
+    "database/Oracle/Oracle 常用语句/0.sqlplus 参数设置.md",
+    "database/Oracle/Oracle 常用语句/0.DBA日常维护SQL整理.md",
+    "database/Oracle/Oracle 安装部署/oracle11g r2 在window server 2012中安装和卸载.md",
+    "database/Oracle/Oracle 安装部署/Linux下Oracle client（sqlplus）安装和配置.md",
+    "database/Oracle/Oracle 安装部署/优化相关.md",
+    "database/Oracle/Oracle 安装部署/2.静默安装 Oracle19c.md",
+    "database/Oracle/Oracle 安装部署/1.静默安装 Oracle11g.md",
+    "database/Oracle/Oracle 安装部署/0.安装前准备-os组及相关的备份与恢复权限.md",
+    "database/Oracle/Oracle 安装部署/0.安装前准备-Oracle OFA 标准.md",
+    "database/Oracle/Oracle 联机日志和归档/Oracle 事务流程分析.md",
+    "database/Oracle/Oracle 联机日志和归档/Oracle flashback.md",
+    "database/Oracle/Oracle 联机日志redolog.md",
+    "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
+    "database/Oracle/Oracle 备份恢复/rman 定时备份脚本方案.md",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
     "存储系列/iSCSI.md",
-    "基础服务/DNS/dnsmasq.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle rac 开启 archivelog.md",
-    "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
-    "企业建设/KVM/KVM 虚拟机热扩容.md",
-    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
-    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
-    "企业建设/KVM/KVM 创建虚拟机.md",
-    "().md",
-    "README.md",
-    "shell/shell 命令手册/文件系统/partprobe.md",
-    "shell/shell 命令手册/文件系统.md",
-    "database/Oracle/Oralce 基础概念/oracle 视图.md",
-    "database/Oracle/Oracle 内存管理.md",
-    "database/Oracle/Oralce 基础概念/oracle 用户与模式.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/3. Oracle rac 管理命令.md",
-    "database/Oracle/Oralce 基础概念/oracle 检查点.md",
-    "database/Oracle/Oralce 基础概念/oracle 基本概念和结构.md",
-    "database/Oracle/Oralce 基础概念/ORACLE数据字典.md",
-    "database/Oracle/Oralce 基础概念/Oracle视图.md",
-    "database/Oracle/Oralce 基础概念/3.Oracle数据库nomount、mount、open三种状态知识点.md",
-    "database/Oracle/Oralce 基础概念/ORACLE存储过程.md",
-    "database/Oracle/Oralce 基础概念/ORACLE表连接.md",
+    "database/Oracle/Oracle 问题总结/err-调整内存后，oracle启动异常.md",
     "网络与安全/assets/network-asset-1b412d8183fe110f4ec3e-20240729210304-40es9rv.png",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip",

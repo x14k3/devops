@@ -106,11 +106,6 @@ Created mapped LUN 0.
 /> 
 /> iscsi/iqn.2025-07.com.oracle:rac.storage/tpg1/portals create 192.168.10.135 3260
 
-/> set global auto_add_mapped_luns=true
-Parameter auto_add_mapped_luns is now 'true'.
-/> set global auto_add_default_portal=false
-Parameter auto_add_default_portal is now 'false'.
-
 /> saveconfig 
 Last 10 configs saved in /etc/target/backup/.
 Configuration saved to /etc/target/saveconfig.json

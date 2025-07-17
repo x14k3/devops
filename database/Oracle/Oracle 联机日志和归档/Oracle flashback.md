@@ -1,6 +1,6 @@
 #oracle
 
-**开启闪回功能必须是在归档模式下，请参考上面的操作**​[Oracle之redo log 归档](Oracle之redo%20log%20归档.md)
+**开启闪回功能必须是在归档模式下，请参考上面的操作**​[Oracle redo log 归档](Oracle%20redo%20log%20归档.md)
 
 当启用闪回就必须使用**logarchivedestn**参数来指定归档日志目录。
 

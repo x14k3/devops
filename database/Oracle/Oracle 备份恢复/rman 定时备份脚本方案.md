@@ -10,7 +10,7 @@ rman target /
 CONFIGURE RETENTION POLICY TO REDUNDANCY 7;
 CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET;
 CONFIGURE CONTROLFILE AUTOBACKUP ON;
-CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO  '/data/oraback/fmsdb/ctl_%F_spfile.bak';
+CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO  '/data/oraback/fmsdb/ctl_%F.bak';
 ```
 
 编写备份脚本
@@ -91,41 +91,32 @@ CONFIGURE CHANNEL DEVICE TYPE DISK FORMAT '+FRA';
 > - 归档日志备份后自动删除释放空间
 
 
-RMAN 备份脚本-全量备份脚本 rman_full_backup.rcv
+RMAN 备份脚本-全量备份脚本 rman_full_backup.sh
 ```bash
 #!/bin/bash
-
-ORACLE_SID=ORCLCDB  # 修改为实际数据库名
-ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
-DATE=$(date +%Y%m%d_%H%M%S)
-$ORACLE_HOME/bin/rman target / <<EOF
+source /home/oracle/.bash_profile
+rman target / <<EOF
 RUN {
-  ALLOCATE CHANNEL c1 DEVICE TYPE DISK;
-  ALLOCATE CHANNEL c2 DEVICE TYPE DISK;
   BACKUP AS COMPRESSED BACKUPSET 
     DATABASE 
     INCLUDE CURRENT CONTROLFILE
     PLUS ARCHIVELOG DELETE ALL INPUT;
   BACKUP CURRENT CONTROLFILE;
+  BACKUP SPFILE;
   CROSSCHECK BACKUP;
   DELETE NOPROMPT EXPIRED BACKUP;
   DELETE NOPROMPT OBSOLETE;
-  RELEASE CHANNEL c1;
-  RELEASE CHANNEL c2;
 }
 EXIT;
 EOF
 ```
 
-RMAN 备份脚本-增量备份脚本 rman_incr_backup.rcv
+RMAN 备份脚本-增量备份脚本 rman_incr_backup.sh
 ```bash
 #!/bin/bash
-ORACLE_SID=ORCLCDB
-ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
-$ORACLE_HOME/bin/rman target / <<EOF
+source /home/oracle/.bash_profile
+rman target / <<EOF
 RUN {
-  ALLOCATE CHANNEL c1 DEVICE TYPE DISK;
-  ALLOCATE CHANNEL c2 DEVICE TYPE DISK;
   BACKUP AS COMPRESSED BACKUPSET 
     INCREMENTAL LEVEL 1 
     DATABASE
@@ -137,14 +128,12 @@ EXIT;
 EOF
 ```
 
-RMAN 备份脚本-归档日志备份脚本 rman_arch_backup.rcv
+RMAN 备份脚本-归档日志备份脚本 rman_arch_backup.sh
 ```bash
 #!/bin/bash
-ORACLE_SID=ORCLCDB
-ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
-$ORACLE_HOME/bin/rman target / <<EOF
+source /home/oracle/.bash_profile
+rman target / <<EOF
 RUN {
-  ALLOCATE CHANNEL c1 DEVICE TYPE DISK;
   BACKUP ARCHIVELOG ALL DELETE ALL INPUT;
 }
 EXIT;
@@ -157,7 +146,7 @@ EOF
 crontab -e
 
 # 添加以下任务 (根据实际路径调整)
-0 0 * * 0 /scripts/rman_full_backup.rcv > /logs/rman_full_$(date +\%Y\%m\%d).log 2>&1  # 每周日全备
-0 0 * * 1-6 /scripts/rman_incr_backup.rcv > /logs/rman_incr_$(date +\%Y\%m\%d).log 2>&1  # 周一至周六增量
-0 */1 * * * /scripts/rman_arch_backup.rcv > /logs/rman_arch_$(date +\%Y\%m\%d_\%H).log 2>&1  # 每小时归档备份
+0 0 * * 0 /scripts/rman_full_backup.sh > /logs/rman_full_$(date +\%Y\%m\%d).log 2>&1  # 每周日全备
+0 0 * * 1-6 /scripts/rman_incr_backup.sh > /logs/rman_incr_$(date +\%Y\%m\%d).log 2>&1  # 周一至周六增量
+0 */1 * * * /scripts/rman_arch_backup.sh > /logs/rman_arch_$(date +\%Y\%m\%d_\%H).log 2>&1  # 每小时归档备份
 ```

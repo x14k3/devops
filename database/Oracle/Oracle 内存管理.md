@@ -36,9 +36,8 @@ show parameter target;
 
 ```
 
-### /dev/shm对自动内存管理的影响
-
-若使用自动内存管理，必须要确保 *(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值*。
+==注意==
+>若使用自动内存管理，必须要确保 *(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值*。
 
 ```sql
 # 修改/dev/shm (默认大小为内存一半)

@@ -6,24 +6,35 @@
 不管数据库是否是归档模式，重做日志是肯定要写的。而只有数据库在归档模式下，重做日志才会备份，形成归档日志。
 一般来说，归档日志结合全备份，用于数据库出现问题后的恢复使用
 
-**开启归档模式**
+### 开启归档模式
 
 ```sql
 -- 查看是否开启归档模式
-SQL> archive log list;
+archive log list;
+
 -- 设置归档文件格式   
-SQL> alter system set log_archive_format='arc_%t_%s_%r.dbf' scope=spfile;
+alter system set log_archive_format='arc_%t_%s_%r.dbf' scope=spfile;
+
 -- 设置归档文件保存路径,路径中最好包含实例名，确保目录存在，且拥有者为oracle用户
-SQL> alter system set log_archive_dest_1 ='location=/data/arch/fmsdb' scope=spfile;
+alter system set log_archive_dest_1 ='location=/data/arch/fmsdb' scope=spfile;
+
 -- 重启数据库至mount模式
-SQL> shutdown immediate
-SQL> startup mount
--- 开启归档
-SQL> alter database archivelog;
+shutdown immediate
+startup mount
+
+-- 打开归档、强制、最小附加日志
+alter database archivelog;
+--alter database force logging;
+--alter database add supplemental log data;
+
 -- 打开数据库
-SQL> alter database open;
+alter database open;
+
 -- 手动归档
-SQL> alter system archive log current;
+alter system archive log current;
+
+-- 运行带有SWITCH LOGFILE子句的ALTER SYSTEM语句。
+alter system switch logfile;
 ```
 
 说明
@@ -38,7 +49,7 @@ SQL> alter system archive log current;
 
 ‍
 
-**配置参数详解**
+### 配置参数详解
 
 log\_archive\_dest\_n   # 设置归档日志路径
 
@@ -64,3 +75,35 @@ scope=both    # 内存和spfile都更改
 ```
 
 ‍
+
+
+### 启用最小补充日志
+
+**检查当前数据库的补充日志设置:**
+
+```sql
+SELECT supplemental_log_data_min, supplemental_log_data_pk, supplemental_log_data_ui FROM v$database;
+```
+如果 `supplemental_log_data_min` 为 `YES`，则表示已开启最小补充日志。同样，`supplemental_log_data_pk` 和 `supplemental_log_data_ui` 分别表示主键和唯一键的补充日志是否开启。
+
+
+如果需要启用最小补充日志，可以执行以下命令：
+```sql
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+```
+
+
+**启用其他类型的补充日志:**
+
+除了最小补充日志，还可以启用主键、唯一键和外键的补充日志。例如，要启用主键的补充日志，可以执行：
+```sql
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (PRIMARY KEY) COLUMNS;
+```
+
+同样，可以分别使用 `(UNIQUE)` 和 `(FOREIGN KEY)` 启用唯一键和外键的补充日志。  
+如果要启用所有列的补充日志，可以使用 `(ALL)`:﻿
+```sql
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+```
+
+**重启数据库**
