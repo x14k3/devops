@@ -1,4 +1,4 @@
-# Bash的基本特性之 Here Documents 与 Here Strings
+
 
 # Here Documents
 

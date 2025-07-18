@@ -99,31 +99,5 @@ With the Partitioning, OLAP, Data Mining and Real Application Testing options
 SQL>
 ```
 
-#### 5、Linux环境下Oracle SqlPlus中方向键问题的解决方法
-
- （1）问题
-
-```
-SQL> ^[[A^[[A^[[B 
-```
-
- （2）下载rlwrap
-
-```
-wget https://mirrors.aliyun.com/epel/7/x86_64/Packages/r/rlwrap-0.45.2-2.el7.x86_64.rpm    # centos7.x
-yum install readline-devel rlwrap-0.45.2-2.el7.x86_64.rpm
-
-```
-
- （3）运行sqlplus
-
-```
-rlwrap sqlplus test/test@//192.168.1.81:1521/TPADC
-```
-
-```
-alias sqlplus=’rlwrap sqlplus’ 
-alias rman=’rlwrap rman
-```
 
 ‍

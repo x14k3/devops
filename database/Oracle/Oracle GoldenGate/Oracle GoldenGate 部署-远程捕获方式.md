@@ -1,16 +1,15 @@
 #oracle
 
-## 一、 概要信息
-
-### 1.1 文档简介
+### 概要信息
 
 Oracle GoldenGate 是一个全面的软件包，用于在异构数据环境中复制数据。该产品集支持高可用性解决方案、实时数据集成、事务性变更数据捕获、数据复制、转换以及运营和分析企业系统之间的验证。
 
 Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳抽取
 
-参考文档：[OGG 19C 远程部署（单独部署）安装配置详细过程.pdf](assets/OGG%2019C%20远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf)
+**参考文档**：[OGG 19C 远程部署（单独部署）安装配置详细过程.pdf](assets/OGG%2019C%20远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf)
 
-### 1.2 安装环境
+
+**安装环境**
 
 ||源数据库|目标数据库|OGG主机|
 | --------------| -----------------------------| -----------------------------| ----------------|
@@ -21,59 +20,31 @@ Oracle GoldenGata 19C 远程部署方式（单台 、非侵入式 ），最佳�
 
 ‍
 
-源端数据库和目标数据库参照：[Oracle19c](../../Oracle%20安装部署/2.静默安装%20Oracle19c.md) 进行单机安装
+源端数据库和目标数据库参照：[Oracle19c](../Oracle%20Installation/2.Silent%20installation%20of%20oracle19c.md) 进行单机安装
 
 下载Oracle GoldenGate ：[https://edelivery.oracle.com/](https://edelivery.oracle.com/)
 
 下载 instantclient-basic-linux.x64：[https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html](https://www.oracle.com/hk/database/technologies/instant-client/linux-x86-64-downloads.html)
 
-## 二、数据库配置
-
-### 2.1 源端开启归档
+### 数据库配置
 
 ```sql
+-- 源端开启归档
 SQL> alter database archivelog;
-```
 
-ps:源端数据库没有开归档要开启归档,已经打开可以忽略 。
-
-### 2.2 源端开启强制日志
-
-```sql
+-- 源端开启强制日志
 SQL> alter database force logging;
 
-Database altered.
-```
-
-### 2.3 源端开启数据库最小附加日志
-
-```sql
+-- 源端开启数据库最小附加日志
 SQL> ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
-
-Database altered.
-
 SQL> SELECT supplemental_log_data_min, force_logging FROM v$database;
 
-SUPPLEME FORCE_LOGGING
--------- ---------------------------------------
-YES      YES
-
-SQL> 
-```
-
-### 2.4 源和目标端打开复制参数
-
-```sql
---源和目标执行
+-- 源和目标端打开复制参数
+-- 源和目标执行
 SQL> alter system set enable_goldengate_replication=true;
 ```
 
-note: 11.2.0.4以上需要配置
-
-‍
-
-### 2.5 源和目标端创建 OGG 用户
-
+**源和目标端创建 OGG 用户**
 ```sql
 ---表 空 间
 create tablespace ggtbs datafile '+DATA' size 1g autoextend on;--create tablespace GGTBS;
@@ -92,9 +63,7 @@ exec dbms_goldengate_auth.grant_admin_privilege('GGADMIN','*',TRUE)
 
 note: 除了必要权限 , 其他权限可以根据实际情况而定 。
 
-‍
-
-目标端的OGG 用户 , 还需要下列 权 限 :
+**目标端的OGG 用户 , 还需要下列 权 限 **
 
 ```sql
 grant create session to ggadmin;
@@ -112,45 +81,39 @@ grant comment any table to ggadmin;
 
 ‍
 
-## 三、 OGG 软件安装
+### OGG 软件安装
 
 以下步骤都是在 OGG 单独部署机器上操作
 
-### 3.1 创建用户和目录
-
 ```bash
---创建组和用户
+# 创建用户和目录
+## 创建组和用户
 groupadd oinstall
 useradd -g oinstall oracle
 passwd oracle
 
---创建目录
+## 创建目录
 mkdir /ogg/oraclient -p
 mkdir /ogg/ogg191
 mkdir /ogg/oraInventory
 chown oracle:oinstall -R /ogg
 chmod 775 -R /ogg
-```
 
-### 3.2 配置环境变量
-
-```bash
+# 配置环境变量
 su - oracle
-vim /home/oracle/.bash_profile
-#--------------------------------------
+echo '
 export ORACLE_HOME=/ogg/oraclient/instantclient_19_25
 export GG_HOME=/ogg/ogg191
 export LD_LIBRARY_PATH=$ORACLE_HOME:$GG_HOME
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$ORACLE_HOME:$GG_HOME:$PATH
-alias ggsci='cd $GG_HOME; ggsci'
-#---------------------------------------
+alias ggsci='cd $GG_HOME; ggsci' '>> /home/oracle/.bash_profile
+
 source /home/oracle/.bash_profile
 ```
 
 ‍
-
-### 3.3 Oracle客户端静默安装
+#### Oracle客户端静默安装
 
 最基础客户端包即可,主要是ggsci命令需要他里面的依赖库
 
@@ -158,13 +121,7 @@ source /home/oracle/.bash_profile
 unzip -d /ogg/oraclient instantclient-basic-linux.x64-11.2.0.4.0
 ```
 
-‍
-
-‍
-
-### 3.4 OGG 静默安装
-
-解压
+#### OGG 静默安装
 
 ```bash
 su - oracle
@@ -172,8 +129,7 @@ unzip 191004_fbo_ggs_Linux_x64_shiphome.zip
 cd fbo_ggs_Linux_x64_shiphome/Disk1/
 ```
 
-编辑响应文件
-
+**编辑响应文件**
 ​`vi /home/oracle/fbo_ggs_Linux_x64_shiphome/Disk1/response/oggcore.rsp`​
 
 ```bash
@@ -186,7 +142,7 @@ INVENTORY_LOCATION=/ogg/oraInventory
 UNIX_GROUP_NAME=oinstall
 ```
 
-静默安装
+**静默安装**
 
 ```bash
 [oracle@test Disk1]$ ./runInstaller -silent -showProgress -responseFile /home/oracle/fbo_ggs_Linux_x64_shiphome/Disk1/response/oggcore.rsp
@@ -240,7 +196,7 @@ As a root user, execute the following script(s):
 Successfully Setup Software.
 ```
 
-以root用户执行以下脚本
+**以root用户执行以下脚本**
 
 ```bash
 [root@test ~]# cd /ogg/oraInventory/
@@ -263,27 +219,23 @@ The execution of the script is complete.
 
 ‍
 
-‍
+‍e
 
-## 四、 OGG 配置
+### OGG 配置
 
 note: 以下配 置均为远程捕获和交付的方式 , 无需在数据库本地安装部署 。
 
-### 4.1 配置 TNSNAMES
-
-创建目录
+#### 配置 TNSNAMES
 
 ```bash
+# 创建目录
 su - oracle
 mkdir -p /ogg/oraclient/instantclient_19_25/network/admin
-```
 
-配置 tnsnames.ora
-
-```bash
+# 配置 tnsnames.ora
 cd /ogg/oraclient/instantclient_19_25/network/admin
-vi tnsnames.ora
-#-------------------------------------------------------------
+
+echo '
 source =
   (DESCRIPTION =
     (ADDRESS_LIST =
@@ -305,10 +257,11 @@ target =
       (SERVICE_NAME = orcl)
       (SERVER = DEDICATED)
     )
-  )
+  ) ' >> tnsnames.ora
+
 ```
 
-### 4.2 创建 ogg 目录
+#### 创建 ogg 目录
 
 ```bash
 #----登录 ogg交互工具
@@ -337,13 +290,13 @@ Dump files                     /ogg/ogg191/dirdmp: created.
 # 4、dirrpt:进程报告文件，进程挂查断时，可以查看此文件，找出错误报告，也可在./ggsci下，用view report查看错误日志；
 # 5、dirprm:存放配置参数的文件，修改参数时，可以直接修改本文件，也可以在./ggsci下，用edit param 修改；
 # 6、dirtmp:临时文件目录，用于长事务处理；
+
 ```
 
-‍
 
-### 4.3 配置 MGR 进程
+#### 配置 MGR 进程
 
-编辑参数
+**编辑参数**
 
 ```sql
 GGSCI (oggmc) 2> edit param mgr
@@ -358,7 +311,7 @@ LAGINFOMINUTES 30
 LAGCRITICALMINUTES 45
 ```
 
-校验mgr 参数
+**校验mgr 参数**
 
 ```bash
 [oracle@test ogg191]$ ./checkprm /ogg/ogg191/dirprm/mgr.prm -C mgr -V
@@ -397,7 +350,7 @@ Runtime parameter validation is not reflected in the above check.
 
 ```
 
-启动
+**启动**
 
 ```bash
 [oracle@test ogg191]$ ./ggsci 
@@ -420,12 +373,9 @@ GGSCI (test) 3>
 ```
 
 ‍
+#### 配置用户凭证
 
-‍
-
-### 4.4 配置用户凭证
-
-配置
+**配置**
 
 ```sql
 GGSCI (test) 3> add credentialstore
@@ -440,7 +390,7 @@ GGSCI (test) 5> alter credentialstore add user ggadmin@target, password ggadmin 
 Credential store altered.
 ```
 
-验证
+**验证**
 
 ```bash
 GGSCI (test) 6> info credentialstore
@@ -460,9 +410,9 @@ GGSCI (test) 7>
 
 ‍
 
-### 4.5 配置 extract 进程
+#### 配置 extract 进程
 
-#### 4.5.1 经典模式(可选)
+##### 经典模式(可选)
 
 添加附加日志
 
@@ -578,10 +528,7 @@ EXTRACT RUNNING EXTCSA 00:00:00 00:00:25
 ```
 
 ‍
-
-‍
-
-#### 4.5.2 集成模式(可选)
+##### 集成模式(可选)
 
 note: 推  成模式,性能更好,原理是整合 logminer, 多租户环境只能用集成模式
 
@@ -645,11 +592,11 @@ GGSCI (test) 8> info all
 
 ‍
 
-### 4.6 配置 pump 进程
+#### 配置 pump 进程
 
 如果OGG 的 replicat 进程和抽取进程都在同一台 ,可以不需要配置这个pump进程
 
-编 辑 参 数
+编辑参数
 
 ```sql
 GGSCI (test) 8> edit param dpecs
@@ -677,7 +624,7 @@ GGSCI (test) 8> start dpecs
 GGSCI (test) 8> info all
 ```
 
-### 4.7 配置 replicat 进程
+#### 配置 replicat 进程
 
 添加数据库检查点表
 
@@ -728,9 +675,9 @@ REPLICAT STOPPED REPCS 00:00:00 00:00:05
 
 ‍
 
-## 五、OGG 同步设置
+### OGG 同步设置
 
-### 5.1 数据导出导入
+#### 数据导出导入
 
 源库创建数据泵目录
 
@@ -798,7 +745,7 @@ tz_scheduler_state,wyy.qrtz_triggers,wyy.lab_bank_record compression=all
 parallel=4 exclude=statistics,TRIGGER,REF_CONSTRAINT,QUEUE,package,procedure
 ```
 
-### 5.2 目标库创建数据泵目录
+#### 目标库创建数据泵目录
 
 ```sql
 SQL> create or replace directory impogg as '/backup/expdir ';
@@ -809,14 +756,14 @@ col directory_path for a25
 select * from dba_directories where directory_name='IMPOGG';
 ```
 
-### 5.3 目标库导入数据
+#### 目标库导入数据
 
 ```sql
 ----一定要注意加 remap_schema,指定要导入的 schemas
 impdp \"/ as sysdba\" directory=impogg dumpfile=bocpay%U.dmp logfile=impogg.log parallel=4 job_name=impogg cluster=N
 ```
 
-### 5.4 收集统计信息
+#### 收集统计信息
 
 ```sql
 
@@ -971,7 +918,7 @@ order by status,owner;
 spool off
 ```
 
-## 5.5 开启同步
+### 开启同步
 
 ```sql
 GGSCI (racdb1) 16>start repcs,aftercsn 123231017915

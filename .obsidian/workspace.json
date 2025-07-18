@@ -8,63 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3bd918e9f19aed5b",
+            "id": "13dc69a5d6736c97",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/Oracle/Oracle 常用语句/sqlplus 参数设置.md",
+                "file": "shell/shell 用法总结/shell 变量和数值运算.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "sqlplus 参数设置"
-            }
-          },
-          {
-            "id": "2f6cce4592d88340",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Oracle redo log 归档"
-            }
-          },
-          {
-            "id": "904547b9c2b8191d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Oracle redo log 归档"
-            }
-          },
-          {
-            "id": "adee6a4aeeadc8d2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "存储系列/iSCSI.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "iSCSI"
+              "title": "shell 变量和数值运算"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -184,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
+                "file": "shell/shell 用法总结/shell 变量和数值运算.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Oracle redo log 归档 的大纲"
+              "title": "shell 变量和数值运算 的大纲"
             }
           }
         ],
@@ -212,36 +169,37 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "904547b9c2b8191d",
+  "active": "13dc69a5d6736c97",
   "lastOpenFiles": [
-    "database/Oracle/Oracle 联机日志和归档/Oracle redo log 管理.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/远程克隆PDB.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/将11g数据库插入到12c成为pdb.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/2. pdb 数据库管理.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/1. pdb 数据库安装.md",
-    "database/Oracle/Oracle 高级特性/Oracle CDB/0. CDB 概念.md",
-    "database/Oracle/Oracle 内存管理.md",
-    "database/Oracle/Oracle 联机日志和归档/Oracle redo log 归档.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/4. Oracle rac 开启 archivelog.md",
-    "database/Oracle/Oracle 常用语句/0.sqlplus 参数设置.md",
-    "database/Oracle/Oracle 常用语句/0.DBA日常维护SQL整理.md",
-    "database/Oracle/Oracle 安装部署/oracle11g r2 在window server 2012中安装和卸载.md",
-    "database/Oracle/Oracle 安装部署/Linux下Oracle client（sqlplus）安装和配置.md",
-    "database/Oracle/Oracle 安装部署/优化相关.md",
-    "database/Oracle/Oracle 安装部署/2.静默安装 Oracle19c.md",
-    "database/Oracle/Oracle 安装部署/1.静默安装 Oracle11g.md",
-    "database/Oracle/Oracle 安装部署/0.安装前准备-os组及相关的备份与恢复权限.md",
-    "database/Oracle/Oracle 安装部署/0.安装前准备-Oracle OFA 标准.md",
-    "database/Oracle/Oracle 联机日志和归档/Oracle 事务流程分析.md",
-    "database/Oracle/Oracle 联机日志和归档/Oracle flashback.md",
-    "database/Oracle/Oracle 联机日志redolog.md",
-    "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
-    "database/Oracle/Oracle 备份恢复/rman 定时备份脚本方案.md",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/2. Oracle19c RAC-ASM部署.md",
-    "存储系列/iSCSI.md",
-    "database/Oracle/Oracle 问题总结/err-调整内存后，oracle启动异常.md",
+    "shell/shell 用法总结/shell 函数.md",
+    "shell/shell 用法总结/shell 进程替换.md",
+    "shell/shell 用法总结/shell 内置变量.md",
+    "shell/shell 用法总结/shell 变量和数值运算.md",
+    "shell/shell 用法总结/Bash重定向.md",
+    "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
+    "shell/shell 用法总结/Bash的基本特性之 Here Documents 与 Here Strings.md",
+    "shell/shell 用法总结/使用whiptail创建交互式shell对话框.md",
+    "shell/shell 用法总结/使用dialog创建交互式shell对话框.md",
+    "shell/shell 用法总结/shell登录提示符与登录提示信息.md",
+    "shell/shell 用法总结/shell 状态返回值.md",
+    "shell/shell 用法总结/shell 语法调试.md",
+    "shell/shell 用法总结/shell 循环.md",
+    "shell/shell 用法总结/shell 选择和判断.md",
+    "shell/shell 用法总结/shell 条件测试语句和运算符.md",
+    "shell/shell 用法总结/shell 数组.md",
+    "shell/正则表达式.md",
+    "shell/homebrew.md",
+    "shell/vim 编辑快捷键.md",
+    "shell/Linux 命令行编辑快捷键.md",
+    "linux/linux 网络管理/linux NetworkManager.md",
+    "linux/linux 网络管理/linux ip 命令/ip address.md",
+    "database/Oracle/Oracle 高级特性/Oracle OMF.md",
+    "database/Oracle/Oracle 高级特性/Oracle OEM.md",
+    "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
+    "database/Oracle/Oracle RAC/5. Oracle rac 新增节点.md",
+    "database/Oracle/Oracle GoldenGate/assets/OGG 19C 远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf",
     "网络与安全/assets/network-asset-1b412d8183fe110f4ec3e-20240729210304-40es9rv.png",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
+    "database/Oracle/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip",
     "golang/go 入门指南/未命名",
     "111111test",
