@@ -4,5 +4,6 @@
   "attachmentFolderPath": "./assets",
   "newLinkFormat": "relative",
   "alwaysUpdateLinks": true,
-  "defaultViewMode": "preview"
+  "defaultViewMode": "preview",
+  "promptDelete": false
 }

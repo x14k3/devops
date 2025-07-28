@@ -4,24 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "0e30d2eb60878bdc",
+        "id": "11d14d369c2eb6cb",
         "type": "tabs",
         "children": [
           {
-            "id": "13dc69a5d6736c97",
+            "id": "446af5d097816f2a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "shell/shell 用法总结/shell 变量和数值运算.md",
+                "file": "k8s/企业部署实战_K8S.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "shell 变量和数值运算"
+              "title": "企业部署实战_K8S"
+            }
+          },
+          {
+            "id": "802f7b8051c4f1f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docker/docker 优化项.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "docker 优化项"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -141,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "shell/shell 用法总结/shell 变量和数值运算.md",
+                "file": "docker/docker 优化项.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "shell 变量和数值运算 的大纲"
+              "title": "docker 优化项 的大纲"
             }
           }
         ],
@@ -155,7 +170,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 401.5
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -169,41 +184,53 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "13dc69a5d6736c97",
+  "active": "802f7b8051c4f1f2",
   "lastOpenFiles": [
-    "shell/shell 用法总结/shell 函数.md",
-    "shell/shell 用法总结/shell 进程替换.md",
-    "shell/shell 用法总结/shell 内置变量.md",
-    "shell/shell 用法总结/shell 变量和数值运算.md",
-    "shell/shell 用法总结/Bash重定向.md",
-    "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
-    "shell/shell 用法总结/Bash的基本特性之 Here Documents 与 Here Strings.md",
-    "shell/shell 用法总结/使用whiptail创建交互式shell对话框.md",
-    "shell/shell 用法总结/使用dialog创建交互式shell对话框.md",
-    "shell/shell 用法总结/shell登录提示符与登录提示信息.md",
-    "shell/shell 用法总结/shell 状态返回值.md",
-    "shell/shell 用法总结/shell 语法调试.md",
-    "shell/shell 用法总结/shell 循环.md",
-    "shell/shell 用法总结/shell 选择和判断.md",
-    "shell/shell 用法总结/shell 条件测试语句和运算符.md",
-    "shell/shell 用法总结/shell 数组.md",
-    "shell/正则表达式.md",
+    "k8s/企业部署实战_K8S.md",
+    "docker/docker 优化项.md",
+    "docker/docker compose.md",
+    "docker/docker harbor.md",
+    "企业建设/openVPN/1. OpenVPN Server搭建.md",
+    "docker/docker 部署.md",
+    "docker/docker 仓库.md",
     "shell/homebrew.md",
-    "shell/vim 编辑快捷键.md",
-    "shell/Linux 命令行编辑快捷键.md",
+    "linux/linux 网络管理/网络虚拟化/Linux 虚拟网络设备之 tuntap.md",
     "linux/linux 网络管理/linux NetworkManager.md",
-    "linux/linux 网络管理/linux ip 命令/ip address.md",
-    "database/Oracle/Oracle 高级特性/Oracle OMF.md",
-    "database/Oracle/Oracle 高级特性/Oracle OEM.md",
-    "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
-    "database/Oracle/Oracle RAC/5. Oracle rac 新增节点.md",
+    "linux/linux 网络管理/linux 网络配置.md",
+    "基础服务/DNS/dnsmasq.md",
+    "企业建设/openVPN/4. openVPN配置文件详解.md",
+    "企业建设/KVM/KVM 虚拟机热扩容.md",
+    "k8s/assets/1582188308711.png",
+    "k8s/assets/Pasted image 20250718154618.png",
+    "k8s/原理及源码解析/Kubernetes yaml文件.md",
+    "k8s/原理及源码解析/Docker基础.md",
+    "k8s/原理及源码解析/assets/1585985515532.png",
+    "k8s/原理及源码解析/Kubernetes基本概念.md",
+    "k8s/原理及源码解析/Kubernetes相关生态.md",
+    "k8s/原理及源码解析/Kubernetes调度机制.md",
+    "k8s/原理及源码解析/assets/kubernetes技能图谱.jpg",
+    "k8s/原理及源码解析/assets/1587267230890.png",
+    "k8s/原理及源码解析/assets/1587267088835.png",
+    "k8s/原理及源码解析/assets/1587266196364.png",
+    "k8s/原理及源码解析/assets/1586660769927.png",
+    "k8s/原理及源码解析/assets/1587263685501.png",
+    "k8s/原理及源码解析/assets/1587049585883.png",
+    "k8s/原理及源码解析/assets",
+    "k8s/原理及源码解析/README.md",
+    "k8s/原理及源码解析",
+    "k8s/原理及源码解析.md",
+    "k8s/assets",
+    "k8s/第七章——Promtheus监控k8s企业级应用.md",
+    "k8s",
+    "k8s/第三章——k8s集群.md",
+    "k8s/第五章——K8S结合CI&CD持续交付和集中管理配置.md",
+    "中间件/rabbitMQ/1. RabbitMQ 简介.md",
+    "k8s/第一章——Docker（已熟悉的可以从第二章开始）.md",
+    "k8s",
+    "docker/docker 基础",
     "database/Oracle/Oracle GoldenGate/assets/OGG 19C 远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf",
-    "网络与安全/assets/network-asset-1b412d8183fe110f4ec3e-20240729210304-40es9rv.png",
     "database/Oracle/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
     "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip",
-    "golang/go 入门指南/未命名",
-    "111111test",
-    "devops/zabbix/assets/Pasted image 20250613162942.png",
-    "devops/zabbix/assets/Pasted image 20250613162916.png"
+    "golang/go 入门指南/未命名"
   ]
 }

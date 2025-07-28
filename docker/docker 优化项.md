@@ -22,15 +22,15 @@ docker已换阿里源，某些冷门或较新镜像仍然会从docker.io进行�
 
 ```bash
 mkdir /etc/systemd/system/docker.service.d
-cat <<EOF >> /etc/systemd/system/docker.service.d/proxy.conf
-
+echo '
 # Add content below
 
 [Service]
 Environment="HTTP_PROXY=http://127.0.0.1:10809"
 Environment="HTTPS_PROXY=http://127.0.0.1:10809"
-Environment="NO_PROXY=localhost,127.0.0.1,.example.com"
-EOF
+Environment="NO_PROXY=localhost,127.0.0.1,.example.com,.od.com" '  >> /etc/systemd/system/docker.service.d/proxy.conf
+
+# 注意，使用docker login 使用域名的时候，要将域名加入到"NO_PROXY"
 
 systemctl daemon-reload
 systemctl stop docker.socket

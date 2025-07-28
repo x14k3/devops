@@ -59,20 +59,16 @@ virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
 
 ## 二、网卡热添加
 
-- 网卡添加
+### 网卡添加
 
-```
-#桥接
-[root@zutuanxue ~]# virsh attach-interface --domain centos8-3 --type bridge --source br0 --model virtio --config
-成功附加接口
+```bash
+# 桥接
+virsh attach-interface --domain centos8-3 --type bridge --source br0 --model virtio --config
 
-#NAT
-[root@zutuanxue ~]# virsh attach-interface --type network --domain centos8-3 --source default --config
-成功附加接口
+# NAT
+virsh attach-interface --type network --domain centos8-3 --source default --config
 
-
-
-关于type  source不会写的可以参考xml文件
+# 关于type  source不会写的可以参考xml文件
 <interface type='network'>
       <mac address='52:54:00:30:38:55'/>
       <source network='default'/>
@@ -80,29 +76,27 @@ virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
       <address type='pci' domain='0x0000' bus='0x09' slot='0x01' function='0x0'/>
     </interface>
 
-可以看到  type   ”source network“这两个字段吧
+#可以看到  type   ”source network“这两个字段吧
 ```
 
-- 网卡剥离
+### 网卡剥离
 
 剥离要指定剥离网卡的Mac地址
 
-```
-永久剥离
-[root@zutuanxue ~]# virsh detach-interface --domain centos8-3 --mac 52:54:00:43:b8:3c --type bridge --config
-成功分离接口
+```bash
+# 永久剥离
+virsh detach-interface --domain centos8-3 --mac 52:54:00:43:b8:3c --type bridge --config
 
-临时剥离
-[root@zutuanxue ~]# virsh detach-interface --domain centos8-3 --mac 52:54:00:95:b7:0e --type network
-成功分离接口
+# 临时剥离
+virsh detach-interface --domain centos8-3 --mac 52:54:00:95:b7:0e --type network
 ```
 
 ## 三、内存热添加
 
-**扩容内存**
+### **扩容内存**
 
 ```bash
-内存热添加的基础是必须设置最大内存的容量，否则无法添加，最大扩展不能超过最大分配
+# 内存热添加的基础是必须设置最大内存的容量，否则无法添加，最大扩展不能超过最大分配
 virsh setmaxmem test1 8G --config
 #将原来4G的内容扩容到8G
 virsh setmem    test1 8G --config
@@ -117,7 +111,7 @@ virsh setmem    test1 8G --config
 --memory memory=1024,currentMemory=512
 ```
 
-**缩小内存**
+### **缩小内存**
 
 同样的方法，指定内存目标容量即可
 
@@ -129,16 +123,16 @@ virsh setmem  centos8-3  512M --live --config
 
 ## 四、CPU热添加
 
-**添加CPU**
+### **添加CPU**
 
 该虚拟机必须指定了最大cpu数量 –**vcpu**s 5,max**vcpu**s=10
 
-```
-临时
-[root@zutuanxue ~]# virsh setvcpus --domain centos8-3 6 --live
+```bash
+# 临时
+virsh setvcpus --domain centos8-3 6 --live
 
-永久
-[root@zutuanxue ~]# virsh setvcpus --domain centos8-3 6 --live --config 
+# 永久
+virsh setvcpus --domain centos8-3 6 --live --config 
 ```
 
 注意：CPU目前是不支持回收的。
@@ -149,7 +143,7 @@ virsh setmem  centos8-3  512M --live --config
 
 ### 1.关闭虚拟机
 
-```
+```bash
 virsh shutdown ehs-jboss-01
 ```
 
@@ -159,7 +153,7 @@ virsh shutdown ehs-jboss-01
 
 修改 CPU vcpu 参数来调整 CPU 个数(核数)；
 
-```
+```bash
 [root@ehs-as-04 ~]# virsh edit ehs-jboss-01
 ......
   <name>ehs-jboss-01</name>
@@ -173,14 +167,14 @@ virsh shutdown ehs-jboss-01
 
 ### 3.从配置文件启动虚拟机
 
-```
+```bash
 [root@ehs-as-04 ~]# virsh create /etc/libvirt/qemu/ehs-jboss-01.xml 
 域 ehs-jboss-01 被创建（从 /etc/libvirt/qemu/ehs-jboss-01.xml）
 ```
 
 ### 4.查看当前内存大小
 
-```
+```bash
 [root@ehs-as-04 ~]# virsh dominfo ehs-jboss-01
 Id:             65
 名称：       ehs-jboss-01
@@ -200,7 +194,7 @@ CPU 时间：   32.8s
 
 ### 5.设置虚拟机内存大小为8G
 
-```
+```bash
 [root@kvm01 ~]# virsh setmem ehs-jboss-01 8388608
 ```
 
@@ -208,7 +202,7 @@ CPU 时间：   32.8s
 
 查看当前内存大小
 
-```
+```bash
 [root@kvm01 ~]# virsh dominfo ehs-jboss-01 | grep memory
 Max memory: 1048432 KiB
 Used memory: 1048432 KiB
@@ -216,7 +210,7 @@ Used memory: 1048432 KiB
 
 查看当前CPU个数
 
-```
+```bash
 [root@kvm01 ~]# virsh dominfo ehs-jboss-01 | grep CPU
 CPU(s): 2
 CPU time: 15.0s
