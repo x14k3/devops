@@ -149,45 +149,41 @@ centos:7.8
 - 安装nginx
   [nginx 部署](../../中间件/nginx/nginx%20部署.md)
 - nginx整合php-fpm
+```conf
+server {
+    listen       8001;
+    server_name  192.168.10.145;
+    #charset koi8-r;
 
-  ```bash
-  server {
-          listen       8001;
-          server_name  192.168.10.145;
-          #charset koi8-r;
+    #access_log  logs/host.access.log  main;
+    location / {
+        root /data/nginx/html;
+        index index.php;
+    }
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        index index.php;
+        fastcgi_param  SCRIPT_FILENAME /data/nginx/html/$fastcgi_script_name;
+        include        fastcgi_params;
+}
+```
 
-          #access_log  logs/host.access.log  main;
-          location / {
-              root /data/nginx/html;
-              index index.php;
-          }
-          location ~ \.php$ {
-              fastcgi_pass 127.0.0.1:9000;
-              index index.php;
-              fastcgi_param  SCRIPT_FILENAME /data/nginx/html/$fastcgi_script_name;
-              include        fastcgi_params;
-          }
-
-  ```
-  ```bash
-  # 启动nginx
-  /data/nginx/sbin/nginx -c /data/nginx/conf/nginx.conf
-  ```
 - 复制PHP文件到nginx 前端资源目录
+```bash
+cp -a /opt/zabbix-6.0.0/ui/* /data/nginx/html/
 
-  ```bash
-  cp -a /opt/zabbix-6.0.0/ui/* /data/nginx/html/
-  ```
+# 启动nginx
+/data/nginx/sbin/nginx -c /data/nginx/conf/nginx.conf
+```
+
 - 访问首页，根据提示修改php参数
+```bash
+echo '
+php_admin_value[memory_limit] = 128M
+php_admin_value[max_execution_time] = 300
+php_admin_value[post_max_size] = 16M ' >>/data/php/etc/php-fpm.d/www.conf
 
-  ```bash
-  cat <<EOF >>/data/php/etc/php-fpm.d/www.conf
-  php_admin_value[memory_limit] = 128M
-  php_admin_value[max_execution_time] = 300
-  php_admin_value[post_max_size] = 16M
-  EOF
+systemctl restart php-fpm
 
-  systemctl restart php-fpm
-
-  ```
-- 输入用户名和密码Admin/zabbix
+# 输入用户名和密码Admin/zabbix
+```

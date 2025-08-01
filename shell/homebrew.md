@@ -33,6 +33,7 @@ brew install stunnel
 brew install openvpn
 
 brew services start stunnel
-sudo brew services info openvpn
-sudo brew services start openvpn
+brew services start openvpn
+brew services start v2ray
+brew services info openvpn
 ```

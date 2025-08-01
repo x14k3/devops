@@ -1,72 +1,4 @@
 
-- Pod
-    - Pod是K8S里能够被运行的最小的逻辑单元（原子单元）
-    - 1个Pod里面可以运行多个容器，它们共享UTS+NET+IPC名称空间
-    - 可以把Pod理解成豌豆荚，而同一Pod内的每个容器是一颗颗豌豆
-    - 一个Pod里运行多个容器，又叫边车（SideCar）模式
-- Pod控制器（关于更多[初识Pod](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Kubernetes%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.md#%E5%88%9D%E8%AF%86pod)）
-    - Pod控制器是Pod启动的一种模板，用来保证在K8S里启动的Pod始终按照人们的预期运行（副本数、生命周期、健康状态检查...）
-    - Pod内提供了众多的Pod控制器，常用的有以下几种：
-        - Deployment
-        - DaemonSet
-        - ReplicaSet
-        - StatefulSet
-        - Job
-        - Cronjob
-- Name
-    - 由于K8S内部，使用“资源”来定义每一种逻辑概念（功能），故每种“资源”，都应该有自己的“名称”
-    - “资源”有api版本（apiVersion）类别（kind）、元数据（metadata）、定义清单（spec）、状态（status）等配置信息
-    - “名称”通常定义在“资源”的“元数据”信息里
-- [namespace](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Docker%E5%9F%BA%E7%A1%80.md#%E5%85%B3%E4%BA%8Enamespace)
-    - 随着项目增多、人员增加、集群规模的扩大，需要一种能够隔离K8S内各种“资源”的方法，这就是名称空间
-    - 名称空间可以理解为K8S内部的虚拟集群组
-    - 不同名称空间内的“资源”名称可以相同，相同名称空间内的同种“资源”、“名称”不能相同
-    - 合理的使用K8S名称空间，使得集群管理员能够更好的对交付到K8S里的服务进行分类管理和浏览
-    - K8S内默认存在的名称空间有：default、kube-system、kube-public
-    - 查询K8S里特定“资源”要带上相应的名称空间
-- Label
-    - 标签是K8S特色的管理方式，便于分类管理资源对象
-    - 一个标签可以对应多个资源，一个资源也可以有多个标签，它们是多对多的关系
-    - 一个资源拥有多个标签，可以实现不同维度的管理
-    - 标签的组成：key=value
-    - 与标签类似的，还有一种“注解”（annotations）
-- Label选择器
-    - 给资源打上标签后，可以使用标签选择器过滤指定的标签
-    - 标签选择器目前有两个：基于等值关系（等于、不等于）和基于集合关系（属于、不属于、存在）
-    - 许多资源支持内嵌标签选择器字段
-        - matchLabels
-        - matchExpressions
-- Service
-    - 在K8S的世界里，虽然每个Pod都会被分配一个单独的IP地址，但这个IP地址会随着Pod的销毁而消失
-    - Service（服务）就是用来解决这个问题的核心概念
-    - 一个Service可以看作一组提供相同服务的Pod的对外访问接口
-    - Service作用与哪些Pod是通过标签选择器来定义的
-- Ingress
-    - Ingress是K8S集群里工作在OSI网络参考模型下，第7层的应用，对外暴露的接口
-    - Service只能进行L4流量调度，表现形式是ip+port
-    - Ingress则可以调度不同业务域、不同URL访问路径的业务流量
-
-简单理解：Pod可运行的原子，name定义名字，namespace名称空间（放一堆名字），label标签（另外的名字），service提供服务，ingress通信
-
-### K8S架构图
-
-![[assets/1582188308711.png]]
-
-kubectl：Kubernetes集群的命令行接口
-API Server：的核心功能是对核心对象（例如：Pod，Service，RC）的增删改查操作，同时也是集群内模块之间数据交换的枢纽
-Etcd：包含在 APIServer 中，用来存储资源信息
-Controller Manager ：负责维护集群的状态，比如故障检测、自动扩展、滚动更新等
-Scheduler**：负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上。可以通过这些有更深的了解：
-- [Kubernetes调度机制](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Kubernetes%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6.md)
-- [Kubernetes的资源模型与资源管理](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Kubernetes%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6.md#kubernetes%E7%9A%84%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9E%8B%E4%B8%8E%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86)
-- [Kubernetes默认的调度策略](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Kubernetes%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6.md#kubernetes%E9%BB%98%E8%AE%A4%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5)
-- [调度器的优先级与强制机制](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Kubernetes%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6.md#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E5%BC%BA%E5%88%B6%E6%9C%BA%E5%88%B6)
-
-**kube-proxy**：负责为Service提供cluster内部的服务发现和负载均衡
-**Kubelet**：在Kubernetes中，应用容器彼此是隔离的，并且与运行其的主机也是隔离的，这是对应用进行独立解耦管理的关键点。[Kubelet工作原理解析](https://github.com/ben1234560/k8s_PaaS/blob/master/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/Kubernetes%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6.md#kubelet)
-**Node**：运行容器应用，由Master管理
-
-#### 我们部署的K8S架构图
 
 ![[assets/Pasted image 20250718154618.png]]
 
@@ -87,9 +19,9 @@ Scheduler**：负责资源的调度，按照预定的调度策略将Pod调度到
 
 准备一台8C64G的机器，我们将它分成5个节点，如下图
 
-
 |      | 反向代理           | 反向代理           | 主控+运算          | 主控+运算          | 运维机器            |
 | ---- | -------------- | -------------- | -------------- | -------------- | --------------- |
+| 主机名  | hdss-7-11      | hdss-7-12      | hdss-7-21      | hdss-7-22      | hdss-7-200      |
 | ip地址 | 192.168.133.11 | 192.168.133.12 | 192.168.133.21 | 192.168.133.22 | 192.168.133.200 |
 | 标配   | 2C4G           | 2C4G           | 2C16G          | 2C16G          | 2C2G            |
 
@@ -119,7 +51,7 @@ yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y
 >**WHAT**：DNS（域名系统）说白了，就是把一个域和IP地址做了一下绑定，如你在里机器里面输入 `nslookup www.qq.com`，出来的Address是一堆IP，IP是不容易记的，所以DNS让IP和域名做一下绑定，这样你输入域名就可以了
 >**WHY**：我们要用ingress，在K8S里要做7层调度，而且无论如何都要用域名（如之前的那个百度页面的域名，那个是host的方式），但是问题是我们怎么给K8S里的容器绑host，所以我们必须做一个DNS，然后容器服从我们的DNS解析调度
 
-[[../基础服务/DNS/dnsmasq|dnsmasq]]
+在11机器部署 [[../基础服务/DNS/dnsmasq|dnsmasq]]
 
 ```bash
 # 在11机器：
@@ -147,6 +79,8 @@ server=114.114.114.114
 
 > **WHAT**： 证书，可以用来审计也可以保障安全，k8S组件启动的时候，则需要有对应的证书，证书的详解你也可以在网上搜到，这里就不细细说明了
 > **WHY**：当然是为了让我们的组件能正常运行
+
+在200机器
 
 ```bash
 # 在200机器：
@@ -185,7 +119,6 @@ echo '
 }' >> ca-csr.json
 
 cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
-cat ca.pem
 
 ```
 
@@ -195,7 +128,7 @@ cat ca.pem
 >**WHAT**：docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。
 **WHY**：Pod里面就是由数个docker容器组成，Pod是豌豆荚，docker容器是里面的豆子。
 
-[[../docker/docker 部署|docker 部署]]
+在21/22机器 [[../docker/docker 部署|docker 部署]]
 
 ```bash
 # 如我们架构图所示，运算节点是21/22机器（没有docker则无法运行pod），运维主机是200机器（没有docker则没办法下载docker存入私有仓库），所以在三台机器安装（21/22/200）
@@ -228,7 +161,7 @@ docker ps -a
 > **WHAT **：harbor仓库是可以部署到本地的私有仓库，也就是你可以把镜像推到这个仓库，然后需要用的时候再下载下来，这样的好处是：1、下载速度快，用到的时候能马上下载下来2、不用担心镜像改动或者下架等。
 > **WHY**：因为我们的部署K8S涉及到很多镜像，制作相关包的时候如果网速问题会导致失败重来，而且我们在公司里也会建自己的仓库，所以必须按照harbor仓库
 
-在200机器部署harbor [[../docker/docker harbor|docker harbor]]
+在200机器部署 [[../docker/docker harbor|docker harbor]]
 
 ```bash
 # 修改harbor.yml文件
@@ -247,7 +180,8 @@ data_volume：数据卷，即docker镜像放在哪里
 location：日志文件
 **./install.sh**：启动shell脚本
 
-在200机器部署nginx
+
+在200机器部署 [[../中间件/nginx/nginx 部署|nginx 部署]]
 
 ```bash
 yum install nginx -y
@@ -278,4 +212,235 @@ docker login harbor.od.com
 # 账号：admin 密码：Harbor12345
 docker push harbor.od.com/public/nginx:v20250728
 # 报错：如果发现登录不上去了，过一阵子再登录即可，大约5分钟左右
+```
+
+---
+
+## 部署etcd服务
+
+>**WHAT**：一个高可用强一致性的服务发现存储仓库，关于服务发现，其本质就是知道了集群中是否有进程在监听udp和tcp端口（如上面部署的harbor就是监听180端口），并且通过名字就可以查找和连接。
+>- **一个强一致性、高可用的服务存储目录**：基于Raft算法的etcd天生就是这样
+>- **一种注册服务和监控服务健康状态的机制**：在etcd中注册服务，并且对注册的服务设置`key TTL`（TTL上面有讲到），定时保持服务的心跳以达到监控健康状态的效果
+>- **一种查找和连接服务的机制**：通过在etcd指定的主题下注册的服务也能在对应的主题下查找到，为了确保连接，我们可以在每个服务机器上都部署一个Proxy模式的etcd，这样就可以确保能访问etcd集群的服务都能互相连接
+**WHY**：我们需要让服务快速透明地接入到计算集群中，让共享配置信息快速被集群中的所有机器发现
+
+我们在12/21/22机器部署[[../中间件/etcd|etcd]]
+
+
+---
+
+## 部署API-server集群
+
+[kubernetes官网](https://github.com/kubernetes/kubernetes)
+
+根据架构图，我们把运算节点部署在21和22机器
+```bash
+# 21/22机器
+cd /opt/src/
+# 可以去官网下载
+wget https://dl.k8s.io/v1.15.2/kubernetes-server-linux-amd64.tar.gz
+mv kubernetes-server-linux-amd64.tar.gz kubernetes-server-linux-amd64-v1.15.2.tar.gz
+
+tar xf kubernetes-server-linux-amd64-v1.15.2.tar.gz -C /opt/
+
+# 签发client证书，200机器：
+cd /opt/certs
+echo '{
+    "CN": "k8s-node",
+    "hosts": [
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ]
+} ' >> client-csr.json
+
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
+
+
+# 给API-server做证书，200机器
+echo '{
+    "CN": "k8s-apiserver",
+    "hosts": [
+        "127.0.0.1",
+        "192.168.0.1",
+        "kubernetes.default",
+        "kubernetes.default.svc",
+        "kubernetes.default.svc.cluster",
+        "kubernetes.default.svc.cluster.local",
+        "192.168.133.11",
+        "192.168.133.12",
+        "192.168.133.21",
+        "192.168.133.22"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ]
+}' >> apiserver-csr.json
+
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server apiserver-csr.json |cfssl-json -bare apiserver
+
+
+# 21/22机器：
+cd /opt/kubernetes/server/bin
+mkdir cert && cd cert/
+# 把证书考过来
+scp hdss7-200:/opt/certs/ca.pem .
+scp hdss7-200:/opt/certs/ca-key.pem .
+scp hdss7-200:/opt/certs/client-key.pem .
+scp hdss7-200:/opt/certs/client.pem .
+scp hdss7-200:/opt/certs/apiserver.pem .
+scp hdss7-200:/opt/certs/apiserver-key.pem .
+
+```
+
+
+```bash
+# 21/22机器：
+cd /opt/kubernetes/server/bin
+mkdir conf
+
+cat  >> conf/audit.yaml <<EOF
+apiVersion: audit.k8s.io/v1beta1 # This is required.
+kind: Policy
+# Don't generate audit events for all requests in RequestReceived stage.
+omitStages:
+  - "RequestReceived"
+rules:
+  # Log pod changes at RequestResponse level
+  - level: RequestResponse
+    resources:
+    - group: ""
+      # Resource "pods" doesn't match requests to any subresource of pods,
+      # which is consistent with the RBAC policy.
+      resources: ["pods"]
+  # Log "pods/log", "pods/status" at Metadata level
+  - level: Metadata
+    resources:
+    - group: ""
+      resources: ["pods/log", "pods/status"]
+
+  # Don't log requests to a configmap called "controller-leader"
+  - level: None
+    resources:
+    - group: ""
+      resources: ["configmaps"]
+      resourceNames: ["controller-leader"]
+
+  # Don't log watch requests by the "system:kube-proxy" on endpoints or services
+  - level: None
+    users: ["system:kube-proxy"]
+    verbs: ["watch"]
+    resources:
+    - group: "" # core API group
+      resources: ["endpoints", "services"]
+
+  # Don't log authenticated requests to certain non-resource URL paths.
+  - level: None
+    userGroups: ["system:authenticated"]
+    nonResourceURLs:
+    - "/api*" # Wildcard matching.
+    - "/version"
+
+  # Log the request body of configmap changes in kube-system.
+  - level: Request
+    resources:
+    - group: "" # core API group
+      resources: ["configmaps"]
+    # This rule only applies to resources in the "kube-system" namespace.
+    # The empty string "" can be used to select non-namespaced resources.
+    namespaces: ["kube-system"]
+
+  # Log configmap and secret changes in all other namespaces at the Metadata level.
+  - level: Metadata
+    resources:
+    - group: "" # core API group
+      resources: ["secrets", "configmaps"]
+
+  # Log all other resources in core and extensions at the Request level.
+  - level: Request
+    resources:
+    - group: "" # core API group
+    - group: "extensions" # Version of group should NOT be included.
+
+  # A catch-all rule to log all other requests at the Metadata level.
+  - level: Metadata
+    # Long-running requests like watches that fall under this rule will not
+    # generate an audit event in RequestReceived.
+    omitStages:
+      - "RequestReceived"
+EOF
+      
+
+cat >> /opt/kubernetes/server/bin/kube-apiserver.sh <<EOF
+#!/bin/bash
+./kube-apiserver \
+  --apiserver-count 2 \
+  --audit-log-path /data/logs/kubernetes/kube-apiserver/audit-log \
+  --audit-policy-file ./conf/audit.yaml \
+  --authorization-mode RBAC \
+  --client-ca-file ./cert/ca.pem \
+  --requestheader-client-ca-file ./cert/ca.pem \
+  --enable-admission-plugins NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota \
+  --etcd-cafile ./cert/ca.pem \
+  --etcd-certfile ./cert/client.pem \
+  --etcd-keyfile ./cert/client-key.pem \
+  --etcd-servers https://10.4.7.12:2379,https://10.4.7.21:2379,https://10.4.7.22:2379 \
+  --service-account-key-file ./cert/ca-key.pem \
+  --service-cluster-ip-range 192.168.0.0/16 \
+  --service-node-port-range 3000-29999 \
+  --target-ram-mb=1024 \
+  --kubelet-client-certificate ./cert/client.pem \
+  --kubelet-client-key ./cert/client-key.pem \
+  --log-dir  /data/logs/kubernetes/kube-apiserver \
+  --tls-cert-file ./cert/apiserver.pem \
+  --tls-private-key-file ./cert/apiserver-key.pem \
+  --v 2
+EOF
+
+chmod +x kube-apiserver.sh
+# 一处修改：[program:kube-apiserver-7-21]
+bin]# vi /etc/supervisord.d/kube-apiserver.ini
+[program:kube-apiserver-7-21]
+command=/opt/kubernetes/server/bin/kube-apiserver.sh            ; the program (relative uses PATH, can take args)
+numprocs=1                                                      ; number of processes copies to start (def 1)
+directory=/opt/kubernetes/server/bin                            ; directory to cwd to before exec (def no cwd)
+autostart=true                                                  ; start at supervisord start (default: true)
+autorestart=true                                                ; retstart at unexpected quit (default: true)
+startsecs=30                                                    ; number of secs prog must stay running (def. 1)
+startretries=3                                                  ; max # of serial start failures (default 3)
+exitcodes=0,2                                                   ; 'expected' exit codes for process (default 0,2)
+stopsignal=QUIT                                                 ; signal used to kill process (default TERM)
+stopwaitsecs=10                                                 ; max num secs to wait b4 SIGKILL (default 10)
+user=root                                                       ; setuid to this UNIX account to run the program
+redirect_stderr=true                                            ; redirect proc stderr to stdout (default false)
+stdout_logfile=/data/logs/kubernetes/kube-apiserver/apiserver.stdout.log        ; stderr log path, NONE for none; default AUTO
+stdout_logfile_maxbytes=64MB                                    ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups=4                                        ; # of stdout logfile backups (default 10)
+stdout_capture_maxbytes=1MB                                     ; number of bytes in 'capturemode' (default 0)
+stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
+
+bin]# mkdir -p /data/logs/kubernetes/kube-apiserver
+bin]# supervisorctl update
+# 查看21/22两台机器是否跑起来了，可能比较慢在starting，等10秒
+bin]# supervisorctl status
 ```
