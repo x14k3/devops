@@ -198,21 +198,12 @@ vim test.txt
 
 ## 常见问题
 
-- 按上下左右键出现ABCD
 
-  ```bash
-  echo "set nocp" >> ~/.vimrc
-  source ~/.vimrc
-  ```
-
-- 插入模式下delete/backspce键失效
-
-  ```sql
-  echo "set backspace=2" >> ~/.vimrc
-  ```
-
-- 禁用vim的visual模式
-
-  ```bash
-  echo "set mouse-=a" >> ~/.vimrc
-  ```
+```bash
+# 按上下左右键出现ABCD
+echo "set nocp" >> ~/.vimrc
+# 插入模式下delete/backspce键失效
+echo "set backspace=2" >> ~/.vimrc
+# 禁用vim的visual模式
+echo "set mouse-=a" >> ~/.vimrc
+```

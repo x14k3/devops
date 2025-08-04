@@ -18,7 +18,7 @@ Nginx的Location配置支持普通字符串匹配和正则匹配，不过url的�
 
 为了加深你的理解，我们来看如下一个例子。由于规则2的优先级更高，当用户访问`/static/`​或则`/static/123.html`​时，Nginx会优先执行规则2里的操作，其它的的请求则会交由规则1执行。
 
-```highlight
+```nginx
 # 规则1：通用匹配
 location / {
 }
@@ -36,7 +36,7 @@ location ^~ /static {
 
 如果用`root`​设置静态文件资源路径，可以按如下代码设置。两者是等同的。
 
-```highlight
+```nginx
 # 规则2：处理以/static/开头的url
 location ^~ /static {                     
     root /usr/share/nginx/html; # 静态资源路径
