@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2c0f1fc098bcae8f",
+        "id": "822cbbb71096415c",
         "type": "tabs",
         "children": [
           {
-            "id": "b38c3bbbbcdd5ca5",
+            "id": "c9d35c2f0c04c800",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
+                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5. 深度探讨：继承、优先级与内核参数"
+              "title": "6. 实践应用与案例分析"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
+                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "5. 深度探讨：继承、优先级与内核参数 的大纲"
+              "title": "6. 实践应用与案例分析 的大纲"
             }
           }
         ],
@@ -169,10 +169,10 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "b38c3bbbbcdd5ca5",
+  "active": "c9d35c2f0c04c800",
   "lastOpenFiles": [
-    "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
     "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
+    "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
     "linux/linux 资源限制/3. limits.conf文件：持久化用户和组的资源限制.md",
     "linux/linux 资源限制/10. Appendix C 相关系统文件、命令与工具.md",
     "linux/linux 资源限制/11..md",
