@@ -49,17 +49,13 @@ sudo qemu-img create -f qcow2 /data/qemu/images/win10_dev.qcow2 100G
 ### 3. **执行安装命令**
 
 ```bash
-sudo virt-install \
-  --name win10 \
-  --ram 8192 \
-  --vcpus 2 \
-  --disk path=/data/qemu/images/win10_dev.qcow2,bus=virtio,format=qcow2 \
-  --os-variant win10 \
-  --network network=default,model=virtio \
-  --graphics vnc,listen=0.0.0.0 \
-  --cdrom /data/qemu/iso/Win10_22H2_Chinese_Simplified_x64v1.iso \
-  --disk path=/data/qemu/iso/virtio-win-0.1.271.iso,device=cdrom \
-  --boot cdrom
+virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
+--network bridge=br0,model=virtio --graphics vnc,listen=0.0.0.0 \
+--cdrom /data/archive/iso/Win10_22H2_Chinese_Simplified_x64v1.iso \
+--disk path=/data/qemu/win10_sys.qcow2,bus=virtio,format=qcow2 \
+--disk path=/data/qemu/win10_file.qcow2,bus=virtio,format=qcow2 \
+--disk path=/data/archive/iso/virtio-win-0.1.271.iso,device=cdrom \
+--boot cdrom
 ```
 
 ### 参数说明：
@@ -106,7 +102,13 @@ sudo virt-install \
 
   删除 `<disk type='file' device='cdrom'>`​ 相关段落，或使用：
 
-  ```
+  ```bash
+  <os>
+    <type arch='x86_64' machine='pc-q35-7.2'>hvm</type>
+    <boot dev='hd'/>    --修改为dev=hd
+  </os>
+
+
   virsh change-media win10 hda --eject --config  # 弹出光盘
   ```
 - **调整配置**：

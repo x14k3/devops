@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
+                "file": "企业建设/KVM/KVM 创建虚拟机.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "6. 实践应用与案例分析"
+              "title": "KVM 创建虚拟机"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
+                "file": "企业建设/KVM/KVM 创建虚拟机.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "6. 实践应用与案例分析 的大纲"
+              "title": "KVM 创建虚拟机 的大纲"
             }
           }
         ],
@@ -171,6 +171,13 @@
   },
   "active": "c9d35c2f0c04c800",
   "lastOpenFiles": [
+    "企业建设/KVM/KVM 虚拟机热扩容.md",
+    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
+    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "企业建设/KVM/KVM 创建虚拟机.md",
+    "docker/docker 部署.md",
+    "linux/linux 资源限制/7. 故障排除与最佳实践.md",
+    "linux/linux 资源限制/6. 实践应用与案例分析.md",
     "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
     "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
     "linux/linux 资源限制/3. limits.conf文件：持久化用户和组的资源限制.md",
@@ -178,8 +185,6 @@
     "linux/linux 资源限制/11..md",
     "linux/linux 资源限制/9. Appendix B limits.conf示例配置文件集.md",
     "linux/linux 资源限制/8. Appendix A 常用资源限制项对照表.md",
-    "linux/linux 资源限制/7. 故障排除与最佳实践.md",
-    "linux/linux 资源限制/6. 实践应用与案例分析.md",
     "linux/linux 资源限制/3. PAM 架构与组件.md",
     "linux/linux 资源限制/2. ulimit命令：管理当前会话的资源限制.md",
     "linux/linux 资源限制/1. linux 资源限制.md",
@@ -192,11 +197,6 @@
     "企业建设/数据同步方案/rsync/linux环境下使用rsync在两台机器之间定时备份文件.md",
     "企业建设/数据同步方案/rsync/借助inotify实现实时同步.md",
     "企业建设/postfix/Postfix 与 Dovecot.md",
-    "企业建设/postfix.md",
-    "企业建设/rsyslog.md",
-    "企业建设/运维外挂.md",
-    "企业建设/高可用方案.md",
-    "企业建设/数据同步方案.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
