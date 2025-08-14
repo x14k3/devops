@@ -51,10 +51,10 @@ sudo qemu-img create -f qcow2 /data/qemu/images/win10_dev.qcow2 100G
 ```bash
 virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
 --network bridge=br0,model=virtio --graphics vnc,listen=0.0.0.0 \
---cdrom /data/archive/iso/Win10_22H2_Chinese_Simplified_x64v1.iso \
---disk path=/data/qemu/win10_sys.qcow2,bus=virtio,format=qcow2 \
---disk path=/data/qemu/win10_file.qcow2,bus=virtio,format=qcow2 \
---disk path=/data/archive/iso/virtio-win-0.1.271.iso,device=cdrom \
+--cdrom /data/qemu/iso/Win10_22H2_Chinese_Simplified_x64v1.iso \
+--disk path=/data/qemu/images/win10_sys.qcow2,bus=virtio,format=qcow2 \
+--disk path=/data/qemu/images/win10_data.qcow2,bus=virtio,format=qcow2 \
+--disk path=/data/qemu/iso/virtio-win-0.1.271.iso,device=cdrom \
 --boot cdrom
 ```
 
@@ -79,7 +79,7 @@ virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
 
 1. **加载VirtIO驱动**：
 
-    - 在安装界面选择磁盘时，点击  **"加载驱动程序"**   **&gt;**   **"浏览"**
+    - 在安装界面选择磁盘时，点击  **"加载驱动程序"**  ， **"浏览"**
     - 选择VirtIO光盘中的 `\viostor\w10\amd64`​ 加载磁盘驱动
     - 安装完成后，从VirtIO光盘安装其他驱动（如网络、Balloon服务）
 2. **启用远程访问**：
@@ -94,29 +94,17 @@ virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
 
 ### 5. **安装后优化**
 
-- **删除安装介质**：
-
-  ```
-  virsh edit win10
-  ```
-
-  删除 `<disk type='file' device='cdrom'>`​ 相关段落，或使用：
-
   ```bash
+  # 修改启动盘
+  virsh edit win10
+# --------------------------
   <os>
     <type arch='x86_64' machine='pc-q35-7.2'>hvm</type>
-    <boot dev='hd'/>    --修改为dev=hd
+    <boot dev='cdrom'/>    --修改为dev=hd
   </os>
 
+  ```
 
-  virsh change-media win10 hda --eject --config  # 弹出光盘
-  ```
-- **调整配置**：
-
-  ```
-  virsh edit win10  # 手动修改XML（如CPU/内存）
-  virsh shutdown win10 && virsh start win10  # 重启生效
-  ```
 
 ---
 
