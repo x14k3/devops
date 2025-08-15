@@ -158,7 +158,9 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 ### 4.1 m3u 文件
 
 [https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u](https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u)
-
+```bash
+curl -O https://raw.githubusercontent.com/fanmingming/live/refs/heads/main/tv/m3u/ipv6.m3u
+```
 注意使用iptv6需要设置光猫和路由器设置ipv6，docker-jellyfin 使用`docker run --net=host`​参数
 
 确认开启ipv6测试地址：[http://test-ipv6.com/](ipv6测试网址)

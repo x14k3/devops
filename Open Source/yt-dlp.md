@@ -111,7 +111,7 @@ yt-dlp -f 'bv[ext=mp4]+ba[ext=m4a]' --proxy socks5://127.0.0.1:10808 --output "%
 # 如果你想下載特定畫質影片，比方說1080p，那就加上-f "bestvideo[height<=1080]+bestaudio[ext=m4a]"的參數，指定影片最大高度。至於其他畫質，2160為4K，1080為1080p，720為720p，以此類推。
 ```
 
-### 5.下载播放列表所有视频
+### 4.下载播放列表所有视频
 
 ```bash
 播放列表一般url到有list关键字
@@ -122,3 +122,22 @@ yt-dlp -f 'bv[ext=mp4]+ba[ext=m4a]' --proxy socks5://127.0.0.1:10808 --output "%
 ```
 
 ‍
+#### 5. 遇到的问题
+
+```bash
+$ ./yt-dlp_macos -f 'bv[ext=mp4]+ba[ext=m4a]'  --output "%(title)s.%(ext)s" --embed-thumbnail --add-metadata --merge-output-format mp4 https://www.youtube.com/watch\?v\=eQ6iBwRA8_g 
+[youtube] Extracting URL: https://www.youtube.com/watch?v=eQ6iBwRA8_g
+[youtube] eQ6iBwRA8_g: Downloading webpage
+[youtube] eQ6iBwRA8_g: Downloading tv client config
+[youtube] eQ6iBwRA8_g: Downloading player 9f49a55a-main
+[youtube] eQ6iBwRA8_g: Downloading tv player API JSON
+[youtube] eQ6iBwRA8_g: Downloading ios player API JSON
+ERROR: [youtube] eQ6iBwRA8_g: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+```
+
+解决方法
+```bash
+# 使用firefox 浏览器 添加  --cookies-from-browser firefox
+$ ./yt-dlp_macos -f 'bv[ext=mp4]+ba[ext=m4a]'  --output "%(title)s.%(ext)s" --cookies-from-browser firefox --embed-thumbnail --add-metadata --merge-output-format mp4 https://www.youtube.com/watch\?v\=eQ6iBwRA8_g 
+
+```

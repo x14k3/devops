@@ -1,4 +1,3 @@
-# enp0s31f6: Detected Hardware Unit Hang
 
 参考：
 

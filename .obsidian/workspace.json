@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "822cbbb71096415c",
+        "id": "874d5ce367ad06a3",
         "type": "tabs",
         "children": [
           {
-            "id": "c9d35c2f0c04c800",
+            "id": "80e9eda49af81b81",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "企业建设/KVM/KVM 创建虚拟机.md",
-                "mode": "preview",
+                "file": "Open Source/yt-dlp.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "KVM 创建虚拟机"
+              "title": "yt-dlp"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "企业建设/KVM/KVM 创建虚拟机.md",
+                "file": "Open Source/yt-dlp.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "KVM 创建虚拟机 的大纲"
+              "title": "yt-dlp 的大纲"
             }
           }
         ],
@@ -169,13 +169,23 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "c9d35c2f0c04c800",
+  "active": "80e9eda49af81b81",
   "lastOpenFiles": [
+    "企业建设/KVM/kvm 遇到过的问题/enp0s31f6_ Detected Hardware Unit Hang.md",
+    "企业建设/KVM/kvm 遇到过的问题.md",
     "Open Source/yt-dlp.md",
-    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
     "企业建设/KVM/KVM 创建虚拟机.md",
-    "企业建设/KVM/KVM 虚拟机热扩容.md",
     "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "Open Source/docker-jellyfin.md",
+    "Open Source/docker-Navidrome.md",
+    "ipv6测试网址.md",
+    "Open Source/docker-pansou.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 负载均衡.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 反向代理-tcp.md",
+    "Open Source/aria2.md",
+    "docker/docker 命令.md",
+    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
+    "企业建设/KVM/KVM 虚拟机热扩容.md",
     "docker/docker 部署.md",
     "linux/linux 资源限制/7. 故障排除与最佳实践.md",
     "linux/linux 资源限制/6. 实践应用与案例分析.md",
@@ -187,16 +197,6 @@
     "linux/linux 资源限制/9. Appendix B limits.conf示例配置文件集.md",
     "linux/linux 资源限制/8. Appendix A 常用资源限制项对照表.md",
     "linux/linux 资源限制/3. PAM 架构与组件.md",
-    "linux/linux 资源限制/2. ulimit命令：管理当前会话的资源限制.md",
-    "linux/linux 资源限制/1. linux 资源限制.md",
-    "Open Source/docker-jellyfin.md",
-    "shell/shell 命令手册/网络相关/curl.md",
-    "shell/shell 命令手册/文本处理/tr.md",
-    "shell/shell 命令手册/shell 三剑客/sed.md",
-    "shell/shell 命令手册/shell 三剑客/awk.md",
-    "Open Source/aria2.md",
-    "企业建设/数据同步方案/rsync/linux环境下使用rsync在两台机器之间定时备份文件.md",
-    "企业建设/数据同步方案/rsync/借助inotify实现实时同步.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
