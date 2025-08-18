@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "874d5ce367ad06a3",
+        "id": "2eccecfd96e6bd88",
         "type": "tabs",
         "children": [
           {
-            "id": "80e9eda49af81b81",
+            "id": "3db04a31acef228e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Open Source/yt-dlp.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "yt-dlp"
+              "title": "新标签页"
             }
           }
         ]
@@ -141,13 +137,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Open Source/yt-dlp.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "yt-dlp 的大纲"
+              "title": "大纲"
             }
           }
         ],
@@ -169,34 +164,34 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "80e9eda49af81b81",
+  "active": "3db04a31acef228e",
   "lastOpenFiles": [
+    "docker/docker 命令.md",
+    "Open Source/docker-jellyfin.md",
+    "Open Source/docker-Windows.md",
+    "Open Source/fail2ban.md",
+    "Open Source/frp.md",
+    "Open Source/home-assistant.md",
+    "Open Source/knock.md",
+    "Open Source/openWRT.md",
+    "Open Source/shadowsocks.md",
+    "Open Source/tailscale.md",
+    "Open Source/v2ray.md",
+    "Open Source/wireguard.md",
+    "Open Source/yt-dlp.md",
     "企业建设/KVM/kvm 遇到过的问题/enp0s31f6_ Detected Hardware Unit Hang.md",
     "企业建设/KVM/kvm 遇到过的问题.md",
-    "Open Source/yt-dlp.md",
     "企业建设/KVM/KVM 创建虚拟机.md",
     "企业建设/KVM/KVM 磁盘镜像管理工具.md",
-    "Open Source/docker-jellyfin.md",
     "Open Source/docker-Navidrome.md",
     "ipv6测试网址.md",
     "Open Source/docker-pansou.md",
     "中间件/nginx/nginx 配置文件详解/Nginx 负载均衡.md",
     "中间件/nginx/nginx 配置文件详解/Nginx 反向代理-tcp.md",
     "Open Source/aria2.md",
-    "docker/docker 命令.md",
     "企业建设/KVM/KVM 虚拟机克隆和快照.md",
     "企业建设/KVM/KVM 虚拟机热扩容.md",
     "docker/docker 部署.md",
-    "linux/linux 资源限制/7. 故障排除与最佳实践.md",
-    "linux/linux 资源限制/6. 实践应用与案例分析.md",
-    "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
-    "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
-    "linux/linux 资源限制/3. limits.conf文件：持久化用户和组的资源限制.md",
-    "linux/linux 资源限制/10. Appendix C 相关系统文件、命令与工具.md",
-    "linux/linux 资源限制/11..md",
-    "linux/linux 资源限制/9. Appendix B limits.conf示例配置文件集.md",
-    "linux/linux 资源限制/8. Appendix A 常用资源限制项对照表.md",
-    "linux/linux 资源限制/3. PAM 架构与组件.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",

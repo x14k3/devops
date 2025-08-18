@@ -24,9 +24,10 @@
 --name       # 指定容器的name
 --net        # 容器网络设置
 --restart=[
-          no         # 容器退出时，不重启容器；
-          on-failure # 只有在非0状态退出时才从新启动容器；
-          always     # 无论退出状态是如何，都重启容器；
+          no             # 默认，容器退出时，不重启容器；
+          on-failure     # 当容器的退出状态码非零时（即非正常退出），Docker 会自动重启容器；
+          always         # 无论容器是正常退出还是异常退出，Docker 都会自动重启容器；
+          unless-stopped # 容器退出时总是重启，但如果Docker 守护进程在启动时容器已经停止，则不会重启。也就是说，它会忽略Docker 启动时就已经停止的容器
 ]
 --privileged=true  # 使docker中的root获得真正的root权限
 # 小技巧：docker必须有进程存在才能保存运行
@@ -78,16 +79,16 @@ docker import         # 加载通过docker export打包的容器镜像 [ docker 
 ## 镜像管理
 
 ```bash
-docker images       # 列出镜像
-docker rmi          # 删除镜像
-docker tag          # 修改本地某一镜像的标记，使其镜像属于某一仓库 [docker tag alpine:3.15 192.168.0.100:8081/images/alpine:3.15]
-docker build        # 通过指定Dockerfile文件编译镜像
-docker history      # 查看镜像历史
-docker checkpoint   # 设置checkpoint，类似于恢复点，可以让镜像撤销到曾经设置的某一个checkpoint上
-docker manifest     # docker镜像清单管理
-docker trust        # docker可信镜像管理
-docker save         # 将镜像保存成tar文件 [docker save -o alpine.tar  alpine:3.15]
-docker load         # 从tar中恢复镜像 [docker load < alpine.tar]
+docker images         # 列出镜像
+docker rmi            # 删除镜像
+docker tag            # 修改本地某一镜像的标记，使其镜像属于某一仓库 [docker tag alpine:3.15 192.168.0.100:8081/images/alpine:3.15]
+docker build          # 通过指定Dockerfile文件编译镜像
+docker history        # 查看镜像历史
+docker checkpoint     # 设置checkpoint，类似于恢复点，可以让镜像撤销到曾经设置的某一个checkpoint上
+docker manifest       # docker镜像清单管理
+docker trust          # docker可信镜像管理
+docker save           # 将镜像保存成tar文件 [docker save -o alpine.tar  alpine:3.15]
+docker load           # 从tar中恢复镜像 [docker load < alpine.tar]
 ```
 
 **总结一下docker save和docker export的区别：**
