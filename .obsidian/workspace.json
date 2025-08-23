@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "shell/shell 命令手册/脚本常用命令/xargs.md",
+                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "xargs"
+              "title": "6. 实践应用与案例分析"
             }
           }
         ]
@@ -74,8 +74,7 @@
               "title": "书签"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -142,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "shell/shell 命令手册/脚本常用命令/xargs.md",
+                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "xargs 的大纲"
+              "title": "6. 实践应用与案例分析 的大纲"
             }
           }
         ],
@@ -172,6 +171,16 @@
   },
   "active": "83fb554966c11521",
   "lastOpenFiles": [
+    "linux/linux 资源限制/7. Appendix A 常用资源限制项对照表.md",
+    "linux/linux 资源限制/6. 实践应用与案例分析.md",
+    "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
+    "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
+    "linux/linux 资源限制/9. Appendix C 相关系统文件、命令与工具.md",
+    "linux/linux 资源限制/8 Appendix B limits.conf示例配置文件集.md",
+    "linux/linux 资源限制/7. 故障排除与最佳实践.md",
+    "sundongsheng.md",
+    "README.md",
+    "shell/shell 命令手册/脚本常用命令/xargs.md",
     "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
     "shell/shell 用法总结/Bash的基本特性之 Here Documents 与 Here Strings.md",
     "shell/shell 用法总结/使用whiptail创建交互式shell对话框.md",
@@ -188,16 +197,6 @@
     "shell/shell 用法总结/Bash重定向.md",
     "shell/shell 命令手册/文本处理/find.md",
     "database/Oracle/Oralce 基础概念/Oracle 启动原理.md",
-    "database/Oracle/Oralce 基础概念/Oracle 分区.md",
-    "database/Oracle/Oracle Memory Management.md",
-    "database/Oracle/Oralce 基础概念/Oracle 用户与模式.md",
-    "database/Oracle/Oralce 基础概念/Oracle 视图.md",
-    "database/Oracle/Oralce 基础概念/Oracle 基本概念和结构.md",
-    "企业建设/KVM/KVM 虚拟机热扩容.md",
-    "docker/docker 命令.md",
-    "Open Source/docker-jellyfin.md",
-    "Open Source/docker-Windows.md",
-    "Open Source/fail2ban.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
