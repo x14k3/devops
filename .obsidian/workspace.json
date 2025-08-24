@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
-                "mode": "source",
+                "file": "Open Source/蓝眼云盘.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "6. 实践应用与案例分析"
+              "title": "蓝眼云盘"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 资源限制/6. 实践应用与案例分析.md",
+                "file": "Open Source/蓝眼云盘.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "6. 实践应用与案例分析 的大纲"
+              "title": "蓝眼云盘 的大纲"
             }
           }
         ],
@@ -171,14 +171,15 @@
   },
   "active": "83fb554966c11521",
   "lastOpenFiles": [
-    "linux/linux 资源限制/7. Appendix A 常用资源限制项对照表.md",
+    "sundongsheng.md",
+    "ipv6测试网址.md",
     "linux/linux 资源限制/6. 实践应用与案例分析.md",
+    "linux/linux 资源限制/7. Appendix A 常用资源限制项对照表.md",
     "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
     "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
     "linux/linux 资源限制/9. Appendix C 相关系统文件、命令与工具.md",
     "linux/linux 资源限制/8 Appendix B limits.conf示例配置文件集.md",
     "linux/linux 资源限制/7. 故障排除与最佳实践.md",
-    "sundongsheng.md",
     "README.md",
     "shell/shell 命令手册/脚本常用命令/xargs.md",
     "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
@@ -196,7 +197,6 @@
     "shell/shell 用法总结/shell 函数.md",
     "shell/shell 用法总结/Bash重定向.md",
     "shell/shell 命令手册/文本处理/find.md",
-    "database/Oracle/Oralce 基础概念/Oracle 启动原理.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
