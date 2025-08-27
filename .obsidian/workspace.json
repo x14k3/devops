@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Open Source/蓝眼云盘.md",
-                "mode": "preview",
+                "file": "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "蓝眼云盘"
+              "title": "Linux Pluggable Authentication Modules (PAM) 全面深度解析"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Open Source/蓝眼云盘.md",
+                "file": "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "蓝眼云盘 的大纲"
+              "title": "Linux Pluggable Authentication Modules (PAM) 全面深度解析 的大纲"
             }
           }
         ],
@@ -171,32 +171,32 @@
   },
   "active": "83fb554966c11521",
   "lastOpenFiles": [
+    "linux/linux 其他配置/CentOS7 升级 Glibc 2.17 到2.28.md",
+    "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
+    "linux/linux 其他配置/opensuse 声卡问题.md",
+    "linux/linux 文件系统/9. linux Multipath.md",
+    "linux/linux 文件系统/8. linux 下的 dev-shm.md",
+    "linux/linux 文件系统/4. linux RAID（磁盘阵列）.md",
+    "linux/linux 文件系统/2. linux 磁盘配额.md",
+    "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
+    "Open Source/yt-dlp.md",
+    "database/Oracle/Oracle 备份恢复/rman 定时备份脚本方案.md",
+    "database/Oracle/Oracle 备份恢复/Oracle RMAN.md",
+    "database/Oracle/Oracle 备份恢复/Oracle 数据泵.md",
+    "database/Oracle/Oracle 备份恢复/基于RMAN实现异机恢复.md",
+    "database/Oracle/Oracle 备份恢复/不完全恢复.md",
+    "database/Oracle/Oracle 备份恢复/完全恢复.md",
+    "Open Source/蓝眼云盘.md",
     "sundongsheng.md",
     "ipv6测试网址.md",
     "linux/linux 资源限制/6. 实践应用与案例分析.md",
     "linux/linux 资源限制/7. Appendix A 常用资源限制项对照表.md",
     "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
-    "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
     "linux/linux 资源限制/9. Appendix C 相关系统文件、命令与工具.md",
     "linux/linux 资源限制/8 Appendix B limits.conf示例配置文件集.md",
     "linux/linux 资源限制/7. 故障排除与最佳实践.md",
     "README.md",
     "shell/shell 命令手册/脚本常用命令/xargs.md",
-    "shell/shell 用法总结/Bash的基本特性之命令行编辑.md",
-    "shell/shell 用法总结/Bash的基本特性之 Here Documents 与 Here Strings.md",
-    "shell/shell 用法总结/使用whiptail创建交互式shell对话框.md",
-    "shell/shell 用法总结/使用dialog创建交互式shell对话框.md",
-    "shell/shell 用法总结/shell登录提示符与登录提示信息.md",
-    "shell/shell 用法总结/shell 状态返回值.md",
-    "shell/shell 用法总结/shell 循环.md",
-    "shell/shell 用法总结/shell 选择和判断.md",
-    "shell/shell 用法总结/shell 条件测试语句和运算符.md",
-    "shell/shell 用法总结/shell 内置变量.md",
-    "shell/shell 用法总结/shell 数组.md",
-    "shell/shell 用法总结/shell 进程替换.md",
-    "shell/shell 用法总结/shell 函数.md",
-    "shell/shell 用法总结/Bash重定向.md",
-    "shell/shell 命令手册/文本处理/find.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
