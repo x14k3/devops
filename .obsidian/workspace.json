@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
+                "file": "database/PostgreSQL/postgresql技巧.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linux Pluggable Authentication Modules (PAM) 全面深度解析"
+              "title": "postgresql技巧"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
+                "file": "database/PostgreSQL/postgresql技巧.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Linux Pluggable Authentication Modules (PAM) 全面深度解析 的大纲"
+              "title": "postgresql技巧 的大纲"
             }
           }
         ],
@@ -155,7 +155,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 344.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,8 +171,11 @@
   },
   "active": "83fb554966c11521",
   "lastOpenFiles": [
-    "linux/linux 其他配置/CentOS7 升级 Glibc 2.17 到2.28.md",
+    "database/PostgreSQL/PostgreSQL 备份恢复.md",
+    "database/PostgreSQL/postgresql技巧.md",
+    "database/PostgreSQL/PostgreSQL 安装部署.md",
     "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
+    "linux/linux 其他配置/CentOS7 升级 Glibc 2.17 到2.28.md",
     "linux/linux 其他配置/opensuse 声卡问题.md",
     "linux/linux 文件系统/9. linux Multipath.md",
     "linux/linux 文件系统/8. linux 下的 dev-shm.md",
@@ -194,9 +197,6 @@
     "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
     "linux/linux 资源限制/9. Appendix C 相关系统文件、命令与工具.md",
     "linux/linux 资源限制/8 Appendix B limits.conf示例配置文件集.md",
-    "linux/linux 资源限制/7. 故障排除与最佳实践.md",
-    "README.md",
-    "shell/shell 命令手册/脚本常用命令/xargs.md",
     "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
