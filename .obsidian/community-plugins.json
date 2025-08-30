@@ -1,5 +1,7 @@
 [
   "oz-clear-unused-images",
   "mousewheel-image-zoom",
-  "remotely-save"
+  "remotely-save",
+  "xmind-viewer",
+  "mxmind"
 ]

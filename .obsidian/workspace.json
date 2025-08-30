@@ -4,21 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "7da7c552eb728213",
+        "id": "39d2dc2fe7d4b008",
         "type": "tabs",
         "children": [
           {
-            "id": "83fb554966c11521",
+            "id": "8227099da3de513a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "xmind-viewer",
               "state": {
-                "file": "database/PostgreSQL/postgresql技巧.md",
-                "mode": "source",
-                "source": false
+                "file": "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind"
               },
-              "icon": "lucide-file",
-              "title": "postgresql技巧"
+              "icon": "brain",
+              "title": "XMind view: 多租户-备份"
             }
           }
         ]
@@ -141,13 +139,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/PostgreSQL/postgresql技巧.md",
+                "file": "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "postgresql技巧 的大纲"
+              "title": "多租户-备份 的大纲"
             }
           }
         ],
@@ -159,6 +157,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "mxmind:Mxmind": false,
       "remotely-save:Remotely Save": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
@@ -169,10 +168,23 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "83fb554966c11521",
+  "active": "a41355350eff645e",
   "lastOpenFiles": [
-    "database/PostgreSQL/PostgreSQL 备份恢复.md",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql3-多表连接.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-0324.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-02V20200216.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-01V20200216.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-32组函数V20190720.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-31单行函数V20190720.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-22V20190707.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-21V20190707.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/SQL-11V20190706.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-1V20190706.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/子查询.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/未命名.md",
+    "database/Oracle/Oracle Memory Management.md",
     "database/PostgreSQL/postgresql技巧.md",
+    "database/PostgreSQL/PostgreSQL 备份恢复.md",
     "database/PostgreSQL/PostgreSQL 安装部署.md",
     "linux/linux 内核配置/Linux Pluggable Authentication Modules (PAM) 全面深度解析.md",
     "linux/linux 其他配置/CentOS7 升级 Glibc 2.17 到2.28.md",
@@ -194,10 +206,6 @@
     "ipv6测试网址.md",
     "linux/linux 资源限制/6. 实践应用与案例分析.md",
     "linux/linux 资源限制/7. Appendix A 常用资源限制项对照表.md",
-    "linux/linux 资源限制/4. pam_limits模块：资源限制的执行者.md",
-    "linux/linux 资源限制/9. Appendix C 相关系统文件、命令与工具.md",
-    "linux/linux 资源限制/8 Appendix B limits.conf示例配置文件集.md",
-    "linux/linux 资源限制",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
     "k8s/assets/1582188308711.png",
@@ -207,15 +215,6 @@
     "k8s/原理及源码解析/assets/1587267230890.png",
     "k8s/原理及源码解析/assets/1587267088835.png",
     "k8s/原理及源码解析/assets/1587266196364.png",
-    "k8s/原理及源码解析/assets/1586660769927.png",
-    "k8s/原理及源码解析/assets",
-    "k8s/原理及源码解析",
-    "k8s/assets",
-    "k8s",
-    "k8s",
-    "docker/docker 基础",
-    "database/Oracle/Oracle GoldenGate/assets/OGG 19C 远程部署（单独部署）安装配置详细过程-20250109160006-fz2ooaz.pdf",
-    "database/Oracle/Oracle RAC/assets/rlwrap-0.45.2-2.el7.x86_64.rpm",
-    "database/Oracle/Oracle 高可用集群/Oracle RAC/assets/nodeinfo.zip"
+    "k8s/原理及源码解析/assets/1586660769927.png"
   ]
 }
