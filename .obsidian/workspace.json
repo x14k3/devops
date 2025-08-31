@@ -11,12 +11,14 @@
             "id": "8227099da3de513a",
             "type": "leaf",
             "state": {
-              "type": "xmind-viewer",
+              "type": "markdown",
               "state": {
-                "file": "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind"
+                "file": "devops/jenkins/Jenkins 概述.md",
+                "mode": "preview",
+                "source": false
               },
-              "icon": "brain",
-              "title": "XMind view: 多租户-备份"
+              "icon": "lucide-file",
+              "title": "Jenkins 概述"
             }
           }
         ]
@@ -139,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind",
+                "file": "devops/jenkins/Jenkins 概述.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "多租户-备份 的大纲"
+              "title": "Jenkins 概述 的大纲"
             }
           }
         ],
@@ -168,8 +170,16 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "8227099da3de513a",
   "lastOpenFiles": [
+    "devops/jenkins/assets/Pasted image 20250831093451.png",
+    "devops/jenkins/assets",
+    "devops/jenkins/Jenkins 部署.md",
+    "devops/jenkins/Jenkins 概述.md",
+    "devops/jenkins/Jenkins 流水线.md",
+    "企业建设/KVM/KVM 创建虚拟机.md",
+    "企业建设/KVM/KVM 安装.md",
+    "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind",
     "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql3-多表连接.xmind",
     "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-0324.xmind",
     "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-02V20200216.xmind",
@@ -178,9 +188,6 @@
     "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-31单行函数V20190720.xmind",
     "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-22V20190707.xmind",
     "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-21V20190707.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/SQL-11V20190706.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-1V20190706.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/子查询.xmind",
     "database/Oracle/oracle 学习文件（OPC）/未命名.md",
     "database/Oracle/Oracle Memory Management.md",
     "database/PostgreSQL/postgresql技巧.md",
@@ -201,11 +208,6 @@
     "database/Oracle/Oracle 备份恢复/基于RMAN实现异机恢复.md",
     "database/Oracle/Oracle 备份恢复/不完全恢复.md",
     "database/Oracle/Oracle 备份恢复/完全恢复.md",
-    "Open Source/蓝眼云盘.md",
-    "sundongsheng.md",
-    "ipv6测试网址.md",
-    "linux/linux 资源限制/6. 实践应用与案例分析.md",
-    "linux/linux 资源限制/7. Appendix A 常用资源限制项对照表.md",
     "Open Source/assets/network-asset-prepare-20241118215730-u7oo6l1.jpg",
     "中间件/stunnel/assets/336678946543465436-20240612100735-q1ukl49.png",
     "k8s/assets/1582188308711.png",
