@@ -1,44 +1,9 @@
-# awk
 
 AWK是一种强大的文本处理工具，其处理文本的效率极高，其输出可以来自标注输入、其他命令的输出或一个或多个文件，熟练使用awk将会对工作效率有很大的提升。
 
-## awk调用方式
-
-awk调用方式包括三种：
-
-#### 一、命令行调用
-
-```bash
-awk [-F seperator] 'commond' input-file
-```
-
-commond的组成又可以包括多个模式和动作的组合，即命令行调用又可以写为：
-
-```bash
-akw [-F seperator] 'parrtern1 {Action1} pattern2 {Action2}' input-file
-```
-
-- seperator:分隔符。分隔符为可选参数，可以为任意字符串,若不指定，默认分隔符为空格。
-- commond:awk命令
-- input\_file: 待处理的文本文件
-
-#### 二、脚本调用
-
-```bash
-awk -f awk-script-file input-file
-```
-
-将awk命令写入一个文件中，然后使用-f参数指定该文件运行
-
-#### 三、shell脚本插入awk命令
-
-在shell中插入awk命令对文件进行处理,直接执行shell命令。
-
 ## 模式与动作
 
-```
 任何awk语句都由**模式**和**动作**组成，**模式部分决定Action语句何时触发以及触发事件，动作决定对当前被匹配的数据进行的操作**，Action中由多个awk处理语句组成。
-```
 
 ```bash
 awk [-F seperator] 'parrtern1 {Action1} pattern2 {Action2}' input-file

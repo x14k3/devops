@@ -4,7 +4,9 @@
 
 1.创建告警媒介，和告警内容
 
-![|475](assets/image-20221127214726115-20230610173809-aqzlx3p.png)​​![|475](assets/image-20221127214732068-20230610173809-jlrixou.png)
+![|675](assets/image-20221127214726115-20230610173809-aqzlx3p.png)​​
+
+![|725](assets/image-20221127214732068-20230610173809-jlrixou.png)
 
 
 ```text
@@ -121,7 +123,9 @@ python weixin.py sundongsheng "zabbix告警" "tomcat_jenkins:8080异常"
 
 1.创建告警媒体，和告警内容
 
-![](assets/image-20221127214806057-20230610173809-uafexqr.png)​​![](assets/image-20221127214813373-20230610173809-eaxjsvg.png)​
+![|700](assets/image-20221127214806057-20230610173809-uafexqr.png)
+
+​​![|700](assets/image-20221127214813373-20230610173809-eaxjsvg.png)​
 
 ```zabbix
 主题: 
@@ -141,14 +145,16 @@ ZABBIX告警通知
 
 2.用户添加告警媒介
 
-![](assets/image-20221127214820865-20230610173809-eqekxew.png)​
+![|700](assets/image-20221127214820865-20230610173809-eqekxew.png)​
 
 3.创建告警触发器
 
-![](assets/image-20221127214827561-20230610173809-bvzuvnf.png)​
+![|700](assets/image-20221127214827561-20230610173809-bvzuvnf.png)
 
-![](assets/image-20221127214834557-20230610173809-v0p8sbr.png)​
+​
 
-![](assets/image-20221127214841166-20230610173809-qjt3239.png)​
+![|700](assets/image-20221127214834557-20230610173809-v0p8sbr.png)​
+
+![|700](assets/image-20221127214841166-20230610173809-qjt3239.png)​
 
 4.测试

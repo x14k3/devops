@@ -11,7 +11,7 @@ SVN全称Subversion，是一个开放源代码的版本控制系统，Subversion
 
 ## 工作流程
 
-![](assets/image-20230607144718076-20230610173809-l8v1hkj.png)
+![|575](assets/image-20230607144718076-20230610173809-l8v1hkj.png)
 
 1. 从服务器下载项目组最新代码 （Checkout）
 2. 如果已经 Checkout并且有人已 Commit了代码，你可以更新以获得最新代码 （Update）
