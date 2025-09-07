@@ -23,8 +23,8 @@ Cloudreve是一款免费开源的网盘系统， 支持腾讯云COS、本机、O
 
 ```bash
 #解压获取到的主程序
-wget https://github.com/cloudreve/Cloudreve/releases/download/3.8.3/cloudreve_3.8.3_linux_amd64.tar.gz
-tar xvf cloudreve_3.8.3_linux_amd64.tar.gz
+wget https://github.com/cloudreve/cloudreve/releases/download/4.7.0/cloudreve_4.7.0_linux_amd64.tar.gz
+tar xvf cloudreve_4.7.0_linux_amd64.tar.gz
 
 # 启动 Cloudreve
 ./cloudreve
@@ -41,8 +41,6 @@ tar xvf cloudreve_3.8.3_linux_amd64.tar.gz
 [Unit]
 Description=Cloudreve
 Documentation=https://docs.cloudreve.org
-After=network.target
-After=mysqld.service
 Wants=network.target
 
 [Service]

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/Jenkins(CICD).md",
+                "file": "Open Source/cloudreve.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Jenkins(CICD)"
+              "title": "cloudreve"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/Jenkins(CICD).md",
+                "file": "Open Source/cloudreve.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Jenkins(CICD) 的大纲"
+              "title": "cloudreve 的大纲"
             }
           }
         ],
@@ -172,6 +172,8 @@
   },
   "active": "8227099da3de513a",
   "lastOpenFiles": [
+    "Open Source/蓝眼云盘.md",
+    "devops/Jenkins(CICD).md",
     "devops/assets/Pasted image 20250906164955.png",
     "devops/assets/Pasted image 20250906164939.png",
     "devops/assets/Pasted image 20250906164924.png",
@@ -182,10 +184,8 @@
     "devops/assets/Pasted image 20250906164806.png",
     "devops/assets/Pasted image 20250906164752.png",
     "devops/assets/Pasted image 20250906164729.png",
-    "devops/assets/Pasted image 20250906164710.png",
     "devops/assets",
     "devops/一些概念释义/为什么我们需要 DevOps.md",
-    "devops/Jenkins(CICD).md",
     "devops/一些概念释义/敏捷开发.md",
     "devops/一些概念释义/微服务.md",
     "devops/一些概念释义/分布式.md",
