@@ -320,4 +320,9 @@ Publish Over SSH配置
 
 ## 集成Sonar Qube
 
- 
+### Sonar Qube介绍
+
+Sonar Qube是一个开源的代码分析平台，支持Java、Python、PHP、JavaScript、CSS等25种以上的语言，可以检测出重复代码、代码漏洞、代码规范和安全性漏洞的问题。
+
+Sonar Qube可以与多种软件整合进行代码扫描，比如Maven，Gradle，Git，Jenkins等，并且会将代码检测结果推送回Sonar Qube并且在系统提供的UI界面上显示出来
+![[assets/Pasted image 20250911210411.png|600]]
