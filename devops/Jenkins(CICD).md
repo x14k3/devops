@@ -325,4 +325,177 @@ Publish Over SSH配置
 Sonar Qube是一个开源的代码分析平台，支持Java、Python、PHP、JavaScript、CSS等25种以上的语言，可以检测出重复代码、代码漏洞、代码规范和安全性漏洞的问题。
 
 Sonar Qube可以与多种软件整合进行代码扫描，比如Maven，Gradle，Git，Jenkins等，并且会将代码检测结果推送回Sonar Qube并且在系统提供的UI界面上显示出来
+
 ![[assets/Pasted image 20250911210411.png|600]]
+
+### Sonar Qube环境搭建
+
+#### Sonar Qube安装
+
+Sonar Qube在7.9版本中已经放弃了对MySQL的支持，并且建议在商业环境中采用PostgreSQL，那么安装Sonar Qube时需要依赖PostgreSQL。
+
+并且这里会安装Sonar Qube的长期支持版本[8.9](https://blog.csdn.net/a772304419/article/details/134359312)
+
+```bash
+docker pull postgres 
+docker pull sonarqube:8.9.3-community
+
+echo '
+version: "3.1"
+services:
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - 5432:5432
+    networks:
+      - sonarnet
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+  sonarqube:
+    image: sonarqube:8.9.3-community
+    container_name: sonarqube
+    depends_on:
+      - db
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+networks:
+  sonarnet:
+    driver: bridge
+'  >> docker-compoe.yml
+
+docker-compose up -d
+```
+
+访问Sonar Qube首页
+
+http://x.x.x.x:5432
+
+![[assets/Pasted image 20250913081245.png]]
+
+还需要重新设置一次密码
+
+![[assets/Pasted image 20250913081257.png]]
+
+Sonar Qube首页
+
+![[assets/Pasted image 20250913081306.png]]
+
+#### 安装中文插件
+
+![[assets/Pasted image 20250913081322.png]]
+
+安装成功后需要重启，安装失败重新点击install重装即可。
+
+安装成功后，会查看到重启按钮，点击即可
+
+![[assets/Pasted image 20250913081335.png]]
+
+### Sonar Qube基本使用
+
+Sonar Qube的使用方式很多，Maven可以整合，也可以采用sonar-scanner的方式，再查看Sonar Qube的检测效果
+#### Maven实现代码检测
+
+修改Maven的settings.xml文件配置Sonar Qube信息
+```bash
+<profile>
+    <id>sonar</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+    <properties>
+        <sonar.login>admin</sonar.login>
+        <sonar.password>123456789</sonar.password>
+        <sonar.host.url>http://192.168.11.11:9000</sonar.host.url>
+    </properties>
+</profile>
+```
+
+在代码位置执行命令：`mvn sonar:sonar`
+![[assets/Pasted image 20250913081438.png]]
+
+查看Sonar Qube界面检测结果
+![[assets/Pasted image 20250913081459.png]]
+
+#### Sonar-scanner实现代码检测
+
+下载Sonar-scanner：[https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip](https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip)
+
+解压并配置sonar服务端信息
+```bash
+yum -y install unzip
+unzip sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip
+
+# - 配置sonarQube服务端地址，修改conf下的sonar-scanner.properties
+```
+![[assets/Pasted image 20250913081603.png]]
+
+执行命令检测代码
+```bash
+# 在项目所在目录执行以下命令
+~/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=demo -Dsonar.projectKey=java -Dsonar.java.binaries=target/
+```
+
+Ps：主要查看我的sonar-scanner执行命令的位置
+![[assets/Pasted image 20250913081650.png]]
+
+查看SonarQube界面检测结果
+
+![[assets/Pasted image 20250913081700.png]]
+
+### Jenkins集成Sonar Qube
+
+Jenkins继承Sonar Qube实现代码扫描需要先下载整合插件
+
+#### Jenkins安装插件
+
+![[assets/Pasted image 20250913081730.png]]
+
+
+![[assets/Pasted image 20250913081735.png]]
+
+![[assets/Pasted image 20250913081741.png]]
+
+#### Jenkins配置Sonar Qube
+
+开启Sonar Qube权限验证
+
+![[assets/Pasted image 20250913081806.png]]
+
+获取Sonar Qube的令牌
+
+![[assets/Pasted image 20250913081818.png]]
+
+配置Jenkins的Sonar Qube信息
+
+![[assets/Pasted image 20250913081835.png]]
+
+![[assets/Pasted image 20250913081840.png]]
+
+![[assets/Pasted image 20250913081845.png]]
+
+
+#### 配置Sonar-scanner
+
+将Sonar-scaner添加到Jenkins数据卷中并配置全局配置
+
+![[assets/Pasted image 20250913081908.png]]
+
+配置任务的Sonar-scanner
+
+![[assets/Pasted image 20250913081925.png]]
+
+#### 构建任务
+
+![[assets/Pasted image 20250913081937.png]]
+![[assets/Pasted image 20250913081943.png]]
+
+## 集成Harbor
+
