@@ -78,13 +78,13 @@ docker exec -it gitlab cat /etc/gitlab/initial_root_password
 ![[assets/Pasted image 20250906162823.png]]
 
 
-## Build阶段工具 **
+## Build阶段工具 
 
 构建Java项目的工具一般有两种选择，一个是Maven，一个是Gradle。
 这里我们选择Maven作为项目的编译工具。
 具体安装Maven流程不做阐述，但是需要确保配置好Maven仓库私服以及JDK编译版本。
 
-## Operate阶段工具 **
+## Operate阶段工具 
 
 部署过程，会采用Docker进行部署，暂时只安装Docker即可，后续还需安装Kubenetes
 
@@ -498,4 +498,6 @@ Jenkins继承Sonar Qube实现代码扫描需要先下载整合插件
 ![[assets/Pasted image 20250913081943.png]]
 
 ## 集成Harbor
+
+harbor 安装及使用  [[../docker/docker harbor|docker harbor]]
 
