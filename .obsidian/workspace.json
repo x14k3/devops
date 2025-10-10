@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/Jenkins(CICD).md",
-                "mode": "source",
+                "file": "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Jenkins(CICD)"
+              "title": "2. Install Oracle RAC for 19c"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/Jenkins(CICD).md",
+                "file": "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Jenkins(CICD) 的大纲"
+              "title": "2. Install Oracle RAC for 19c 的大纲"
             }
           },
           {
@@ -182,6 +182,9 @@
   },
   "active": "8227099da3de513a",
   "lastOpenFiles": [
+    "database/Oracle/Oracle RAC/3. Oracle rac 管理命令.md",
+    "database/Oracle/Oracle RAC/5. Oracle rac 集群的IP 规划.md",
+    "devops/Jenkins(CICD).md",
     "Open Source/yt-dlp.md",
     "Open Source/docker-photoprism.md",
     "Open Source/docker-Navidrome.md",
@@ -199,7 +202,6 @@
     "shell/shell 命令手册/备份与恢复/rsync.md",
     "shell/shell 命令手册/备份与恢复/restore.md",
     "shell/shell 命令手册/文件系统/mount.md",
-    "devops/Jenkins(CICD).md",
     "devops/assets/Pasted image 20250913081943.png",
     "devops/assets/Pasted image 20250913081937.png",
     "devops/assets/Pasted image 20250913081925.png",
@@ -217,8 +219,6 @@
     "devops/一些概念释义/为什么我们需要 DevOps.md",
     "devops/一些概念释义/敏捷开发.md",
     "devops/一些概念释义/微服务.md",
-    "devops/一些概念释义/分布式.md",
-    "devops/一些概念释义/什么是 DevOps.md",
     "devops/jenkins",
     "devops/jenkins/assets",
     "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind",
