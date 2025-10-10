@@ -19,15 +19,15 @@
 
 准备一台8C64G的机器，我们将它分成5个节点，如下图
 
-|      | 反向代理           | 反向代理           | 主控+运算          | 主控+运算          | 运维机器            |
-| ---- | -------------- | -------------- | -------------- | -------------- | --------------- |
-| 主机名  | hdss-7-11      | hdss-7-12      | hdss-7-21      | hdss-7-22      | hdss-7-200      |
-| ip地址 | 192.168.133.11 | 192.168.133.12 | 192.168.133.21 | 192.168.133.22 | 192.168.133.200 |
-| 标配   | 2C4G           | 2C4G           | 2C16G          | 2C16G          | 2C2G            |
+|      | 反向代理         | 反向代理         | 主控+运算        | 主控+运算        | 运维机器          |
+| ---- | ------------ | ------------ | ------------ | ------------ | ------------- |
+| 主机名  | k8s-11       | k8s-12       | k8s-21       | hk8s-22      | k8s-200       |
+| ip地址 | 192.168.3.11 | 192.168.3.12 | 192.168.3.21 | 192.168.3.22 | 192.168.3.200 |
+| 标配   | 2C2G         | 2C2G         | 2C16G        | 2C16G        | 2C2G          |
 
 ```bash
-# 全部机器，设置名字，11是hdss7-11,12是hdss7-12,以此类推
-hostnamectl set-hostname hdss7-11.host.com
+# 全部机器，设置名字，11是k8s-11,12是k8s-12,以此类推
+hostnamectl set-hostname k8s-11.host.com
 
 # 查看enforce是否关闭，确保disabled状态，当然可能没有这个命令
 getenforce
@@ -60,14 +60,14 @@ vim /etc/dnsmasq.conf
 # Include all files in /etc/dnsmasq.d except RPM backup files
 
 conf-dir=/etc/dnsmasq.d,.rpmnew,.rpmsave,.rpmorig
-listen-address=127.0.0.1,192.168.133.11
+listen-address=127.0.0.1,192.168.3.11
 
-address=/hdss-7-11.host.com/192.168.133.11
-address=/hdss-7-12.host.com/192.168.133.12
-address=/hdss-7-21.host.com/192.168.133.21
-address=/hdss-7-22.host.com/192.168.133.22
-address=/hdss-7-200.host.com/192.168.133.200
-address=/harbor.od.com/192.168.133.200
+address=/k8s-11.host.com/192.168.3.11
+address=/k8s-12.host.com/192.168.3.12
+address=/k8s-21.host.com/192.168.3.21
+address=/k8s-22.host.com/192.168.3.22
+address=/k8s-200.host.com/192.168.3.200
+address=/harbor.od.com/192.168.3.200
 
 server=114.114.114.114
 
@@ -126,16 +126,20 @@ cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
 ### 部署docker环境
 
 >**WHAT**：docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。
-**WHY**：Pod里面就是由数个docker容器组成，Pod是豌豆荚，docker容器是里面的豆子。
+>**WHY**：Pod里面就是由数个docker容器组成，Pod是豌豆荚，docker容器是里面的豆子。
 
 在21/22机器 [[../docker/docker 部署|docker 部署]]
 
 ```bash
 # 如我们架构图所示，运算节点是21/22机器（没有docker则无法运行pod），运维主机是200机器（没有docker则没办法下载docker存入私有仓库），所以在三台机器安装（21/22/200）
-curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+export http_proxy="http://192.168.3.100:10809"
+export https_proxy="http://192.168.3.100:10809"
+curl -sSL https://get.docker.com/ | sh
+
 # 上面的下载可能网络有问题，需要多试几次，这些部署我已经不同机器试过很多次了
 mkdir -p /data/docker /etc/docker
-# # 注意，172.7.21.1，这里得21是指在hdss7-21得机器，如果是22得机器，就是172.7.22.1，共一处需要改机器名："bip": "172.7.21.1/24"
+# # 注意，172.7.21.1，这里得21是指在k8s-21得机器，如果是22得机器，就是172.7.22.1，共一处需要改机器名："bip": "172.7.21.1/24"
 echo '
 {
   "data-root": "/data/docker",
@@ -304,12 +308,12 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=serv
 cd /opt/kubernetes/server/bin
 mkdir cert && cd cert/
 # 把证书考过来
-scp hdss7-200:/opt/certs/ca.pem .
-scp hdss7-200:/opt/certs/ca-key.pem .
-scp hdss7-200:/opt/certs/client-key.pem .
-scp hdss7-200:/opt/certs/client.pem .
-scp hdss7-200:/opt/certs/apiserver.pem .
-scp hdss7-200:/opt/certs/apiserver-key.pem .
+scp k8s-200:/opt/certs/ca.pem .
+scp k8s-200:/opt/certs/ca-key.pem .
+scp k8s-200:/opt/certs/client-key.pem .
+scp k8s-200:/opt/certs/client.pem .
+scp k8s-200:/opt/certs/apiserver.pem .
+scp k8s-200:/opt/certs/apiserver-key.pem .
 
 ```
 
@@ -418,9 +422,9 @@ cat >> /opt/kubernetes/server/bin/kube-apiserver.sh <<EOF
 EOF
 
 chmod +x kube-apiserver.sh
-# 一处修改：[program:kube-apiserver-7-21]
+# 一处修改：[program:kube-apiserver-21]
 bin]# vi /etc/supervisord.d/kube-apiserver.ini
-[program:kube-apiserver-7-21]
+[program:kube-apiserver-21]
 command=/opt/kubernetes/server/bin/kube-apiserver.sh            ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin                            ; directory to cwd to before exec (def no cwd)
@@ -601,7 +605,7 @@ bin]# chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
 bin]# mkdir -p /data/logs/kubernetes/kube-controller-manager
 # 注意22机器，下面要改成7-22，一处修改：manager-7-21]
 bin]# vi /etc/supervisord.d/kube-conntroller-manager.ini
-[program:kube-controller-manager-7-21]
+[program:kube-controller-manager-21]
 command=/opt/kubernetes/server/bin/kube-controller-manager.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                                        ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin                                              ; directory to cwd to before exec (def no cwd)
@@ -633,7 +637,7 @@ bin]# chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
 bin]# mkdir -p /data/logs/kubernetes/kube-scheduler
 # 注意改机器号，一处修改：scheduler-7-21]
 bin]# vi /etc/supervisord.d/kube-scheduler.ini
-[program:kube-scheduler-7-21]
+[program:kube-scheduler-21]
 command=/opt/kubernetes/server/bin/kube-scheduler.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                               ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin                                     ; directory to cwd to before exec (def no cwd)
@@ -709,8 +713,8 @@ bin]# kubectl get cs
 ```bash
 # 分发证书，21/22机器
 cert]# cd /opt/kubernetes/server/bin/cert/
-cert]# scp hdss7-200:/opt/certs/kubelet.pem .
-cert]# scp hdss7-200:/opt/certs/kubelet-key.pem .
+cert]# scp k8s-200:/opt/certs/kubelet.pem .
+cert]# scp k8s-200:/opt/certs/kubelet-key.pem .
 
 # 21机器：
 cert]# cd ../conf/
@@ -753,7 +757,7 @@ conf]# kubectl get clusterrolebinding k8s-node -o yaml
 
 # 22机器，复制21机器即可
 cert]# cd ../conf/
-conf]# scp hdss7-21:/opt/kubernetes/server/bin/conf/kubelet.kubeconfig .
+conf]# scp k8s-21:/opt/kubernetes/server/bin/conf/kubelet.kubeconfig .
 ```
 
 >**kubectl create -f** ：通过配置文件名或stdin创建一个集群资源对象
@@ -770,7 +774,7 @@ certs]# docker push harbor.od.com/public/pause:latest
 
 
 ```bash
-# 21/21机器，注意修改主机名，有一处需要改：hdss7-21
+# 21/21机器，注意修改主机名，有一处需要改：k8s-21
 bin]# vi /opt/kubernetes/server/bin/kubelet.sh
 #!/bin/sh
 ./kubelet \
@@ -784,7 +788,7 @@ bin]# vi /opt/kubernetes/server/bin/kubelet.sh
   --client-ca-file ./cert/ca.pem \
   --tls-cert-file ./cert/kubelet.pem \
   --tls-private-key-file ./cert/kubelet-key.pem \
-  --hostname-override hdss7-21.host.com \
+  --hostname-override k8s-21.host.com \
   --image-gc-high-threshold 20 \
   --image-gc-low-threshold 10 \
   --kubeconfig ./conf/kubelet.kubeconfig \
@@ -797,7 +801,7 @@ bin]# mkdir -p /data/logs/kubernetes/kube-kubelet /data/kubelet
 bin]# chmod +x kubelet.sh
 # 有一处要修改：kube-kubelet-7-21]
 bin]# vi /etc/supervisord.d/kube-kubelet.ini
-[program:kube-kubelet-7-21]
+[program:kube-kubelet-21]
 command=/opt/kubernetes/server/bin/kubelet.sh     ; the program (relative uses PATH, can take args)
 numprocs=1                                        ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin              ; directory to cwd to before exec (def no cwd)
@@ -820,10 +824,10 @@ bin]# supervisorctl update
 bin]# supervisorctl status
 bin]# kubectl get nodes
 # 给标签,21/22都给上master,node
-bin]# kubectl label node hdss7-21.host.com node-role.kubernetes.io/master=
-bin]# kubectl label node hdss7-21.host.com node-role.kubernetes.io/node=
-bin]# kubectl label node hdss7-22.host.com node-role.kubernetes.io/master=
-bin]# kubectl label node hdss7-22.host.com node-role.kubernetes.io/node=
+bin]# kubectl label node k8s-21.host.com node-role.kubernetes.io/master=
+bin]# kubectl label node k8s-21.host.com node-role.kubernetes.io/node=
+bin]# kubectl label node k8s-22.host.com node-role.kubernetes.io/master=
+bin]# kubectl label node k8s-22.host.com node-role.kubernetes.io/node=
 bin]# kubectl get nodes
 ```
 
@@ -858,8 +862,8 @@ bin]# kubectl get nodes
 ```bash
 # 分发证书，21/22机器：
 cd /opt/kubernetes/server/bin/cert
-cert]# scp hdss7-200:/opt/certs/kube-proxy-client.pem .
-cert]# scp hdss7-200:/opt/certs/kube-proxy-client-key.pem .
+cert]# scp k8s-200:/opt/certs/kube-proxy-client.pem .
+cert]# scp k8s-200:/opt/certs/kube-proxy-client-key.pem .
 cd ../conf/
 # 21机器：
 conf]# kubectl config set-cluster myk8s \
@@ -882,7 +886,7 @@ conf]# kubectl config set-context myk8s-context \
 conf]# kubectl config use-context myk8s-context --kubeconfig=kube-proxy.kubeconfig
 
 # 22机器
-conf]# scp hdss7-21:/opt/kubernetes/server/bin/conf/kube-proxy.kubeconfig .
+conf]# scp k8s-21:/opt/kubernetes/server/bin/conf/kube-proxy.kubeconfig .
 
 
 # 21/22机器：
@@ -909,12 +913,12 @@ done
 ```bash
 # 21/22机器：
 ~]#cd /opt/kubernetes/server/bin/
-# 注意修改对应的机器ip，有一处修改：hdss7-21
+# 注意修改对应的机器ip，有一处修改：k8s-21
 bin]# vi /opt/kubernetes/server/bin/kube-proxy.sh
 #!/bin/sh
 ./kube-proxy \
   --cluster-cidr 172.7.0.0/16 \
-  --hostname-override hdss7-21.host.com \
+  --hostname-override k8s-21.host.com \
   --proxy-mode=ipvs \
   --ipvs-scheduler=nq \
   --kubeconfig ./conf/kube-proxy.kubeconfig
