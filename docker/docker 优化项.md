@@ -26,8 +26,8 @@ echo '
 # Add content below
 
 [Service]
-Environment="HTTP_PROXY=http://127.0.0.1:10809"
-Environment="HTTPS_PROXY=http://127.0.0.1:10809"
+Environment="HTTP_PROXY=http://192.168.3.100:10809"
+Environment="HTTPS_PROXY=http://192.168.3.100:10809"
 Environment="NO_PROXY=localhost,127.0.0.1,.example.com,.od.com" '  >> /etc/systemd/system/docker.service.d/proxy.conf
 
 # 注意，使用docker login 使用域名的时候，要将域名加入到"NO_PROXY"
@@ -40,7 +40,7 @@ systemctl start docker.socket
 ## 容器使用宿主机的代理
 
 ```bash
-#方法一： 直接在容器内使用（推荐
+#方法一： 直接在容器内使用（推荐)
 export ALL_PROXY='socks5://172.17.0.1:10808'
 ```
 

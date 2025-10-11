@@ -16,7 +16,9 @@
 
 ```bash
 # 安装 Docker
-curl -fsSL https://get.docker.com | sh
+export http_proxy="http://192.168.3.100:10809" 
+export https_proxy="http://192.168.3.100:10809" 
+curl -sSL https://get.docker.com/ | sh
 systemctl start docker && systemctl enable docker
 
 # 安装 Docker Compose
@@ -28,12 +30,12 @@ chmod +x /usr/local/bin/docker-compose
 2. 下载 Harbor 离线安装包
 
 ```bash
-
-mkdir -p /data/harbor/logs /data/harbor/cert
-
+mkdir /data && cd /data
 wget https://github.com/goharbor/harbor/releases/download/v2.9.0/harbor-offline-installer-v2.9.0.tgz
 tar xvf harbor-offline-installer-v2.9.0.tgz
 cd harbor
+
+mkdir -p /data/harbor/logs /data/harbor/cert
 ```
 
 3. 配置 `harbor.yml`
