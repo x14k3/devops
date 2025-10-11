@@ -281,10 +281,10 @@ echo '{
         "kubernetes.default.svc",
         "kubernetes.default.svc.cluster",
         "kubernetes.default.svc.cluster.local",
-        "192.168.133.11",
-        "192.168.133.12",
-        "192.168.133.21",
-        "192.168.133.22"
+        "192.168.3.11",
+        "192.168.3.12",
+        "192.168.3.21",
+        "192.168.3.22"
     ],
     "key": {
         "algo": "rsa",
@@ -308,12 +308,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=serv
 cd /opt/kubernetes/server/bin
 mkdir cert && cd cert/
 # 把证书考过来
-scp k8s-200:/opt/certs/ca.pem .
-scp k8s-200:/opt/certs/ca-key.pem .
-scp k8s-200:/opt/certs/client-key.pem .
-scp k8s-200:/opt/certs/client.pem .
-scp k8s-200:/opt/certs/apiserver.pem .
-scp k8s-200:/opt/certs/apiserver-key.pem .
+scp k8s-200.host.com:/opt/certs/\{ca.pem,ca-key.pem,client-key.pem,client.pem,apiserver.pem,apiserver-key.pem\} .
 
 ```
 
@@ -399,7 +394,7 @@ cat >> /opt/kubernetes/server/bin/kube-apiserver.sh <<EOF
 #!/bin/bash
 ./kube-apiserver \
   --apiserver-count 2 \
-  --audit-log-path /data/logs/kubernetes/kube-apiserver/audit-log \
+  --audit-log-path /opt/kubernetes/logs/kube-apiserver/audit-log \
   --audit-policy-file ./conf/audit.yaml \
   --authorization-mode RBAC \
   --client-ca-file ./cert/ca.pem \
@@ -408,14 +403,14 @@ cat >> /opt/kubernetes/server/bin/kube-apiserver.sh <<EOF
   --etcd-cafile ./cert/ca.pem \
   --etcd-certfile ./cert/client.pem \
   --etcd-keyfile ./cert/client-key.pem \
-  --etcd-servers https://10.4.7.12:2379,https://10.4.7.21:2379,https://10.4.7.22:2379 \
+  --etcd-servers https://192.168.3.12:2379,https://192.168.3.21:2379,https://192.168.3.22:2379 \
   --service-account-key-file ./cert/ca-key.pem \
   --service-cluster-ip-range 192.168.0.0/16 \
   --service-node-port-range 3000-29999 \
   --target-ram-mb=1024 \
   --kubelet-client-certificate ./cert/client.pem \
   --kubelet-client-key ./cert/client-key.pem \
-  --log-dir  /data/logs/kubernetes/kube-apiserver \
+  --log-dir  /opt/kubernetes/logs/kube-apiserver \
   --tls-cert-file ./cert/apiserver.pem \
   --tls-private-key-file ./cert/apiserver-key.pem \
   --v 2
@@ -423,7 +418,7 @@ EOF
 
 chmod +x kube-apiserver.sh
 # 一处修改：[program:kube-apiserver-21]
-bin]# vi /etc/supervisord.d/kube-apiserver.ini
+echo '
 [program:kube-apiserver-21]
 command=/opt/kubernetes/server/bin/kube-apiserver.sh            ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
@@ -437,16 +432,18 @@ stopsignal=QUIT                                                 ; signal used to
 stopwaitsecs=10                                                 ; max num secs to wait b4 SIGKILL (default 10)
 user=root                                                       ; setuid to this UNIX account to run the program
 redirect_stderr=true                                            ; redirect proc stderr to stdout (default false)
-stdout_logfile=/data/logs/kubernetes/kube-apiserver/apiserver.stdout.log        ; stderr log path, NONE for none; default AUTO
+stdout_logfile=/opt/kubernetes/logs/kube-apiserver/apiserver.stdout.log        ; stderr log path, NONE for none; default AUTO
 stdout_logfile_maxbytes=64MB                                    ; max # logfile bytes b4 rotation (default 50MB)
 stdout_logfile_backups=4                                        ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                     ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
 
-bin]# mkdir -p /data/logs/kubernetes/kube-apiserver
-bin]# supervisorctl update
+' >> /etc/supervisord.d/kube-apiserver.ini
+
+mkdir -p /opt/kubernetes/logs/kube-apiserver
+supervisorctl update
 # 查看21/22两台机器是否跑起来了，可能比较慢在starting，等10秒
-bin]# supervisorctl status
+supervisorctl status
 ```
 
 

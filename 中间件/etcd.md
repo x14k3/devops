@@ -82,10 +82,10 @@ echo '
 {
     "CN": "k8s-etcd",
     "hosts": [
-        "192.168.133.11",
-        "192.168.133.12",
-        "192.168.133.21",
-        "192.168.133.22"
+        "192.168.3.11",
+        "192.168.3.12",
+        "192.168.3.21",
+        "192.168.3.22"
     ],
     "key": {
         "algo": "rsa",
@@ -132,21 +132,18 @@ mv etcd-v3.1.20-linux-amd64 etcd-v3.1.20
 
 cd etcd-v3.1.20
 mkdir data certs logs
-scp hdss-7-200:/opt/certs/ca.pem /data/etcd-v3.1.20/certs
-scp hdss-7-200:/opt/certs/etcd-peer.pem /data/etcd-v3.1.20/certs
-scp hdss-7-200:/opt/certs/etcd-peer-key.pem /data/etcd-v3.1.20/certs
-
+scp k8s-200.host.com:/opt/certs/\{ca.pem,etcd-peer.pem,etcd-peer-key.pem\} /data/etcd-v3.1.20/certs/
 
 # 注意，如果是21机器，这下面得12都得改成21，initial-cluster则是全部机器都有不需要改，一共5处：etcd-server-12、listen-peer-urls后、client-urls后、advertise-peer-urls后、advertise-client-urls后
 echo '#!/bin/sh
 ./etcd --name etcd-server-12 \
        --data-dir /data/etcd-v3.1.20/data \
-       --listen-peer-urls https://192.168.133.12:2380 \
-       --listen-client-urls https://192.168.133.12:2379,http://127.0.0.1:2379 \
+       --listen-peer-urls https://192.168.3.12:2380 \
+       --listen-client-urls https://192.168.3.12:2379,http://127.0.0.1:2379 \
        --quota-backend-bytes 8000000000 \
-       --initial-advertise-peer-urls https://192.168.133.12:2380 \
-       --advertise-client-urls https://192.168.133.12:2379,http://127.0.0.1:2379 \
-       --initial-cluster  etcd-server-12=https://192.168.133.12:2380,etcd-server-21=https://192.168.133.21:2380,etcd-server-22=https://192.168.133.22:2380 \
+       --initial-advertise-peer-urls https://192.168.3.12:2380 \
+       --advertise-client-urls https://192.168.3.12:2379,http://127.0.0.1:2379 \
+       --initial-cluster  etcd-server-12=https://192.168.3.12:2380,etcd-server-21=https://192.168.3.21:2380,etcd-server-22=https://192.168.3.22:2380 \
        --ca-file ./certs/ca.pem \
        --cert-file ./certs/etcd-peer.pem \
        --key-file ./certs/etcd-peer-key.pem \
@@ -161,14 +158,6 @@ echo '#!/bin/sh
 
 chmod +x etcd-server-startup.sh
 chown -R etcd.etcd /data/etcd-v3.1.20/
-
-### 分别拷贝到12/21/22
-ssh hdss-7-21 'mkdir /data'
-ssh hdss-7-21 'useradd -s /sbin/nologin -M etcd'
-ssh hdss-7-22 'mkdir /data'
-ssh hdss-7-22 'useradd -s /sbin/nologin -M etcd'
-scp -r /data/etcd-v3.1.20 hdss-7-21:/data/
-scp -r /data/etcd-v3.1.20 hdss-7-22:/data/
 
 ```
 
@@ -201,12 +190,12 @@ stdout_capture_maxbytes=1MB                                     ; number of byte
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false) ' >> /etc/supervisord.d/etcd-server.ini
 
 supervisorctl update
-# out：etcd-server-7-21: added process group
+# out：etcd-server-21: added process group
 supervisorctl start etcd-server-12
 supervisorctl start etcd-server-21
 supervisorctl start etcd-server-22
 supervisorctl status
-# out: etcd-server-7-12                 RUNNING   pid 16582, uptime 0:00:59
+# out: etcd-server-12                 RUNNING   pid 16582, uptime 0:00:59
 netstat -luntp|grep etcd
 # 必须是监听了2379和2380这两个端口才算成功
 
