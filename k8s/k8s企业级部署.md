@@ -453,13 +453,13 @@ supervisorctl status
 
 ```bash
 # 11/12机器
-~]# yum install nginx nginx-mod-stream -y
+yum install nginx nginx-mod-stream -y
 # 添加在最下面
-~]# vi /etc/nginx/nginx.conf
+echo '
 stream {
     upstream kube-apiserver {
-        server 10.4.7.21:6443     max_fails=3 fail_timeout=30s;
-        server 10.4.7.22:6443     max_fails=3 fail_timeout=30s;
+        server 192.168.3.21:6443     max_fails=3 fail_timeout=30s;
+        server 192.168.3.22:6443     max_fails=3 fail_timeout=30s;
     }
     server {
         listen 7443;
@@ -468,13 +468,15 @@ stream {
         proxy_pass kube-apiserver;
     }
 }
+' >> /etc/nginx/nginx.conf
 
-~]# nginx -t
-~]# systemctl start nginx
-~]# systemctl enable nginx
-~]# yum install keepalived -y
+nginx -t
+systemctl start nginx
+systemctl enable nginx
+
+yum install keepalived -y
 # keepalived 监控端口脚本
-~]# vi /etc/keepalived/check_port.sh
+echo '
 #!/bin/bash
 CHK_PORT=$1
 if [ -n "$CHK_PORT" ];then
@@ -486,8 +488,9 @@ if [ -n "$CHK_PORT" ];then
 else
         echo "Check Port Cant Be Empty!"
 fi
+' >> /etc/keepalived/check_port.sh
 
-~]# chmod +x /etc/keepalived/check_port.sh
+chmod +x /etc/keepalived/check_port.sh
 ```
 
 
@@ -495,12 +498,14 @@ fi
 # 仅以下分主从操作：
 # 把原有内容都删掉，命令行快速按打出dG
 # 注意，下面的vrrp_instance下的interface，我的机器是eth0配置了网卡，有的版本是ens33配置网卡，可以用ifconfig查看，第一行就是，如果你是ens33，改这个interface ens33
+
 # keepalived 主（即11机器）:
-11 ~]# vi /etc/keepalived/keepalived.conf
+echo > /etc/keepalived/keepalived.conf
+echo '
 ! Configuration File for keepalived
 
 global_defs {
-   router_id 10.4.7.11
+   router_id 192.168.3.11
 
 }
 
@@ -516,7 +521,7 @@ vrrp_instance VI_1 {
     virtual_router_id 251
     priority 100
     advert_int 1
-    mcast_src_ip 10.4.7.11
+    mcast_src_ip 192.168.3.11
     nopreempt
 
     authentication {
@@ -527,15 +532,17 @@ vrrp_instance VI_1 {
          chk_nginx
     }
     virtual_ipaddress {
-        10.4.7.10
+        192.168.3.10
     }
 }
+' >> /etc/keepalived/keepalived.conf
 
-keepalived从（即12机器）:
-12 ~]# vi /etc/keepalived/keepalived.conf
+# keepalived从（即12机器）:
+echo > /etc/keepalived/keepalived.conf
+echo '
 ! Configuration File for keepalived
 global_defs {
-	router_id 10.4.7.12
+	router_id 192.168.3.12
 }
 vrrp_script chk_nginx {
 	script "/etc/keepalived/check_port.sh 7443"
@@ -546,7 +553,7 @@ vrrp_instance VI_1 {
 	state BACKUP
 	interface eth0
 	virtual_router_id 251
-	mcast_src_ip 10.4.7.12
+	mcast_src_ip 192.168.3.12
 	priority 90
 	advert_int 1
 	authentication {
@@ -557,27 +564,27 @@ vrrp_instance VI_1 {
 		chk_nginx
 	}
 	virtual_ipaddress {
-		10.4.7.10
+		192.168.3.10
 	}
 }
+' >> /etc/keepalived/keepalived.conf
 ```
 
 
 ```bash
 # 11/12机器
-~]# systemctl start keepalived
-~]# systemctl enable keepalived
+systemctl start keepalived
+systemctl enable keepalived
 # 在11机器
-11 ~]# ip add
-
+ip add
 ```
 
 
 小实验（可不做）：
 ```bash
 # 实验(可不做)：在11机器关掉nginx
-11 ~]# nginx -s stop
-11 ~]# netstat -luntp|grep 7443
+nginx -s stop
+netstat -luntp|grep 7443
 # 代理会跑到12机器
 ```
 
@@ -586,7 +593,7 @@ vrrp_instance VI_1 {
 
 ```bash
 # 21/22机器：
-bin]# vi /opt/kubernetes/server/bin/kube-controller-manager.sh
+echo '
 #!/bin/sh
 ./kube-controller-manager \
   --cluster-cidr 172.7.0.0/16 \
@@ -596,12 +603,14 @@ bin]# vi /opt/kubernetes/server/bin/kube-controller-manager.sh
   --service-account-private-key-file ./cert/ca-key.pem \
   --service-cluster-ip-range 192.168.0.0/16 \
   --root-ca-file ./cert/ca.pem \
-  --v 2
+  --v 2 
+' >> /opt/kubernetes/server/bin/kube-controller-manager.sh
 
-bin]# chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
-bin]# mkdir -p /data/logs/kubernetes/kube-controller-manager
-# 注意22机器，下面要改成7-22，一处修改：manager-7-21]
-bin]# vi /etc/supervisord.d/kube-conntroller-manager.ini
+chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
+mkdir -p /data/logs/kubernetes/kube-controller-manager
+
+# 注意22机器，下面要改成-22，一处修改：manager-21]
+echo '
 [program:kube-controller-manager-21]
 command=/opt/kubernetes/server/bin/kube-controller-manager.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                                        ; number of processes copies to start (def 1)
@@ -615,25 +624,28 @@ stopsignal=QUIT                                                                 
 stopwaitsecs=10                                                                   ; max num secs to wait b4 SIGKILL (default 10)
 user=root                                                                         ; setuid to this UNIX account to run the program
 redirect_stderr=true                                                              ; redirect proc stderr to stdout (default false)
-stdout_logfile=/data/logs/kubernetes/kube-controller-manager/controller.stdout.log  ; stderr log path, NONE for none; default AUTO
+stdout_logfile=/opt/kubernetes/logs/kube-controller-manager/controller.stdout.log  ; stderr log path, NONE for none; default AUTO
 stdout_logfile_maxbytes=64MB                                                      ; max # logfile bytes b4 rotation (default 50MB)
 stdout_logfile_backups=4                                                          ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                                       ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                                       ; emit events on stdout writes (default false)
+' >> /etc/supervisord.d/kube-conntroller-manager.ini
 
-bin]# supervisorctl update
-bin]# vi /opt/kubernetes/server/bin/kube-scheduler.sh
+supervisorctl update
+echo '
 #!/bin/sh
 ./kube-scheduler \
   --leader-elect  \
   --log-dir /data/logs/kubernetes/kube-scheduler \
   --master http://127.0.0.1:8080 \
   --v 2
-  
-bin]# chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
-bin]# mkdir -p /data/logs/kubernetes/kube-scheduler
+' >> /opt/kubernetes/server/bin/kube-scheduler.sh
+
+chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
+mkdir -p /data/logs/kubernetes/kube-scheduler
+
 # 注意改机器号，一处修改：scheduler-7-21]
-bin]# vi /etc/supervisord.d/kube-scheduler.ini
+echo '
 [program:kube-scheduler-21]
 command=/opt/kubernetes/server/bin/kube-scheduler.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                               ; number of processes copies to start (def 1)
@@ -652,13 +664,14 @@ stdout_logfile_maxbytes=64MB                                             ; max #
 stdout_logfile_backups=4                                                 ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                              ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                              ; emit events on stdout writes (default false)
+' >> /etc/supervisord.d/kube-scheduler.ini
 
-bin]# supervisorctl update
-bin]# supervisorctl status
+supervisorctl update
+supervisorctl status
 # 起来了4个
-bin]# ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
+ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
 # 查看集群健康情况，21/22机器：
-bin]# kubectl get cs
+kubectl get cs
 ```
 
 [![1578842317467](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1578842317467.png)https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1578842317467.png
