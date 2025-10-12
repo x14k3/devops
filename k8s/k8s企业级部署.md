@@ -249,7 +249,8 @@ tar xf kubernetes-server-linux-amd64-v1.15.2.tar.gz -C /opt/
 
 # 签发client证书，200机器：
 cd /opt/certs
-echo '{
+cat >> client-csr.json <<EOF
+{
     "CN": "k8s-node",
     "hosts": [
     ],
@@ -266,13 +267,15 @@ echo '{
             "OU": "ops"
         }
     ]
-} ' >> client-csr.json
+} 
+EOF
 
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
 
 
 # 给API-server做证书，200机器
-echo '{
+cat >> apiserver-csr.json <<EOF
+{
     "CN": "k8s-apiserver",
     "hosts": [
         "127.0.0.1",
@@ -281,6 +284,7 @@ echo '{
         "kubernetes.default.svc",
         "kubernetes.default.svc.cluster",
         "kubernetes.default.svc.cluster.local",
+        "192.168.3.10",
         "192.168.3.11",
         "192.168.3.12",
         "192.168.3.21",
@@ -299,7 +303,8 @@ echo '{
             "OU": "ops"
         }
     ]
-}' >> apiserver-csr.json
+}
+EOF
 
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server apiserver-csr.json |cfssl-json -bare apiserver
 
@@ -418,7 +423,7 @@ EOF
 
 chmod +x kube-apiserver.sh
 # 一处修改：[program:kube-apiserver-21]
-echo '
+cat >> /etc/supervisord.d/kube-apiserver.ini << EOF
 [program:kube-apiserver-21]
 command=/opt/kubernetes/server/bin/kube-apiserver.sh            ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
@@ -437,8 +442,7 @@ stdout_logfile_maxbytes=64MB                                    ; max # logfile 
 stdout_logfile_backups=4                                        ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                     ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
-
-' >> /etc/supervisord.d/kube-apiserver.ini
+EOF
 
 mkdir -p /opt/kubernetes/logs/kube-apiserver
 supervisorctl update
@@ -455,8 +459,8 @@ supervisorctl status
 # 11/12机器
 yum install nginx nginx-mod-stream -y
 # 添加在最下面
-echo '
-stream {
+cat >> /etc/nginx/nginx.conf <<EOF
+echo 'stream {
     upstream kube-apiserver {
         server 192.168.3.21:6443     max_fails=3 fail_timeout=30s;
         server 192.168.3.22:6443     max_fails=3 fail_timeout=30s;
@@ -468,7 +472,7 @@ stream {
         proxy_pass kube-apiserver;
     }
 }
-' >> /etc/nginx/nginx.conf
+EOF
 
 nginx -t
 systemctl start nginx
@@ -476,7 +480,7 @@ systemctl enable nginx
 
 yum install keepalived -y
 # keepalived 监控端口脚本
-echo '
+cat >> /etc/keepalived/check_port.sh <<EOF
 #!/bin/bash
 CHK_PORT=$1
 if [ -n "$CHK_PORT" ];then
@@ -488,7 +492,7 @@ if [ -n "$CHK_PORT" ];then
 else
         echo "Check Port Cant Be Empty!"
 fi
-' >> /etc/keepalived/check_port.sh
+EOF
 
 chmod +x /etc/keepalived/check_port.sh
 ```
@@ -501,9 +505,9 @@ chmod +x /etc/keepalived/check_port.sh
 
 # keepalived 主（即11机器）:
 echo > /etc/keepalived/keepalived.conf
-echo '
-! Configuration File for keepalived
 
+cat >>  /etc/keepalived/keepalived.conf <<EOF
+! Configuration File for keepalived
 global_defs {
    router_id 192.168.3.11
 
@@ -535,11 +539,11 @@ vrrp_instance VI_1 {
         192.168.3.10
     }
 }
-' >> /etc/keepalived/keepalived.conf
+EOF
 
 # keepalived从（即12机器）:
 echo > /etc/keepalived/keepalived.conf
-echo '
+cat >> /etc/keepalived/keepalived.conf <<EOF
 ! Configuration File for keepalived
 global_defs {
 	router_id 192.168.3.12
@@ -567,7 +571,7 @@ vrrp_instance VI_1 {
 		192.168.3.10
 	}
 }
-' >> /etc/keepalived/keepalived.conf
+EOF
 ```
 
 
@@ -593,24 +597,24 @@ netstat -luntp|grep 7443
 
 ```bash
 # 21/22机器：
-echo '
+cat >> /opt/kubernetes/server/bin/kube-controller-manager.sh <<EOF
 #!/bin/sh
 ./kube-controller-manager \
   --cluster-cidr 172.7.0.0/16 \
   --leader-elect true \
-  --log-dir /data/logs/kubernetes/kube-controller-manager \
+  --log-dir /opt/kubernetes/logs/kube-controller-manager \
   --master http://127.0.0.1:8080 \
   --service-account-private-key-file ./cert/ca-key.pem \
   --service-cluster-ip-range 192.168.0.0/16 \
   --root-ca-file ./cert/ca.pem \
   --v 2 
-' >> /opt/kubernetes/server/bin/kube-controller-manager.sh
+EOF
 
 chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
-mkdir -p /data/logs/kubernetes/kube-controller-manager
+mkdir -p /opt/kubernetes/logs/kube-controller-manager
 
 # 注意22机器，下面要改成-22，一处修改：manager-21]
-echo '
+cat >> /etc/supervisord.d/kube-conntroller-manager.ini <<EOF
 [program:kube-controller-manager-21]
 command=/opt/kubernetes/server/bin/kube-controller-manager.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                                        ; number of processes copies to start (def 1)
@@ -629,23 +633,23 @@ stdout_logfile_maxbytes=64MB                                                    
 stdout_logfile_backups=4                                                          ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                                       ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                                       ; emit events on stdout writes (default false)
-' >> /etc/supervisord.d/kube-conntroller-manager.ini
+EOF
 
 supervisorctl update
-echo '
+cat >> /opt/kubernetes/server/bin/kube-scheduler.sh <<EOF
 #!/bin/sh
 ./kube-scheduler \
   --leader-elect  \
-  --log-dir /data/logs/kubernetes/kube-scheduler \
+  --log-dir /opt/kubernetes/logs/kube-scheduler \
   --master http://127.0.0.1:8080 \
   --v 2
-' >> /opt/kubernetes/server/bin/kube-scheduler.sh
+EOF
 
 chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
-mkdir -p /data/logs/kubernetes/kube-scheduler
+mkdir -p /opt/kubernetes/logs/kube-scheduler
 
 # 注意改机器号，一处修改：scheduler-7-21]
-echo '
+cat >> /etc/supervisord.d/kube-scheduler.ini <<EOF
 [program:kube-scheduler-21]
 command=/opt/kubernetes/server/bin/kube-scheduler.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                               ; number of processes copies to start (def 1)
@@ -659,12 +663,12 @@ stopsignal=QUIT                                                          ; signa
 stopwaitsecs=10                                                          ; max num secs to wait b4 SIGKILL (default 10)
 user=root                                                                ; setuid to this UNIX account to run the program
 redirect_stderr=true                                                     ; redirect proc stderr to stdout (default false)
-stdout_logfile=/data/logs/kubernetes/kube-scheduler/scheduler.stdout.log ; stderr log path, NONE for none; default AUTO
+stdout_logfile=/opt/kubernetes/logs/kube-scheduler/scheduler.stdout.log ; stderr log path, NONE for none; default AUTO
 stdout_logfile_maxbytes=64MB                                             ; max # logfile bytes b4 rotation (default 50MB)
 stdout_logfile_backups=4                                                 ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                              ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                              ; emit events on stdout writes (default false)
-' >> /etc/supervisord.d/kube-scheduler.ini
+EOF
 
 supervisorctl update
 supervisorctl status
@@ -674,28 +678,28 @@ ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
 kubectl get cs
 ```
 
-[![1578842317467](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1578842317467.png)https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1578842317467.png
-
-
+![[assets/Pasted image 20251012134319.png]]
 
 ## 安装部署运算节点服务（kubelet）
 
 ```bash
 # 签发证书，200机器
-200 certs]# vi kubelet-csr.json
+cat >>  kubelet-csr.json << EOF
 {
     "CN": "k8s-kubelet",
     "hosts": [
     "127.0.0.1",
-    "10.4.7.10",
-    "10.4.7.21",
-    "10.4.7.22",
-    "10.4.7.23",
-    "10.4.7.24",
-    "10.4.7.25",
-    "10.4.7.26",
-    "10.4.7.27",
-    "10.4.7.28"
+    "192.168.3.10",
+    "192.168.3.11",
+    "192.168.3.12",
+    "192.168.3.21",
+    "192.168.3.22",
+    "192.168.3.23",
+    "192.168.3.24",
+    "192.168.3.25",
+    "192.168.3.26",
+    "192.168.3.27",
+    "192.168.3.28"
     ],
     "key": {
         "algo": "rsa",
@@ -711,44 +715,42 @@ kubectl get cs
         }
     ]
 }
+EOF
 
-200 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
-200 certs]# ll
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
 ```
 
 >**kubelet-csr-hosts**：把所有可能用到的IP都放进来
 
-[![1580436431973](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1580436431973.png)](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1580436431973.png)
-
 ```bash
 # 分发证书，21/22机器
-cert]# cd /opt/kubernetes/server/bin/cert/
-cert]# scp k8s-200:/opt/certs/kubelet.pem .
-cert]# scp k8s-200:/opt/certs/kubelet-key.pem .
+cd /opt/kubernetes/server/bin/cert/
+scp k8s-200.host.com:/opt/certs/\{kubelet.pem,kubelet-key.pem\} ./
 
 # 21机器：
-cert]# cd ../conf/
-conf]# kubectl config set-cluster myk8s \
+cd /opt/kubernetes/server/bin/conf/
+kubectl config set-cluster myk8s \
   --certificate-authority=/opt/kubernetes/server/bin/cert/ca.pem \
   --embed-certs=true \
-  --server=https://10.4.7.10:7443 \
+  --server=https://192.168.3.10:7443 \
   --kubeconfig=kubelet.kubeconfig
 
-conf]# kubectl config set-credentials k8s-node \
+kubectl config set-credentials k8s-node \
   --client-certificate=/opt/kubernetes/server/bin/cert/client.pem \
   --client-key=/opt/kubernetes/server/bin/cert/client-key.pem \
   --embed-certs=true \
   --kubeconfig=kubelet.kubeconfig 
 
-conf]# kubectl config set-context myk8s-context \
+kubectl config set-context myk8s-context \
   --cluster=myk8s \
   --user=k8s-node \
   --kubeconfig=kubelet.kubeconfig
 
-conf]# kubectl config use-context myk8s-context --kubeconfig=kubelet.kubeconfig
+kubectl config use-context myk8s-context --kubeconfig=kubelet.kubeconfig
 #out: Switched to context "myk8s-context".
+
 # 做权限授权，推荐文章https://www.jianshu.com/p/9991f189495f
-conf]# vi k8s-node.yaml
+cat >> k8s-node.yaml <<EOF
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -761,13 +763,13 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
   name: k8s-node
-  
-conf]# kubectl create -f k8s-node.yaml
-conf]# kubectl get clusterrolebinding k8s-node -o yaml
+EOF
+
+kubectl create -f k8s-node.yaml
+kubectl get clusterrolebinding k8s-node -o yaml
 
 # 22机器，复制21机器即可
-cert]# cd ../conf/
-conf]# scp k8s-21:/opt/kubernetes/server/bin/conf/kubelet.kubeconfig .
+scp k8s-21.host.com:/opt/kubernetes/server/bin/conf/kubelet.kubeconfig /opt/kubernetes/server/bin/conf/
 ```
 
 >**kubectl create -f** ：通过配置文件名或stdin创建一个集群资源对象
@@ -776,16 +778,17 @@ conf]# scp k8s-21:/opt/kubernetes/server/bin/conf/kubelet.kubeconfig .
 
 ```bash
 # 准备pause基础镜像，200机器：
-certs]# docker pull kubernetes/pause
-certs]# docker images|grep pause
-certs]# docker tag f9d5de079539 harbor.od.com/public/pause:latest
-certs]# docker push harbor.od.com/public/pause:latest
+docker pull kubernetes/pause # 如果遇到 `kubernetes/pause` 不存在的问题，请尝试将镜像的引用更新为 `registry.k8s.io/pause`
+docker pull registry.k8s.io/pause
+docker images|grep pause
+docker tag 350b164e7ae1 harbor.od.com/public/pause:latest
+docker push harbor.od.com/public/pause:latest
 ```
 
 
 ```bash
 # 21/21机器，注意修改主机名，有一处需要改：k8s-21
-bin]# vi /opt/kubernetes/server/bin/kubelet.sh
+cat >> /opt/kubernetes/server/bin/kubelet.sh << EOF
 #!/bin/sh
 ./kubelet \
   --anonymous-auth=false \
@@ -802,15 +805,17 @@ bin]# vi /opt/kubernetes/server/bin/kubelet.sh
   --image-gc-high-threshold 20 \
   --image-gc-low-threshold 10 \
   --kubeconfig ./conf/kubelet.kubeconfig \
-  --log-dir /data/logs/kubernetes/kube-kubelet \
+  --log-dir /opt/kubernetes/logs/kube-kubelet \
   --pod-infra-container-image harbor.od.com/public/pause:latest \
   --root-dir /data/kubelet
-  
-conf]# cd /opt/kubernetes/server/bin
-bin]# mkdir -p /data/logs/kubernetes/kube-kubelet /data/kubelet
-bin]# chmod +x kubelet.sh
-# 有一处要修改：kube-kubelet-7-21]
-bin]# vi /etc/supervisord.d/kube-kubelet.ini
+EOF
+
+cd /opt/kubernetes/server/bin
+mkdir -p /opt/kubernetes/logs/kube-kubelet /data/kubelet
+chmod +x kubelet.sh
+
+# 有一处要修改：kube-kubelet-21]
+cat >>  /etc/supervisord.d/kube-kubelet.ini << EOF
 [program:kube-kubelet-21]
 command=/opt/kubernetes/server/bin/kubelet.sh     ; the program (relative uses PATH, can take args)
 numprocs=1                                        ; number of processes copies to start (def 1)
@@ -824,21 +829,22 @@ stopsignal=QUIT                                   ; signal used to kill process 
 stopwaitsecs=10                                   ; max num secs to wait b4 SIGKILL (default 10)
 user=root                                         ; setuid to this UNIX account to run the program
 redirect_stderr=true                              ; redirect proc stderr to stdout (default false)
-stdout_logfile=/data/logs/kubernetes/kube-kubelet/kubelet.stdout.log   ; stderr log path, NONE for none; default AUTO
+stdout_logfile=/opt/kubernetes/logs/kube-kubelet/kubelet.stdout.log   ; stderr log path, NONE for none; default AUTO
 stdout_logfile_maxbytes=64MB                      ; max # logfile bytes b4 rotation (default 50MB)
 stdout_logfile_backups=4                          ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                       ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                       ; emit events on stdout writes (default false)
+EOF
 
-bin]# supervisorctl update
-bin]# supervisorctl status
-bin]# kubectl get nodes
+supervisorctl update
+supervisorctl status
+kubectl get nodes
 # 给标签,21/22都给上master,node
-bin]# kubectl label node k8s-21.host.com node-role.kubernetes.io/master=
-bin]# kubectl label node k8s-21.host.com node-role.kubernetes.io/node=
-bin]# kubectl label node k8s-22.host.com node-role.kubernetes.io/master=
-bin]# kubectl label node k8s-22.host.com node-role.kubernetes.io/node=
-bin]# kubectl get nodes
+kubectl label node k8s-21.host.com node-role.kubernetes.io/master=
+kubectl label node k8s-21.host.com node-role.kubernetes.io/node=
+kubectl label node k8s-22.host.com node-role.kubernetes.io/master=
+kubectl label node k8s-22.host.com node-role.kubernetes.io/node=
+kubectl get nodes
 ```
 
 [![1579071142869](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1579071142869.png)](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1579071142869.png)
@@ -922,9 +928,9 @@ done
 
 ```bash
 # 21/22机器：
-~]#cd /opt/kubernetes/server/bin/
+cd /opt/kubernetes/server/bin/
 # 注意修改对应的机器ip，有一处修改：k8s-21
-bin]# vi /opt/kubernetes/server/bin/kube-proxy.sh
+cat >> /opt/kubernetes/server/bin/kube-proxy.sh << EOF
 #!/bin/sh
 ./kube-proxy \
   --cluster-cidr 172.7.0.0/16 \
@@ -932,11 +938,13 @@ bin]# vi /opt/kubernetes/server/bin/kube-proxy.sh
   --proxy-mode=ipvs \
   --ipvs-scheduler=nq \
   --kubeconfig ./conf/kube-proxy.kubeconfig
-  
-bin]# chmod +x kube-proxy.sh
-bin]# mkdir -p /data/logs/kubernetes/kube-proxy
+EOF
+
+chmod +x kube-proxy.sh
+mkdir -p /opt/kubernetes/logs/kube-proxy
+
 # 注意机器IP，有一处修改：kube-proxy-7-21]
-bin]# vi /etc/supervisord.d/kube-proxy.ini
+cat >> /etc/supervisord.d/kube-proxy.ini << EOF
 [program:kube-proxy-7-21]
 command=/opt/kubernetes/server/bin/kube-proxy.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                           ; number of processes copies to start (def 1)
@@ -950,16 +958,17 @@ stopsignal=QUIT                                                      ; signal us
 stopwaitsecs=10                                                      ; max num secs to wait b4 SIGKILL (default 10)
 user=root                                                            ; setuid to this UNIX account to run the program
 redirect_stderr=true                                                 ; redirect proc stderr to stdout (default false)
-stdout_logfile=/data/logs/kubernetes/kube-proxy/proxy.stdout.log     ; stderr log path, NONE for none; default AUTO
+stdout_logfile=/opt/kubernetes/logs/kube-proxy/proxy.stdout.log     ; stderr log path, NONE for none; default AUTO
 stdout_logfile_maxbytes=64MB                                         ; max # logfile bytes b4 rotation (default 50MB)
 stdout_logfile_backups=4                                             ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                          ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                          ; emit events on stdout writes (default false)
+EOF
 
-bin]# supervisorctl update
-bin]# yum install ipvsadm -y
-bin]# ipvsadm -Ln
-bin]# kubectl get svc
+supervisorctl update
+yum install ipvsadm -y
+ipvsadm -Ln
+kubectl get svc
 ```
 
 >**ipvsadm**：用于设置、维护和检查Linux内核中虚拟服务器列表的_命令_
@@ -968,7 +977,7 @@ bin]# kubectl get svc
 ```bash
 # 验证一下集群，21机器(在任意节点机器，我选的是21)：
 cd
-~]# vi /root/nginx-ds.yaml
+cat >> /root/nginx-ds.yaml <<EOF
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -984,10 +993,11 @@ spec:
         image: harbor.od.com/public/nginx:v1.7.9
         ports:
         - containerPort: 80
-        
-~]# kubectl create -f nginx-ds.yaml
+EOF
+
+kubectl create -f nginx-ds.yaml
 # out：daemonset.extensions/nginx-ds created
-~]# kubectl get pods -o wide
+kubectl get pods -o wide
 # 以下是成功的状态，在21/22机器都可以查到
 ```
 

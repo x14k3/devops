@@ -88,7 +88,8 @@
               "title": "书签"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -196,8 +197,11 @@
   },
   "active": "23f453cbd5c34ec6",
   "lastOpenFiles": [
-    "中间件/etcd.md",
+    "database/Mysql/mysql 备份和恢复/1. mysql 逻辑备份 mysqldump.md",
     "k8s/k8s企业级部署.md",
+    "docker/docker 命令.md",
+    "k8s/assets/Pasted image 20251012134319.png",
+    "中间件/etcd.md",
     "docker/docker harbor.md",
     "docker/docker 优化项.md",
     "docker/docker 部署.md",
@@ -213,7 +217,6 @@
     "Open Source/docker-photoprism.md",
     "Open Source/docker-Navidrome.md",
     "Open Source/docker-jellyfin.md",
-    "docker/docker 命令.md",
     "docker/docker 数据卷.md",
     "shell/shell 命令手册/文本处理/ln.md",
     "Open Source/docker-rustdesk.md",
@@ -221,7 +224,6 @@
     "企业建设/数据同步方案/rsync/Linux同步文件到Window(rsync).md",
     "企业建设/数据同步方案/rsync/借助inotify实现实时同步.md",
     "企业建设/数据同步方案/rsync.md",
-    "企业建设/数据同步方案/restic.md",
     "devops/assets/Pasted image 20250913081943.png",
     "devops/assets/Pasted image 20250913081937.png",
     "devops/assets/Pasted image 20250913081925.png",
@@ -231,7 +233,6 @@
     "devops/assets/Pasted image 20250913081835.png",
     "devops/assets/Pasted image 20250913081818.png",
     "devops/assets/Pasted image 20250913081806.png",
-    "devops/assets/Pasted image 20250913081741.png",
     "devops/assets",
     "devops/jenkins",
     "devops/jenkins/assets",
