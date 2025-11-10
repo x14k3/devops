@@ -1,4 +1,4 @@
-# snapper
+
 
 Snapper 是一个 Linux 命令行工具，用于创建和管理文件系统的快照。
 
