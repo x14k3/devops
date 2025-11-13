@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "1eeee49d540929b5",
+        "id": "b88daf3822494f1a",
         "type": "tabs",
         "children": [
           {
-            "id": "58db3a2eb6457bef",
+            "id": "3e3d456144611ea7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "shell/shell 命令手册/tools/ipcs.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "ipcs"
+              "title": "新标签页"
             }
           }
         ]
@@ -78,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 259.5
+    "width": 368.5
   },
   "right": {
     "id": "4f3c84d39789a0e3",
@@ -141,13 +137,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "shell/shell 命令手册/tools/ipcs.md",
+                "file": "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/02 实验：rman-完全恢复（二）.xmind",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "ipcs 的大纲"
+              "title": "02 实验：rman-完全恢复（二） 的大纲"
             }
           },
           {
@@ -180,11 +176,24 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "58db3a2eb6457bef",
+  "active": "a41355350eff645e",
   "lastOpenFiles": [
+    "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/01 实验：rman -完全恢复（一）.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/闪回技术/01 闪回查询.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/01 安装/04 安装Oracle数据库.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/01 安装/02 Oracle Installations with Standard and Job Role Separation Groups and Users.xmind",
+    "database/Oracle/oracle 学习文件（OPC）/01 安装/01 需要的操作系统组及用户.xmind",
+    "中间件/redis/redisShake.md",
+    "中间件/redis/Redis GunYu.md",
+    "linux/linux 进程管理/linux proc-pid-status 文件.md",
+    "linux/linux 内核机理/内核引导过程.md",
+    "linux/linux 内核机理",
+    "linux/linux 内核机理.md",
+    "linux/linux 内核配置/linux 升级内核版本.md",
+    "linux/linux 文件系统/6. linux 单用户模式/linux 单用户模式.md",
+    "shell/shell 命令手册/tools/ipcs.md",
     "shell/shell 命令手册/tools/lsof.md",
     "shell/shell 命令手册/tools/ldd.md",
-    "shell/shell 命令手册/tools/ipcs.md",
     "shell/shell 命令手册/tools/crontab.md",
     "shell/shell 命令手册/tools/cp.md",
     "shell/shell 命令手册/tools/objdump.md",
@@ -201,14 +210,6 @@
     "中间件/etcd.md",
     "docker/docker harbor.md",
     "docker/docker 优化项.md",
-    "docker/docker 部署.md",
-    "shell/shell 命令手册/网络相关/curl.md",
-    "企业建设/KVM/KVM 虚拟机热扩容.md",
-    "k8s/k8s集群维护.md",
-    "k8s/k8s概述.md",
-    "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
-    "database/Oracle/Oracle RAC/3. Oracle rac 管理命令.md",
-    "database/Oracle/Oracle RAC/5. Oracle rac 集群的IP 规划.md",
     "devops/assets/Pasted image 20250913081943.png",
     "devops/assets/Pasted image 20250913081937.png",
     "devops/assets/Pasted image 20250913081925.png",
@@ -222,11 +223,6 @@
     "devops/jenkins",
     "devops/jenkins/assets",
     "database/Oracle/oracle 学习文件（OPC）/03 多租户/多租户-备份.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql3-多表连接.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-0324.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-02V20200216.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql1-01V20200216.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-32组函数V20190720.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql-31单行函数V20190720.xmind"
+    "database/Oracle/oracle 学习文件（OPC）/05 SQL/sql3-多表连接.xmind"
   ]
 }
