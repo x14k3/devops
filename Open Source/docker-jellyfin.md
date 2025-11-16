@@ -160,6 +160,7 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 [https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u](https://github.com/fanmingming/live/blob/main/tv/m3u/ipv6.m3u)
 ```bash
 curl -O https://raw.githubusercontent.com/fanmingming/live/refs/heads/main/tv/m3u/ipv6.m3u
+#curl -O https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/移动IPV6IPTV直播源.m3u
 ```
 注意使用iptv6需要设置光猫和路由器设置ipv6，docker-jellyfin 使用`docker run --net=host`​参数
 

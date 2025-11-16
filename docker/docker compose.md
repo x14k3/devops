@@ -99,7 +99,7 @@ docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 ‍
 
-## docker-compose.yml模板文件
+## docker-compose.yml 模板文件
 
 Docker-Compose允许用户通过一个docker-compose.yml模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
 Compose模板文件是一个定义服务、网络和卷的YAML文件。Compose模板文件默认路径是当前目录下的docker-compose.yml，可以使用.yml或.yaml作为文件扩展名。
