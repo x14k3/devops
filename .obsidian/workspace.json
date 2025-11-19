@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docker/docker 镜像.md",
-                "mode": "preview",
+                "file": "面试资料.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "docker 镜像"
+              "title": "面试资料"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docker/docker 镜像.md",
+                "file": "面试资料.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "docker 镜像 的大纲"
+              "title": "面试资料 的大纲"
             }
           },
           {
@@ -183,8 +183,11 @@
   },
   "active": "4d802e2f9a76c034",
   "lastOpenFiles": [
-    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
+    "sundongsheng.md",
+    "面试资料.md",
+    "README.md",
     "docker/docker 镜像.md",
+    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
     "docker/docker 优化项.md",
     "中间件/jdk/OOM内存溢出问题.md",
     "中间件/jdk/assets/1900341bb6aa6e45b91a40abe2f1dcf1_MD5.jpg",
@@ -209,9 +212,6 @@
     "shell/shell 命令手册/文件系统/assets/net-img-df-tool-20231027153819-ben8gnp.png",
     "shell/shell 命令手册/性能监控/cpulimit.md",
     "shell/shell 命令手册/性能监控/dmesg.md",
-    "shell/shell 命令手册/性能监控/dmidecode.md",
-    "shell/shell 命令手册/性能监控/fio.md",
-    "shell/shell 命令手册/性能监控/hdparm.md",
     "devops/Jenkins/assets/16394b5b4cf2885d03733b0ed4839a3c_MD5.jpg",
     "devops/Jenkins/assets/c2987db00eaa47cdf21e3a2d439b2bbd_MD5.png",
     "devops/Jenkins/assets/904a3343b0817efe90fcd15546d17532_MD5.png",
