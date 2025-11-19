@@ -8,73 +8,8 @@
         "type": "tabs",
         "children": [
           {
-            "id": "6109241899ee0b6b",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "k8s/k8s概述.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "k8s概述"
-            }
-          },
-          {
-            "id": "d145d8c1c98d83b7",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "linux/linux 网络管理/路由策略/多网卡环境下利用策略路由实现网络流量同进同出.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "多网卡环境下利用策略路由实现网络流量同进同出"
-            }
-          },
-          {
-            "id": "5a9b73c27a848e2b",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "网络与安全/网络协议/虚拟IP与ARP协议.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "虚拟IP与ARP协议"
-            }
-          },
-          {
-            "id": "d409b97567bcb23d",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/ansible/2.ansible常用命令集.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "2.ansible常用命令集"
-            }
-          },
-          {
             "id": "4d802e2f9a76c034",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -82,89 +17,8 @@
                 "mode": "preview",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "docker 镜像"
-            }
-          },
-          {
-            "id": "dc1a732b1c09154d",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docker/docker 命令.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "docker 命令"
-            }
-          },
-          {
-            "id": "2eda0495c796fbbb",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "企业建设/信创/等级保护 2.0.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "等级保护 2.0"
-            }
-          },
-          {
-            "id": "e302c26ace0b33b8",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/PostgreSQL/PostgreSQL 安装部署.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "PostgreSQL 安装部署"
-            }
-          },
-          {
-            "id": "a73f361be5316f5a",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "mysql 主从架构"
-            }
-          },
-          {
-            "id": "26ac5cf7bb4580bb",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "sundongsheng.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "sundongsheng"
             }
           }
         ]
@@ -287,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "k8s/k8s概述.md",
+                "file": "docker/docker 镜像.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "k8s概述 的大纲"
+              "title": "docker 镜像 的大纲"
             }
           },
           {
@@ -311,8 +165,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 266.5,
-    "collapsed": true
+    "width": 266.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -328,15 +181,37 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "6109241899ee0b6b",
+  "active": "4d802e2f9a76c034",
   "lastOpenFiles": [
-    "docker/docker 命令.md",
-    "sundongsheng.md",
-    "k8s/k8s概述.md",
-    "中间件/tomcat/Tomcat 调优.md",
-    "中间件/tomcat/Tomcat 部署.md",
-    "devops/Jenkins/使用Maven构建Java应用程序.md",
-    "devops/Jenkins/jenkins 部署.md",
+    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
+    "docker/docker 镜像.md",
+    "docker/docker 优化项.md",
+    "中间件/jdk/OOM内存溢出问题.md",
+    "中间件/jdk/assets/1900341bb6aa6e45b91a40abe2f1dcf1_MD5.jpg",
+    "中间件/jdk/assets/Pasted image 20251119150951.png",
+    "中间件/jdk/java应用CPU过高排查.md",
+    "shell/shell 命令手册/性能监控/lsof.md",
+    "shell/shell 命令手册/tools/lsof.md",
+    "linux/linux 进程管理/systemctl.md",
+    "shell/shell 命令手册/文件系统/snapper.md",
+    "shell/shell 命令手册/文件系统/ulimit.md",
+    "shell/shell 命令手册/文件系统/partprobe.md",
+    "shell/shell 命令手册/文件系统/parted.md",
+    "shell/shell 命令手册/文件系统/mount.md",
+    "shell/shell 命令手册/文件系统/mkfs & mke2fx.md",
+    "shell/shell 命令手册/文件系统/lsblk.md",
+    "shell/shell 命令手册/文件系统/initramfs.md",
+    "shell/shell 命令手册/文件系统/fsck.md",
+    "shell/shell 命令手册/文件系统/fdisk.md",
+    "shell/shell 命令手册/文件系统/dumpe2fs.md",
+    "shell/shell 命令手册/文件系统/du.md",
+    "shell/shell 命令手册/文件系统/dd.md",
+    "shell/shell 命令手册/文件系统/assets/net-img-df-tool-20231027153819-ben8gnp.png",
+    "shell/shell 命令手册/性能监控/cpulimit.md",
+    "shell/shell 命令手册/性能监控/dmesg.md",
+    "shell/shell 命令手册/性能监控/dmidecode.md",
+    "shell/shell 命令手册/性能监控/fio.md",
+    "shell/shell 命令手册/性能监控/hdparm.md",
     "devops/Jenkins/assets/16394b5b4cf2885d03733b0ed4839a3c_MD5.jpg",
     "devops/Jenkins/assets/c2987db00eaa47cdf21e3a2d439b2bbd_MD5.png",
     "devops/Jenkins/assets/904a3343b0817efe90fcd15546d17532_MD5.png",
@@ -344,31 +219,9 @@
     "devops/Jenkins/assets/dfb2cec0b25a151eefc46929ccefe16b_MD5.png",
     "devops/Jenkins/assets/3ce3e078bc36def3c81194c95ca893a7_MD5.png",
     "devops/Jenkins/assets/f011b57df55f0f337a83d7fe97a23c4f_MD5.png",
-    "devops/Jenkins/assets/dc22c5dd8ff1a2a0c0a1c5cd2344b8ea_MD5.png",
-    "devops/Jenkins/assets/c167ef3f4ec7798592ef36096bf5a309_MD5.png",
-    "devops/Jenkins/assets/792fb98a26823751529c0de7abee3a53_MD5.png",
-    "devops/Jenkins/使用Jenkins实现镜像的CI CD.md",
-    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
-    "database/Mysql/mysql 高可用部署/mysql 同步复制.md",
-    "database/Mysql/mysql 备份和恢复/1. mysql 逻辑备份 mysqldump.md",
-    "database/Mysql/mysql 备份和恢复/2. mysql 物理备份 xtrabackup.md",
-    "database/Mysql/mysql 备份和恢复/3. mysql 物理备份 lvm-snapshot.md",
-    "database/Mysql/mysql 备份和恢复/基于binlog恢复数据.md",
-    "database/Mysql/mysql 单机部署/mysql 二进制安装.md",
-    "database/PostgreSQL/PostgreSQL 备份恢复.md",
-    "database/PostgreSQL/PostgreSQL 基础命令.md",
-    "database/PostgreSQL/PostgreSQL 安装部署.md",
-    "企业建设/信创/等级保护 2.0.md",
-    "中间件/jdk/jdk 部署.md",
-    "docker/docker 部署.md",
-    "devops/jira/jira和confluence的docker部署.md",
-    "企业建设/信创/东方通 部署.md",
     "企业建设/信创/assets",
     "企业建设/信创",
-    "devops/Jenkins/用 Maven 构建 Java 应用.md",
     "devops/Jenkins/assets",
-    "devops/ansible/2.ansible常用命令集.md",
-    "docker/docker 镜像.md",
     "devops/Jenkins",
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/02 实验：rman-完全恢复（二）.xmind",
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/01 实验：rman -完全恢复（一）.xmind",
