@@ -13,15 +13,62 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试资料.md",
+                "file": "docker/docker 镜像.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
+              "title": "docker 镜像"
+            }
+          },
+          {
+            "id": "2fb20219f4ac30bd",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "mysql 主从架构"
+            }
+          },
+          {
+            "id": "99dc295da52cd701",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "面试资料.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
               "title": "面试资料"
             }
+          },
+          {
+            "id": "8b66618e93568a74",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "k8s/k8s概述.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "k8s概述"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -141,13 +188,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "面试资料.md",
+                "file": "k8s/k8s概述.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "面试资料 的大纲"
+              "title": "k8s概述 的大纲"
             }
           },
           {
@@ -181,13 +228,29 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "4d802e2f9a76c034",
+  "active": "8b66618e93568a74",
   "lastOpenFiles": [
-    "sundongsheng.md",
     "面试资料.md",
-    "README.md",
-    "docker/docker 镜像.md",
+    "k8s/k8s概述.md",
     "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
+    "sundongsheng.md",
+    "docker/docker 镜像.md",
+    "devops/ansible/2.ansible常用命令集.md",
+    "存储系列/RAID.md",
+    "linux/linux 进程管理/systemd.md",
+    "linux/linux 进程管理/supervisord.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 超时设置.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 反向代理-http.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 基础功能配置集合.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 负载均衡.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 静态文件配置.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 跨域问题.md",
+    "中间件/nginx/nginx 配置文件详解/nginx 配置文件详解.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 配置HTTPS.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx Location配置.md",
+    "中间件/nginx/nginx 配置文件详解/Nginx 双向认证.md",
+    "中间件/nginx/nginx 部署.md",
+    "README.md",
     "docker/docker 优化项.md",
     "中间件/jdk/OOM内存溢出问题.md",
     "中间件/jdk/assets/1900341bb6aa6e45b91a40abe2f1dcf1_MD5.jpg",
@@ -195,23 +258,7 @@
     "中间件/jdk/java应用CPU过高排查.md",
     "shell/shell 命令手册/性能监控/lsof.md",
     "shell/shell 命令手册/tools/lsof.md",
-    "linux/linux 进程管理/systemctl.md",
-    "shell/shell 命令手册/文件系统/snapper.md",
-    "shell/shell 命令手册/文件系统/ulimit.md",
-    "shell/shell 命令手册/文件系统/partprobe.md",
-    "shell/shell 命令手册/文件系统/parted.md",
-    "shell/shell 命令手册/文件系统/mount.md",
-    "shell/shell 命令手册/文件系统/mkfs & mke2fx.md",
-    "shell/shell 命令手册/文件系统/lsblk.md",
-    "shell/shell 命令手册/文件系统/initramfs.md",
-    "shell/shell 命令手册/文件系统/fsck.md",
-    "shell/shell 命令手册/文件系统/fdisk.md",
-    "shell/shell 命令手册/文件系统/dumpe2fs.md",
-    "shell/shell 命令手册/文件系统/du.md",
-    "shell/shell 命令手册/文件系统/dd.md",
     "shell/shell 命令手册/文件系统/assets/net-img-df-tool-20231027153819-ben8gnp.png",
-    "shell/shell 命令手册/性能监控/cpulimit.md",
-    "shell/shell 命令手册/性能监控/dmesg.md",
     "devops/Jenkins/assets/16394b5b4cf2885d03733b0ed4839a3c_MD5.jpg",
     "devops/Jenkins/assets/c2987db00eaa47cdf21e3a2d439b2bbd_MD5.png",
     "devops/Jenkins/assets/904a3343b0817efe90fcd15546d17532_MD5.png",
