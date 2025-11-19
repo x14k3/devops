@@ -152,21 +152,22 @@
             }
           },
           {
-            "id": "cb896ad3c12e81fa",
+            "id": "26ac5cf7bb4580bb",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "中间件/tomcat/Tomcat 调优.md",
+                "file": "sundongsheng.md",
                 "mode": "preview",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "Tomcat 调优"
+              "title": "sundongsheng"
             }
           }
-        ],
-        "currentTab": 9
+        ]
       }
     ],
     "direction": "vertical"
@@ -286,13 +287,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "中间件/tomcat/Tomcat 调优.md",
+                "file": "k8s/k8s概述.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Tomcat 调优 的大纲"
+              "title": "k8s概述 的大纲"
             }
           },
           {
@@ -310,7 +311,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 266.5
+    "width": 266.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -326,8 +328,12 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "cb896ad3c12e81fa",
+  "active": "6109241899ee0b6b",
   "lastOpenFiles": [
+    "docker/docker 命令.md",
+    "sundongsheng.md",
+    "k8s/k8s概述.md",
+    "中间件/tomcat/Tomcat 调优.md",
     "中间件/tomcat/Tomcat 部署.md",
     "devops/Jenkins/使用Maven构建Java应用程序.md",
     "devops/Jenkins/jenkins 部署.md",
@@ -363,10 +369,6 @@
     "devops/Jenkins/assets",
     "devops/ansible/2.ansible常用命令集.md",
     "docker/docker 镜像.md",
-    "docker/docker 命令.md",
-    "docker/docker 数据卷.md",
-    "devops/ansible/1.ansible入门.md",
-    "devops/nacos/nacos 单机部署.md",
     "devops/Jenkins",
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/02 实验：rman-完全恢复（二）.xmind",
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/01 实验：rman -完全恢复（一）.xmind",
