@@ -1,7 +1,9 @@
 
+https://mirrors.huaweicloud.com/java/jdk/
 
 ```bash
 wget https://mirrors.huaweicloud.com/java/jdk/8u192-b12/jdk-8u192-linux-x64.tar.gz
+#wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
 mkdir -p /usr/local/java
 tar -zxf jdk-8u192-linux-x64.tar.gz -C /usr/local/java
 #配置环境变量

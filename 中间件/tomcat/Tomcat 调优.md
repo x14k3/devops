@@ -7,7 +7,7 @@ tomcat的优化可以提高网站的并发能力，体现个人的价值，tomca
 在前面的课程中我们提到了一个叫AJP的协议，同时我们也知道了这个AJP的作用，但是在生产环境中一般使用的是nginx+tomcat的架构，所以大多数时候用不到，所以我们可以禁用它，而在我们的server.xml文件中这个AJP默认就是禁用的,如果是其它版本最好看一下
 AJP协议
 
-```
+```xml
  [root@zutuanxue conf]# vim /opt/tomcat1/conf/server.xml 
 
  <!--

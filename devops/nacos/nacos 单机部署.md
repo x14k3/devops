@@ -107,7 +107,7 @@ curl -X GET "http://192.168.10.167:8101/nacos/v1/cs/configs?dataId=gds&group=DEF
 
 使用python将nacos配置文件转义为url格式，然后通过curl 上传到nacos控制台
 
-```python
+```bash
 #!/bin/python
 import sys
 import os
@@ -122,6 +122,8 @@ for fileName in nacosFiles:
         f.write(urltext)
     
 -------------------------------------------------------------------------------------------------------------
+
+#/bin/bash
 gener_bs_nacosFiles(){
   if [[ -f ${SUB_SCRIPT}/bs_nacos_alter_mysql.sh ]]; then
     sh ${SUB_SCRIPT}/bs_nacos_alter_mysql.sh
