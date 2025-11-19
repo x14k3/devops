@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -188,13 +188,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "k8s/k8s概述.md",
+                "file": "面试资料.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "k8s概述 的大纲"
+              "title": "面试资料 的大纲"
             }
           },
           {
@@ -228,10 +228,10 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "8b66618e93568a74",
+  "active": "99dc295da52cd701",
   "lastOpenFiles": [
-    "面试资料.md",
     "k8s/k8s概述.md",
+    "面试资料.md",
     "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
     "sundongsheng.md",
     "docker/docker 镜像.md",

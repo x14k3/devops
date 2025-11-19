@@ -53,18 +53,18 @@
 ![[assets/1582188308711.png]]
 
 
-- **API Server**：对核心对象（例如：Pod，Service，RC）的增删改查操作，同时也是集群内模块之间数据交换的枢纽
+- API Server：对核心对象（例如：Pod，Service，RC）的增删改查操作，同时也是集群内模块之间数据交换的枢纽
 
-- **Etcd**：用于存储 Kubernetes 的所有集群数据，如节点信息、Pod 状态、Secrets、ConfigMaps 等。
+- Etcd：用于存储 Kubernetes 的所有集群数据，如节点信息、Pod 状态、Secrets、ConfigMaps 等。
 
-- **Controller Manager** ：负责维护集群的状态，比如故障检测、自动扩展、滚动更新等
+- Controller Manager ：负责维护集群的状态，比如故障检测、自动扩展、滚动更新等
 
-- **Scheduler**：监听 API Server 新创建的、尚未分配节点的 Pod，并根据调度策略（如资源请求、亲和性/反亲和性、数据位置等）为其选择一个最合适的 Worker Node。它只做调度决策，不实际执行 Pod 的创建。
+- Scheduler：监听 API Server 新创建的、尚未分配节点的 Pod，并根据调度策略（如资源请求、亲和性/反亲和性、数据位置等）为其选择一个最合适的 Worker Node。它只做调度决策，不实际执行 Pod 的创建。
 
-- **kube-proxy**：通过 `iptables` 或 `ipvs` 模式，将发往 Service VIP（虚拟 IP）的流量转发到后端正确的 Pod 上。实现服务发现和负载均衡。
+- kube-proxy：通过 `iptables` 或 `ipvs` 模式，将发往 Service VIP（虚拟 IP）的流量转发到后端正确的 Pod 上。实现服务发现和负载均衡。
 
-- **Kubelet**：- 与 API Server 通信，接收 Pod 定义。管理本节点上 Pod 的生命周期（创建、启动、停止、重启容器）。
+- Kubelet：- 与 API Server 通信，接收 Pod 定义。管理本节点上 Pod 的生命周期（创建、启动、停止、重启容器）。
 
-- **kubectl**：Kubernetes集群的命令行接口
+- kubectl：Kubernetes集群的命令行接口
 
 - Node（容器运行时）：下载容器镜像、创建容器命名空间、隔离资源、运行应用等。
