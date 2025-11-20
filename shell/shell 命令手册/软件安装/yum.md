@@ -103,7 +103,7 @@ yum clean all &&  yum makecache
 ## **局域网源**
 
 *配置本地源*
-[nginx 部署](../../../中间件/nginx/nginx%20部署.md)
+[nginx 部署](../../../中间件/Nginx/nginx%20部署.md)
 
 ```bash
 # 安装nginx

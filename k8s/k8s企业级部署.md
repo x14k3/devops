@@ -185,7 +185,7 @@ location：日志文件
 **./install.sh**：启动shell脚本
 
 
-在200机器部署 [[../中间件/nginx/nginx 部署|nginx 部署]]
+在200机器部署 [[../中间件/Nginx/nginx 部署|nginx 部署]]
 
 ```bash
 yum install nginx -y
