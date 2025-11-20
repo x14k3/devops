@@ -78,39 +78,8 @@ docker build -t 192.168.10.31/jinzay/jdk ./
 
 # 使用镜像
 
-## docker run
+[[docker 命令#docker run | docker run]]
 
-`docker run -d --name nginx -p 本地端口:容器端口 -v 本地目录:容器目录 --restart=always nginxImageName /bin/bash`
-
-```bash
-#docker run [OPTIONS] (imageName|imageId)
-#OPTIONS说明：
--d           #容器后台运行
--p           #本地端口:容器端口，将本地端口映射到容器的指定端口。
--v           #本地目录:容器目录，将本地目录挂载到容器中，实现数据持久化。
---volumes-from=[]  #挂载其他容器的某个目录到容器
---name       #指定容器的name
---expose     #指定容器暴露的端口，只是一个提示。
--e           #指定环境变量
--h           #指定容器主机名
--u           #指定容器用户
--w           #指定容器的工作目录
--c           #设置cpu权重
--m           #指定容器内存上限
---net        #容器网络设置
---dns        #指定容器的dns服务器
--i           #打开STDIN，用于控制台交互
--t           #分配tty设备，支持终端登录
---restart=
-no           #容器退出时，不重启容器；
-on-failure   #只有在非0状态退出时才从新启动容器；
-always       #无论退出状态是如何，都重启容器；
---privileged=true  # 使docker中的root获得真正的root权限
-
-#小技巧：docker必须有进程存在才能保存运行
-#所以启动一个没有服务的docker时，避免自动stop，可使用下面的命令
-docker run -dit imageID /bin/bash
-```
 
 **容器启动失败**
 

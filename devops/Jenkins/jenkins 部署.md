@@ -3,7 +3,7 @@
 
 1. 下载 [Jenkins](https://updates.jenkins.io/download/war/) 
 	`wget https://mirror.twds.com.tw/jenkins/war/2.530/jenkins.war`
-2. 安装 [[../../中间件/jdk/jdk 部署|jdk]]  21 22 高版本
+2. 安装 [[../../中间件/JDK/JDK 部署|jdk]]  21 22 高版本
 	`wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz`
 3. 打开终端进入到下载目录.
 4. 运行命令 `java -jar jenkins.war --httpPort=8080`
@@ -25,15 +25,19 @@
 1. 安装 [[../../docker/docker 部署|docker]]
 2. 下载 `jenkinsci/blueocean` 镜像并使用以下docker run 命令将其作为Docker中的容器运行 ：
 ```bash
-docker pull jenkinsci/blueocean
+docker pull jenkins/jenkins:jdk21
 
-docker run -d \
+docker run -d --name jenkins \
   -u root \
   -p 8080:8080 \
   -v /data/jenkins/jenkins-data:/var/jenkins_home \
-  jenkinsci/blueocean
+  jenkins/jenkins:jdk21
 
+# 查看初始化密码
+docker logs -f jenkins
 ```
 3. 继续按照[Post-installation setup wizard](https://www.jenkins.io/zh/doc/book/installing/#setup-wizard)安装。
 
+
+## jenkins 集群部署
 
