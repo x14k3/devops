@@ -30,6 +30,12 @@ echo "$record"
 9. build with parameters
 	[[devops/Jenkins/assets/dfd75fef5920f9c8ae4d5da9135667ed_MD5.jpg|Open: Pasted image 20251120194320.png]]
 ![[devops/Jenkins/assets/dfd75fef5920f9c8ae4d5da9135667ed_MD5.jpg|525]]
-
+10. 查看控制台输出
 [[devops/Jenkins/Jenkins 使用/assets/3ec4573b474a5a51a9572e73197ba57e_MD5.jpg|Open: Pasted image 20251120200332.png]]
 ![[devops/Jenkins/Jenkins 使用/assets/3ec4573b474a5a51a9572e73197ba57e_MD5.jpg|575]]
+
+
+## 小结
+
+- 通过Jenkins 实现带有参数的构建
+- 通过Jenkins 执行shell 命令
