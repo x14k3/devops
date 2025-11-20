@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "中间件/JDK/JDK 部署.md",
+                "file": "shell/shell 开箱即用/zabbix监控端口数据（自动发现规则）.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JDK 部署"
+              "title": "zabbix监控端口数据（自动发现规则）"
             }
           }
         ],
@@ -186,13 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "中间件/JDK/JDK 部署.md",
+                "file": "shell/shell 开箱即用/zabbix监控端口数据（自动发现规则）.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "JDK 部署 的大纲"
+              "title": "zabbix监控端口数据（自动发现规则） 的大纲"
             }
           },
           {
@@ -226,35 +226,35 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "84fc26411f2207e4",
   "lastOpenFiles": [
+    "shell/shell 开箱即用/ssh免密批量处理.md",
+    "shell/shell 开箱即用/pyhton-nacos配置文件转义.md",
+    "shell/shell 开箱即用/mysql数据库备份脚本.md",
+    "shell/shell 开箱即用/Linux下快速比较两个目录的不同.md",
+    "shell/shell 开箱即用/jar包服务启动停止shell脚本.md",
+    "shell/shell 开箱即用/github自动提交.md",
+    "shell/shell 开箱即用/自动化 SSH 密钥生成和分发的脚本.md",
+    "shell/shell 开箱即用/文件编码转换utf-8.md",
+    "shell/shell 开箱即用/日志压缩清理.md",
+    "shell/shell 开箱即用/快速生成大量文件.md",
+    "shell/shell 开箱即用/检测网卡流量.md",
+    "shell/shell 开箱即用/根据 web 日志，封禁异常 IP.md",
+    "shell/shell 开箱即用/服务器初始化脚本.md",
+    "面试资料.md",
+    "assets",
+    "中间件/JDK/JDK 部署.md",
     "中间件/JDK/OOM 内存溢出处理.md",
     "网络与安全/网络协议/OSI 七层和TCP IP四层.md",
     "网络与安全/网络协议/TCP-传输控制协议.md",
-    "面试资料.md",
     "中间件/Nginx/nginx 部署.md",
     "中间件/Nginx/nginx 概述.md",
     "shell/shell 命令手册/tools/lsof.md",
     "中间件/tomcat/Tomcat 假死原因及处理.md",
-    "中间件/JDK/JDK 部署.md",
     "中间件/jdk/java应用CPU过高排查.md",
     "devops/Jenkins/Jenkins 概述.md",
     "devops/Jenkins/使用Maven构建Java应用程序.md",
     "devops/Jenkins/使用Jenkins实现镜像的CI CD.md",
-    "devops/Jenkins/Jenkins 部署.md",
-    "docker/docker 镜像.md",
-    "docker/docker 命令.md",
-    "docker/docker 优化项.md",
-    "linux/linux 文件系统/1. 文件系统相关概念/linux系统启动流程分析.md",
-    "linux/linux 文件系统/3. linux 分区/3.2 Linux LVM（逻辑卷管理）.md",
-    "shell/shell 命令手册/文件系统/fdisk.md",
-    "linux/linux 文件系统/3. linux 分区/3.1 Linux 磁盘分区.md",
-    "linux/linux 文件系统/1. 文件系统相关概念/深入理解 Linux Ext 文件系统设计原理.md",
-    "assets",
-    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
-    "k8s/k8s概述.md",
-    "devops/ELK/ELK 优化-日常运维.md",
-    "devops/ELK/ELK 部署/ELK 8.0.0 部署.md",
     "devops/ELK/ELK 部署",
     "中间件/JDK/assets/1900341bb6aa6e45b91a40abe2f1dcf1_MD5.jpg",
     "中间件/jdk/assets/Pasted image 20251119150951.png",

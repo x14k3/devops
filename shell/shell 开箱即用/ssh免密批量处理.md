@@ -1,4 +1,4 @@
-# ssh免密批量处理
+
 
 ```bash
 #!/usr/bin/expect -f
