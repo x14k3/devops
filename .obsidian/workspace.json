@@ -8,36 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4d802e2f9a76c034",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docker/docker 镜像.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "docker 镜像"
-            }
-          },
-          {
-            "id": "2fb20219f4ac30bd",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "mysql 主从架构"
-            }
-          },
-          {
             "id": "99dc295da52cd701",
             "type": "leaf",
             "pinned": true,
@@ -54,21 +24,48 @@
             }
           },
           {
-            "id": "8b66618e93568a74",
+            "id": "fc4a2e81a7a7145d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "k8s/k8s概述.md",
+                "file": "linux/linux 文件系统/1. 文件系统相关概念/linux系统启动流程分析.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "linux系统启动流程分析"
+            }
+          },
+          {
+            "id": "0772cbadef98bb24",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "shell/shell 命令手册/文件系统/fdisk.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "fdisk"
+            }
+          },
+          {
+            "id": "2485237c2523f826",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "linux/linux 文件系统/3. linux 分区/3.2 Linux LVM（逻辑卷管理）.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "k8s概述"
+              "title": "3.2 Linux LVM（逻辑卷管理）"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -230,34 +227,36 @@
   },
   "active": "99dc295da52cd701",
   "lastOpenFiles": [
-    "k8s/k8s概述.md",
+    "linux/linux 文件系统/3. linux 分区/3.2 Linux LVM（逻辑卷管理）.md",
     "面试资料.md",
-    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
-    "sundongsheng.md",
+    "shell/shell 命令手册/文件系统/fdisk.md",
+    "linux/linux 文件系统/3. linux 分区/3.1 Linux 磁盘分区.md",
+    "linux/linux 文件系统/1. 文件系统相关概念/深入理解 Linux Ext 文件系统设计原理.md",
+    "linux/linux 文件系统/1. 文件系统相关概念/linux系统启动流程分析.md",
+    "assets",
     "docker/docker 镜像.md",
-    "devops/ansible/2.ansible常用命令集.md",
+    "database/Mysql/mysql 高可用部署/mysql 主从架构.md",
+    "k8s/k8s概述.md",
+    "devops/ELK/ELK 优化-日常运维.md",
+    "devops/ELK/ELK 部署/ELK 8.0.0 部署.md",
+    "devops/ELK/ELK 部署/ELK 7.17 部署.md",
+    "devops/ELK/ELK 部署",
+    "devops/ELK/未命名.md",
+    "devops/ELK/ELK 概述.md",
+    "devops/ELK/elk-cerebro.md",
+    "devops/warpgate.md",
+    "devops/skywalking/Skywalking+ELK.md",
+    "README.md",
+    "sundongsheng.md",
+    "devops/Ansible/2.ansible常用命令集.md",
     "存储系列/RAID.md",
     "linux/linux 进程管理/systemd.md",
     "linux/linux 进程管理/supervisord.md",
     "中间件/nginx/nginx 配置文件详解/Nginx 超时设置.md",
     "中间件/nginx/nginx 配置文件详解/Nginx 反向代理-http.md",
     "中间件/nginx/nginx 配置文件详解/Nginx 基础功能配置集合.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 负载均衡.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 静态文件配置.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 跨域问题.md",
-    "中间件/nginx/nginx 配置文件详解/nginx 配置文件详解.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 配置HTTPS.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx Location配置.md",
-    "中间件/nginx/nginx 配置文件详解/Nginx 双向认证.md",
-    "中间件/nginx/nginx 部署.md",
-    "README.md",
-    "docker/docker 优化项.md",
-    "中间件/jdk/OOM内存溢出问题.md",
     "中间件/jdk/assets/1900341bb6aa6e45b91a40abe2f1dcf1_MD5.jpg",
     "中间件/jdk/assets/Pasted image 20251119150951.png",
-    "中间件/jdk/java应用CPU过高排查.md",
-    "shell/shell 命令手册/性能监控/lsof.md",
-    "shell/shell 命令手册/tools/lsof.md",
     "shell/shell 命令手册/文件系统/assets/net-img-df-tool-20231027153819-ben8gnp.png",
     "devops/Jenkins/assets/16394b5b4cf2885d03733b0ed4839a3c_MD5.jpg",
     "devops/Jenkins/assets/c2987db00eaa47cdf21e3a2d439b2bbd_MD5.png",
@@ -273,8 +272,6 @@
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/02 实验：rman-完全恢复（二）.xmind",
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/01 实验：rman -完全恢复（一）.xmind",
     "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/闪回技术/01 闪回查询.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/01 安装/04 安装Oracle数据库.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/01 安装/02 Oracle Installations with Standard and Job Role Separation Groups and Users.xmind",
-    "database/Oracle/oracle 学习文件（OPC）/01 安装/01 需要的操作系统组及用户.xmind"
+    "database/Oracle/oracle 学习文件（OPC）/01 安装/04 安装Oracle数据库.xmind"
   ]
 }
