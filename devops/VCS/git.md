@@ -15,40 +15,64 @@ ssh-keygen -t rsa -b 1024
 # 现在您必须将这些密钥复制到服务器上，以便两台机器可以相互通信。在本地机器上运行以下命令：
 cat ~/.ssh/id_rsa.pub | ssh git@remote-server "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 # 现在，用 ssh 登录进服务器并为 Git 创建一个项目路径。你可以为你的仓库设置一个你想要的目录。
-mkdir   /home/git/project-1.git
+mkdir   /home/git/project.git
 # 初始化
-cd  /home/git/project-1.git
+cd  /home/git/project.git
 git init --bare
 
-==============================================
+```
+
+‍
+## git 客户端操作
+
+```bash
 # 现在我们需要在本地机器上新建一个基于 Git 版本控制仓库：
 mkdir -p /data/git/project.local
 cd /data/git/project.local
-# 现在在该目录中创建项目所需的文件。留在这个目录并启动 git：
+# 现在在该目录中创建项目所需的文件。留在这个目录并启动 git
 git init
-# 把所有文件添加到本地仓库中：
+# 把所有文件添加到本地仓库中
 git add .
-# 现在，每次添加文件或进行更改时，都必须运行上面的 add 命令。 您还需要为每个文件更改都写入提交消息。提交消息基本上说明了我们所做的更改。
+# 您还需要为每个文件更改都写入提交消息。提交消息基本上说明了我们所做的更改。
 git commit -m "message"  -a
-#在这种情况下，我有一个名为 GoT（《权力的游戏》的点评）的文件，并且我做了一些更改，所以当我运行命令时，它指定对文件进行更改。 在上面的命令中 -a 选项意味着提交仓库中的所有文件。 如果您只更改了一个，则可以指定该文件的名称而不是使用 -a。
-git commit -m "message"  GoT.txt
 # 到现在为止，我们一直在本地服务器上工作。添加远程仓库，以便其他人通过互联网进行协作。
-git remote add origin ssh://git@remote-server/home/git/project-1.git
+git config --global user.email "xxxx@foxmail.com"
+git config --global user.name "xxxxxxx"
+#git remote add origin ssh://git@remote-server/home/git/project-1.git
 git remote add origin https://github.com/x14k3/devops.git
 # 现在，您可以使用 pull 或 push 选项在服务器和本地计算机之间推送或拉取：
 git push origin master
 
-======================================================
+# ======================================================
 # 如果有其他团队成员想要使用该项目，则需要将远程服务器上的仓库克隆到其本地计算机上：
 git clone https://github.com/x14k3/devops
 # 现在他们可以编辑文件，写入提交更改信息，然后将它们推送到服务器：
 git commit -m 'corrections in GoT.txt story' -a
 # 然后推送改变：
 git push origin master
+```
+
+将未提交的修改移到新分支
+
+这种方法适用于你还在当前分支工作，但还没进行 `commit` 的情况。
+
+```bash
+# 暂存当前修改：将你当前做的修改保存起来，但不提交。
+git stash
+
+# 创建并切换到新分支：创建一个新的分支，并切换到该分支。
+git checkout -b 新分支名
+
+# 恢复修改：将之前暂存的修改恢复到工作区。
+git stash pop
+
+# 正常提交：现在你可以在新分支上执行正常的添加、提交和推送操作了
+git add .
+git commit -m "提交到新分支的注释"
+git push origin 新分支名
 
 ```
 
-‍
 
 ## <span data-type="text" style="color: var(--b3-font-color11);">git 常用命令</span>
 

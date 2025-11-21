@@ -68,11 +68,8 @@ container模式：使用 --net=container:NAME_or_ID 指定
 ## 获得容器的 IP 地址
 
 ```bash
-$ docker exec dockerhive_namenode cat /etc/hosts
-
-
-$ docker inspect mysql | grep IPAddress
-
+docker exec dockerhive_namenode cat /etc/hosts
+docker inspect mysql | grep IPAddress
 ```
 
 ‍
