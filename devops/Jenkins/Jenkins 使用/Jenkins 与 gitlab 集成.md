@@ -16,3 +16,10 @@
 4. web：jenkins 构建
 [[devops/Jenkins/Jenkins 使用/assets/3301201e2de25d1403474e10a905cb79_MD5.jpg|Open: Pasted image 20251121223459.png]]
 ![[devops/Jenkins/Jenkins 使用/assets/3301201e2de25d1403474e10a905cb79_MD5.jpg|650]]
+
+
+## 使用ssh方法拉取（重点）
+
+使用ssh的方法拉取的话先在本地生成公钥和私钥，注意，公钥（id_rsa.pub）保存到gitlab中，私钥（id_rsa）保存到jenkins中
+
+注意：这里要强调一点，有些同学刚开不知道这个公钥和私钥要建在那个服务器上，这个很简单，就是你想在那台服务器上从gitlab中拉取代码，那么你就建在那个服务器上，而我这里是使用Jenkins从gitlab拉取代码，而jenkins又是以docker容器的方式运行的，那么我就在jenkins这个容器中来产生秘钥。

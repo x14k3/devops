@@ -35,11 +35,11 @@ gitlab/gitlab-ce    latest              c752bc978a4b        4 days ago          
 
 ```bash
 docker run -d --name gitlab --hostname 192.168.3.111 \
--p 444:443 -p 81:80 -p 23:22 \
+-p 443:443 -p 80:80 -p 2222:22 \
 -v /data/gitlab/etc:/etc/gitlab \
 -v /data/gitlab/log:/var/log/gitlab \
 -v /data/gitlab/opt:/var/opt/gitlab \
-gitlab/gitlab-ce
+-e TZ=Asia/Shanghai gitlab/gitlab-ce
 ```
 
 数据存储地方
@@ -57,13 +57,6 @@ gitlab/gitlab-ce
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                    PORTS                                                          NAMES
 9e12ae220c14        c752bc978a4b        "/assets/wrapper"   13 minutes ago      Up 13 minutes (healthy)   0.0.0.0:23->22/tcp, 0.0.0.0:81->80/tcp, 0.0.0.0:444->443/tcp   gitlab
 ```
-
-默认用户 root
-默认密码
-```bash
-cat /data/gitlab/etc/initial_root_password
-```
-
 
 ## **3.配置GitLab** 
 
@@ -84,16 +77,15 @@ docker exec -it gitlab /bin/bash
 
 ```bash
 # external_url 'GENERATED_EXTERNAL_URL'
-external_url "http://192.168.3.34:81"
-
-# gitlab_rails['gitlab_shell_ssh_port'] = 22
-gitlab_rails['gitlab_shell_ssh_port'] = 23
-
-# nginx['listen_port'] = nil
-nginx['listen_port'] = 81
-
+external_url "http://192.168.3.111"
+gitlab_rails['gitlab_shell_ssh_port'] = 2222
+nginx['listen_port'] = 80
+gitlab_rails['gitlab_ssh_host'] = '192.168.3.111'
+gitlab_rails['time_zone'] = ''
 #如果用了Https，下面的端口也修改
 # nginx['redirect_http_to_https_port'] = 80
+
+
 ```
 
 **说明** ：
@@ -101,8 +93,6 @@ nginx['listen_port'] = 81
 - **gitlab_shell_ssh_port** ：ssh端口，使用ssh进行clone时的端口；
 - **listen_port** ：nginx监听的端口；
 - **redirect_http_to_https_port** ：使用https时，nginx监听的端口；
-
-**注意** ：这里修改完毕，会有一个 **坑** ，具体看目录 **3.4.重新创建**
 
 ### 3.2.邮箱配置
 
@@ -142,25 +132,13 @@ docker exec -it gitlab /bin/bash
 gitlab-ctl reconfigure
 ```
 
-### 3.4.重新创建
 
-经过上述的配置，会发现打不开gitlab的网页，这是因为修改了external_url，会导致container内部的项目80端口也被直接转到了81端口，所以需要重新映射端口。
-
+默认用户 root
+默认密码
+```bash
+cat /data/gitlab/etc/initial_root_password
 ```
-docker stop gitlab
-docker rm gitlab
-
-docker run -d --name gitlab --hostname 192.168.3.111 \
--p 444:443 -p 81:81 -p 23:22 \
--v /data/gitlab/etc:/etc/gitlab \
--v /data/gitlab/log:/var/log/gitlab \
--v /data/gitlab/opt:/var/opt/gitlab \
-gitlab/gitlab-ce
-```
-
-
-
 
 登录后依次点击【头像】-【Edit profile】-【password】，然后修改密码
-
 至此，gitlab已经安装完成，并已修改密码
+

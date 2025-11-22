@@ -30,7 +30,7 @@ docker pull jenkins/jenkins:jdk21
 docker run -d --name jenkins \
   -u root \
   -p 8080:8080 \
-  -v /data/jenkins/jenkins-data:/var/jenkins_home \
+  -v /data/jenkins:/var/jenkins_home \
   jenkins/jenkins:jdk21
 
 # 查看初始化密码
