@@ -96,7 +96,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -216,13 +216,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/Jenkins/Jenkins 部署.md",
+                "file": "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Jenkins 部署 的大纲"
+              "title": "Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署 的大纲"
             }
           },
           {
@@ -256,16 +256,23 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "d0771b7f69492353",
+  "active": "08a8a4f928260ed8",
   "lastOpenFiles": [
+    "devops/Jenkins/Jenkins 使用/assets/9a8c49c5a52f61339d40fa2521235d79_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211222.png",
+    "devops/Jenkins/Jenkins 使用/assets/bb8b5eee7d43c90bc9b1b7fb129575be_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211202.png",
+    "devops/Jenkins/Jenkins 使用/assets/258f414c7ecf048c31fb6ae6d6131132_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211145.png",
+    "devops/Jenkins/Jenkins 使用/assets/5ed961ff971bb3f6d95021292943870c_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211116.png",
+    "devops/Jenkins/Jenkins 使用/assets/2143e09b1695368b3e210f794415f46e_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211026.png",
+    "devops/Jenkins/Jenkins 使用/assets/550ffe452ead7932642b2975d0d1ca1c_MD5.jpg",
+    "devops/Jenkins/Jenkins 部署.md",
     "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
-    "devops/Jenkins/Jenkins 使用/assets/ff657ecba4a8a08fbf5dbf6218caeb75_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122204535.png",
-    "devops/Jenkins/Jenkins 使用/assets/bedc72db1a9a3778ae43a29ae2628ec5_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122203826.png",
     "中间件/JDK/JDK 部署.md",
     "中间件/tomcat/Tomcat 部署.md",
-    "devops/Jenkins/Jenkins 部署.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 与 gitlab 集成.md",
     "devops/GitLab/gitlab docker 部署.md",
     "devops/GitLab/gitlab 部署.md",
@@ -275,12 +282,6 @@
     "shell/shell 命令手册/网络相关/nmap.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 与 docker 集成.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 与 shell 集成.md",
-    "devops/Jenkins/Jenkins 使用/assets/3301201e2de25d1403474e10a905cb79_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251121223459.png",
-    "devops/Jenkins/Jenkins 使用/assets/f49b50252709fac9988f10065ac44b8c_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251121223440.png",
-    "devops/Jenkins/Jenkins 使用/assets/00e21c45fc6f8b092ec75e378c97f8a4_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251121222840.png",
     "docker/docker 命令.md",
     "基础服务/ssh/4. ssh配置文件.md",
     "基础服务/ssh/3. ssh端口映射.md",
