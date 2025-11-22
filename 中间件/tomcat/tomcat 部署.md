@@ -10,13 +10,19 @@ tomcat 和jdk关系（区别）
 
 ## tomcat 部署
 
-1. ((20231110105237-7rngo10 'jdk 部署'))
+1. [[../JDK/JDK 部署|JDK 部署]]
 2. tomcat 下载地址：[https://tomcat.apache.org/](https://tomcat.apache.org/)
+3. tomcat archive：[https://archive.apache.org/dist/tomcat/](https://archive.apache.org/dist/tomcat/)
 
 ```bash
 # 进入下载目录，进行解压缩：
-cd /opt
+wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.12/bin/apache-tomcat-7.0.12.zip
 tar zxvf  apache-tomcat-7.0.12.tar.gz
+
+chmod u+x apache-tomcat-7.0.12/bin/*.sh
+# 启动
+apache-tomcat-7.0.12/bin/startup.sh
+
 ```
 
 ### 1.tomcat日志切割
