@@ -25,29 +25,29 @@ apache-tomcat-7.0.12/bin/startup.sh
 
 ```
 
-### 1.tomcat日志切割
+## tomcat日志切割
 
-- **下载cronolog**
-  [https://developer.aliyun.com/packageSearch?word=cronolog](https://developer.aliyun.com/packageSearch?word=cronolog)
+**下载cronolog**
+[https://developer.aliyun.com/packageSearch?word=cronolog](https://developer.aliyun.com/packageSearch?word=cronolog)
 
 ```bash
+# yum 安装
 yum install cronolog
-#或者使用下载压缩包安装
-# 1. 下载(最新版本)
+
+# ################################################
+# 源码编译安装
 wget http://cronolog.org/download/cronolog-1.6.2.tar.gz
 tar zxvf cronolog-1.6.2.tar.gz
-# 3. 进入安装目录
 cd cronolog-1.6.2
-# 4. 运行安装
 ./configure
 make &7 make install
-# 5. 查看是否安装成功
+# 查看是否安装成功
 which cronolog
 ```
 
-- **修改catalina.sh**
+**修改catalina.sh**
 
-  `vim ~/bin/catalina.sh`
+`vim ~/bin/catalina.sh`
 
   ```bash
   # 大概500/509行
@@ -78,7 +78,7 @@ which cronolog
     fi
   ```
 
-### 2.umask
+## umask
 
 对于文件和目录来说， 最大的权限其实都是777，但是执行权限对于文件来说，很可怕，而对目录来说执行权限是个基本权限。所以默认目录的最大权限是777，而文件的默认最大权限就是666。
 
@@ -99,7 +99,7 @@ fi
 umask $UMASK 
 ```
 
-### 3.不修改端口，部署多个项目
+## 不修改端口，部署多个项目
 
 能否在同一个tomcat的webapps目录下运行多个不同项目呢？答案是可以的。
 
@@ -115,24 +115,19 @@ http://192.168.8.15:8080/bank
 #接下来我们可以通过nginx反向代理来访问不同的项目
 ```
 
-### 4.logs 日志文件说明
+## logs 日志文件说明
 
-***catalina.out***
-
+catalina.out
 catalina.out即标准输出和标准出错，所有输出到这两个位置的都会进入catalina.out，这里包含tomcat运行自己输出的日志以及应用里向console输出的日志。
 
-***catalina.日期.log***
-
+catalina.日期.log
 catalina.{yyyy-MM-dd}.log是tomcat自己运行的一些日志，这些日志还会输出到catalina.out，但是应用向console输出的日志不会输出到catalina.{yyyy-MM-dd}.log。
 
-***host-manager.日期.log***
-
+host-manager.日期.log
 这个估计是放tomcat的自带的manager项目的日志信息的，也没有看到有什么重要的日志信息
 
-***localhost.日期.log***
-
+localhost.日期.log
 localhost.{yyyy-MM-dd}.log主要是应用初始化(listener, filter, servlet)未处理的异常最后被tomcat捕获而输出的日志，而这些未处理异常最终会导致应用无法启动。
 
-***localhost***​***access***​***log.日期.txt***
-
+localhost***​***access***​***log.日期.txt
 这个是存放访问tomcat的请求的所有地址以及请求的路径、时间，请求协议以及返回码等信息(重要)
