@@ -94,13 +94,24 @@ vim apache-maven-3.5.4/conf/settings.xml
 ![[devops/Jenkins/Jenkins 使用/assets/5ed961ff971bb3f6d95021292943870c_MD5.jpg|650]]
 
 选择要上传的服务器
-[[devops/Jenkins/Jenkins 使用/assets/4984fc8e8f9014510f9125dd94e905cf_MD5.jpg|Open: Pasted image 20251123140048.png]]
-![[devops/Jenkins/Jenkins 使用/assets/4984fc8e8f9014510f9125dd94e905cf_MD5.jpg|650]]
+[[devops/Jenkins/Jenkins 使用/assets/c8f0f74295d447f43583090bdeab119a_MD5.jpg|Open: Pasted image 20251123141830.png]]
+![[devops/Jenkins/Jenkins 使用/assets/c8f0f74295d447f43583090bdeab119a_MD5.jpg|650]]
+
+test.sh 脚本内容如下
+```bash
+#!/bin/bash
+cd /opt
+/usr/local/java/jdk1.8.0_192/bin/java -jar jb-hello-world-maven-0.2.0.jar >> /opt/test.log
+```
+
 
 多个Source files 可以用【,】隔开
 如果想给多个服务器部署，可以选择add server
 
 [[devops/Jenkins/Jenkins 使用/assets/9a8c49c5a52f61339d40fa2521235d79_MD5.jpg|Open: Pasted image 20251122211222.png]]
 ![[devops/Jenkins/Jenkins 使用/assets/9a8c49c5a52f61339d40fa2521235d79_MD5.jpg|650]]
+
+
+
 
 配置完成后点击保存，然后点击build now即可开始自动构建
