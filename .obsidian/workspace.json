@@ -31,68 +31,12 @@
               "type": "markdown",
               "state": {
                 "file": "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
               "title": "Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署"
-            }
-          },
-          {
-            "id": "0453d65100cd1f46",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "中间件/tomcat/Tomcat 部署.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Tomcat 部署"
-            }
-          },
-          {
-            "id": "6974ac1e8fea6393",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "中间件/JDK/JDK 部署.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "JDK 部署"
-            }
-          },
-          {
-            "id": "3af155db2c3ddd7a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/Jenkins/Jenkins 部署.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Jenkins 部署"
-            }
-          },
-          {
-            "id": "d0771b7f69492353",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/Jenkins/Jenkins 部署.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Jenkins 部署"
             }
           }
         ],
@@ -258,24 +202,26 @@
   },
   "active": "08a8a4f928260ed8",
   "lastOpenFiles": [
-    "devops/Jenkins/Jenkins 使用/assets/9a8c49c5a52f61339d40fa2521235d79_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211222.png",
-    "devops/Jenkins/Jenkins 使用/assets/bb8b5eee7d43c90bc9b1b7fb129575be_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211202.png",
-    "devops/Jenkins/Jenkins 使用/assets/258f414c7ecf048c31fb6ae6d6131132_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211145.png",
-    "devops/Jenkins/Jenkins 使用/assets/5ed961ff971bb3f6d95021292943870c_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211116.png",
-    "devops/Jenkins/Jenkins 使用/assets/2143e09b1695368b3e210f794415f46e_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251122211026.png",
-    "devops/Jenkins/Jenkins 使用/assets/550ffe452ead7932642b2975d0d1ca1c_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/4984fc8e8f9014510f9125dd94e905cf_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123140048.png",
+    "devops/Jenkins/Jenkins 使用/assets/85be96f8b46d1d4eabf0dcabc02a49af_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123134120.png",
+    "devops/Jenkins/Jenkins 使用/assets/1836d54e4ace6d7a173a70bce3eecc41_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123134032.png",
+    "devops/Jenkins/Jenkins 使用/assets/e4fd0ebd9b39640776c28d3fffd9b6b0_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123133856.png",
+    "中间件/tomcat/Tomcat 部署.md",
+    "中间件/JDK/JDK 部署.md",
     "devops/Jenkins/Jenkins 部署.md",
     "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
-    "中间件/JDK/JDK 部署.md",
-    "中间件/tomcat/Tomcat 部署.md",
+    "devops/Jenkins/Jenkins 使用/assets/a8abffcafa7929b66f243e00cff2def6_MD5.jpg",
+    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123132925.png",
+    "devops/VCS/git.md",
+    "devops/GitLab/gitlab 部署.md",
+    "devops/GitLab/gitlab 基本使用.md",
+    "devops/Jenkins/Jenkins 使用/assets/9a8c49c5a52f61339d40fa2521235d79_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/Jenkins 与 gitlab 集成.md",
     "devops/GitLab/gitlab docker 部署.md",
-    "devops/GitLab/gitlab 部署.md",
     "面试资料.md",
     "docker/docker 优化项.md",
     "docker/docker 部署.md",
@@ -288,10 +234,8 @@
     "基础服务/ssh/2. ssh公钥登录.md",
     "基础服务/ssh/1. ssh口令登陆.md",
     "docker/docker 网络.md",
-    "devops/VCS/git.md",
     "devops/VCS/svn.md",
     "sundongsheng.md",
-    "devops/GitLab/gitlab 基本使用.md",
     "Open Source/aria2.md",
     "Open Source/fail2ban.md",
     "devops/Jenkins/Jenkins 使用/assets",

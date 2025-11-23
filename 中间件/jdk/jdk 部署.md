@@ -1,5 +1,6 @@
 
 https://mirrors.huaweicloud.com/java/jdk/
+https://www.oracle.com/java/technologies/downloads/archive/ 
 
 ```bash
 wget https://mirrors.huaweicloud.com/java/jdk/8u192-b12/jdk-8u192-linux-x64.tar.gz

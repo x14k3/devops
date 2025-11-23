@@ -1,252 +1,323 @@
-#git
 
-## <span data-type="text" style="color: var(--b3-font-color11);">git 服务端部署</span>
-
-或者参考[gitlab 部署](../GitLab/gitlab%20部署.md)
+### Git 仓库初始化与配置
 
 ```bash
-yum install git-core
-#为 Git 创建一个用户
-useradd -d /home/git git
-echo "Ninestar123" | passwd --stdin git
-
-# 为了容易的访问服务器，我们设置一个免密 ssh 登录。首先在你本地电脑上创建一个 ssh 密钥：
-ssh-keygen -t rsa -b 1024
-# 现在您必须将这些密钥复制到服务器上，以便两台机器可以相互通信。在本地机器上运行以下命令：
-cat ~/.ssh/id_rsa.pub | ssh git@remote-server "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
-# 现在，用 ssh 登录进服务器并为 Git 创建一个项目路径。你可以为你的仓库设置一个你想要的目录。
-mkdir   /home/git/project.git
-# 初始化
-cd  /home/git/project.git
-git init --bare
-
-```
-
-‍
-## git 客户端操作
-
-```bash
-# 现在我们需要在本地机器上新建一个基于 Git 版本控制仓库：
-mkdir -p /data/git/project.local
-cd /data/git/project.local
-# 现在在该目录中创建项目所需的文件。留在这个目录并启动 git
+# 初始化本地git仓库（创建新仓库）
 git init
-# 把所有文件添加到本地仓库中
-git add .
-# 您还需要为每个文件更改都写入提交消息。提交消息基本上说明了我们所做的更改。
-git commit -m "message"  -a
-# 到现在为止，我们一直在本地服务器上工作。添加远程仓库，以便其他人通过互联网进行协作。
-git config --global user.email "xxxx@foxmail.com"
-git config --global user.name "xxxxxxx"
-#git remote add origin ssh://git@remote-server/home/git/project-1.git
-git remote add origin https://github.com/x14k3/devops.git
-# 现在，您可以使用 pull 或 push 选项在服务器和本地计算机之间推送或拉取：
-git push origin master
 
-# ======================================================
-# 如果有其他团队成员想要使用该项目，则需要将远程服务器上的仓库克隆到其本地计算机上：
-git clone https://github.com/x14k3/devops
-# 现在他们可以编辑文件，写入提交更改信息，然后将它们推送到服务器：
-git commit -m 'corrections in GoT.txt story' -a
-# 然后推送改变：
-git push origin master
+# 配置用户名（全局配置）
+git config --global user.name "xxx"
+
+# 配置邮箱（全局配置）
+git config --global user.email "xxx@xxx.com"
+
+# 启用 Git 命令行颜色高亮，便于区分信息
+git config --global color.ui true
+git config --global color.status auto
+git config --global color.diff auto
+git config --global color.branch auto
+git config --global color.interactive auto
+
+# 移除 Git 代理配置
+git config --global --unset http.proxy
 ```
 
-将未提交的修改移到新分支
-
-这种方法适用于你还在当前分支工作，但还没进行 `commit` 的情况。
+### 远程仓库操作
 
 ```bash
-# 暂存当前修改：将你当前做的修改保存起来，但不提交。
+# 克隆远程仓库
+git clone git@github.com:getiot/getiot-kb.git
+
+# 添加远程仓库地址，方便 push/pull/fetch
+git remote add origin git@github.com:getiot/getiot-kb.git
+
+# 查看所有远程分支
+git branch -r
+
+# 拉取远程分支并合并到当前分支（相当于 fetch + merge）
+git pull origin master
+
+# 只拉取远程分支最新更新（不自动合并）
+git fetch
+
+# 拉取远程分支更新并删除远程已删除的分支
+git fetch --prune
+
+# 将当前分支 push 到远程分支
+git push origin master
+
+# 删除远程分支
+git push origin :hotfixes/BJVEP933
+
+# 推送所有标签到远程仓库
+git push --tags
+```
+
+### 查看仓库状态与日志
+
+```bash
+# 查看当前工作区和暂存区状态
+git status
+
+# 查看提交日志（默认按时间倒序）
+git log
+
+# 查看最近1条提交日志
+git log -1
+
+# 查看最近5条提交日志
+git log -5
+
+# 显示提交日志以及每次提交影响的文件及行数统计
+git log --stat
+
+# 显示每次提交具体的代码差异（补丁）
+git log -p -m
+
+# 以图形化方式展示提交日志
+git log --pretty=format:'%h %s' --graph
+
+# 查看某个具体提交的详细内容（完整commit id或简写）
+git show dfb02e6e4f2f7b573337763e5c0013802e392818
+git show dfb02
+
+# 查看当前 HEAD 的提交
+git show HEAD
+
+# 查看 HEAD 的上一个版本提交，多个父提交用 ^ 标记（例如 ^2、^5）
+git show HEAD^
+
+# 显示所有标签
+git tag
+
+# 查看某个标签的提交详情
+git show v2.0
+
+# 查看某标签的提交日志
+git log v2.0
+
+# 显示提交历史对应的文件修改（类似 log + diff）
+git whatchanged
+
+# 显示所有提交记录，包括孤立提交
+git reflog
+
+# 查看某个时间点的分支状态，比如 HEAD 5 次之前或昨天的 master 状态
+git show HEAD@{5}
+git show master@{yesterday}
+
+# 列出 git index 中包含的文件
+git ls-files
+
+# 显示当前分支历史的图示
+git show-branch
+
+# 显示所有分支的历史图示
+git show-branch --all
+
+# 查看 Git 对象树（内部命令）
+git ls-tree HEAD
+
+# 将 ref（分支、标签等）解析为 SHA1 值（内部命令）
+git rev-parse v2.0
+
+# 格式化显示某个提交（简洁原始格式）
+git show -s --pretty=raw 2be7fcb476
+```
+
+### 文件操作（添加、删除、重命名）
+
+```bash
+# 添加文件到暂存区（index）
+git add filename
+
+# 添加当前目录下所有已修改文件到暂存区
+git add .
+
+# 撤销暂存（从暂存区移除但不丢弃修改）
+git restore --staged filename
+
+# 清除工作目录中的更改（慎用）
+git restore filename
+
+# 删除暂存区和工作区的文件
+git rm xxx
+
+# 递归删除目录及其下所有文件
+git rm -r *
+
+# 重命名文件
+git mv README README2
+```
+
+### 提交操作
+
+```bash
+# 提交暂存区的内容到本地仓库，附带提交说明
+git commit -m 'xxx'
+
+# 将上一次提交修改的内容进行修改（修正上一次提交信息或内容）
+git commit --amend -m 'xxx'
+
+# 将所有修改过的文件自动添加并提交（相当于 git add + git commit）
+git commit -am 'xxx'
+```
+
+### 分支管理
+
+```bash
+# 查看本地所有分支
+git branch
+
+# 查看包含某提交的所有分支
+git branch --contains 50089
+
+# 查看所有分支（本地 + 远程）
+git branch -a
+
+# 显示所有远程分支
+git branch -r
+
+# 显示所有已经合并到当前分支的分支
+git branch --merged
+
+# 显示所有未合并到当前分支的分支
+git branch --no-merged
+
+# 重命名本地分支
+git branch -m master master_copy
+
+# 删除本地分支（安全删除，分支合并后可用）
+git branch -d hotfixes/BJVEP933
+
+# 强制删除本地分支（无论是否合并）
+git branch -D hotfixes/BJVEP933
+
+# 新建并切换到新分支
+git checkout -b master_copy
+
+# 新建分支并基于远程分支创建跟踪关系，同时切换过去
+git checkout -b devel origin/develop
+
+# 切换到已存在的分支
+git checkout features/performance
+
+# 检出远程分支并创建本地跟踪分支
+git checkout --track hotfixes/BJVEP933
+
+# 检出某个标签（版本）
+git checkout v2.0
+
+# 检出指定文件，恢复到 HEAD 版本（用于撤销工作区修改）
+git checkout -- README
+```
+
+### 合并与变基
+
+```bash
+# 合并远程分支到当前分支
+git merge origin/master
+
+# 合并指定提交的修改（Cherry-pick）
+git cherry-pick ff44785404a8e
+
+# 变基操作，将当前分支的提交变基到另一分支（常用于整理提交历史）
+git rebase
+```
+
+### 差异对比（diff）
+
+```bash
+# 查看工作区和暂存区之间的差异（未暂存的修改）
+git diff
+
+# 查看暂存区和最新提交之间的差异（已暂存但未提交的修改）
+git diff --cached
+
+# 比较当前版本与上一个版本的差异
+git diff HEAD^
+
+# 比较 HEAD 版本和工作区中 lib 目录的差异
+git diff HEAD -- ./lib
+
+# 比较远程分支 origin/master 和本地分支 master 的差异
+git diff origin/master..master
+
+# 仅显示差异文件列表，不显示具体内容
+git diff origin/master..master --stat
+```
+
+### 标签管理
+
+```bash
+# 添加带注释的标签
+git tag -a v2.0 -m '说明文字'
+
+# 推送标签到远程仓库
+git push origin v2.0
+
+# 推送所有标签到远程仓库
+git push --tags
+
+# 查看标签
+git tag
+
+# 删除本地标签
+git tag -d v2.0
+
+# 删除远程标签
+git push origin :refs/tags/v2.0
+```
+
+### 撤销操作
+
+```bash
+# 撤销某个提交（通过新增一个反向提交）
+git revert dfb02e6e4f2f7b573337763e5c0013802e392818
+
+# 重置当前分支到指定提交状态，通常用于回退合并失败等
+git reset --hard HEAD
+```
+
+### 暂存操作（stash）
+
+```bash
+# 将当前修改暂存起来，恢复工作区到最新提交状态
 git stash
 
-# 创建并切换到新分支：创建一个新的分支，并切换到该分支。
-git checkout -b 新分支名
+# 查看所有暂存列表
+git stash list
 
-# 恢复修改：将之前暂存的修改恢复到工作区。
-git stash pop
+# 查看某次暂存的详细内容
+git stash show -p stash@{0}
 
-# 正常提交：现在你可以在新分支上执行正常的添加、提交和推送操作了
-git add .
-git commit -m "提交到新分支的注释"
-git push origin 新分支名
-
+# 应用某次暂存的修改（不会自动删除stash）
+git stash apply stash@{0}
 ```
 
-
-## <span data-type="text" style="color: var(--b3-font-color11);">git 常用命令</span>
-
-### 0. 配置
-
-Git的设置文件为`.gitconfig`​，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
+### 搜索与查询]
 
 ```bash
-# 显示当前的Git配置
-git config --list
+# 在仓库文件中搜索包含指定字符串的行
+git grep "delete from"
 
-# 编辑Git配置文件
-git config -e [--global]
-# 设置提交代码时的用户信息
-git config [--global] user.name "[name]"
-git config [--global] user.email "[email address]"
-
-# 让git走代理
-git config --global https.proxy http://127.0.0.1:10809
-git config --global https.proxy https://127.0.0.1:10809
-git config --global https.proxy socks5://127.0.0.1:10808
-git config --global http.proxy  socks5://127.0.0.1:10808
-
+# 使用复杂表达式搜索，例如同时满足两个正则表达式
+git grep -e '#define' --and -e SORT_DIRENT
 ```
 
-‍
-
-### 1. 获取与创建项目
-
-> **简而言之**，用 `git init`​ 来在目录中创建新的 Git 仓库。使用 `git clone`​ 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。
+### 垃圾回收与检查
 
 ```bash
-# 新建一个目录，将其初始化为Git代码库; 你可以在任何时候、任何目录中这么做，完全是本地化的。
-git init [project-name] 
-# 复制一个 Git 仓库;复制该项目的全部记录，让你本地拥有这些。并且该操作将拷贝该项目的主分支， 使你能够查看代码，或编辑、修改。
-sudo git clone   http://192.168.128.127/zx/hess-agent-linux.git
-sudo git clone -b CentOS-6.8  http://192.168.128.127/zx/hess-agent-linux.git   # clone分支
+# 清理无用对象，优化仓库
+git gc
+
+# 检查仓库对象是否完整，有无损坏
+git fsck
 ```
 
-‍
-
-### 2. 基本的快照
-
-> **简而言之**，使用 `git add`​ 添加需要追踪的新文件和待提交的更改，然后使用 `git status`​ 和 `git diff`​ 查看有何改动，最后用 `git commit`​ 将你的快照记录。这就是你要用的基本流程，绝大部分时候都是这样的。执行 `git rm`​ 来删除 Git 追踪的文件。它还会删除你的工作目录中的相应文件。
+### 其它常用补充命令
 
 ```bash
-git add .         # 添加文件到缓存,无论是修改过的还是新建的都需要添加到缓存
-git status        # 查看你的文件在工作目录与缓存的状态
-git status  -s    # 简短的输出
-
-git diff          # 显示暂存区和工作区的差异
-git diff --stat   # 显示摘要而非整个 diff
-git diff --cached # 查看已缓存的改动
-
-git commit  -m "xxx" -a  # 提交工作区自上次commit之后的变化，直接到仓库区 ;-v 提交时显示所有diff信息
-
-git reset HEAD    # 取消缓存已缓存的内容
-git rm            # 将文件从缓存区移除
-```
-
-‍
-
-### 3. 分支与合并
-
-> **简而言之**，你可以执行 `git branch (branchname)`​ 来创建分支，使用 `git checkout (branchname)`​ 命令切换到该分支，在该分支的上下文环境中，提交快照等，之后可以很容易地来回切换。当你切换分支的时候，Git 会用该分支的最后提交的快照替换你的工作目录的内容，所以多个分支不需要多个目录。使用 `git merge`​ 来合并分支。你可以多次合并到统一分支，也可以选择在合并之后直接删除被并入的分支。使用 `git log`​ 列出促成当前分支目前的快照的提交历史记录。这使你能够看到项目是如何到达现在的状况的。
-
-```bash
-git branch                     # 列出分支；-r 列出所有远程分支 -a 列出所有本地分支和远程分支
-git branch (branchname)        # 新建本地分支
-git branch -d localBranchName  # 删除本地分支
-git push origin --delete remoteBranchName # 删除远程分支
-
-git checkout                   # 切换分支
-git checkout -b (branchname)   # 创建新分支，并立即切换到它
-git push --set-upstream origin (branchname) #建立本地到远端仓库的链接 –这样代码才能提交上去
-git merge                       # 将分支合并到你的当前分支
-git log    # 显示一个分支中提交的更改记录，--oneline 选项来查看历史记录的紧凑简洁的版本。 --graph 选项，查看历史中什么时候出现了分支、合并
-git tag [tag] [commit]   # 给历史记录中的某个重要的一点打上标签,新建一个tag在指定commit
-
-```
-
-‍
-
-### 4. 分享与更新项目
-
-> **简而言之** 使用 `git fetch`​ 更新你的项目，使用 `git push`​ 分享你的改动。你可以用 `git remote`​ 管理你的远程仓库。
-
-```bash
-git remote                    # 列出远端别名， -v 参数，你还可以看到每个别名的实际链接地址
-git remote add [alias] [url]  # 为你的项目添加一个新的远端仓库
-git remote rm                 # 删除现存的某个别名
-
-git fetch [alias]             # 从远端仓库下载新分支与数据 【从远程获取最新版本到本地，但不会自动merge】
-git pull [alias]  [branch]    # 从远端仓库提取数据并尝试合并到当前分支【会获取所有远程索引并合并到本地分支中来】
-
-git push [alias] [branch]     # 推送你的新分支与数据到某个远端仓库
-
-```
-
-‍
-
-### 5. 检查与比较
-
-> **简而言之** 执行 `git log`​ 找到你的项目历史中的特定提交 ——       按作者、日期、内容或者历史记录。执行 `git diff`​ 比较历史记录中的两个不同的点 ——       通常是为了看看两个分支有啥区别，或者从某个版本到另一个版本，你的软件都有啥变化。
-
-```bash
-# 显示有变更的文件
-git status
-# 显示当前分支的版本历史
-git log
-# 显示commit历史，以及每次commit发生变更的文件
-git log --stat
-# 搜索提交历史，根据关键词
-git log -S [keyword]
-# 显示某个commit之后的所有变动，每个commit占据一行
-git log [tag] HEAD --pretty=format:%s
-# 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
- git log [tag] HEAD --grep feature
-# 显示某个文件的版本历史，包括文件改名
-git log --follow [file]
-git whatchanged [file]
-# 显示指定文件相关的每一次
-diffgit log -p [file]
-# 显示过去5次提交
-git log -5 --pretty --oneline
-# 显示所有提交过的用户，按提交次数排序
-git shortlog -sn
-# 显示指定文件是什么人在什么时间修改过
-git blame [file]
-# 显示暂存区和工作区的差异
-git diff
-# 显示暂存区和上一个commit的差异
-git diff --cached [file]
-# 显示工作区与当前分支最新commit之间的差异
-git diff HEAD
-# 显示两次提交之间的差异
-git diff [first-branch]...[second-branch]
-# 显示今天你写了多少行代码
-git diff --shortstat "@{0 day ago}"
-# 显示某次提交的元数据和内容变化
-git show [commit]
-# 显示某次提交发生变化的文件
-git show --name-only [commit]
-# 显示某次提交时，某个文件的内容
-git show [commit]:[filename]
-# 显示当前分支的最近几次提交
+# 查看当前仓库引用历史（如分支切换、commit等）记录
 git reflog
-```
-
-## [git 从远程仓库获取所有分支](https://www.cnblogs.com/sogeisetsu/p/11922067.html "发布于 2019-11-24 13:05")
-
-方法一：
-
-```bash
-git clone只能clone远程库的master分支，无法clone所有分支，解决办法如下：
-
-    找一个干净目录，假设是git_work
-    cd git_work
-    git clone http://myrepo.xxx.com/project/.git ,这样在git_work目录下得到一个project子目录
-    cd project
-    git branch -a，列出所有分支名称如下：
-    remotes/origin/dev
-    remotes/origin/release
-    git checkout -b dev origin/dev，作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
-    git checkout -b release origin/release，作用参见上一步解释
-    git checkout dev，切换回dev分支，并开始开发。
-
-```
-
-方法二：
-
-```bash
-git clone xxx
-git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
-git fetch --all
-git pull --all
 ```
