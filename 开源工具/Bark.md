@@ -49,3 +49,70 @@ docker-compose up -d
 	#!/bin/bash
 	nohup ./bark-server_linux_amd64 -addr 0.0.0.0:8903 -data ./bark-data >> bark-server.log 2>&1 &
 	```
+
+
+## nginx 代理
+
+```bash
+####### bark
+        location /bark/ {
+            proxy_pass http://127.0.0.1:8903/;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $http_host;
+        }
+```
+
+
+## 使用说明
+
+### 测试服务器
+
+```bash
+# 使用 `curl` 命令测试服务器的 
+curl https://xxxx.com:1234/bark/ping
+{"code":200,"message":"pong","timestamp":1903969315}
+# 结果: 如果返回 `pong`，则表示服务器部署成功且可以正常访问。 
+```
+
+### 配置客户端
+
+- **下载 App**: 在你的 iPhone 上下载并安装 [Bark app](https://zhuanlan.zhihu.com/p/375637631)。
+- **添加服务器**: 打开 Bark App，进入设置或添加服务器的选项，输入你的私有服务器地址。这个地址是 `http://你的服务器IP:端口`。
+- 获取设备ID：[[开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg|Open: Pasted image 20251124153800.png]]
+![[开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg|375]]
+
+### 发送消息
+
+```bash
+# 你可以使用 `curl` 命令
+# 消息会通过 Bark 服务器推送，并显示在你的 iPhone 上的 Bark App 中。
+curl https://xxxx.com:1234/bark/你的设备ID/标题/内容
+
+
+# 以下是我发送到手机 阿里云ssl证书到期告警通知 的脚本
+# ##################################################
+#!/bin/bash
+cert_file="/etc/nginx/ssl/xxxxx.xyz.pem"
+bark_url='https://xxxxxxx.xyz:123/bark/xxidididididid'
+
+expiry_date=$(openssl x509 -in "$cert_file" -noout -enddate | cut -d= -f2)
+expiry_timestamp=$(date -d "$expiry_date" +%s)
+current_timestamp=$(date +%s)
+days_left=$(( (expiry_timestamp - current_timestamp) / 86400 ))
+
+echo "证书文件: $cert_file"
+echo "过期时间: $expiry_date"
+echo "剩余天数: $days_left"
+
+# 提前5天发送告警
+if [[ $days_left -le 5 ]];then
+curl -X POST "${bark_url}/阿里云SSL证书即将过期/剩余天数${days_left}"
+fi
+
+
+# 定时任务
+0 9 * * * /data/script/check_ssl.sh >> /tmp/check_ssl.log 2>&1
+```
+也可以通过浏览器或任何支持发送 HTTP 请求的工具，向 `http://你的服务器IP:端口/你的设备ID/消息标题` 发送 POST 请求。

@@ -1,4 +1,3 @@
-# crontab
 
 提交和管理用户的需要周期性执行的任务
 
@@ -6,7 +5,7 @@
 
 ### 语法
 
-```
+```bash
 crontab(选项)(参数)
 
 ### 选项
@@ -29,7 +28,7 @@ Linux下的任务调度分为两类： **系统任务调度** 和 **用户任务
 
 ​`/etc/crontab`​文件包括下面几行：
 
-```
+```bash
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=""HOME=/
@@ -45,7 +44,7 @@ MAILTO=""HOME=/
 
 **用户任务调度：**  用户定期要执行的工作，比如用户数据备份、定时邮件提醒等。用户可以使用 crontab 工具来定制自己的计划任务。所有用户定义的crontab文件都被保存在`/var/spool/cron`​目录中。其文件名与用户名一致，使用者权限文件如下：
 
-```
+```bash
 /etc/cron.deny     该文件中所列用户不允许使用crontab命令
 /etc/cron.allow    该文件中所列用户允许使用crontab命令
 /var/spool/cron/   所有用户crontab文件存放的目录,以用户名命名
@@ -53,7 +52,7 @@ MAILTO=""HOME=/
 
 crontab文件的含义：用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：
 
-```
+```bash
 minute   hour   day   month   week   command     顺序：分 时 日 月 周
 ```
 
@@ -75,7 +74,7 @@ minute   hour   day   month   week   command     顺序：分 时 日 月 周
 
 **crond服务**
 
-```
+```bash
 /sbin/service crond start    # 启动服务
 /sbin/service crond stop     # 关闭服务
 /sbin/service crond restart  # 重启服务
@@ -84,49 +83,43 @@ minute   hour   day   month   week   command     顺序：分 时 日 月 周
 
 查看crontab服务状态：
 
-```
+```bash
 service crond status
 ```
 
 手动启动crontab服务：
 
-```
+```bash
 service crond start
 ```
 
 查看crontab服务是否已设置为开机启动，执行命令：
 
-```
+```bash
 ntsysv
 ```
 
 加入开机自动启动：
 
-```
+```bash
 chkconfig –level 35 crond on
 ```
 
 ### 实例
 
-```
-#每1分钟执行一次command
-* * * * * command
-#每小时的第3和第15分钟执行
-3,15 * * * * command
-#在上午8点到11点的第3和第15分钟执行
-3,15 8-11 * * * command
-#每隔两天的上午8点到11点的第3和第15分钟执行
-3,15 8-11 */2 * * command
-#每个星期一的上午8点到11点的第3和第15分钟执行
-3,15 8-11 * * 1 command
-#每晚的21:30重启smb
-30 21 * * * /etc/init.d/smb restart
-# 每周六、周日的1:10重启smb
-10 1 * * 6,0 /etc/init.d/smb restart
-# 每一小时重启smb
-0 */1 * * * /etc/init.d/smb restart
-# 每小时执行`/etc/cron.hourly`目录内的脚本
-01 * * * * root run-parts /etc/cron.hourly
+```bash
+# 每分钟执行
+* * * * *    command
+# 每2分钟执行
+*/2 * * * *  command
+
+# 每小时执行
+1 * * * *    command # 每小时的01分执行
+0 */1 * * *  command # 每小时整执行
+
+# 每天 9:00 执行
+0 9 * * *    command
+
 ```
 
 ‍
