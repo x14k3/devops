@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "开源工具/Navidrome.md",
-                "mode": "preview",
+                "file": "企业建设/openVPN/6. OpenVPN 常用 iptable 规则.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Navidrome"
+              "title": "6. OpenVPN 常用 iptable 规则"
             }
           }
         ],
@@ -186,13 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "开源工具/Navidrome.md",
+                "file": "企业建设/openVPN/6. OpenVPN 常用 iptable 规则.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Navidrome 的大纲"
+              "title": "6. OpenVPN 常用 iptable 规则 的大纲"
             }
           },
           {
@@ -228,6 +228,18 @@
   },
   "active": "40dd75c30ac6742c",
   "lastOpenFiles": [
+    "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
+    "企业建设/openVPN/7. OpenVPN 的几种基本模式.md",
+    "企业建设/openVPN/8. OpenVPN 证书管理.md",
+    "企业建设/openVPN/6. OpenVPN 常用 iptable 规则.md",
+    "企业建设/openVPN/4. OpenVPN 访问 client所在子网.md",
+    "企业建设/openVPN/2. OpenVPN 配置文件详解.md",
+    "企业建设/openVPN/3. OpenVPN 基于用户密码认证.md",
+    "企业建设/openVPN/1. OpenVPN 服务部署.md",
+    "企业建设/openVPN/TUN与TAP模式-openvpn.md",
+    "linux/linux 安全管理/ufw.md",
+    "linux/linux 安全管理/assets",
+    "开源工具/Navidrome.md",
     "开源工具/openWRT.md",
     "中间件/Nginx/nginx 配置及优化/4. nginx 负载均衡.md",
     "中间件/Nginx/nginx 部署.md",
@@ -244,17 +256,6 @@
     "企业建设/数据同步方案/rsync.md",
     "企业建设/数据同步方案/restic.md",
     "shell/shell 命令手册/备份与恢复/assets",
-    "shell/shell 命令手册/备份与恢复/rsync.md",
-    "shell/shell 命令手册/tools/crontab.md",
-    "开源工具/Bark.md",
-    "shell/shell 命令手册/网络相关/curl.md",
-    "shell/shell 开箱即用/pyhton-nacos配置文件转义.md",
-    "shell/shell 开箱即用/未命名.md",
-    "shell/shell 开箱即用/mysql数据库备份脚本.md",
-    "shell/shell 开箱即用/Linux下快速比较两个目录的不同.md",
-    "shell/shell 开箱即用/jar包服务启动停止shell脚本.md",
-    "shell/shell 开箱即用/github自动提交.md",
-    "shell/shell 开箱即用/日志压缩清理.md",
     "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",
     "开源工具/assets/Pasted image 20251124153800.png",
     "开源工具/assets/Pasted image 20251124153635.png",
@@ -272,7 +273,6 @@
     "企业建设/信创/assets",
     "企业建设/信创",
     "devops/Jenkins/assets",
-    "devops/Jenkins",
-    "database/Oracle/oracle 学习文件（OPC）/02 备份恢复/rman的备份恢复/02 实验：rman-完全恢复（二）.xmind"
+    "devops/Jenkins"
   ]
 }
