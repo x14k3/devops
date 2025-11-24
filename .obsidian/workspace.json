@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Open Source/Stirling PDF.md",
+                "file": "sundongsheng.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Stirling PDF"
+              "title": "sundongsheng"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Open Source/Stirling PDF.md",
+                "file": "sundongsheng.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Stirling PDF 的大纲"
+              "title": "sundongsheng 的大纲"
             }
           },
           {
@@ -183,10 +183,14 @@
   },
   "active": "900620db8351c371",
   "lastOpenFiles": [
+    "面试资料.md",
+    "README.md",
+    "sundongsheng.md",
+    "配置案例.md",
+    "Open Source/Stirling PDF.md",
     "Open Source/tailscale.md",
     "Open Source/wireguard.md",
     "Open Source/Windows(docker).md",
-    "Open Source/Stirling PDF.md",
     "Open Source/iGotify.md",
     "Open Source/Navidrome.md",
     "Open Source/Photoprism.md",
@@ -202,13 +206,9 @@
     "中间件/Nginx/nginx 配置及优化/10. nginx 跨域问题.md",
     "中间件/Nginx/nginx 配置及优化/8. nginx 限制请求并发连接数与下载速度.md",
     "中间件/Nginx/nginx 部署.md",
-    "配置案例.md",
     "中间件/Nginx/nginx 配置及优化/12. nginx与 uWSGI服务器的沟通.md",
     "中间件/Nginx/nginx 配置及优化/11. nginx 静态文件配置.md",
     "中间件/Nginx/nginx 配置及优化/7. nginx 双向认证.md",
-    "中间件/Nginx/nginx 配置及优化/6. nginx 超时设置.md",
-    "中间件/Nginx/nginx 配置及优化/5. nginx 配置HTTPS.md",
-    "中间件/Nginx/nginx 配置及优化/4. nginx 负载均衡.md",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141852.png",
     "devops/Jenkins/Jenkins 使用/assets/c8f0f74295d447f43583090bdeab119a_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141830.png",
