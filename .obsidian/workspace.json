@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "开源工具/iGotify.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "iGotify"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "开源工具/iGotify.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "README 的大纲"
+              "title": "iGotify 的大纲"
             }
           },
           {
@@ -183,21 +183,26 @@
   },
   "active": "900620db8351c371",
   "lastOpenFiles": [
+    "开源工具/ntfy.md",
+    "开源工具/iGotify.md",
+    "开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg",
+    "开源工具/assets/Pasted image 20251124140755.png",
+    "开源工具/assets/4bf3ce376e0a298258e59d4726ec8d79_MD5.jpg",
+    "开源工具/assets/Pasted image 20251124131757.png",
+    "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
+    "README.md",
     "sundongsheng.md",
     "面试资料.md",
-    "README.md",
     "配置案例.md",
     "开源工具/Stirling PDF.md",
     "开源工具/tailscale.md",
     "开源工具/wireguard.md",
     "开源工具/Windows(docker).md",
-    "开源工具/iGotify.md",
     "开源工具/Navidrome.md",
     "开源工具/Photoprism.md",
     "开源工具/Rustdesk.md",
     "开源工具/HomeAssistant.md",
     "开源工具/Jellyfin.md",
-    "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
     "中间件/Nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
     "中间件/Nginx/nginx 配置及优化/1. nginx 基础功能配置集合.md",
     "中间件/Nginx/nginx 配置及优化/0. nginx 配置文件详解.md",
@@ -208,17 +213,12 @@
     "中间件/Nginx/nginx 部署.md",
     "中间件/Nginx/nginx 配置及优化/12. nginx与 uWSGI服务器的沟通.md",
     "中间件/Nginx/nginx 配置及优化/11. nginx 静态文件配置.md",
-    "中间件/Nginx/nginx 配置及优化/7. nginx 双向认证.md",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141852.png",
     "devops/Jenkins/Jenkins 使用/assets/c8f0f74295d447f43583090bdeab119a_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141830.png",
     "devops/Jenkins/Jenkins 使用/assets/57a3bda2bf6b9a74ecf3ad229d2f29fd_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141345.png",
     "devops/Jenkins/Jenkins 使用/assets/4984fc8e8f9014510f9125dd94e905cf_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123140048.png",
-    "devops/Jenkins/Jenkins 使用/assets/85be96f8b46d1d4eabf0dcabc02a49af_MD5.jpg",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123134120.png",
-    "devops/Jenkins/Jenkins 使用/assets/1836d54e4ace6d7a173a70bce3eecc41_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/assets",
     "devops/Jenkins/Jenkins 使用",
     "assets",

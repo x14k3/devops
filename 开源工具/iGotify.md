@@ -6,7 +6,22 @@ Gotify 是一款简易的发送与接受消息的开源软件。提供 **WEB �
 3. **多终端支持**：网页/APP/命令行全平台覆盖
 4. **企业级安全**：支持[HTTPS](https://zhida.zhihu.com/search?content_id=255882559&content_type=Article&match_order=1&q=HTTPS&zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NjQxMjIzMTcsInEiOiJIVFRQUyIsInpoaWRhX3NvdXJjZSI6ImVudGl0eSIsImNvbnRlbnRfaWQiOjI1NTg4MjU1OSwiY29udGVudF90eXBlIjoiQXJ0aWNsZSIsIm1hdGNoX29yZGVyIjoxLCJ6ZF90b2tlbiI6bnVsbH0.rE51FvEfU0B_GsdjlwF-VHTp8MYYhLN2KQOsK-Y9L7Y&zhida_source=entity)加密、多用户权限控制
 
+缺点：客户端只有 web网页和 Android App
 ## 部署
+
+### docker
+
+```bash
+docker run -d \
+-e TZ="Asia/Shanghai" \
+-e GOTIFY_SERVER_PORT=10004 \
+-p 10004:10004 \
+-v /root/gotify/data:/app/data \
+gotify/server
+```
+
+
+### docker compose
 
 创建目录
 
@@ -76,4 +91,40 @@ GOTIFY_REGISTRATION=false
 docker-compose up -d
 ```
 
-## 4. 反向代理
+## 反向代理
+
+```bash
+####### gotify
+        location /gotify/ {
+            proxy_pass http://127.0.0.1:8903;
+            rewrite ^/gotify(/.*) $1 break;
+            proxy_http_version 1.1;
+            # Ensuring it can use websockets
+            proxy_set_header   Upgrade $http_upgrade;
+            proxy_set_header   Connection "upgrade";
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto http;
+            proxy_redirect     http:// $scheme://;
+            # The proxy must preserve the host because gotify verifies the host with the origin
+            # for WebSocket connections
+            proxy_set_header   Host $http_host;
+        }
+
+```
+
+
+## 使用
+### 脚本消息推送
+
+1. 在Web控制台创建应用，获取Token
+[[开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg|Open: Pasted image 20251124140755.png]]
+![[开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg|600]]
+
+2. 使用curl发送通知：
+```bash
+curl "http://IP:port/message?token=你的Token" \
+  -F "title=服务器告警" \
+  -F "message=CPU负载已达90%!" \
+  -F "priority=5"
+```
