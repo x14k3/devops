@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "sundongsheng.md",
+                "file": "README.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "sundongsheng"
+              "title": "README"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "sundongsheng.md",
+                "file": "README.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "sundongsheng 的大纲"
+              "title": "README 的大纲"
             }
           },
           {
@@ -183,20 +183,20 @@
   },
   "active": "900620db8351c371",
   "lastOpenFiles": [
+    "sundongsheng.md",
     "面试资料.md",
     "README.md",
-    "sundongsheng.md",
     "配置案例.md",
-    "Open Source/Stirling PDF.md",
-    "Open Source/tailscale.md",
-    "Open Source/wireguard.md",
-    "Open Source/Windows(docker).md",
-    "Open Source/iGotify.md",
-    "Open Source/Navidrome.md",
-    "Open Source/Photoprism.md",
-    "Open Source/Rustdesk.md",
-    "Open Source/HomeAssistant.md",
-    "Open Source/Jellyfin.md",
+    "开源工具/Stirling PDF.md",
+    "开源工具/tailscale.md",
+    "开源工具/wireguard.md",
+    "开源工具/Windows(docker).md",
+    "开源工具/iGotify.md",
+    "开源工具/Navidrome.md",
+    "开源工具/Photoprism.md",
+    "开源工具/Rustdesk.md",
+    "开源工具/HomeAssistant.md",
+    "开源工具/Jellyfin.md",
     "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
     "中间件/Nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
     "中间件/Nginx/nginx 配置及优化/1. nginx 基础功能配置集合.md",
