@@ -4,73 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "9cf00427fc62c636",
+        "id": "6f72da2130f9bc82",
         "type": "tabs",
         "children": [
           {
-            "id": "99dc295da52cd701",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "面试资料.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "面试资料"
-            }
-          },
-          {
-            "id": "08a8a4f928260ed8",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署"
-            }
-          },
-          {
-            "id": "33cfa4bc8f03e6d0",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "2. nginx 反向代理-http"
-            }
-          },
-          {
-            "id": "f0b0c588ec4d0ff5",
+            "id": "900620db8351c371",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
+                "file": "Open Source/Stirling PDF.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. nginx 反向代理-http"
+              "title": "Stirling PDF"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -190,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
+                "file": "Open Source/Stirling PDF.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2. nginx 反向代理-http 的大纲"
+              "title": "Stirling PDF 的大纲"
             }
           },
           {
@@ -230,10 +181,20 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "f0b0c588ec4d0ff5",
+  "active": "900620db8351c371",
   "lastOpenFiles": [
-    "中间件/Nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
+    "Open Source/tailscale.md",
+    "Open Source/wireguard.md",
+    "Open Source/Windows(docker).md",
+    "Open Source/Stirling PDF.md",
+    "Open Source/iGotify.md",
+    "Open Source/Navidrome.md",
+    "Open Source/Photoprism.md",
+    "Open Source/Rustdesk.md",
+    "Open Source/HomeAssistant.md",
+    "Open Source/Jellyfin.md",
     "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
+    "中间件/Nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
     "中间件/Nginx/nginx 配置及优化/1. nginx 基础功能配置集合.md",
     "中间件/Nginx/nginx 配置及优化/0. nginx 配置文件详解.md",
     "中间件/Nginx/nginx 配置及优化/13. nginx Location配置.md",
@@ -248,16 +209,6 @@
     "中间件/Nginx/nginx 配置及优化/6. nginx 超时设置.md",
     "中间件/Nginx/nginx 配置及优化/5. nginx 配置HTTPS.md",
     "中间件/Nginx/nginx 配置及优化/4. nginx 负载均衡.md",
-    "中间件/Nginx/nginx 概述.md",
-    "中间件/Nginx/未命名.md",
-    "中间件/Nginx/nginx 模块/nginx禁止限制某个IP地址或网段访问服务器.md",
-    "中间件/Nginx/nginx 模块/nginx stream常用模块.md",
-    "中间件/Nginx/nginx 模块/nginx http常用模块.md",
-    "中间件/Nginx/nginx 模块/nginx 其他模块.md",
-    "中间件/Nginx/nginx 模块/nginx http常用模块/ngx_http_auth_basic_module.md",
-    "中间件/Nginx/nginx 模块/nginx http常用模块/ngx_http_addition_module.md",
-    "Open Source/iGotify.md",
-    "Open Source/cloudreve.md",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141852.png",
     "devops/Jenkins/Jenkins 使用/assets/c8f0f74295d447f43583090bdeab119a_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141830.png",
