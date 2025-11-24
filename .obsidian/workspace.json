@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "shell/shell 命令手册/文本处理/ln.md",
+                "file": "开源工具/Navidrome.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ln"
+              "title": "Navidrome"
             }
           }
         ],
@@ -186,13 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "shell/shell 命令手册/文本处理/ln.md",
+                "file": "开源工具/Navidrome.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "ln 的大纲"
+              "title": "Navidrome 的大纲"
             }
           },
           {
@@ -228,10 +228,18 @@
   },
   "active": "40dd75c30ac6742c",
   "lastOpenFiles": [
+    "开源工具/openWRT.md",
+    "中间件/Nginx/nginx 配置及优化/4. nginx 负载均衡.md",
+    "中间件/Nginx/nginx 部署.md",
+    "中间件/Nginx/nginx 配置及优化/11. nginx 静态文件配置.md",
+    "中间件/Nginx/nginx 配置及优化/7. nginx 双向认证.md",
+    "中间件/Nginx/nginx 配置及优化/5. nginx 配置HTTPS.md",
+    "中间件/Nginx/nginx 配置及优化/0. nginx 配置文件详解.md",
+    "中间件/Nginx/nginx 配置及优化/8. nginx 限制请求并发连接数与下载速度.md",
+    "shell/shell 命令手册/文本处理/ln.md",
     "企业建设/数据同步方案/rsync/linux 环境下使用rsync在两台机器之间定时备份文件.md",
     "企业建设/数据同步方案/rsync/linux 同步文件到 Window(rsync).md",
     "企业建设/数据同步方案/lsync.md",
-    "shell/shell 命令手册/文本处理/ln.md",
     "企业建设/数据同步方案/rsync/借助 inotify 实现实时同步.md",
     "企业建设/数据同步方案/rsync.md",
     "企业建设/数据同步方案/restic.md",
@@ -247,19 +255,11 @@
     "shell/shell 开箱即用/jar包服务启动停止shell脚本.md",
     "shell/shell 开箱即用/github自动提交.md",
     "shell/shell 开箱即用/日志压缩清理.md",
-    "shell/shell 开箱即用/文件编码转换utf-8.md",
-    "shell/shell 开箱即用/自动化 SSH 密钥生成和分发的脚本.md",
-    "shell/shell 开箱即用/服务器初始化脚本.md",
-    "shell/shell 开箱即用/根据 web 日志，封禁异常 IP.md",
-    "shell/shell 开箱即用/检测网卡流量.md",
-    "shell/shell 开箱即用/SSL 证书日期到期提醒.md",
-    "shell/shell 开箱即用/zabbix监控端口数据（自动发现规则）.md",
     "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",
     "开源工具/assets/Pasted image 20251124153800.png",
     "开源工具/assets/Pasted image 20251124153635.png",
     "开源工具/assets/Pasted image 20251124153616.png",
     "开源工具/assets/ed76b39ce136e31c5532bb64686f0435_MD5.png",
-    "开源工具/iGotify.md",
     "开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg",
     "开源工具/assets/Pasted image 20251124140755.png",
     "开源工具/assets/4bf3ce376e0a298258e59d4726ec8d79_MD5.jpg",

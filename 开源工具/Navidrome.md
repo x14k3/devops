@@ -2,8 +2,6 @@
 [Navidrome](https://github.com/navidrome/navidrome/)🎧☁️ 与 Subsonic/Airsonic 兼容的现代音乐服务器和串流器。
 Navidrome 是一款基于网络的开源音乐收藏服务器和流媒体。它让您可以通过任何浏览器或移动设备自由收听您收藏的音乐。它就像你的个人 Spotify！
 
-## 特点[#](https://bytejog.com/posts/linux/navidrome/#%E7%89%B9%E7%82%B9)
-
 - 处理超大音乐收藏
 - 几乎可串流任何音频格式
 - 读取并使用所有精心策划的元数据
@@ -19,9 +17,9 @@ Navidrome 是一款基于网络的开源音乐收藏服务器和流媒体。它�
 - 翻译成各种语言
 
 
-## 创建docker文件[#](https://bytejog.com/posts/linux/navidrome/#%E5%88%9B%E5%BB%BAdocker%E6%96%87%E4%BB%B6)
+## 创建docker文件
 
-采用Docker形式安装服务，准备工作是安装docker服务，参考[Install using the apt repository](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
+采用 Docker形式安装服务，准备工作是安装docker服务，参考[Install using the apt repository](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
 Navidrome的主目录假定在`/opt/navidrome`, 创建docker compose文件
 
 ```bash
@@ -57,29 +55,29 @@ services:
       - "/opt/navidrome/music:/music:ro"
 ```
 
-Navidrome有很多参数[Advanced configuration](https://www.navidrome.org/docs/usage/configuration-options/#advanced-configuration)，使用熟悉了可以自己在环境变量里再增加配置。
+Navidrome 有很多参数[Advanced configuration](https://www.navidrome.org/docs/usage/configuration-options/#advanced-configuration)，使用熟悉了可以自己在环境变量里再增加配置。
 
-| 参数名称 | 参数值 | 说明 |
-| ---|---|--- |
-| ND_SCANSCHEDULE | 0 | 设置为0不自动扫描，有变动了到网页里点击快速刷新就可以 |
-| ND_LOGLEVEL | info | 输出日志格式 |
-| ND_SESSIONTIMEOUT | 24h | 登录自动过期时间 |
-| ND_BASEURL | /nav | 相对路径，通过nginx代理很有用，不暴露navidrome的端口，有一定的保护作用 |
-| ND_PLAYLISTSPATH | . | 播放列表的相对路径，也就是在`/opt/navidrome/music` |
-| ND_LASTFM_LANGUAGE | zh | LastFM配置为中文，配置三个参数，Navidrome 会自动去查询歌手的信息 |
-| ND_LASTFM_APIKEY | lastfm_apikey | [Last.fm配置](https://www.navidrome.org/docs/usage/external-integrations/#lastfm) |
-| ND_LASTFM_SECRET | lastfm_secret | [Last.fm配置](https://www.navidrome.org/docs/usage/external-integrations/#lastfm) |
-| ND_SPOTIFY_ID | spotify_id | 查询Spotify上的歌手信息 |
-| ND_SPOTIFY_SECRET | spotify_secret | [Spotify配置](https://www.navidrome.org/docs/usage/external-integrations/#spotify) |
-| ND_ENABLEARTWORKPRECACHE | false | 不启用封面图片缓存，因为服务器资源紧张，就关闭了，推进设置为`true` |
-| ND_ENABLESHARING | true | 启用分享功能，可以不登录就可以听歌 |
+| 参数名称                     | 参数值            | 说明                                                                               |
+| ------------------------ | -------------- | -------------------------------------------------------------------------------- |
+| ND_SCANSCHEDULE          | 0              | 设置为0不自动扫描，有变动了到网页里点击快速刷新就可以                                                      |
+| ND_LOGLEVEL              | info           | 输出日志格式                                                                           |
+| ND_SESSIONTIMEOUT        | 24h            | 登录自动过期时间                                                                         |
+| ND_BASEURL               | /nav           | 相对路径，通过nginx代理很有用，不暴露navidrome的端口，有一定的保护作用                                       |
+| ND_PLAYLISTSPATH         | .              | 播放列表的相对路径，也就是在`/opt/navidrome/music`                                             |
+| ND_LASTFM_LANGUAGE       | zh             | LastFM配置为中文，配置三个参数，Navidrome 会自动去查询歌手的信息                                         |
+| ND_LASTFM_APIKEY         | lastfm_apikey  | [Last.fm配置](https://www.navidrome.org/docs/usage/external-integrations/#lastfm)  |
+| ND_LASTFM_SECRET         | lastfm_secret  | [Last.fm配置](https://www.navidrome.org/docs/usage/external-integrations/#lastfm)  |
+| ND_SPOTIFY_ID            | spotify_id     | 查询Spotify上的歌手信息                                                                  |
+| ND_SPOTIFY_SECRET        | spotify_secret | [Spotify配置](https://www.navidrome.org/docs/usage/external-integrations/#spotify) |
+| ND_ENABLEARTWORKPRECACHE | false          | 不启用封面图片缓存，因为服务器资源紧张，就关闭了，推进设置为`true`                                             |
+| ND_ENABLESHARING         | true           | 启用分享功能，可以不登录就可以听歌                                                                |
 
 volumes映射说明：
 
 - /opt/navidrome/data：navidrome运行时生成的数据库文件
 - /opt/navidrome/music：上传音乐文件的目录，可以有多级目录，都会加载，不用担心
 
-## 准备音乐文件[#](https://bytejog.com/posts/linux/navidrome/#%E5%87%86%E5%A4%87%E9%9F%B3%E4%B9%90%E6%96%87%E4%BB%B6)
+## 准备音乐文件
 
 将音乐文件上传到`/opt/navidrome/music`目录内容示意，按照个人喜好组织文件
 
@@ -134,7 +132,7 @@ H/Hozier/Hozier - Too Sweet.mp3
 
 M3U格式参考[https://en.wikipedia.org/wiki/M3U](https://en.wikipedia.org/wiki/M3U)
 
-## 启动Navidrome[#](https://bytejog.com/posts/linux/navidrome/#%E5%90%AF%E5%8A%A8navidrome)
+## 启动 navidrome
 
 ```bash
 cd /opt/navidrome
@@ -154,19 +152,28 @@ docker compose up -d
 docker compose logs -f docs-navidrome-1
 ```
 
-## Nginx配置[#](https://bytejog.com/posts/linux/navidrome/#nginx%E9%85%8D%E7%BD%AE)
-
-Nginx的服务配置请网络搜索
+## nginx  代理
 
 ```nginx
-location ^~ /nav/{
-            proxy_pass  http://xxx.xxx.xxx.xxx:14533;
-            proxy_buffering off;
-            client_max_body_size    300m;
-        }
+######## navidrome
+location ^~ /navidrome/ {
+	proxy_redirect off;
+	proxy_pass http://10.8.0.8:4533;
+	proxy_buffering off;
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "upgrade";
+	proxy_set_header Host $http_host;
+	limit_conn conn_zone 100; 
+
+	gzip off;
+	#proxy_buffering off;
+	#proxy_max_temp_file_size 0;
+
+}
 ```
 
-## Navidrome使用[#](https://bytejog.com/posts/linux/navidrome/#navidrome%E4%BD%BF%E7%94%A8)
+## navidrome 使用
 
 第一次需要浏览器访问，创建管理员账号和密码，后续进入系统就可以愉快的使用了。
 可以用管理员账号创建其他账号，分享给其他人使用
