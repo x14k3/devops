@@ -1,12 +1,18 @@
-Gotify 是一款简易的发送与接受消息的开源软件。提供 **WEB 服务端**，**Android 端**与**命令行**工具。
 
-四大核心优势
-1. **零依赖部署**：单Docker容器搞定，不吃配置
-2. **毫秒级延迟**：基于WebSocket协议，消息即发即达
+Gotify 是一个免费开源、轻量级的消息推送服务器，用于在服务器和客户端之间实时发送和接收消息。
+它使用 WebSocket 协议，提供简单的 REST API 供应用程序集成，并拥有一个 Web 界面和 Android 客户端来管理和接收通知。主要用于开发自定义通知系统，例如将监控告警推送到开发者手机上
+
+优点：
+1. **零依赖部署**：单 Docker容器搞定，不吃配置
+2. **毫秒级延迟**：基于 WebSocket协议，消息即发即达
 3. **多终端支持**：网页/APP/命令行全平台覆盖
-4. **企业级安全**：支持[HTTPS](https://zhida.zhihu.com/search?content_id=255882559&content_type=Article&match_order=1&q=HTTPS&zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NjQxMjIzMTcsInEiOiJIVFRQUyIsInpoaWRhX3NvdXJjZSI6ImVudGl0eSIsImNvbnRlbnRfaWQiOjI1NTg4MjU1OSwiY29udGVudF90eXBlIjoiQXJ0aWNsZSIsIm1hdGNoX29yZGVyIjoxLCJ6ZF90b2tlbiI6bnVsbH0.rE51FvEfU0B_GsdjlwF-VHTp8MYYhLN2KQOsK-Y9L7Y&zhida_source=entity)加密、多用户权限控制
+4. **企业级安全**：支持 https 加密、多用户权限控制
 
-缺点：客户端只有 web网页和 Android App
+缺点
+1. 客户端只支持 Web 界面和 Android 客户端，不支持 ios
+
+
+如果客户端是 IOS 可以参考：[[Bark]]
 ## 部署
 
 ### docker

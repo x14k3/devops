@@ -4,21 +4,51 @@
     "type": "split",
     "children": [
       {
-        "id": "6f72da2130f9bc82",
+        "id": "8abf5a606ad5ae36",
         "type": "tabs",
         "children": [
           {
-            "id": "900620db8351c371",
+            "id": "2c5eab4919c6059a",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "开源工具/Bark.md",
+                "mode": "preview",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Bark"
+            }
+          },
+          {
+            "id": "1c35a6ec40a64db3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "开源工具/iGotify.md",
+                "file": "docker/docker 命令.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "iGotify"
+              "title": "docker 命令"
+            }
+          },
+          {
+            "id": "e7c5bc2de2b2d64c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "shell/shell 命令手册/tools/nohup.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "nohup"
             }
           }
         ]
@@ -53,7 +83,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "nohup",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -141,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "开源工具/iGotify.md",
+                "file": "开源工具/Bark.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "iGotify 的大纲"
+              "title": "Bark 的大纲"
             }
           },
           {
@@ -181,38 +211,38 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "900620db8351c371",
+  "active": "2c5eab4919c6059a",
   "lastOpenFiles": [
-    "开源工具/ntfy.md",
+    "docker/docker 命令.md",
+    "shell/shell 命令手册/tools/nohup.md",
+    "开源工具/frp.md",
+    "shell/shell 开箱即用/jar包服务启动停止shell脚本.md",
+    "企业建设/高可用方案/heartbeat/CentOS 7.6+NFS+Heartbeat+DRBD.md",
+    "开源工具/alist.md",
+    "开源工具/Bark.md",
+    "开源工具/蓝眼云盘.md",
+    "开源工具/aria2.md",
+    "开源工具/cloudreve.md",
+    "开源工具/fail2ban.md",
+    "开源工具/HomeAssistant.md",
+    "开源工具/Jellyfin.md",
+    "开源工具/yt-dlp.md",
+    "开源工具/wireguard.md",
+    "开源工具/Windows(docker).md",
+    "开源工具/v2ray.md",
+    "开源工具/tailscale.md",
+    "开源工具/Stirling PDF.md",
+    "开源工具/shadowsocks.md",
+    "开源工具/Rustdesk.md",
     "开源工具/iGotify.md",
+    "开源工具/knock.md",
+    "开源工具/ntfy.md",
     "开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg",
     "开源工具/assets/Pasted image 20251124140755.png",
     "开源工具/assets/4bf3ce376e0a298258e59d4726ec8d79_MD5.jpg",
     "开源工具/assets/Pasted image 20251124131757.png",
     "中间件/Nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
     "README.md",
-    "sundongsheng.md",
-    "面试资料.md",
-    "配置案例.md",
-    "开源工具/Stirling PDF.md",
-    "开源工具/tailscale.md",
-    "开源工具/wireguard.md",
-    "开源工具/Windows(docker).md",
-    "开源工具/Navidrome.md",
-    "开源工具/Photoprism.md",
-    "开源工具/Rustdesk.md",
-    "开源工具/HomeAssistant.md",
-    "开源工具/Jellyfin.md",
-    "中间件/Nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
-    "中间件/Nginx/nginx 配置及优化/1. nginx 基础功能配置集合.md",
-    "中间件/Nginx/nginx 配置及优化/0. nginx 配置文件详解.md",
-    "中间件/Nginx/nginx 配置及优化/13. nginx Location配置.md",
-    "中间件/Nginx/nginx 配置及优化/9. nginx 日志配置.md",
-    "中间件/Nginx/nginx 配置及优化/10. nginx 跨域问题.md",
-    "中间件/Nginx/nginx 配置及优化/8. nginx 限制请求并发连接数与下载速度.md",
-    "中间件/Nginx/nginx 部署.md",
-    "中间件/Nginx/nginx 配置及优化/12. nginx与 uWSGI服务器的沟通.md",
-    "中间件/Nginx/nginx 配置及优化/11. nginx 静态文件配置.md",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141852.png",
     "devops/Jenkins/Jenkins 使用/assets/c8f0f74295d447f43583090bdeab119a_MD5.jpg",
     "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141830.png",
