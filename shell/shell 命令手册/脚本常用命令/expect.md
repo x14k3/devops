@@ -1,8 +1,5 @@
-# expect
 
-‍
-
-## [#](https://wiki.eryajf.net/pages/5279.html#_1%E3%80%81expect%E6%98%AF%E4%BB%80%E4%B9%88) 1、expect是什么
+## 1 expect是什么
 
 使用Linux的程序员对输入密码都不会陌生，在Linux下对用户有严格的权限限制，干很多事情越过了权限就得输入密码，比如使用超级用户执行命令，又比如scp、ssh连接远程主机等等。 比如我们要是 到10.20.24.103这台机器上去，就需要输入密码：
 
@@ -15,7 +12,7 @@ root@10.20.24.103's password:
 
 ‍
 
-## [#](https://wiki.eryajf.net/pages/5279.html#_2%E3%80%81expect%E7%9A%84%E5%8E%9F%E7%90%86) 2、expect的原理
+## 2 expect的原理
 
 针对这种scp或者ssh命令的功能，可能很多人想到的就是勉密钥登录。这种其实可以但是这种在生产环境不建议这么做，不安全。
 
@@ -29,7 +26,7 @@ $ sudo yum install expect
 
 ‍
 
-## [#](https://wiki.eryajf.net/pages/5279.html#_3%E3%80%81%E5%85%A5%E9%97%A8%E8%84%9A%E6%9C%AC) 3、入门脚本
+## 3 门脚本
 
 简单示例如下：
 
@@ -68,7 +65,7 @@ SZB-L0032013
 
 ‍
 
-## [#](https://wiki.eryajf.net/pages/5279.html#_4%E3%80%81expect%E7%9A%84%E6%A1%88%E4%BE%8B) 4、expect的案例
+## 4 expect的案例
 
 自动输入github账号和密码 提交到github
 
@@ -112,7 +109,7 @@ EOF
 
 ```
 
-## [#](https://wiki.eryajf.net/pages/5279.html#_5%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9) 5、注意事项
+## 5 注意事项
 
 - 1、llength argv表示参数的个数2、argv表示参数的个数
 - 2、argv0 表示脚本的名称

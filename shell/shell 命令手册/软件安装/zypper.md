@@ -1,4 +1,3 @@
-# zypper
 
 #### zypper常用命令
 

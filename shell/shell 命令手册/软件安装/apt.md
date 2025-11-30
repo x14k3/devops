@@ -1,6 +1,4 @@
-# apt
 
-‍
 
 Ubuntu/Debian apt 提供了丰富的命令，完成包的管理任务。
 
