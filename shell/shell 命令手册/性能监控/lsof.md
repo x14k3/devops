@@ -1,4 +1,4 @@
-# lsof
+
 
 在 CentOS/Fedora/RHEL 版本的 Linux 中则使用下面的命令进行安装。
 

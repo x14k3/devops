@@ -1,4 +1,3 @@
-# mkfs & mke2fx
 
 # mkfs
 

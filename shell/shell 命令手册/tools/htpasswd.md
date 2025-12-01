@@ -1,6 +1,4 @@
-# htpasswd
 
-apache服务器创建密码认证文件
 
 **htpasswd命令** 是Apache的Web服务器内置工具，用于创建和更新储存用户名、域和用户基本认证的密码文件。
 

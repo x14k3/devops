@@ -1,8 +1,7 @@
-# base64
 
 ​`base64`​ 命令用于对文件或者标准输入进行编码和解码。
 
-## [#](https://wiki.eryajf.net/pages/5279.html#_1-%E7%94%A8%E6%B3%95) 1，用法
+## 1 用法
 
 ```
 $ base64 --help
@@ -31,9 +30,7 @@ GNU coreutils 在线帮助：<https://www.gnu.org/software/coreutils/>
 
 ​​
 
-## [#](https://wiki.eryajf.net/pages/5279.html#_2-%E5%AE%9E%E8%B7%B5) 2，实践
-
-### [#](https://wiki.eryajf.net/pages/5279.html#_1-%E7%BC%96%E7%A0%81) 1，编码
+##  2 编码
 
 - 直接执行
 
@@ -56,7 +53,7 @@ GNU coreutils 在线帮助：<https://www.gnu.org/software/coreutils/>
   ...内容略...
   ```
 
-### [#](https://wiki.eryajf.net/pages/5279.html#_2-%E8%A7%A3%E7%A0%81) 2，解码
+### 3 解码
 
 - 直接执行
 

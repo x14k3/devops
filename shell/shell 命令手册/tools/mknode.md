@@ -1,9 +1,6 @@
-# mknode
+
 
 **mknod命令** 用于创建Linux中的字符设备文件和块设备文件。
-
-‍
-
 ```shell
 mknod(选项)(参数)
 ```

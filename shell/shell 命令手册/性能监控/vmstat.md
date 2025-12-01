@@ -1,4 +1,4 @@
-# vmstat
+
 
 **vmstat命令** 的含义为显示虚拟内存状态（“Viryual Memor Statics”），但是它可以报告关于进程、内存、I/O等系统整体运行状态。
 

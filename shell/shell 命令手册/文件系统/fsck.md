@@ -1,6 +1,4 @@
-# fsck
 
-## 简介
 
 **fsck**（File System Consistency Check）是Linux的实用工具，用于检查文件系统是否存在错误或未解决的问题。该工具可以修复潜在的错误并生成报告。
 

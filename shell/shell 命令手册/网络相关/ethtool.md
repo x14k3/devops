@@ -1,10 +1,4 @@
-# ethtool
 
-[纠正错误](https://github.com/jaywcjlove/linux-command/edit/master/command/ethtool.md) [添加实例](https://github.com/jaywcjlove/linux-command/edit/master/command/ethtool.md)
-
-显示或修改以太网卡的配置信息
-
-## 补充说明
 
 ethtool命令用于获取以太网卡的配置信息，或者修改这些配置。这个命令比较复杂，功能特别多。
 

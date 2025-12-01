@@ -11,10 +11,14 @@
             "id": "30486518efc02908",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "基础服务/sshd/1. ssh口令登陆.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "1. ssh口令登陆"
             }
           }
         ]
@@ -137,12 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "基础服务/sshd/1. ssh口令登陆.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "1. ssh口令登陆 的大纲"
             }
           },
           {
@@ -178,33 +183,33 @@
   },
   "active": "30486518efc02908",
   "lastOpenFiles": [
-    "开源工具/Bark.md",
-    "shell/shell 命令手册/网络相关/curl.md",
-    "企业建设/数据同步方案/rsync/linux 环境下使用rsync在两台机器之间定时备份文件.md",
-    "shell/shell 命令手册/软件安装/zypper.md",
-    "shell/shell 命令手册/软件安装/yum.md",
-    "shell/shell 命令手册/软件安装/rpm.md",
-    "shell/shell 命令手册/软件安装/dpkg.md",
-    "shell/shell 命令手册/软件安装/dnf.md",
-    "shell/shell 命令手册/软件安装/arp.md",
-    "shell/shell 命令手册/软件安装/apt.md",
-    "shell/shell 命令手册/内核模块管理/rmmod.md",
-    "shell/shell 命令手册/内核模块管理/modprobe.md",
-    "shell/shell 命令手册/内核模块管理/modinfo.md",
-    "shell/shell 命令手册/内核模块管理/lsmod.md",
-    "shell/shell 命令手册/内核模块管理/insmod.md",
-    "shell/shell 命令手册/脚本常用命令/xargs.md",
-    "shell/shell 命令手册/脚本常用命令/shuf.md",
-    "shell/shell 命令手册/脚本常用命令/shell 命令小技巧.md",
-    "shell/shell 命令手册/脚本常用命令/read.md",
-    "shell/shell 命令手册/脚本常用命令/expect.md",
-    "shell/shell 命令手册/脚本常用命令/exec.md",
-    "shell/shell 命令手册/脚本常用命令/echo.md",
-    "shell/shell 命令手册/脚本常用命令/basename.md",
-    "shell/shell 命令手册/脚本常用命令/date.md",
+    "shell/shell 命令手册/tools/wget.md",
+    "shell/shell 命令手册/tools/wall.md",
+    "shell/shell 命令手册/tools/tee.md",
+    "shell/shell 命令手册/tools/ssh.md",
+    "shell/shell 命令手册/tools/script.md",
+    "shell/shell 命令手册/tools/openssl.md",
+    "shell/shell 命令手册/tools/scp.md",
+    "shell/shell 命令手册/tools/openssl (Conflicted 2025-04-25 15_27_53).md",
+    "shell/shell 命令手册/tools/objdump.md",
+    "shell/shell 命令手册/tools/nohup.md",
+    "shell/shell 命令手册/tools/mknode.md",
+    "shell/shell 命令手册/tools/mkisofs.md",
+    "shell/shell 命令手册/tools/lsof.md",
+    "shell/shell 命令手册/tools/ldd.md",
+    "shell/shell 命令手册/tools/kill.md",
+    "shell/shell 命令手册/tools/k3b.md",
+    "shell/shell 命令手册/tools/ipcs.md",
+    "shell/shell 命令手册/tools/fuser.md",
+    "shell/shell 命令手册/tools/htpasswd.md",
+    "shell/shell 命令手册/tools/flock.md",
+    "shell/shell 命令手册/tools/crontab.md",
+    "shell/shell 命令手册/tools/cp.md",
+    "shell/shell 命令手册/tools/cdrecird growisofs.md",
+    "shell/shell 命令手册/tools/base64.md",
+    "shell/shell 命令手册/shell 三剑客/grep.md",
+    "shell/shell 命令手册/shell 三剑客/sed.md",
     "shell/shell 命令手册/备份与恢复/assets",
-    "shell/shell 命令手册/备份与恢复/rsync.md",
-    "shell/shell 命令手册/备份与恢复/restore.md",
     "linux/linux 安全管理/assets",
     "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",
     "开源工具/assets/Pasted image 20251124153800.png",

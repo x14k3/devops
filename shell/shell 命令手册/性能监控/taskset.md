@@ -1,4 +1,3 @@
-# taskset
 
 ## 使用taskset命令让进程运行在指定CPU上
 

@@ -1,10 +1,3 @@
-# bunzip2
-
-[纠正错误](https://github.com/jaywcjlove/linux-command/edit/master/command/bunzip2.md) [添加实例](https://github.com/jaywcjlove/linux-command/edit/master/command/bunzip2.md)
-
-可解压缩.bz2格式的压缩文件。
-
-## 补充说明
 
 bzip2可以对文件进行压缩与解压缩。此命令类似于“gzip/gunzip”命令，只能对文件进行压缩。对于目录只能压缩目录下的所有文件，压缩完成后，在目录下生成以“.bz2”为后缀的压缩包。**bunzip2其实是bzip2的符号链接**，即软链接，因此解压都可以通过bzip2 -d实现。
 

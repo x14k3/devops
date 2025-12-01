@@ -1,4 +1,4 @@
-# ipmitool
+
 
 # 1. ipmitool使用
 
