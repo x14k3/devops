@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
-                "mode": "source",
+                "file": "linux/linux 进程管理/systemd.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5. OpenVPN 隐藏流量（stunnel）"
+              "title": "systemd"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
+                "file": "linux/linux 进程管理/systemd.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "5. OpenVPN 隐藏流量（stunnel） 的大纲"
+              "title": "systemd 的大纲"
             }
           },
           {
@@ -183,6 +183,7 @@
   },
   "active": "30486518efc02908",
   "lastOpenFiles": [
+    "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
     "企业建设/openVPN/3. OpenVPN 基于用户密码认证.md",
     "企业建设/openVPN/2. OpenVPN 配置文件详解.md",
     "企业建设/openVPN/1. OpenVPN 服务部署.md",
@@ -208,7 +209,6 @@
     "shell/shell 命令手册/tools/k3b.md",
     "shell/shell 命令手册/tools/ipcs.md",
     "shell/shell 命令手册/tools/fuser.md",
-    "shell/shell 命令手册/tools/htpasswd.md",
     "shell/shell 命令手册/备份与恢复/assets",
     "linux/linux 安全管理/assets",
     "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",

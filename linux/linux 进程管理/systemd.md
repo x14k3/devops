@@ -1,252 +1,337 @@
+## 服务 Unit
+
+### 配置文件目录
 
 
-现代的 Linux 发行版都使用 systemd 来管理系统服务，因此本文主要介绍 systemd 环境下的服务与日志管理，~~Gentoo 用户请绕道~~。
+1. 系统配置文件目录`/etc/systemd/system/`的优先级最高, **建议放在这** .
+2. 其次为`/usr/lib/systemd/system/`. 例如我用 apt 安装 nginx后, 它的配置就放在这里.
+3. `/usr/lib/systemd/user/`存放用户的配置, **但是一般不用!!! 因为必须 usnm m,. er session 处于活动状态**
 
-早期（2014 年以前）还有 SysVinit 和 Upstart 等，但现在已经很少见了。SysVinit 还有一个现代化的替代品，叫做 OpenRC。
 
-## Init
 
-Init 进程是 Linux 启动时运行的第一个进程，负责启动系统的各种服务并最终启动 shell。传统的 init 程序位于 `/sbin/init`​，而现代发行版中它一般是指向 `/lib/systemd/systemd`​ 的软链接，即由 systemd 作为 PID 1 运行。
+可以参考[Where do I put my systemd unit file?](https://unix.stackexchange.com/questions/224992/where-do-i-put-my-systemd-unit-file), 以及文档[systemd.unit-freedesktop](https://www.freedesktop.org/software/systemd/man/systemd.unit.html),[systemd.unit(5)-arch](https://man.archlinux.org/man/systemd.unit.5)
 
-PID 1 在 Linux 中有一些特殊的地位：
+`systemctl enable supervisor`配置开机自启, 会在对应`target`的`wants`目录下, 添加一个软链接.
 
-- 不受 `SIGKILL`​ 或 `SIGSTOP`​ 信号影响，不能被杀死或暂停。类似地，即使收到了其他未注册的信号，默认行为也是忽略，而不是结束进程或挂起。
-- 当其他进程退出时，这些进程的子进程会由 PID 1 接管，因此 PID 1 需要负责回收（`wait(2)`​）这些僵尸进程。
+```bash
+# 启用supervisor
+systemctl enable supervisor --now
+Created symlink /etc/systemd/system/multi-user.target.wants/supervisor.service → /lib/systemd/system/supervisor.service
 
-## Systemd 与服务
-
-Systemd 是一大坨软件，包括服务管理（PID  1）、日志管理（systemd-journald）、网络管理（systemd-networkd）、本地 DNS  缓存（systemd-resolved）、时间同步（systemd-timesyncd）等，本文主要关心服务管理和日志管理。
-
-在 systemd 中，运行一个完整系统所需的每个部件都作为“单元”（unit）管理。一个 unit 可以是服务（`.service`​）、挂载点（`.mount`​）、设备（`.device`​）、定时器（`.timer`​）以至于目标（`.target`​）等，完整的列表可以在 [`systemd.unit(5)`](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html)​ 中找到。
-
-![微信图片_20241217165258](assets/微信图片_20241217165258-20241217165553-8v2bi9m.jpg)
-
-Systemd unit 的配置文件**主要**从以下目录按顺序载入，其中同名的文件只取找到的第一个：
-
-- ​`/etc/systemd/system`​：本地配置文件，优先级最高，这也是唯一一个管理员可以手动修改文件的地方。
-- ​`/run/systemd/system`​：运行时目录，存放由 systemd 或其他程序动态创建的 unit。注意 `/run`​ 目录重启后会被清空。
-- ​`/usr/lib/systemd/system`​：系统配置文件，优先级最低，一般由发行版（软件包管理器）提供。
-
-‍
-
-## systemctl 命令和参数
-
-### 命令格式
-
-```go
-systemctl 命令 服务名称
-例如 systemctl start php.service
+# 我们看一下这个目录下的内容, 都是类似的符号链接
+/etc/systemd/system/multi-user.target.wants# ll
+drwxr-xr-x  2 root root 4096 Jul 29 22:10 ./
+drwxr-xr-x 16 root root 4096 Jul 27 00:03 ../
+...
+lrwxrwxrwx  1 root root   34 Apr 19 14:41 aliyun.service -> /etc/systemd/system/aliyun.service
+lrwxrwxrwx  1 root root   38 Jul 29 22:10 supervisor.service -> /lib/systemd/system/supervisor.service
+...
 ```
 
-命令
+为什么是`multi-user.target`这个`target`呢? 可以跳到下面看[配置文件中的Install](https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/Systemd%E6%95%99%E7%A8%8B/#Install).
 
-```go
-start             开启
-stop              关闭
-restart           重启
-status            查看状态
-is-active         查看激活与否
-enable            设置开机启动
-disable           禁止开机启动
-is-enabled        查看是否开机自启
-kill              杀死进程
-mask              禁止自动和手动启动
-unmask            取消禁止
-list-dependencies 查看服务的依赖关系
-```
+### 配置示例 - 复制使用
 
-### 语法
+配置文件主要有 3 部分.
+- `Unit`: 启动顺序与依赖关系
+- `Service`: 启动行为
+- `Install`给`systemctl`用的, 其实与`守护进程systemd`无关.
 
-```go
-#语法
-systemctl COMMAND name.service
-#启动
-systemctl start name.service
-#停止
-systemctl stop name.service
-#重启
-systemctl restart name.service
-#查看状态
-systemctl status name.service
-#禁止自动和手动启动
-systemctl mask name.service
-#取消禁止
-systemctl unmask name.service
-#查看某服务当前激活与否的状态：
-systemctl is-active name.service
-#查看所有已经激活的服务：
-systemctl list-units --type|-t service
-#查看所有服务：
-systemctl list-units --type service --all
-#设定某服务开机自启，相当于chkconfig name on
-systemctl enable name.service
-#设定某服务开机禁止启动：相当于chkconfig name off
-systemctl disable name.service
-#查看所有服务的开机自启状态，相当于chkconfig --list
-systemctl list-unit-files --type service
-#用来列出该服务在哪些运行级别下启用和禁用：chkconfig –list name
-ls /etc/systemd/system/*.wants/name.service
-#查看服务是否开机自启：
-systemctl is-enabled name.service
-#列出失败的服务
-systemctl --failed --type=service
-#开机并立即启动或停止
-systemctl enable --now postfix
-systemctl disable  --now postfix
-#查看服务的依赖关系：
-systemctl list-dependencies name.service
-#杀掉进程：
-systemctl kill unitname
-#重新加载配置文件
-systemctl daemon-reload
-#关机
-systemctl halt、systemctl poweroff
-#重启：
-systemctl reboot
-#挂起：
-systemctl suspend
-#休眠：
-systemctl hibernate
-#休眠并挂起：
-systemctl hybrid-sleep
-
-————————————————
-原文作者：PHP_LHF
-转自链接：https://learnku.com/articles/72684
-版权声明：著作权归作者所有。商业转载请联系作者获得授权，非商业转载请保留以上作者信息和原文链接。
-```
-
-### 加载配置文件
-
-### 关机和开机
-
-```go
-systemctl poweroff 关机 
-systemctl reboot 开机
-```
-
-### unit 文件存放位置
-
-```go
-本文件一共有三个地方可以存放 
-/etc/systemd/system/ 
-/usr/lib/systemd/system 
-/lib/systemd/system
-```
-
-### unit 格式说明
-
-```go
-1、以 “#” 开头的行后面的内容会被认为是注释
-2、相关布尔值，1、yes、on、true 都是开启，0、no、off、false 都是关闭
-3、时间单位默认是秒，所以要用毫秒（ms）分钟（m）等须显式说明
-```
-
-### service unit file 文件构成部分
-
-```go
-1、[Unit]：定义与Unit类型无关的通用选项；用于提供unit的描述信息、unit行为及依赖关系等
-2、[Service]：与特定类型相关的专用选项；此处为Service类型
-3、[Install]：定义由“systemctl enable”以及"systemctl disable“命令在实现服务启用或禁用时用到的一些选项
-```
-
-### unit 段的常用选项
-
-|描述|可选项|
-| -------------| --------------------------------------------------------------------------------------------------------|
-|Description|对当前服务的简单描述|
-|After|可以指定在哪些服务之后进行启动|
-|Before|可以指定在哪些服务之前进行启动|
-|Requires|可以指定服务依赖于哪些服务 (这种依赖是” 强依赖”，一旦所依赖的服务异常，当前的服务也随之停止)|
-|Wants|可以指定服务依赖于哪些服务 (这种依赖是” 弱依赖”，即使所依赖的服务的启动情况不影响当前的服务是否启动)|
-|Conflicts|定义 units 间的冲突关系|
-
-### service 段的常用选项
-
-|可选项|描述|
-| -----------------| -----------------------------------------------------------------------------------------|
-|EnvironmentFile|环境配置文件，用来指定当前服务启动的环境变量|
-|ExecStart|指定服务启动时执行的命令或脚本|
-|ExecStartPre|指定服务启动前执行的命令或脚本|
-|ExecStartPost|指定服务启动后执行的命令或脚本|
-|ExecStop|指明停止服务要运行的命令或脚本|
-|ExecStopPost|指定服务停止之后执行的命令或脚本|
-|RestartSec|指定服务在重启时等待的时间，单位为秒|
-|ExecReload|指明重启服务要运行的命令或脚本|
-|Restart|当设定 Restart=1 时，则当次 daemon 服务意外终止后，会再次自动启动此服务，具体看下列类型|
-|PrivateTmp|设定为 yes 时，会在生成 /tmp/systemd-private-UUID-NAME.service-XXXXX/tmp/ 目录|
-|KillMode|[指定停止的方式，具体见下面](https://learnku.com/articles/72684#restart)|
-|Restart|[指定重启时的类型，具体见下面](https://learnku.com/articles/72684#restart)|
-|Type|[指定启动类型，具体见下面](https://learnku.com/articles/72684#type)|
-
-**type 选项**
-
-|type 可选项|描述|
-| -------------| ------------------------------------------------|
-|simple|指定 ExecStart 字段的进程为主进程|
-|forking|指定以 fork () 子进程执行 ExecStart 字段的进程|
-|oneshot|执行一次|
-|notify|启动后发送会发送通知信号通知 systemd|
-|idle|等其他任务结束后才运行|
-|||
-
-**restart 的可选值**
-
-|restart 可选项|描述|
-| ----------------| --------------------------------------------|
-|no|退出后不会重启|
-|on-success|当进程正常退出时 (退出码为 0) 执行重启|
-|on-failure|当进程不正常退出时 (退出码不为 0) 执行重启|
-|on-abnormal|当被信号终止和超时执行重启|
-|on-abort|当收到没有捕捉到的信号终止时执行重启|
-|on-watchdog|当看门狗超时时执行重启|
-|always|一直重启|
-
-**killModel**
-
-|KillMode 可选项|描述|
-| -----------------| ----------------------------------------------------|
-|control-group|杀掉当前进程中所有的进程|
-|process|杀掉当前进程的主进程|
-|mixed|主进程将收到 SIGTERM 信号，子进程收到 SIGKILL 信号|
-|none|不杀掉任何进程|
-
-### install 段的常用选项
-
-|install 段的常用选项|描述|
-| ----------------------| ----------------------------------------------|
-|Alias|别名，可使用 systemctl command Alias.service|
-|RequiredBy|被哪些 units 所依赖，强依赖|
-|WantedBy|被哪些 units 所依赖，弱依赖|
-|Also|安装本服务的时候还要安装别的相关服务|
-
-Install 一般填为 WantedBy=multi-user.target
-
-```go
-注意：对于新创建的unit文件，或者修改了的unit文件，要通知systemd重载此配置文件,而后可以选择重启，使用命令 systemctl daemon-reload
-```
-
-### unit 文件的例子
-
-```go
+```ini
 [Unit]
-Description=Frp Client Service #指明自己的描述
-After=network.target           #指明本服务需要在network服务启动后在启动 
+Description=测试服务
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
+
 
 [Service]
-Type=simple #指明下面ExecStart字段的进程为主进程
-User=nobody#这个可写可不写
-Restart=always#当进程正常退出时重启
-RestartSec=5s #服务在重启时等待的时间，这里指定为5s
-ExecStart=/usr/bin/frpc -c /etc/frp/frpc.ini #指定服务启动时运行的脚本或者命令
-ExecReload=/usr/bin/frpc reload -c /etc/frp/frpc.ini #指定服务重启时运行的脚本或者命令
-LimitNOFILE=1048576  #进程的文件句柄硬限制
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
+
+WorkingDirectory=/root/myApp/TestServer
+ExecStart=/root/myApp/TestServer/TestServer
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 资源限制 K,M,G,T
+# MemoryMax=500M
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
+
 
 [Install]
 WantedBy=multi-user.target
-
+# Alias=testserver.service
+# Alias常见用法还有 ftp别名ftpd ssh别名sshd
 ```
 
-将此文件命名为 frps.service 复制到 /lib/systemd/system 里面，然后重新加载 systemctl 配置文件
+> 配置文件的默认值在`/etc/systemd/system.conf`中.
 
-‍
+### 配置详情
+
+#### Unit
+```ini
+[Unit]
+# 简短描述
+Description=我的服务
+# 文档地址
+Documentation=https://ken.kentxxq.com
+
+# 依赖a-Unit和b-Unit,a或b任意一个没运行,启动失败
+Requires=a.service b.service
+# 需要a-Unit,a没运行,不影响我
+Wants=a.service
+# a-Unit退出,我就停止运行
+BindsTo=a.service
+# a-Unit在我之后启动
+Before=a.service
+# a-Unit在我之前启动
+After=a.service
+# a-Unit不能与我同时运行
+Conflicts=a.service
+
+# Condition开头 必须满足所有条件我才会运行
+# 下面是路径存在就运行
+ConditionPathExists=/usr/bin/myprogram
+# 文件不是空的才运行
+ConditionFileNotEmpty=/etc/keepalived/keepalived.conf
+# Assert开头 必须满足所有条件,否则会报错启动失败
+AssertPathExists=/usr/bin/myprogram
+# 这个文件有运行权限
+AssertFileIsExecutable=/xxxx
+
+# 启动时间区间,单位秒.
+StartLimitIntervalSec=30
+# 在StartLimitIntervalSec时间内,只会尝试启动3次
+StartLimitBurst=3
+```
+
+#### Service
+
+```ini
+[Service]
+# 默认值,ExecStart就是主进程
+Type=simple
+# 主进程创建子进程,父进程立即退出
+Type=forking
+# 代替rc.local,执行开机启动. 搭配RemainAfterExit=yes,让systemd显示状态active,让你知道已经执行过了.必须成功退出
+Type=oneshot
+# 和上面的区别是只要执行了就行,不一定要成功
+Type=exec
+# 服务启动以后,通过sd_notify(3)发送通知给systemd,才算启动成功.containerd有用到
+Type=notify
+
+# 运行用户和组,默认root用户/root组
+User=kentxxq
+Group=kentxxq
+
+# 运行目录
+WorkingDirectory=/path
+# 启动前执行,失败不会执行ExecStart
+# 启动前加载overlay内核模块, -减号 代表失败了也不影响ExecStart
+# ExecStartPre=-/sbin/modprobe overlay
+ExecStartPre=ls
+# 启动命令.可以存在多个,然后会顺序执行.可能是为了调试方便?
+ExecStart=
+ExecStart=/usr/bin/xxx \
+  --aaa=xxx \
+  --bbb=xxx
+# 启动后执行
+ExecStartPost=ls
+# systemctl reload执行
+ExecReload=nginx -s reload
+# 停止服务前执行命令,做一些清理工作
+ExecStop=nginx -s stop
+# 停止前等待多少秒
+TimeoutStopSec=10
+# 停止以后执行的命令,例如检查nginx端口是否还在监听?
+ExecStopPost=ls
+
+# 重启间隔时间 s/min/h/d
+RestartSec=30s
+# 重启的配置, 会受到Unit单元的StartLimit影响!!!
+# always,on-success、on-failure、on-abnormal、on-abort、on-watchdog. 
+Restart=always
+
+# 资源限制 K,M,G,T
+MemoryMax=500M
+
+# 杀死模式
+# 默认control-group
+# control-group执行ExecStop后,向cgroup中所有进程先term后发送kill
+# mixed会在cgroup的子进程全部先term,再kill后,才开始term,再kill主进程
+# process仅主进程发送term后发送kill(containerd只杀主进程)
+# none只是执行ExecStop命令
+KillMode=mixed
+# 确认只处理term信号,不需要发送kill命令,可以不发送.
+# 配合TimeoutStopSec=infinity 使用,一直等待term信号处理完成
+SendSIGKILL=no
+# 修改杀死信号,默认是SIGTERM
+RestartKillSignal=SIGHUP
+
+# 环境变量 $MY_ENV1 $MY_ENV2
+Environment=MY_ENV1=value1
+Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+EnvironmentFile=/path/to/environment/file1
+
+# 日志文件
+# 标准输出路径
+StandardOutput=append:/tmp/my-service.log
+# 标准输出路径
+StandardError=append:/tmp/my-service.log
+# 定义一个名字
+SyslogIdentifier=my-service
+
+# 其他
+# 保护/proc文件系统,其他进程无法修改,保证安全性. minio有用到
+ProtectProc=invisible
+# 可以打开的文件数/文件描述符=无限 默认是system.conf:#DefaultLimitNOFILE=1024:524288
+LimitNOFILE=infinity
+# 允许核心转储文件无限大,containerd有用到
+LimitCORE=infinity
+# 最大进程数无限
+LimitNPROC=infinity
+# 最大线程数=无限,默认4915. TasksMax比LimitNPROC更常用,参考回答https://unix.stackexchange.com/questions/452284/managing-nproc-in-systemd
+TasksMax=infinity
+# 开启后将其cgroup下资源控制交给进程自己管理,containerd有用到.
+Delegate=yes
+# -1000到1000,-999代表优先级很高.发生oom的时候,内核尽量先杀其他进程,保留这个. containerd有用到
+OOMScoreAdjust=-999
+# 私有的临时文件目录.systemd自动清理,通过隔离保证安全性.nginx有用到
+PrivateTmp=true
+```
+
+#### Install
+
+- 守护进程`systemd`完全不会处理这部分. 这部分是让`systemctl enable`用的.
+- `systemctl get-default`得到启动时默认的`target`.
+
+- 服务器先启动到`multi-user`,然后再`graphical.target`. 而通常服务器没有 UI.
+- 常用 **多用户命令行** `multi-user`.
+- **图形** `graphical.target`,图形用于开机启动 qq, 钉钉.
+- `systemctl set-default multi-user.target`可以调整默认`target`.
+
+```ini
+[Install]
+# 放到.wants下面,到了通常用这个
+WantedBy=multi-user.target
+# 放到.required下面, 如果依赖没成功,就抛出错误,不尝试启动
+RequiredBy=b.service
+# 启动别名,必须要enable后才能使用哦!
+Alias=a.service
+```
+
+## Systemd 相关组件
+
+### systemctl 命令
+
+#### 启停配置
+
+```bash
+# 系统
+# 重启系统
+systemctl reboot
+# 关闭系统,切断电源
+systemctl poweroff
+
+# 服务状态
+systemctl status nginx
+# 服务开启
+systemctl start nginx
+# 服务配置重新加载
+systemctl daemon-reload
+# 服务重启
+# 发送term信号,然后xx秒后,kill命令.然后重新拉起
+systemctl restart nginx
+# 服务重启
+systemctl stop nginx
+```
+
+#### 查询详情
+
+```bash
+# 查询所有的target状态,简介
+systemctl list-units --type target
+# 查询所有的service状态,简介
+systemctl list-units --type service
+
+# 查看服务的完整参数
+systemctl show nginx
+
+# 查看所有unit文件是否可以运行,是否开机启动
+# enabled,disabled 是否建立启动连接. 
+# static 没有[Install],只能被依赖
+# masked 禁止建立启动链接
+systemctl list-unit-files
+```
+
+#### 依赖关系
+
+```bash
+# 查询target下的service
+systemctl list-dependencies multi-user.target
+
+systemctl list-dependencies nginx.service
+
+systemctl list-dependencies --all nginx.service
+```
+
+#### 服务状态确认
+
+```bash
+# 帮助确认状态
+# 显示某个 Unit 是否正在运行
+systemctl is-active nginx.service
+# 显示某个 Unit 是否处于启动失败状态
+systemctl is-failed nginx.service
+# 显示某个 Unit 服务是否建立了启动链接
+systemctl is-enabled nginx.service
+```
+
+### journal 日志
+
+`journald`的配置文件路径`/etc/systemd/journald.conf`, **建议设置比较小, 因为会影响 systemctl 的速度**
+
+```ini
+[Journal]
+# 最大保存200M,默认最大4G.或者存储空间的10%
+SystemMaxUse=200M
+# 最多保留1天.默认为0.
+MaxRetentionSec=1day
+
+# 重启生效
+systemctl status systemd-journald
+```
+
+常用命令如下:
+
+```bash
+# 滚动查看日志
+journalctl -u nginx.service -f
+
+# 日志空间占用
+journalctl --disk-usage
+# 自动清理,默认是4G /etc/systemd/journald.conf
+SystemMaxUse=10G
+systemctl restart systemd-journald
+
+# 手动清理
+# 通常日志会存放在这样的目录里
+/var/log/journal/2195e6a94ece4443abc39350bd0f8b5f
+# 进入以后,手动清空所有日志
+:>system.journal
+
+# 保留1秒, 2d 保留2天 1w 保留一周
+journalctl --vacuum-time=1s
+# 保留500m
+journalctl --vacuum-size=500M
+```
