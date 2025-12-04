@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 进程管理/systemd.md",
+                "file": "开源工具/Immich.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "systemd"
+              "title": "Immich"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 进程管理/systemd.md",
+                "file": "开源工具/Immich.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "systemd 的大纲"
+              "title": "Immich 的大纲"
             }
           },
           {
@@ -183,6 +183,15 @@
   },
   "active": "30486518efc02908",
   "lastOpenFiles": [
+    "开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp",
+    "docker/docker 网络.md",
+    "开源工具/Immich.md",
+    "docker/docker 优化项.md",
+    "开源工具/assets/b063cbcb5f2a902636ca1302a5618117_MD5.webp",
+    "开源工具/assets/0114b83ce7a61f82ddfe19904b44812f_MD5.webp",
+    "开源工具/assets/beb599fbd3c73f8d8a35f2f5fe8b889b_MD5.webp",
+    "开源工具/Photoprism.md",
+    "linux/linux 进程管理/systemd.md",
     "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
     "企业建设/openVPN/3. OpenVPN 基于用户密码认证.md",
     "企业建设/openVPN/2. OpenVPN 配置文件详解.md",
@@ -203,12 +212,6 @@
     "shell/shell 命令手册/tools/nohup.md",
     "shell/shell 命令手册/tools/mknode.md",
     "shell/shell 命令手册/tools/mkisofs.md",
-    "shell/shell 命令手册/tools/lsof.md",
-    "shell/shell 命令手册/tools/ldd.md",
-    "shell/shell 命令手册/tools/kill.md",
-    "shell/shell 命令手册/tools/k3b.md",
-    "shell/shell 命令手册/tools/ipcs.md",
-    "shell/shell 命令手册/tools/fuser.md",
     "shell/shell 命令手册/备份与恢复/assets",
     "linux/linux 安全管理/assets",
     "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",
@@ -218,9 +221,6 @@
     "开源工具/assets/ed76b39ce136e31c5532bb64686f0435_MD5.png",
     "开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg",
     "开源工具/assets/Pasted image 20251124140755.png",
-    "开源工具/assets/4bf3ce376e0a298258e59d4726ec8d79_MD5.jpg",
-    "开源工具/assets/Pasted image 20251124131757.png",
-    "devops/Jenkins/Jenkins 使用/assets/Pasted image 20251123141852.png",
     "devops/Jenkins/Jenkins 使用/assets",
     "devops/Jenkins/Jenkins 使用",
     "assets",
