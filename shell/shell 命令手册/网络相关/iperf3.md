@@ -9,6 +9,16 @@ iperf3 -s -p 5201 -D
 
 # 客户端（流量发送端）
 iperf3 -c 192.168.1.s -p 5201 -f M -t 60 -b 100M -Z --logfile /tmp/perf3_client.log
+
+# 例一：执行20s，每5s执行一次
+iperf3 -c 43.248.136.69 -t 20 -i 5
+
+# 传输数据包5G，每7s显示一次
+iperf3 -c 43.248.136.69 -i 7 -n 5G
+
+# -F指定文件传输
+iperf3 -c 43.248.136.69 -i 2 -F Python-3.7.1rc2.tgz -t 20
+
 ```
 
 ## 命令说明

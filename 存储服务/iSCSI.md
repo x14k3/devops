@@ -1,5 +1,5 @@
 oracle使用iscsi 在redhat环境下搭建共享存储步骤
-### **一、Target 服务器配置（提供存储）**
+## Target 服务器配置
 
 **安装必要软件包**
 ```bash
@@ -120,11 +120,11 @@ Configuration saved to /etc/target/saveconfig.json
 
 ---
 
-### **二、Initiator 客户端配置（连接存储）**
+## Initiator 客户端配置
 
-#### 节点 1 配置 (192.168.133.201)
+### 节点 1 配置
 
-**设置 Initiator 名称**
+#### 设置 Initiator 名称
 ```bash
 yum install -y iscsi-initiator-utils device-mapper-multipath
 
@@ -132,15 +132,18 @@ echo "InitiatorName=iqn.2025-07.com.oracle:rac01" > /etc/iscsi/initiatorname.isc
 ```
 
 
-**配置多路径 (安装并配置 device-mapper-multipath)**
+#### 配置多路径
 ```bash
+# 生成Multipath而配置文件
 mpathconf --enable --with_multipathd y
-
+# 修改/etc/multipath.conf配置文件
 echo '
 defaults {
     user_friendly_names yes
+    find_multipaths yes
     path_grouping_policy multibus
     failback immediate
+    rr_weight priorities
     no_path_retry fail
 }
 blacklist {
@@ -156,13 +159,13 @@ systemctl start multipathd
 # devnode                黑名单：排除所有形如sda, sdb, ..., sdz的本地磁盘
 ```
 
-**连接存储**
+#### **连接存储**
 ```bash
 iscsiadm -m discovery -t st -p 192.168.133.203
 iscsiadm -m node -T iqn.2025-07.com.oracle:rac.storage -p 192.168.133.203 -l
 ```
 
-**使用 `udev` 规则配置持久化设备命名 (每台主机)**
+#### 使用 `udev` 规则配置持久化设备命名 (每台主机)
 
 编辑/etc/scsi_id.config文件，2个节点都要编辑
 
@@ -194,20 +197,19 @@ udevadm trigger
 ```
 
 
-#### 节点 2 配置 (192.168.100.102)
+### 节点 2 配置 
 
-**设置唯一 Initiator 名称**
+#### 设置唯一 Initiator 名称
 ```bash
 echo "InitiatorName=iqn.2025-07.com.oracle:rac02" > /etc/iscsi/initiatorname.iscsi
 ```
 
-
-**重复节点1的配置步骤（多路径、连接存储）**
+#### 重复节点1的配置步骤（多路径、连接存储）
 
 ---
 
 
-### 三、常用的 `iscsiadm` 命令
+## 常用的 `iscsiadm` 命令
 ```bash
 #发现iSCSI 目标
 iscsiadm -m discovery -t st -p <IP地址>
