@@ -6,7 +6,7 @@
 - yum软件仓库
 - 源码软件
 
-[yum](../../../shell/shell%20命令手册/软件安装/yum.md)  [dnf](../../../shell/shell%20命令手册/软件安装/dnf.md)  [apt-get](../../../shell/shell%20命令手册/软件安装/apt.md)  [zypper](../../../shell/shell%20命令手册/软件安装/zypper.md)​[dpkg](../../../shell/shell%20命令手册/软件安装/dpkg.md)
+[yum](../linux%20命令/shell%20命令手册/软件安装/yum.md)  [dnf](../linux%20命令/shell%20命令手册/软件安装/dnf.md)  [apt-get](../linux%20命令/shell%20命令手册/软件安装/apt.md)  [zypper](../linux%20命令/shell%20命令手册/软件安装/zypper.md)​[dpkg](../linux%20命令/shell%20命令手册/软件安装/dpkg.md)
 
 ‍
 

@@ -77,7 +77,7 @@
 arping -I ens3  -s ${vip} ${gateway} -c 5
 ```
 
-参考 [arp](../../../shell/shell%20命令手册/软件安装/arp.md) [arping](../../../shell/shell%20命令手册/网络相关/arping.md) 命令
+参考 [arp](../../linux/linux%20命令/shell%20命令手册/软件安装/arp.md) [arping](../../linux/linux%20命令/shell%20命令手册/网络相关/arping.md) 命令
 
 ## VRRP
 

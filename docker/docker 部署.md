@@ -55,7 +55,7 @@ yum clean all &&  yum makecache
 
 ## yum源安装
 
-预置条件，更新yum源 [阿里源](../../shell/shell%20命令手册/软件安装/yum.md#20231110105237-mtqvqbk)
+预置条件，更新yum源 [阿里源](../linux/linux%20命令/shell%20命令手册/软件安装/yum.md#20231110105237-mtqvqbk)
 
 ```bash
 # 增加docker源
