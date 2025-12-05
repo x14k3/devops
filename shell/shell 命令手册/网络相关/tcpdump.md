@@ -9,14 +9,14 @@
 
 这篇文章，我肝了好几天，借助于Linux 的 man 帮助命令，我把 tcpdump 的用法全部研究了个遍，才形成了本文，不夸张的说，应该可以算是中文里把 tcpdump 讲得最清楚明白，并且还最全的文章了（至少我从百度、谷歌的情况来看），所以本文值得你收藏分享，就怕你错过了，就再也找不到像这样把 tcpdump 讲得直白而且特全的文章了。
 
-![](assets/network-asset-20200630095709-20241119123548-q6s69fg.png)
+![|625](assets/network-asset-20200630095709-20241119123548-q6s69fg.png)
 
 在讲解之前，有两点需要声明：
 
 1. 第三节到第六节里的 tcpdump 命令示例，只为了说明参数的使用，并不一定就能抓到包，如果要精准抓到你所需要的包，需要配合第五节的逻辑逻辑运算符进行组合搭配。
 2. 不同 Linux 发行版下、不同版本的 tcpdump 可能有小许差异， 本文是基于 CentOS 7.2 的 4.5.1 版本的tcpdump 进行学习的，若在你的环境中无法使用，请参考 `man tcpdump`​ 进行针对性学习。
 
-## 1\. tcpdump 核心参数图解[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_0)
+## 1. tcpdump 核心参数图解
 
 大家都知道，网络上的流量、数据包，非常的多，因此要想抓到我们所需要的数据包，就需要我们定义一个精准的过滤器，把这些目标数据包，从巨大的数据包网络中抓取出来。
 
@@ -59,7 +59,7 @@ $ tcpdump tcp src host 192.168.10.100
 
 为此，我画了一张图，方便你直观的理解 tcpdump 的各种参数：
 
-![](assets/network-asset-20200628111325-20241119123549-r1p1j8f.png)
+![|675](assets/network-asset-20200628111325-20241119123549-r1p1j8f.png)
 
 1. option 可选参数：将在后边一一解释。
 2. proto 类过滤器：根据协议进行过滤，可识别的关键词有： tcp, udp, icmp, ip, ip6, arp, rarp,ether,wlan, fddi, tr, decnet
@@ -76,9 +76,9 @@ proto、type、direction 这三类过滤器的内容比较简单，也最常用�
 
 其实 tcpdump 还有一些过滤关键词，它不符合以上四种过滤规则，可能需要你单独记忆。关于这部分我会在 **第六节：特殊过滤规则** 里进行介绍。
 
-## 2\. 理解 tcpdump 的输出[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_1)
+## 2. 理解 tcpdump 的输出
 
-### 2.1 输出内容结构[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_2)
+### 2.1 输出内容结构
 
 tcpdump 输出的内容虽然多，却很规律。
 
@@ -98,7 +98,7 @@ tcpdump 输出的内容虽然多，却很规律。
 6. 第六列：冒号
 7. 第七列：数据包内容，包括Flags 标识符，seq 号，ack 号，win 窗口，数据长度 length，其中 \[P.\] 表示 PUSH 标志位为 1，更多标识符见下面
 
-### 2.2 Flags 标识符[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_3)
+### 2.2 Flags 标识符
 
 使用 tcpdump 抓包后，会遇到的 TCP 报文 Flags，有以下几种：
 
@@ -108,9 +108,9 @@ tcpdump 输出的内容虽然多，却很规律。
 - ​`[R]`​ : RST（重置连接）
 - ​`[.]`​ : 没有 Flag （意思是除上面四种类型外的其他情况，有可能是 ACK 也有可能是 URG）
 
-## 3\. 常规过滤规则[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_4)
+## 3\. 常规过滤规则
 
-### 3.1 基于IP地址过滤：host[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_5)
+### 3.1 基于IP地址过滤：host[
 
 使用 `host`​ 就可以指定 host ip 进行过滤
 
@@ -128,7 +128,7 @@ $ tcpdump -i eth2 src 192.168.10.100
 $ tcpdump -i eth2 dst 192.168.10.200
 ```
 
-### 3.2 基于网段进行过滤：net[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_6)
+### 3.2 基于网段进行过滤：net
 
 若你的ip范围是一个网段，可以直接这样指定
 
@@ -146,7 +146,7 @@ $ tcpdump src net 192.168
 $ tcpdump dst net 192.168
 ```
 
-### 3.3 基于端口进行过滤：port[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_7)
+### 3.3 基于端口进行过滤：port
 
 使用 `port`​ 就可以指定特定端口进行过滤
 
@@ -192,7 +192,7 @@ $ tcpdump dst portrange 8000-8080
 $ tcpdump tcp port http
 ```
 
-### 3.4 基于协议进行过滤：proto[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_8)
+### 3.4 基于协议进行过滤：proto
 
 常见的网络协议有：tcp, udp, icmp, http, ip,ipv6 等
 
@@ -204,7 +204,7 @@ $ tcpdump icmp
 
 protocol 可选值：ip, ip6, arp, rarp, atalk, aarp, decnet, sca, lat, mopdl, moprc, iso, stp, ipx, or netbeui
 
-### 3.5 基本IP协议的版本进行过滤[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_9)
+### 3.5 基本IP协议的版本进行过滤
 
 当你想查看 tcp 的包，你也许会这样子写
 
@@ -279,15 +279,15 @@ $ tcpdump 'ip6 && tcp'
 $ tcpdump 'ip6 proto tcp'
 ```
 
-## 4\. 可选参数解析[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_10)
+## 4. 可选参数解析
 
-### 4.1 设置不解析域名提升速度[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_11)
+### 4.1 设置不解析域名提升速度
 
 - ​`-n`​：不把ip转化成域名，直接显示 ip，避免执行 DNS lookups 的过程，速度会快很多
 - ​`-nn`​：不把协议和端口号转化成名字，速度也会快很多。
 - ​`-N`​：不打印出host 的域名部分.。比如,，如果设置了此选现，tcpdump 将会打印'nic' 而不是 'nic.ddn.mil'.
 
-### 4.2 过滤结果输出到文件[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_12)
+### 4.2 过滤结果输出到文件
 
 使用 tcpdump 工具抓到包后，往往需要再借助其他的工具进行分析，比如常见的 wireshark 。
 
@@ -299,7 +299,7 @@ $ tcpdump 'ip6 proto tcp'
 $ tcpdump icmp -w icmp.pcap
 ```
 
-### 4.3 从文件中读取包数据[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_13)
+### 4.3 从文件中读取包数据
 
 使用 `-w`​ 是写入数据到文件，而使用 `-r`​ 是从文件中读取数据。
 
@@ -309,35 +309,34 @@ $ tcpdump icmp -w icmp.pcap
 $ tcpdump icmp -r all.pcap
 ```
 
-### 4.4 控制详细内容的输出[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_14)
+### 4.4 控制详细内容的输出
 
 - ​`-v`​：产生详细的输出. 比如包的TTL，id标识，数据包长度，以及IP包的一些选项。同时它还会打开一些附加的包完整性检测，比如对IP或ICMP包头部的校验和。
 - ​`-vv`​：产生比-v更详细的输出. 比如NFS回应包中的附加域将会被打印, SMB数据包也会被完全解码。（摘自网络，目前我还未使用过）
 - ​`-vvv`​：产生比-vv更详细的输出。比如 telent 时所使用的SB, SE 选项将会被打印, 如果telnet同时使用的是图形界面，其相应的图形选项将会以16进制的方式打印出来（摘自网络，目前我还未使用过）
 
-### 4.5 控制时间的显示[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_15)
+### 4.5 控制时间的显示
 
 - ​`-t`​ ：在每行的输出中不输出时间
 - ​`-tt`​：在每行的输出中会输出时间戳
 - ​`-ttt`​：输出每两行打印的时间间隔(以毫秒为单位)
 - ​`-tttt`​：在每行打印的时间戳之前添加日期的打印（此种选项，输出的时间最直观）
 
-### 4.6 显示数据包的头部[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_16)
+### 4.6 显示数据包的头部
 
 - ​`-x`​：以16进制的形式打印每个包的头部数据（但不包括数据链路层的头部）
 - ​`-xx`​：以16进制的形式打印每个包的头部数据（包括数据链路层的头部）
 - ​`-X`​：以16进制和 ASCII码形式打印出每个包的数据(但不包括连接层的头部)，这在分析一些新协议的数据包很方便。
 - ​`-XX`​：以16进制和 ASCII码形式打印出每个包的数据(包括连接层的头部)，这在分析一些新协议的数据包很方便。
 
-### 4.7 过滤指定网卡的数据包[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_17)
-
+### 4.7 过滤指定网卡的数据包
 - ​`-i`​：指定要过滤的网卡接口，如果要查看所有网卡，可以 `-i any`​
 
-### 4.8 过滤特定流向的数据包[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_18)
+### 4.8 过滤特定流向的数据包
 
 - ​`-Q`​： 选择是入方向还是出方向的数据包，可选项有：in, out, inout，也可以使用 --direction=\[direction\] 这种写法
 
-### 4.9 其他常用的一些参数[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_19)
+### 4.9 其他常用的一些参数
 
 - ​`-A`​：以ASCII码方式显示每一个数据包(不显示链路层头部信息). 在抓取包含网页数据的数据包时, 可方便查看数据
 - ​`-l`​ : 基于行的输出，便于你保存查看，或者交给其它工具分析
@@ -348,7 +347,7 @@ $ tcpdump icmp -r all.pcap
 - ​`-C`​：file-size，tcpdump 在把原始数据包直接保存到文件中之前, 检查此文件大小是否超过file-size. 如果超过了, 将关闭此文件,另创一个文件继续用于原始数据包的记录. 新创建的文件名与-w 选项指定的文件名一致, 但文件名后多了一个数字.该数字会从1开始随着新创建文件的增多而增加. file-size的单位是百万字节(nt: 这里指1,000,000个字节,并非1,048,576个字节, 后者是以1024字节为1k, 1024k字节为1M计算所得, 即1M=1024 ＊ 1024 ＝ 1,048,576)
 - ​`-F`​：使用file 文件作为过滤条件表达式的输入, 此时命令行上的输入将被忽略.
 
-### 4.10 对输出内容进行控制的参数[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_20)
+### 4.10 对输出内容进行控制的参数
 
 - ​`-D`​ : 显示所有可用网络接口的列表
 - ​`-e`​ : 每行的打印输出中将包括数据包的数据链路层头部信息
@@ -359,7 +358,7 @@ $ tcpdump icmp -r all.pcap
 - ​`-dd`​：以C语言的形式打印出包匹配码.
 - ​`-ddd`​：以十进制数的形式打印出包匹配码
 
-## 5\. 过滤规则组合[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_21)
+## 5. 过滤规则组合
 
 有编程基础的同学，对于下面三个逻辑运算符应该不陌生了吧
 
@@ -401,13 +400,13 @@ $ tcpdump 'src 10.0.2.4 and (dst port 3389 or 22)'
 $ tcpdump "( if=en0 and proc =nc ) || (if != en0 and dir=in)"
 ```
 
-## 6\. 特殊过滤规则[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_22)
+## 6. 特殊过滤规则
 
-### 5.1 根据 tcpflags 进行过滤[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_23)
+### 5.1 根据 tcpflags 进行过滤
 
 通过[上一篇文章](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247488180&idx=1&sn=09526224732ebfcccb52847f27298c70&chksm=e8867256dff1fb40c9f47bafd0e87a9237c5a9ebf33c8a3d0a598276b496d29cdaa3fbff8d26&token=1970357830&lang=zh_CN#rd)，我们知道了 tcp 的首部有一个标志位。
 
-![TCP 报文首部](assets/network-asset-20200606095627-20241119123549-qjo5axs.png)
+![TCP 报文首部|700](assets/network-asset-20200606095627-20241119123549-qjo5axs.png)
 
 tcpdump 支持我们根据数据包的标志位进行过滤
 
@@ -429,7 +428,7 @@ proto [ expr:size ]
 
 以 tcp-syn 为例，你可以参照下面这张图，计算出来的值 是就是 2
 
-![](assets/network-asset-20200628222010-20241119123549-pc1baxf.png)
+![|650](assets/network-asset-20200628222010-20241119123549-pc1baxf.png)
 
 由于数字不好记忆，所以一般使用这样的“别名常量”表示。
 
@@ -447,19 +446,19 @@ tcp[tcpflags] == tcp-syn
 
 1、第一种写法：使用数字表示偏移量
 
-```
+```bash
 $ tcpdump -i eth0 "tcp[13] & 2 != 0" 
 ```
 
 2、第二种写法：使用别名常量表示偏移量
 
-```
+```bash
 $ tcpdump -i eth0 "tcp[tcpflags] & tcp-syn != 0" 
 ```
 
 3、第三种写法：使用混合写法
 
-```
+```bash
 $ tcpdump -i eth0 "tcp[tcpflags] & 2 != 0" 
 
 # or
@@ -471,25 +470,25 @@ $ tcpdump -i eth0 "tcp[13] & tcp-syn != 0"
 
 1、第一种写法
 
-```
+```bash
 $ tcpdump -i eth0 'tcp[13] == 2 or tcp[13] == 16'
 ```
 
 2、第二种写法
 
-```
+```bash
 $ tcpdump -i eth0 'tcp[tcpflags] == tcp-syn or tcp[tcpflags] == tcp-ack'
 ```
 
 3、第三种写法
 
-```
+```bash
 $ tcpdump -i eth0 "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0" 
 ```
 
 4、第四种写法：注意这里是 单个等号，而不是像上面一样两个等号，18（syn+ack） = 2（syn） + 16（ack）
 
-```
+```bash
 $ tcpdump -i eth0 'tcp[13] = 18'
 
 # or
@@ -499,7 +498,7 @@ $ tcpdump -i eth0 'tcp[tcpflags] = 18'
 
 tcp 中有 类似 tcp-syn 的别名常量，其他协议也是有的，比如 icmp 协议，可以使用的别名常量有
 
-```
+```bash
 icmp-echoreply, icmp-unreach, icmp-sourcequench, 
 icmp-redirect, icmp-echo, icmp-routeradvert,
 icmp-routersolicit, icmp-timx-ceed, icmp-paramprob, 
@@ -507,35 +506,35 @@ icmp-tstamp, icmp-tstampreply,icmp-ireq,
 icmp-ireqreply, icmp-maskreq, icmp-maskreply
 ```
 
-### 5.2 基于包大小进行过滤[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_24)
+### 5.2 基于包大小进行过滤
 
 若你想查看指定大小的数据包，也是可以的
 
-```
+```bash
 $ tcpdump less 32 
 $ tcpdump greater 64 
 $ tcpdump <= 128
 ```
 
-### 5.3 根据 mac 地址进行过滤[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_25)
+### 5.3 根据 mac 地址进行过滤
 
 例子如下，其中 ehost 是记录在 /etc/ethers 里的 name
 
-```
+```bash
 $ tcpdump ether host [ehost]
 $ tcpdump ether dst	[ehost]
 $ tcpdump ether src	[ehost]
 ```
 
-### 5.4 过滤通过指定网关的数据包[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_26)
+### 5.4 过滤通过指定网关的数据包
 
-```
+```bash
 $ tcpdump gateway [host]
 ```
 
-### 5.5 过滤广播/多播数据包[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_27)
+### 5.5 过滤广播/多播数据包
 
-```
+```bash
 $ tcpdump ether broadcast
 $ tcpdump ether multicast
 
@@ -545,7 +544,7 @@ $ tcpdump ip multicast
 $ tcpdump ip6 multicast
 ```
 
-## 7\. 如何抓取到更精准的包？[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_28)
+## 7. 如何抓取到更精准的包？
 
 先给你抛出一个问题：如果我只想抓取 HTTP 的 POST 请求该如何写呢？
 
@@ -566,7 +565,7 @@ $ tcpdump -s 0 -A -vv 'tcp[((tcp[12:1] & 0xf0) >> 2):4]'
 - ​`tcp[n]`​：表示 tcp 报文里 第 n 个字节
 - ​`tcp[n:c]`​：表示 tcp 报文里从第n个字节开始取 c 个字节，tcp\[12:1\] 表示从报文的第12个字节（因为有第0个字节，所以这里的12其实表示的是13）开始算起取一个字节，也就是 8 个bit。查看 [tcp 的报文首部结构](https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure)，可以得知这 8 个bit 其实就是下图中的红框圈起来的位置，而在这里我们只要前面 4个bit，也就是实际数据在整个报文首部中的偏移量。
 
-  ![](assets/network-asset-20200629085659-20241119123550-sukiui1.png)
+  ![|675](assets/network-asset-20200629085659-20241119123550-sukiui1.png)
 - ​`&`​：是[位运算](https://en.wikipedia.org/wiki/Bitwise_operation)里的 and 操作符，比如 `0011 & 0010 = 0010`​
 - ​`>>`​：是位运算里的右移操作，比如 `0111 >> 2 = 0001`​
 - ​`0xf0`​：是 10 进制的 240 的 16 进制表示，但对于位操作来说，10进制和16进制都将毫无意义，我们需要的是二进制，将其转换成二进制后是：11110000，这个数有什么特点呢？前面个 4bit 全部是 1，后面4个bit全部是0，往后看你就知道这个特点有什么用了。
@@ -594,13 +593,13 @@ $ tcpdump -s 0 -A -vv 'tcp[((tcp[12:1] & 0xf0) >> 2):4]'
 0x20   -->   32    -->  空格
 ```
 
-![](assets/network-asset-20200629130407-20241119123552-ifpfh1p.png)
+![|700](assets/network-asset-20200629130407-20241119123552-ifpfh1p.png)
 
 如果相等，则该表达式为True，tcpdump 认为这就是我们所需要抓的数据包，将其输出到我们的终端屏幕上。
 
-## 8\. 抓包实战应用例子[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_29)
+## 8. 抓包实战应用例子
 
-### 8.1 提取 HTTP 的 User-Agent[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_30)
+### 8.1 提取 HTTP 的 User-Agent
 
 从 HTTP 请求头中提取 HTTP 的 User-Agent：
 
@@ -614,7 +613,7 @@ $ tcpdump -nn -A -s1500 -l | grep "User-Agent:"
 $ tcpdump -nn -A -s1500 -l | egrep -i 'User-Agent:|Host:'
 ```
 
-### 8.2 抓取 HTTP GET 和 POST 请求[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_31)
+### 8.2 抓取 HTTP GET 和 POST 请求
 
 抓取 HTTP GET 请求包：
 
@@ -638,7 +637,7 @@ $ tcpdump -vvAls0 | grep 'POST'
 
 注意：该方法不能保证抓取到 HTTP POST 有效数据流量，因为一个 POST 请求会被分割为多个 TCP 数据包。
 
-### 8.3 找出发包数最多的 IP[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_32)
+### 8.3 找出发包数最多的 IP
 
 找出一段时间内发包最多的 IP，或者从一堆报文中找出发包最多的 IP，可以使用下面的命令：
 
@@ -650,7 +649,7 @@ $ tcpdump -nnn -t -c 200 | cut -f 1,2,3,4 -d '.' | sort | uniq -c | sort -nr | h
 - **sort | uniq -c** : 排序并计数
 - **sort -nr** : 按照数值大小逆向排序
 
-### 8.4 抓取 DNS 请求和响应[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_33)
+### 8.4 抓取 DNS 请求和响应
 
 DNS 的默认端口是 53，因此可以通过端口进行过滤
 
@@ -658,8 +657,7 @@ DNS 的默认端口是 53，因此可以通过端口进行过滤
 $ tcpdump -i any -s0 port 53
 ```
 
-### 8.5 切割 pcap 文件[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_34)
-
+### 8.5 切割 pcap 文件
 当抓取大量数据并写入文件时，可以自动切割为多个大小相同的文件。例如，下面的命令表示每 3600 秒创建一个新文件 `capture-(hour).pcap`​，每个文件大小不超过 `200*1000000`​ 字节：
 
 ```
@@ -668,23 +666,21 @@ $ tcpdump  -w /tmp/capture-%H.pcap -G 3600 -C 200
 
 这些文件的命名为 `capture-{1-24}.pcap`​，24 小时之后，之前的文件就会被覆盖。
 
-### 8.6 提取 HTTP POST 请求中的密码[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_35)
-
+### 8.6 提取 HTTP POST 请求中的密码
 从 HTTP POST 请求中提取密码和主机名：
 
 ```
 $ tcpdump -s 0 -A -n -l | egrep -i "POST /|pwd=|passwd=|password=|Host:"
 ```
 
-### 8.7 提取 HTTP 请求的 URL[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_36)
-
+### 8.7 提取 HTTP 请求的 URL
 提取 HTTP 请求的主机名和路径：
 
 ```
 $ tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 ```
 
-### 8.8 抓取 HTTP 有效数据包[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_37)
+### 8.8 抓取 HTTP 有效数据包
 
 抓取 80 端口的 HTTP 有效数据包，排除 TCP 连接建立过程的数据包（SYN / FIN / ACK）：
 
@@ -692,7 +688,7 @@ $ tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 $ tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'
 ```
 
-### 8.9 结合 Wireshark 进行分析[#](https://www.cnblogs.com/wongbingming/p/13212306.html#idx_38)
+### 8.9 结合 Wireshark 进行分析
 
 通常 `Wireshark`​（或 tshark）比 tcpdump 更容易分析应用层协议。一般的做法是在远程服务器上先使用 `tcpdump`​ 抓取数据并写入文件，然后再将文件拷贝到本地工作站上用 `Wireshark`​ 分析。
 
@@ -710,7 +706,7 @@ $ ssh root@remotesystem 'tcpdump -s0 -c 1000 -nn -w - port 53' | /Applications/W
 
 抓取到的数据：
 
-![](assets/network-asset-20200210170101-20241119123555-3oprtuv.png)
+![|700](assets/network-asset-20200210170101-20241119123555-3oprtuv.png)
 
 ​`-c`​ 选项用来限制抓取数据的大小。如果不限制大小，就只能通过 `ctrl-c`​ 来停止抓取，这样一来不仅关闭了 tcpdump，也关闭了 wireshark。
 

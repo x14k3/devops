@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "开源工具/Immich.md",
+                "file": "shell/shell 命令手册/网络相关/tcpdump.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Immich"
+              "title": "tcpdump"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "开源工具/Immich.md",
+                "file": "shell/shell 命令手册/网络相关/tcpdump.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Immich 的大纲"
+              "title": "tcpdump 的大纲"
             }
           },
           {
@@ -183,35 +183,36 @@
   },
   "active": "30486518efc02908",
   "lastOpenFiles": [
+    "shell/shell 命令手册/网络相关/minicom.md",
+    "shell/shell 命令手册/网络相关/nc.md",
+    "shell/shell 命令手册/网络相关/nmap.md",
+    "shell/shell 命令手册/网络相关/iperf3.md",
+    "shell/shell 命令手册/性能监控/taskset.md",
+    "shell/shell 命令手册/性能监控/pstree.md",
+    "开源工具/wireguard.md",
+    "docker/docker compose.md",
+    "开源工具/shadowsocks.md",
+    "开源工具/Stirling PDF.md",
+    "开源工具/tailscale.md",
+    "开源工具/Photoprism.md",
+    "开源工具/openWRT.md",
+    "开源工具/Navidrome.md",
+    "开源工具/iGotify.md",
+    "开源工具/Bark.md",
+    "开源工具/Immich.md",
+    "docker/docker 数据卷.md",
+    "docker/docker 优化项.md",
     "开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp",
     "docker/docker 网络.md",
-    "开源工具/Immich.md",
-    "docker/docker 优化项.md",
     "开源工具/assets/b063cbcb5f2a902636ca1302a5618117_MD5.webp",
     "开源工具/assets/0114b83ce7a61f82ddfe19904b44812f_MD5.webp",
     "开源工具/assets/beb599fbd3c73f8d8a35f2f5fe8b889b_MD5.webp",
-    "开源工具/Photoprism.md",
     "linux/linux 进程管理/systemd.md",
     "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
     "企业建设/openVPN/3. OpenVPN 基于用户密码认证.md",
     "企业建设/openVPN/2. OpenVPN 配置文件详解.md",
     "企业建设/openVPN/1. OpenVPN 服务部署.md",
     "企业建设/数据同步方案/rsync/linux 环境下使用rsync在两台机器之间定时备份文件.md",
-    "企业建设/数据同步方案/rsync/linux 同步文件到 Window(rsync).md",
-    "企业建设/数据同步方案/rsync/借助 inotify 实现实时同步.md",
-    "基础服务/sshd/1. ssh口令登陆.md",
-    "shell/shell 命令手册/tools/wget.md",
-    "shell/shell 命令手册/tools/wall.md",
-    "shell/shell 命令手册/tools/tee.md",
-    "shell/shell 命令手册/tools/ssh.md",
-    "shell/shell 命令手册/tools/script.md",
-    "shell/shell 命令手册/tools/openssl.md",
-    "shell/shell 命令手册/tools/scp.md",
-    "shell/shell 命令手册/tools/openssl (Conflicted 2025-04-25 15_27_53).md",
-    "shell/shell 命令手册/tools/objdump.md",
-    "shell/shell 命令手册/tools/nohup.md",
-    "shell/shell 命令手册/tools/mknode.md",
-    "shell/shell 命令手册/tools/mkisofs.md",
     "shell/shell 命令手册/备份与恢复/assets",
     "linux/linux 安全管理/assets",
     "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",
@@ -220,7 +221,6 @@
     "开源工具/assets/Pasted image 20251124153616.png",
     "开源工具/assets/ed76b39ce136e31c5532bb64686f0435_MD5.png",
     "开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg",
-    "开源工具/assets/Pasted image 20251124140755.png",
     "devops/Jenkins/Jenkins 使用/assets",
     "devops/Jenkins/Jenkins 使用",
     "assets",
