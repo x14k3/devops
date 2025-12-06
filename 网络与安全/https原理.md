@@ -6,7 +6,7 @@
 
 HTTPS的整体过程分为证书验证和数据传输阶段，具体的交互过程如下：
 
-![mloginfful](assets/mloginfful-20240416142733-enp6pfl.jpeg)
+![mloginfful|650](assets/mloginfful-20240416142733-enp6pfl.jpeg)
 
 ① 证书验证阶段
 

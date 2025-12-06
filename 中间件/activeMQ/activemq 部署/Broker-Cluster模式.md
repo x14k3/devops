@@ -3,7 +3,7 @@
 Broker-Cluster部署方式中，各个broker通过网络互相连接，并共享queue。当broker-A上面指定的queue-A中接收到一个message处于pending状态，而此时没有consumer连接broker-A时。如果cluster中的broker-B上面有一个consumer在消费queue-A的消息，那么broker-B会先通过内部网络获取到broker-A上面的message，并通知自己的consumer来消费。  
 **优点是可以解决负载均衡和分布式的问题。但不支持高可用。**
 
-![](assets/image-20221130145157307-20230610173811-argxfbq.png)
+![|650](assets/image-20221130145157307-20230610173811-argxfbq.png)
 
 ## static Broker-Cluster
 

@@ -58,7 +58,7 @@ cd /usr/src/keepalived-1.4.5/
 
 接下来我们演示使用 keepalived 来保证负载均衡服务 nginx 的高可用性
 
-![](assets/image-20221127204322259-20230610173810-fkrmdy6.png)
+![|600](assets/image-20221127204322259-20230610173810-fkrmdy6.png)
 
 ## 1. 修改节点1 配置文件
 
