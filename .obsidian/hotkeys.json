@@ -1,0 +1,11 @@
+{
+  "editor:table-row-after": [
+    {
+      "modifiers": [
+        "Ctrl",
+        "Shift"
+      ],
+      "key": "="
+    }
+  ]
+}
