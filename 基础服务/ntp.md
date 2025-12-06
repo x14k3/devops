@@ -69,13 +69,13 @@ restrict 192.168.137.104 nomodify notrap noquery # 允许上层时间服务器�
 
 **查看网络中的ntp服务器**​`ntpq -p`
 
-![](assets/image-20221127215127840-20230610173810-conzlzl.png)
+![|600](assets/image-20221127215127840-20230610173810-conzlzl.png)
 
-![](assets/image-20221127215133514-20230610173810-ifgvw9p.png)
+![|600](assets/image-20221127215133514-20230610173810-ifgvw9p.png)
 
 **查看时间同步状态**\*\* ：一般需要5-10分钟后才能成功连接和同步\*\*​
 
-![](assets/image-20221127215138591-20230610173810-xan0ime.png)
+![|600](assets/image-20221127215138591-20230610173810-xan0ime.png)
 
 ```bash
 remote           refid      st t when poll reach   delay   offset  jitter

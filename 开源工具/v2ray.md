@@ -191,11 +191,11 @@ cat /proc/sys/kernel/random/uuid
 
 如果服务端的配置为 [vmess 协议](#vmess%20协议)
 
-![](assets/image-20221127210933123-20230610173813-wthc3c7.png)
+![|600](assets/image-20221127210933123-20230610173813-wthc3c7.png)
 
 如果服务端的配置为 [WebSocket + TLS + Web](#WebSocket%20+%20TLS%20+%20Web)
 
-![](assets/image-20221127210912432-20230610173813-dx832bp.png)
+![|600](assets/image-20221127210912432-20230610173813-dx832bp.png)
 
 ## linux
 
@@ -374,8 +374,7 @@ start_v2ray
 useradd -M -s /sbin/nologin v2ray
 chown -R v2ray:v2ray /data/application/v2ray/
 
-
-cat <<EOF >> /etc/systemd/system/v2ray.service 
+echo '
 [Unit]
 Description=V2Ray Service
 Documentation=https://www.v2fly.org/
@@ -393,7 +392,7 @@ RestartPreventExitStatus=23
 
 [Install]
 WantedBy=multi-user.target
-EOF
+' >> /etc/systemd/system/v2ray.service 
 
 systemctl daemon-reload
 systemctl enable v2ray

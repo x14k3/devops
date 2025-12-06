@@ -106,15 +106,15 @@ Endpoint = 114.132.56.178:50814
 
 ### 通过容器安装wg-easy
 
-```docker
+```bash
 docker run -d \
   --name=wg-easy \
-  -e WG_HOST=123.123.123.123 (🚨这里输入服务器的公网IP) \
-  -e PASSWORD=passwd123 (🚨这里输入你的密码) \
-  -e WG_DEFAULT_ADDRESS=10.0.8.x （🚨默认IP地址）\
-  -e WG_DEFAULT_DNS=114.114.114.114 （🚨默认DNS）\
-  -e WG_ALLOWED_IPS=10.0.8.0/24 （🚨允许连接的IP段）\
-  -e WG_PERSISTENT_KEEPALIVE=25 （🚨重连间隔）\
+  -e WG_HOST=123.123.123.123        # 这里输入服务器的公网IP \
+  -e PASSWORD=passwd123             # 这里输入你的密码 \
+  -e WG_DEFAULT_ADDRESS=10.0.8.x    # 默认IP地址 \
+  -e WG_DEFAULT_DNS=114.114.114.114 # 默认DNS \
+  -e WG_ALLOWED_IPS=10.0.8.0/24     # 允许连接的IP段 \
+  -e WG_PERSISTENT_KEEPALIVE=25     # 重连间隔 \
   -v ~/.wg-easy:/etc/wireguard \
   -p 51820:51820/udp \
   -p 51821:51821/tcp \

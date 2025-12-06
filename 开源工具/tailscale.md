@@ -95,7 +95,7 @@ To authenticate, visit:
 
 Windows Tailscale 客户端想要使用 Headscale 作为控制服务器，只需在浏览器中打开 URL：`https://doshell.xx:220xx/windows`​，便会出现如下的界面：
 
-![](assets/Pasted%20image%2020221222215323-20230610173813-1i6nu9z.png)
+![|675](assets/Pasted%20image%2020221222215323-20230610173813-1i6nu9z.png)
 
 **注册客户端到headscale控制服务器**
 
@@ -109,7 +109,7 @@ tailscale up --login-server=https://doshell.top:11051 --accept-routes=true --acc
 
 然后将浏览器弹出的命令在服务端执行：
 
-![](assets/Pasted%20image%2020221222220854-20230610173813-c77ouoo.png)
+![|650](assets/Pasted%20image%2020221222220854-20230610173813-c77ouoo.png)
 
 **客户端开启路由转发功能**
 

@@ -46,7 +46,6 @@ firewall-cmd --remove-masquerade
 > 这里服务端平台用Centos 7 1804版本,客户端用的是Win7
 > 外网IP:192.168.111.0/24 内网IP:192.168.222.0/24
 
-‍
 
 关闭firewalld,打开iptables服务
 
@@ -72,8 +71,6 @@ systemctl enable iptables
 ```bash
 net.ipv4.ip_forward = 1
 ```
-
-‍
 
 配置iptables
 

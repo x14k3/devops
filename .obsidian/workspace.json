@@ -15,15 +15,30 @@
               "type": "markdown",
               "state": {
                 "file": "linux/linux 命令/linux 系统性能瓶颈分析.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
               "title": "linux 系统性能瓶颈分析"
             }
+          },
+          {
+            "id": "90a1d6afafaeba27",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "存储服务/ftp/vsftp.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "vsftp"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -143,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 命令/linux 系统性能瓶颈分析.md",
+                "file": "存储服务/ftp/vsftp.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "linux 系统性能瓶颈分析 的大纲"
+              "title": "vsftp 的大纲"
             }
           },
           {
@@ -183,35 +198,36 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "1b92de781a2ce4d9",
+  "active": "90a1d6afafaeba27",
   "lastOpenFiles": [
-    "linux/linux 命令/assets",
-    "linux/linux 命令/shell 命令手册/性能监控/sysstat/sar.md",
+    "存储服务/ftp/sftp-windwos.md",
+    "存储服务/ftp/sftp-linux.md",
+    "存储服务/ftp/ftp-windows.md",
+    "存储服务/ftp/ftp 概述.md",
+    "存储服务/ftp/ftp 常用命令.md",
+    "基础服务/vnc & rdesktop.md",
+    "基础服务/ntp.md",
     "linux/linux 命令/linux 系统性能瓶颈分析.md",
-    "linux/linux 命令/Linux 命令行编辑快捷键.md",
-    "linux/linux 命令/homebrew.md",
-    "linux/linux 进程管理/systemd.md",
-    "linux/linux 进程管理/systemd.md",
-    "linux/linux 进程管理/supervisord.md",
-    "linux/linux 文件系统/9. linux Multipath.md",
-    "存储服务/iSCSI.md",
-    "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
+    "基础服务/chrony.md",
+    "基础服务/使用linux服务器搭建网关.md",
+    "基础服务/端口转发.md",
+    "基础服务/DNS/dnsmasq.md",
+    "基础服务/DNS/DNS概念和原理.md",
+    "基础服务/DHCP/DHCP 原理.md",
+    "基础服务/DHCP/DHCP 服务器搭建.md",
+    "计算机操作系统/内存管理/2.内存时序.md",
+    "计算机操作系统/内存管理/1.虚拟内存.md",
+    "开源工具/yt-dlp.md",
+    "开源工具/wireguard.md",
+    "开源工具/Windows(docker).md",
+    "开源工具/v2ray.md",
+    "开源工具/tailscale.md",
+    "开源工具/Stirling PDF.md",
+    "开源工具/shadowsocks.md",
+    "开源工具/Rustdesk.md",
+    "开源工具/Photoprism.md",
+    "linux/linux 命令/assets",
     "linux/linux 文件系统/assets/106cef93e378e983f7ba3d4e4e1385f8_MD5.jpg",
-    "linux/linux 文件系统/4. linux RAID（磁盘阵列）.md",
-    "linux/linux 文件系统/2. linux 磁盘配额.md",
-    "linux/linux 文件系统/8. linux 下的 dev-shm.md",
-    "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
-    "linux/linux 命令/shell 命令手册/网络相关/iperf3.md",
-    "linux/linux 命令/shell 命令手册/文件系统/ulimit.md",
-    "linux/linux 资源限制/2. ulimit命令：管理当前会话的资源限制.md",
-    "linux/linux 资源限制/1. linux 资源限制.md",
-    "linux/linux 资源限制/5. 深度探讨：继承、优先级与内核参数.md",
-    "linux/linux 资源限制/6. 实践应用与案例分析.md",
-    "linux/linux 资源限制/3. limits.conf文件：持久化用户和组的资源限制.md",
-    "linux/linux 命令/shell 命令手册/性能监控/sysstat.md",
-    "linux/linux 命令/shell 命令手册/网络相关/nc.md",
-    "devops/warpgate.md",
-    "devops/Coolmonitor.md",
     "开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp",
     "开源工具/assets/b063cbcb5f2a902636ca1302a5618117_MD5.webp",
     "开源工具/assets/0114b83ce7a61f82ddfe19904b44812f_MD5.webp",

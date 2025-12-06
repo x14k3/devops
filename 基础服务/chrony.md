@@ -249,7 +249,7 @@ timedatectl set-time "2023-01-31 10:00:20"
 
 ### 示例： chronyc sourcestats -v
 
-```
+```bash
 # chronyc sourcestats -v
                              .- Number of sample points in measurement set.
                             /    .- Number of residual runs with same sign.

@@ -117,7 +117,7 @@ ACCEPT     tcp  --  112.10.95.255        0.0.0.0/0            tcp dpt:22
 
 查看测试系统的SSH端口开启状态
 
-```yaml
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap -A -p 22 192.168.50.71 -oA djinn   
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-03-28 11:03 CST
@@ -131,7 +131,7 @@ PORT   STATE  SERVICE VERSION
 
 使用`1356 6784 3409`​暗号敲门
 
-```yaml
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ knock 192.168.50.71 1356 6784 3409
 ┌──(kali㉿kali)-[~]
@@ -152,7 +152,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 使用`3409 6784 1356  `​暗号关门
 
-```yaml
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ knock 192.168.50.71 3409 6784 1356
 ┌──(kali㉿kali)-[~]

@@ -1,14 +1,18 @@
 
-1.安装
 
-​`yum install -y vsftpd`​
+## 安装 vsftp
 
-2.修改配置文件
-
-​`cp /etc/vsftpd/vsftpd.conf{,.bak} ; vim /etc/vsftpd/vsftpd.conf`​
-
+下载
 ```bash
-anonymous_enable=NO                   # 禁用匿名登录和本地用户登录
+yum install -y vsftpd
+```
+​​
+
+修改配置文件
+​`cp /etc/vsftpd/vsftpd.conf{,.bak} ; vim /etc/vsftpd/vsftpd.conf`​
+```bash
+anonymous_enable=NO    # 禁用匿名登录和本地用户登录
+
 ###################   以下是新增 ######################
 #限制ftp用户只能在其主目录下活动（禁止切换到上级目录）
 chroot_local_user=YES
@@ -23,33 +27,31 @@ ascii_download_enable=YES
 
 ```
 
-3.创建目录
+创建目录
+```bash
+mkdir -p /etc/vsftpd/userconf
+```
+​​
 
-​`mkdir -p /etc/vsftpd/userconf`​
-
-4.定义用户配置文件
+定义用户配置文件
 
 ​`vim /etc/vsftpd/userconf/ftp_dzhd `​  # 文件名要和ftp用名相同
-
 ```bash
 # 设置ftp_dzhd这个用户的根目录为/data/bps/data/sdq
 local_root=/data/bps/data/sdq
 ```
 
-5.修改pam
-
+修改pam
 ​`cp /etc/pam.d/vsftpd{,.bak} ; vim /etc/pam.d/vsftpd`​
 
 ```bash
 # 删除或注释该行
 # auth       required     pam_shells.so
 
-
 #  配置项的含义为仅允许用户的shell为 /etc/shells文件内的shell命令时，才能够成功
 ```
 
-6.创建用户
-
+创建用户
 ```bash
 groupadd ftpuser
 useradd -s /sbin/nologin -G ftpuser ftp_dzhd && echo "Ninestar123" |passwd --stdin ftp_dzhd
@@ -59,13 +61,14 @@ chown ftp_dzhd:ftpuser /data/bps/data/sdq
 
 ```
 
-7.重启vsftp  
-​`systemctl restart vsftpd`​
-
+重启vsftp  
+```bash
+systemctl restart vsftpd
+```
+​​
 ## 被动模式
 
-1.修改配置文件
-
+修改配置文件
 ​`vim /etc/vsftpd/vsftpd.conf`​
 
 ```bash
@@ -76,15 +79,16 @@ pasv_min_port=2024
 pasv_max_port=2034
 ```
 
-2.重启vsftp  
-​`systemctl restart vsftpd`​
+重启 vsftp 
+```bash
+systemctl restart vsftpd
+```
+​​
 
 ## 启用ssl
 
-1.修改配置文件
-
+修改配置文件
 ​`vim /etc/vsftpd/vsftpd.conf`​
-
 ```bash
 #添加如下选项
 ssl_enable=yes
@@ -101,8 +105,7 @@ ssl_ciphers=HIGH
 
 ```
 
-2.制作ssl证书
-
+制作ssl证书
 ```bash
 yum install -y openssl
 cd /etc/vsftpd
@@ -110,11 +113,11 @@ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /etc/vsftpd/vsftpd.p
 chmod 400 vsftpd.pem
 ```
 
-3.重启vsftp  
-​`systemctl restart vsftpd`​
-
-‍
-
+重启 vsftp 
+```bash
+systemctl restart vsftpd
+```
+​​
 ‍
 
 ## vsftpd.conf 配置文件说明
@@ -129,7 +132,7 @@ vsftpd.conf # vsftpd的主配置文件
 
 ### 匿名用户
 
-```
+```bash
 anon_upload_enable=NO   # 是否允许匿名登录
 write_enable=YES        # 是否允许登陆用户有写权限。属于全局设置，默认值为YES
 no_anon_password=YES/NO # 使用匿名登入时，不会询问密码

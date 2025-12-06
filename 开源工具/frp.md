@@ -27,17 +27,19 @@ log.level = "info"
 2.创建systemd服务
 
 ```bash
-cat > /etc/systemd/system/frps.service <<EOF
+echo '
 [Unit]
 Description = frp server
 After = network.target syslog.target
 Wants = network.target
+
 [Service]
 Type = simple
 ExecStart = /data/frps/frps -c /data/frps/frps.toml
+
 [Install]
 WantedBy = multi-user.target
-EOF
+' >> /etc/systemd/system/frps.service 
 ```
 
 3.启动frps
@@ -46,8 +48,6 @@ EOF
 systemctl daemon-reload
 systemctl start frps
 ```
-
-‍
 
 ‍
 

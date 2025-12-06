@@ -22,7 +22,7 @@ photo
 
 编辑docker-compose.yml文件,在里面写入如入内容
 
-```dockerfile
+```bash
 version: '3.5'
 # Example Docker Compose config file for PhotoPrism (Linux / AMD64)
 #
