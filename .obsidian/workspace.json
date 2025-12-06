@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "4cf1a5887a2a8281",
+        "id": "34e11a4e3e153237",
         "type": "tabs",
         "children": [
           {
-            "id": "39727a8d90e24823",
+            "id": "1b92de781a2ce4d9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "linux/linux 文件系统/9. linux Multipath.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "9. linux Multipath"
+              "title": "新标签页"
             }
           }
         ]
@@ -141,13 +137,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 文件系统/9. linux Multipath.md",
-                "followCursor": true,
+                "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "9. linux Multipath 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -181,18 +176,20 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "39727a8d90e24823",
+  "active": "1b92de781a2ce4d9",
   "lastOpenFiles": [
+    "linux/linux 进程管理/systemd.md",
+    "linux/linux 进程管理/systemd.md",
+    "linux/linux 进程管理/supervisord.md",
+    "linux/linux 命令/homebrew.md",
+    "linux/linux 文件系统/9. linux Multipath.md",
     "存储服务/iSCSI.md",
     "database/Oracle/Oracle RAC/2. Install Oracle RAC for 19c.md",
-    "linux/linux 文件系统/9. linux Multipath.md",
     "linux/linux 文件系统/assets/106cef93e378e983f7ba3d4e4e1385f8_MD5.jpg",
     "linux/linux 文件系统/4. linux RAID（磁盘阵列）.md",
     "linux/linux 文件系统/2. linux 磁盘配额.md",
     "linux/linux 文件系统/8. linux 下的 dev-shm.md",
     "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
-    "linux/linux 进程管理/systemd.md",
-    "linux/linux 进程管理/supervisord.md",
     "linux/linux 命令/shell 命令手册/网络相关/iperf3.md",
     "linux/linux 命令/shell 命令手册/性能监控/sysstat/sar.md",
     "linux/linux 命令/assets",
@@ -209,8 +206,6 @@
     "devops/Coolmonitor.md",
     "devops/JumpServer.md",
     "开源工具/yt-dlp.md",
-    "开源工具/wireguard.md",
-    "docker/docker 命令.md",
     "开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp",
     "开源工具/assets/b063cbcb5f2a902636ca1302a5618117_MD5.webp",
     "开源工具/assets/0114b83ce7a61f82ddfe19904b44812f_MD5.webp",
