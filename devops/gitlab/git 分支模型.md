@@ -10,7 +10,7 @@ Git分支模型(master/bugfix/hotfix/develop/feature/release)
 
 ## 1.主要分支
 
-![](assets/net-img-2021-06-10_154857-20230727091212-ijk7r24.png)
+![|325](assets/net-img-2021-06-10_154857-20230727091212-ijk7r24.png)
 在核心，开发模型受到现有模型的极大启发。中央仓库拥有两个主要分支，具有无限的生命周期：
 
 - master
@@ -42,7 +42,7 @@ Git分支模型(master/bugfix/hotfix/develop/feature/release)
 
 ### 2.1.功能分支
 
-![](assets/net-img-2021-06-10_154913-20230727091212-ivevj3k.png)​
+![|166](assets/net-img-2021-06-10_154913-20230727091212-ivevj3k.png)​
 
 1. 分支出自：develop
 2. 必须合并回：develop
@@ -76,7 +76,7 @@ $ git push origin develop
 ```
 
 该–no-ff参数使合并始终创建新的commit，最新版中git merge 默认的就是–no-ff。这样可以避免丢失功能分支的历史信息，并将所有添加功能的 commit 组合到一个commit中。对比：
-![](assets/net-img-2021-06-10_155212-20230727091212-eqrjhsk.png)
+![|500](assets/net-img-2021-06-10_155212-20230727091212-eqrjhsk.png)
 在后一种情况下，不可能从Git历史中看到哪些 commit 实现了一个功能 - 您必须手动读取所有日志消息。恢复整个功能（即一组提交）在后一种情况下也是比较头痛的，而如果使用该–no-ff标志则很容易完成 。
 虽然它会创建一些（空的）commit，但增益远远大于成本。
 
@@ -149,7 +149,7 @@ Deleted branch release-1.2 (was ff452fe).
 
 ## 3.修补程序分支
 
-![](assets/net-img-2021-06-10_160015-20230727091213-b4xi581.png)​
+![|375](assets/net-img-2021-06-10_160015-20230727091213-b4xi581.png)​
 
 1. 分支出自：master
 2. 必须合并回：develop 和 master

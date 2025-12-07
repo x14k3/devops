@@ -8,46 +8,46 @@
 
 ### 1. 登录和基本语言配置
 
-![](assets/net-img-2020-12-29_113919-20230725161237-57x68xw.png "null")  
+![600](assets/net-img-2020-12-29_113919-20230725161237-57x68xw.png "null")  
 首次登录使用用户名root，密码为首次访问GitLab时设置的新密码。  
-​![](assets/net-img-2020-12-29_113926-20230725161237-y2ywt8n.png "null")  
-​![](assets/net-img-2020-12-29_113939-20230725161237-xvjral9.png "null")  
+​![600](assets/net-img-2020-12-29_113926-20230725161237-y2ywt8n.png "null")  
+​![600](assets/net-img-2020-12-29_113939-20230725161237-xvjral9.png "null")  
 设置环境为简体中文  
-​![](assets/net-img-2020-12-29_113944-20230725161237-g2mari2.png "null")​
+​![600](assets/net-img-2020-12-29_113944-20230725161237-g2mari2.png "null")​
 
 ### 2. 自动注册
 
-![image20200407163952391.png](assets/image20200407163952391-20230610173809-n02l9kc.png)​
+![image20200407163952391.png|600](assets/image20200407163952391-20230610173809-n02l9kc.png)​
 
-![image20200407164026831.png](assets/image20200407164026831-20230610173809-xcyegm5.png)​
+![image20200407164026831.png|600](assets/image20200407164026831-20230610173809-xcyegm5.png)​
 
 ### 3. 组&用户&项目
 
 **创建组**
 
-![image20200407164306707.png](assets/image20200407164306707-20230610173809-5uzevno.png)​
+![image20200407164306707.png|600](assets/image20200407164306707-20230610173809-5uzevno.png)​
 
 **设置组名称、描述等创建群组**
 
-![image20200407164514878.png](assets/image20200407164514878-20230610173809-15ygbfd.png)​
+![image20200407164514878.png|600](assets/image20200407164514878-20230610173809-15ygbfd.png)​
 
 **创建用户**
 
-![image20200407164550662.png](assets/image20200407164550662-20230610173809-5jyuj1z.png)​
+![image20200407164550662.png|600](assets/image20200407164550662-20230610173809-5jyuj1z.png)​
 
-![image20200407164640254.png](assets/image20200407164640254-20230610173809-8xn8lho.png)​
+![image20200407164640254.png|600](assets/image20200407164640254-20230610173809-8xn8lho.png)​
 
 **设置密码**
 
-![image20200407164723320.png](assets/image20200407164723320-20230610173809-pr8yvtm.png)​
+![image20200407164723320.png|600](assets/image20200407164723320-20230610173809-pr8yvtm.png)​
 
-![image20200407164835369.png](assets/image20200407164835369-20230610173809-ls01o33.png)​
+![image20200407164835369.png|600](assets/image20200407164835369-20230610173809-ls01o33.png)​
 
 **把用户添加到组里面**
 
-![image20200407164948977.png](assets/image20200407164948977-20230610173809-czbc82a.png)​
+![image20200407164948977.png|600](assets/image20200407164948977-20230610173809-czbc82a.png)​
 
-![image20200407165031097.png](assets/image20200407165031097-20230610173809-d2iuh73.png)​
+![image20200407165031097.png|600](assets/image20200407165031097-20230610173809-d2iuh73.png)​
 
 ```
 Guest：可以创建issue、发表评论，不能读写版本库
@@ -66,23 +66,23 @@ Public：所有人都能看到
 
 管理区域-创建仓库
 
-![image20200407165129307.png](assets/image20200407165129307-20230610173809-2faie9z.png)​
+![image20200407165129307.png|600](assets/image20200407165129307-20230610173809-2faie9z.png)​
 
-![image20200407170517512.png](assets/image20200407170517512-20230610173809-y205kfz.png)​
+![image20200407170517512.png|600](assets/image20200407170517512-20230610173809-y205kfz.png)​
 
 也可以导入项目
 
-![image20200407170805432.png](assets/image20200407170805432-20230610173809-tng9b1e.png)​
+![image20200407170805432.png|600](assets/image20200407170805432-20230610173809-tng9b1e.png)​
 
 创建仓库以后，网页下面有操作步骤的提醒
 
-![image20200407170918038.png](assets/image20200407170918038-20230610173809-i7j2y61.png)​
+![image20200407170918038.png|600](assets/image20200407170918038-20230610173809-i7j2y61.png)​
 
 ### 4. 登陆用户测试
 
 是否能看到空的gitlabtest仓库，修改完密码后再次登录
 
-![image20200407171108761.png](assets/image20200407171108761-20230610173809-ln38qvg.png)​
+![image20200407171108761.png|600](assets/image20200407171108761-20230610173809-ln38qvg.png)​
 
 ### 5. 添加ssh‐keys
 
@@ -90,9 +90,9 @@ Public：所有人都能看到
 
 ssh‐keygen ‐t rsa
 
-![image20200408093838255.png](assets/image20200408093838255-20230610173809-le8zdsz.png)​
+![image20200408093838255.png|600](assets/image20200408093838255-20230610173809-le8zdsz.png)​
 
-![image20200407171928443.png](assets/image20200407171928443-20230610173809-cgkeefk.png)​
+![image20200407171928443.png|600](assets/image20200407171928443-20230610173809-cgkeefk.png)​
 
 ### 6. 添加、推送到远程仓库
 
@@ -148,29 +148,29 @@ a  b  c  file4test
 
 创建合并请求
 
-![image20200408111919102.png](assets/image20200408111919102-20230610173809-42vhx6d.png)​
+![image20200408111919102.png|600](assets/image20200408111919102-20230610173809-42vhx6d.png)​
 
-![image20200408112004021.png](assets/image20200408112004021-20230610173809-tddzpge.png)​
+![image20200408112004021.png|600](assets/image20200408112004021-20230610173809-tddzpge.png)​
 
 ‍
 
 切换到管理员账号，处理请求
 
-![image20200408112235898.png](assets/image20200408112235898-20230610173809-i49g7mr.png)​
+![image20200408112235898.png|600](assets/image20200408112235898-20230610173809-i49g7mr.png)​
 
-![image20200408112327012.png](assets/image20200408112327012-20230610173809-s0p2epu.png)​
+![image20200408112327012.png|600](assets/image20200408112327012-20230610173809-s0p2epu.png)​
 
 切换到test用户或者直接使用管理员查看，内容已合并，之前的usertest分支已经被删除
 
-![image20200408112446861.png](assets/image20200408112446861-20230610173809-9nmv86w.png)​
+![image20200408112446861.png|600](assets/image20200408112446861-20230610173809-9nmv86w.png)​
 
 **设置保护主分支**
 
-![image20200407181236004.png](assets/image20200407181236004-20230610173809-vjmzqae.png)​
+![image20200407181236004.png|600](assets/image20200407181236004-20230610173809-vjmzqae.png)​
 
-![image20200407181310037.png](assets/image20200407181310037-20230610173809-f7qjtei.png)​
+![image20200407181310037.png|600](assets/image20200407181310037-20230610173809-f7qjtei.png)​
 
-![image20200407182219612.png](assets/image20200407182219612-20230610173809-el4jbmu.png)​
+![image20200407182219612.png|600](assets/image20200407182219612-20230610173809-el4jbmu.png)​
 
 默认情况下为了保证master分支的稳定是被保护的，只有维护者可以执行push的操作，所以，当一个开发者身份的用户在针对master分支进行操作的时候会出现被拒绝的提示
 
@@ -193,14 +193,16 @@ error: 无法推送一些引用到 'git@192.168.2.100:gitlabtest/gitlabtest.git'
 
 fetch+git merge ）
 
-```
-[root@zutuanxue git_data]# git fetch 
-[root@zutuanxue git_data]# ls
+```bash
+git fetch 
+ls
 a  b  c  README.md
-[root@zutuanxue git_data]# git merge origin/master
-[root@zutuanxue git_data]# ls
+
+git merge origin/master
+ls
 a  b  c  file4test  README.md
-[root@zutuanxue git_data]# git push -u origin
+
+git push -u origin
 ```
 
 ### 8. 提交程序到GIT

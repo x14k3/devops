@@ -140,7 +140,7 @@ nohup /data/kibana/bin/kibana >> /data/logs/kibana.log 2>&1 & ;
 
 ## 配置logstash
 
-![](assets/image-20221127214009311-20230610173808-l39nnkc.png)
+![|525](assets/image-20221127214009311-20230610173808-l39nnkc.png)
 
 Logstash管道有两个必需的元素，**输入**和**输出**，以及一个**可选元素过滤器**。输入插件从数据源那里消费数据，过滤器插件根据你的期望修改数据，输出插件将数据写入目的地。
 
