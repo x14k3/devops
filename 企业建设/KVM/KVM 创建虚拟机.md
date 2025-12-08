@@ -4,22 +4,22 @@
 
 使用nographics 方式
 
-> 使用 –nographic 以非图形界面的方式启动，所以需要重定向guest的console，所以需要`--extra-args='console=tty0 console=ttyS0,115200n8 serial'`​参数
+> 使用 `–nographic` 以非图形界面的方式启动，所以需要重定向 guest的 console，所以需要`--extra-args='console=tty0 console=ttyS0,115200n8 serial'`​参数
 
 ```bash
 sudo virt-install --name=centos7 --ram 4096 --vcpus 2 \
---disk path=/data/qemu/images/centos7.qcow2,size=60,format=qcow2 \
+--disk path=/data/qemu/images/centos7.qcow2,size=60,format=qcow2,bus=virtio \
 --location /data/qemu/iso/CentOS-7.9-x86_64-DVD-2009.iso \
 --nographics --extra-args='console=tty0 console=ttyS0,115200n8 serial'  \
---network bridge=br0
+--network bridge=br0,model=virtio
 ```
 
 ```bash
 virt-install --name=CentOS7_templ --ram 8192 --vcpus 2 \
---disk path=/data/CentOS7_templ.qcow2,size=55,format=qcow2 \
+--disk path=/data/CentOS7_templ.qcow2,size=55,format=qcow2,bus=virtio \
 --location /data/CentOS-7-x86_64-DVD-1908.iso \
 --nographics --extra-args='console=tty0 console=ttyS0,115200n8 serial' \
---virt-type=kvm --hvm --network network=default
+--virt-type=kvm --hvm --network network=default,model=virtio
 ```
 
 ‍
@@ -58,27 +58,27 @@ virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
 --boot cdrom
 ```
 
-### 参数说明：
+#### 参数说明
 
-|参数|说明|
-| ------| ----------------------------------|
-|​`--name win10`​|虚拟机名称|
-|​`--ram 4096`​|内存大小（MB）|
-|​`--vcpus 2`​|CPU核心数|
-|​`--disk path=...`​|虚拟磁盘路径（`bus=virtio`​需安装驱动）|
-|​`--os-variant win10`​|系统优化配置（用`osinfo-query os`​查看支持列表）|
-|​`--network network=default`​|使用默认NAT网络|
-|​`--graphics spice`​|启用SPICE远程桌面（支持`virt-viewer`​连接）|
-|​`--cdrom`​|Windows安装ISO路径|
-|​`--disk path=...`​|VirtIO驱动ISO路径|
-|​`--boot cdrom`​|优先从光盘启动|
+| 参数                          | 说明                                |
+| --------------------------- | --------------------------------- |
+| ​--name win10               | 虚拟机名称                             |
+| ​--ram 4096                 | 内存大小（MB）                          |
+| ​--vcpus 2                  | CPU核心数                            |
+| ​--disk path=...            | 虚拟磁盘路径（`bus=virtio`​需安装驱动）        |
+| ​--os-variant win10         | 系统优化配置（用`osinfo-query os`​查看支持列表） |
+| ​--network network=default​ | 使用默认NAT网络                         |
+| ​--graphics spice​          | 启用SPICE远程桌面（支持`virt-viewer`​连接）   |
+| ​--cdrom                    | Windows安装ISO路径                    |
+| ​--disk path=...​           | VirtIO驱动ISO路径                     |
+| ​--boot cdrom`              | 优先从光盘启动                           |
+|                             |                                   |
 
 ---
 
 ### 4. **安装Windows注意事项**
 
 1. **加载VirtIO驱动**：
-
     - 在安装界面选择磁盘时，点击  **"加载驱动程序"**  ， **"浏览"**
     - 选择VirtIO光盘中的 `\viostor\w10\amd64`​ 加载磁盘驱动
     - 安装完成后，从VirtIO光盘安装其他驱动（如网络、Balloon服务）
@@ -117,6 +117,6 @@ virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
 |​`virsh destroy win10`​|强制停止|
 |​`virsh undefine win10`​|删除虚拟机（保留磁盘）|
 
-> **注意**：若安装时未使用VirtIO，Windows可能无法识别磁盘。此时需在XML中将磁盘总线改为`ide`​（性能降低），安装驱动后再切换回`virtio`​。
+> **注意**：若安装时未使用 VirtIO，Windows可能无法识别磁盘。此时需在XML中将磁盘总线改为`ide`​（性能降低），安装驱动后再切换回`virtio`​。
 
 ‍

@@ -24,21 +24,39 @@
             }
           },
           {
-            "id": "6f11b1e9fceb000b",
+            "id": "a8b782a9c045f6a7",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "存储服务/GlusterFS/GlusterFS 集群部署.md",
+                "file": "存储服务/TrueNAS.md",
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "GlusterFS 集群部署"
+              "title": "TrueNAS"
+            }
+          },
+          {
+            "id": "73004d0f06b98293",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "存储服务/Ceph.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Ceph"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -158,13 +176,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "存储服务/GlusterFS/GlusterFS 集群部署.md",
+                "file": "存储服务/Ceph.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "GlusterFS 集群部署 的大纲"
+              "title": "Ceph 的大纲"
             }
           },
           {
@@ -198,10 +216,27 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "6f11b1e9fceb000b",
+  "active": "73004d0f06b98293",
   "lastOpenFiles": [
+    "存储服务/TrueNAS.md",
+    "存储服务/Ceph.md",
+    "存储服务/Openfiler（Expired）.md",
+    "企业建设/KVM/KVM 创建虚拟机.md",
+    "存储服务/assets/05f7ef3d591e6268ceb044af071a6569_MD5.jpg",
+    "存储服务/assets/Pasted image 20251207220521.png",
+    "企业建设/KVM/KVM 虚拟机网络设置.md",
+    "linux/linux 命令/homebrew.md",
+    "企业建设/KVM/cloud-init介绍.md",
+    "企业建设/KVM/将OVA格式的虚拟机导入KVM.md",
+    "企业建设/KVM/kvm 遇到过的问题/enp0s31f6_ Detected Hardware Unit Hang.md",
+    "存储服务/samba.md",
     "存储服务/RAID.md",
     "存储服务/nfs.md",
+    "存储服务/iSCSI.md",
+    "存储服务/fastDFS.md",
+    "存储服务/网络存储技术概要.md",
+    "存储服务/存储多路径.md",
+    "存储服务/GlusterFS/GlusterFS 集群部署.md",
     "devops/GitLab/gitlab 基本使用.md",
     "devops/GitLab/gitlab 部署.md",
     "devops/GitLab/git 分支模型.md",
@@ -212,24 +247,9 @@
     "devops/ELK/ELK 部署/ELK 7.17 部署.md",
     "linux/linux 命令/linux 系统性能瓶颈分析.md",
     "devops/Zabbix/Zabbix 告警通知.md",
-    "devops/Zabbix/Zabbix 搭建.md",
-    "中间件/php.md",
-    "中间件/etcd.md",
-    "中间件/tuxedo/tuxedo部署.md",
-    "中间件/tuxedo/tuxedo介绍.md",
-    "中间件/apache/Apache服务之配置文件.md",
-    "中间件/activeMQ/activemq 部署/Master-slave模式.md",
-    "中间件/activeMQ/activemq 部署/Broker-Cluster模式.md",
     "中间件/activeMQ/activemq 部署/assets/image-20221130145157307-20230610173811-argxfbq.png",
     "中间件/activeMQ/activemq 部署/assets/image-20221129175501864-20230610173811-z79c28o.png",
     "中间件/activeMQ/activemq 部署/assets/image-20221127213133868-20230610173811-0m0mcwu.png",
-    "中间件/activeMQ/activemq+ssl.md",
-    "中间件/activeMQ/activemq 优化.md",
-    "中间件/apache/Apache httpd服务安装.md",
-    "网络与安全/Vxlan技术.md",
-    "网络与安全/TLS Client-initiated 重协商攻击.md",
-    "网络与安全/linux 安全相关配置.md",
-    "网络与安全/信息安全中常用术语介绍.md",
     "linux/linux 命令/assets",
     "linux/linux 文件系统/assets/106cef93e378e983f7ba3d4e4e1385f8_MD5.jpg",
     "开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp",
@@ -238,8 +258,6 @@
     "开源工具/assets/beb599fbd3c73f8d8a35f2f5fe8b889b_MD5.webp",
     "shell/shell 命令手册/备份与恢复/assets",
     "linux/linux 安全管理/assets",
-    "开源工具/assets/3f2b268a06f02b20de2ad1937071e89d_MD5.jpg",
-    "开源工具/assets/Pasted image 20251124153800.png",
     "devops/Jenkins/Jenkins 使用/assets",
     "devops/Jenkins/Jenkins 使用",
     "assets",
