@@ -49,7 +49,7 @@ mongod --port=27017 --dbpath=/mongodb/data --logpath=/mongodb/log/mongodb.log --
 
 - 也可以将上面的参数写到配置文件中，如`/mongodb/conf/mongo.conf`​文件，必须是yaml格式
 
-```ymal
+```yaml
 systemLog:
   destination: file
   path: /mongodb/log/mongodb.log # log path
