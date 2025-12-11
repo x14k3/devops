@@ -17,54 +17,29 @@
 
 ### 2.2 镜像下载
 
-jellyfin/jellyfin 官方镜像下载：
-
 ```bash
-sudo docker pull jellyfin/jellyfin:latest
-```
-
-linuxserver/jellyfin 镜像下载：
-
-```bash
-sudo docker pull linuxserver/jellyfin:latest
-```
-
-nyanmisaka/jellyfin 即插即用镜像下载：
-
-```bash
-sudo docker pull nyanmisaka/jellyfin:latest
+# jellyfin/jellyfin 官方镜像下载
+docker pull jellyfin/jellyfin:latest
+# linuxserver/jellyfin 镜像下载
+docker pull linuxserver/jellyfin:latest
+# nyanmisaka/jellyfin 即插即用镜像下载
+docker pull nyanmisaka/jellyfin:latest
 ```
 
 ### 2.3 容器的创建与启动
 
-2.3.1 应用程序必要文件夹的准备：
-
-在创建与启动 Jellyfin 容器前，先要在 Linux 系统下创建两个文件夹，分别用于保存配置文件，应用程序缓存，定位一个媒体库文件夹，假设你的媒体库文件夹在  */media* 文件中。
-
 ```bash
-# 在系统根目录下创建 /data/jellyfin 文件夹，并在 /data/jellyfin文件夹下再创建 config 和 cache 两个三级文件夹 
-sudo mkdir -p /data/jellyfin/{config,cache}
-```
-
-2.3.2 创建与启动Jellyfin容器：
-
-```bash
-docker run -d --name jellyfin \
--e PUID=1000 -e PGID=1000 -e TZ=Asia/Shanghai \
---net=host \
--p 8096:8096 \
+#  应用程序必要文件夹的准备
+mkdir -p /data/jellyfin/{config,cache}
+# 创建与启动Jellyfin容器
+docker run -d --name jellyfin -e PUID=1000 -e PGID=1000 \
+-e TZ=Asia/Shanghai --net=host \
 -v /data/application/jellyfin/config:/config \
 -v /data/application/jellyfin/cache:/cache \
--v /data/media:/media \
---device=/dev/dri:/dev/dri \
---add-host=api.themoviedb.org:18.66.233.6 \
---add-host=api.themoviedb.org:18.66.233.94 \
---add-host=api.themoviedb.org:18.66.233.7 \
---add-host=api.themoviedb.org:18.66.233.63 \
---restart unless-stopped nyanmisaka/jellyfin:latest 
+-v /mnt/backup_OptiPlex3000/media:/media \
+--device=/dev/dri:/dev/dri  \
+--restart unless-stopped jellyfin/jellyfin:unstable
 ```
-
-端口说明：
 
 |端口号|用途|可选项|
 | --------| ------------------------------------| --------|
@@ -73,33 +48,21 @@ docker run -d --name jellyfin \
 |7359|让同一局域网中的客户端设备自动发现|可选|
 |1900|DLNA的端口|可选|
 
-2.3.3 确认容器：
-
-```bash
-sudo docker ps -l 
-#查看最后一个创建和启动的容器 #或者 
-sudo docker ps 
-#查看所有正在运行的容器
-```
-
 ### 2.4 系统环境调试
-
-‍
 
 ```bash
 #进入 Jellyfin 的 Bash 模式：
 docker exec -it Jellyfin /bin/bash
-
 # 更新容器内 debain 仓库信息
 apt update 
 # 字体安装
 apt install fonts-noto-cjk-extra
 # Intel核心显卡直通确认与驱动安装
-#显卡直通确认 
+# 显卡直通确认 
 ls /dev/dri
-#驱动安装 
+# 驱动安装 
 apt install intel-media-va-driver 
-#解码支持确认 
+# 解码支持确认 
 /usr/lib/jellyfin-ffmpeg/vainfo
 ```
 
@@ -131,14 +94,7 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 
 全部设置完点“确定”，之后系统便会自动生成电影和电视剧的海报列表，完成的速度和你使用的网络环境相关。
 
-### 3.2 网络设置：
-
-- 打开“控的制台”，在“高级”里选择“联网”；
-- 设置“监听的本地网络地址”，设为 Jellyfin 服务器所在的网址；
-- 设置“LAN网络”，设置为你的局域网地址，比如：192.168.1.0/255.255.255.0，如果有多个局域网网段，则用“逗号”隔开；
-- 最后点”确定“完成网络配置。
-
-### 3.3 视频硬解设置：
+### 3.2 视频硬解设置
 
 - 打开”控制台“，在”服务器“里选择”播放“；
 - 硬件加速这里：下拉选择”Video Acceleartion API(VAAP)“或者”Intel QuickSync(QSV)“，不是太老的CPU/显卡，建议选QSV；
@@ -151,7 +107,56 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 
 注意，千万不要选择”启用色调映射“，这是个坑，选中后，很多HEVC/HDR的片子在播放时会报错，提示没有合适的容器，最终无法播放。
 
-‍
+
+### 3.3 metabute 刮削器配置
+
+#### 插件安装
+
+1. 进入 Jellyfin 控制台 > 插件 > 存储库，点击添加
+2. 新版 Jellyfin 控制台 > 插件 > 目录 > 设置图标 > 点击加号图标
+3. 输入存储库名称：MetaTube
+4. 输入存储库URL：`https://raw.githubusercontent.com/metatube-community/jellyfin-plugin-metatube/dist/manifest.json`
+5. 在插件目录元数据类别下找到 MetaTube，点击安装
+6. 重启 Jellyfin
+7. 进入控制台 -> 我的插件，确认 Metatube 插件的状态为 Active，点击进入设置界面
+
+适用于中国的存储库URL：`https://cdn.jsdelivr.net/gh/metatube-community/jellyfin-plugin-metatube@dist/manifest.json`（可能有缓存）
+
+#### 后端服务安装
+
+为什么需要安装 Metatube 后端服务？
+
+因为 jellyfin 需要通过后端来刮削数据，metatube 作为刮削源，jellyfin 把影片名称等信息交给 metatube后端去刮削，metatube后端根据代号去不同的数据站获取数据，jellyfin 拿到元数据后保存到本地或者影片文件夹中。
+
+后端使用go语言编写，部署比较方便，有多种方式。有一定动手能力的可以选择自己部署，也可以选择部署免费的云服务。
+
+```bash
+# 二进制运行
+wget https://github.com/metatube-community/metatube-server-releases/releases/download/v1.3.1/metatube-server-linux-amd64.zip
+
+./metatube-server-linux-amd64
+
+# docker 方式部署
+# docker run -d --name metatube -p 8097:8080 -v /data/application/jellyfin/metatube/config:/config ghcr.io/metatube-community/metatube-server:latest -dsn /data/application/jellyfin/metatube/metatube.db
+
+```
+
+然后通过浏览器访问 http://localhost:8080，输出以下信息
+
+```json
+{"data":{"app":"metatube","version":"v1.3.1-754f637"}}
+```
+
+或者使用curl验证
+
+```powerShell
+curl http://localhost:8080
+
+{"data":{"app":"metatube","version":"v1.3.1-754f637"}}
+```
+
+注意这个服务需要一直运行，刮削时会持续输出日志，关闭后无法刮削，所以最好配置开机启动和后台运行。
+
 
 ## 4、电视直播配置
 

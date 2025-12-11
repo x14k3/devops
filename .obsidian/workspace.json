@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/MongoDB/MongoDB安装.md",
-                "mode": "preview",
+                "file": "开源工具/Jellyfin.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MongoDB安装"
+              "title": "Jellyfin"
             }
           }
         ],
@@ -158,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/MongoDB/MongoDB安装.md",
+                "file": "开源工具/Jellyfin.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "MongoDB安装 的大纲"
+              "title": "Jellyfin 的大纲"
             }
           },
           {
@@ -200,6 +200,7 @@
   },
   "active": "71ca38bc0d8ed83e",
   "lastOpenFiles": [
+    "database/MongoDB/MongoDB安装.md",
     "database/MongoDB/assets",
     "linux/linux 命令/linux 系统性能瓶颈分析.md",
     "devops/ELK/ELK 部署/Docker 部署 Elasticsearch + Kibana.md",
@@ -244,7 +245,6 @@
     "devops/Jenkins/Jenkins 使用/assets",
     "devops/Jenkins/Jenkins 使用",
     "assets",
-    "devops/ELK/ELK 部署",
-    "企业建设/信创/assets"
+    "devops/ELK/ELK 部署"
   ]
 }
