@@ -38,7 +38,7 @@ docker run -d --name jellyfin -e PUID=1000 -e PGID=1000 \
 -v /data/application/jellyfin/cache:/cache \
 -v /mnt/backup_OptiPlex3000/media:/media \
 --device=/dev/dri:/dev/dri  \
---restart unless-stopped jellyfin/jellyfin:unstable
+--restart unless-stopped jellyfin/jellyfin:latest
 ```
 
 |端口号|用途|可选项|
@@ -108,7 +108,33 @@ Jellyfin的容器已经在Docker里创建、启动和调试好了，接下来可
 注意，千万不要选择”启用色调映射“，这是个坑，选中后，很多HEVC/HDR的片子在播放时会报错，提示没有合适的容器，最终无法播放。
 
 
-### 3.3 metabute 刮削器配置
+### 3.3 metashark 刮削器配置
+
+#### 插件安装
+
+1. 进入 Jellyfin 控制台 > 插件 > 存储库，点击添加
+2. 新版 Jellyfin 控制台 > 插件 > 目录 > 设置图标 > 点击加号图标
+3. 输入存储库名称：metashark
+4. 输入存储库URL：`https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest.json`
+5. 在插件目录元数据类别下找到 metashark，点击安装
+6. 重启 Jellyfin
+7. 进入控制台 -> 我的插件，确认 metashark 插件的状态为 Active，点击进入设置界面
+
+
+#### 如何使用
+
+上述操作完成后，就可以来刮削影片了。
+
+1. 创建媒体库，选择电影类型，选择影片所在文件夹。
+2. 配置媒体库，勾选 metashark 作为元数据下载器 (电影)， 注意只勾选这一个即可。
+3. 图片获取程序也只选择 metashark，然后勾选 “将媒体图像保存到媒体所在文件夹”
+4. 扫描媒体库 - 刷新元数据，即可开始刮削，不出意外，刮削完成后会自动显示封面和影片信息。
+5. 可以设置成 “启用实时监控”，不需要手动刷新，有的实在扫描不出来的可以手动选择识别，填写影片号码后查找。
+
+
+
+
+### 3.4 metabute 刮削器配置
 
 #### 插件安装
 
@@ -137,25 +163,44 @@ wget https://github.com/metatube-community/metatube-server-releases/releases/dow
 ./metatube-server-linux-amd64
 
 # docker 方式部署
-# docker run -d --name metatube -p 8097:8080 -v /data/application/jellyfin/metatube/config:/config ghcr.io/metatube-community/metatube-server:latest -dsn /data/application/jellyfin/metatube/metatube.db
+docker run -d --name metatube -p 8097:8080 -v /data/application/jellyfin/metatube/config:/config ghcr.io/metatube-community/metatube-server:latest -dsn /config/metatube.db
 
 ```
 
-然后通过浏览器访问 http://localhost:8080，输出以下信息
+然后通过浏览器访问 http://192.168.3.100:8097 输出以下信息
 
 ```json
-{"data":{"app":"metatube","version":"v1.3.1-754f637"}}
+{"data":{"app":"metatube","version":"v1.3.2-f2bbaee"}}
 ```
 
 或者使用curl验证
 
 ```powerShell
-curl http://localhost:8080
+curl http://192.168.3.100:8097 
 
-{"data":{"app":"metatube","version":"v1.3.1-754f637"}}
+{"data":{"app":"metatube","version":"v1.3.2-f2bbaee"}}
 ```
 
 注意这个服务需要一直运行，刮削时会持续输出日志，关闭后无法刮削，所以最好配置开机启动和后台运行。
+
+
+#### 配置插件
+
+安装好插件和后端服务后，进入插件设置界面，配置服务端地址(http://192.168.3.100:8097) 和 Token，Token 相当于密钥，如果在部署的时候配置了 Token，在插件里一定要配置 Token，否则会因为校验失败无法使用。
+
+[[开源工具/assets/46b69b4f0c5ed498d893084eedd8e2cf_MD5.jpg|Open: Pasted image 20251211125958.png]]
+![[开源工具/assets/46b69b4f0c5ed498d893084eedd8e2cf_MD5.jpg|600]]
+
+
+#### 如何使用
+
+上述操作完成后，就可以来刮削影片了。
+
+1. 创建媒体库，选择电影类型，选择影片所在文件夹。
+2. 配置媒体库，勾选 Metatube 作为元数据下载器 (电影)， 注意只勾选这一个即可。
+3. 图片获取程序也只选择 Metatube，然后勾选 “将媒体图像保存到媒体所在文件夹”
+4. 扫描媒体库 - 刷新元数据，即可开始刮削，不出意外，刮削完成后会自动显示封面和影片信息。
+5. 可以设置成 “启用实时监控”，不需要手动刷新，有的实在扫描不出来的可以手动选择识别，填写影片号码后查找。
 
 
 ## 4、电视直播配置
