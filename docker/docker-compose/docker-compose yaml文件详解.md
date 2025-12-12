@@ -1,111 +1,10 @@
 
 
-我们知道使用一个 `Dockerfile` 模板文件，可以让用户很方便的定义一个单独的应用容器。然而，在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况。例如要实现一个 Web 项目，除了 Web 服务容器本身，往往还需要再加上后端的数据库服务容器，甚至还包括负载均衡容器等。
-
-`Compose` 恰好满足了这样的需求。它允许用户通过一个单独的 `docker-compose.yml` 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
-
-**​`Compose`​**​ ** 中有两个重要的概念：**
-
-- 服务 (`service`)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。
-- 项目 (`project`)：由一组关联的应用容器组成的一个完整业务单元，在 `docker-compose.yml` 文件中定义。
-
-`Compose` 的默认管理对象是项目，通过子命令对项目中的一组容器进行便捷地生命周期管理。
-`Compose` 项目由 Python 编写，实现上调用了 Docker 服务提供的 API 来对容器进行管理。因此，只要所操作的平台支持 Docker API，就可以在其上利用 `Compose` 来进行编排管理。
-
-**Compose v2**
-
-目前 Docker 官方用 GO 语言 重写了 Docker Compose，并将其作为了 docker cli 的子命令，称为 `Compose V2`。你可以参照官方文档安装，然后将熟悉的 `docker-compose` 命令替换为 `docker compose`，即可使用 Docker Compose。
-
-## 部署 docker-compose
-
-`Compose` 支持 Linux、macOS、Windows 10 三大平台。
-`Compose` 可以通过 Python 的包管理工具 `pip` 进行安装，也可以直接下载编译好的二进制文件使用，甚至能够直接在 Docker 容器中运行。
-`Docker Desktop for Mac/Windows` 自带 `docker-compose` 二进制文件，安装 Docker 之后可以直接使用。
-
-```bash
-docker-compose --version
-docker-compose version 1.27.4, build 40524192
-```
-
-Linux 系统请使用以下介绍的方法安装。  
-从 官方 [GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。
-
-## docker compose 命令
-
-### docker-compose
-
-```sh
-docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
-```
-
-命令选项如下：
-
-- -f，–file FILE指定Compose模板文件，默认为docker-compose.yml，可以多次指定。
-- -p，–project-name NAME指定项目名称，默认将使用所在目录名称作为项目名。
-- -x-network-driver 使用Docker的可拔插网络后端特性（需要Docker 1.9+版本） -x-network-driver DRIVER指定网络后端的驱动，默认为bridge（需要Docker 1.9+版本）
-- -verbose输出更多调试信息
-- -v，–version打印版本并退出
-
-```bash
-docker-compose 命令 --help                     获得一个命令的帮助
-docker-compose up -d nginx                     构建启动nignx容器
-docker-compose exec nginx bash                 登录到nginx容器中
-docker-compose down                            此命令将会停止 up 命令所启动的容器，并移除网络
-docker-compose ps                              列出项目中目前的所有容器
-docker-compose restart nginx                   重新启动nginx容器
-docker-compose build nginx                     构建镜像 
-docker-compose build --no-cache nginx          不带缓存的构建
-docker-compose top                             查看各个服务容器内运行的进程 
-docker-compose logs -f nginx                   查看nginx的实时日志
-docker-compose images                          列出 Compose 文件包含的镜像
-docker-compose config                          验证文件配置，当配置正确时，不输出任何内容，当文件配置错误，输出错误信息。 
-docker-compose events --json nginx             以json的形式输出nginx的docker日志
-docker-compose pause nginx                     暂停nignx容器
-docker-compose unpause nginx                   恢复ningx容器
-docker-compose rm nginx                        删除容器（删除前必须关闭容器，执行stop）
-docker-compose stop nginx                      停止nignx容器
-docker-compose start nginx                     启动nignx容器
-docker-compose restart nginx                   重启项目中的nignx容器
-docker-compose run --no-deps --rm php-fpm php -v   在php-fpm中不启动关联容器，并容器执行php -v 执行完成后删除容器
-
-```
-
-‍
-
-### docker-compose up
-
-这个命令一定要记住，每次启动都要用到，只要学会使用的人记住这个就好了
-
-```sh
-docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
-```
-
-选项包括：
-
-- -d 在后台运行服务容器
-- –no-color 不使用颜色来区分不同的服务的控制输出
-- –no-deps 不启动服务所链接的容器
-- –force-recreate 强制重新创建容器，不能与–no-recreate同时使用 –no-recreate 如果容器已经存在，则不重新创建，不能与–force-recreate同时使用
-- –no-build 不自动构建缺失的服务镜像
-- –build 在启动容器前构建服务镜像
-- –abort-on-container-exit 停止所有容器，如果任何一个容器被停止，不能与-d同时使用
-- -t, –timeout TIMEOUT 停止容器时候的超时（默认为10秒）
-- –remove-orphans 删除服务中没有在compose文件中定义的容器
-- –scale SERVICE=NUM 设置服务运行容器的个数，将覆盖在compose中通过scale指定的参数  
-  docker-compose up 启动所有服务  
-  docker-compose up -d 在后台所有启动服务
-- -f 指定使用的Compose模板文件，默认为docker-compose.yml，可以多次指定。  
-  docker-compose -f docker-compose.yml up -d
-
-‍
-
-## docker-compose.yml 模板文件
-
 Docker-Compose允许用户通过一个docker-compose.yml模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
 Compose模板文件是一个定义服务、网络和卷的YAML文件。Compose模板文件默认路径是当前目录下的docker-compose.yml，可以使用.yml或.yaml作为文件扩展名。
 Docker-Compose标准模板文件应该包含version、services、networks三大部分，最关键的是**services和networks**两个部分。
 
-```dockerfile
+```yaml
 version: '3.5'
 services:
   nacos1:
@@ -198,7 +97,7 @@ Compose目前有三个版本分别为Version 1，Version 2，Version 3，Compose
 
 image是指定服务的镜像名称或镜像ID。如果镜像在本地不存在，Compose将会尝试拉取镜像。
 
-```
+```yaml
 services:
   web:
     image: dockercloud/hello-world
@@ -208,19 +107,19 @@ services:
 
 服务除了可以基于指定的镜像，还可以基于一份Dockerfile，在使用up启动时执行构建任务，构建标签是build，可以指定Dockerfile所在文件夹的路径。Compose将会利用Dockerfile自动构建镜像，然后使用镜像启动服务容器。
 
-```
+```yaml
 build: /path/to/build/dir
 ```
 
 也可以是相对路径，只要上下文确定就可以读取到Dockerfile。
 
-```
+```yaml
 build: ./dir
 ```
 
 设定上下文根目录，然后以该目录为准指定Dockerfile。
 
-```
+```yaml
 build:
 	context: ../
 	dockerfile: path/of/Dockerfile
@@ -232,7 +131,7 @@ build都是一个目录，如果要指定Dockerfile文件需要在build标签的
 
 context选项可以是Dockerfile的文件路径，也可以是到链接到git仓库的url，当提供的值是相对路径时，被解析为相对于撰写文件的路径，此目录也是发送到Docker守护进程的context
 
-```
+```yaml
 build:
 	context: ./dir
 ```
@@ -241,7 +140,7 @@ build:
 
 使用dockerfile文件来构建，必须指定构建路径
 
-```
+```yaml
 build:
 context: .
 	dockerfile: Dockerfile-alternate
@@ -253,7 +152,7 @@ context: .
 
 数据卷的格式可以是下面多种形式
 
-```
+```yaml
 volumes:
   // 只是指定一个路径，Docker 会自动在创建一个数据卷（这个路径是容器内部的）。
   - /var/lib/mysql
@@ -271,7 +170,7 @@ volumes:
 
 如果不使用宿主机的路径，可以指定一个volume_driver。
 
-```
+```yaml
 volume_driver: mydriver
 ```
 
@@ -279,7 +178,7 @@ volume_driver: mydriver
 
 从另一个服务或容器挂载其数据卷：
 
-```
+```yaml
 volumes_from:
    - service_name   
      - container_name
@@ -291,7 +190,7 @@ ports用于映射端口的标签。
 
 使用HOST:CONTAINER格式或者只是指定容器的端口，宿主机会随机映射端口。
 
-```
+```yaml
 ports:
  - "3000"
  - "8000:8000"
@@ -305,7 +204,7 @@ ports:
 
 使用command可以覆盖容器启动后默认执行的命令。
 
-```
+```yaml
 command: bundle exec thin -p 3000
 ```
 
@@ -315,7 +214,7 @@ Compose的容器名称格式是：<项目名称><服务名称><序号>
 
 可以自定义项目名称、服务名称，但如果想完全控制容器的命名，可以使用标签指定：
 
-```
+```yaml
 container_name: app
 ```
 
@@ -323,7 +222,7 @@ container_name: app
 
 在使用Compose时，最大的好处就是少打启动命令，但一般项目容器启动的顺序是有要求的，如果直接从上到下启动容器，必然会因为容器依赖问题而启动失败。例如在没启动数据库容器的时候启动应用容器，应用容器会因为找不到数据库而退出。depends\_on标签用于解决容器的依赖、启动先后的问题：
 
-```
+```yaml
 version: '2'
 services:
   web:
@@ -343,7 +242,7 @@ services:
 
 部署相关的配置都在这个节点下，例：
 
-```dockerfile
+```yaml
 deploy:
   mode: replicated
   replicas: 2
@@ -365,7 +264,7 @@ deploy:
 
 ### PID
 
-```
+```yaml
 pid: "host"
 ```
 
@@ -375,7 +274,7 @@ pid: "host"
 
 添加主机名的标签，会在/etc/hosts文件中添加一些记录。
 
-```
+```yaml
 extra_hosts:
  - "somehost:162.242.195.82"
  - "otherhost:50.31.209.229"
@@ -383,7 +282,7 @@ extra_hosts:
 
 启动后查看容器内部hosts：
 
-```
+```yaml
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ```
@@ -392,7 +291,7 @@ extra_hosts:
 
 自定义DNS服务器。可以是一个值，也可以是一个列表。
 
-```
+```yaml
 dns：8.8.8.8
 dns：
     - 8.8.8.8   
@@ -403,7 +302,7 @@ dns：
 
 暴露端口，但不映射到宿主机，只允许能被连接的服务访问。仅可以指定内部端口为参数，如下所示：
 
-```
+```yaml
 expose:
     - "3000"
     - "8000"
@@ -413,7 +312,7 @@ expose:
 
 链接到其它服务中的容器。使用服务名称（同时作为别名），或者“服务名称:服务别名”
 
-```
+```yaml
 links:
     - db
     - db:database
@@ -424,7 +323,7 @@ links:
 
 设置网络模式。
 
-```
+```yaml
 net: "bridge"
 net: "none"
 net: "host"
@@ -435,7 +334,7 @@ net: "host"
 添加或删除容器拥有的宿主机的内核功能。
 详情参考 [capabilities](#capabilities)
 
-```
+```yaml
 cap_add:
   - ALL # 开启全部权限
 
@@ -447,7 +346,7 @@ cap_drop:
 
 为容器指定父cgroup组，意味着将继承该组的资源限制。
 
-```
+```yaml
 cgroup_parent: m-executor-abcd
 ```
 
@@ -455,7 +354,7 @@ cgroup_parent: m-executor-abcd
 
 自定义DNS搜索域。可以是单个值或列表。
 
-```
+```yaml
 dns_search: example.com
 
 dns_search:
@@ -467,13 +366,13 @@ dns_search:
 
 覆盖容器默认的 entrypoint。
 
-```
+```yaml
 entrypoint: /code/entrypoint.sh
 ```
 
 也可以是以下格式：
 
-```
+```yaml
 entrypoint:
     - php
     - -d
@@ -487,13 +386,13 @@ entrypoint:
 
 从文件添加环境变量。可以是单个值或列表的多个值。
 
-```
+```yaml
 env_file: .env
 ```
 
 也可以是列表格式：
 
-```
+```yaml
 env_file:
   - ./common.env
   - ./apps/web.env
@@ -504,7 +403,7 @@ env_file:
 
 添加环境变量。您可以使用数组或字典、任何布尔值，布尔值需要用引号引起来，以确保 YML 解析器不会将其转换为 True 或 False。
 
-```
+```yaml
 environment:
   RACK_ENV: development
   SHOW: 'true'
@@ -514,7 +413,7 @@ environment:
 
 用于检测docker服务是否健康运行。
 
-```
+```yaml
 healthcheck:
   test: ["CMD", "curl", "-f", "http://localhost"] # 设置检测程序
   interval: 1m30s # 设置检测间隔
@@ -529,7 +428,7 @@ healthcheck:
 
 driver：指定服务容器的日志记录驱动程序，默认值为json-file。有以下三个选项
 
-```
+```yaml
 driver: "json-file"
 driver: "syslog"
 driver: "none"
@@ -537,7 +436,7 @@ driver: "none"
 
 仅在json-file驱动程序下，可以使用以下参数，限制日志得数量和大小。
 
-```
+```yaml
 logging:
   driver: json-file
   options:
@@ -549,7 +448,7 @@ logging:
 
 syslog驱动程序下，可以使用syslog-address指定日志接收地址。
 
-```
+```yaml
 logging:
   driver: syslog
   options:
@@ -560,7 +459,7 @@ logging:
 
 配置容器连接的网络，引用顶级networks下的条目 。
 
-```
+```yaml
 services:
   some-service:
     networks:
@@ -588,7 +487,7 @@ aliases：同一网络上的其他容器可以使用服务名称或此别名来�
 - on-failure：在容器非正常退出时（退出状态非0），才会重启容器。
 - unless-stopped：在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器
 
-```
+```yaml
 restart: "no"
 restart: always
 restart: on-failure
@@ -601,7 +500,7 @@ restart: unless-stopped
 
 存储敏感数据，例如密码：
 
-```
+```yaml
 version: "3.1"
 services:
 
@@ -621,7 +520,7 @@ secrets:
 
 修改容器默认的schema标签。
 
-```
+```yaml
 security-opt：
   - label:user:USER   # 设置容器的用户标签
   - label:role:ROLE   # 设置容器的角色标签
@@ -633,7 +532,7 @@ security-opt：
 
 指定在容器无法处理SIGTERM (或者任何 stop_signal 的信号)，等待多久后发送SIGKILL信号关闭容器。
 
-```
+```yaml
 stop_grace_period: 1s # 等待 1 秒
 stop_grace_period: 1m30s # 等待 1 分 30 秒 
 ```
@@ -646,7 +545,7 @@ stop_grace_period: 1m30s # 等待 1 分 30 秒
 
 以下示例，使用SIGUSR1替代信号SIGTERM来停止容器。
 
-```
+```yaml
 stop_signal: SIGUSR1
 ```
 
@@ -654,7 +553,7 @@ stop_signal: SIGUSR1
 
 设置容器中的内核参数，可以使用数组或字典格式。
 
-```
+```yaml
 sysctls:
   net.core.somaxconn: 1024
   net.ipv4.tcp_syncookies: 0
@@ -668,7 +567,7 @@ sysctls:
 
 在容器内安装一个临时文件系统。可以是单个值或列表的多个值。
 
-```
+```yaml
 tmpfs: /run
 
 tmpfs:
@@ -680,7 +579,7 @@ tmpfs:
 
 覆盖容器默认的ulimit。
 
-```
+```yaml
 ulimits:
   nproc: 65535
   nofile:
@@ -692,7 +591,7 @@ ulimits:
 
 指定设备映射列表。
 
-```
+```yaml
 devices:
   - "/dev/ttyUSB0:/dev/ttyUSB0"
 ```
@@ -701,7 +600,7 @@ devices:
 
 为容器分配一个伪终端，就相当于 `docke run -t`, 就是把 `/bin/bash` 当做前台进程。
 
-```
+```yaml
 tty: true
 ```
 
@@ -710,7 +609,7 @@ tty: true
 Capabilities的主要思想在于分割root用户的特权，即将root的特权分割成不同的能力，每种能力代表一定的特权操作。 例如：能力CAP_SYS_MODULE表示用户能够加载(或卸载)内核模块的特权操作，而CAP_SETUID表示用户能够修改进程用户身份的特权操作。在Capbilities中系统将根据进程拥有的能力来进行特权操作的访问控制。
 
 ```bash
-CHOWN             # 修改文件属主的权限
+CHOWN            # 修改文件属主的权限
 DAC_OVERRIDE     # 忽略文件的DAC访问限制
 DAC_READ_SEARCH  # 忽略文件读及目录搜索的DAC访问限制
 FOWNER           # 忽略文件属主ID必须和进程用户ID相匹配的限制
@@ -739,140 +638,4 @@ SYS_TIME         # 允许改变系统时钟
 SYS_TTY_CONFIG   # 允许配置TTY设备
 MKNOD            # 允许使用mknod()系统调用
 LEASE            # 允许修改文件锁的FL_LEASE标志
-```
-
-## 使用 docker compose 部署redis集群
-
-1.编写redis配置文件
-
-参考[三、集群模式](../中间件/redis/redis%20部署/redis%20部署.md#三、集群模式)
-
-```bash
-# 在server上创建一个目录用于存放redis集群部署文件。这里我放的路径为/root/redis-cluster
-
-# 在/opt/docker/redis-cluster目录下创建redis-1,redis-2,redis-3,redis-4,redis-5,redis-6文件夹
-
-mkdir -p /opt/docker/redis-cluster/{redis-1,redis-2,redis-3,redis-4,redis-5,redis-6}
-
-# 创建持久化目录
-
-mkdir -p /opt/docker/redis-cluster/redis-1/data
-mkdir -p /opt/docker/redis-cluster/redis-2/data
-mkdir -p /opt/docker/redis-cluster/redis-3/data
-mkdir -p /opt/docker/redis-cluster/redis-4/data
-mkdir -p /opt/docker/redis-cluster/redis-5/data
-mkdir -p /opt/docker/redis-cluster/redis-6/data
-
-# 在每个redis-*文件夹下创建redis.conf文件，并写入如下内容:
-# 注意：port值不能都为6379，根据上面redis列表设置的端口号，依次给redis-1 ~ redis-6设置6379~6384端口号
-----------------------------------------------
-bind 0.0.0.0
-port 6379
-masterauth passwd123
-requirepass passwd123
-daemonize no
-appendonly yes
-protected-mode no
-cluster-enabled yes 
-cluster-config-file nodes.conf
-cluster-node-timeout 5000
------------------------------------------------
-
-# 在/root/redis-cluster文件夹下创建docker-compose.yml文件
-vim docker-compose.yml
------------------------------------------------
-version: '3.1'
-services:
-  # redis1配置
-  redis1:
-    image: redis
-    container_name: redis-1
-    restart: always
-    network_mode: "host"
-    volumes:
-      - /opt/docker/redis-cluster/redis-1/data:/data
-      - /opt/docker/redis-cluster/redis-1/redis.conf:/usr/local/etc/redis/redis.conf
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-  # redis2配置
-  redis2:
-    image: redis
-    container_name: redis-2
-    restart: always
-    network_mode: "host"
-    volumes:
-      - /opt/docker/redis-cluster/redis-2/data:/data
-      - /opt/docker/redis-cluster/redis-2/redis.conf:/usr/local/etc/redis/redis.conf
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-  # redis3配置
-  redis3:
-    image: redis
-    container_name: redis-3
-    restart: always
-    network_mode: "host"
-    volumes:
-      - /opt/docker/redis-cluster/redis-3/data:/data
-      - /opt/docker/redis-cluster/redis-3/redis.conf:/usr/local/etc/redis/redis.conf
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-  # redis4配置
-  redis4:
-    image: redis
-    container_name: redis-4
-    restart: always
-    network_mode: "host"
-    volumes:
-      - /opt/docker/redis-cluster/redis-4/data:/data
-      - /opt/docker/redis-cluster/redis-4/redis.conf:/usr/local/etc/redis/redis.conf
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-  # redis5配置
-  redis5:
-    image: redis
-    container_name: redis-5
-    restart: always
-    network_mode: "host"
-    volumes:
-      - /opt/docker/redis-cluster/redis-5/data:/data
-      - /opt/docker/redis-cluster/redis-5/redis.conf:/usr/local/etc/redis/redis.conf
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-  # redis6配置
-  redis6:
-    image: redis
-    container_name: redis-6
-    restart: always
-    network_mode: "host"
-    volumes:
-      - /opt/docker/redis-cluster/redis-6/data:/data
-      - /opt/docker/redis-cluster/redis-6/redis.conf:/usr/local/etc/redis/redis.conf
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
----------------------------------------------------------------------------
-#启动容器
-
-docker-compose -f docker-compose.yml up -d
-
-# 开启集群,随便找一个容器进入，这里我选择redis-1进入。
-docker exec -it redis-1 /bin/bash
-# 在进入容器后，输入如下命令开启集群 .
-redis-cli -a passwd123 --cluster create 192.168.0.100:6379 \
-192.168.0.100:6380 \
-192.168.0.100:6381 \
-192.168.0.100:6382 \
-192.168.0.100:6383 \
-192.168.0.100:6384 \
---cluster-replicas 1
-
-
-# 测试
-root@doshell:/data# redis-cli -a passwd123
-Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
-127.0.0.1:6379> cluster nodes
-e75f93d2823da513bfdd4b03cb6460be81c499ee 192.168.0.100:6383@16383 slave fc72a4564078437c79f89872fdef446e6ab6f1a9 0 1677158403619 1 connected
-e5b5d0a4af25be7a403493eecb5c8e3d2edabfe6 192.168.0.100:6381@16381 master - 0 1677158403000 3 connected 10923-16383
-fc72a4564078437c79f89872fdef446e6ab6f1a9 192.168.0.100:6379@16379 myself,master - 0 1677158403000 1 connected 0-5460
-3940aa367229a3ae76cd6afac946dcfdb07b33c6 192.168.0.100:6382@16382 slave e5b5d0a4af25be7a403493eecb5c8e3d2edabfe6 0 1677158403116 3 connected
-ef2a2b489e05b3fcfb0ba22f39fa4849e2ca3819 192.168.0.100:6384@16384 slave 34f9514dfae83d8881cd578e1bd331efff2e2986 0 1677158404120 2 connected
-34f9514dfae83d8881cd578e1bd331efff2e2986 192.168.0.100:6380@16380 master - 0 1677158403000 2 connected 5461-10922
-127.0.0.1:6379> 
-
-# 删除环境
-cd /opt/docker/redis-cluster
-docker compose down
 ```
