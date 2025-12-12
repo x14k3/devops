@@ -59,12 +59,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/Keycloak.md",
+                "file": "docker/Portainer.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Keycloak"
+              "title": "Portainer"
             }
           }
         ],
@@ -188,13 +188,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/Keycloak.md",
+                "file": "docker/Portainer.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Keycloak 的大纲"
+              "title": "Portainer 的大纲"
             }
           },
           {
@@ -230,20 +230,21 @@
   },
   "active": "d9865e1afdf13624",
   "lastOpenFiles": [
-    "devops/assets/c695357f250e3a4afdb8ac170d0a3f44_MD5.png",
-    "devops/assets/76c9f8f6dd772529c6f1a330cae4ef30_MD5.png",
-    "devops/assets/c559c6daadcc2f925f72be8078f59984_MD5.png",
-    "devops/assets/fd085192ead066b5094c8f86f21df799_MD5.png",
-    "devops/assets/9c18f14b4618a3c094b4285e70763072_MD5.png",
-    "devops/assets/5f6407bd3a96788a6869fd15f40d1b51_MD5.png",
-    "devops/assets/295b823b1d6c6d2202ecab8500db49b3_MD5.png",
-    "devops/assets/3d5394b6eed2d694ecc1671f49fe9c7e_MD5.png",
-    "devops/assets/0f3b236d577d208d07eb78cb94095acf_MD5.png",
-    "devops/assets/7d4714aa49ba533b895acd313a5c6b33_MD5.png",
-    "devops/assets/013e63da27886f454c08867caa440e93_MD5.png",
+    "docker/assets/e022187de411e5ccf137b5b42eddd568_MD5.png",
+    "docker/assets/9a02b9665d98bfc8bb21d4a5eb9d4229_MD5.png",
+    "docker/assets/0567449289114e7d261ca971ec1eaa84_MD5.png",
+    "docker/assets/2b9a1ba419109a64cb8f5241ac46e83c_MD5.png",
+    "docker/assets/c0163322bd3fa92f1b51df6142ad2d13_MD5.png",
+    "docker/assets/91931845d407e00c18435e4a657aa939_MD5.png",
+    "docker/assets/9f89c6428faa0fc2785e2a0395f40764_MD5.png",
+    "docker/assets/201a0d1e9eb9eeb4cbcbd0fbc8829834_MD5.png",
+    "docker/assets/8963a5bc2ee174fb3238ef1deffcb77d_MD5.png",
+    "docker/assets/85dd10c74fd63f9366ee6567b6363220_MD5.png",
+    "docker/assets/60da4aa4afbcc591745d2e28519cdc50_MD5.png",
+    "devops/Keycloak.md",
+    "docker/Portainer.md",
     "devops/assets",
     "docker/docker 实用指南/Docker Jenkins进阶配置.md",
-    "devops/Keycloak.md",
     "docker/docker 实用指南/Dockerfile+Maven插件构建SpringBoot镜像（推荐）.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 配置&插件安装&项目构建实战演示.md",
     "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
@@ -267,7 +268,6 @@
     "开源工具/crawl4ai.md",
     "docker/docker 实用指南/Docker 分配CPU资源.md",
     "docker/docker 实用指南/Docker 构建缓存指南.md",
-    "docker/docker 实用指南/Docker 清理缓存.md",
     "docker/docker 实用指南",
     "database/MongoDB/assets",
     "devops/ELK/ELK 部署/assets",
