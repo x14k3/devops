@@ -46,20 +46,20 @@ virsh define --file /etc/libvirt/qemu/rhel8_clone1.xml
 - 修改xml文件
 - 导入xml文件
 
-a、 创建一个链接克隆磁盘，必须是qcow2格式磁盘
 
-```
-[root@zutuanxue ~]# qemu-img create -b /var/lib/libvirt/images/rhel8.qcow2 -f qcow2 /var/lib/libvirt/images/rhel8_clone2.qcow2
+```bash
+# a、创建一个链接克隆磁盘，必须是qcow2格式磁盘
+qemu-img create -b /var/lib/libvirt/images/rhel8.qcow2 -f qcow2 
+
 Formatting '/var/lib/libvirt/images/rhel8_clone2.qcow2', fmt=qcow2 size=10737418240 backing_file=/var/lib/libvirt/images/rhel8.qcow2 cluster_size=65536 lazy_refcounts=off refcount_bits=16
 
-查看
-[root@zutuanxue ~]# ll -h /var/lib/libvirt/images/rhel8_clone2.qcow2 
+# 查看
+ll -h /var/lib/libvirt/images/rhel8_clone2.qcow2 
 -rw-r--r-- 1 root root 193K 3月  24 00:49 /var/lib/libvirt/images/rhel8_clone2.qcow2
+#显示仅有193K，ok
 
-显示仅有193K，ok
+qemu-img info /var/lib/libvirt/images/rhel8_clone2.qcow2 
 
-
-[root@zutuanxue ~]# qemu-img info /var/lib/libvirt/images/rhel8_clone2.qcow2 
 image: /var/lib/libvirt/images/rhel8_clone2.qcow2
 file format: qcow2
 virtual size: 10G (10737418240 bytes)
@@ -71,41 +71,24 @@ Format specific information:
     lazy refcounts: false
     refcount bits: 16
     corrupt: false
-```
 
-b、生成一个xml文件
 
-```
-[root@zutuanxue ~]# virsh dumpxml --domain rhel8 > /etc/libvirt/qemu/rhel8_clone2.xml
-```
 
-c、修改xml
+# b、生成一个xml文件
+virsh dumpxml --domain rhel8 > /etc/libvirt/qemu/rhel8_clone2.xml
 
-```
+# c、修改xml
 修改虚拟机名字
 删除UUID
 删除mac地址
 修改磁盘路径
+
+# d、导入虚拟机
+virsh define /etc/libvirt/qemu/rhel8_clone2.xml
+#定义域 rhel8_clone2（从 /etc/libvirt/qemu/rhel8_clone2.xml）
+virsh list --all
+
 ```
-
-d、导入虚拟机
-
-```
-[root@zutuanxue ~]# virsh define /etc/libvirt/qemu/rhel8_clone2.xml
-定义域 rhel8_clone2（从 /etc/libvirt/qemu/rhel8_clone2.xml）
-
-[root@zutuanxue ~]# virsh list --all
- Id    名称                         状态
-----------------------------------------------------
- 6     rhel8-clone                    running
- -     centos8-3                      关闭
- -     centos8-4                      关闭
- -     rhel8                          关闭
- -     rhel8-2                        关闭
- -     rhel8_clone2                   关闭
- -     win10                          关闭
-```
-
 ‍
 
 ## 虚拟机快照
@@ -127,13 +110,11 @@ KVM 快照的定义：快照就是将虚机在某一个时间点上的磁盘、�
 1. 创建快照备份
 
     ```bash
-    virsh snapshot-create    # 使用XML创建快照
-    virsh snapshot-create-as # 使用一组参数创建快照
-    virsh snapshot-delete    # 删除快照
+    virsh snapshot-create                       # 使用XML创建快照
+    virsh snapshot-create-as                    # 使用一组参数创建快照
+    virsh snapshot-delete <虚拟机名称> <快照名称>  # 删除快照
     virsh snapshot-list
-    virsh snapshot-info      # 快照信息
-
-    virsh snapshot-create rac-01
+    virsh snapshot-info                         # 快照信息
     ```
 
 2. 查看虚拟机快照
@@ -170,7 +151,7 @@ KVM 快照的定义：快照就是将虚机在某一个时间点上的磁盘、�
     virsh snapshot-revert rac01 1708328988
     ```
 
-## 内存快照
+### 内存快照
 
 只是保持内存和虚机使用的其它资源的状态。如果虚机状态快照在做和恢复之间磁盘没有被修改，那么虚机将保持一个持续的状态；如果被修改了，那么很可能导致数据corruption。
 

@@ -1,5 +1,5 @@
 
-## **docker仓库改为阿里源**
+## docker 仓库改为阿里源
 
 ```bash
 mkdir -p /etc/docker
@@ -44,7 +44,7 @@ systemctl start docker.socket
 export ALL_PROXY='socks5://172.17.0.1:10808'
 ```
 
-## 默认存储路径/var/lib/docker
+## 默认存储路径 /var/lib/docker
 
 ```bash
 # 修改docker默认运行目录 /data/docker
