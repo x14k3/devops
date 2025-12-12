@@ -1,4 +1,5 @@
 
+https://ezprompt.net
 
 ## 登录提示符
 

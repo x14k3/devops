@@ -154,7 +154,7 @@ systemctl start docker
 docker start 容器id
 ```
 
-### 3.iptable转发端口
+### 3.iptable 转发端口
 
 ```bash
 docker inspect 容器id | grep IPAddress

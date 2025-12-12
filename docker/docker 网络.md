@@ -56,7 +56,7 @@ bridge模式的容器与外界通信时，必定会占用宿主机上的端口�
 
 安装Docker时，它会自动创建三个网络，bridge（创建容器默认连接到此网络）、 none 、host
 
-![](assets/image-20221127212104343-20230610173810-hv8mub6.png)
+![|600](assets/image-20221127212104343-20230610173810-hv8mub6.png)
 
 docker run创建Docker容器时，可以用 `--net` 选项指定容器的网络模式 ：
 
@@ -64,12 +64,3 @@ host模式：使用 --net=host 指定。
 none模式：使用 --net=none 指定。
 bridge模式：使用 --net=bridge 指定，默认设置。
 container模式：使用 --net=container:NAME_or_ID 指定
-
-## 获得容器的 IP 地址
-
-```bash
-docker exec dockerhive_namenode cat /etc/hosts
-docker inspect mysql | grep IPAddress
-```
-
-‍

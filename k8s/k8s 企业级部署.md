@@ -1,6 +1,6 @@
 
 
-![[assets/Pasted image 20250718154618.png]]
+![[assets/Pasted image 20250718154618.png|700]]
 
 可以简单理解成：
 
@@ -678,7 +678,7 @@ ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
 kubectl get cs
 ```
 
-![[assets/Pasted image 20251012134319.png]]
+![[assets/Pasted image 20251012134319.png|650]]
 
 ## 安装部署运算节点服务（kubelet）
 
@@ -847,7 +847,7 @@ kubectl label node k8s-22.host.com node-role.kubernetes.io/node=
 kubectl get nodes
 ```
 
-[![1579071142869](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1579071142869.png)](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1579071142869.png)
+[![[k8s/assets/d43598b65c18fc306954663fa6523101_MD5.png|625]]](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1579071142869.png)
 
 ## 安装部署运算节点服务（kube-proxy）
 
@@ -873,7 +873,7 @@ kubectl get nodes
 
 200 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client kube-proxy-csr.json |cfssl-json -bare kube-proxy-client
 ```
-[![1580437266613](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1580437266613.png)](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1580437266613.png)
+[![[k8s/assets/3a9ca76161c96cca155929113597099b_MD5.png|700]]](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1580437266613.png)
 
 ```bash
 # 分发证书，21/22机器：
@@ -924,7 +924,7 @@ done
 ~]# lsmod |grep ip_vs
 ```
 
-[![1578846381651](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1578846381651.png)](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1578846381651.png)
+[![[k8s/assets/39b3a11f3d47e5545b4fa86fa5601f57_MD5.png|650]]](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1578846381651.png)
 
 ```bash
 # 21/22机器：
@@ -1007,6 +1007,6 @@ kubectl get pods -o wide
 >**nginx-ds.yaml解析：**
 >- 可以参考这篇文章[点击跳转](https://www.baidu.com/link?url=tFECOG31lKlcqDWeAZGF1VyjhzVAN9vUKHKEKKw5G8y0AC8MKpJxSZeL647MIFdw&wd=&eqid=dafe84b80019e4a3000000065e51d2e2)，这里的nginx-ds.yaml建议自己手敲一遍，敲的同时要知道自己敲的是什么，记住，yaml语法不允许使用Tab键，只允许空格
 
-[![1578847257509](https://github.com/ben1234560/k8s_PaaS/raw/master/assets/1578847257509.png)](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1578847257509.png)
+[![[k8s/assets/f906f9ef35deee798b84c4a59d888d5f_MD5.png|700]]](https://github.com/ben1234560/k8s_PaaS/blob/master/assets/1578847257509.png)
 
 此时你已经部署好K8S集群！当然只有集群还远远不够，我们还需要更多的东西才能组成我们的PaaS服务，休息一下继续享受它:smiley:
