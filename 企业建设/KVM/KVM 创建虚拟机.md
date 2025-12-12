@@ -44,7 +44,6 @@ virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
 --disk path=/data/qemu/images/win10_sys.qcow2,bus=virtio,format=qcow2 \
 --disk path=/data/qemu/images/win10_data.qcow2,bus=virtio,format=qcow2 \
 --disk path=/data/qemu/iso/virtio-win-0.1.271.iso,device=cdrom \
---boot cdrom
 ```
 
 4. **安装Windows注意事项**
@@ -68,6 +67,22 @@ virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
     <boot dev='cdrom'/>    --修改为dev=hd
   </os>
 
+
+# 取消镜像工具
+<!--    <disk type='file' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <source file='/data/qemu/iso/Win10_22H2_Chinese_Simplified_x64v1.iso'/>
+      <target dev='sda' bus='sata'/>
+      <readonly/>
+      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+    </disk>
+    <disk type='file' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <source file='/data/qemu/iso/virtio-win-0.1.271.iso'/>
+      <target dev='sdb' bus='sata'/>
+      <readonly/>
+      <address type='drive' controller='0' bus='0' target='0' unit='1'/>
+    </disk>-->
   ```
 
 
