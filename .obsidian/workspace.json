@@ -22,8 +22,23 @@
               "icon": "lucide-file",
               "title": "linux 系统性能瓶颈分析"
             }
+          },
+          {
+            "id": "b7f560a47db9afac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "开源工具/knock.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "knock"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -143,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 命令/linux 系统性能瓶颈分析.md",
+                "file": "开源工具/knock.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "linux 系统性能瓶颈分析 的大纲"
+              "title": "knock 的大纲"
             }
           },
           {
@@ -183,11 +198,17 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "1b92de781a2ce4d9",
+  "active": "b7f560a47db9afac",
   "lastOpenFiles": [
-    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
-    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "开源工具/Navidrome.md",
+    "开源工具/蓝眼云盘.md",
+    "企业建设/KVM/KVM 安装.md",
     "企业建设/KVM/KVM 创建虚拟机.md",
+    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
+    "企业建设/KVM/KVM 虚拟机热扩容.md",
+    "企业建设/KVM/KVM 虚拟机网络设置.md",
+    "linux/linux 命令/linux 系统性能瓶颈分析.md",
     "docker/docker 优化项.md",
     "docker/docker 数据卷.md",
     "docker/docker 网络.md",
@@ -198,7 +219,6 @@
     "开源工具/assets/Pasted image 20251211125958.png",
     "database/MongoDB/MongoDB安装.md",
     "database/MongoDB/assets",
-    "linux/linux 命令/linux 系统性能瓶颈分析.md",
     "devops/ELK/ELK 部署/Docker 部署 Elasticsearch + Kibana.md",
     "devops/ELK/ELK 部署/assets/475a12f2be29c3a8b14238f0011622fa_MD5.png",
     "devops/ELK/ELK 部署/assets/41cbcb1202204772d046d5729137ab80_MD5.png",
@@ -215,15 +235,10 @@
     "存储服务/Ceph/Ceph 介绍.md",
     "存储服务/TrueNAS.md",
     "存储服务/nfs.md",
-    "存储服务/Ceph.md",
     "存储服务/Ceph",
-    "未命名.md",
     "存储服务/assets/570818aeeb71fa4666798a7b700974d8_MD5.png",
-    "企业建设/KVM/KVM 安装.md",
-    "存储服务/Openfiler（Expired）.md",
     "存储服务/assets/05f7ef3d591e6268ceb044af071a6569_MD5.jpg",
     "存储服务/assets/Pasted image 20251207220521.png",
-    "企业建设/KVM/KVM 虚拟机网络设置.md",
     "linux/linux 命令/assets",
     "shell/shell 命令手册/备份与恢复/assets",
     "linux/linux 安全管理/assets",

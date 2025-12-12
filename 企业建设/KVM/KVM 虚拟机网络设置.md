@@ -1,6 +1,3 @@
-# KVM 虚拟机网络设置
-
-‍
 
 ## NAT
 
@@ -158,7 +155,7 @@ net.ipv4.ip_forward=1
 Bridge方式即虚拟网桥的网络连接方式，是客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。
 桥接网络（也叫物理设备共享）被用作把一个物理设备复制到一台虚拟机。网桥多用作高级设置，特别是主机多个网络接口的情况。
 
-![697113-20190830210734350-1126923956](assets/697113-20190830210734350-1126923956-20240201160748-kkiotvb.png)
+![697113-20190830210734350-1126923956|500](assets/697113-20190830210734350-1126923956-20240201160748-kkiotvb.png)
 
 ‍
 
@@ -229,10 +226,6 @@ network:
 
 ​`brctl show`​
 
-‍
-
-‍
-
 ### 使用方式
 
 新建虚拟机的时候使用方式
@@ -240,8 +233,6 @@ network:
 ```bash
 virt-install ---network bridge=br0
 ```
-
-‍
 
 已有虚拟机可以通过修改配置文件方式  
 编辑修改虚拟机配置文件 /etc/libvirt/qemu/v1.xml，增加如下内容
@@ -256,7 +247,6 @@ virt-install ---network bridge=br0
 ```
 
 ‍
-
 ### 问题发现
 
 **问题1：虚拟机能ping通宿主机，但ping不通局域网和网关**  
@@ -274,7 +264,6 @@ net.bridge.bridge-nf-call-arptables = 0
 sysctl -p
 ```
 
-‍
 
 **问题2：安装windows虚拟机的时候，windows虚拟机没有网卡，不能配置网络**
 
@@ -300,9 +289,6 @@ The stable builds of virtio-win roughly correlate to what was shipped with the m
 然后通过virsh-manager将该镜像挂载到windows虚拟机进行安装
 
 ‍
-
-‍
-
 ## bridge和nat模式共存
 
 用virt install 完成虚拟机的安装后，发现里面只有一块网卡，有些时候我们需要两块或多块网卡怎么办？ 可以通过virsh attach-iterface来实现
@@ -364,7 +350,6 @@ virsh domiflist test_01
 virsh detach-interface test_01 --type bridge --mac 52:54:00:ab:2d:39 --config
 ```
 
-‍
 
 注：添加网卡时候出现的报错
 
