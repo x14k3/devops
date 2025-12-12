@@ -59,12 +59,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docker/docker 实用指南/Docker Jenkins进阶配置.md",
+                "file": "devops/Keycloak.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Docker Jenkins进阶配置"
+              "title": "Keycloak"
             }
           }
         ],
@@ -188,13 +188,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docker/docker 实用指南/Docker Jenkins进阶配置.md",
+                "file": "devops/Keycloak.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Docker Jenkins进阶配置 的大纲"
+              "title": "Keycloak 的大纲"
             }
           },
           {
@@ -230,19 +230,22 @@
   },
   "active": "d9865e1afdf13624",
   "lastOpenFiles": [
+    "devops/assets/c695357f250e3a4afdb8ac170d0a3f44_MD5.png",
+    "devops/assets/76c9f8f6dd772529c6f1a330cae4ef30_MD5.png",
+    "devops/assets/c559c6daadcc2f925f72be8078f59984_MD5.png",
+    "devops/assets/fd085192ead066b5094c8f86f21df799_MD5.png",
+    "devops/assets/9c18f14b4618a3c094b4285e70763072_MD5.png",
+    "devops/assets/5f6407bd3a96788a6869fd15f40d1b51_MD5.png",
+    "devops/assets/295b823b1d6c6d2202ecab8500db49b3_MD5.png",
+    "devops/assets/3d5394b6eed2d694ecc1671f49fe9c7e_MD5.png",
+    "devops/assets/0f3b236d577d208d07eb78cb94095acf_MD5.png",
+    "devops/assets/7d4714aa49ba533b895acd313a5c6b33_MD5.png",
+    "devops/assets/013e63da27886f454c08867caa440e93_MD5.png",
+    "devops/assets",
+    "docker/docker 实用指南/Docker Jenkins进阶配置.md",
+    "devops/Keycloak.md",
     "docker/docker 实用指南/Dockerfile+Maven插件构建SpringBoot镜像（推荐）.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 配置&插件安装&项目构建实战演示.md",
-    "devops/Jenkins/Jenkins 使用/assets/1a2af77cab6675f86c9770261a91b82b_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/8a245543d59fb1b9e1266a791cdd29fe_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/5632c0a91c3a94ba6e50cce1aacc7048_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/57cc83c179d582560248f9e22c245db6_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/a0450639623435c2dac3aeae568de7a5_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/c55d9ea64aea4717d2fa77650f471f28_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/ac410449fb7c7de85b96879aac572317_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/058a900d831a7bee49f1b242fb5ccf2a_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/9776ead3a68d9cee679b54e7a79a7e11_MD5.png",
-    "devops/Jenkins/Jenkins 使用/assets/575d84f5f33a07110d0aa98baca8a9b9_MD5.png",
-    "docker/docker 实用指南/Docker Jenkins进阶配置.md",
     "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 与 shell 集成.md",
     "devops/Jenkins/Jenkins 使用/Jenkins 与 gitlab 集成.md",
@@ -265,7 +268,6 @@
     "docker/docker 实用指南/Docker 分配CPU资源.md",
     "docker/docker 实用指南/Docker 构建缓存指南.md",
     "docker/docker 实用指南/Docker 清理缓存.md",
-    "docker/docker 实用指南/Docker 容器时间同步指南.md",
     "docker/docker 实用指南",
     "database/MongoDB/assets",
     "devops/ELK/ELK 部署/assets",
@@ -273,7 +275,6 @@
     "linux/linux 命令/assets",
     "shell/shell 命令手册/备份与恢复/assets",
     "linux/linux 安全管理/assets",
-    "devops/Jenkins/Jenkins 使用/assets",
-    "devops/Jenkins/Jenkins 使用"
+    "devops/Jenkins/Jenkins 使用/assets"
   ]
 }
