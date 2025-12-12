@@ -76,6 +76,8 @@ docker build -t 192.168.10.31/jinzay/jdk ./
 - 利用缓存: 将不经常变化的指令放在Dockerfile的靠前位置，以充分利用Docker的构建缓存。
 - 串联指令: 合并 RUN 指令，以减少镜像层数。 
 
+[[docker 实用指南/Docker 精简镜像的几个方法|Docker 精简镜像的几个方法]]
+
 # 使用镜像
 
 [[docker 命令#docker run | docker run]]

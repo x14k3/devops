@@ -7,7 +7,7 @@
 
 ## docker开启远程API
 
-参考：[基于Maven插件为SpringBoot应用构建镜像（一）](https://tuonioooo-notebook.gitbook.io/docker/advanced/docker-maven-build-image)
+[[Docker 2375 端口完整指南]]
 
 ## 编写Dockerfile文件
 
