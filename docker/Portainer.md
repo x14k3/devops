@@ -6,69 +6,24 @@
 
 我们可以直接使用 **Docker** 的方式来安装
 
-首先创建数据卷，实现数据持久化
-
-```
-docker volume create portainer_db
-```
-
 启动 **Partainer** 容器
 
-```
-docker run -d -p 9000:9000 -name portainer -restart always -v /var/run/docker/sock:/var/run/docker.sock -v portainer_db:/data portainer/portainer
+```bash
+docker run -d -p 9000:9000 --name portainer \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v /data/application/portainer/data:/data \
+portainer/portainer:latest
 ```
 
 运行成功后，然后通过 9000端口访问即可
 
-```
+```bash
 http://ip:9000
-```
-
-然后我们输入自定义的密码，进入下面页面
-![[docker/assets/c0163322bd3fa92f1b51df6142ad2d13_MD5.png|700]]
-
-这里是选择我们通过portainer管理哪里的Docker
-
-- Local：本地的
-- Remote：远程的
-- Agent：
-- Azure：云服务
-
-## Docker Compose 方式安装
-
-这里我们主要是通过Docker Compose来进行安装【如果没有安装docker-compose，需要提前安装】
-
-```
-# 创建 目录
-mkdir docker-compose
-
-# 进入目录
-cd docker-compose
-
-# 创建配置文件
-vim mogu_portainer.yml
-```
-
-然后添加如下内容
-
-```
-version: '3.1'
-services:
-  portainer:
-    image: portainer/portainer
-    container_name: portainer
-    ports:
-      - 9000:9000
-      - 8000:8000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./data:/data
-      - ./public:/public
 ```
 
 然后在执行汉化
 
-```
+```bash
 # 下载汉化包
 wget https://dl.quchao.net/Soft/Portainer-CN.zip
 # 解压缩
@@ -77,13 +32,13 @@ unzip Portainer-CN.zip -d public
 
 然后运行下面命令
 
-```
+```bash
 docker-compose -f mogu_portainer.yml up -d
 ```
 
 构建portainer容器后，我们访问下面页面
 
-```
+```bash
 http://ip:9000
 ```
 
@@ -101,13 +56,13 @@ http://ip:9000
 
 首先我们编辑 daemon.json
 
-```
+```bash
 vim /etc/docker/daemon.json
 ```
 
 然后加入以下内容即可【注意 **2375** 端口号要慎开，不然可能被当肉鸡挖矿】
 
-```
+```yaml
 {
 	"hosts": ["tcp://192.168.119.150:2375", "unix:///var/run/docker.sock"]
 }
@@ -145,7 +100,7 @@ vim /etc/docker/daemon.json
 
 我们输入下面的地址
 
-```
+```bash
 http://ip:32768
 ```
 

@@ -105,7 +105,17 @@ docker load           # 从tar中恢复镜像 [docker load < alpine.tar]
 
 ## 数据卷管理
 
-[docker 数据卷](docker%20数据卷.md)
+[docker 容器卷](docker%20容器卷.md)
+
+```bash
+### 常用 `docker volume` 命令
+docker volume ls      # 列出所有卷
+docker volume inspect # 查看卷的详细信息
+docker volume create  # 创建一个新卷
+docker volume rm      # 删除一个或多个卷
+docker volume prune   # 删除未使用的卷
+```
+
 
 ## 网络管理
 
