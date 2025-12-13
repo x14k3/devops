@@ -6,49 +6,19 @@
 
 我们可以直接使用 **Docker** 的方式来安装
 
-启动 **Partainer** 容器
-
 ```bash
-docker run -d -p 9000:9000 --name portainer \
+docker run -d --name portainer -p 9000:9000  \
 -v /var/run/docker.sock:/var/run/docker.sock \
--v /data/application/portainer/data:/data \
 portainer/portainer:latest
+
+# 汉化版本
+docker run -d --name portainer -p 9000:9000 \
+-v /var/run/docker.sock:/var/run/docker.sock \
+6053537/portainer-ce:latest
 ```
 
 运行成功后，然后通过 9000端口访问即可
 
-```bash
-http://ip:9000
-```
-
-然后在执行汉化
-
-```bash
-# 下载汉化包
-wget https://dl.quchao.net/Soft/Portainer-CN.zip
-# 解压缩
-unzip Portainer-CN.zip -d public
-```
-
-然后运行下面命令
-
-```bash
-docker-compose -f mogu_portainer.yml up -d
-```
-
-构建portainer容器后，我们访问下面页面
-
-```bash
-http://ip:9000
-```
-
-即可看到我们的图形化页面了【首次登录需要填写默认密码】
-
-[![[docker/assets/8963a5bc2ee174fb3238ef1deffcb77d_MD5.png|700]]
-
-登录后，即可看到我们的容器信息
-
-[![[docker/assets/00c47a6d5fbbf7b8f33750bf954a2c14_MD5.png|700]]
 
 ## 使用Portainer管理其它主机
 
@@ -99,10 +69,7 @@ vim /etc/docker/daemon.json
 ![[docker/assets/e022187de411e5ccf137b5b42eddd568_MD5.png|750]]
 
 我们输入下面的地址
-
-```bash
 http://ip:32768
-```
 
 即可看到，nginx已经成功安装
 ![[docker/assets/85dd10c74fd63f9366ee6567b6363220_MD5.png|750]]
