@@ -433,3 +433,18 @@ docker run -d \
   --mount type=tmpfs,destination=/app,tmpfs-mode=1770 \
   nginx:latest
 ```
+
+
+## 遇到的问题
+
+`docker run redis` 没有声明`volume`为什么会自动创建容器卷
+
+>当我们运行 `docker run redis` 时，Docker 会使用 Redis 官方镜像。查看 Redis 官方镜像的 Dockerfile（例如：https://github.com/docker-library/redis/blob/master/Dockerfile），我们可以发现其中定义了 VOLUME 指令。
+>
+>例如，在 Redis 的 Dockerfile 中，有：  `VOLUME /data`
+>
+>这意味着，在运行容器时，Docker 会自动为容器创建一个匿名卷，挂载到容器内的 /data 目录。这个匿名卷位于宿主机的某个位置（通常是 /var/lib/docker/volumes/ 下的一个随机目录）。
+>
+>这样做的目的是为了数据持久化，即使容器被删除，这个匿名卷仍然存在，除非手动删除。但请注意，如果使用匿名卷，那么当容器被删除后，这个卷可能会变成孤儿卷（没有容器引用的卷），占用磁盘空间。
+>
+>所以，即使我们在运行命令中没有声明 volume，由于镜像中定义了 VOLUME，Docker 也会自动创建匿名卷。
