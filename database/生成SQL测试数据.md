@@ -190,3 +190,28 @@ DROP TABLESPACE test_data INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;
 -- CREATE TABLESPACE test_data ... （同创建脚本）
 
 ```
+
+方法一：创建一个表，并同时添加10000条数据，代码：
+
+```csharp
+create table TestTable as 
+select rownum as id,
+               to_char(sysdate + rownum/24/3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
+               trunc(dbms_random.value(0, 100)) as random_id,
+               dbms_random.string('x', 20) random_string
+          from dual
+        connect by level <= 10000;
+```
+
+方法二：在创建表后，原来表的基础上追加记录，比如在方法一创建的TestTable表中追加1000000条数据，代码：
+
+```csharp
+insert into TestTable
+  (ID, INC_DATETIME,RANDOM_ID,RANDOM_STRING)
+  select rownum as id,
+         to_char(sysdate + rownum / 24 / 3600, 'yyyy-mm-dd hh24:mi:ss') as inc_datetime,
+         trunc(dbms_random.value(0, 100)) as random_id,
+         dbms_random.string('x', 20) random_string
+    from dual
+  connect by level <= 1000000;
+```

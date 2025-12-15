@@ -116,6 +116,23 @@ immich
 
 ## Immich 功能配置   
 
+### 存储模板配置
+
+这个功能默认是关闭的，根据官方文档中关于《[存储模板的实现方式](https://immich.app/docs/administration/backup-and-restore#asset-types-and-storage-locations)》的解释，开启后可以自定义图片存储结构。**适合文件夹强迫症用户。
+
+以本文将图片挂载到 `/photos` 文件夹为例。不论你是否启用存储模板，`/photos` 文件夹中都会生成如下文件夹：
+
+- `profile`：用户个人资料图片
+- `thumbs`：存储缩略图
+- `encoded-video` ：存储转码视频
+- `upload`：存储上传的图片，启用存储模板后，这个文件夹会变成临时中转站
+- `library`：启用存储模板后，图片会从 `upload` 移动至此
+
+假如没有启用存储模板，即默认设置的状态下，图片会保存在 `/photos/upload/<userID>` 文件夹中，`userID` 可以在账户设置 -> 账户 -> 用户 ID 中找到，这个 ID 为字符串且唯一。
+
+如果启用了存储模板，所有图片会被自动任务移动到 `/photos/library/<userID>` 文件夹中。这个 `userID` 和上面的情况一样，都是唯一的字符串。但管理员可以为用户额外设置**存储标签**（管理员有一个默认的 `admin` 存储标签。），该标签被设置后将会代替 `<userID>`。也就是说，图片会被保存到 `/photos/library/admin` 文件夹。
+
+接着选择自己喜欢的存储模板。我选择的是 `{{y}}/{{MM}}/{{dd}}/{{filename}}`，即最终图片会被保存在结构为 `/2022/02/03/IMAGE_56437.jpg` 的文件夹中。
 
 ### 配置地理信息（Geodata）
 
@@ -136,7 +153,7 @@ immich
 ## 批量从服务器本地导入文件
 
 在 im­mich 设置中创建一个 api key 
-[![[开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp]]
+![[开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp]]
 
 使用 `immich login <url> <key>` 的格式连接到 im­mich，例如：
 ```bash

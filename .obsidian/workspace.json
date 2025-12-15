@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docker/Portainer.md",
-                "mode": "preview",
+                "file": "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Portainer"
+              "title": "Oracle 常用语句"
             }
           }
         ],
@@ -158,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docker/Portainer.md",
+                "file": "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Portainer 的大纲"
+              "title": "Oracle 常用语句 的大纲"
             }
           },
           {
@@ -200,51 +200,51 @@
   },
   "active": "c42842d6c07ec4d3",
   "lastOpenFiles": [
-    "docker/docker-compose/docker-compose yaml文件详解.md",
-    "docker/docker-compose/docker-compose 命令.md",
-    "linux/linux 命令/linux 系统性能瓶颈分析.md",
-    "docker/docker 容器卷.md",
+    "database/Oracle/Oracle 常用语句/3.表的管理.md",
+    "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
+    "database/Oracle/Oracle 常用语句/4.基本查询.md",
+    "database/Oracle/Oracle 常用语句/5.复杂查询.md",
+    "database/Oracle/Oracle 常用语句/6.表连接.md",
+    "database/Oracle/Oracle 常用语句/2.用户管理.md",
+    "database/Oracle/Oracle 常用语句/1.sqlplus 参数设置.md",
+    "database/Oracle/Oracle 常用语句/0.DBA日常维护SQL整理.md",
+    "database/生成SQL测试数据.md",
+    "database/Oracle/Oracle 备份恢复/完全恢复.md",
+    "database/Oracle/Oracle 备份恢复/assets",
+    "开源工具/HomeAssistant.md",
+    "开源工具/knock.md",
     "开源工具/Immich.md",
+    "开源工具/Jellyfin.md",
+    "开源工具/openWRT.md",
+    "开源工具/wireguard.md",
+    "开源工具/tailscale.md",
+    "开源工具/蓝眼云盘.md",
+    "docker/docker 实用指南/Docker 2375 端口完整指南.md",
+    "docker/docker-compose/Docker Compose 锚点的用法.md",
+    "docker/docker-compose/docker-compose 命令.md",
+    "docker/docker-compose/docker-compose yaml文件详解.md",
+    "docker/var-lib-docker目录解析.md",
+    "docker/docker 优化项.md",
+    "docker/docker 网络.md",
+    "docker/docker 镜像.md",
     "docker/assets/d4e5b59483741043a1eff0c84b56cb0d_MD5.png",
     "docker/assets/Pasted image 20251213201757.png",
     "docker/assets/Pasted image 20251213201140.png",
     "docker/assets/5d93652d7fc1f56a64d554f281d9c4e5_MD5.jpg",
     "docker/assets/Pasted image 20251213200418.png",
-    "docker/docker 命令.md",
-    "docker/Portainer.md",
-    "docker/containerd.md",
-    "docker/docker-compose/Docker Compose 锚点的用法.md",
-    "docker/docker 部署.md",
     "docker/docker-compose",
-    "docker/未命名.md",
     "docker/assets/fa17984507fcb96349adb7d4f216bacd_MD5.jpg",
     "docker/assets/Pasted image 20251212214458.png",
     "docker/assets/67807fcae2dd1aa6113e78c2bbd72964_MD5.jpg",
     "docker/assets/Pasted image 20251212214253.png",
-    "docker/docker 实用指南/Docker 精简镜像的几个方法.md",
-    "docker/docker 镜像.md",
     "docker/docker 实用指南/assets/4fc2a31e5bbd30ac86269908afb56ae0_MD5.png",
-    "docker/docker 实用指南/Docker 多阶段构建指南.md",
-    "docker/docker 实用指南/Dockerfile+Maven插件构建SpringBoot镜像（推荐）.md",
-    "docker/docker 实用指南/Docker 容器时间同步指南.md",
-    "docker/docker 实用指南/Docker 清理缓存.md",
-    "docker/docker 实用指南/Docker 分配CPU资源.md",
-    "docker/docker 实用指南/Docker 构建缓存指南.md",
-    "devops/Keycloak.md",
     "devops/assets",
-    "docker/docker 实用指南/Docker Jenkins进阶配置.md",
-    "devops/Jenkins/Jenkins 使用/Jenkins 配置&插件安装&项目构建实战演示.md",
-    "devops/Jenkins/Jenkins 使用/Jenkins + Maven + GitLab + Tomcat 实现自动集成、打包、部署.md",
-    "devops/Jenkins/Jenkins 使用/Jenkins 与 shell 集成.md",
-    "devops/Jenkins/Jenkins 使用/Jenkins 与 gitlab 集成.md",
-    "devops/Jenkins/Jenkins 使用/Jenkins 与 docker 集成.md",
     "docker/docker 实用指南/assets",
     "docker/docker 实用指南",
     "database/MongoDB/assets",
     "devops/ELK/ELK 部署/assets",
     "存储服务/Ceph",
     "linux/linux 命令/assets",
-    "shell/shell 命令手册/备份与恢复/assets",
-    "linux/linux 安全管理/assets"
+    "shell/shell 命令手册/备份与恢复/assets"
   ]
 }

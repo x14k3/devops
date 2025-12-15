@@ -125,7 +125,6 @@ ExecStart=/usr/bin/dockerd
 **3.1 💾 在** `nano` **中保存文件的步骤：**
 
 1️⃣ **按下**
-Copy
 ```
 Ctrl + O
 ```
@@ -134,7 +133,6 @@ Ctrl + O
 
 
 2️⃣ 终端底部会提示：
-Copy
 ```
 File Name to Write: /etc/systemd/system/docker.service.d/override.conf
 ```
@@ -142,7 +140,6 @@ File Name to Write: /etc/systemd/system/docker.service.d/override.conf
 直接 **按回车键 Enter** 确认保存。
 
 3️⃣ 然后再按：
-Copy
 ```
 Ctrl + X
 ```
@@ -151,8 +148,8 @@ Ctrl + X
 
 ---
 
-#### [](https://tuonioooo-notebook.gitbook.io/docker/advanced/docker-enabled-remote-tcp#id-4.-chong-qi-docker-fu-wu)4. 重启 Docker 服务
-Copy
+#### 4. 重启 Docker 服务
+
 ```
 # 重载 systemd 配置
 sudo systemctl daemon-reload
@@ -164,8 +161,8 @@ sudo systemctl restart docker
 sudo systemctl status docker
 ```
 
-#### [](https://tuonioooo-notebook.gitbook.io/docker/advanced/docker-enabled-remote-tcp#id-5.-yan-zheng-duan-kou-yi-kai-qi)5. 验证端口已开启
-Copy
+#### 5. 验证端口已开启
+
 ```
 # 检查监听端口
 sudo netstat -tulnp | grep 2375
