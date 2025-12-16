@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/生成SQL测试数据.md",
+                "file": "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "生成SQL测试数据"
+              "title": "邮件发送的基本过程与概念"
             }
           }
         ],
@@ -158,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/生成SQL测试数据.md",
+                "file": "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "生成SQL测试数据 的大纲"
+              "title": "邮件发送的基本过程与概念 的大纲"
             }
           },
           {
@@ -200,6 +200,17 @@
   },
   "active": "c42842d6c07ec4d3",
   "lastOpenFiles": [
+    "企业建设/邮件服务器/assets/cc43211ea5e0b41f5cec159832870b01_MD5.jpg",
+    "企业建设/邮件服务器/assets/02fe1a9c99b73fe785d756d730151274_MD5.png",
+    "企业建设/邮件服务器/assets",
+    "企业建设/邮件服务器/Mailcow.md",
+    "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
+    "企业建设/邮件服务器/iRedMail.md",
+    "企业建设/邮件服务器/Docker Mailserver.md",
+    "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
+    "企业建设/rsyslog.md",
+    "企业建设/运维外挂.md",
+    "database/生成SQL测试数据.md",
     "database/Mysql/mysql 优化/SQL 优化.md",
     "database/Mysql/日常工作 DCL、DDL、DML/7. SQL 高级特性.md",
     "database/Mysql/日常工作 DCL、DDL、DML/6. 系统常用函数.md",
@@ -218,17 +229,8 @@
     "database/Mysql/mysql 备份和恢复/基于binlog恢复数据.md",
     "database/Mysql/mysql 备份和恢复/3. mysql 物理备份 lvm-snapshot.md",
     "database/Mysql/mysql 备份和恢复/2. mysql 物理备份 xtrabackup.md",
-    "database/Mysql/mysql 备份和恢复/1. mysql 逻辑备份 mysqldump.md",
-    "database/Mysql/mysql 问题总结/err-mysqldump导出函数和事件提示无权限.md",
-    "database/Mysql/mysql 问题总结/warn-binlog日志自动清理及手动删除.md",
-    "database/Mysql/mysql 问题总结/other-mysql8.0.3版本之后的认证插件问题.md",
-    "database/Mysql/mysql 问题总结/other-忘记root密码，root远程登录.md",
-    "database/Mysql/mysql 问题总结/other-减少mysqlbackup 对IO压力的影响.md",
-    "database/Mysql/mysql 问题总结/err-mysqldump解决 DEFINER 问题.md",
     "database/Mysql/mysql 部署",
     "database/Mysql/mysql 优化",
-    "database/Oracle/Oracle Memory Management.md",
-    "database/Oracle/Oralce 基础概念/Oracle 用户与模式.md",
     "database/Oracle/Oracle 备份恢复/assets",
     "docker/assets/d4e5b59483741043a1eff0c84b56cb0d_MD5.png",
     "docker/assets/Pasted image 20251213201757.png",
@@ -240,11 +242,9 @@
     "docker/assets/Pasted image 20251212214458.png",
     "docker/assets/67807fcae2dd1aa6113e78c2bbd72964_MD5.jpg",
     "docker/assets/Pasted image 20251212214253.png",
-    "docker/docker 实用指南/assets/4fc2a31e5bbd30ac86269908afb56ae0_MD5.png",
     "devops/assets",
     "docker/docker 实用指南/assets",
     "docker/docker 实用指南",
-    "database/MongoDB/assets",
-    "devops/ELK/ELK 部署/assets"
+    "database/MongoDB/assets"
   ]
 }
