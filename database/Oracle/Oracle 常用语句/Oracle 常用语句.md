@@ -43,6 +43,9 @@ select * from user_users;
 select * from session_privs;
 select * from user_role_privs;
 
+/* 查看用户所属的表空间 */
+ select default_tablespace from dba_users where username='JY2WEB';
+ 
 --查看某个用户所拥有的角色
 select * from dba_role_privs where grantee='JY2WEB';
 --查看某个角色所拥有的权限

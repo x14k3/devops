@@ -388,6 +388,6 @@ rpl_semi_sync_master_wait_point=AFTER_SYNC  # 主库在返回给客户端事务�
 ## <span id="20231110105237-8huy0id" style="display: none;"></span>**全同步复制**
 
 全同步复制（full sync replication）是指当主库执行完一个事务后，需要确保所有的从库都执行了该事务才返回给客户端。因为需要等待所有的从库都执行完该事务才能返回，所以全同步复制的性能较差。  
-MySQL自身不支持同步复制，需要用到第三方工具如 [DRDB ](../../../企业建设/高可用方案/DRDB/DRDB%20概念.md)|参考文章：[CentOS 7.6+NFS+Heartbeat+DRBD](../../../企业建设/高可用方案/heartbeat/CentOS%207.6+NFS+Heartbeat+DRBD.md)（sync模式）等实现同步复制。还可以参考[mysql MGR模式](mysql%20MGR模式.md)[当主库提交事务之后，所有的从库节点必须收到、APPLY并且提交这些事务，然后主库线程才能继续做后续操作。但缺点是，主库完成一个事务的时间会被拉长，性能降低。]
+MySQL自身不支持同步复制，需要用到第三方工具如 [DRDB ](../../../../企业建设/高可用方案/DRDB/DRDB%20概念.md)|参考文章：[CentOS 7.6+NFS+Heartbeat+DRBD](../../../企业建设/高可用方案/heartbeat/CentOS%207.6+NFS+Heartbeat+DRBD.md)（sync模式）等实现同步复制。还可以参考[mysql MGR模式](mysql%20MGR模式.md)[当主库提交事务之后，所有的从库节点必须收到、APPLY并且提交这些事务，然后主库线程才能继续做后续操作。但缺点是，主库完成一个事务的时间会被拉长，性能降低。]
 
 ‍

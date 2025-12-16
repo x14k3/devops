@@ -4,9 +4,6 @@
 
 ​`mysql> show globalvariables;`​
 
-‍
-‍
-
 ## 缓冲池
 
 innodb_buffer_pool_size

@@ -203,7 +203,7 @@ select rownum as id,
         connect by level <= 10000;
 ```
 
-方法二：在创建表后，原来表的基础上追加记录，比如在方法一创建的TestTable表中追加1000000条数据，代码：
+方法二：在创建表后，原来表的基础上追加记录，比如在方法一创建的TestTable表中追加10000条数据，代码：
 
 ```csharp
 insert into TestTable
@@ -213,5 +213,5 @@ insert into TestTable
          trunc(dbms_random.value(0, 100)) as random_id,
          dbms_random.string('x', 20) random_string
     from dual
-  connect by level <= 1000000;
+  connect by level <= 10000;
 ```

@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
+                "file": "database/生成SQL测试数据.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Oracle 常用语句"
+              "title": "生成SQL测试数据"
             }
           }
         ],
@@ -95,7 +95,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 250.5
+    "width": 248.5
   },
   "right": {
     "id": "4f3c84d39789a0e3",
@@ -158,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
+                "file": "database/生成SQL测试数据.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Oracle 常用语句 的大纲"
+              "title": "生成SQL测试数据 的大纲"
             }
           },
           {
@@ -200,33 +200,36 @@
   },
   "active": "c42842d6c07ec4d3",
   "lastOpenFiles": [
-    "database/Oracle/Oracle 常用语句/3.表的管理.md",
-    "database/Oracle/Oracle 常用语句/Oracle 常用语句.md",
-    "database/Oracle/Oracle 常用语句/4.基本查询.md",
-    "database/Oracle/Oracle 常用语句/5.复杂查询.md",
-    "database/Oracle/Oracle 常用语句/6.表连接.md",
-    "database/Oracle/Oracle 常用语句/2.用户管理.md",
-    "database/Oracle/Oracle 常用语句/1.sqlplus 参数设置.md",
-    "database/Oracle/Oracle 常用语句/0.DBA日常维护SQL整理.md",
-    "database/生成SQL测试数据.md",
-    "database/Oracle/Oracle 备份恢复/完全恢复.md",
+    "database/Mysql/mysql 优化/SQL 优化.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/7. SQL 高级特性.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/6. 系统常用函数.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/5. DML 语句.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/3. DCL 语句.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/2. 常用 sql.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/1. mysql 服务启动命令.md",
+    "database/Mysql/日常工作 DCL、DDL、DML/4. DDL 语句.md",
+    "database/Mysql/mysql 部署/mysql 单机部署/mysql 二进制安装.md",
+    "database/Mysql/mysql 部署/mysql 单机部署/mysql RPM安装.md",
+    "database/Mysql/mysql 部署/mysql 单机部署/mysql my.cnf 配置说明.md",
+    "database/Mysql/日常工作 DCL、DDL、DML",
+    "database/Mysql/mysql 优化/mysql 服务配置优化.md",
+    "database/Mysql/mysql 优化/SQL 的索引优化.md",
+    "database/Mysql/mysql 备份和恢复/load data infile 用法.md",
+    "database/Mysql/mysql 备份和恢复/基于binlog恢复数据.md",
+    "database/Mysql/mysql 备份和恢复/3. mysql 物理备份 lvm-snapshot.md",
+    "database/Mysql/mysql 备份和恢复/2. mysql 物理备份 xtrabackup.md",
+    "database/Mysql/mysql 备份和恢复/1. mysql 逻辑备份 mysqldump.md",
+    "database/Mysql/mysql 问题总结/err-mysqldump导出函数和事件提示无权限.md",
+    "database/Mysql/mysql 问题总结/warn-binlog日志自动清理及手动删除.md",
+    "database/Mysql/mysql 问题总结/other-mysql8.0.3版本之后的认证插件问题.md",
+    "database/Mysql/mysql 问题总结/other-忘记root密码，root远程登录.md",
+    "database/Mysql/mysql 问题总结/other-减少mysqlbackup 对IO压力的影响.md",
+    "database/Mysql/mysql 问题总结/err-mysqldump解决 DEFINER 问题.md",
+    "database/Mysql/mysql 部署",
+    "database/Mysql/mysql 优化",
+    "database/Oracle/Oracle Memory Management.md",
+    "database/Oracle/Oralce 基础概念/Oracle 用户与模式.md",
     "database/Oracle/Oracle 备份恢复/assets",
-    "开源工具/HomeAssistant.md",
-    "开源工具/knock.md",
-    "开源工具/Immich.md",
-    "开源工具/Jellyfin.md",
-    "开源工具/openWRT.md",
-    "开源工具/wireguard.md",
-    "开源工具/tailscale.md",
-    "开源工具/蓝眼云盘.md",
-    "docker/docker 实用指南/Docker 2375 端口完整指南.md",
-    "docker/docker-compose/Docker Compose 锚点的用法.md",
-    "docker/docker-compose/docker-compose 命令.md",
-    "docker/docker-compose/docker-compose yaml文件详解.md",
-    "docker/var-lib-docker目录解析.md",
-    "docker/docker 优化项.md",
-    "docker/docker 网络.md",
-    "docker/docker 镜像.md",
     "docker/assets/d4e5b59483741043a1eff0c84b56cb0d_MD5.png",
     "docker/assets/Pasted image 20251213201757.png",
     "docker/assets/Pasted image 20251213201140.png",
@@ -242,9 +245,6 @@
     "docker/docker 实用指南/assets",
     "docker/docker 实用指南",
     "database/MongoDB/assets",
-    "devops/ELK/ELK 部署/assets",
-    "存储服务/Ceph",
-    "linux/linux 命令/assets",
-    "shell/shell 命令手册/备份与恢复/assets"
+    "devops/ELK/ELK 部署/assets"
   ]
 }

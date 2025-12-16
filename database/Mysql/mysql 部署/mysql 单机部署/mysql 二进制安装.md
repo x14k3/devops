@@ -7,8 +7,6 @@
   **注意：MySQL apl、beta、RC版本都不要选，一定要选择GA版（稳定版）**   
   下载地址：[https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
 
-‍
-
 
 通用二进制版本： 本文档采用此方式安装
 
@@ -16,9 +14,8 @@ https://downloads.mysql.com/archives/community/
 
 选择版本，再选择Operating System: Linux - Generic
 
-![img](http://jpg.fxkjnj.com/picgo/202212051359315.png)​
+![img|700](http://jpg.fxkjnj.com/picgo/202212051359315.png)​
 
-‍
 
 ### 下载、环境准备
 

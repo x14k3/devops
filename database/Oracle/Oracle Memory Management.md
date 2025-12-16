@@ -16,11 +16,10 @@ pga在用户登录时候直接绑定各类会话、权限等信息，而且当�
 MEMORY_TARGET：设置目标内存大小，Oracle会尝试将内存稳定在该值。不需要重启服务。
 MEMORY_MAX_TARGET ：设置最大允许的内存大小，Oracle以此来限制内存使用的最大值。需要重启数据库。
 
-**什么情况下使用自动内存管理**
+==**什么情况下使用自动内存管理**==
 Oracle官方推荐**SGA+PGA的内存总大小**如果**小于**或等于**4GB**，建议使用自动内存管理。如果你的SGA+PGA大于4G也使用了自动内存管理，那么建议最好设置SGA_TARGET和PGA_AGGREGATE_TARGET的值。那么这些值将作为SGA和PGA的最小值。该设置主要是为了避免过大的内存抖动。
 
-### 启用自动内存管理
-
+==**启用自动内存管理**==
 ```sql
 -- 1.查看当前SGA_TARGET和PGA_AGGREGATE_TARGET参数
 show parameter target;
@@ -36,7 +35,6 @@ show parameter target;
 
 ```
 
-==注意==
 >若使用自动内存管理，必须要确保 *(/dev/shm)大于MEMORY_MAX_TARGET 和MEMORY_TARGET的值*。
 
 ```sql
@@ -59,16 +57,14 @@ mount -o remount /dev/shm
 SGA_TARGET用于设置共享内存目标大小，Oracle会努力维持共享内存在此目标值，如果你修改了该参数，你并不需要重启数据库。
 SGA_MAX_SIZE用于设置最大允许的共享内存大小，Oracle以此来限制共享内存的最大值，如果你修改了该参数，你需要重启数据库。
 
-**什么情况下使用自动共享内存管理**
-
+==**什么情况下使用自动共享内存管理**==
 Oracle官方推荐SGA+PGA的总大小大于4GB，建议使用自动共享内存管理。如果我们启用了自动共享内存管理，Oracle会自动的调整SGA各组件大小，一般我们并不需要干预。但如果我们知道各组件高峰期时这些值的使用量，那么我们也可以为这些组件设置指定值，这些值将作为组件的最小值。从而避免高峰期时不必要的内存调整
 
 在Oracle 10g 中引入了一个非常重要的参数：SGA_TARGET，这也是Oracle 10g的一个新特性。自动共享内存管理（Automatic Shared Memory Management ASMM），控制这一特性的，就仅仅是这个参数SGA_TARGE。设置这个参数后，你就不需要为每个内存区来指定大小了。
 
 ASMM只能自动调整5个内存池的大小，它们是：shared pool、buffer cache、large pool、java
 
-### 启用自动共享内存管理
-
+==**启用自动共享内存管理**==
 ```sql
 ALTER SYSTEM SET SGA_TARGET        = 8192M  SCOPE = SPFILE;
 ALTER SYSTEM SET SGA_MAX_SIZE      = 8192M  SCOPE = SPFILE;
@@ -90,7 +86,6 @@ show parameter target;
 ‍
 
 ‍
-
 # 四、自动PGA内存管理
 
 当使用自动PGA内存管理时，Oracle会自动的管理实例PGA的内存总量。我们可以通过设置初始化参数PGA_AGGREGATE_TARGET为非0值来开启自动PGA内存管理。Oracle会尝试确保分配给所有数据库服务器进程和后台进程的PGA内存总量不会超过这个目标，但实际使用时可能超过该设置。当我们使用自动PGA内存管理时，SQL工作区的大小是自动的，并且会忽略所有*_AREA_SIZE初始化参数
