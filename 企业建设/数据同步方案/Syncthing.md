@@ -60,34 +60,31 @@
   要在不以 `root`​ 身份运行的情况下，需要给 `Syncthing`​ 镜像额外的系统权限。使用 `PCAP`​ 环境变量授权，比如 `PCAP=cap_chown,cap_fowner+ep`​。
 
   ```bash
-  # docker cli
-  $ docker pull syncthing/syncthing
-  $ docker run --hostname=my-syncthing \
-      -p 8384:8384 -p 22000:22000/tcp \
-      -p 22000:22000/udp -p 21027:21027/udp \
-      -v /wherever/st-sync:/var/syncthing \
-      syncthing/syncthing:latest
+mkdir -p /docker/syncthing/config #用于存放syncthing配置文件
+mkdir -p /docker/syncthing/data #用于存放需要同步的数据
+
+docker run --name syncthing \
+  --hostname=syncthing \      #可选项
+  -e PUID=1000 -e PGID=1000 \ #可选项，如果docker访问挂载的目录出现权限问题的时候可以采用，在宿主机里的使用id username命令来获取PUID和PGID
+  -e TZ=Asia/Shanghai \ #指定时区
+  -p 8384:8384 \ # 管理gui的端口，请根据自己实际环境情况指定
+  -p 22000:22000/tcp \ #指定宿主机上tcp的监听端口，请根据自己实际情况修改，最好不变
+  -p 22000:22000/udp \ #指定宿主机上udp的监听端口，请根据自己实际环境修改，最好不变
+  -p 21027:21027/udp \ #发现协议使用的端口，请根据自己实际环境修改，最好不变
+  -v /docker/syncthing/config:/config \ #挂载宿主机上的指定目录到容器内部特定路径，这里是配置文件所在目录
+  -v /docker/syncthing/data:/data1 \ #挂载宿主机上的指定目录到容器内部特定路径，这里主要是需要同步的数据所在的目录,可以指定多个，比如data2，data3等，也可以直接将宿主机上原有的需要同步的目录直接映射过来，不过需要注意权限问题，比如755改成777，否则可能会同步不了，不要问我怎么知道的。
+  linuxserver/syncthing:latest
   ```
 
-  ```yaml
-  version: "3"
-  services:
-    syncthing:
-      image: syncthing/syncthing
-      container_name: syncthing
-      hostname: my-syncthing
-      environment:
-        - PUID=1000
-        - PGID=1000
-      volumes:
-        - /wherever/st-sync:/var/syncthing
-      ports:
-        - 8384:8384 # Web UI
-        - 22000:22000/tcp # TCP file transfers
-        - 22000:22000/udp # QUIC file transfers
-        - 21027:21027/udp # Receive local discovery broadcasts
-      restart: unless-stopped
-  ```
+  内网可以使用host模式
+  ```bash
+  docker run --name syncthing  -d --restart=always --net=host \
+  --hostname=syncthing \
+  -e TZ=Asia/Shanghai \
+  -v /docker/syncthing/config:/config \
+  -v /docker/syncthing/data:/data1 \
+  lscr.io/linuxserver/syncthing:latest
+```
 
 ## 3. 使用方式 - 设置文件同步
 
@@ -117,16 +114,16 @@
 
   而同步的操作，需要通过交换 **设备 **​**​`ID`​**​ 来实现的。该设备 `ID`​ 是一个唯一的加密安全标识符，并在你首次启动 `Syncthing`​ 时作为密钥生成的一部分生成。当然，也可以通过在 `GUI`​ 中查看到。只有当两台设备都配置了彼此的设备 `ID`​ 时，它们才会相互连接和通信，其本质上是公钥的一部分。
 
-  ![use-syncthing-tool-02](assets/use-syncthing-tool-02-20231228145845-kjmnpky.png "Syncthing文件同步工具")
+  ![use-syncthing-tool-02|700](assets/use-syncthing-tool-02-20231228145845-kjmnpky.png "Syncthing文件同步工具")
 
   单击两台设备右下角的 `Add Remote Device`​，然后输入另一侧的设备 `ID`​。设备名称是可选的，改成我们好记忆的就可以了。单击 `Save`​ 后，新设备将出现在 `GUI`​ 的右侧，即使已断开连接的设备。
 
-  ![use-syncthing-tool-03](assets/use-syncthing-tool-03-20231228151050-n8z3gbc.png)
+  ![use-syncthing-tool-03|700](assets/use-syncthing-tool-03-20231228151050-n8z3gbc.png)
 
 - 3.**设置需要共享的文件夹**  
   此时，默认情况下，两个设备共享一个 `Default Folder`​ 空目录。如果要同步其他文件夹的话，需要事先添加。之后，将文件添加到任一设备上的共享目录都会将这些文件同步到另一端。
-  ![use-syncthing-tool-04](assets/use-syncthing-tool-04-20231228151204-yr08na6.png)
-  ![use-syncthing-tool-05](assets/use-syncthing-tool-05-20231228151219-zrycq0g.png)
+  ![use-syncthing-tool-04|700](assets/use-syncthing-tool-04-20231228151204-yr08na6.png)
+  ![use-syncthing-tool-05|700](assets/use-syncthing-tool-05-20231228151219-zrycq0g.png)
 
   如果在连接设备时遇到问题，请先查看防火墙设置，然后查看 `GUI`​ 或控制台上的错误消息。不要忘记配置更改不会立即反映出来，尤其是在重新启动后。
 

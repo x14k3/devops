@@ -35,17 +35,16 @@ tar xvf cloudreve_4.7.0_linux_amd64.tar.gz
 
 进程守护
 
-​`vim /usr/lib/systemd/system/cloudreve.service`​
-
-```ini
+```bash
+echo '
 [Unit]
 Description=Cloudreve
 Documentation=https://docs.cloudreve.org
 Wants=network.target
 
 [Service]
-WorkingDirectory=/PATH_TO_CLOUDREVE
-ExecStart=/PATH_TO_CLOUDREVE/cloudreve
+WorkingDirectory=/data/application/cloudreve/data
+ExecStart=/data/application/cloudreve/cloudreve
 Restart=on-abnormal
 RestartSec=5s
 KillMode=mixed
@@ -54,7 +53,13 @@ StandardOutput=null
 StandardError=syslog
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target 
+' >> /etc/systemd/system/cloudreve.service
+
+systemctl daemon-reload
+systemctl enable cloudreve
+systemctl start cloudreve
+
 ```
 
 反向代理

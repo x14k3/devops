@@ -206,4 +206,7 @@ echo "set nocp" >> ~/.vimrc
 echo "set backspace=2" >> ~/.vimrc
 # 禁用vim的visual模式
 echo "set mouse-=a" >> ~/.vimrc
+# 语法高亮
+echo "syntax enable" >> ~/.vimrc
+
 ```

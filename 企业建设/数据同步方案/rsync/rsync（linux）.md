@@ -165,9 +165,8 @@ crontab -e
   静默模式，抑制非错误信息。
 - ​`-P`​  
   等价于 `--partial --progress`​：
-
-  - ​`--partial`​：保留部分传输的文件（便于断点续传）。
-  - ​`--progress`​：显示传输进度。
+	`--partial`​：保留部分传输的文件（便于断点续传）。
+	---progress`​：显示传输进度。
 - ​`-n, --dry-run`​  
   模拟运行，显示哪些文件会被同步但不实际执行。
 - ​`--delete`​  
@@ -209,8 +208,7 @@ crontab -e
   示例：同步 `/foo/bar`​ 到 `/backup/`​ 会生成 `/backup/foo/bar`​。
 - ​`-b, --backup`​  
   对目标端已存在的文件创建备份（默认后缀 `~`​）。
-
-  - ​`--backup-dir=DIR`​：指定备份文件存放目录。
+- ​`--backup-dir=DIR`​：指定备份文件存放目录。
 - ​`--remove-source-files`​  
   同步后删除源端文件（非目录）。
 
@@ -258,32 +256,26 @@ crontab -e
 ### **常用示例**
 
 1. **本地同步**（保留所有属性）：  
-
     ```
-    rsync -av /source/ /destination/
+    rsync -av /source/ /destination/ -W
     ```
 2. **同步到远程服务器**（通过 SSH）：  
-
     ```
     rsync -avz -e ssh /local/path user@remote:/remote/path
     ```
 3. **从远程同步到本地**：  
-
     ```
     rsync -avz user@remote:/remote/path /local/path
     ```
 4. **删除目标端多余文件**（严格同步）：  
-
     ```
     rsync -av --delete /source/ /destination/
     ```
 5. **限速同步**（避免占用带宽）：  
-
     ```
     rsync -avz --bwlimit=1000 /source/ user@remote:/destination/
     ```
 6. **增量备份**（结合硬链接）：  
-
     ```
     rsync -a --link-dest=/previous/backup /source/ /new/backup/
     ```

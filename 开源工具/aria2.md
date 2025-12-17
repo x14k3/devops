@@ -3,7 +3,7 @@
 
 **执行命令**
 
-```shell
+```bash
 docker run -d \
   --name=aria2 \
   -e PUID=1026 \
