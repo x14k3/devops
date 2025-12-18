@@ -2,7 +2,7 @@
 ## 环境准备
 
 - 安装 [[../../docker/docker 部署|docker ]]
-- 安装 [[../../docker/docker-compose/docker-compose 命令|docker-compose 命令]]
+- 安装 [[../../docker/docker-compose/docker compose 构建命令|docker compose 构建命令]]
 
 
 ## 1.拉取gitlab镜像

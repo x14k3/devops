@@ -18,7 +18,7 @@
 
 docker compose 学习博客「推荐」：  
 https://tuonioooo-notebook.gitbook.io/docker/docker-compose
-## 部署 docker-compose
+## 部署 docker compose
 
 `Compose` 支持 Linux、macOS、Windows 10 三大平台。
 `Compose` 可以通过 Python 的包管理工具 `pip` 进行安装，也可以直接下载编译好的二进制文件使用，甚至能够直接在 Docker 容器中运行。
@@ -34,7 +34,7 @@ Linux 系统请使用以下介绍的方法安装。
 
 ## docker compose 命令
 
-### docker-compose
+### docker compose
 
 ```sh
 docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
@@ -49,7 +49,6 @@ docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
 - -v，–version打印版本并退出
 
 ```bash
-docker-compose 命令 --help                     获得一个命令的帮助
 docker-compose up -d nginx                     构建启动nignx容器
 docker-compose exec nginx bash                 登录到nginx容器中
 docker-compose down                            此命令将会停止 up 命令所启动的容器，并移除网络
@@ -73,7 +72,7 @@ docker-compose run --no-deps --rm php-fpm php -v   在php-fpm中不启动关联�
 ```
 
 ‍
-### docker-compose up
+### docker compose up
 
 这个命令一定要记住，每次启动都要用到，只要学会使用的人记住这个就好了
 
