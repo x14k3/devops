@@ -2,22 +2,24 @@
 code-server是一款服务端的vscode，可以在浏览器中使用vscode
 
 ## code-server 服务部署
+
+## 部署 code-server 基础环境
 ### 准备配置文件
 
 ```bash
-export coder-server-path="/data/application/coder-server"
-mkdir ${coder-server-path}/code-server-data -p
-mkdir ${coder-server-path}/project -p
-mkdir ${coder-server-path}/.config/code-server/ -p
+export CodeServerPath=/data/application/code-server
+mkdir ${CodeServerPath}/code-server-data -p
+mkdir ${CodeServerPath}/project -p
+mkdir ${CodeServerPath}/.config/code-server/ -p
 
-echo '
-bind-addr: 127.0.0.1:8080
+echo 'bind-addr: 127.0.0.1:8080
 auth: password
 password: xxxxx@1234
 cert: false
-' >> ${coder-server-path}/.config/code-server/config.yaml
+' >> ${CodeServerPath}/.config/code-server/config.yaml
 
-chown -R 1000:1000 ${coder-server-path}
+#chown -R 1000:1000 ${CodeServerPath}
+unset CodeServerPath
 ```
 ### docker-compose.yml 配置
 
@@ -66,10 +68,10 @@ docker compose logs code-server-golang
 - **登录密码**: `xxxxxx@123`（在 docker-compose.yml 中配置）
 
 ---
-## 搭建 golang开发环境
+## 部署 golang 开发环境
 
 ### 创建 Dockerfile
-vim Dockerfile
+`vim Dockerfile`
 ```dockerfile
 # 使用官方 code-server 镜像
 FROM codercom/code-server:latest
@@ -97,13 +99,15 @@ RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
     && rm go${GO_VERSION}.linux-amd64.tar.gz
 
 # 设置环境变量
-ENV PATH="/usr/local/go/bin:$PATH"
-ENV GOPATH="/home/coder/go"
-ENV GOBIN="$GOPATH/bin"
+ENV GOROOT="/usr/local/go"
+ENV GOPATH="/home/coder/project"
+ENV PATH="$GOROOT/bin:$PATH"
 
 # 创建 Go 工作目录并设置权限
-RUN mkdir -p /home/coder/go/{bin,src,pkg} \
-    && chown -R coder:coder /home/coder/go
+RUN mkdir -p /home/coder/project/bin \
+	&& mkdir -p /home/coder/project/src \
+	&& mkdir -p /home/coder/project/pkg \
+    && chown -R coder:coder /home/coder
 
 # 安装常用 Go 工具
 USER coder
@@ -117,7 +121,7 @@ RUN go install golang.org/x/tools/gopls@latest \
 USER coder
 
 # 设置工作目录
-WORKDIR /home/coder
+WORKDIR /home/coder/project
 
 # 暴露端口
 EXPOSE 8080
@@ -130,9 +134,26 @@ CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password"]
 
 ```bash
 # 构建镜像
-docker build -t code-server-go .
+docker build -t my/code-server-go .
+# 使用代理
+docker build --build-arg http_proxy=http://192.168.3.100:10809 --build-arg https_proxy=http://192.168.3.100:10809 -t my/code-server-go .
 ```
-提示：[[../docker/docker 实用指南/Docker 使用代理|Docker 使用代理]]
+
+### 启动服务
+
+[[#准备配置文件]]
+
+```bash
+docker run -d --name code-server-go -p 8903:8080 \
+-u "${UID:-1000}:${GID:-1000}" \
+-e "DOCKER_USER=${USER}" \
+-e "TZ=Asia/Shanghai" \
+-v /data/application/code-server/go:/home/coder/go \
+-v /data/application/code-server/project:/home/coder/project \
+-v /data/application/code-server/.config/code-server/config.yaml:/root/.config/code-server/config.yaml \
+code-server-go:latest
+
+```
 
 ### 安装扩展
 
