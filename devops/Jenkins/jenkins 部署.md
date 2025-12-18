@@ -22,7 +22,7 @@
 - 1GB+可用内存
 - 50 GB+ 可用磁盘空间
 
-1. 安装 [[../../docker/docker 部署|docker]]
+1. 安装 [[../../docker/docker install|docker]]
 2. 下载 `jenkinsci/blueocean` 镜像并使用以下docker run 命令将其作为Docker中的容器运行 ：
 ```bash
 docker pull jenkins/jenkins:jdk21

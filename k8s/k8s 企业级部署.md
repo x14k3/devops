@@ -128,7 +128,7 @@ cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
 >**WHAT**：docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。
 >**WHY**：Pod里面就是由数个docker容器组成，Pod是豌豆荚，docker容器是里面的豆子。
 
-在21/22机器 [[../docker/docker 部署|docker 部署]]
+在21/22机器 [[../docker/docker install|docker install]]
 
 ```bash
 # 如我们架构图所示，运算节点是21/22机器（没有docker则无法运行pod），运维主机是200机器（没有docker则没办法下载docker存入私有仓库），所以在三台机器安装（21/22/200）

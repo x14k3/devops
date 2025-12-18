@@ -63,9 +63,14 @@ ENTRYPOINT   # 指定运行容器启动过程执行命令，覆盖CMD参数
 docker build -t 192.168.10.31/jinzay/jdk ./
 #docker build  -t ImageName:TagName dir
 
--t          # 给镜像加一个Tag,一般写dockerhub+镜像名
--f          # 指定Dockerfile文件
-
+-t,--tag      # 指定构建的镜像名和 tag
+-f,--file     # 指定Dockerfile文件
+--build-arg   # 设置构建参数，可以在Dockerfile文件中使用。
+-m,--memory   # 设置Docker build命令的内存限制
+--add-host    # 可以使用一个或多个 --add-host 标志将其他主机添加到容器的 /etc/hosts 文件中
+--no-cache    # 构建镜像时不使用缓存
+--network     # 在构建过程中为 RUN 指令设置网络模式
+--progress    # 构建过程中的输出显示方式，其值可以是 `auto`（默认）、`none`、`plain`、`quiet`、`rawjson` 或 `tty`，其中 `plain` 会以纯文本显示容器输出，方便查看详细日志，而 `tty` 则模拟终端，适用于交互式构建，帮助您更精细地监控和调试镜像构建.
 ```
 
 
@@ -80,7 +85,7 @@ docker build -t 192.168.10.31/jinzay/jdk ./
 
 # 使用镜像
 
-[[docker 命令#docker run | docker run]]
+[[docker command#docker run| docker run]]
 
 
 **容器启动失败**

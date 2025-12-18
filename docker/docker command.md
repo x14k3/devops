@@ -80,16 +80,19 @@ docker import         # 加载通过docker export打包的容器镜像 [ docker 
 ## 镜像管理
 
 ```bash
-docker images         # 列出镜像
-docker rmi            # 删除镜像
-docker tag            # 修改本地某一镜像的标记，使其镜像属于某一仓库 [docker tag alpine:3.15 192.168.0.100:8081/images/alpine:3.15]
-docker build          # 通过指定Dockerfile文件编译镜像
-docker history        # 查看镜像历史
-docker checkpoint     # 设置checkpoint，类似于恢复点，可以让镜像撤销到曾经设置的某一个checkpoint上
-docker manifest       # docker镜像清单管理
-docker trust          # docker可信镜像管理
-docker save           # 将镜像保存成tar文件 [docker save -o alpine.tar  alpine:3.15]
-docker load           # 从tar中恢复镜像 [docker load < alpine.tar]
+docker images           # 列出镜像
+docker rmi              # 删除镜像
+docker image prune[-a]  # 删除悬空镜像（中断时产生的 `<none>` 镜像）
+docker tag              # 修改本地某一镜像的标记，使其镜像属于某一仓库 [docker tag alpine:3.15 192.168.0.100:8081/images/alpine:3.15]
+docker build            # 通过指定Dockerfile文件编译镜像
+docker builder prune[-a]# 删除构建缓存
+docker history          # 查看镜像历史
+docker checkpoint       # 设置checkpoint，类似于恢复点，可以让镜像撤销到曾经设置的某一个checkpoint上
+docker manifest         # docker镜像清单管理
+docker trust            # docker可信镜像管理
+docker save             # 将镜像保存成tar文件 [docker save -o alpine.tar  alpine:3.15]
+docker load             # 从tar中恢复镜像 [docker load < alpine.tar]
+
 ```
 
 **总结一下docker save和docker export的区别：**
@@ -103,9 +106,11 @@ docker load           # 从tar中恢复镜像 [docker load < alpine.tar]
 > docker export的应用场景：
 > 主要用来制作基础镜像，比如你从一个ubuntu镜像启动一个容器，然后安装一些软件和进行一些设置后，使用docker export保存为一个基础镜像。然后，把这个镜像分发给其他人使用，比如作为基础的开发环境。
 
+
+
 ## 数据卷管理
 
-[docker 容器卷](docker%20容器卷.md)
+[docker volume](docker%20volume.md)
 
 ```bash
 ### 常用 `docker volume` 命令
@@ -119,7 +124,7 @@ docker volume prune   # 删除未使用的卷
 
 ## 网络管理
 
-[docker 网络](docker%20网络.md)
+[docker network](docker%20network.md)
 
 ## 仓库管理
 
@@ -145,6 +150,8 @@ docker network            # docker网络管理
 docker plugin             # docker插件管理
 docker secret             # docker敏感信息管理
 docker service            # docker服务管理
+docker image prune[-a]    # 删除悬空镜像（中断时产生的 `<none>` 镜像）
+docker builder prune[-a]  # 删除构建缓存
 ```
 
 ## docker容器端口映射

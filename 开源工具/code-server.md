@@ -96,32 +96,27 @@ RUN apt-get update && apt-get install -y \
 ARG GO_VERSION=1.21.0
 RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
     && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
-    && rm go${GO_VERSION}.linux-amd64.tar.gz
+    && rm go${GO_VERSION}.linux-amd64.tar.gz \
+    && mkdir -p /home/coder/project/{bin,src,pkg}
 
 # 设置环境变量
 ENV GOROOT="/usr/local/go"
 ENV GOPATH="/home/coder/project"
+ENV GOBIN="$GOROOT/bin"
 ENV PATH="$GOROOT/bin:$PATH"
 
-# 创建 Go 工作目录并设置权限
-RUN mkdir -p /home/coder/project/bin \
-	&& mkdir -p /home/coder/project/src \
-	&& mkdir -p /home/coder/project/pkg \
-    && chown -R coder:coder /home/coder
-
-# 安装常用 Go 工具
-USER coder
 RUN go install golang.org/x/tools/gopls@latest \
     && go install github.com/go-delve/delve/cmd/dlv@latest \
     && go install honnef.co/go/tools/cmd/staticcheck@latest \
     && go install golang.org/x/tools/cmd/goimports@latest \
-    && go install github.com/cweill/gotests/gotests@latest
+    && go install github.com/cweill/gotests/gotests@latest \
+    chown -R coder:coder /home/coder
 
 # 切换回 code-server 用户
 USER coder
 
 # 设置工作目录
-WORKDIR /home/coder/project
+WORKDIR /home/coder
 
 # 暴露端口
 EXPOSE 8080
@@ -151,7 +146,7 @@ docker run -d --name code-server-go -p 8903:8080 \
 -v /data/application/code-server/go:/home/coder/go \
 -v /data/application/code-server/project:/home/coder/project \
 -v /data/application/code-server/.config/code-server/config.yaml:/root/.config/code-server/config.yaml \
-code-server-go:latest
+my/code-server-go:latest
 
 ```
 

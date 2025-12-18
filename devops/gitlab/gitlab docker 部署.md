@@ -1,7 +1,7 @@
 
 ## 环境准备
 
-- 安装 [[../../docker/docker 部署|docker ]]
+- 安装 [[../../docker/docker install|docker ]]
 - 安装 [[../../docker/docker-compose/docker compose 构建命令|docker compose 构建命令]]
 
 
