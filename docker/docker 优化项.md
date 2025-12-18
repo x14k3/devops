@@ -1,53 +1,10 @@
 
-## docker 仓库改为阿里源
+## [[docker 实用指南/Docker 使用代理|Docker 使用代理]]
+## 修改存储路径 
+
+docker 默认存储路径为 `/var/lib/docker`，修改默认运行目录为`/data/docker`
 
 ```bash
-mkdir -p /etc/docker
-vim /etc/docker/daemon.json
--------------------------------------------------------------
-{
-  "registry-mirrors": ["https://tu2ax1rl.mirror.aliyuncs.com"],
-  "insecure-registries": ["0.0.0.0"]
-}
--------------------------------------------------------------
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-```
-
-## docker pull 使用代理
-
-docker已换阿里源，某些冷门或较新镜像仍然会从docker.io进行下载，需要代理。
-
-对于docker这种级别的应用，环境变量需要经由systemd传入。
-
-```bash
-mkdir /etc/systemd/system/docker.service.d
-echo '
-# Add content below
-
-[Service]
-Environment="HTTP_PROXY=http://192.168.3.100:10809"
-Environment="HTTPS_PROXY=http://192.168.3.100:10809"
-Environment="NO_PROXY=localhost,127.0.0.1,.example.com,.od.com" '  >> /etc/systemd/system/docker.service.d/proxy.conf
-
-# 注意，使用docker login 使用域名的时候，要将域名加入到"NO_PROXY"
-
-systemctl daemon-reload
-systemctl stop docker.socket
-systemctl start docker.socket
-```
-
-## 容器使用宿主机的代理
-
-```bash
-#方法一： 直接在容器内使用（推荐)
-export ALL_PROXY='socks5://172.17.0.1:10808'
-```
-
-## 默认存储路径 /var/lib/docker
-
-```bash
-# 修改docker默认运行目录 /data/docker
 # 停止的docker相关服务:
 systemctl stop docker
 systemctl stop docker.socket

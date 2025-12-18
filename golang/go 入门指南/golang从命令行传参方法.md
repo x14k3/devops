@@ -1,6 +1,6 @@
 
 使用 `os.Args`：
-```golang
+```go
 package main
 
 import (
@@ -27,7 +27,7 @@ func main() {
 ```
 
 使用 `flag` 包：
-```golang
+```go
 package main
 
 import (

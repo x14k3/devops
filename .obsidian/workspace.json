@@ -56,59 +56,45 @@
             }
           },
           {
-            "id": "c130d1e9f8f0dbec",
+            "id": "1969a5a5e161c33f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docker/docker-compose/docker compose 指令详解.md",
+                "file": "golang/go 前置配置/Go 语言环境安装/Linux下配置VSCode的Go开发环境.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "docker compose 指令详解"
+              "title": "Linux下配置VSCode的Go开发环境"
             }
           },
           {
-            "id": "f073fadf3939c550",
+            "id": "34fb25d21dd9aa4b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docker/docker-compose/docker compose 构建命令.md",
+                "file": "docker/docker 实用指南/Docker 使用代理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "docker compose 构建命令"
+              "title": "Docker 使用代理"
             }
           },
           {
-            "id": "79ab274750908ed1",
+            "id": "77e393f4b1afc9f2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docker/docker-compose/docker compose 构建命令.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "docker compose 构建命令"
-            }
-          },
-          {
-            "id": "999d4bb4c8c45bc4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "linux/linux 命令/vim 编辑快捷键.md",
+                "file": "docker/docker 优化项.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "vim 编辑快捷键"
+              "title": "docker 优化项"
             }
           }
         ],
@@ -274,15 +260,27 @@
   },
   "active": "97baa264924d0fd6",
   "lastOpenFiles": [
-    "docker/docker-compose/docker compose 指令详解.md",
-    "linux/linux 命令/vim 编辑快捷键.md",
+    "docker/docker 实用指南/Docker 使用代理.md",
     "开源工具/code-server.md",
-    "docker/docker-compose/docker compose 构建命令.md",
-    "linux/linux 命令/linux 系统性能瓶颈分析.md",
+    "docker/docker 优化项.md",
+    "docker/docker 镜像.md",
+    "docker/docker 实用指南/Docker 2375 端口完整指南.md",
+    "docker/docker 实用指南/Docker 多阶段构建指南.md",
     "golang/go 前置配置/Go 语言环境安装/Linux下配置VSCode的Go开发环境.md",
+    "docker/docker-compose/assets/8956a24e90b6b1a5baa6e989f3ac8d13_MD5.jpg",
+    "golang/go 入门指南/go 入门指南.md",
+    "golang/go 入门指南/Go 语言 tag 标签.md",
+    "golang/go 入门指南/Go 语言中的 init 函数_ 特点、用途和注意事项.md",
+    "golang/go 入门指南/golang从命令行传参方法.md",
+    "docker/docker-compose/docker compose 指令详解.md",
+    "docker/docker-compose/docker compose 构建命令.md",
+    "linux/linux 命令/vim 编辑快捷键.md",
+    "golang/go 前置配置/Go 语言环境安装/如何使用 Go 多版本（Mac）.md",
+    "golang/go 前置配置/Go 语言环境安装/go 命令行工具.md",
+    "golang/go 前置配置/Go 语言环境安装/Windows下配置VSCode的Go开发环境.md",
+    "linux/linux 命令/linux 系统性能瓶颈分析.md",
     "docker/docker-compose/assets/70a8e6b48f5934aedf9b45789aa3d0b9_MD5.jpg",
     "docker/docker-compose/assets/Pasted image 20251218135858.png",
-    "docker/docker-compose/assets/8956a24e90b6b1a5baa6e989f3ac8d13_MD5.jpg",
     "docker/docker-compose/assets/Pasted image 20251218135607.png",
     "docker/docker-compose/docker compose 锚点的用法.md",
     "docker/docker-compose/assets",
@@ -294,18 +292,6 @@
     "开源工具/frp.md",
     "开源工具/蓝眼云盘.md",
     "开源工具/assets/e6b299bf75fe2046a1a0a1fa9e030005_MD5.png",
-    "开源工具/fail2ban.md",
-    "开源工具/iGotify.md",
-    "开源工具/wireguard.md",
-    "开源工具/shadowsocks.md",
-    "开源工具/Rustdesk.md",
-    "开源工具/openWRT.md",
-    "开源工具/Navidrome.md",
-    "开源工具/crawl4ai.md",
-    "开源工具/Bark.md",
-    "开源工具/yt-dlp.md",
-    "开源工具/Windows(docker).md",
-    "开源工具/v2ray.md",
     "企业建设/邮件服务器/assets/cc43211ea5e0b41f5cec159832870b01_MD5.jpg",
     "企业建设/邮件服务器/assets/02fe1a9c99b73fe785d756d730151274_MD5.png",
     "企业建设/邮件服务器/assets",

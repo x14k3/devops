@@ -1,6 +1,7 @@
 
 code-server是一款服务端的vscode，可以在浏览器中使用vscode
 
+## code-server 服务部署
 ### 准备配置文件
 
 ```bash
@@ -57,40 +58,151 @@ docker compose up -d
 docker compose ps
 # 查看日志
 docker compose logs code-server-golang
-
 ```
 
-## 访问方式
+### 访问方式
 
 - **访问地址**: [http://localhost:8903](http://localhost:8903/)
 - **登录密码**: `xxxxxx@123`（在 docker-compose.yml 中配置）
 
+---
 ## 搭建 golang开发环境
 
-#### Chinese (Simplified) (简体中文)
-[[docker/docker-compose/assets/8956a24e90b6b1a5baa6e989f3ac8d13_MD5.jpg|Open: Pasted image 20251218135607.png]]
-![[docker/docker-compose/assets/8956a24e90b6b1a5baa6e989f3ac8d13_MD5.jpg|625]]
+### 创建 Dockerfile
+vim Dockerfile
+```dockerfile
+# 使用官方 code-server 镜像
+FROM codercom/code-server:latest
 
-1. **打开命令面板**：在 code-server (或 VS Code) 中按下 `Ctrl+Shift+P`.
-2. **输入命令**：输入 `Configure Display Language` (配置显示语言).
+# 切换到 root 用户安装依赖
+USER root
 
-#### GO
-[[docker/docker-compose/assets/70a8e6b48f5934aedf9b45789aa3d0b9_MD5.jpg|Open: Pasted image 20251218135858.png]]
-![[docker/docker-compose/assets/70a8e6b48f5934aedf9b45789aa3d0b9_MD5.jpg|600]]
+# 安装基础工具和 Go 开发环境
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    vim \
+    sudo \
+    build-essential \
+    # Go 依赖
+    golang \
+    && rm -rf /var/lib/apt/lists/*
 
-进入容器手动安装
-```bash
-# 进入正在运行的 code-server 容器
-docker exec -it <容器名或容器ID> bash
-
-# 下载并安装 Go（以 Go 1.21 为例）
-wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
-tar xf go1.21.0.linux-amd64.tar.gz
+# 或者从官方安装最新版 Go（推荐）
+# 设置 Go 版本
+ARG GO_VERSION=1.21.0
+RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
+    && rm go${GO_VERSION}.linux-amd64.tar.gz
 
 # 设置环境变量
-echo 'export PATH=$PATH:/home/coder/go/bin' >> ~/.bashrc
-source ~/.bashrc
+ENV PATH="/usr/local/go/bin:$PATH"
+ENV GOPATH="/home/coder/go"
+ENV GOBIN="$GOPATH/bin"
 
-# 验证安装
-go version
+# 创建 Go 工作目录并设置权限
+RUN mkdir -p /home/coder/go/{bin,src,pkg} \
+    && chown -R coder:coder /home/coder/go
+
+# 安装常用 Go 工具
+USER coder
+RUN go install golang.org/x/tools/gopls@latest \
+    && go install github.com/go-delve/delve/cmd/dlv@latest \
+    && go install honnef.co/go/tools/cmd/staticcheck@latest \
+    && go install golang.org/x/tools/cmd/goimports@latest \
+    && go install github.com/cweill/gotests/gotests@latest
+
+# 切换回 code-server 用户
+USER coder
+
+# 设置工作目录
+WORKDIR /home/coder
+
+# 暴露端口
+EXPOSE 8080
+
+# code-server 的默认启动命令
+CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password"]
+```
+
+### 构建镜像
+
+```bash
+# 构建镜像
+docker build -t code-server-go .
+```
+提示：[[../docker/docker 实用指南/Docker 使用代理|Docker 使用代理]]
+
+### 安装扩展
+
+在 code-server 中按 `Ctrl+Shift+X` 打开扩展商店，安装以下扩展：
+
+- **Chinese**(Simplified 简体中文)
+   1. **打开命令面板**：在 code-server (或 VS Code) 中按下 `Ctrl+Shift+P`.
+   2. **输入命令**：输入 `Configure Display Language` (配置显示语言).
+- **Go** (由 Go Team at Google 开发)
+- **Go Test Explorer** (用于测试)
+- **Go Coverage** (代码覆盖率)
+- **Better Go Syntax** (语法高亮)
+- **Error Lens** (更好的错误显示)
+
+### 配置 Go 设置
+
+创建或编辑 `/home/coder/.config/code-server/User/settings.json`：
+
+```json
+{
+    "go.gopath": "/home/coder/go",
+    "go.goroot": "/usr/local/go",
+    "go.toolsGopath": "/home/coder/go/bin",
+    "go.useLanguageServer": true,
+    "go.languageServerExperimentalFeatures": {
+        "diagnostics": true,
+        "documentLink": true
+    },
+    "go.languageServerFlags": [
+        "-rpc.trace",
+        "serve"
+    ],
+    "go.formatTool": "goimports",
+    "go.autocompleteUnimportedPackages": true,
+    "go.testOnSave": false,
+    "go.testTimeout": "30s",
+    "go.coverOnSave": false,
+    "go.enableCodeLens": {
+        "references": true,
+        "runtest": true
+    },
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "[go]": {
+        "editor.defaultFormatter": "golang.go"
+    }
+}
+```
+
+
+
+### 创建测试项目
+
+在容器中或通过 code-server 创建测试文件：
+
+```bash\
+# 在终端中
+mkdir -p /home/coder/projects/hello-world
+cd /home/coder/projects/hello-world
+go mod init hello-world
+```
+
+创建 `main.go`：
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+    fmt.Println("Go 开发环境已配置成功！")
+}
 ```
