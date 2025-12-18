@@ -150,8 +150,8 @@ docker network            # docker网络管理
 docker plugin             # docker插件管理
 docker secret             # docker敏感信息管理
 docker service            # docker服务管理
-docker image prune[-a]    # 删除悬空镜像（中断时产生的 `<none>` 镜像）
-docker builder prune[-a]  # 删除构建缓存
+docker image prune[-a]    # 删除没有标签的镜像[-a]删除没有被容器引用的镜像
+docker builder prune -a   # 删除构建缓存     [-a]删除所有未使用的构建缓存，包括可能被引用的
 ```
 
 ## docker容器端口映射

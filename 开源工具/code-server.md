@@ -1,154 +1,110 @@
 
-code-server是一款服务端的vscode，可以在浏览器中使用vscode
+## 基于 code-server 镜像构建 Go 开发环境 Dockerfile
 
-## code-server 服务部署
+### 准备 Dockerfile
 
-## 部署 code-server 基础环境
-### 准备配置文件
-
-```bash
-export CodeServerPath=/data/application/code-server
-mkdir ${CodeServerPath}/code-server-data -p
-mkdir ${CodeServerPath}/project -p
-mkdir ${CodeServerPath}/.config/code-server/ -p
-
-echo 'bind-addr: 127.0.0.1:8080
-auth: password
-password: xxxxx@1234
-cert: false
-' >> ${CodeServerPath}/.config/code-server/config.yaml
-
-#chown -R 1000:1000 ${CodeServerPath}
-unset CodeServerPath
-```
-### docker-compose.yml 配置
-
-```yaml
-version: "3.9"
-services:
-  code-server:
-    image: codercom/code-server:latest
-    container_name: code-server-golang
-    restart: unless-stopped
-    ports:
-      - "8903:8080"
-    volumes:
-      - /data/application/coder-server/code-server-data:/home/coder/.local/share/code-server
-      - /data/application/coder-server/project:/home/coder/project
-      - /data/application/coder-server/.config/code-server/config.yaml:/home/coder/.config/code-server/config.yaml
-    environment:
-      - DOCKER_USER=${USER}
-    user: "${UID:-1000}:${GID:-1000}"
-    stdin_open: true
-    tty: true
-```
-
-### 关键配置说明
-
-- **端口映射**: `127.0.0.1:8903:8080` - 本地8680端口映射到容器8080端口
-- **数据持久化**: `./code-server-data` - 保存 code-server 配置和扩展
-- **项目目录**: `./project` - **重要：这是您应该保存代码文件的目录**
-- **配置文件**: `./config.yaml` - code-server 配置文件
-- **用户权限**: 使用 UID:GID 1000:1000
-
-### 启动服务
-
-```bash
-# 启动服务
-docker compose up -d
-# 查看服务状态
-docker compose ps
-# 查看日志
-docker compose logs code-server-golang
-```
-
-### 访问方式
-
-- **访问地址**: [http://localhost:8903](http://localhost:8903/)
-- **登录密码**: `xxxxxx@123`（在 docker-compose.yml 中配置）
-
----
-## 部署 golang 开发环境
-
-### 创建 Dockerfile
-`vim Dockerfile`
 ```dockerfile
-# 使用官方 code-server 镜像
+# 使用官方 code-server 镜像作为基础
 FROM codercom/code-server:latest
 
-# 切换到 root 用户安装依赖
-USER root
-
-# 安装基础工具和 Go 开发环境
+# 安装基础工具和依赖
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
     git \
-    vim \
-    sudo \
-    build-essential \
-    # Go 依赖
-    golang \
+    gcc \
+    g++ \
+    make \
+    ca-certificates \
+    procps \
+    lsb-release \
+    gnupg \
+    software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-# 或者从官方安装最新版 Go（推荐）
-# 设置 Go 版本
-ARG GO_VERSION=1.21.0
-RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
-    && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
-    && rm go${GO_VERSION}.linux-amd64.tar.gz \
-    && mkdir -p /home/coder/project/{bin,src,pkg}
+# 安装 Go 1.21.0
+RUN wget -O go.tar.gz https://golang.org/dl/go1.21.0.linux-amd64.tar.gz \
+    && rm -rf /usr/local/go \
+    && tar -C /usr/local -xzf go.tar.gz \
+    && rm go.tar.gz
 
-# 设置环境变量
-ENV GOROOT="/usr/local/go"
-ENV GOPATH="/home/coder/project"
-ENV GOBIN="$GOROOT/bin"
-ENV PATH="$GOROOT/bin:$PATH"
+# 设置 Go 环境变量
+ENV GOPATH=/go
+ENV PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 
+# 创建工作目录
+RUN mkdir -p /workspace /go
+
+# 安装常用 Go 开发工具
 RUN go install golang.org/x/tools/gopls@latest \
     && go install github.com/go-delve/delve/cmd/dlv@latest \
     && go install honnef.co/go/tools/cmd/staticcheck@latest \
     && go install golang.org/x/tools/cmd/goimports@latest \
     && go install github.com/cweill/gotests/gotests@latest \
-    chown -R coder:coder /home/coder
+    && go install github.com/fatih/gomodifytags@latest \
+    && go install github.com/josharian/impl@latest \
+    && go install github.com/haya14busa/goplay/cmd/goplay@latest \
+    && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
-# 切换回 code-server 用户
-USER coder
+
+# 配置 code-server 的 settings.json
+RUN mkdir -p /home/coder/.local/share/code-server/User \
+    && echo '{ \
+        "go.gopath": "/go", \
+        "go.goroot": "/usr/local/go", \
+        "go.useLanguageServer": true, \
+        "go.toolsManagement.autoUpdate": true, \
+        "go.lintTool": "golangci-lint", \
+        "go.lintOnSave": "package", \
+        "editor.formatOnSave": true, \
+        "go.formatTool": "goimports", \
+        "[go]": { \
+            "editor.defaultFormatter": "golang.go" \
+        }, \
+        "terminal.integrated.defaultProfile.linux": "bash", \
+        "telemetry.enableTelemetry": false, \
+        "telemetry.enableCrashReporter": false \
+    }' > /home/coder/.local/share/code-server/User/settings.json
 
 # 设置工作目录
-WORKDIR /home/coder
+WORKDIR /workspace
 
-# 暴露端口
+# 暴露 code-server 端口 (默认为 8080)
 EXPOSE 8080
 
-# code-server 的默认启动命令
-CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password"]
+# 设置默认用户
+USER 1000
+
+# 设置容器启动命令
+CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "/workspace"]
 ```
 
-### 构建镜像
+### 构建镜像 / 启动容器
 
 ```bash
 # 构建镜像
 docker build -t my/code-server-go .
 # 使用代理
 docker build --build-arg http_proxy=http://192.168.3.100:10809 --build-arg https_proxy=http://192.168.3.100:10809 -t my/code-server-go .
+
+# 基本运行
+docker run -d \
+  --name go-dev \
+  -p 8080:8080 \
+  -v "$(pwd)/workspace:/workspace" \
+  -v "$(pwd)/go:/go" \
+  go-code-server:1.21.0
+
+# 带密码的运行方式（推荐）
+docker run -d \
+  --name go-dev \
+  -p 8080:8080 \
+  -v "$(pwd)/workspace:/workspace" \
+  -v "$(pwd)/go:/go" \
+  -e PASSWORD=your_password \
+  go-code-server:1.21.0
 ```
 
-### 启动服务
-
-[[#准备配置文件]]
-
-```bash
-docker run -d --name code-server-go -p 8903:8080 \
--u "${UID:-1000}:${GID:-1000}" \
--e "DOCKER_USER=${USER}" \
--e "TZ=Asia/Shanghai" \
--v /data/application/code-server/go:/home/coder/go \
--v /data/application/code-server/project:/home/coder/project \
--v /data/application/code-server/.config/code-server/config.yaml:/root/.config/code-server/config.yaml \
-my/code-server-go:latest
-
-```
 
 ### 安装扩展
 
@@ -163,42 +119,6 @@ my/code-server-go:latest
 - **Better Go Syntax** (语法高亮)
 - **Error Lens** (更好的错误显示)
 
-### 配置 Go 设置
-
-创建或编辑 `/home/coder/.config/code-server/User/settings.json`：
-
-```json
-{
-    "go.gopath": "/home/coder/go",
-    "go.goroot": "/usr/local/go",
-    "go.toolsGopath": "/home/coder/go/bin",
-    "go.useLanguageServer": true,
-    "go.languageServerExperimentalFeatures": {
-        "diagnostics": true,
-        "documentLink": true
-    },
-    "go.languageServerFlags": [
-        "-rpc.trace",
-        "serve"
-    ],
-    "go.formatTool": "goimports",
-    "go.autocompleteUnimportedPackages": true,
-    "go.testOnSave": false,
-    "go.testTimeout": "30s",
-    "go.coverOnSave": false,
-    "go.enableCodeLens": {
-        "references": true,
-        "runtest": true
-    },
-    "editor.formatOnSave": true,
-    "files.autoSave": "afterDelay",
-    "[go]": {
-        "editor.defaultFormatter": "golang.go"
-    }
-}
-```
-
-
 
 ### 创建测试项目
 
@@ -206,8 +126,8 @@ my/code-server-go:latest
 
 ```bash\
 # 在终端中
-mkdir -p /home/coder/projects/hello-world
-cd /home/coder/projects/hello-world
+mkdir -p /go/src/hello-world
+cd /go/src/hello-world
 go mod init hello-world
 ```
 

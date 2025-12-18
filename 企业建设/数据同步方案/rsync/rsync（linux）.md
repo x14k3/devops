@@ -257,11 +257,11 @@ crontab -e
 
 1. **本地同步**（保留所有属性）：  
     ```
-    rsync -av /source/ /destination/ -W
+    rsync -av /source/ /destination/ 
     ```
 2. **同步到远程服务器**（通过 SSH）：  
     ```
-    rsync -avz -e ssh /local/path user@remote:/remote/path
+    rsync -avz -e ssh /local/path user@remote:/remote/path ---progress
     ```
 3. **从远程同步到本地**：  
     ```

@@ -3,13 +3,12 @@
 
 ```bash
 mkdir -p /etc/docker
-vim /etc/docker/daemon.json
--------------------------------------------------------------
-{
+echo '{
   "registry-mirrors": ["https://tu2ax1rl.mirror.aliyuncs.com"],
   "insecure-registries": ["0.0.0.0"]
 }
--------------------------------------------------------------
+' >> /etc/docker/daemon.json
+
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```

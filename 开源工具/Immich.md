@@ -153,7 +153,7 @@ immich
 ## 批量从服务器本地导入文件
 
 在 im­mich 设置中创建一个 api key 
-![[开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp]]
+![[开源工具/assets/efd15d63b0a2ef1a262d3fd83ffec2ec_MD5.webp|700]]
 
 使用 `immich login <url> <key>` 的格式连接到 im­mich，例如：
 ```bash
