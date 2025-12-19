@@ -11,10 +11,14 @@
             "id": "058575a210c00fe5",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "邮件发送的基本过程与概念"
             }
           }
         ]
@@ -137,12 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "邮件发送的基本过程与概念 的大纲"
             }
           },
           {
@@ -178,6 +183,18 @@
   },
   "active": "058575a210c00fe5",
   "lastOpenFiles": [
+    "企业建设/邮件服务器/assets/08bc5c313b5024c1074de4d175e884dd_MD5.jpg",
+    "企业建设/邮件服务器/assets/3f335e804e9793ae91175680ebf55759_MD5.png",
+    "企业建设/邮件服务器/assets/ca2058b1d19d549c8c49b0da09feb20e_MD5.jpg",
+    "企业建设/邮件服务器/assets/18fb413e65761a48f2d15a75e3a7bc64_MD5.png",
+    "企业建设/邮件服务器/assets/2850eaa18b0791bc6c5223b5a8ad00ad_MD5.jpg",
+    "企业建设/邮件服务器/assets/b15539a0b22191dcf4940f19038ed86e_MD5.png",
+    "企业建设/邮件服务器/assets/0a6191e5a45de790bf1f291e98e6e8e9_MD5.png",
+    "企业建设/邮件服务器/Docker Mailserver.md",
+    "企业建设/邮件服务器/iRedMail.md",
+    "企业建设/邮件服务器/Mailcow.md",
+    "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
+    "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
     "开源工具/code-server.md",
     "开源工具/Immich.md",
     "linux/linux 命令/shell 命令手册/文件系统/fdisk.md",
@@ -200,22 +217,10 @@
     "docker/docker harbor.md",
     "linux/linux 命令/shell 命令手册/性能监控/dmidecode.md",
     "linux/linux 命令/shell 命令手册/性能监控/assets",
-    "企业建设/数据同步方案/rsync/rsync（linux）.md",
-    "linux/linux 命令/shell 命令手册/备份与恢复/rsync.md",
-    "企业建设/数据同步方案/rsync.md",
-    "linux/linux 命令/shell 命令手册/tools/cp.md",
     "开源工具/assets/image-20221127210933123-20230610173813-wthc3c7.png",
     "开源工具/assets/4e8415783d37486de12687f98d0618e6_MD5.jpg",
     "开源工具/assets/46b69b4f0c5ed498d893084eedd8e2cf_MD5.jpg",
-    "docker/docker volume.md",
-    "docker/docker optimization.md",
-    "docker/docker-compose/assets/8956a24e90b6b1a5baa6e989f3ac8d13_MD5.jpg",
-    "docker/docker-compose/assets/70a8e6b48f5934aedf9b45789aa3d0b9_MD5.jpg",
-    "docker/docker-compose/assets/Pasted image 20251218135858.png",
-    "docker/docker-compose/assets/Pasted image 20251218135607.png",
     "docker/docker-compose/assets",
-    "开源工具/assets/e6b299bf75fe2046a1a0a1fa9e030005_MD5.png",
-    "企业建设/邮件服务器/assets/cc43211ea5e0b41f5cec159832870b01_MD5.jpg",
     "企业建设/邮件服务器/assets",
     "database/Mysql/日常工作 DCL、DDL、DML",
     "database/Mysql/mysql 部署",
