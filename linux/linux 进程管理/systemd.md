@@ -261,15 +261,15 @@ runlevel是 SysV init 初始化系统中的概念，在Systemd初始化系统中
 
 ```bash
 # 查看当前系统的所有 Target  
-$ systemctl list-unit-files --type=target  
+systemctl list-unit-files --type=target  
 # 查看一个 Target 包含的所有 Unit  
-$ systemctl list-dependencies multi-user.target  
+systemctl list-dependencies multi-user.target  
 # 查看启动时的默认 Target  
-$ systemctl get-default  
+systemctl get-default  
 # 设置启动时的默认 Target  
-$ sudo systemctl set-default multi-user.target  
+systemctl set-default multi-user.target  
 # 切换 Target 时，默认不关闭前一个 Target 启动的进程，systemctl isolate 命令改变这种行为，关闭前一个 Target 里面所有不属于后一个 Target 的进程  
-$ sudo systemctl isolate multi-user.target
+systemctl isolate multi-user.target
 ```
 
 ### 3.4 启动过程
@@ -288,32 +288,32 @@ $ sudo systemctl isolate multi-user.target
 
 ```bash
 # 重启系统  
-$ sudo systemctl reboot  
+systemctl reboot  
 # 关闭系统，切断电源  
-$ sudo systemctl poweroff  
+systemctl poweroff  
 # CPU停止工作  
-$ sudo systemctl halt  
+systemctl halt  
 # 暂停系统  
-$ sudo systemctl suspend  
+systemctl suspend  
 # 让系统进入冬眠状态  
-$ sudo systemctl hibernate  
+systemctl hibernate  
 # 让系统进入交互式休眠状态  
-$ sudo systemctl hybrid-sleep  
+systemctl hybrid-sleep  
 # 启动进入救援状态（单用户状态）  
-$ sudo systemctl rescue
+systemctl rescue
 ```
 
 `systemd-analyze`命令用于查看启动耗时。
 
 ```bash
 # 查看启动耗时  
-$ systemd-analyze
+systemd-analyze
 # 查看每个服务的启动耗时  
-$ systemd-analyze blame  
+systemd-analyze blame  
 # 显示瀑布状的启动过程流  
-$ systemd-analyze critical-chain
+systemd-analyze critical-chain
 # 显示指定服务的启动流  
-$ systemd-analyze critical-chain atd.service
+systemd-analyze critical-chain atd.service
 ```
 
 ### 4.2 查看配置文件
@@ -325,11 +325,11 @@ $ systemd-analyze critical-chain atd.service
 # disabled：没建立启动链接  
 # static：该配置文件没有[Install]部分（无法执行），只能作为其他配置文件的依赖  
 # masked：该配置文件被禁止建立启动链接  
-$ systemctl list-unit-files  
+systemctl list-unit-files  
 # 列出指定类型的配置文件  
-$ systemctl list-unit-files --type=service  
+systemctl list-unit-files --type=service  
 # 查看当前系统的所有 Target  
-$ systemctl list-unit-files --type=target
+systemctl list-unit-files --type=target
 ```
 
 
@@ -355,17 +355,17 @@ $ systemctl cat docker.service
 
 ```bash
 # 显示系统状态  
-$ systemctl status  
+systemctl status  
 # 显示单个 Unit 的状态  
-$ systemctl status bluetooth.service  
+systemctl status bluetooth.service  
 # 显示远程主机的某个 Unit 的状态  
-$ systemctl -H root@levonfly.example.com status httpd.service  
+systemctl -H root@levonfly.example.com status httpd.service  
 # 显示某个 Unit 是否正在运行  
-$ systemctl is-active application.service  
+systemctl is-active application.service  
 # 显示某个 Unit 是否处于启动失败状态  
-$ systemctl is-failed application.service  
+systemctl is-failed application.service  
 # 显示某个 Unit 服务是否建立了启动链接  
-$ systemctl is-enabled application.service
+systemctl is-enabled application.service
 ```
 
 
@@ -373,33 +373,33 @@ $ systemctl is-enabled application.service
 
 ```bash
 # 立即启动一个服务  
-$ sudo systemctl start apache.service  
+systemctl start apache.service  
 # 立即停止一个服务  
-$ sudo systemctl stop apache.service  
+systemctl stop apache.service  
 # 重启一个服务  
-$ sudo systemctl restart apache.service  
+systemctl restart apache.service  
 # 杀死一个服务的所有子进程  
-$ sudo systemctl kill apache.service  
+systemctl kill apache.service  
 # 重新加载一个服务的配置文件  
-$ sudo systemctl reload apache.service  
+systemctl reload apache.service  
 # 重载所有修改过的配置文件  
-$ sudo systemctl daemon-reload  
+systemctl daemon-reload  
 # 显示某个 Unit 的所有底层参数  
-$ systemctl show httpd.service  
+systemctl show httpd.service  
 # 显示某个 Unit 的指定属性的值  
-$ systemctl show -p CPUShares httpd.service  
+systemctl show -p CPUShares httpd.service  
 # 设置某个 Unit 的指定属性  
-$ sudo systemctl set-property httpd.service CPUShares=500
+systemctl set-property httpd.service CPUShares=500
 ```
 
 ### 4.6 查看 Unit 的依赖关系
 
 ```bash
 # 列出一个 Unit 的所有依赖，默认不会列出 target 类型  
-$ systemctl list-dependencies nginx.service  
+systemctl list-dependencies nginx.service  
   
 # 列出一个 Unit 的所有依赖，包括 target 类型  
-$ systemctl list-dependencies --all nginx.service
+systemctl list-dependencies --all nginx.service
 ```
 
 ### 4.7 服务的生命周期
@@ -425,9 +425,7 @@ systemctl disable # 取消服务的开机启动
 
 # 服务的修改和移除
 systemctl daemon-reload # Systemd 会将 Unit 文件的内容写到缓存中，因此当 Unit 文件被更新时，需要告诉 Systemd 重新读取所有的 Unit 文件
-    
 systemctl reset-failed  # 移除标记为丢失的 Unit 文件。在删除 Unit 文件后，由于缓存的关系，即使通过 daemon-reload 更新了缓存，在 list-units 中依然会显示标记为 not-found 的 Unit。
-    
 
 ```
 
@@ -456,39 +454,39 @@ systemctl reset-failed  # 移除标记为丢失的 Unit 文件。在删除 Unit 
 - hostnamectl：用于查看和修改系统的主机名和主机信息
 ```bash
 # 显示当前主机的信息
-$ hostnamectl
+hostnamectl
 # 设置主机名
-$ sudo hostnamectl set-hostname levonfly
+hostnamectl set-hostname levonfly
 ```
 - journalctl：用于查看系统日志和各类应用服务日志
 - localectl：用于查看和管理系统的地区信息
 ```bash
-**# 查看本地化设置
-$ localectl  
+# 查看本地化设置
+localectl  
 # 设置本地化参数
-$ sudo localectl set-locale LANG=en_GB.utf8  
-$ sudo localectl set-keymap en_GB**
+localectl set-locale LANG=en_GB.utf8  
+localectl set-keymap en_GB**
 ```
 - loginctl：用于管理系统已登录用户和 Session 的信息
 ```bash
 # 列出当前session
-$ loginctl list-sessions 
+loginctl list-sessions 
 # 列出当前登录用户
-$ loginctl list-users
+loginctl list-users
 # 列出显示指定用户的信息
-$ loginctl show-user ruanyf
+loginctl show-user ruanyf
 ```
 - machinectl：用于操作 Systemd 容器
 - timedatectl：用于查看和管理系统的时间和时区信息
 ```bash
 # 查看当前时区设置
-$ timedatectl  
+timedatectl  
 # 显示所有可用的时区
-$ timedatectl list-timezones 
+timedatectl list-timezones 
 # 设置当前时区
-$ sudo timedatectl set-timezone America/New_York  
-$ sudo timedatectl set-time YYYY-MM-DD  
-$ sudo timedatectl set-time HH:MM:SS
+sudo timedatectl set-timezone America/New_York  
+sudo timedatectl set-time YYYY-MM-DD  
+sudo timedatectl set-time HH:MM:SS
 ```
 - systemd-analyze 显示此次系统启动时运行每个服务所消耗的时间，可以用于分析系统启动过程中的性能瓶颈
 - systemd-ask-password：辅助性工具，用星号屏蔽用户的任意输入，然后返回实际输入的内容

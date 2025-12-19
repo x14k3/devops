@@ -3,16 +3,15 @@
 
 ### 语法
 
-```
+```bash
 fdisk [选项] <磁盘>           更改分区表
 fdisk [选项] -l [<磁盘>...]   列出分区表
 ```
 
 ### 选项
 
-```
-
-选项：
+```bash
+# 选项：
  -b, --sectors-size <大小>     显示扇区计数和大小
  -B, --protect-boot            创建新标签时不要擦除 bootbits
  -c, --compatibility[=<模式>]  模式，为“dos”或“nondos”(默认)
@@ -45,13 +44,13 @@ fdisk [选项] -l [<磁盘>...]   列出分区表
 
 首先选择要进行操作的磁盘：
 
-```
-[root@localhost ~]# fdisk /dev/sdb
+```bash
+fdisk /dev/sdb
 ```
 
 输入`m`​列出可以执行的命令：
 
-```
+```bash
 command (m for help): m
 Command action
    a   toggle a bootable flag
@@ -74,7 +73,7 @@ Command action
 
 输入`p`​列出磁盘目前的分区情况：
 
-```
+```bash
 Command (m for help): p
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes
@@ -88,7 +87,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 
 输入`d`​然后选择分区，删除现有分区：
 
-```
+```bash
 Command (m for help): d
 Partition number (1-4): 1
 
@@ -98,7 +97,7 @@ Selected partition 2
 
 查看分区情况，确认分区已经删除：
 
-```
+```bash
 Command (m for help): print
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes
@@ -112,7 +111,7 @@ Command (m for help):
 
 输入`n`​建立新的磁盘分区，首先建立两个主磁盘分区：
 
-```
+```bash
 Command (m for help): n
 Command action
    e   extended
@@ -136,7 +135,7 @@ Last cylinder or +size or +sizeM or +sizeK (101-391, default 391): +200M  //分�
 
 确认分区建立成功：
 
-```
+```bash
 Command (m for help): p
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes
@@ -150,7 +149,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 
 再建立一个逻辑分区：
 
-```
+```bash
 Command (m for help): n
 Command action
    e   extended
@@ -165,7 +164,7 @@ Using default value 391
 
 确认扩展分区建立成功：
 
-```
+```bash
 Command (m for help): p
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes
@@ -180,7 +179,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 
 在扩展分区上建立两个逻辑分区：
 
-```
+```bash
 Command (m for help): n
 Command action
    l   logical (5 or over)
@@ -203,7 +202,7 @@ Using default value 391
 
 确认逻辑分区建立成功：
 
-```
+```bash
 Command (m for help): p
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes
@@ -226,7 +225,7 @@ Command (m for help):
 
 最后对分区操作进行保存：
 
-```
+```bash
 Command (m for help): w
 The partition table has been altered!
 
@@ -238,7 +237,7 @@ Syncing disks.
 
 在sdb1上建立ext2分区：
 
-```
+```bash
 [root@localhost ~]# mkfs.ext2 /dev/sdb1
 mke2fs 1.39 (29-May-2006)
 Filesystem label=
@@ -264,7 +263,7 @@ This filesystem will be automatically checked every 32 mounts or
 
 在sdb6上建立ext3分区：
 
-```
+```bash
 [root@localhost ~]# mkfs.ext3 /dev/sdb6
 mke2fs 1.39 (29-May-2006)
 Filesystem label=
@@ -292,7 +291,7 @@ This filesystem will be automatically checked every 32 mounts or
 
 建立两个目录`/oracle`​和`/web`​，将新建好的两个分区挂载到系统：
 
-```
+```bash
 [root@localhost ~]# mkdir /oracle
 [root@localhost ~]# mkdir /web
 [root@localhost ~]# mount /dev/sdb1 /oracle
@@ -301,7 +300,7 @@ This filesystem will be automatically checked every 32 mounts or
 
 查看分区挂载情况：
 
-```
+```bash
 [root@localhost ~]# df -h
 文件系统              容量  已用 可用 已用% 挂载点
 /dev/mapper/VolGroup00-LogVol00
@@ -314,7 +313,7 @@ tmpfs                 125M     0  125M   0% /dev/shm
 
 如果需要每次开机自动挂载则需要修改`/etc/fstab`​文件，加入两行配置：
 
-```
+```bash
 [root@localhost ~]# vim /etc/fstab
 
 /dev/VolGroup00/LogVol00 /                       ext3    defaults        1 1
