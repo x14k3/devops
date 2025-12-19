@@ -21,75 +21,23 @@ Containerd 是需要调用 `runc` 的，而第一个压缩包是不包含 `ru
 - containerd二进制包
   github下载地址：https://github.com/containerd/containerd/releases
 - containerd带cni插件的二进制包
-  `wget https://github.com/containerd/containerd/releases/download/v1.6.8/cri-containerd-cni-1.6.8-linux-amd64.tar.gz`
+	```bash
+	wget https://github.com/containerd/containerd/releases/download/v1.6.8/cri-containerd-cni-1.6.8-linux-amd64.tar.gz
+	tar -C / -xzf cri-containerd-cni-1.6.8-linux-amd64.tar.gz
 
-```bash
-tar -tf cri-containerd-cni-1.4.3-linux-amd64.tar.gz
-etc/
-etc/cni/
-etc/cni/net.d/
-etc/cni/net.d/10-containerd-net.conflist
-etc/crictl.yaml
-etc/systemd/
-etc/systemd/system/
-etc/systemd/system/containerd.service
-usr/
-usr/local/
-usr/local/bin/
-usr/local/bin/containerd-shim-runc-v2
-usr/local/bin/ctr
-usr/local/bin/containerd-shim
-usr/local/bin/containerd-shim-runc-v1
-usr/local/bin/crictl
-usr/local/bin/critest
-usr/local/bin/containerd
-usr/local/sbin/
-usr/local/sbin/runc
-opt/
-opt/cni/
-opt/cni/bin/
-opt/cni/bin/vlan
-opt/cni/bin/host-local
-opt/cni/bin/flannel
-opt/cni/bin/bridge
-opt/cni/bin/host-device
-opt/cni/bin/tuning
-opt/cni/bin/firewall
-opt/cni/bin/bandwidth
-opt/cni/bin/ipvlan
-opt/cni/bin/sbr
-opt/cni/bin/dhcp
-opt/cni/bin/portmap
-opt/cni/bin/ptp
-opt/cni/bin/static
-opt/cni/bin/macvlan
-opt/cni/bin/loopback
-opt/containerd/
-opt/containerd/cluster/
-opt/containerd/cluster/version
-opt/containerd/cluster/gce/
-opt/containerd/cluster/gce/cni.template
-opt/containerd/cluster/gce/configure.sh
-opt/containerd/cluster/gce/cloud-init/
-opt/containerd/cluster/gce/cloud-init/master.yaml
-opt/containerd/cluster/gce/cloud-init/node.yaml
-opt/containerd/cluster/gce/env
+	# 查看版本：
 
-tar -C / -xzf cri-containerd-cni-1.6.8-linux-amd64.tar.gz
+	ctr version
+	Client:
+	  Version:  v1.4.3
+	  Revision: 269548fa27e0089a8b8278fc4fc781d7f65a939b
+	  Go version: go1.15.5
 
-# 查看版本：
-
-ctr version
-Client:
-  Version:  v1.4.3
-  Revision: 269548fa27e0089a8b8278fc4fc781d7f65a939b
-  Go version: go1.15.5
-
-Server:
-  Version:  v1.4.3
-  Revision: 269548fa27e0089a8b8278fc4fc781d7f65a939b
-  UUID: d1724999-91b3-4338-9288-9a54c9d52f70
-```
+	Server:
+	  Version:  v1.4.3
+	  Revision: 269548fa27e0089a8b8278fc4fc781d7f65a939b
+	  UUID: d1724999-91b3-4338-9288-9a54c9d52f70
+	```
 
 ## 生成配置文件
 

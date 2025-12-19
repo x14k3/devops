@@ -55,6 +55,7 @@ docker exec -it       # 在运行的容器中执行命令[docker exec -it alpine
     -t :命令行交互模式
   
 docker ps             # 列出容器
+docker ps --format "table {{.ID}}\t{{.Status}}\t{{.Names}}" # 格式化输出
 docker logs           # 获取docker日志
 docker inspect        # 获取容器或镜像的元数据
 docker top            # 查看正在运行中的容器进程信息
