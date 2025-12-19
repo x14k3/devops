@@ -27,17 +27,13 @@ dmidecode [选项]
 ### 实例
 
 ```bash
+sudo dmidecode -t 1               # 系统信息（System Information）
+sudo dmidecode -t 2               # 基本主板信息（Base Board Information）
+sudo dmidecode -t 4[processor]    # CPU信息（Processor Information）
+sudo dmidecode -t 11              # 查看OEM信息 
+sudo dmidecode -t 16              # 查询内存信息
+sudo dmidecode -t 17[memory]      # 查看内存条信息
 
-# 需要sudo权限
-sudo dmidecode -t 1    # 系统信息（System Information）
-sudo dmidecode -t 2    # 基本主板信息（Base Board Information）
-sudo dmidecode -t 4    # CPU信息（Processor Information）
-sudo dmidecode -t 11   # 查看OEM信息 
-sudo dmidecode -t 16   # 查询内存信息
-sudo dmidecode -t 17   # 查看内存条数
-
-sudo dmidecode -t processor # CPU信息
-sudo dmidecode -t memory    # 查看内存信息
 # 查看内存的插槽数，已经使用多少插槽。每条内存多大。
 sudo dmidecode|grep -P -A5 "Memory\s+Device"|grep Size|grep -v Range
 # 查看内存支持的最大内存容量
@@ -45,78 +41,8 @@ sudo dmidecode|grep -P 'Maximum\s+Capacity'
 # 查看内存的频率（查看内存信息的看Speed 项）
 sudo dmidecode|grep -A16 "Memory Device"|grep 'Speed'
 
-dmidecode |grep 'Product Name'  # 查看服务器型号 
-dmidecode |grep 'Serial Number' # 查看主板的序列号 
+sudo dmidecode |grep 'Product Name'  # 查看服务器型号 
+sudo dmidecode |grep 'Serial Number' # 查看主板的序列号 
 
-cat /proc/scsi/scsi # 查看服务器硬盘信息
-```
-
-查看内存的插槽数，已经使用多少插槽。每条内存多大，已使用内存多大
-
-```
-dmidecode|grep -P -A5 "Memory\s+Device"|grep Size|grep -v Range 
-
-#   Size: 2048 MB
-#   Size: 2048 MB
-#   Size: 4096 MB
-#   Size: No Module Installed
-```
-
-查看内存支持的最大内存容量
-
-```
-dmidecode|grep -P 'Maximum\s+Capacity'
-
-#  Maximum Capacity: 16 GB
-```
-
-查看内存的频率
-
-```
-dmidecode|grep -A16 "Memory Device"
-
-#   Memory Device
-#     Array Handle: 0x1000
-#     Error Information Handle: Not Provided
-#     Total Width: 72 bits
-#     Data Width: 64 bits
-#     Size: 2048 MB
-#     Form Factor: DIMM
-#     Set: 1
-#     Locator: DIMM_A1
-#     Bank Locator: Not Specified
-#     Type: DDR3
-#     Type Detail: Synchronous Unbuffered (Unregistered)
-#     Speed: 1333 MHz
-#     Manufacturer: 00CE000080CE
-#     Serial Number: 4830F3E1
-#     Asset Tag: 01093200
-#     Part Number: M391B5673EH1-CH9
-#   --
-#   Memory Device
-#     Array Handle: 0x1000
-#     Error Information Handle: Not Provided
-#     Total Width: 72 bits
-#     Data Width: 64 bits
-#     Size: 2048 MB
-#     Form Factor: DIMM
-#     Set: 1
-#     Locator: DIMM_A2
-#     Bank Locator: Not Specified
-#     Type: DDR3
-#     Type Detail: Synchronous Unbuffered (Unregistered)
-#     Speed: 1333 MHz
-#     Manufacturer: 00AD000080AD
-#     Serial Number: 1BA1F0B5
-#     Asset Tag: 01110900
-#     Part Number: HMT325U7BFR8C-H9
-#   --
-
-dmidecode|grep -A16 "Memory Device"|grep 'Speed'
-
-#  Speed: 1333 MHz
-#  Speed: 1333 MHz
-#  Speed: 1333 MHz
-#  Speed: Unknown
-
+cat /proc/scsi/scsi                  # 查看服务器硬盘信息
 ```

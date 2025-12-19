@@ -6,7 +6,7 @@
 ```dockerfile
 # 使用官方 code-server 镜像作为基础
 FROM codercom/code-server:latest
-
+USER root
 # 安装基础工具和依赖
 RUN apt-get update && apt-get install -y \
     curl \
