@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "开源工具/openlist.md",
+                "file": "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "openlist"
+              "title": "5. OpenVPN 隐藏流量（stunnel）"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "开源工具/openlist.md",
+                "file": "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "openlist 的大纲"
+              "title": "5. OpenVPN 隐藏流量（stunnel） 的大纲"
             }
           },
           {
@@ -183,9 +183,10 @@
   },
   "active": "2b6db6a7d39716dc",
   "lastOpenFiles": [
+    "linux/linux 命令/homebrew.md",
+    "开源工具/openlist.md",
     "开源工具/openWRT.md",
     "docker/docker command.md",
-    "开源工具/openlist.md",
     "docker/docker network.md",
     "docker/docker install.md",
     "docker/docker images（build）.md",
@@ -215,7 +216,6 @@
     "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
     "企业建设/openVPN/4. OpenVPN 访问 client所在子网.md",
     "企业建设/openVPN/3. OpenVPN 基于用户密码认证.md",
-    "企业建设/openVPN/2. OpenVPN 配置文件详解.md",
     "企业建设/openVPN/assets/b415667351877489c242118522cc0847_MD5.png",
     "linux/linux 命令/shell 命令手册/性能监控/assets",
     "开源工具/assets/image-20221127210933123-20230610173813-wthc3c7.png",
