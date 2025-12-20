@@ -29,7 +29,7 @@ WantedBy=multi-user.target
 
 systemctl daemon-reload
 systemctl start openlist
-```
+
 
 
 # 使用方法：
@@ -58,6 +58,7 @@ systemctl start openlist
   -h, --help      显示 openlist 命令帮助
   --log-std       强制日志输出到标准输出
   --no-prefix     禁用环境前缀
+
 
 ```
 
