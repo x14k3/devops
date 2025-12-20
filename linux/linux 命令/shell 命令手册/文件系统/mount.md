@@ -7,7 +7,7 @@
 
 ### 语法
 
-```
+```bash
 mount [-hV]
 mount -a [-fFnrsvw] [-t vfstype]
 mount [-fnrsvw] [-o options [,...]] device | dir
@@ -59,19 +59,19 @@ mount [-fnrsvw] [-t vfstype] [-o options] device dir
 
 #### 将 `/dev/hda1`​ 挂在 `/mnt`​ 之下。
 
-```
+```bash
 mount /dev/hda1 /mnt
 ```
 
 将 `/dev/hda1`​ 用唯读模式挂在 `/mnt`​ 之下。
 
-```
+```bash
 mount -o ro /dev/hda1 /mnt
 ```
 
 将 `/tmp/image.iso`​ 这个光碟的 `image`​ 档使用 `loop`​ 模式挂在 `/mnt/cdrom`​ 之下。用这种方法可以将一般网络上可以找到的 `Linux`​ 光 碟 ISO 档在不烧录成光碟的情况下检视其内容。
 
-```
+```bash
 mount -o loop /tmp/image.iso /mnt/cdrom
 ```
 
@@ -81,7 +81,7 @@ mount -o loop /tmp/image.iso /mnt/cdrom
 
 将`https://your.webdav.link.here`​的网络存储以网络磁盘的形式挂载到系统路径`/path/to/mount`​
 
-```
+```bash
 mount -t davfs https://your.webdav.link.here /path/to/mount
 ```
 
@@ -129,13 +129,13 @@ mount -t cifs -o username=share,password=share //192.168.66.198/share ./windows
 
 ### 语法
 
-```
+```bash
 umount(选项)(参数)
 ```
 
 ### 选项
 
-```
+```bash
 -a：卸除/etc/mtab中记录的所有文件系统；
 -h：显示帮助；
 -n：卸除时不要将信息存入/etc/mtab文件中；
@@ -155,21 +155,21 @@ umount(选项)(参数)
 
 通过设备名卸载
 
-```
+```bash
 umount -v /dev/sda1
 /dev/sda1 umounted
 ```
 
 通过挂载点卸载
 
-```
+```bash
 umount -v /mnt/mymount/
 /tmp/diskboot.img umounted
 ```
 
 如果设备正忙，卸载即告失败。卸载失败的常见原因是，某个打开的shell当前目录为挂载点里的某个目录：
 
-```
+```bash
 umount -v /mnt/mymount/
 umount: /mnt/mymount: device is busy
 umount: /mnt/mymount: device is busy
@@ -177,7 +177,7 @@ umount: /mnt/mymount: device is busy
 
 有时，导致设备忙的原因并不好找。碰到这种情况时，可以用lsof列出已打开文件，然后搜索列表查找待卸载的挂载点：
 
-```
+```bash
 lsof | grep mymount         查找mymount分区里打开的文件
 bash   9341  francois  cwd   DIR   8,1   1024    2 /mnt/mymount
 ```
@@ -186,12 +186,12 @@ bash   9341  francois  cwd   DIR   8,1   1024    2 /mnt/mymount
 
 对付系统文件正忙的另一种方法是执行延迟卸载：
 
-```
+```bash
 umount -vl /mnt/mymount/     执行延迟卸载
 ```
 
 延迟卸载（lazy unmount）会立即卸载目录树里的文件系统，等到设备不再繁忙时才清理所有相关资源。卸载可移动存储介质还可以用eject命令。下面这条命令会卸载cd并弹出CD：
 
-```
+```bash
 eject /dev/cdrom      卸载并弹出CD 
 ```

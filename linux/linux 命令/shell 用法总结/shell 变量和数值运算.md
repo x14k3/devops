@@ -4,7 +4,7 @@
 
 ### 将命令输出赋值变量
 
-```
+```bash
 var=`shell命令`  # `是反引号
 var=$(shell命令) 
 var='
@@ -16,7 +16,7 @@ line 3
 
 ### 读取标准输入赋值给变量
 
-```
+```bash
 read -p "请输入一个字符： " key
 echo $key
 ```
@@ -25,7 +25,7 @@ echo $key
 
 ### 基础引用
 
-```
+```bash
 $var
 ${var}
 ${var:defaultvalue}
@@ -48,7 +48,7 @@ ${var:defaultvalue}
 
 ### 用变量值作为新变量名
 
-```
+```bash
 $ name=test
 $ test_p=123
 $ echo `eval echo '$'"$name""_p"`
@@ -57,7 +57,7 @@ $ echo `eval echo '$'"$name""_p"`
 
 或者
 
-```
+```bash
 $ var="world"
 $ declare "hello_$var=value"
 $ echo $hello_world
@@ -66,7 +66,7 @@ value
 
 或者（ `bash`​ 4.3+）
 
-```
+```bash
 $ hello_world="value"
 $ var="world"
 $ declare -n ref=hello_$var
@@ -76,7 +76,7 @@ value
 
 或者
 
-```
+```bash
 $ hello_world="value"
 $ var="world"
 $ ref="hello_$var"
@@ -84,7 +84,7 @@ $ echo ${!ref}
 value
 ```
 
-```
+```bash
 name_1=aa
 name_2=bbb
 for i in ${!name_@} ;do  #  ${!name_@}仅限在sh、 bash中使用
@@ -98,7 +98,7 @@ done
 
 ### 加减乘除
 
-```
+```bash
 #样本数据
 a=120
 b=110
@@ -121,7 +121,7 @@ f=`expr $a / $b`    #结果：1
 
 ### 自增
 
-```
+```bash
 a=1
 
 #第一种整型变量自增方式
@@ -151,7 +151,7 @@ echo $a
 
 ## 4.数值变量的判断
 
-```
+```bash
 -gt    大于，如[ $a -gt $b ]
 -lt    小于，如[ $a -lt $b ]
 -eq    等于，如[ $a -eq $b ]
@@ -168,23 +168,19 @@ le     小于等于 ，如 [ $a -le $b ]
 
 ### 变量输出多行变一行并追加字符
 
-```
+```bash
 $ echo $a
-
 1
-
 2
-
 3
 
 $ echo $a | tr '\n' ',’
-
 1,2,3,
 ```
 
 ### 位数截取
 
-```
+```bash
 a=1110418197875
 
 # 截去后三位,要求只取"1110418197875"
@@ -200,7 +196,7 @@ c=${a:0:-3}
 
 ### 定义赋值、引用、输出
 
-```
+```bash
 tests='a1a
 b2b
 c3c
@@ -219,7 +215,7 @@ echo "$tests"
 
 ### 遍历循环
 
-```
+```bash
 # zsh中的方法
 for test in ${(f)tests}; do
   echo "测试: "$test
