@@ -1,6 +1,5 @@
 
 [linux](https://github.com/x14k3/devops/tree/master/linux)  
-[shell](https://github.com/x14k3/devops/tree/master/shell)  
 [docker](https://github.com/x14k3/devops/tree/master/docker)  
 [devops](https://github.com/x14k3/devops/tree/master/devops)  
 [golang](https://github.com/unknwon/the-way-to-go_ZH_CN)  
