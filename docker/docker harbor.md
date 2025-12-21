@@ -185,6 +185,13 @@ docker-compose up -d
 sudo ./prepare
 docker-compose down -v
 docker-compose up -d
+
+
+# docker上传镜像到harbor镜像仓库
+docker login 192.168.3.100:8902
+docker tag x14k3.dockerhub/code-server-go:v1.0  192.168.3.100:8902/library/code-server-go:v1.0
+docker push 192.168.3.100/library/code-server-go:v1.0
+
 ```
 
 
@@ -194,11 +201,11 @@ docker-compose up -d
 
 1. Docker 客户端信任 HTTP 仓库（非 HTTPS 时）
 
-```bash
-# 在客户端机器的 /etc/docker/daemon.json 添加
-{
-  "insecure-registries": ["192.168.3.100:8902"]
-}
-systemctl restart docker
+	```bash
+	# 在客户端机器的 /etc/docker/daemon.json 添加
+	{
+	  "insecure-registries": ["192.168.3.100:8902"]
+	}
+	systemctl restart docker
 
-```
+	```
