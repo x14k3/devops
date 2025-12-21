@@ -160,7 +160,6 @@ Password: Harbor12345  # 你在 harbor.yml 中设置的密码
     
 
 ### 验证 HTTPS 访问
-
 # 浏览器访问
 https://harbor.od.com
 # 首次访问需信任自签名证书（高级 → 继续访问）
@@ -198,7 +197,7 @@ docker-compose up -d
 ```bash
 # 在客户端机器的 /etc/docker/daemon.json 添加
 {
-  "insecure-registries": ["your.domain.com"]
+  "insecure-registries": ["192.168.3.100:8902"]
 }
 systemctl restart docker
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 命令/shell 命令手册/文件系统/dd.md",
-                "mode": "source",
+                "file": "docker/docker harbor.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "dd"
+              "title": "docker harbor"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 命令/shell 命令手册/文件系统/dd.md",
+                "file": "docker/docker harbor.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "dd 的大纲"
+              "title": "docker harbor 的大纲"
             }
           },
           {
@@ -183,6 +183,10 @@
   },
   "active": "2acabaccf1f7652c",
   "lastOpenFiles": [
+    "docker/docker images（build）.md",
+    "docker/docker harbor.md",
+    "docker/docker command.md",
+    "linux/linux 命令/shell 命令手册/文件系统/dd.md",
     "devops/GitLab/git 命令手册.md",
     "devops/GitLab/assets/bf95a8526436ba95288c6e9cafa3f951_MD5.png",
     "devops/GitLab/assets/b8e6dfb07a36453c94e0c519f49fb58c_MD5.png",
@@ -208,9 +212,6 @@
     "linux/linux 命令/shell 开箱即用/封禁异常 IP.md",
     "linux/linux 命令/shell 开箱即用/比较两个目录的不同（linux）.md",
     "linux/linux 命令/shell 开箱即用/mysql 备份脚本.md",
-    "linux/linux 命令/shell 开箱即用/nacos 配置文件转义（python）.md",
-    "linux/linux 命令/shell 开箱即用/zabbix 监控端口数据（自动发现规则）.md",
-    "linux/linux 命令/shell 开箱即用/SSL 证书日期到期提醒.md",
     "企业建设/邮件服务器/assets/08bc5c313b5024c1074de4d175e884dd_MD5.jpg",
     "企业建设/邮件服务器/assets/3f335e804e9793ae91175680ebf55759_MD5.png",
     "企业建设/邮件服务器/assets/ca2058b1d19d549c8c49b0da09feb20e_MD5.jpg",
