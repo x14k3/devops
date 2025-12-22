@@ -29,30 +29,18 @@ vim docker-compose.yml
 
 `docker-compose.yml`内容
 
-```dockerfile
-version: "3"
-services:
-  navidrome:
-    image: deluan/navidrome:develop
-    ports:
-      - "14533:4533"
-    restart: unless-stopped
-    environment:
-      ND_SCANSCHEDULE: 0
-      ND_LOGLEVEL: info
-      ND_SESSIONTIMEOUT: 24h
-      ND_BASEURL: "/nav"
-      ND_PLAYLISTSPATH: "."
-      ND_LASTFM_LANGUAGE: "zh"
-      ND_LASTFM_APIKEY: "lastfm_apikey"
-      ND_LASTFM_SECRET: "lastfm_secret"
-      ND_SPOTIFY_ID: "spotify_id"
-      ND_SPOTIFY_SECRET: "spotify_secret"
-      ND_ENABLEARTWORKPRECACHE: "false"
-      ND_ENABLESHARING: "true"
-    volumes:
-      - "/opt/navidrome/data:/data"
-      - "/opt/navidrome/music:/music:ro"
+```bash
+docker run -d --name navidrome \
+-p 4533:4533 \
+-e ND_SCANSCHEDULE=12h \
+-e ND_LOGLEVEL=info \
+-e ND_SESSIONTIMEOUT=12h \
+-e ND_BASEURL="/navidrome" \
+-e ND_LASTFM_LANGUAGE=zh \
+-v "/data/application/navidrome/data:/data" \
+-v "/data/application/navidrome/music:/music:ro" \
+--restart unless-stopped \
+deluan/navidrome:latest
 ```
 
 Navidrome 有很多参数[Advanced configuration](https://www.navidrome.org/docs/usage/configuration-options/#advanced-configuration)，使用熟悉了可以自己在环境变量里再增加配置。
@@ -74,8 +62,8 @@ Navidrome 有很多参数[Advanced configuration](https://www.navidrome.org/docs
 
 volumes映射说明：
 
-- /opt/navidrome/data：navidrome运行时生成的数据库文件
-- /opt/navidrome/music：上传音乐文件的目录，可以有多级目录，都会加载，不用担心
+- ./data：navidrome运行时生成的数据库文件
+- ./music：上传音乐文件的目录，可以有多级目录，都会加载，不用担心
 
 ## 准备音乐文件
 
