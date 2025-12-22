@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "linux/linux 文件属性和权限/特殊权限 SUID,SGID,SBIT.md",
-                "mode": "source",
+                "file": "开源工具/Kavita.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "特殊权限 SUID,SGID,SBIT"
+              "title": "Kavita"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 文件属性和权限/特殊权限 SUID,SGID,SBIT.md",
+                "file": "开源工具/Kavita.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "特殊权限 SUID,SGID,SBIT 的大纲"
+              "title": "Kavita 的大纲"
             }
           },
           {
@@ -183,11 +183,13 @@
   },
   "active": "fa89d08beee6d71f",
   "lastOpenFiles": [
+    "linux/linux 文件属性和权限/特殊权限 SUID,SGID,SBIT.md",
     "linux/linux 文件属性和权限/sudo 命令.md",
     "linux/linux 文件属性和权限/linux 文件时间属性.md",
-    "linux/linux 文件属性和权限/ACL 权限.md",
+    "linux/linux 文件属性和权限/ACL权限设置（setfacl和getfacl）.md",
+    "linux/linux 文件属性和权限/assets/273a4f9f1471339044901c33a8965214_MD5.jpg",
     "linux/linux 文件属性和权限/特殊属性 chattr,lsattr.md",
-    "linux/linux 文件属性和权限/特殊权限 SUID,SGID,SBIT.md",
+    "linux/linux 文件属性和权限/assets/cfe84421731370866e02484a3895c863_MD5.png",
     "linux/linux 文件属性和权限/6. mask 权限.md",
     "linux/linux 文件属性和权限/7. umask 命令.md",
     "linux/linux 文件属性和权限/1. chmod 命令.md",
@@ -211,14 +213,11 @@
     "开源工具/openlist.md",
     "开源工具/Jellyfin.md",
     "开源工具/Kavita.md",
-    "开源工具/knock.md",
     "企业建设/邮件服务器/assets/08bc5c313b5024c1074de4d175e884dd_MD5.jpg",
     "企业建设/邮件服务器/assets/3f335e804e9793ae91175680ebf55759_MD5.png",
     "企业建设/邮件服务器/assets/ca2058b1d19d549c8c49b0da09feb20e_MD5.jpg",
     "企业建设/邮件服务器/assets/18fb413e65761a48f2d15a75e3a7bc64_MD5.png",
     "企业建设/邮件服务器/assets/2850eaa18b0791bc6c5223b5a8ad00ad_MD5.jpg",
-    "企业建设/邮件服务器/assets/b15539a0b22191dcf4940f19038ed86e_MD5.png",
-    "企业建设/邮件服务器/assets/0a6191e5a45de790bf1f291e98e6e8e9_MD5.png",
     "linux/linux 命令/shell 命令手册/性能监控/assets",
     "docker/docker-compose/assets",
     "企业建设/邮件服务器/assets",
