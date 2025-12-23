@@ -183,11 +183,11 @@
   },
   "active": "69ef5c7a2a612eb7",
   "lastOpenFiles": [
+    "k8s/二进制高可用Kubernetes集群部署/2. 系统初始化.md",
+    "k8s/二进制高可用Kubernetes集群部署/1. 角色规划和分配.md",
     "k8s/二进制高可用Kubernetes集群部署/5. kubectl命令行工具.md",
     "k8s/二进制高可用Kubernetes集群部署/4. 部署ETCD集群.md",
     "k8s/二进制高可用Kubernetes集群部署/3. 创建CA根证书和秘钥.md",
-    "k8s/二进制高可用Kubernetes集群部署/2. 系统初始化.md",
-    "k8s/二进制高可用Kubernetes集群部署/1. 角色规划和分配.md",
     "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets/7c71a9250a47cab65f55e37e05df51cf_MD5.png",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/bfe9cdcae11c9c493c9e5c8933f8428e_MD5.png",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/af897f0addba6e54ee31b9e1754559f4_MD5.png",
