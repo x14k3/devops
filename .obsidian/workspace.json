@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "k8s/二进制高可用Kubernetes集群部署/1. 角色规划和分配.md",
+                "file": "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点/1、部署环境说明.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. 角色规划和分配"
+              "title": "1、部署环境说明"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "k8s/二进制高可用Kubernetes集群部署/1. 角色规划和分配.md",
+                "file": "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点/1、部署环境说明.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "1. 角色规划和分配 的大纲"
+              "title": "1、部署环境说明 的大纲"
             }
           },
           {
@@ -183,8 +183,8 @@
   },
   "active": "69ef5c7a2a612eb7",
   "lastOpenFiles": [
-    "k8s/二进制高可用Kubernetes集群部署/2. 系统初始化.md",
     "k8s/二进制高可用Kubernetes集群部署/1. 角色规划和分配.md",
+    "k8s/二进制高可用Kubernetes集群部署/2. 系统初始化.md",
     "k8s/二进制高可用Kubernetes集群部署/5. kubectl命令行工具.md",
     "k8s/二进制高可用Kubernetes集群部署/4. 部署ETCD集群.md",
     "k8s/二进制高可用Kubernetes集群部署/3. 创建CA根证书和秘钥.md",
