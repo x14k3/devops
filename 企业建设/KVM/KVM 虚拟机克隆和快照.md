@@ -110,11 +110,12 @@ KVM 快照的定义：快照就是将虚机在某一个时间点上的磁盘、�
 1. 创建快照备份
 
     ```bash
-    virsh snapshot-create                       # 使用XML创建快照
-    virsh snapshot-create-as                    # 使用一组参数创建快照
-    virsh snapshot-delete <虚拟机名称> <快照名称>  # 删除快照
-    virsh snapshot-list
-    virsh snapshot-info                         # 快照信息
+    virsh snapshot-create    <虚拟机名称>
+    virsh snapshot-create-as <虚拟机名称> <快照名称> "<快照描述>"
+    virsh snapshot-delete    <虚拟机名称> <快照名称> # 删除快照
+    virsh snapshot-list      <虚拟机名称>
+    virsh snapshot-info      <虚拟机名称> <快照名称>
+	virsh snapshot-revert    <虚拟机名称> <快照名称> # 恢复快照
     ```
 
 2. 查看虚拟机快照

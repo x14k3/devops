@@ -53,8 +53,8 @@ yum clean, yum clean all (= yum clean packages; yum clean oldheaders) #清除缓
 ```bash
 # 备份Linux本地现有的yum仓库文件
 cd /etc/yum.repos.d
-mkdir backup
-mv ./* backup/
+mkdir yumbackup
+mv ./* yumbackup/
 
 # 下载新的仓库文件
 #wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo

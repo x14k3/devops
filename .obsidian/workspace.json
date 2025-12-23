@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "192.168.1.31",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -183,9 +183,12 @@
   },
   "active": "88c8dd7386cc0231",
   "lastOpenFiles": [
-    "k8s/k8s 集群维护.md",
-    "k8s/k8s 概述.md",
+    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
     "k8s/二进制安装Kubernetes（k8s）v1.35.0.md",
+    "linux/linux 命令/shell 命令手册/软件安装/yum.md",
+    "linux/linux 软件包管理/linux 软件包管理.md",
+    "k8s/k8s 概述.md",
+    "k8s/k8s 集群维护.md",
     "linux/linux 命令/shell 命令手册/网络相关/nmap.md",
     "k8s/二进制高可用Kubernetes集群部署/1. 角色规划和分配.md",
     "企业建设/KVM/虚拟机资源分配参照.md",
@@ -221,9 +224,6 @@
     "k8s/二进制高可用Kubernetes集群部署/7. 部署Worker节点/2、部署containerd.md",
     "k8s/二进制高可用Kubernetes集群部署/7. 部署Worker节点/1、部署环境说明.md",
     "k8s/二进制高可用Kubernetes集群部署/7. 部署Worker节点",
-    "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点/5、部署高可用kube-scheduler集群.md",
-    "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点/4、部署高可用kube-controller-manager集群.md",
-    "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点/3、部署高可用kube-apiserver集群.md",
     "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点",
     "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态",
     "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件",
