@@ -1961,8 +1961,8 @@ systemctl status cri-docker.service
 # 显示docker.service单元的当前状态，包括运行状态、是否启用等信息。
 ```
 
----
-# 20251223 22:09 
+
+
 ## 2.3.k8s与etcd下载及安装（仅在master01操作）
 
 ### 2.3.1解压k8s安装包
@@ -2350,7 +2350,7 @@ cfssl gencert   \
 -ca=/etc/kubernetes/pki/ca.pem   \
 -ca-key=/etc/kubernetes/pki/ca-key.pem   \
 -config=ca-config.json   \
--hostname=10.96.0.1,192.168.3.161,127.0.0.1,kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster,kubernetes.default.svc.cluster.local,x.oiox.cn,z.oiox.cn,192.168.3.161,192.168.3.162,192.168.3.163,192.168.3.164,192.168.3.165,192.168.3.161,192.168.1.37,192.168.1.38,192.168.1.39,192.168.1.40,::1   \
+-hostname=10.96.0.1,127.0.0.1,kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster,kubernetes.default.svc.cluster.local,x.oiox.cn,z.oiox.cn,192.168.3.161,192.168.3.162,192.168.3.163,192.168.3.164,192.168.3.165,192.168.3.166,192.168.3.167,192.168.3.168,192.168.3.169,192.168.3.160,::1   \
 -profile=kubernetes   apiserver-csr.json | cfssljson -bare /etc/kubernetes/pki/apiserver
 
 # 这个命令是使用cfssl工具生成Kubernetes API Server的证书。
@@ -3771,6 +3771,9 @@ systemctl status keepalived.service
 
 # 关闭主节点，看vip是否漂移到备节点
 ```
+
+---
+# 20251224 2057
 
 # 6.k8s组件配置
 

@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "k8s/二进制安装Kubernetes（k8s）v1.35.0.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
