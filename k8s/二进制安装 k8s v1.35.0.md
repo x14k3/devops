@@ -1,4 +1,3 @@
-# 二进制安装Kubernetes（k8s）v1.34.0
 
 # 介绍
 
@@ -27,18 +26,18 @@
 详细版本
 | 软件 | 版本 |
 | --- | ---| 
-| cni_plugins_version | v1.7.1 |
-| cri_containerd_cni_version | 2.1.4 |
-| crictl_version | v1.34.0 |
-| cri_dockerd_version | 0.3.20 |
-| etcd_version | v3.6.4 |
+| cni_plugins_version | v1.9.0 |
+| cri_containerd_cni_version | 2.2.1 |
+| crictl_version | v1.35.0 |
+| cri_dockerd_version | 0.3.21 |
+| etcd_version | v3.6.7 |
 | cfssl_version | 1.6.5 |
-| kubernetes_server_version | 1.34.0 |
-| docker_version | 28.3.3 |
-| runc_version | 1.3.0 |
+| kubernetes_server_version | 1.35.0 |
+| docker_version | 29.1.3 |
+| runc_version | 1.4.0 |
 | kernel_version | 6.16.4 |
-| helm_version | 3.18.6 |
-| nginx_version | 1.29.1 |
+| helm_version | 4.0.4 |
+| nginx_version | 1.29.4 |
 
 
 网段  <br>
@@ -54,7 +53,7 @@ IPv6   <br>
 service：fd00:1111::/112  <br>
 pod：fc00:2222::/112
 
-安装包已经整理好：https://github.com/cby-chen/Kubernetes/releases/download/v1.34.0/kubernetes-v1.34.0.tar
+安装包已经整理好：https://github.com/cby-chen/Kubernetes/releases/download/v1.35.0/kubernetes-v1.35.0.tar
 
 ## 1.1.k8s基础系统环境配置
 
@@ -752,18 +751,18 @@ apt install ./*.deb
 # http://nginx.org/download/
 
 # Version numbers
-cni_plugins_version='v1.7.1'
-cri_containerd_cni_version='2.0.5'
-crictl_version='v1.34.0'
-cri_dockerd_version='0.3.17'
-etcd_version='v3.5.21'
+cni_plugins_version='v1.9.0'
+cri_containerd_cni_version='2.2.1'
+crictl_version='v1.35.0'
+cri_dockerd_version='0.3.21'
+etcd_version='v3.6.7'
 cfssl_version='1.6.5'
-kubernetes_server_version='1.34.0'
-docker_version='28.1.1'
-runc_version='1.3.0'
+kubernetes_server_version='1.35.0'
+docker_version='29.1.3'
+runc_version='1.4.0'
 kernel_version='5.4.278'
-helm_version='3.17.3'
-nginx_version='1.28.0'
+helm_version='4.0.4'
+nginx_version='1.29.4'
 
 # URLs 
 base_url='https://github.com'
@@ -1057,6 +1056,9 @@ grubby --set-default $(ls /boot/vmlinuz-* | grep elrepo)
 
 # 重启生效
 reboot
+
+# v8 整合命令为：
+yum install https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm -y ; sed -i "s@mirrorlist@#mirrorlist@g" /etc/yum.repos.d/elrepo.repo ; sed -i "s@elrepo.org/linux@mirrors.tuna.tsinghua.edu.cn/elrepo@g" /etc/yum.repos.d/elrepo.repo ; yum  --disablerepo="*"  --enablerepo="elrepo-kernel"  list  available -y ; yum  --enablerepo=elrepo-kernel  install kernel-lt -y ; grubby --default-kernel ; reboot 
 
 # v8 整合命令为：
 yum install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm -y ; sed -i "s@mirrorlist@#mirrorlist@g" /etc/yum.repos.d/elrepo.repo ; sed -i "s@elrepo.org/linux@mirrors.tuna.tsinghua.edu.cn/elrepo@g" /etc/yum.repos.d/elrepo.repo ; yum  --disablerepo="*"  --enablerepo="elrepo-kernel"  list  available -y ; yum  --enablerepo=elrepo-kernel  install kernel-lt -y ; grubby --default-kernel ; reboot 
@@ -1512,7 +1514,7 @@ systemctl status containerd.service
 
 ```shell
 # https://github.com/kubernetes-sigs/cri-tools/releases/
-# wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.34.0/crictl-v1.34.0-linux-amd64.tar.gz
+# wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.35.0/crictl-v1.35.0-linux-amd64.tar.gz
 
 #解压
 tar xf crictl-v*-linux-amd64.tar.gz -C /usr/bin/
@@ -1627,9 +1629,9 @@ cat > /etc/systemd/system/docker.service <<EOF
 [Unit]
 Description=Docker Application Container Engine
 Documentation=https://docs.docker.com
-After=network-online.target firewalld.service cri-docker.service docker.socket containerd.service
+After=network-online.target firewalld.service containerd.service
 Wants=network-online.target
-Requires=docker.socket containerd.service
+Requires=containerd.service
 
 [Service]
 Type=notify
@@ -1659,7 +1661,7 @@ EOF
 # - Documentation: 提供关于此服务的文档链接，这里是Docker官方文档链接。
 # - After: 说明该服务在哪些其他服务之后启动，这里是在网络在线、firewalld服务和containerd服务后启动。
 # - Wants: 说明该服务想要的其他服务，这里是网络在线服务。
-# - Requires: 说明该服务需要的其他服务，这里是docker.socket和containerd.service。
+# - Requires: 说明该服务需要的其他服务，这里containerd.service。
 # 
 # [Service]
 # - Type: 服务类型，这里是notify，表示服务在启动完成时发送通知。
@@ -1775,11 +1777,11 @@ groupadd docker
 systemctl daemon-reload
 # 用于重新加载systemd管理的单位文件。当你新增或修改了某个单位文件（如.service文件、.socket文件等），需要运行该命令来刷新systemd对该文件的配置。
 
-systemctl enable --now docker.socket
-# 启用并立即启动docker.socket单元。docker.socket是一个systemd的socket单元，用于接收来自网络的Docker API请求。
-
 systemctl enable --now docker.service
 # 启用并立即启动docker.service单元。docker.service是Docker守护进程的systemd服务单元。
+
+systemctl enable --now docker.socket
+# 启用并立即启动docker.socket单元。docker.socket是一个systemd的socket单元，用于接收来自网络的Docker API请求。
 
 systemctl stop docker.service
 # 停止运行中的docker.service单元，即停止Docker守护进程。
@@ -1821,16 +1823,16 @@ Description=CRI Interface for Docker Application Container Engine
 Documentation=https://docs.mirantis.com
 After=network-online.target firewalld.service docker.service
 Wants=network-online.target
-Requires=cri-docker.socket
+Requires=docker.service
 
 [Service]
 Type=notify
 ExecStart=/usr/bin/cri-dockerd/cri-dockerd --network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.7
 ExecReload=/bin/kill -s HUP $MAINPID
 TimeoutSec=0
-RestartSec=2
+RestartSec=5
 Restart=always
-StartLimitBurst=3
+StartLimitBurst=5
 StartLimitInterval=60s
 LimitNOFILE=infinity
 LimitNPROC=infinity
@@ -1849,7 +1851,7 @@ EOF
 # - Documentation：该参数指定了相关文档的网址，供用户参考。
 # - After：该参数指定了此单元应该在哪些其他单元之后启动，确保在网络在线、防火墙和Docker服务启动之后再启动此单元。
 # - Wants：该参数指定了此单元希望也启动的所有单元，此处是希望在网络在线之后启动。
-# - Requires：该参数指定了此单元需要依赖的单元，此处是cri-docker.socket单元。
+# - Requires：该参数指定了此单元需要依赖的单元，此处是docker.service单元。
 # 
 # [Service]
 # - Type：该参数指定了服务的类型，这里是notify，表示当服务启动完成时向系统发送通知。
@@ -1934,7 +1936,7 @@ systemctl status cri-docker.service
 # https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG
 # 
 # wget https://github.com/etcd-io/etcd/releases/download/v3.5.21/etcd-v3.5.21-linux-amd64.tar.gz
-# wget https://cdn.dl.k8s.io/release/v1.34.0/kubernetes-server-linux-amd64.tar.gz
+# wget https://cdn.dl.k8s.io/release/v1.35.0/kubernetes-server-linux-amd64.tar.gz
 
 # 解压k8s安装文件
 cd cby
@@ -1965,25 +1967,27 @@ tar -xf etcd*.tar.gz && mv etcd-*/etcd /usr/local/bin/ && mv etcd-*/etcdctl /usr
 # 总结起来，以上命令将从名为 etcd*.tar.gz 的压缩文件中解压出 etcd 和 etcdctl 文件，并将它们移动到 /usr/local/bin 目录中。
 
 # 查看/usr/local/bin下内容
-ll /usr/local/bin/
-总用量 581544
--rwxr-xr-x 1 1000 docker 25268376  7月 26 02:17 etcd
--rwxr-xr-x 1 1000 docker 16466072  7月 26 02:17 etcdctl
--rwxr-xr-x 1 root root   84046008  8月 27 18:30 kube-apiserver
--rwxr-xr-x 1 root root   71000248  8月 27 18:30 kube-controller-manager
--rwxr-xr-x 1 root root   60559544  8月 27 18:30 kubectl
--rwxr-xr-x 1 root root   59195684  8月 27 18:30 kubelet
--rwxr-xr-x 1 root root   44495032  8月 27 18:30 kube-proxy
--rwxr-xr-x 1 root root   48840888  8月 27 18:30 kube-scheduler
+[root@localhost cby]# ll /usr/local/bin/
+总用量 398984
+-rwxr-xr-x 1 1000 docker 26087608 12月 18 03:41 etcd
+-rwxr-xr-x 1 1000 docker 17207480 12月 18 03:41 etcdctl
+-rwxr-xr-x 1 root root   85766328 12月 17 20:56 kube-apiserver
+-rwxr-xr-x 1 root root   71815352 12月 17 20:56 kube-controller-manager
+-rwxr-xr-x 1 root root   58597560 12月 17 20:56 kubectl
+-rwxr-xr-x 1 root root   58110244 12月 17 20:56 kubelet
+-rwxr-xr-x 1 root root   43258040 12月 17 20:56 kube-proxy
+-rwxr-xr-x 1 root root   47685816 12月 17 20:56 kube-scheduler
+[root@localhost cby]# 
+
 ```
 
 ### 2.3.2查看版本
 
 ```shell
 [root@k8s-master01 ~]#  kubelet --version
-Kubernetes v1.34.0
+Kubernetes v1.35.0
 [root@k8s-master01 ~]# etcdctl version
-etcdctl version: 3.6.4
+etcdctl version: 3.6.7
 API version: 3.6
 [root@k8s-master01 ~]# 
 ```
@@ -2022,7 +2026,7 @@ mkdir -p /opt/cni/bin
 # 可以根据下文3.x进行手动部署操作 
 https://github.com/cby-chen/Kubernetes/
 https://github.com/cby-chen/Kubernetes/tags
-https://github.com/cby-chen/Kubernetes/releases/download/v1.34.0/kubernetes-v1.34.0.tar
+https://github.com/cby-chen/Kubernetes/releases/download/v1.35.0/kubernetes-v1.35.0.tar
 ```
 
 # 3.相关证书生成
@@ -2939,34 +2943,36 @@ for NODE in k8s-master02 k8s-master03; do  for FILE in $(ls /etc/kubernetes/pki 
 ### 3.2.10 查看证书
 
 ```shell
-ll /etc/kubernetes/pki/
+[root@localhost cby]# ll /etc/kubernetes/pki/
 总用量 104
--rw-r--r-- 1 root root 1025  8月 30 18:58 admin.csr
--rw------- 1 root root 1675  8月 30 18:58 admin-key.pem
--rw-r--r-- 1 root root 1444  8月 30 18:58 admin.pem
--rw-r--r-- 1 root root 1415  8月 30 18:58 apiserver.csr
--rw------- 1 root root 1679  8月 30 18:58 apiserver-key.pem
--rw-r--r-- 1 root root 1805  8月 30 18:58 apiserver.pem
--rw-r--r-- 1 root root 1070  8月 30 18:58 ca.csr
--rw------- 1 root root 1679  8月 30 18:58 ca-key.pem
--rw-r--r-- 1 root root 1363  8月 30 18:58 ca.pem
--rw-r--r-- 1 root root 1082  8月 30 18:58 controller-manager.csr
--rw------- 1 root root 1675  8月 30 18:58 controller-manager-key.pem
--rw-r--r-- 1 root root 1501  8月 30 18:58 controller-manager.pem
--rw-r--r-- 1 root root  940  8月 30 18:58 front-proxy-ca.csr
--rw------- 1 root root 1675  8月 30 18:58 front-proxy-ca-key.pem
--rw-r--r-- 1 root root 1094  8月 30 18:58 front-proxy-ca.pem
--rw-r--r-- 1 root root  903  8月 30 18:58 front-proxy-client.csr
--rw------- 1 root root 1675  8月 30 18:58 front-proxy-client-key.pem
--rw-r--r-- 1 root root 1188  8月 30 18:58 front-proxy-client.pem
--rw-r--r-- 1 root root 1045  8月 30 18:58 kube-proxy.csr
--rw------- 1 root root 1675  8月 30 18:58 kube-proxy-key.pem
--rw-r--r-- 1 root root 1464  8月 30 18:58 kube-proxy.pem
--rw------- 1 root root 1708  8月 30 18:58 sa.key
--rw-r--r-- 1 root root  451  8月 30 18:58 sa.pub
--rw-r--r-- 1 root root 1058  8月 30 18:58 scheduler.csr
--rw------- 1 root root 1675  8月 30 18:58 scheduler-key.pem
--rw-r--r-- 1 root root 1476  8月 30 18:58 scheduler.pem
+-rw-r--r-- 1 root root 1025 12月 19 20:22 admin.csr
+-rw------- 1 root root 1675 12月 19 20:22 admin-key.pem
+-rw-r--r-- 1 root root 1444 12月 19 20:22 admin.pem
+-rw-r--r-- 1 root root 1415 12月 19 20:21 apiserver.csr
+-rw------- 1 root root 1679 12月 19 20:21 apiserver-key.pem
+-rw-r--r-- 1 root root 1805 12月 19 20:21 apiserver.pem
+-rw-r--r-- 1 root root 1070 12月 19 20:21 ca.csr
+-rw------- 1 root root 1679 12月 19 20:21 ca-key.pem
+-rw-r--r-- 1 root root 1363 12月 19 20:21 ca.pem
+-rw-r--r-- 1 root root 1082 12月 19 20:21 controller-manager.csr
+-rw------- 1 root root 1675 12月 19 20:21 controller-manager-key.pem
+-rw-r--r-- 1 root root 1501 12月 19 20:21 controller-manager.pem
+-rw-r--r-- 1 root root  940 12月 19 20:21 front-proxy-ca.csr
+-rw------- 1 root root 1679 12月 19 20:21 front-proxy-ca-key.pem
+-rw-r--r-- 1 root root 1094 12月 19 20:21 front-proxy-ca.pem
+-rw-r--r-- 1 root root  903 12月 19 20:21 front-proxy-client.csr
+-rw------- 1 root root 1679 12月 19 20:21 front-proxy-client-key.pem
+-rw-r--r-- 1 root root 1188 12月 19 20:21 front-proxy-client.pem
+-rw-r--r-- 1 root root 1045 12月 19 20:22 kube-proxy.csr
+-rw------- 1 root root 1679 12月 19 20:22 kube-proxy-key.pem
+-rw-r--r-- 1 root root 1464 12月 19 20:22 kube-proxy.pem
+-rw------- 1 root root 1704 12月 19 20:22 sa.key
+-rw-r--r-- 1 root root  451 12月 19 20:22 sa.pub
+-rw-r--r-- 1 root root 1058 12月 19 20:22 scheduler.csr
+-rw------- 1 root root 1679 12月 19 20:22 scheduler-key.pem
+-rw-r--r-- 1 root root 1476 12月 19 20:22 scheduler.pem
+[root@localhost cby]# 
+
 
 
 # 一共26个就对了
@@ -3186,9 +3192,15 @@ After=network.target
 [Service]
 Type=notify
 ExecStart=/usr/local/bin/etcd --config-file=/etc/etcd/etcd.config.yml
-Restart=on-failure
-RestartSec=10
-LimitNOFILE=65536
+TimeoutSec=0
+RestartSec=60
+Restart=always
+StartLimitBurst=3
+StartLimitInterval=60s
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
 
 [Install]
 WantedBy=multi-user.target
@@ -3231,13 +3243,14 @@ systemctl status etcd.service
 # 如果要用IPv6那么把IPv4地址修改为IPv6即可
 export ETCDCTL_API=3
 etcdctl --endpoints="192.168.1.33:2379,192.168.1.32:2379,192.168.1.31:2379" --cacert=/etc/kubernetes/pki/etcd/etcd-ca.pem --cert=/etc/kubernetes/pki/etcd/etcd.pem --key=/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out=table
-+-------------------+------------------+---------+-----------------+---------+--------+-----------------------+-------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
-|     ENDPOINT      |        ID        | VERSION | STORAGE VERSION | DB SIZE | IN USE | PERCENTAGE NOT IN USE | QUOTA | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS | DOWNGRADE TARGET VERSION | DOWNGRADE ENABLED |
-+-------------------+------------------+---------+-----------------+---------+--------+-----------------------+-------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
-| 192.168.1.33:2379 |  8065f2e59c8d68c |   3.6.4 |           3.6.0 |   20 kB |  16 kB |                   20% |   0 B |      true |      false |         3 |         12 |                 12 |        |                          |             false |
-| 192.168.1.32:2379 | b7b7ad6bf4db3f28 |   3.6.4 |           3.6.0 |   20 kB |  16 kB |                   20% |   0 B |     false |      false |         3 |         12 |                 12 |        |                          |             false |
-| 192.168.1.31:2379 | bf047bcfe3b9bf27 |   3.6.4 |           3.6.0 |   20 kB |  16 kB |                   20% |   0 B |     false |      false |         3 |         12 |                 12 |        |                          |             false |
-+-------------------+------------------+---------+-----------------+---------+--------+-----------------------+-------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
++-------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+|     ENDPOINT      |        ID        | VERSION | STORAGE VERSION | DB SIZE | IN USE | PERCENTAGE NOT IN USE | QUOTA  | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS | DOWNGRADE TARGET VERSION | DOWNGRADE ENABLED |
++-------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+| 192.168.1.33:2379 |  8065f2e59c8d68c |   3.6.7 |           3.6.0 |   20 kB |  16 kB |                   20% | 2.1 GB |     false |      false |         4 |         14 |                 14 |        |                          |             false |
+| 192.168.1.32:2379 | b7b7ad6bf4db3f28 |   3.6.7 |           3.6.0 |   20 kB |  16 kB |                   20% | 2.1 GB |      true |      false |         4 |         14 |                 14 |        |                          |             false |
+| 192.168.1.31:2379 | bf047bcfe3b9bf27 |   3.6.7 |           3.6.0 |   20 kB |  16 kB |                   20% | 2.1 GB |     false |      false |         4 |         14 |                 14 |        |                          |             false |
++-------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+
 
 
 # 这个命令是使用etcdctl工具，用于查看指定etcd集群的健康状态。下面是每个参数的详细解释：
@@ -3402,8 +3415,7 @@ yum -y install keepalived haproxy
 ### 5.2.2修改haproxy配置文件（配置文件一样）
 
 ```shell
-# cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
-
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
 cat >/etc/haproxy/haproxy.cfg<<"EOF"
 global
  maxconn 2000
@@ -3499,7 +3511,7 @@ EOF
 ### 5.2.3Master01配置keepalived master节点
 
 ```shell
-#cp /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak
+cp /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak
 
 cat > /etc/keepalived/keepalived.conf << EOF
 ! Configuration File for keepalived
@@ -3540,7 +3552,7 @@ EOF
 ### 5.2.4Master02配置keepalived backup节点
 
 ```shell
-# cp /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak
+cp /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak
 
 cat > /etc/keepalived/keepalived.conf << EOF
 ! Configuration File for keepalived
@@ -3582,7 +3594,7 @@ EOF
 ### 5.2.5Master03配置keepalived backup节点
 
 ```shell
-# cp /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak
+cp /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak
 
 cat > /etc/keepalived/keepalived.conf << EOF
 ! Configuration File for keepalived
@@ -4407,7 +4419,7 @@ EOF
 # IPv6示例
 # 若不使用IPv6那么忽略此项即可
 # 下方 --node-ip 更换为每个节点的IP即可
-cat > /usr/lib/systemd/system/kubelet.service << EOF
+**cat > /usr/lib/systemd/system/kubelet.service << EOF
 [Unit]
 Description=Kubernetes Kubelet
 Documentation=https://github.com/kubernetes/kubernetes
@@ -4425,7 +4437,7 @@ ExecStart=/usr/local/bin/kubelet \\
     --node-ip=192.168.1.31,fc00::31
 [Install]
 WantedBy=multi-user.target
-EOF
+EOF**
 ```
 
 ### 8.2.2当使用Containerd作为Runtime 
@@ -4665,30 +4677,32 @@ systemctl status kubelet.service
 
 ```shell
 [root@k8s-master01 ~]# kubectl  get node
-NAME           STATUS   ROLES    AGE   VERSION
-k8s-master01   NotReady    <none>   16s   v1.34.0
-k8s-master02   NotReady    <none>   13s   v1.34.0
-k8s-master03   NotReady    <none>   12s   v1.34.0
-k8s-node01     NotReady    <none>   10s   v1.34.0
-k8s-node02     NotReady    <none>   9s    v1.34.0
-[root@k8s-master01 ~]#
+NAME           STATUS     ROLES    AGE   VERSION
+k8s-master01   NotReady   <none>   15s   v1.35.0
+k8s-master02   NotReady   <none>   14s   v1.35.0
+k8s-master03   NotReady   <none>   12s   v1.35.0
+k8s-node01     NotReady   <none>   11s   v1.35.0
+k8s-node02     NotReady   <none>   9s    v1.35.0
+[root@k8s-master01 ~]# 
+
 ```
 
 ### 8.2.6查看容器运行时
 
 ```shell
 [root@k8s-master01 ~]# kubectl describe node | grep Runtime
-  Container Runtime Version:  containerd://2.1.4
-  Container Runtime Version:  containerd://2.1.4
-  Container Runtime Version:  containerd://2.1.4
-  Container Runtime Version:  containerd://2.1.4
-  Container Runtime Version:  containerd://2.1.4
+  Container Runtime Version:  containerd://2.2.1
+  Container Runtime Version:  containerd://2.2.1
+  Container Runtime Version:  containerd://2.2.1
+  Container Runtime Version:  containerd://2.2.1
+  Container Runtime Version:  containerd://2.2.1
 [root@k8s-master01 ~]# kubectl describe node | grep Runtime
-  Container Runtime Version:  docker://28.3.3
-  Container Runtime Version:  docker://28.3.3
-  Container Runtime Version:  docker://28.3.3
-  Container Runtime Version:  docker://28.3.3
-  Container Runtime Version:  docker://28.3.3
+  Container Runtime Version:  docker://29.1.3
+  Container Runtime Version:  docker://29.1.3
+  Container Runtime Version:  docker://29.1.3
+  Container Runtime Version:  docker://29.1.3
+  Container Runtime Version:  docker://29.1.3
+[root@k8s-master01 ~]# 
 ```
 
 ## 8.3.kube-proxy配置
@@ -4927,11 +4941,11 @@ libseccomp-2.5.2-2.el9.x86_64
 ```shell
 
 # 安装operator
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/tigera-operator.yaml
 
 
 # 下载配置文件
-curl https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/custom-resources.yaml -O
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/custom-resources.yaml -O
 
 
 
@@ -4995,12 +5009,12 @@ chmod +x ./calicoctl
 
 
 # 查看集群节点
-./calicoctl get nodes
+./calicoctl get nodes --allow-version-mismatch
 # 查看集群节点状态
-./calicoctl node status
+./calicoctl node status --allow-version-mismatch
 #查看地址池
-./calicoctl get ipPool
-./calicoctl get ipPool -o yaml
+./calicoctl get ipPool --allow-version-mismatch
+./calicoctl get ipPool --allow-version-mismatch -o yaml
 
 
 ```
@@ -5009,27 +5023,29 @@ chmod +x ./calicoctl
 
 ```shell
 # calico 初始化会很慢 需要耐心等待一下，大约十分钟左右
-[root@k8s-master01 ~]# kubectl get pod -A
-NAMESPACE          NAME                                       READY   STATUS    RESTARTS   AGE
-calico-apiserver   calico-apiserver-85cb574df5-mzsns          1/1     Running   0          2m48s
-calico-apiserver   calico-apiserver-85cb574df5-rwhn5          1/1     Running   0          2m48s
-calico-system      calico-kube-controllers-76965d9bd5-h569t   1/1     Running   0          2m45s
-calico-system      calico-node-8zdw5                          1/1     Running   0          2m45s
-calico-system      calico-node-98rn5                          1/1     Running   0          2m45s
-calico-system      calico-node-fnxv6                          1/1     Running   0          2m45s
-calico-system      calico-node-fsz7c                          1/1     Running   0          2m45s
-calico-system      calico-node-s4kmk                          1/1     Running   0          2m45s
-calico-system      calico-typha-5d4fbdfbf7-nz5t6              1/1     Running   0          2m45s
-calico-system      calico-typha-5d4fbdfbf7-slqgv              1/1     Running   0          2m45s
-calico-system      calico-typha-5d4fbdfbf7-t2l5v              1/1     Running   0          2m46s
-calico-system      csi-node-driver-cbbmd                      2/2     Running   0          2m45s
-calico-system      csi-node-driver-ndsg2                      2/2     Running   0          2m45s
-calico-system      csi-node-driver-nf2l6                      2/2     Running   0          2m45s
-calico-system      csi-node-driver-p8fql                      2/2     Running   0          2m45s
-calico-system      csi-node-driver-xh59g                      2/2     Running   0          2m45s
-calico-system      goldmane-68c899b75-zdk9n                   1/1     Running   0          2m46s
-calico-system      whisker-74688b7447-k7ngd                   2/2     Running   0          44s
-tigera-operator    tigera-operator-db78d5bd4-8hr5k            1/1     Running   0          3m22s
+[root@k8s-master01 kubernetes-v1.35.0]# kubectl get pod -A
+NAMESPACE         NAME                                       READY   STATUS    RESTARTS   AGE
+calico-system     calico-apiserver-8944cd746-8cf9n           1/1     Running   0          3m17s
+calico-system     calico-apiserver-8944cd746-kdvx4           1/1     Running   0          3m17s
+calico-system     calico-kube-controllers-757dc6b956-bpx2m   1/1     Running   0          3m16s
+calico-system     calico-node-89xvc                          1/1     Running   0          3m16s
+calico-system     calico-node-95dgk                          1/1     Running   0          3m16s
+calico-system     calico-node-jbm6g                          1/1     Running   0          3m16s
+calico-system     calico-node-p5mb2                          1/1     Running   0          3m16s
+calico-system     calico-node-t68xn                          1/1     Running   0          3m16s
+calico-system     calico-typha-68687d94bd-7pcmq              1/1     Running   0          3m14s
+calico-system     calico-typha-68687d94bd-cfclr              1/1     Running   0          3m16s
+calico-system     calico-typha-68687d94bd-t62kd              1/1     Running   0          3m14s
+calico-system     csi-node-driver-5mwsv                      2/2     Running   0          3m16s
+calico-system     csi-node-driver-jtp56                      2/2     Running   0          3m16s
+calico-system     csi-node-driver-ncd7q                      2/2     Running   0          3m16s
+calico-system     csi-node-driver-nvb6d                      2/2     Running   0          3m16s
+calico-system     csi-node-driver-s6dk9                      2/2     Running   0          3m16s
+calico-system     goldmane-576ddf78d8-4zkch                  1/1     Running   0          3m17s
+calico-system     whisker-58576c6584-nv246                   2/2     Running   0          2m43s
+tigera-operator   tigera-operator-5cd7bd49c7-rwb54           1/1     Running   0          3m34s
+[root@k8s-master01 kubernetes-v1.35.0]# 
+
 
 ```
 
@@ -5042,7 +5058,7 @@ tigera-operator    tigera-operator-db78d5bd4-8hr5k            1/1     Running   
 # [root@k8s-master01 ~]# chmod 700 get_helm.sh
 # [root@k8s-master01 ~]# ./get_helm.sh
 
-# wget https://mirrors.huaweicloud.com/helm/v3.17.3/helm-v3.17.3-linux-amd64.tar.gz
+# wget https://get.helm.sh/helm-v4.0.4-linux-amd64.tar.gz
 tar xvf helm-*-linux-amd64.tar.gz
 cp linux-amd64/helm /usr/local/bin/
 ```
@@ -5066,8 +5082,7 @@ helm install  cilium ./cilium/ -n kube-system
 helm install cilium cilium/cilium --version 1.17.4 -n kube-system
 
 # 启用ipv6
-# 正式版不支持1.34.0集群  暂时用测试版本的
-# helm install cilium cilium/cilium --version 1.18.0-pre.2 -n kube-system --set ipv6.enabled=true 
+# helm install cilium cilium/cilium -n cilium-system --set ipv6.enabled=true 
 
 
 # 启用路由信息和监控插件
@@ -5479,7 +5494,7 @@ kubectl  apply -f dashboard-user.yaml
 
 # 创建token
 kubectl -n kube-system create token admin-user
-eyJhbGciOiJSUzI1NiIsImtpZCI6ImkxLUpXdlZMdE9qTWZaNFVON1ppTWZPcU83NkpyRWNNdWxXNm5CN3ZUajQifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzU2NjE0NDk0LCJpYXQiOjE3NTY2MTA4OTQsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiNjYxZTQ4YjgtNDZjMC00ZjM2LWI4MzUtNzYzMTUyNTgzYTZhIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiNTA1ZGQ4NDItMWMxZC00YzBiLWIzN2ItNTlkMjAzNDNlYzA3In19LCJuYmYiOjE3NTY2MTA4OTQsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbi11c2VyIn0.WzTJuDbniHcOrKvTe_kfjOM5DIdqf-DsJl0qfn3iiLhqnczk9UxPpBb97I7XXDSf1eyHcNyvOYzKIPxdr6duGDlHiJbkLszozJR26F_EHviufqEuBKiph6FarQtsy_q_yaVPW2g_7nq-tnwcV3I2rvms6p6pNvledAQ8eRt_fJGFJ1AJ8rc3jsAbA-SCrRTLTtYqmAOZqJnSkRwVXvQLr4twNIaQjz3YiZIreNlaLqLJcj0r8ozP2lQCtmDO6bVBAKCGpgytQFDLyHiJyu8HlpMLice4nmz7stIza1LtIRcy_OLPCfGNRNvju0WPDt7qZVV5z5oxepAEBWzTfoOCDQ
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImtxelI3UzBZOFl5MGtWU1k0c2QyUVRaOXhQeEFNYTNHWlNyRUFucHBIVGMifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzY2MTUzNDIwLCJpYXQiOjE3NjYxNDk4MjAsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiN2E1NWM3MDEtODc5ZC00YjBmLTg2YTMtNWVmMDBjZjE0NGI0Iiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiZTc5ODAyMzYtNTUyOC00NjRjLWFlOTctMWVmNDJiMWY3ODhhIn19LCJuYmYiOjE3NjYxNDk4MjAsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbi11c2VyIn0.oDH1uZAWnxeq7gun0ej0ihbSJa6YYZwXcDt9O_tHQsWRi9Lr4kcusG0sm6UntEAy7fHLf6UWLTNHtv-V2lvDjUxRM46xQUzDOQ2v5hBI9NnpcRXQRvMvwn0s6wFeGNr2aFZ9i9aeSJZTdqHOlBjrqxsJtYD6fqDGtJYGdbvUA50nvXPN25a9ofgKvEtWjMA50ojGCr3yqF3vrWruEV77suFeYyIye5YXMnJw_I7Cp3zSEwrAuqfyVAlRv8mYQKxZJsNyban2-wcV10V5qzkofSL4DkgBaqqTDh1aOeD2NJrjmLKPQUt8meLohYy5tMGoyZgx0NGzr-9R71KF8tFHoA
 ```
 
 ## 13.4创建长期token
@@ -5501,12 +5516,12 @@ kubectl  apply -f dashboard-user-token.yaml
 # 查看密码
 kubectl get secret admin-user -n kube-system -o jsonpath={".data.token"} | base64 -d
 
-eyJhbGciOiJSUzI1NiIsImtpZCI6ImkxLUpXdlZMdE9qTWZaNFVON1ppTWZPcU83NkpyRWNNdWxXNm5CN3ZUajQifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI1MDVkZDg0Mi0xYzFkLTRjMGItYjM3Yi01OWQyMDM0M2VjMDciLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.ESyhAs--VuapsdXzwWpeNYxf5JLoxsQWFdKwiD9QgjXsfMVe7Xoy82mXd_sr1XH96hmRDms04D3cAW5j05RDlnx8yXWIFMcphZ5xwt8Qls-XYcpJWHGLrWl91JIk-Dm8Xr70CkOyjFSpr9nKSg8fp2QlIpOFG_l04hvZY3OKQrHhVwk77D2OespFBswz3QacERNqNxX8N8J1UbEs_cXW0jUmCCpAgHcJaxVYYcb_KQm1L3iF0D-d8cn8ImRvcswN0PQN-deOsctWdm15rlb_vnyFrC47uQQYgrwMe1mtuitOkhdZ59Px_wxE0xv49cAFduzeLdJllU151GhEilpXAg
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImtxelI3UzBZOFl5MGtWU1k0c2QyUVRaOXhQeEFNYTNHWlNyRUFucHBIVGMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJlNzk4MDIzNi01NTI4LTQ2NGMtYWU5Ny0xZWY0MmIxZjc4OGEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.etS6ehzcPjtdipt4zm3L2FJpcbYFlJGLGXmrd8dLMGDw2xVU5XQgZM2gMrHa_rrJPnRKcksaG7qNpasM574D7__CpcktduTM_EsUiOc5i7u9lHDMxsPczyiFxlOp7d8jOdNbqwnlEPA5iYWJ6P3Cj3LiDfFKKHQChKgv8mS588Eh-nnYiMsblWltqvPd_DOJ9JxJ4G4T25yWsbEgpH3uZmXUAyVUDNgDFLNIKRPQXLg5d07rlmgHjJInvEsnrrCs8dxp173iNW8LYxnDNy7pwjrXbvniYiRXjltAwc6F68G590hQaogy9AEVUskeTgBvONPJwkZRHbf0beOL30pT0w
 ```
 
 ## 13.5登录dashboard
 
-https://192.168.1.31:31330/
+https://192.168.1.31:31268/
 
 
 
@@ -5533,26 +5548,28 @@ kubectl apply -f metallb-native.yaml
 ```
 ## 14.2 查看运行情况
 ```shell
-root@k8s-master01:~# kubectl -n metallb-system get all 
-NAME                              READY   STATUS    RESTARTS   AGE
-pod/controller-6599cd9c46-rr54w   1/1     Running   0          78s
-pod/speaker-55j5t                 1/1     Running   0          78s
-pod/speaker-bcr4j                 1/1     Running   0          78s
-pod/speaker-p7vgz                 1/1     Running   0          78s
-pod/speaker-pzvkd                 1/1     Running   0          78s
-pod/speaker-vcjvr                 1/1     Running   0          78s
+[root@k8s-master01 kubernetes-v1.35.0]# kubectl -n metallb-system get all 
+NAME                              READY   STATUS              RESTARTS   AGE
+pod/controller-59f49888d7-chwst   1/1     Running             0          54s
+pod/speaker-4nkv6                 0/1     Running             0          54s
+pod/speaker-dzfzs                 0/1     ErrImagePull        0          53s
+pod/speaker-fmwgn                 0/1     ContainerCreating   0          53s
+pod/speaker-jch8z                 0/1     Running             0          53s
+pod/speaker-pplvk                 0/1     Running             0          53s
 
-NAME                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-service/metallb-webhook-service   ClusterIP   10.106.20.159   <none>        443/TCP   78s
+NAME                              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/metallb-webhook-service   ClusterIP   10.100.70.55   <none>        443/TCP   54s
 
 NAME                     DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
-daemonset.apps/speaker   5         5         5       5            5           kubernetes.io/os=linux   78s
+daemonset.apps/speaker   5         5         0       5            0           kubernetes.io/os=linux   54s
 
 NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/controller   1/1     1            1           78s
+deployment.apps/controller   1/1     1            1           54s
 
 NAME                                    DESIRED   CURRENT   READY   AGE
-replicaset.apps/controller-6599cd9c46   1         1         1       78s
+replicaset.apps/controller-59f49888d7   1         1         1       54s
+[root@k8s-master01 kubernetes-v1.35.0]# 
+
 
 ```
 
@@ -5602,7 +5619,7 @@ helm repo update
 
 # 拉取仓库
 helm pull ingress-nginx/ingress-nginx
-tar xvf ingress-nginx-4.12.3.tgz
+tar xvf ingress-nginx-4.14.1.tgz
 
 # 查看镜像地址，若你的环境无法下载这个镜像，那么就需要你自行找镜像 或者更换镜像地址
 [root@k8s-master01 ingress-nginx]# cat  values.yaml | grep image | grep -v \#
@@ -6013,12 +6030,12 @@ EOF
 #查看端口
 [root@k8s-master01 ~]# kubectl  get svc
 NAME           TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)        AGE
-chenby         NodePort    fd00:1111::e9eb   <none>        80:32288/TCP   5s
+chenby         NodePort    fd00:1111::7ef8   <none>        80:32288/TCP   5s
 
 [root@k8s-master01 ~]# 
 
 # 直接访问POD地址
-[root@k8s-master01 ~]# curl -I http://[fd00:1111::e9eb]
+[root@k8s-master01 ~]# curl -I http://[fd00:1111::7ef8]
 HTTP/1.1 200 OK
 Server: nginx/1.29.1
 Date: Sun, 31 Aug 2025 04:14:38 GMT
@@ -6032,7 +6049,7 @@ Accept-Ranges: bytes
 
 
 # 使用IPv4地址访问测试
-[root@k8s-master01 ~]# curl -I http://192.168.1.31:32288
+[root@k8s-master01 ~]# curl -I http://192.168.1.31:32651
 HTTP/1.1 200 OK
 Server: nginx/1.29.1
 Date: Sun, 31 Aug 2025 04:15:05 GMT
@@ -6045,7 +6062,7 @@ Accept-Ranges: bytes
 
 
 # 使用主机的内网IPv6地址测试
-[root@k8s-master01 ~]# curl -I http://[fc00::31]:32288
+[root@k8s-master01 ~]# curl -I http://[fc00::31]:32651
 HTTP/1.1 200 OK
 Server: nginx/1.29.1
 Date: Sun, 31 Aug 2025 04:15:23 GMT
@@ -6058,7 +6075,7 @@ Accept-Ranges: bytes
 
 
 # 使用主机的公网IPv6地址测试
-[root@k8s-master01 ~]# curl -I http://[2408:822a:730:e4a1::80d]:32288
+[root@k8s-master01 ~]# curl -I http://[2409:8a10:6d0:f1::ed1]:32651
 HTTP/1.1 200 OK
 Server: nginx/1.29.1
 Date: Sun, 31 Aug 2025 04:16:16 GMT
@@ -6111,7 +6128,7 @@ helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/
 # --set nfs.path 填写你的nfs服务器路径
 helm install -n kube-system nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
     --set storageClass.defaultClass=true \
-    --set nfs.server=192.168.1.61 \
+    --set nfs.server=192.168.1.31 \
     --set nfs.path=/nfs
 
 # 查看是否为默认存储
@@ -6183,6 +6200,7 @@ kubectl taint nodes k8s-master03 key1=value1:NoSchedule
 kubectl taint nodes k8s-master01 key1=value1:NoSchedule-
 kubectl taint nodes k8s-master02 key1=value1:NoSchedule-
 kubectl taint nodes k8s-master03 key1=value1:NoSchedule-
+
 ```
 
 # 19.安装命令行自动补全功能

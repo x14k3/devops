@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "k8s/v1.33.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline.md",
+                "file": "k8s/二进制安装 k8s v1.35.0.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "v1.33.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline"
+              "title": "二进制安装 k8s v1.35.0"
             }
           },
           {
@@ -198,13 +198,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "k8s/v1.33.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline.md",
+                "file": "k8s/二进制安装 k8s v1.35.0.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "v1.33.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline 的大纲"
+              "title": "二进制安装 k8s v1.35.0 的大纲"
             }
           },
           {
@@ -238,14 +238,15 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "2201f1e4a094ebd7",
   "lastOpenFiles": [
-    "linux/linux 内核配置/linux 内核升级（kernel、systemd、cgroup v2）.md",
-    "k8s/v1.35.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline.md",
-    "k8s/v1.33.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline.md",
-    "k8s/v1.34.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline.md",
+    "k8s/二进制安装 k8s v1.25.4.md",
+    "k8s/assets/1582188308711.png",
+    "k8s/二进制安装 k8s v1.35.0.md",
+    "k8s/二进制安装Kubernetes（k8s）v1.33.0.md",
     "k8s/Kubernetes v1.35版本发布.md",
-    "k8s/二进制安装Kubernetes（k8s）v1.35.0.md",
+    "k8s/v1.34.0-CentOS-binary-install-IPv6-IPv4-Three-Masters-Two-Slaves-Offline.md",
+    "linux/linux 内核配置/linux 内核升级（kernel、systemd、cgroup v2）.md",
     "linux/linux 进程管理/systemd.md",
     "企业建设/KVM/KVM 虚拟机克隆和快照.md",
     "linux/linux 命令/shell 命令手册/软件安装/yum.md",
@@ -274,11 +275,9 @@
     "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets/eebae7b009bc162fbc1084c602f25ae0_MD5.png",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/bdbe857ca0d84953166d61fc88c0889e_MD5.png",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/bf65588304f517d5f6c738e7123b1760_MD5.png",
-    "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets/547326230eb2c5dc4550cff05bbca451_MD5.png",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets",
     "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets",
     "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/2、部署Dashboard插件.md",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件",
     "k8s/二进制高可用Kubernetes集群部署/7. 部署Worker节点",
     "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点",
