@@ -6,19 +6,19 @@
 > 使用 `–nographic` 以非图形界面的方式启动，所以需要重定向 guest的 console，所以需要`--extra-args='console=tty0 console=ttyS0,115200n8 serial'`​参数
 
 ```bash
-sudo virt-install --name=centos7 --ram 4096 --vcpus 2 \
---disk path=/data/qemu/images/centos7.qcow2,size=60,format=qcow2,bus=virtio \
---location /data/qemu/iso/CentOS-7.9-x86_64-DVD-2009.iso \
---nographics --extra-args='console=tty0 console=ttyS0,115200n8 serial'  \
---network bridge=br0,model=virtio
-```
-
-```bash
 virt-install --name=CentOS7_templ --ram 8192 --vcpus 2 \
 --disk path=/data/CentOS7_templ.qcow2,size=55,format=qcow2,bus=virtio \
 --location /data/CentOS-7-x86_64-DVD-1908.iso \
---nographics --extra-args='console=tty0 console=ttyS0,115200n8 serial' \
---virt-type=kvm --hvm --network network=default,model=virtio
+--virt-type=kvm --hvm --network network=default,model=virtio \
+--extra-args='console=tty0 console=ttyS0,115200n8 serial' \
+--nographics
+
+virt-install --name=Rocky-9 --ram 8192 --vcpus 2 \
+--disk path=//data/qemu/images/Rocky9.qcow2,size=55,format=qcow2,bus=virtio \
+--location /data/qemu/iso/Rocky-9-latest-x86_64-minimal.iso \
+--virt-type=kvm --hvm --network bridge=br0,model=virtio \
+--extra-args='console=tty0 console=ttyS0,115200n8 serial' \
+--graphics vnc,listen=0.0.0.0
 ```
 
 ‍
@@ -39,11 +39,11 @@ sudo qemu-img create -f qcow2 /data/qemu/images/win10_dev.qcow2 100G
 3. **执行安装命令**
 ```bash
 virt-install --name win10 --ram 8192 --vcpus 2 --os-variant win10 \
---network bridge=br0,model=virtio --graphics vnc,listen=0.0.0.0 \
 --cdrom /data/qemu/iso/Win10_22H2_Chinese_Simplified_x64v1.iso \
 --disk path=/data/qemu/images/win10_sys.qcow2,bus=virtio,format=qcow2 \
 --disk path=/data/qemu/images/win10_data.qcow2,bus=virtio,format=qcow2 \
 --disk path=/data/qemu/iso/virtio-win-0.1.271.iso,device=cdrom \
+--network bridge=br0,model=virtio --graphics vnc,listen=0.0.0.0 
 ```
 
 4. **安装Windows注意事项**
@@ -303,6 +303,7 @@ keymap=en-us            # 键盘布局
 #### 3. **安装参数**
 ```bash
 --extra-args="KERNEL_ARGS"  # 传递给安装内核的参数
+--extra-args='console=tty0 console=ttyS0,115200n8 serial'
 --initrd-inject="/path/to/ks.cfg"  # 注入kickstart文件
 --serial=pty,target_type=usb-serial  # 串行控制台重定向
 ```
