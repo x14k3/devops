@@ -8,37 +8,16 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2201f1e4a094ebd7",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "k8s/二进制安装 k8s v1.35.0.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "二进制安装 k8s v1.35.0"
-            }
-          },
-          {
             "id": "cc55f8d296b5725b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "k8s/二进制安装 k8s v1.35.0.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "二进制安装 k8s v1.35.0"
+              "title": "新标签页"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -198,7 +177,7 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "cc55f8d296b5725b",
+  "active": "a41355350eff645e",
   "lastOpenFiles": [
     "k8s/二进制安装 k8s v1.25.4.md",
     "k8s/二进制安装 k8s v1.35.0.md",
