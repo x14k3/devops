@@ -64,12 +64,16 @@ yum clean all &&  yum makecache
 ```bash
 # 增加docker源
 yum -y install yum-utils
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-yum clean all && yum makecache
-yum -y install docker-ce
-# 启动
-systemctl start docker
 
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+yum clean all && yum makecache
+
+yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+# 启动
+systemctl enable --now docker.service
+systemctl status docker.service
 ```
 
 ## rpm方式安装
