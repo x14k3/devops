@@ -696,17 +696,17 @@ kubectl get pods --all-namespaces
 kubectl get node  
 ```
 
-## 设置集群角色
+## 12. 设置集群角色
 
 - NoSchedule: 一定不能被调度，已存在的 pod 不会被驱逐
 - PreferNoSchedule: 尽量不要调度
 - NoExecute: 一定不能被调度, 还会驱逐 node 上已有的 pod
 
 ```bash
-kubectl taint node master1 node-role.kubernetes.io/master=true:NoSchedule && \
-kubectl taint node k8s-master2 node-role.kubernetes.io/master=true:PreferNoSchedule && \
-kubectl taint node k8s-master3 node-role.kubernetes.io/master=true:PreferNoSchedule && \
-kubectl label node k8s-node1 node-role.kubernetes.io/node= && \
+kubectl taint node master1 node-role.kubernetes.io/master=true:NoSchedule
+kubectl taint node k8s-master2 node-role.kubernetes.io/master=true:PreferNoSchedule 
+kubectl taint node k8s-master3 node-role.kubernetes.io/master=true:PreferNoSchedule 
+kubectl label node k8s-node1 node-role.kubernetes.io/node= 
 kubectl label node k8s-node2 node-role.kubernetes.io/node=
 
 # 取消不可调度污点
