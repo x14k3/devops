@@ -236,134 +236,118 @@ start_v2ray
 配置文件参考
 
 ```json
-
 {
-  "log": {
-    "access": "access.log",
-    "error": "error.log",
-    "loglevel": "warning"
-  },
-  "inbounds": [
-    {
-      "tag": "socks",
-      "port": 10808,
-      "listen": "127.0.0.1",
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "http",
-      "port": 10809,
-      "listen": "127.0.0.1",
-      "protocol": "http",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    }
-  ],
-  "outbounds": [
-    {
-      "tag": "proxy",
-      "protocol": "VLESS",
-      "settings": {
-        "vnext": [
-          {
-            "address": "ddshe11.com",
-            "port": 1231,
-            "users": [
-              {
-                "id": "673----------------------123",
-                "alterId": 0,
-                "encryption": "none"
-              }
-            ]
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "allowInsecure": false,
-          "show": false
-        },
-        "wsSettings": {
-          "path": "/xxxxx",
-          "headers": {}
-        }
-      },
-      "mux": {
-        "enabled": false,
-        "concurrency": -1
-      }
-    },
-    {
-      "tag": "direct",
-      "protocol": "freedom",
-      "settings": {}
-    },
-   {
-      "tag": "block",
-      "protocol": "blackhole",
-      "settings": {
-        "response": {
-          "type": "http"
-        }
-      }
-    }
-  ],
-  "routing": {
-    "domainStrategy": "IPOnDemand",
-    "rules": [
-      {
-        "type": "field",
-        "outboundTag": "direct",
-        "domain": ["geosite:cn"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "direct",
-        "ip": [
-          "geoip:cn",
-          "geoip:private",
-          "192.168.0.0/16",
-          "10.10.0.0/16",
-          "192.168.31.0/24",
-          "172.168.0.0/24",
-          "10.10.0.0/24"
-        ]
-      },
-      {
-        "type": "field",
-        "outboundTag": "proxy",
-        "network": "udp,tcp"
-      }
-    ]
-  }
+  "log": {
+    "access": "access.log",
+    "error": "error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "tag": "socks",
+      "port": 10808,
+      "listen": "0.0.0.0",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http","tls"],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    },
+    {
+      "tag": "http",
+      "port": 10809,
+      "listen": "0.0.0.0",
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http","tls"],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "VMESS",
+      "settings": {
+        "vnext": [
+          {
+            "address": "xxxx123456789.xyz",
+            "port": 25510,
+            "users": [
+              {
+                "id": "xxa5290-xe9b-xf6e-xed5-9xbe15xxxx89",
+                "alterId": 0,
+"encryption": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "show": false
+        },
+        "wsSettings": {
+          "path": "/vvmess",
+          "headers": {}
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      }
+    }
+  ],
+"routing": {
+  "domainStrategy": "IPIfNonMatch",
+  "rules": [
+    {
+      "type": "field",
+      "outboundTag": "direct",
+      "domain": ["geosite:cn"]
+    },
+    {
+      "type": "field",
+      "outboundTag": "direct",
+      "ip": ["geoip:cn", "geoip:private"]
+    },
+    {
+      "type": "field",
+      "outboundTag": "proxy",
+      "network": "udp,tcp"
+    }
+  ]
 }
-
+}
 ```
 
 ‍
@@ -402,36 +386,146 @@ systemctl start v2ray
 
 ‍
 
-## 路由规则
+### 配置文件详解
 
-```bash
-  "routing": {
-    "domainStrategy": "IPOnDemand",
-    "rules": [
-      {
-        "type": "field",
-        "outboundTag": "direct",
-        "domain": ["geosite:cn"]
+```json
+{
+  // ============================================
+  // 日志配置
+  // ============================================
+  "log": {
+    "access": "access.log",      // 访问日志文件
+    "error": "error.log",        // 错误日志文件
+    "loglevel": "warning"        // 日志级别：warning（只记录警告和错误）
+  },
+  
+  // ============================================
+  // 入站配置 - 本地代理服务入口
+  // ============================================
+  "inbounds": [
+    {
+      "tag": "socks",            // 入站标签，用于内部识别
+      "port": 10808,             // 监听端口：SOCKS5代理端口
+      "listen": "0.0.0.0",       // 监听地址：所有网络接口
+      "protocol": "socks",       // 协议类型：SOCKS5
+      "sniffing": {              // 流量嗅探配置
+        "enabled": true,         // 启用嗅探
+        "destOverride": [
+          "http",                // 识别HTTP流量
+          "tls"                  // 识别TLS/HTTPS流量
+        ],
+        "routeOnly": false       // 嗅探结果仅用于路由决策
       },
+      "settings": {              // SOCKS5协议设置
+        "auth": "noauth",        // 无需认证
+        "udp": true,             // 支持UDP转发
+        "allowTransparent": false // 不支持透明代理
+      }
+    },
+    {
+      "tag": "http",             // 第二个入站标签
+      "port": 10809,             // HTTP代理端口
+      "listen": "0.0.0.0",       // 监听所有网络接口
+      "protocol": "http",        // 协议类型：HTTP代理
+      "sniffing": {              // 嗅探配置（同上）
+        "enabled": true,
+        "destOverride": ["http", "tls"],
+        "routeOnly": false
+      },
+      "settings": {              // HTTP协议设置
+        "auth": "noauth",        // 无需认证
+        "udp": true,             // 支持UDP
+        "allowTransparent": false
+      }
+    }
+  ],
+  
+  // ============================================
+  // 出站配置 - 流量出口处理方式
+  // ============================================
+  "outbounds": [
+    {
+      "tag": "proxy",            // 出站标签：代理出口
+      "protocol": "VMESS",       // 协议：VMess
+      "settings": {              // VMess协议设置
+        "vnext": [               // 服务器配置数组
+          {
+            "address": "doshell.xyz",  // 服务器地址
+            "port": 25515,             // 服务器端口
+            "users": [            // 用户认证信息
+              {
+                "id": "673a5290-4e9b-4f6e-9ed5-91be45d2a689", // UUID
+                "alterId": 0,     // 额外ID（V2Ray旧版特性，通常为0）
+                "encryption": "none" // 加密方式：无
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {        // 传输流设置
+        "network": "ws",         // 传输协议：WebSocket
+        "security": "tls",       // 传输层安全：TLS加密
+        "tlsSettings": {         // TLS设置
+          "allowInsecure": false, // 不允许不安全的TLS证书
+          "show": false          // 不显示TLS连接信息
+        },
+        "wsSettings": {          // WebSocket设置
+          "path": "/vvmess",     // WebSocket路径
+          "headers": {}          // 自定义头部（空）
+        }
+      },
+      "mux": {                   // 多路复用配置
+        "enabled": false,        // 禁用多路复用
+        "concurrency": -1        // 并发连接数（-1表示默认）
+      }
+    },
+    {
+      "tag": "direct",           // 出站标签：直连出口
+      "protocol": "freedom",     // 协议：freedom（直连）
+      "settings": {}             // 无需额外设置
+    },
+    {
+      "tag": "block",            // 出站标签：拦截出口
+      "protocol": "blackhole",   // 协议：blackhole（黑洞，丢弃流量）
+      "settings": {              // 黑洞设置
+        "response": {            // 响应设置
+          "type": "http"         // 返回HTTP响应（模拟HTTP错误）
+        }
+      }
+    }
+  ],
+  
+  // ============================================
+  // 路由配置 - 流量分流规则
+  // ============================================
+  "routing": {
+    "domainStrategy": "IPIfNonMatch", // 域名策略：优先匹配域名，未匹配则用IP匹配
+    
+    "rules": [                   // 路由规则数组（按顺序执行）
+      // 规则1：中国大陆域名直连
+      {
+        "type": "field",         // 规则类型：字段匹配
+        "outboundTag": "direct", // 匹配时使用"direct"出站（直连）
+        "domain": ["geosite:cn"] // 匹配条件：geosite数据库中所有中国域名
+      },
+      
+      // 规则2：中国大陆IP和内网IP直连
       {
         "type": "field",
         "outboundTag": "direct",
         "ip": [
-          "geoip:cn",
-          "geoip:private",
-          "192.168.0.0/16",
-          "10.10.0.0/16",
-          "192.168.31.0/24",
-          "172.168.0.0/24",
-          "10.10.0.0/24"
+          "geoip:cn",           // 匹配条件：所有中国IP地址
+          "geoip:private"       // 匹配条件：所有私有内网IP（10.x.x.x, 172.16-31.x.x, 192.168.x.x等）
         ]
       },
+      
+      // 规则3：其他所有流量走代理（兜底规则）
       {
         "type": "field",
-        "outboundTag": "proxy",
-        "network": "udp,tcp"
+        "outboundTag": "proxy",  // 匹配时使用"proxy"出站（代理）
+        "network": "udp,tcp"     // 匹配所有TCP和UDP流量
       }
     ]
   }
-
+}
 ```
