@@ -30,7 +30,7 @@
               "type": "markdown",
               "state": {
                 "file": "linux/linux 安全管理/linux 安全加固方案.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -52,7 +52,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -172,13 +172,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 命令/shell 命令手册/tools/crontab.md",
+                "file": "linux/linux 安全管理/linux 安全加固方案.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "crontab 的大纲"
+              "title": "linux 安全加固方案 的大纲"
             }
           },
           {
@@ -208,11 +208,13 @@
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
       "oz-clear-unused-images:Clear Unused Images": false,
-      "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
+      "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false,
+      "remotely-save:Remotely Save": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "3cb8444404920a6d",
   "lastOpenFiles": [
+    "linux/linux 命令/shell 命令手册/tools/crontab.md",
     "linux/linux 命令/shell 命令手册/tools/flock.md",
     "开源工具/Bark.md",
     "linux/linux 安全管理/ufw.md",
@@ -242,7 +244,6 @@
     "中间件/redis/assets/e672f5687f8bbc2f35b50dca2a514e75_MD5.png",
     "中间件/redis/assets/ed6903660e4ce9c32d5b5e1498a041c9_MD5.png",
     "中间件/redis/redis 数据持久化.md",
-    "中间件/redis/redis 批量测试数据.md",
     "中间件/etcd",
     "k8s/assets/1582188308711.png",
     "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets/7c71a9250a47cab65f55e37e05df51cf_MD5.png",
