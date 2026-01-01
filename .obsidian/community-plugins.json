@@ -1,9 +1,9 @@
 [
   "oz-clear-unused-images",
   "mousewheel-image-zoom",
-  "remotely-save",
   "xmind-viewer",
   "mxmind",
   "obsidian-local-images-plus",
-  "obsidian-regex-replace"
+  "obsidian-regex-replace",
+  "remotely-save"
 ]
