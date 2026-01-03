@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "71218ba81143fea0",
+        "id": "6f1854e6b4bd208d",
         "type": "tabs",
         "children": [
           {
-            "id": "3d524a1e3191f690",
+            "id": "ca73dd4f314e6cde",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -74,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 248.5
+    "width": 332.50390243530273
   },
   "right": {
     "id": "4f3c84d39789a0e3",
@@ -137,13 +137,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux/linux 命令/shell 命令手册/文件系统/dd.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "dd 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -177,8 +176,28 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "ca73dd4f314e6cde",
   "lastOpenFiles": [
+    "devops/一些概念释义/云计算.md",
+    "devops/一些概念释义/QPS,TPS,并发用户数,吞吐量关系.md",
+    "devops/一些概念释义/为什么我们需要 DevOps.md",
+    "devops/一些概念释义/微服务.md",
+    "devops/一些概念释义/敏捷开发.md",
+    "devops/一些概念释义/分布式.md",
+    "中间件/nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
+    "中间件/nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
+    "中间件/nginx/nginx 配置及优化/8. nginx 限制请求、连接数与下载速度.md",
+    "中间件/nginx/nginx 配置及优化/14. nginx 用作灰度发布.md",
+    "中间件/nginx/nginx 配置及优化/13. nginx Location配置.md",
+    "中间件/nginx/nginx 配置及优化/7. nginx 双向认证.md",
+    "中间件/nginx/nginx 配置及优化/6. nginx 超时设置.md",
+    "中间件/nginx/nginx 配置及优化/5. nginx 配置HTTPS.md",
+    "中间件/nginx/nginx 配置及优化/4. nginx 负载均衡.md",
+    "中间件/nginx/nginx 配置及优化/1. nginx 基础功能配置集合.md",
+    "面试资料.md",
+    "linux/linux 命令/shell 命令手册/软件安装/assets",
+    "sundongsheng.md",
+    "README.md",
     "企业建设/openVPN/1. OpenVPN 服务部署.md",
     "基础服务/sshd/assets",
     "linux/linux 安全管理/linux 安全加固方案.md",
@@ -187,25 +206,6 @@
     "基础服务/sshd/5. ssh 安全加固.md",
     "linux/linux 安全管理/linux ssh 安全加固.md",
     "linux/linux 命令/shell 命令手册/软件安装/apt.md",
-    "linux/linux 软件包管理/linux 软件包管理.md",
-    "linux/linux 软件包管理/Linux 软件源配置全攻略.md",
-    "linux/linux 安全管理/ufw.md",
-    "基础服务/sshd/非交互自动生成SSH密钥文件.md",
-    "基础服务/sshd/openssh 升级.md",
-    "基础服务/sshd/2. ssh 公钥登录.md",
-    "linux/linux 用户和组管理/3. 用户和组管理命令.md",
-    "存储服务/Minio/minio 部署.md",
-    "linux/linux 用户和组管理/2. 用户和组管理相关的文件.md",
-    "docker/docker-compose/docker compose 编排多服务.md",
-    "docker/docker-compose/docker compose 锚点的用法.md",
-    "docker/docker-compose/docker compose 指令详解.md",
-    "docker/docker-compose/docker compose 构建命令.md",
-    "linux/linux 命令/shell 命令手册/tools/crontab.md",
-    "linux/linux 命令/shell 命令手册/tools/flock.md",
-    "开源工具/Bark.md",
-    "企业建设/openVPN/5. OpenVPN 隐藏流量（stunnel）.md",
-    "企业建设/openVPN/4. OpenVPN 访问 client所在子网.md",
-    "linux/linux 命令/vim 编辑快捷键.md",
     "linux/linux 命令/assets",
     "中间件/redis/assets/4e4bc96a7f7aca38cf9047ca57bbc88b_MD5.png",
     "中间件/redis/assets/e672f5687f8bbc2f35b50dca2a514e75_MD5.png",
@@ -223,7 +223,6 @@
     "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件",
     "k8s/二进制高可用Kubernetes集群部署/7. 部署Worker节点",
-    "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点",
-    "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态"
+    "k8s/二进制高可用Kubernetes集群部署/6. 部署Master节点"
   ]
 }

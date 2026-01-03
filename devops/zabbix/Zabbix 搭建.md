@@ -147,7 +147,7 @@ centos:7.8
 - 安装PHP  **(使用7.x版本)** 
   [php](../../中间件/php.md)
 - 安装nginx
-  [nginx 部署](../../中间件/Nginx/nginx%20部署.md)
+  [nginx 部署](../../中间件/nginx/nginx%20部署.md)
 - nginx整合php-fpm
 ```conf
 server {
