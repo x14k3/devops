@@ -89,7 +89,7 @@ vm.swappiness = 60
 vim /etc/sysctl.conf
 vm.swappiness = 10
 # 生效
-sudo sysctl -p
+sysctl -p
 ```
 
 ## 常用案例汇总

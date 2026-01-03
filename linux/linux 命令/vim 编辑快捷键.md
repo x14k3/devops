@@ -1,17 +1,4 @@
 
-1. **打开** VIM 配置文件 `~/.vimrc`。
-2. **添加**以下行到文件末尾:
-```bash
-set tabstop=4     # 设置Tab键显示宽度为4个空格
-set shiftwidth=4  # 设置自动缩进的宽度为4个空格
-set expandtab     # 将Tab键替换为空格
-set nocp          # 问题：按上下左右键出现ABCD
-set backspace=2   # 问题：插入模式下delete/backspce键失效
-set mouse-=a      #  禁用vim的visual模式
-syntax enable     # 语法高亮
-
-```
-
 ### 基本操作
 
 |快捷键|功能|
@@ -208,3 +195,18 @@ vim test.txt
 此时，文件已经正常解密了，下一次将打开文件。
 
 ‍
+
+## 常见问题
+
+
+```bash
+# 按上下左右键出现ABCD
+echo "set nocp" >> ~/.vimrc
+# 插入模式下delete/backspce键失效
+echo "set backspace=2" >> ~/.vimrc
+# 禁用vim的visual模式
+echo "set mouse-=a" >> ~/.vimrc
+# 语法高亮
+echo "syntax enable" >> ~/.vimrc
+
+```
