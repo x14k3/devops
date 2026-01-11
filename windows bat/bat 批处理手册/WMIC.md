@@ -1,4 +1,4 @@
-# WMIC
+
 
 wmic（Windows Management InstrumentationCommand Line） ，提供了从命令行接口和批命令脚本执行系统管理的支持
 

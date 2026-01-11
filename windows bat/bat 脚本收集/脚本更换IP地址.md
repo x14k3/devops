@@ -1,5 +1,5 @@
 
-```bat
+```powershell
 @echo off & setlocal enabledelayedexpansion
 color 0a
 

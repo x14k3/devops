@@ -158,7 +158,7 @@ cat /proc/sys/kernel/random/uuid
 
 修改nginx配置
 
-```bash
+```nginx
     server {
         listen       11051 ssl;
         server_name  doshell.cn;

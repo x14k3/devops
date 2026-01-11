@@ -1,4 +1,3 @@
-# netsh
 
 netsh(全称：Network Shell) 是windows下内置的一个功能强大的网络配置命令行工具。
 
