@@ -7,23 +7,22 @@ KVM虚拟机可以在线(运行时)添加磁盘、CDROM、USB设备，这对在�
 
 ## 添加磁盘文
 
-- 创建虚拟磁盘文件（qcow2类型）
 ```bash
+# 创建虚拟磁盘文件（qcow2类型）
 cd /var/lib/libvirt/images
 qemu-img create -f qcow2 dev7-data.qcow2 20G
-```
 
-- 虚拟磁盘文件添加到虚拟机
-`qemu`可以映射物理存储磁盘(例如`/dev/sdb`)，或者虚拟磁盘文件到KVM虚拟机的虚拟磁盘(`vdb`)
-
-```bash
 
 # 方法一：
 virsh attach-disk <虚拟机名称> /var/lib/libvirt/images/new_disk.qcow2 vdb --cache none --persistent --drive qemu --subdriver qcow2
-#--config     设置的同时更改虚拟机xml文件，这样就可以保证虚拟机重启后仍然生效
-#--persistent 表示将更改写入虚拟机配置，这样重启后仍然有效。相当于–config --live
-#--subdriver  声明镜像文件类型<qcow2|raw>
-#--cache none 设置缓存模式，none表示不缓存（也可以根据需求设置其他模式）。
+# 警告
+# 一定要明确使用`--driver qemu --subdriver qcow2`:
+# `libvirtd`出于安全因素默认关闭了虚拟磁盘类型自动检测功能，并且默认使用的磁盘格式是`raw`，如果不指定磁盘驱动类型会导致被识别成`raw`格式，就会在虚拟机内部看到非常奇怪的极小的磁盘。
+
+# --config     设置的同时更改虚拟机xml文件，这样就可以保证虚拟机重启后仍然生效
+# --persistent 表示将更改写入虚拟机配置，这样重启后仍然有效。相当于–config --live
+# --subdriver  声明镜像文件类型<qcow2|raw>
+# --cache none 设置缓存模式，none表示不缓存（也可以根据需求设置其他模式）。
 
 
 ##----------------------------------------------------------------------------------------------
@@ -38,14 +37,56 @@ virsh attach-disk <虚拟机名称> /var/lib/libvirt/images/new_disk.qcow2 vdb -
 
 ## 附加磁盘：
 virsh attach-device <虚拟机名称> new_disk.xml --persistent
-
 # 分离磁盘
 virsh detach-disk <虚拟机名称> vdb --persistent
+
+# 查看当前磁盘列表（确认要卸载的磁盘的映射名称，例如 `vda`, `vdb`）
+virsh domblklist <虚拟机名称>
+
+
 ```
 
-**警告**
-一定要明确使用`--driver qemu --subdriver qcow2`:
-`libvirtd`出于安全因素默认关闭了虚拟磁盘类型自动检测功能，并且默认使用的磁盘格式是`raw`，如果不指定磁盘驱动类型会导致被识别成`raw`格式，就会在虚拟机内部看到非常奇怪的极小的磁盘。
+## 添加iso文件
+
+```bash
+#方法一：使用virsh change-media
+
+# 1. 查看虚拟机的当前光驱设备：
+virsh domblklist win7
+
+ Target   Source
+-------------------------------------------------------------------------------------------
+ vda      /data/qemu/images/win7.qcow2
+ sda      /data/qemu/iso/cn_windows_7_professional_with_sp1_vl_build_x64_dvd_u_677816.iso
+ sdb      /data/qemu/iso/virtio-win-0.1.173.iso
+
+# 注意：如果你的虚拟机没有光驱设备，那么可能没有类似sda这样的设备。
+# 2. 如果已经有光驱设备（比如sda），那么我们可以使用change-media命令来改变介质：
+virsh change-media <vm_name> sdb --eject  # 先弹出当前介质（如果有）
+virsh change-media <vm_name> sdb /path/to/virtio-win.iso --insert
+
+# 3. 如果没有光驱设备，那么我们需要先添加一个光驱设备。这可以通过virsh attach-device命令完成，需要准备一个XML文件。
+
+# 方法二：使用virsh attach-device添加光驱设备并挂载ISO
+
+# 1. 创建一个XML文件，例如cdrom.xml，内容如下：
+<disk type='file' device='cdrom'>
+  <driver name='qemu' type='raw'/>
+  <source file='/path/to/virtio-win.iso'/>
+  <target dev='sdb' bus='scsi'/>   <!-- 这里假设使用scsi总线，设备为sdb，也可以使用其他总线和设备名，如ide的hdb等 -->
+  <readonly/>
+  <address type='drive' controller='0' bus='0' target='0' unit='1'/>
+</disk>
+# 注意：address部分需要根据虚拟机的PCI控制器和总线情况来设置，如果不确定，可以查看虚拟机的当前XML配置来调整。
+# 2. 执行挂载命令：
+virsh attach-device <vm_name> cdrom.xml
+
+#但是，请注意，热添加设备需要虚拟机总线支持，比如scsi总线。另外，如果虚拟机是Windows，可能需要安装驱动才能识别新的SCSI设备。
+#由于我们要挂载的是virtio-win.iso，这个ISO通常用于为Windows虚拟机提供virtio驱动，所以可能是在Windows虚拟机中操作。
+#考虑到兼容性，我们也可以使用ide总线，因为Windows默认支持ide光驱。但是，现代KVM虚拟机通常使用sata或scsi总线。
+#另一种更简单的方法：使用virt-manager图形界面，在虚拟机运行时，添加硬件->存储，选择ISO文件，设备类型选择CDROM，然后完成。
+```
+
 
 ## 调整磁盘空间
 
@@ -68,82 +109,6 @@ virsh setvcpus --domain centos8-3 6 --live --config
 ```
 
 注意：CPU目前是不支持回收的。
-
-## 添加iso光盘
-
-```
-virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
-```
-
-cdrom/floppy 不支持热插拔，所以和上面动态插入一个磁盘设备不同，如果直接使用以下命令插入设备( 虚拟机名字是`sles12-sp3`)映射:
-```bash
-virsh attach-disk sles12-sp3 SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso --target hdc --type cdrom --mode readonly
-```
-
-会提示错误:
-```bash
-error: Failed to attach disk
-error: Operation not supported: cdrom/floppy device hotplug isn't supported
-```
-
-但是，如果虚拟机定义时候已经定义过cdrom设备，则使用`virsh dumpxml sles12-sp3`可以看到如下设备:
-```xml
-<disk type='file' device='cdrom'>
-  <driver name='qemu'/>
-  <target dev='sda' bus='sata'/>
-  <readonly/>
-  <alias name='sata0-0-0'/>
-  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
-</disk>
-```
-
-
-则我们可以通过指定将iso文件插入到虚拟机中的`sda`CDROM中:
-```bash
-virsh attach-disk sles12-sp3 /var/lib/libvirt/images/SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso sda --type cdrom --mode readonly
-```
-
-就会提示成功插入:
-```
-Disk attached successfully
-```
-
-再次使用`virsh dumpxml sles12-sp3`可以看到iso文件加载:
-```xml
-<disk type='file' device='cdrom'>
-  <driver name='qemu' type='raw'/>
-  <source file='/var/lib/libvirt/images/SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso' index='3'/>
-  <backingStore/>
-  <target dev='sda' bus='sata'/>
-  <readonly/>
-  <alias name='sata0-0-0'/>
-  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
-</disk>
-```
-
-如果要卸载这个iso文件，则创建一个相同结构的xml文件`detach_iso.xml`，但是保持`<source/>`行删除:
-```xml
-<disk type='file' device='cdrom'>
-  <driver name='qemu' type='raw'/>
-  <backingStore/>
-  <target dev='sda' bus='sata'/>
-  <readonly/>
-  <alias name='sata0-0-0'/>
-  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
-</disk>
-```
-
-然后执行设备更新:
-```bash
-virsh update-device sles12-sp3 detach_iso.xml
-```
-
-此时提示:
-```
-Device updated successfully
-```
-
-再检查虚拟机配置，就看到iso文件已经卸载了。
 
 
 ## 网卡热调整
