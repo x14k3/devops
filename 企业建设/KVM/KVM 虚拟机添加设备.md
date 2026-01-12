@@ -1,22 +1,32 @@
-#kvm
 
-## 一、磁盘热扩容
+KVM虚拟机可以在线(运行时)添加磁盘、CDROM、USB设备，这对在线维护非常有用，可以不停机修改设备。
 
-### 动态添加虚拟机磁盘
+备注
 
-  ```bash
-# 在宿主机创建磁盘镜像文件
-qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/new_disk.qcow2 10G 
+案例使用的虚拟机名字`dev7`，添加的磁盘文件命名为`dev7-data.qcow2`
 
-# 动态附加磁盘到运行中的虚拟机
+## 添加磁盘文
 
-# 方法1:使用attach-disk命令
-virsh attach-disk <虚拟机名称> /var/lib/libvirt/images/new_disk.qcow2 vdb --cache none --persistent
+- 创建虚拟磁盘文件（qcow2类型）
+```bash
+cd /var/lib/libvirt/images
+qemu-img create -f qcow2 dev7-data.qcow2 20G
+```
+
+- 虚拟磁盘文件添加到虚拟机
+`qemu`可以映射物理存储磁盘(例如`/dev/sdb`)，或者虚拟磁盘文件到KVM虚拟机的虚拟磁盘(`vdb`)
+
+```bash
+
+# 方法一：
+virsh attach-disk <虚拟机名称> /var/lib/libvirt/images/new_disk.qcow2 vdb --cache none --persistent --drive qemu --subdriver qcow2
 #--config     设置的同时更改虚拟机xml文件，这样就可以保证虚拟机重启后仍然生效
 #--persistent 表示将更改写入虚拟机配置，这样重启后仍然有效。相当于–config --live
 #--subdriver  声明镜像文件类型<qcow2|raw>
 #--cache none 设置缓存模式，none表示不缓存（也可以根据需求设置其他模式）。
 
+
+##----------------------------------------------------------------------------------------------
 
 # 方法2：使用XML配置文件（推荐）
 ## 创建磁盘XML文件 `new_disk.xml`：
@@ -33,33 +43,112 @@ virsh attach-device <虚拟机名称> new_disk.xml --persistent
 virsh detach-disk <虚拟机名称> vdb --persistent
 ```
 
+**警告**
+一定要明确使用`--driver qemu --subdriver qcow2`:
+`libvirtd`出于安全因素默认关闭了虚拟磁盘类型自动检测功能，并且默认使用的磁盘格式是`raw`，如果不指定磁盘驱动类型会导致被识别成`raw`格式，就会在虚拟机内部看到非常奇怪的极小的磁盘。
 
-### 动态调整磁盘空间
+## 调整磁盘空间
 
-```bash
-
-```
-
-### 调整磁盘空间，需要关闭虚拟机
-
+需要关闭虚拟机
 ```bash
 #在物理主机(host主机)上使用使用 `qemu-img resize`​ 命令调整虚拟机磁盘大小:
 qemu-img resize /data/test_01.qcow2 +30G
 ```
 
+## CPU热添加
 
+该虚拟机必须指定了最大cpu数量 –**vcpu**s 5,max**vcpu**s=10
 
-### 在线添加光盘
+```bash
+# 临时
+virsh setvcpus --domain centos8-3 6 --live
+
+# 永久
+virsh setvcpus --domain centos8-3 6 --live --config 
+```
+
+注意：CPU目前是不支持回收的。
+
+## 添加iso光盘
 
 ```
 virsh attach-disk Centos7 /data_lij/iso/CentOS-6.4-x86_64-bin-DVD1.iso vdb
 ```
 
-‍
+cdrom/floppy 不支持热插拔，所以和上面动态插入一个磁盘设备不同，如果直接使用以下命令插入设备( 虚拟机名字是`sles12-sp3`)映射:
+```bash
+virsh attach-disk sles12-sp3 SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso --target hdc --type cdrom --mode readonly
+```
 
-## 二、网卡热添加
+会提示错误:
+```bash
+error: Failed to attach disk
+error: Operation not supported: cdrom/floppy device hotplug isn't supported
+```
 
-### 网卡添加
+但是，如果虚拟机定义时候已经定义过cdrom设备，则使用`virsh dumpxml sles12-sp3`可以看到如下设备:
+```xml
+<disk type='file' device='cdrom'>
+  <driver name='qemu'/>
+  <target dev='sda' bus='sata'/>
+  <readonly/>
+  <alias name='sata0-0-0'/>
+  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+</disk>
+```
+
+
+则我们可以通过指定将iso文件插入到虚拟机中的`sda`CDROM中:
+```bash
+virsh attach-disk sles12-sp3 /var/lib/libvirt/images/SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso sda --type cdrom --mode readonly
+```
+
+就会提示成功插入:
+```
+Disk attached successfully
+```
+
+再次使用`virsh dumpxml sles12-sp3`可以看到iso文件加载:
+```xml
+<disk type='file' device='cdrom'>
+  <driver name='qemu' type='raw'/>
+  <source file='/var/lib/libvirt/images/SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso' index='3'/>
+  <backingStore/>
+  <target dev='sda' bus='sata'/>
+  <readonly/>
+  <alias name='sata0-0-0'/>
+  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+</disk>
+```
+
+如果要卸载这个iso文件，则创建一个相同结构的xml文件`detach_iso.xml`，但是保持`<source/>`行删除:
+```xml
+<disk type='file' device='cdrom'>
+  <driver name='qemu' type='raw'/>
+  <backingStore/>
+  <target dev='sda' bus='sata'/>
+  <readonly/>
+  <alias name='sata0-0-0'/>
+  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+</disk>
+```
+
+然后执行设备更新:
+```bash
+virsh update-device sles12-sp3 detach_iso.xml
+```
+
+此时提示:
+```
+Device updated successfully
+```
+
+再检查虚拟机配置，就看到iso文件已经卸载了。
+
+
+## 网卡热调整
+
+### 添加网卡
 
 ```bash
 # 桥接
@@ -82,7 +171,6 @@ virsh attach-interface --type network --domain centos8-3 --source default --conf
 ### 网卡剥离
 
 剥离要指定剥离网卡的Mac地址
-
 ```bash
 # 永久剥离
 virsh detach-interface --domain centos8-3 --mac 52:54:00:43:b8:3c --type bridge --config
@@ -91,7 +179,8 @@ virsh detach-interface --domain centos8-3 --mac 52:54:00:43:b8:3c --type bridge 
 virsh detach-interface --domain centos8-3 --mac 52:54:00:95:b7:0e --type network
 ```
 
-## 三、内存热添加
+
+## 内存热调整
 
 ### **扩容内存**
 
@@ -121,23 +210,8 @@ virsh setmem  centos8-3  512M --live
 virsh setmem  centos8-3  512M --live --config
 ```
 
-## 四、CPU热添加
 
-### **添加CPU**
-
-该虚拟机必须指定了最大cpu数量 –**vcpu**s 5,max**vcpu**s=10
-
-```bash
-# 临时
-virsh setvcpus --domain centos8-3 6 --live
-
-# 永久
-virsh setvcpus --domain centos8-3 6 --live --config 
-```
-
-注意：CPU目前是不支持回收的。
-
-## 五、通过修改配置文件
+## 通过修改配置文件
 
 **注意：** 增大虚拟机内存、增加虚拟机 CPU 个数需要首先关机虚拟机
 

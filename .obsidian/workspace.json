@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "5fc3a83edaab0b24",
+        "id": "9315785e972c5b0e",
         "type": "tabs",
         "children": [
           {
-            "id": "7114376bcc2511ba",
+            "id": "c68e4593f3e586c5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "windows bat/bat 批处理手册/xcopy.md",
-                "mode": "preview",
+                "file": "企业建设/KVM/KVM 虚拟机添加设备.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "xcopy"
+              "title": "KVM 虚拟机添加设备"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "windows bat/bat 批处理手册/xcopy.md",
+                "file": "企业建设/KVM/KVM 虚拟机添加设备.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "xcopy 的大纲"
+              "title": "KVM 虚拟机添加设备 的大纲"
             }
           },
           {
@@ -181,8 +181,36 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "7114376bcc2511ba",
+  "active": "c68e4593f3e586c5",
   "lastOpenFiles": [
+    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
+    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "企业建设/KVM/KVM 虚拟机网络设置.md",
+    "企业建设/KVM/KVM 虚拟机添加设备.md",
+    "企业建设/KVM/KVM 虚拟机热扩容.md",
+    "企业建设/KVM/KVM 创建虚拟机.md",
+    "企业建设/KVM/kvm 遇到过的问题/KVM安装Win11时跳过Wi-Fi连接.md",
+    "企业建设/KVM/kvm 遇到过的问题/assets",
+    "k8s/k8s v1.25.0 binary installation.md",
+    "k8s/K8s v1.30.0 Kubeadm installation.md",
+    "docker/docker 实用指南/docker 分离 engine和 client.md",
+    "docker/docker 实用指南/assets/971e5029a8199be3b770dcb33a5368cc_MD5.jpg",
+    "docker/docker 实用指南/assets/73190458ed201d40a1e100edbee654e4_MD5.png",
+    "docker/docker 实用指南/assets/13b80a59ef9818aef81886d9bfe7a73c_MD5.png",
+    "docker/docker 实用指南/assets/4d4ddb11b6e3cde7b18b2b6937f9e8bb_MD5.png",
+    "docker/docker 实用指南/assets/707ab081c2f3bf45eca187e996411824_MD5.png",
+    "docker/docker 实用指南/assets/c0da8d70bd39520bdf8d44b7b23c5e78_MD5.png",
+    "docker/docker 实用指南/assets/4e6c9d5dbcd883d55fa58cbdb558c1c9_MD5.png",
+    "docker/docker 实用指南/assets/cb9fc3176704971b29150e125443c109_MD5.png",
+    "企业建设/KVM/KVM 安装.md",
+    "database/Oracle/Oracle Installation/2.Silent installation of oracle19c.md",
+    "database/Oracle/Oracle Installation/1.Silent installation of oracle11g.md",
+    "golang/go 项目案例/端口状态检查.md",
+    "golang/go 项目案例/对 exe进行签名.md",
+    "sundongsheng.md",
+    "README.md",
+    "面试资料.md",
+    "windows bat/bat 批处理手册/xcopy.md",
     "windows bat/bat 批处理手册/WMIC.md",
     "windows bat/bat 批处理手册/tracert.md",
     "windows bat/bat 批处理手册/tasklist.md",
@@ -190,44 +218,16 @@
     "windows bat/bat 批处理手册/schtasks.md",
     "windows bat/bat 批处理手册/sc.md",
     "windows bat/bat 批处理手册/reg.md",
-    "windows bat/bat 批处理手册/netstat.md",
-    "windows bat/bat 批处理手册/netsh.md",
-    "windows bat/bat 批处理手册/mstsc.md",
-    "windows bat/bat 批处理手册/if.md",
-    "windows bat/bat 批处理手册/goto&call.md",
-    "windows bat/bat 批处理手册/for.md",
-    "windows bat/bat 批处理手册/findstr.md",
-    "windows bat/bat 脚本收集/主备资源切换脚本.md",
-    "windows bat/bat 脚本收集/目录文件数量监控.md",
     "windows bat/bat 脚本收集/assets",
-    "windows bat/bat 脚本收集/脚本更换IP地址.md",
-    "windows bat/卷影副本 Shadow Copy.md",
-    "基础服务/vnc & rdesktop.md",
-    "基础服务/ntp.md",
-    "基础服务/chrony.md",
-    "基础服务/使用linux服务器搭建网关.md",
-    "基础服务/端口转发.md",
-    "linux/linux 命令/shell 用法总结/shell 登录提示符与登录提示信息.md",
-    "开源工具/v2ray.md",
-    "面试资料.md",
     "devops/Ansible/assets",
     "linux/linux 命令/shell 命令手册/软件安装/assets",
     "基础服务/sshd/assets",
     "linux/linux 命令/assets",
     "中间件/redis/assets/4e4bc96a7f7aca38cf9047ca57bbc88b_MD5.png",
     "中间件/redis/assets/e672f5687f8bbc2f35b50dca2a514e75_MD5.png",
-    "中间件/redis/assets/ed6903660e4ce9c32d5b5e1498a041c9_MD5.png",
     "中间件/etcd",
-    "k8s/assets/1582188308711.png",
-    "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets/7c71a9250a47cab65f55e37e05df51cf_MD5.png",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/bfe9cdcae11c9c493c9e5c8933f8428e_MD5.png",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/af897f0addba6e54ee31b9e1754559f4_MD5.png",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/939f4d70d4926b901be159114ea2edf0_MD5.png",
-    "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets/91d21001923e2988e5aca9f67ce3867c_MD5.png",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets/93c3670c44b411523d13a06421c767a8_MD5.png",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets",
     "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets",
-    "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件"
+    "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets"
   ]
 }

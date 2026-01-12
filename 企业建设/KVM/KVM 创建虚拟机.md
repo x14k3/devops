@@ -135,7 +135,7 @@ device=                   # 设备类型：disk, cdrom, floppy
 cache=                    # 缓存模式：none, writeback, writethrough
 io=                       # IO模式：native, threads
 sparse=                   # 是否稀疏文件：yes/no
-disks=[pool1,pool2]      # 使用多个磁盘池
+disks=[pool1,pool2]       # 使用多个磁盘池
 
 # 示例
 --disk path=/var/lib/libvirt/images/vm1.qcow2,size=20,format=qcow2,bus=virtio
