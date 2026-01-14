@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "企业建设/KVM/KVM 虚拟机添加设备.md",
+                "file": "企业建设/KVM/KVM 创建虚拟机.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "KVM 创建虚拟机"
+            }
+          },
+          {
+            "id": "ff040d1793d0a76e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "企业建设/KVM/KVM 高级管理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "KVM 虚拟机添加设备"
+              "title": "KVM 高级管理"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -141,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "企业建设/KVM/KVM 虚拟机添加设备.md",
+                "file": "企业建设/KVM/KVM 高级管理.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "KVM 虚拟机添加设备 的大纲"
+              "title": "KVM 高级管理 的大纲"
             }
           },
           {
@@ -181,15 +196,18 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "c68e4593f3e586c5",
+  "active": "ff040d1793d0a76e",
   "lastOpenFiles": [
-    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
-    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "企业建设/KVM/KVM 创建虚拟机.md",
+    "企业建设/KVM/KVM 高级管理.md",
     "企业建设/KVM/KVM 虚拟机网络设置.md",
     "企业建设/KVM/KVM 虚拟机添加设备.md",
-    "企业建设/KVM/KVM 虚拟机热扩容.md",
-    "企业建设/KVM/KVM 创建虚拟机.md",
+    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
+    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
+    "企业建设/KVM/kvm 遇到过的问题/virsh console 不显示开机日志.md",
     "企业建设/KVM/kvm 遇到过的问题/KVM安装Win11时跳过Wi-Fi连接.md",
+    "企业建设/KVM/kvm 遇到过的问题/enp0s31f6_ Detected Hardware Unit Hang.md",
+    "企业建设/KVM/KVM 虚拟机热扩容.md",
     "企业建设/KVM/kvm 遇到过的问题/assets",
     "k8s/k8s v1.25.0 binary installation.md",
     "k8s/K8s v1.30.0 Kubeadm installation.md",
@@ -215,9 +233,6 @@
     "windows bat/bat 批处理手册/tracert.md",
     "windows bat/bat 批处理手册/tasklist.md",
     "windows bat/bat 批处理手册/taskkill.md",
-    "windows bat/bat 批处理手册/schtasks.md",
-    "windows bat/bat 批处理手册/sc.md",
-    "windows bat/bat 批处理手册/reg.md",
     "windows bat/bat 脚本收集/assets",
     "devops/Ansible/assets",
     "linux/linux 命令/shell 命令手册/软件安装/assets",
