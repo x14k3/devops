@@ -4,39 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "9315785e972c5b0e",
+        "id": "f0157ef6cc4e5f51",
         "type": "tabs",
         "children": [
           {
-            "id": "c68e4593f3e586c5",
+            "id": "23adc4c2ce5fcead",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "企业建设/KVM/KVM 创建虚拟机.md",
-                "mode": "preview",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "KVM 创建虚拟机"
-            }
-          },
-          {
-            "id": "ff040d1793d0a76e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "企业建设/KVM/KVM 高级管理.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "KVM 高级管理"
+              "title": "新标签页"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -73,7 +54,7 @@
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabeticalReverse"
               },
               "icon": "lucide-search",
               "title": "搜索"
@@ -156,13 +137,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "企业建设/KVM/KVM 高级管理.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "KVM 高级管理 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -196,9 +176,13 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "ff040d1793d0a76e",
+  "active": "23adc4c2ce5fcead",
   "lastOpenFiles": [
     "企业建设/KVM/KVM 创建虚拟机.md",
+    "linux/linux 命令/shell 命令手册/备份与恢复/dd.md",
+    "linux/linux 命令/shell 命令手册/备份与恢复/assets",
+    "linux/linux 安全管理/ufw.md",
+    "中间件/zookeeper/ZooKeeper中bin目录4个脚本执行文件详解.md",
     "企业建设/KVM/KVM 高级管理.md",
     "企业建设/KVM/KVM 虚拟机网络设置.md",
     "企业建设/KVM/KVM 虚拟机添加设备.md",
@@ -230,9 +214,6 @@
     "面试资料.md",
     "windows bat/bat 批处理手册/xcopy.md",
     "windows bat/bat 批处理手册/WMIC.md",
-    "windows bat/bat 批处理手册/tracert.md",
-    "windows bat/bat 批处理手册/tasklist.md",
-    "windows bat/bat 批处理手册/taskkill.md",
     "windows bat/bat 脚本收集/assets",
     "devops/Ansible/assets",
     "linux/linux 命令/shell 命令手册/软件安装/assets",
@@ -242,7 +223,6 @@
     "中间件/redis/assets/e672f5687f8bbc2f35b50dca2a514e75_MD5.png",
     "中间件/etcd",
     "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets",
-    "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets",
-    "k8s/二进制高可用Kubernetes集群部署/8. 部署网络插件/assets"
+    "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets"
   ]
 }
