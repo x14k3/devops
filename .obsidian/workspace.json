@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "f0157ef6cc4e5f51",
+        "id": "d8d229e35d9c20f5",
         "type": "tabs",
         "children": [
           {
-            "id": "23adc4c2ce5fcead",
+            "id": "86d17d137a35e73a",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "Postfix + Dovecot + Roundcube"
             }
           }
         ]
@@ -137,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": false,
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -160,7 +164,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 266.5
+    "width": 266.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -176,53 +181,53 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "23adc4c2ce5fcead",
+  "active": "a41355350eff645e",
   "lastOpenFiles": [
-    "企业建设/KVM/KVM 创建虚拟机.md",
-    "linux/linux 命令/shell 命令手册/备份与恢复/dd.md",
-    "linux/linux 命令/shell 命令手册/备份与恢复/assets",
-    "linux/linux 安全管理/ufw.md",
-    "中间件/zookeeper/ZooKeeper中bin目录4个脚本执行文件详解.md",
-    "企业建设/KVM/KVM 高级管理.md",
-    "企业建设/KVM/KVM 虚拟机网络设置.md",
-    "企业建设/KVM/KVM 虚拟机添加设备.md",
-    "企业建设/KVM/KVM 磁盘镜像管理工具.md",
-    "企业建设/KVM/KVM 虚拟机克隆和快照.md",
-    "企业建设/KVM/kvm 遇到过的问题/virsh console 不显示开机日志.md",
+    "企业建设/邮件服务器/Mailcow.md",
+    "企业建设/邮件服务器/iRedMail.md",
+    "企业建设/邮件服务器/Docker Mailserver.md",
+    "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
+    "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
+    "devops/jira/assets/9a94b87918f1965ecce8a61109d85c56_MD5.png",
+    "devops/sentinel/assets",
     "企业建设/KVM/kvm 遇到过的问题/KVM安装Win11时跳过Wi-Fi连接.md",
-    "企业建设/KVM/kvm 遇到过的问题/enp0s31f6_ Detected Hardware Unit Hang.md",
-    "企业建设/KVM/KVM 虚拟机热扩容.md",
-    "企业建设/KVM/kvm 遇到过的问题/assets",
-    "k8s/k8s v1.25.0 binary installation.md",
-    "k8s/K8s v1.30.0 Kubeadm installation.md",
-    "docker/docker 实用指南/docker 分离 engine和 client.md",
-    "docker/docker 实用指南/assets/971e5029a8199be3b770dcb33a5368cc_MD5.jpg",
-    "docker/docker 实用指南/assets/73190458ed201d40a1e100edbee654e4_MD5.png",
-    "docker/docker 实用指南/assets/13b80a59ef9818aef81886d9bfe7a73c_MD5.png",
-    "docker/docker 实用指南/assets/4d4ddb11b6e3cde7b18b2b6937f9e8bb_MD5.png",
-    "docker/docker 实用指南/assets/707ab081c2f3bf45eca187e996411824_MD5.png",
-    "docker/docker 实用指南/assets/c0da8d70bd39520bdf8d44b7b23c5e78_MD5.png",
-    "docker/docker 实用指南/assets/4e6c9d5dbcd883d55fa58cbdb558c1c9_MD5.png",
+    "企业建设/KVM/KVM 高级管理.md",
+    "企业建设/KVM/KVM 虚拟机添加设备.md",
+    "中间件/tomcat/tomcat 部署.md",
+    "中间件/nginx/nginx 配置及优化/assets/umdxozvohp-20240321204240-iq5pt60.png",
+    "中间件/nginx/nginx 配置及优化/assets/image-20221127215458444-20230610173812-jt904la.png",
+    "中间件/nginx/nginx 配置及优化/assets",
+    "中间件/nginx/nginx 配置及优化/9. nginx 日志配置.md",
+    "中间件/nginx/nginx 配置及优化/8. nginx 限制请求、连接数与下载速度.md",
+    "中间件/nginx/nginx 配置及优化/7. nginx 双向认证.md",
+    "中间件/nginx/nginx 配置及优化/6. nginx 超时设置.md",
+    "中间件/nginx/nginx 配置及优化/5. nginx 配置HTTPS.md",
+    "中间件/nginx/nginx 配置及优化/4. nginx 负载均衡.md",
+    "中间件/nginx/nginx 配置及优化/3. nginx 反向代理-tcp.md",
+    "中间件/nginx/nginx 配置及优化/2. nginx 反向代理-http.md",
+    "中间件/nginx/nginx 配置及优化/14. nginx 用作灰度发布.md",
+    "中间件/nginx/nginx 配置及优化/13. nginx Location配置.md",
+    "中间件/nginx/nginx 配置及优化/12. nginx与 uWSGI服务器的沟通.md",
+    "中间件/nginx/nginx 配置及优化/11. nginx 静态文件配置.md",
+    "中间件/nginx/nginx 配置及优化/10. nginx 跨域问题.md",
+    "中间件/nginx/nginx 配置及优化/1. nginx 基础功能配置集合.md",
+    "中间件/nginx/nginx 配置及优化/0. nginx 配置文件详解.md",
+    "中间件/nginx/nginx 配置及优化",
+    "中间件/nginx/nginx 部署.md",
+    "中间件/nginx",
+    "中间件/jdk/jdk 部署.md",
+    "中间件/jdk",
     "docker/docker 实用指南/assets/cb9fc3176704971b29150e125443c109_MD5.png",
-    "企业建设/KVM/KVM 安装.md",
-    "database/Oracle/Oracle Installation/2.Silent installation of oracle19c.md",
-    "database/Oracle/Oracle Installation/1.Silent installation of oracle11g.md",
-    "golang/go 项目案例/端口状态检查.md",
-    "golang/go 项目案例/对 exe进行签名.md",
-    "sundongsheng.md",
-    "README.md",
-    "面试资料.md",
-    "windows bat/bat 批处理手册/xcopy.md",
-    "windows bat/bat 批处理手册/WMIC.md",
-    "windows bat/bat 脚本收集/assets",
-    "devops/Ansible/assets",
-    "linux/linux 命令/shell 命令手册/软件安装/assets",
-    "基础服务/sshd/assets",
-    "linux/linux 命令/assets",
-    "中间件/redis/assets/4e4bc96a7f7aca38cf9047ca57bbc88b_MD5.png",
-    "中间件/redis/assets/e672f5687f8bbc2f35b50dca2a514e75_MD5.png",
-    "中间件/etcd",
-    "k8s/二进制高可用Kubernetes集群部署/10. 部署集群插件/assets",
-    "k8s/二进制高可用Kubernetes集群部署/9. 验证集群状态/assets"
+    "docker/docker 实用指南/assets/c0da8d70bd39520bdf8d44b7b23c5e78_MD5.png",
+    "docker/docker 实用指南/assets/971e5029a8199be3b770dcb33a5368cc_MD5.jpg",
+    "docker/docker 实用指南/assets/707ab081c2f3bf45eca187e996411824_MD5.png",
+    "docker/docker 实用指南/assets/4e6c9d5dbcd883d55fa58cbdb558c1c9_MD5.png",
+    "docker/docker 实用指南/assets/4d4ddb11b6e3cde7b18b2b6937f9e8bb_MD5.png",
+    "docker/docker 实用指南/assets/13b80a59ef9818aef81886d9bfe7a73c_MD5.png",
+    "devops/zabbix/assets",
+    "devops/zabbix",
+    "devops/nacos/assets",
+    "devops/nacos",
+    "devops/jira/assets"
   ]
 }

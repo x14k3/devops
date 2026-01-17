@@ -230,7 +230,7 @@ docker exec confluence java -jar /opt/atlassian/confluence/atlassian-agent.jar \
 - 但是你创建的组, 必须要手动同步
 - 更新用户权限后, 必须要手动同步
 
-![image](https://blog.ijunj.com/images/test-sync-user-adjust-priorities.png)
+![[devops/jira/assets/9a94b87918f1965ecce8a61109d85c56_MD5.png]]
 
 ‍
 
