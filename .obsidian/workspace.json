@@ -141,12 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "Postfix + Dovecot + Roundcube 的大纲"
             }
           },
           {
@@ -164,8 +165,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 266.5,
-    "collapsed": true
+    "width": 266.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -181,13 +181,13 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "a41355350eff645e",
+  "active": "86d17d137a35e73a",
   "lastOpenFiles": [
     "企业建设/邮件服务器/Mailcow.md",
     "企业建设/邮件服务器/iRedMail.md",
     "企业建设/邮件服务器/Docker Mailserver.md",
-    "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
     "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
+    "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
     "devops/jira/assets/9a94b87918f1965ecce8a61109d85c56_MD5.png",
     "devops/sentinel/assets",
     "企业建设/KVM/kvm 遇到过的问题/KVM安装Win11时跳过Wi-Fi连接.md",
