@@ -2,7 +2,7 @@
 
 ## 1、安装前准备
 
-[docker install](../docker/docker%20install.md)
+[docker install](../../docker/docker%20install.md)
 
 
 ## 2、Jellyfin Docer 版本安装
