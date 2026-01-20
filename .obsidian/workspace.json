@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "开源工具/组网工具/v2ray.md",
+                "file": "企业建设/系统安装.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "v2ray"
+              "title": "系统安装"
             }
           }
         ]
@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "开源工具/组网工具/v2ray.md",
+                "file": "企业建设/系统安装.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "v2ray 的大纲"
+              "title": "系统安装 的大纲"
             }
           },
           {
@@ -182,6 +182,9 @@
   },
   "active": "5a2bacd89941b5a8",
   "lastOpenFiles": [
+    "linux/linux 命令/shell 命令手册/备份与恢复/dd.md",
+    "企业建设/系统安装.md",
+    "开源工具/组网工具/v2ray.md",
     "开源工具/crawl4ai.md",
     "开源工具/iGotify.md",
     "开源工具/HomeAssistant.md",
@@ -206,15 +209,12 @@
     "开源工具/媒体娱乐/calibre-web.md",
     "开源工具/未命名.canvas",
     "开源工具/组网工具",
-    "开源工具/组网工具/v2ray.md",
     "企业建设/邮件服务器/Postfix + Dovecot + Roundcube.md",
     "企业建设/邮件服务器/Mailcow.md",
     "企业建设/邮件服务器/iRedMail.md",
     "企业建设/邮件服务器/Docker Mailserver.md",
-    "企业建设/邮件服务器/邮件发送的基本过程与概念.md",
     "devops/jira/assets/9a94b87918f1965ecce8a61109d85c56_MD5.png",
     "devops/sentinel/assets",
-    "企业建设/KVM/kvm 遇到过的问题/KVM安装Win11时跳过Wi-Fi连接.md",
     "中间件/nginx/nginx 配置及优化/assets/umdxozvohp-20240321204240-iq5pt60.png",
     "中间件/nginx/nginx 配置及优化/assets/image-20221127215458444-20230610173812-jt904la.png",
     "中间件/nginx/nginx 配置及优化/assets",

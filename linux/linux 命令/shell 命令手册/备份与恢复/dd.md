@@ -65,36 +65,6 @@ mkfs.vfat /dev/sdb1
 dd if=/opt/CentOS-7.0-1406-x86_64-DVD.iso of=/dev/sdb
 dd if=/opt/CentOS-7.0-1406-x86_64-DVD.iso of=/dev/sdb bs=1M status=progress
 
-### Ventoy
-# 查看最新版本号（访问https://github.com/ventoy/Ventoy/releases）
-# 下载最新版Ventoy（以下以1.0.96为例，请替换为最新版本）
-wget https://github.com/ventoy/Ventoy/releases/download/v1.0.96/ventoy-1.0.96-linux.tar.gz
-# 解压
-tar -xzf ventoy-*.tar.gz
-# 进入解压目录
-cd ventoy-1.0.96
-# -i 选项表示安装，会格式化整个U盘并安装Ventoy
-./Ventoy2Disk.sh -i /dev/sdb
-# 显示进度和确认信息，输入"y"确认
-# 查看分区情况
-fdisk -l /dev/sdb
-# 挂载Ventoy分区查看内容
-mkdir -p /opt/ventoy
-mount /dev/sdb1 /opt/ventoy 
-ls -la /opt/ventoy/
-# 应看到以下文件：
-# - ventoy目录（包含ventoy.json配置文件）
-# - 可能的其他文件（如安全启动相关）
-
-# 复制Windows 11 ISO文件到U盘
-# 注意：确保有足够的空间（Windows 11 ISO约5-6GB）
-cp /path/to/windows11.iso /opt/ventoy/
-# 或者使用rsync（显示进度）
-# rsync -avh --progress /path/to/windows11.iso /mnt/ventoy/
-# 同步数据并卸载
-sync
-umount /opt/ventoy
-
 ```
 
 ## 创建swap分区
