@@ -9,7 +9,7 @@ ps：初始用户名密码：minioadmin
 1、下载linux minio
 
 ```bash
-wget https://dl.min.io/server/minio/release/linux-amd64/minio
+wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio.RELEASE.2025-03-12T18-04-18Z
 ```
 
 2、linux部署
